@@ -1,0 +1,10 @@
+C:\Users\craig\AppData\Local\Temporary Projects\BrowserTester\bin\Debug\BrowserTester.exe
+C:\Users\craig\AppData\Local\Temporary Projects\BrowserTester\bin\Debug\BrowserTester.pdb
+C:\Users\craig\AppData\Local\Temporary Projects\BrowserTester\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\craig\AppData\Local\Temporary Projects\BrowserTester\obj\x86\Debug\BrowserTester.exe
+C:\Users\craig\AppData\Local\Temporary Projects\BrowserTester\obj\x86\Debug\BrowserTester.pdb
+C:\Users\craig\Dropbox\Developer\Jobs\BrowserTesting\private\c#\BrowserTester\BrowserTester\BrowserTester\obj\x86\Debug\BrowserTester.exe
+C:\Users\craig\Dropbox\Developer\Jobs\BrowserTesting\private\c#\BrowserTester\BrowserTester\BrowserTester\obj\x86\Debug\BrowserTester.pdb
+C:\Users\craig\Dropbox\Developer\Jobs\BrowserTesting\private\c#\BrowserTester\BrowserTester\BrowserTester\bin\Debug\BrowserTester.exe
+C:\Users\craig\Dropbox\Developer\Jobs\BrowserTesting\private\c#\BrowserTester\BrowserTester\BrowserTester\bin\Debug\BrowserTester.pdb
+C:\Users\craig\Dropbox\Developer\Jobs\BrowserTesting\private\c#\BrowserTester\BrowserTester\BrowserTester\obj\x86\Debug\ResolveAssemblyReference.cache
