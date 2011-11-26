@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,7 +47,12 @@
     <Compile Include="core\User32.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="session\App.cs" />
+    <Compile Include="virt\Application.cs" />
+    <Compile Include="virt\Keyboard.cs" />
+    <Compile Include="virt\Mouse.cs" />
+    <Compile Include="virt\User.cs" />
+    <Compile Include="virt\UserList.cs" />
+    <Compile Include="virt\Window.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

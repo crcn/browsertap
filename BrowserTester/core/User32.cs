@@ -17,10 +17,14 @@ namespace BrowserTester.core
             public int top;
             public int right;
             public int bottom;
-        }
+        } 
 
 
         [DllImport("user32.dll")]
         public static extern IntPtr GetWindowRect(IntPtr hWnd, ref Rect rect);
+
+
+        [DllImport("user32.dll")]
+        public static extern bool PrintWindow(IntPtr hWnd, IntPtr hdcBlt, int nFlags);
     }
 }

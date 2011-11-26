@@ -16,6 +16,8 @@ A tool similar to browserstack, and browserify where developers can test website
 - multiple users can be connected to the same computer. Some to the given session.
 
 
+also see http://mwinapi.sourceforge.net/
+
 ### Technical Features
 
 
@@ -25,8 +27,8 @@ A tool similar to browserstack, and browserify where developers can test website
 
 - core
 	- user32.cs
-- app
-	- `Controller.cs` - controls a given Application
+- virt
+	- `Application.cs` - controls a given Application
 		- `Controller(String path)` - constructor
 		- `open()` - opens an application
 		- `getWindow()` - gets the application window
