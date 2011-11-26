@@ -15,6 +15,7 @@ A tool similar to browserstack, and browserify where developers can test website
 - window chrome resizes to users browser (seamless).
 - multiple users can be connected to the same computer. Some to the given session.
 - Send audio back as well
+- zoom in / out of the opperating system - similar to vmware
 
 
 also see http://mwinapi.sourceforge.net/
