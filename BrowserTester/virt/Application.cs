@@ -39,7 +39,6 @@ namespace BrowserTester.virt
 
             proc.Start();
             return proc;
-        }
 
         /**
          */
