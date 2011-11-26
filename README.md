@@ -17,3 +17,38 @@ A tool similar to browserstack, and browserify where developers can test website
 
 
 ### Technical Features
+
+
+
+
+### Class Architecture
+
+- core
+	- user32.cs
+- app
+	- `Controller.cs` - controls a given Application
+		- `Controller(String path)` - constructor
+		- `open()` - opens an application
+		- `getWindow()` - gets the application window
+		- `getNewUser()` - returns a new user (for multiple sessions) 
+	- `Window.cs`
+		- `print()` - print the given window
+		- `setPosition(int X, int Y)` - not needed - should be 0
+		- `setSize(int width, int height)` - sets size of the window
+		- `setBounds(int X, int Y, int width, int height)`
+		- `getMenuItems()` - returns list of menu items (from chrome)
+	- `User.cs`
+		- `User(Controller appController)`
+		- `getMouse()`
+		- `getKeyboard()`
+	- `Keyboard.cs`
+		- `keyDown(String key)`
+		- `keyUp(String key)`
+	- `Mouse.cs`
+		- `leftClick()`
+		- `rightClick()`
+		- `mouseDown()`
+		- `mouseUp()`
+		- `mouseMove()`
+		- `setPosition(int X, int Y)`
+		- `Point getPosition()`
