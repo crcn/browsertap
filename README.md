@@ -15,9 +15,9 @@
 
 ### Installation
 
-1. Download & Install [node.js](http://nodejs.org/)
-2. Download & Install [git](http://code.google.com/p/git-osx-installer/)
-3. Go to the **directory where you want this project to live**, and call (copy & paste):
+#### 1. Download & Install [node.js](http://nodejs.org/) 
+#### 2. Download & Install [git](http://code.google.com/p/git-osx-installer/)
+#### 3. Go to the **directory where you want this project to live**, and call (copy & paste):
 
 ```bash
 npm install mesh -g # needed for building eyebrowse
@@ -27,7 +27,7 @@ npm install # install eyebrowse now
 mesh make
 ```
 
-4. Run it!
+#### 4. Run it!
 
 You can either run the site:
 
