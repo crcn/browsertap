@@ -1,0 +1,10 @@
+{
+	"name":"eyebrowse",
+	"mesh": {
+		"tasks": {
+			"hello": {
+				"log": "hello!"
+			}
+		}
+	}
+}
