@@ -1,0 +1,27 @@
+{
+    "name": "xtest-client",
+    "description": "",
+    "author": "author",
+    "version": "0.0.1",
+    "dependencies": {},
+    "devDependencies": {},
+    "main": "./lib/node/index.js",
+    "directories": {
+        "src": "./src",
+        "lib": "./lib"
+    },
+    "mesh": {
+        "tasks": {
+            "merge -> make/:target/:command": "<%-command %>/<%-target %>",
+            ":command/:target": [
+                {
+                    "cwd": "./lib/<%-target %>",
+                    "load": "./lib/<%-target %>/make.json"
+                },
+                {
+                    "task": "<%=command %>"
+                }
+            ]
+        }
+    }
+}

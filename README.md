@@ -1,70 +1,53 @@
-### Browser Testing tool
+### Notes
 
-A tool similar to browserstack, and browserify where developers can test websites against different browser engines.
-
-
-### Features
-
-- in default browser via "test" button. No go-to website.
-- over RTMP/RTSP for speed.
-	- uses user32 library for capturing application screen - hidden as well
-	- uses [ffmpeg](http://www.ffmpeg-csharp.com/) for encoding
-	- emulates mouse clicks. see [this](http://homeofcox-cs.blogspot.com/2008/07/c-simulate-mouse-and-keyboard-events.html).
-	- passes RTMP packets over [flourine FX](http://www.fluorinefx.com/).
-- window chrome is cut out. 
-- window chrome resizes to users browser (seamless).
-- multiple users can be connected to the same computer. Some to the given session.
-- Send audio back as well
-- zoom in / out of the opperating system - similar to vmware
+- The architecture for eyebrowse must be kept as minimalistic as possible. In general, more moving parts = more bugs.
+- All **design material** goes in `site/`, or `desktop/client/src/web`. Any other folder is for muah. 
 
 
-also see http://mwinapi.sourceforge.net/
+### Structure
 
-### Technical Features
-
-- compile application descriptors which contain:
-	- window boundaries (width, height)
-	- menu items (to remove chrome, and invoke commands)
-	- process path / path name
-	
-
-copy url to given app by calling
-
-````bash
-	start path/to/app.exe http://some-url.com
-````
+- `desktop/` - the app which sits on the desktop of each windows machine
+	- `client/` - shown to the user - also sends commands to the controller
+	- `controller/` - c# / c++ guts of the app
+- `provision/` - provisions desktop applications using [ec2](http://aws.amazon.com/en/ec2/)
+- `site/` - the website for eyebrowse
 
 
+### Installation
 
-### Class Architecture
+1. Download & Install [node.js](http://nodejs.org/)
+2. Download & Install [git](http://code.google.com/p/git-osx-installer/)
+3. Go to the **directory where you want this project to live**, and call (copy & paste):
 
-- core
-	- user32.cs
-- virt
-	- `Application.cs` - controls a given Application
-		- `Controller(String path)` - constructor
-		- `open()` - opens an application
-		- `getWindow()` - gets the application window
-		- `getNewUser()` - returns a new user (for multiple sessions) 
-	- `Window.cs`
-		- `print()` - print the given window
-		- `setPosition(int X, int Y)` - not needed - should be 0
-		- `setSize(int width, int height)` - sets size of the window
-		- `setBounds(int X, int Y, int width, int height)`
-		- `getMenuItems()` - returns list of menu items (from chrome)
-	- `User.cs`
-		- `User(Controller appController)`
-		- `getMouse()`
-		- `getKeyboard()`
-	- `Keyboard.cs`
-		- `keyDown(String key)`
-		- `keyUp(String key)`
-	- `Mouse.cs`
-		- `leftClick()`
-		- `rightClick()`
-		- `mouseDown()`
-		- `mouseUp()`
-		- `mouseMove()`
-		- `setPosition(int X, int Y)`
-		- `Point getPosition()`
-	- `BrowserApplication.cs` - controls a browser-based app
+```bash
+npm install mesh -g # needed for building eyebrowse
+git clone git@github.com:crcn/eyebrowse.git eyebrowse
+cd eyebrowse # change to the eyebrowse directory
+npm install # install eyebrowse now
+mesh make
+```
+
+4. Run it!
+
+You can either run the site:
+
+```bash
+mesh run:site
+```
+
+OR you can run the client
+
+```bash
+mesh run:desktop-client
+```
+
+**Note: If you change anything, you'll need to call:**
+
+```bash
+mesh make:site:debug
+mesh make:desktop-client:debug
+```
+
+
+
+
