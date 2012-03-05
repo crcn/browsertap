@@ -24,7 +24,7 @@ npm install mesh -g # needed for building eyebrowse
 git clone git@github.com:crcn/eyebrowse.git eyebrowse
 cd eyebrowse # change to the eyebrowse directory
 npm install # install eyebrowse now
-mesh make
+mesh make:site:debug make:desktop-client:debug
 ```
 
 #### 4. Run it!
