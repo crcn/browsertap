@@ -8,9 +8,13 @@
 
 - `desktop/` - the app which sits on the desktop of each windows machine
 	- `client/` - shown to the user - also sends commands to the controller
-	- `controller/` - c# / c++ guts of the app
+	- `player/` - the flash player for the controller
+	- `controller/` - c# controller 
+	- `wkm/` - window, keyboard, mouse c++ library
+
 - `provision/` - provisions desktop applications using [ec2](http://aws.amazon.com/en/ec2/)
 - `site/` - the website for eyebrowse
+- `projects/` - project files
 
 
 ### Installation

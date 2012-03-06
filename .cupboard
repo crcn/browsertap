@@ -1,2 +1,2 @@
 [commands]
-proj = subl --project project.sublime-project
+subl-proj = subl --project ./projects/project.sublime-project

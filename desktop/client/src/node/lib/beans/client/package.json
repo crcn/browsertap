@@ -1,0 +1,13 @@
+{
+  "name": "xbrowser-testing",
+
+  "version": "0.0.1",
+
+  "dependencies": {
+  },
+
+
+  "leche": {
+        "include": ["leche.core","leche.spice.io"]
+  }
+}
