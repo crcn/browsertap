@@ -1,10 +1,6 @@
 {
 	"name":"eyebrowse",
-	"mesh": {
-		"tasks": {
-			"hello": {
-				"log": "hello!"
-			}
-		}
+	"directories": {
+		"player-src": "./client/player/src"
 	}
 }

@@ -11,10 +11,10 @@
 	- `player/` - the flash player for the controller
 	- `controller/` - c# controller 
 	- `wkm/` - window, keyboard, mouse c++ library
-
 - `provision/` - provisions desktop applications using [ec2](http://aws.amazon.com/en/ec2/)
 - `site/` - the website for eyebrowse
 - `projects/` - project files
+- `config/` - config vars for this project
 
 
 ### Installation
