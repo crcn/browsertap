@@ -1,7 +1,8 @@
+# recursively finds other makefiles and calls the given command
 
-all:
-	find desktop provision site -name "makefile" -exec make runMakefile MAKEFILE={} \;
+%:
+	@find desktop provision site -name "makefile" -exec make recursive COMMAND=$@ MAKEFILE={} \;
 
+recursive: 
+	@cd `dirname $$MAKEFILE`; make $$COMMAND
 
-runMakefile: 
-	@cd `dirname $$MAKEFILE`; make all
