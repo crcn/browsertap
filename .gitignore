@@ -2,3 +2,5 @@
 node_modules
 Debug
 Release
+*.o
+*.exe
