@@ -1,8 +1,8 @@
 # recursively finds other makefiles and calls the given command
 
 %:
-	@find desktop provision site -name "makefile" -exec make recursive COMMAND=$@ MAKEFILE={} \;
+	@find desktop provision site -name "makefile" -exec $(MAKE) recursive COMMAND=$@ MAKEFILE={} --no-print-directory \;
 
 recursive: 
-	@cd `dirname $$MAKEFILE`; make $$COMMAND
+	@$(MAKE) -C `dirname $$MAKEFILE` $$COMMAND
 
