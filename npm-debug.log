@@ -1,0 +1,1174 @@
+info it worked if it ends with ok
+verbose cli [ 'c:\\Program Files\\nodejs\\node.exe',
+verbose cli   'c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+verbose cli   'install',
+verbose cli   'mesh' ]
+info using npm@1.1.4
+info using node@v0.6.12
+verbose config file C:\Users\Administrator\.npmrc
+verbose config file c:\Program Files\nodejs\etc\npmrc
+verbose config file c:\Program Files\nodejs\node_modules\npm\npmrc
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm 755
+verbose mkdir done: c:\Users\Administrator\Documents\Development\eyebrowse 755
+verbose cache add [ 'mesh', null ]
+silly cache add: name, spec, args [ undefined, 'mesh', [ 'mesh', null ] ]
+verbose parsed url { pathname: 'mesh', path: 'mesh', href: 'mesh' }
+verbose addNamed [ 'mesh', '' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'mesh', '', false ]
+verbose raw, before any munging mesh
+verbose url resolving [ 'https://registry.npmjs.org/', './mesh' ]
+verbose url resolved https://registry.npmjs.org/mesh
+verbose etag "E3NNW3SZXOC4MHAZMQDBWJGI5"
+http GET https://registry.npmjs.org/mesh
+http 304 https://registry.npmjs.org/mesh
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"E3NNW3SZXOC4MHAZMQDBWJGI5"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:58 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag mesh from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\mesh 755
+silly name, range, hasData 2 [ 'mesh', '', true ]
+silly versions [ 'mesh',
+silly versions   [ '0.0.2',
+silly versions     '0.0.3',
+silly versions     '0.0.4',
+silly versions     '0.0.5',
+silly versions     '0.0.6',
+silly versions     '0.0.8',
+silly versions     '0.0.9',
+silly versions     '0.0.10',
+silly versions     '0.0.11',
+silly versions     '0.0.12' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '3f630706432ed647648c283acac07576ccab8caa',
+verbose bin dist     tarball: 'http://registry.npmjs.org/mesh/-/mesh-0.0.12.tgz' } ]
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\mesh\0.0.12\package\package.json
+verbose loadDefaults mesh@0.0.12
+silly resolved [ { name: 'mesh',
+silly resolved     description: 'Write one app, deploy to many platforms',
+silly resolved     repository: { url: '' },
+silly resolved     version: '0.0.12',
+silly resolved     engines: { node: '*' },
+silly resolved     dependencies: 
+silly resolved      { celeri: '<0.3',
+silly resolved        ncp: '<0.3',
+silly resolved        beanie: '0.0.x',
+silly resolved        scaffoldit: '<0.2.0',
+silly resolved        outcome: '<0.2.0',
+silly resolved        underscore: '1.3.x',
+silly resolved        mkdirp: '0.3.x',
+silly resolved        async: '0.1.x',
+silly resolved        findit: '0.1.x',
+silly resolved        colors: '0.6.x',
+silly resolved        stepc: '0.0.x',
+silly resolved        handlebars: '1.0.x',
+silly resolved        seq: '0.3.x',
+silly resolved        resolve: '0.1.x',
+silly resolved        'uglify-js': '1.2.x',
+silly resolved        crc32: '0.2.x',
+silly resolved        rmdirr: '0.0.x',
+silly resolved        catchall: '0.0.x',
+silly resolved        structr: '0.1.x',
+silly resolved        dirmr: '0.0.x',
+silly resolved        traverse: '0.6.x',
+silly resolved        'html-minifier': 'git+https://github.com/crcn/html-minifier.git',
+silly resolved        beanpoll: '0.2.x',
+silly resolved        plugin: '0.0.x',
+silly resolved        walkr: '0.0.x',
+silly resolved        capirona: '0.0.x',
+silly resolved        sprintf: '0.1.x' },
+silly resolved     devDependencies: {},
+silly resolved     main: './lib/index.js',
+silly resolved     scripts: {},
+silly resolved     bin: { mesh: './bin/mesh' },
+silly resolved     _id: 'mesh@0.0.12',
+silly resolved     optionalDependencies: {},
+silly resolved     _engineSupported: true,
+silly resolved     _npmVersion: '1.1.4',
+silly resolved     _nodeVersion: 'v0.6.12',
+silly resolved     _defaultsLoaded: true,
+silly resolved     _from: 'mesh' } ]
+info into c:\Users\Administrator\Documents\Development\eyebrowse mesh@0.0.12
+info installOne mesh@0.0.12
+verbose from cache C:\Users\Administrator\AppData\Roaming\npm-cache\mesh\0.0.12\package\package.json
+info unbuild c:\Users\Administrator\Documents\Development\eyebrowse\node_modules\mesh
+verbose mkdir (expected) error ENOENT, no such file or directory 'c:\Users\Administrator\Documents\Development\eyebrowse\node_modules'
+verbose mkdir (expected) error ENOENT, no such file or directory 'c:\Users\Administrator\Documents\Development\eyebrowse\node_modules\___mesh.npm'
+verbose mkdir done: c:\Users\Administrator\Documents\Development\eyebrowse\node_modules\___mesh.npm 755
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget c:\Users\Administrator\Documents\Development\eyebrowse\node_modules\mesh
+silly gunzTarPerm modes [ '755', '644' ]
+silly afterUntar ok
+verbose gunzed c:\Users\Administrator\Documents\Development\eyebrowse\node_modules\___mesh.npm\package
+verbose rm'ed c:\Users\Administrator\Documents\Development\eyebrowse\node_modules\mesh
+verbose renamed [ 'c:\\Users\\Administrator\\Documents\\Development\\eyebrowse\\node_modules\\___mesh.npm\\package',
+verbose renamed   'c:\\Users\\Administrator\\Documents\\Development\\eyebrowse\\node_modules\\mesh' ]
+verbose caching c:\Users\Administrator\Documents\Development\eyebrowse\node_modules\mesh\package.json
+verbose loadDefaults mesh@0.0.12
+info preinstall mesh@0.0.12
+verbose from cache c:\Users\Administrator\Documents\Development\eyebrowse\node_modules\mesh\package.json
+verbose readDependencies: using package.json deps
+verbose from cache c:\Users\Administrator\Documents\Development\eyebrowse\node_modules\mesh\package.json
+verbose readDependencies: using package.json deps
+verbose cache add [ 'ncp@<0.3', null ]
+silly cache add: name, spec, args [ undefined, 'ncp@<0.3', [ 'ncp@<0.3', null ] ]
+verbose parsed url { pathname: 'ncp@', path: 'ncp@', href: 'ncp@' }
+silly cache add: name, spec, args [ 'ncp', '<0.3', [ 'ncp', '<0.3' ] ]
+verbose parsed url { pathname: '0.3', path: '0.3', href: '0.3' }
+verbose addNamed [ 'ncp', '<0.3' ]
+verbose addNamed [ null, '<0.3.0-' ]
+silly name, range, hasData [ 'ncp', '<0.3.0-', false ]
+verbose cache add [ 'beanie@0.0.x', null ]
+silly cache add: name, spec, args [ undefined, 'beanie@0.0.x', [ 'beanie@0.0.x', null ] ]
+verbose parsed url { pathname: 'beanie@0.0.x',
+verbose parsed url   path: 'beanie@0.0.x',
+verbose parsed url   href: 'beanie@0.0.x' }
+silly cache add: name, spec, args [ 'beanie', '0.0.x', [ 'beanie', '0.0.x' ] ]
+verbose parsed url { pathname: '0.0.x', path: '0.0.x', href: '0.0.x' }
+verbose addNamed [ 'beanie', '0.0.x' ]
+verbose addNamed [ null, '>=0.0.0- <0.1.0-' ]
+silly name, range, hasData [ 'beanie', '>=0.0.0- <0.1.0-', false ]
+verbose cache add [ 'scaffoldit@<0.2.0', null ]
+silly cache add: name, spec, args [ undefined, 'scaffoldit@<0.2.0', [ 'scaffoldit@<0.2.0', null ] ]
+verbose parsed url { pathname: 'scaffoldit@',
+verbose parsed url   path: 'scaffoldit@',
+verbose parsed url   href: 'scaffoldit@' }
+silly cache add: name, spec, args [ 'scaffoldit', '<0.2.0', [ 'scaffoldit', '<0.2.0' ] ]
+verbose parsed url { pathname: '0.2.0', path: '0.2.0', href: '0.2.0' }
+verbose addNamed [ 'scaffoldit', '<0.2.0' ]
+verbose addNamed [ null, '<0.2.0' ]
+silly name, range, hasData [ 'scaffoldit', '<0.2.0', false ]
+verbose cache add [ 'outcome@<0.2.0', null ]
+silly cache add: name, spec, args [ undefined, 'outcome@<0.2.0', [ 'outcome@<0.2.0', null ] ]
+verbose parsed url { pathname: 'outcome@', path: 'outcome@', href: 'outcome@' }
+silly cache add: name, spec, args [ 'outcome', '<0.2.0', [ 'outcome', '<0.2.0' ] ]
+verbose parsed url { pathname: '0.2.0', path: '0.2.0', href: '0.2.0' }
+verbose addNamed [ 'outcome', '<0.2.0' ]
+verbose addNamed [ null, '<0.2.0' ]
+silly name, range, hasData [ 'outcome', '<0.2.0', false ]
+verbose cache add [ 'underscore@1.3.x', null ]
+silly cache add: name, spec, args [ undefined, 'underscore@1.3.x', [ 'underscore@1.3.x', null ] ]
+verbose parsed url { pathname: 'underscore@1.3.x',
+verbose parsed url   path: 'underscore@1.3.x',
+verbose parsed url   href: 'underscore@1.3.x' }
+silly cache add: name, spec, args [ 'underscore', '1.3.x', [ 'underscore', '1.3.x' ] ]
+verbose parsed url { pathname: '1.3.x', path: '1.3.x', href: '1.3.x' }
+verbose addNamed [ 'underscore', '1.3.x' ]
+verbose addNamed [ null, '>=1.3.0- <1.4.0-' ]
+silly name, range, hasData [ 'underscore', '>=1.3.0- <1.4.0-', false ]
+verbose cache add [ 'mkdirp@0.3.x', null ]
+silly cache add: name, spec, args [ undefined, 'mkdirp@0.3.x', [ 'mkdirp@0.3.x', null ] ]
+verbose parsed url { pathname: 'mkdirp@0.3.x',
+verbose parsed url   path: 'mkdirp@0.3.x',
+verbose parsed url   href: 'mkdirp@0.3.x' }
+silly cache add: name, spec, args [ 'mkdirp', '0.3.x', [ 'mkdirp', '0.3.x' ] ]
+verbose parsed url { pathname: '0.3.x', path: '0.3.x', href: '0.3.x' }
+verbose addNamed [ 'mkdirp', '0.3.x' ]
+verbose addNamed [ null, '>=0.3.0- <0.4.0-' ]
+silly name, range, hasData [ 'mkdirp', '>=0.3.0- <0.4.0-', false ]
+verbose cache add [ 'async@0.1.x', null ]
+silly cache add: name, spec, args [ undefined, 'async@0.1.x', [ 'async@0.1.x', null ] ]
+verbose parsed url { pathname: 'async@0.1.x',
+verbose parsed url   path: 'async@0.1.x',
+verbose parsed url   href: 'async@0.1.x' }
+silly cache add: name, spec, args [ 'async', '0.1.x', [ 'async', '0.1.x' ] ]
+verbose parsed url { pathname: '0.1.x', path: '0.1.x', href: '0.1.x' }
+verbose addNamed [ 'async', '0.1.x' ]
+verbose addNamed [ null, '>=0.1.0- <0.2.0-' ]
+silly name, range, hasData [ 'async', '>=0.1.0- <0.2.0-', false ]
+verbose cache add [ 'findit@0.1.x', null ]
+silly cache add: name, spec, args [ undefined, 'findit@0.1.x', [ 'findit@0.1.x', null ] ]
+verbose parsed url { pathname: 'findit@0.1.x',
+verbose parsed url   path: 'findit@0.1.x',
+verbose parsed url   href: 'findit@0.1.x' }
+silly cache add: name, spec, args [ 'findit', '0.1.x', [ 'findit', '0.1.x' ] ]
+verbose parsed url { pathname: '0.1.x', path: '0.1.x', href: '0.1.x' }
+verbose addNamed [ 'findit', '0.1.x' ]
+verbose addNamed [ null, '>=0.1.0- <0.2.0-' ]
+silly name, range, hasData [ 'findit', '>=0.1.0- <0.2.0-', false ]
+verbose cache add [ 'colors@0.6.x', null ]
+silly cache add: name, spec, args [ undefined, 'colors@0.6.x', [ 'colors@0.6.x', null ] ]
+verbose parsed url { pathname: 'colors@0.6.x',
+verbose parsed url   path: 'colors@0.6.x',
+verbose parsed url   href: 'colors@0.6.x' }
+silly cache add: name, spec, args [ 'colors', '0.6.x', [ 'colors', '0.6.x' ] ]
+verbose parsed url { pathname: '0.6.x', path: '0.6.x', href: '0.6.x' }
+verbose addNamed [ 'colors', '0.6.x' ]
+verbose addNamed [ null, '>=0.6.0- <0.7.0-' ]
+silly name, range, hasData [ 'colors', '>=0.6.0- <0.7.0-', false ]
+verbose cache add [ 'stepc@0.0.x', null ]
+silly cache add: name, spec, args [ undefined, 'stepc@0.0.x', [ 'stepc@0.0.x', null ] ]
+verbose parsed url { pathname: 'stepc@0.0.x',
+verbose parsed url   path: 'stepc@0.0.x',
+verbose parsed url   href: 'stepc@0.0.x' }
+silly cache add: name, spec, args [ 'stepc', '0.0.x', [ 'stepc', '0.0.x' ] ]
+verbose parsed url { pathname: '0.0.x', path: '0.0.x', href: '0.0.x' }
+verbose addNamed [ 'stepc', '0.0.x' ]
+verbose addNamed [ null, '>=0.0.0- <0.1.0-' ]
+silly name, range, hasData [ 'stepc', '>=0.0.0- <0.1.0-', false ]
+verbose cache add [ 'handlebars@1.0.x', null ]
+silly cache add: name, spec, args [ undefined, 'handlebars@1.0.x', [ 'handlebars@1.0.x', null ] ]
+verbose parsed url { pathname: 'handlebars@1.0.x',
+verbose parsed url   path: 'handlebars@1.0.x',
+verbose parsed url   href: 'handlebars@1.0.x' }
+silly cache add: name, spec, args [ 'handlebars', '1.0.x', [ 'handlebars', '1.0.x' ] ]
+verbose parsed url { pathname: '1.0.x', path: '1.0.x', href: '1.0.x' }
+verbose addNamed [ 'handlebars', '1.0.x' ]
+verbose addNamed [ null, '>=1.0.0- <1.1.0-' ]
+silly name, range, hasData [ 'handlebars', '>=1.0.0- <1.1.0-', false ]
+verbose cache add [ 'seq@0.3.x', null ]
+silly cache add: name, spec, args [ undefined, 'seq@0.3.x', [ 'seq@0.3.x', null ] ]
+verbose parsed url { pathname: 'seq@0.3.x', path: 'seq@0.3.x', href: 'seq@0.3.x' }
+silly cache add: name, spec, args [ 'seq', '0.3.x', [ 'seq', '0.3.x' ] ]
+verbose parsed url { pathname: '0.3.x', path: '0.3.x', href: '0.3.x' }
+verbose addNamed [ 'seq', '0.3.x' ]
+verbose addNamed [ null, '>=0.3.0- <0.4.0-' ]
+silly name, range, hasData [ 'seq', '>=0.3.0- <0.4.0-', false ]
+verbose cache add [ 'resolve@0.1.x', null ]
+silly cache add: name, spec, args [ undefined, 'resolve@0.1.x', [ 'resolve@0.1.x', null ] ]
+verbose parsed url { pathname: 'resolve@0.1.x',
+verbose parsed url   path: 'resolve@0.1.x',
+verbose parsed url   href: 'resolve@0.1.x' }
+silly cache add: name, spec, args [ 'resolve', '0.1.x', [ 'resolve', '0.1.x' ] ]
+verbose parsed url { pathname: '0.1.x', path: '0.1.x', href: '0.1.x' }
+verbose addNamed [ 'resolve', '0.1.x' ]
+verbose addNamed [ null, '>=0.1.0- <0.2.0-' ]
+silly name, range, hasData [ 'resolve', '>=0.1.0- <0.2.0-', false ]
+verbose cache add [ 'uglify-js@1.2.x', null ]
+silly cache add: name, spec, args [ undefined, 'uglify-js@1.2.x', [ 'uglify-js@1.2.x', null ] ]
+verbose parsed url { pathname: 'uglify-js@1.2.x',
+verbose parsed url   path: 'uglify-js@1.2.x',
+verbose parsed url   href: 'uglify-js@1.2.x' }
+silly cache add: name, spec, args [ 'uglify-js', '1.2.x', [ 'uglify-js', '1.2.x' ] ]
+verbose parsed url { pathname: '1.2.x', path: '1.2.x', href: '1.2.x' }
+verbose addNamed [ 'uglify-js', '1.2.x' ]
+verbose addNamed [ null, '>=1.2.0- <1.3.0-' ]
+silly name, range, hasData [ 'uglify-js', '>=1.2.0- <1.3.0-', false ]
+verbose cache add [ 'crc32@0.2.x', null ]
+silly cache add: name, spec, args [ undefined, 'crc32@0.2.x', [ 'crc32@0.2.x', null ] ]
+verbose parsed url { pathname: 'crc32@0.2.x',
+verbose parsed url   path: 'crc32@0.2.x',
+verbose parsed url   href: 'crc32@0.2.x' }
+silly cache add: name, spec, args [ 'crc32', '0.2.x', [ 'crc32', '0.2.x' ] ]
+verbose parsed url { pathname: '0.2.x', path: '0.2.x', href: '0.2.x' }
+verbose addNamed [ 'crc32', '0.2.x' ]
+verbose addNamed [ null, '>=0.2.0- <0.3.0-' ]
+silly name, range, hasData [ 'crc32', '>=0.2.0- <0.3.0-', false ]
+verbose cache add [ 'rmdirr@0.0.x', null ]
+silly cache add: name, spec, args [ undefined, 'rmdirr@0.0.x', [ 'rmdirr@0.0.x', null ] ]
+verbose parsed url { pathname: 'rmdirr@0.0.x',
+verbose parsed url   path: 'rmdirr@0.0.x',
+verbose parsed url   href: 'rmdirr@0.0.x' }
+silly cache add: name, spec, args [ 'rmdirr', '0.0.x', [ 'rmdirr', '0.0.x' ] ]
+verbose parsed url { pathname: '0.0.x', path: '0.0.x', href: '0.0.x' }
+verbose addNamed [ 'rmdirr', '0.0.x' ]
+verbose addNamed [ null, '>=0.0.0- <0.1.0-' ]
+silly name, range, hasData [ 'rmdirr', '>=0.0.0- <0.1.0-', false ]
+verbose raw, before any munging ncp
+verbose url resolving [ 'https://registry.npmjs.org/', './ncp' ]
+verbose url resolved https://registry.npmjs.org/ncp
+verbose etag "3WMSRMQK4U6UCOHPP0V7PLIXU"
+http GET https://registry.npmjs.org/ncp
+verbose raw, before any munging beanie
+verbose url resolving [ 'https://registry.npmjs.org/', './beanie' ]
+verbose url resolved https://registry.npmjs.org/beanie
+verbose etag "7D0IG2GPGNAOVQM79TFYB9VZJ"
+http GET https://registry.npmjs.org/beanie
+verbose raw, before any munging scaffoldit
+verbose url resolving [ 'https://registry.npmjs.org/', './scaffoldit' ]
+verbose url resolved https://registry.npmjs.org/scaffoldit
+verbose etag "243M6X568HNIF5YKFFBZHW7CG"
+http GET https://registry.npmjs.org/scaffoldit
+verbose raw, before any munging outcome
+verbose url resolving [ 'https://registry.npmjs.org/', './outcome' ]
+verbose url resolved https://registry.npmjs.org/outcome
+verbose etag "A6GYE4KZ9WY0FTFZGHQVGBPIH"
+http GET https://registry.npmjs.org/outcome
+verbose raw, before any munging underscore
+verbose url resolving [ 'https://registry.npmjs.org/', './underscore' ]
+verbose url resolved https://registry.npmjs.org/underscore
+verbose etag "75BE4YPNT17L9W5PADLHPKRGV"
+http GET https://registry.npmjs.org/underscore
+verbose raw, before any munging mkdirp
+verbose url resolving [ 'https://registry.npmjs.org/', './mkdirp' ]
+verbose url resolved https://registry.npmjs.org/mkdirp
+verbose etag "3LGR1W8EVDSBJP7VP24G3K20R"
+http GET https://registry.npmjs.org/mkdirp
+verbose raw, before any munging findit
+verbose url resolving [ 'https://registry.npmjs.org/', './findit' ]
+verbose url resolved https://registry.npmjs.org/findit
+verbose etag "1I1O5T5PR0NS9HST46ZUPG2YF"
+http GET https://registry.npmjs.org/findit
+verbose raw, before any munging colors
+verbose url resolving [ 'https://registry.npmjs.org/', './colors' ]
+verbose url resolved https://registry.npmjs.org/colors
+verbose etag "D2E9E101SLB9I0ACBW4L4RQI4"
+http GET https://registry.npmjs.org/colors
+verbose raw, before any munging stepc
+verbose url resolving [ 'https://registry.npmjs.org/', './stepc' ]
+verbose url resolved https://registry.npmjs.org/stepc
+verbose etag "5FJHYIS2TL01GZPTDEY61QBM1"
+http GET https://registry.npmjs.org/stepc
+verbose raw, before any munging handlebars
+verbose url resolving [ 'https://registry.npmjs.org/', './handlebars' ]
+verbose url resolved https://registry.npmjs.org/handlebars
+verbose etag "9D6KC2S53GM0UMCJ85BA0CMDU"
+http GET https://registry.npmjs.org/handlebars
+verbose raw, before any munging seq
+verbose url resolving [ 'https://registry.npmjs.org/', './seq' ]
+verbose url resolved https://registry.npmjs.org/seq
+verbose etag "3R7RC6DTDOOTUAGKQTB21S8HW"
+http GET https://registry.npmjs.org/seq
+verbose raw, before any munging resolve
+verbose url resolving [ 'https://registry.npmjs.org/', './resolve' ]
+verbose url resolved https://registry.npmjs.org/resolve
+verbose etag "29FU7JVT6GJCKVNJ3AFWSOQC9"
+http GET https://registry.npmjs.org/resolve
+verbose raw, before any munging uglify-js
+verbose url resolving [ 'https://registry.npmjs.org/', './uglify-js' ]
+verbose url resolved https://registry.npmjs.org/uglify-js
+verbose etag "CJRCOK6P1T1H29IUPM78BQHZ4"
+http GET https://registry.npmjs.org/uglify-js
+verbose raw, before any munging crc32
+verbose url resolving [ 'https://registry.npmjs.org/', './crc32' ]
+verbose url resolved https://registry.npmjs.org/crc32
+verbose etag "2EBJMOFXYNXO3DVKFJS4DI0SH"
+http GET https://registry.npmjs.org/crc32
+verbose raw, before any munging rmdirr
+verbose url resolving [ 'https://registry.npmjs.org/', './rmdirr' ]
+verbose url resolved https://registry.npmjs.org/rmdirr
+verbose etag "19S8SDOKAWCNAXT8VR3IZD4VG"
+http GET https://registry.npmjs.org/rmdirr
+verbose cache add [ 'catchall@0.0.x', null ]
+silly cache add: name, spec, args [ undefined, 'catchall@0.0.x', [ 'catchall@0.0.x', null ] ]
+verbose parsed url { pathname: 'catchall@0.0.x',
+verbose parsed url   path: 'catchall@0.0.x',
+verbose parsed url   href: 'catchall@0.0.x' }
+silly cache add: name, spec, args [ 'catchall', '0.0.x', [ 'catchall', '0.0.x' ] ]
+verbose parsed url { pathname: '0.0.x', path: '0.0.x', href: '0.0.x' }
+verbose addNamed [ 'catchall', '0.0.x' ]
+verbose addNamed [ null, '>=0.0.0- <0.1.0-' ]
+silly name, range, hasData [ 'catchall', '>=0.0.0- <0.1.0-', false ]
+verbose cache add [ 'structr@0.1.x', null ]
+silly cache add: name, spec, args [ undefined, 'structr@0.1.x', [ 'structr@0.1.x', null ] ]
+verbose parsed url { pathname: 'structr@0.1.x',
+verbose parsed url   path: 'structr@0.1.x',
+verbose parsed url   href: 'structr@0.1.x' }
+silly cache add: name, spec, args [ 'structr', '0.1.x', [ 'structr', '0.1.x' ] ]
+verbose parsed url { pathname: '0.1.x', path: '0.1.x', href: '0.1.x' }
+verbose addNamed [ 'structr', '0.1.x' ]
+verbose addNamed [ null, '>=0.1.0- <0.2.0-' ]
+silly name, range, hasData [ 'structr', '>=0.1.0- <0.2.0-', false ]
+verbose cache add [ 'dirmr@0.0.x', null ]
+silly cache add: name, spec, args [ undefined, 'dirmr@0.0.x', [ 'dirmr@0.0.x', null ] ]
+verbose parsed url { pathname: 'dirmr@0.0.x',
+verbose parsed url   path: 'dirmr@0.0.x',
+verbose parsed url   href: 'dirmr@0.0.x' }
+silly cache add: name, spec, args [ 'dirmr', '0.0.x', [ 'dirmr', '0.0.x' ] ]
+verbose parsed url { pathname: '0.0.x', path: '0.0.x', href: '0.0.x' }
+verbose addNamed [ 'dirmr', '0.0.x' ]
+verbose addNamed [ null, '>=0.0.0- <0.1.0-' ]
+silly name, range, hasData [ 'dirmr', '>=0.0.0- <0.1.0-', false ]
+verbose cache add [ 'traverse@0.6.x', null ]
+silly cache add: name, spec, args [ undefined, 'traverse@0.6.x', [ 'traverse@0.6.x', null ] ]
+verbose parsed url { pathname: 'traverse@0.6.x',
+verbose parsed url   path: 'traverse@0.6.x',
+verbose parsed url   href: 'traverse@0.6.x' }
+silly cache add: name, spec, args [ 'traverse', '0.6.x', [ 'traverse', '0.6.x' ] ]
+verbose parsed url { pathname: '0.6.x', path: '0.6.x', href: '0.6.x' }
+verbose addNamed [ 'traverse', '0.6.x' ]
+verbose addNamed [ null, '>=0.6.0- <0.7.0-' ]
+silly name, range, hasData [ 'traverse', '>=0.6.0- <0.7.0-', false ]
+verbose cache add [ 'html-minifier@git+https://github.com/crcn/html-minifier.git',
+verbose cache add   null ]
+silly cache add: name, spec, args [ undefined,
+silly cache add: name, spec, args   'html-minifier@git+https://github.com/crcn/html-minifier.git',
+silly cache add: name, spec, args   [ 'html-minifier@git+https://github.com/crcn/html-minifier.git',
+silly cache add: name, spec, args     null ] ]
+verbose parsed url { pathname: 'html-minifier@git+https://github.com/crcn/html-minifier.git',
+verbose parsed url   path: 'html-minifier@git+https://github.com/crcn/html-minifier.git',
+verbose parsed url   href: 'html-minifier@git+https://github.com/crcn/html-minifier.git' }
+silly cache add: name, spec, args [ 'html-minifier',
+silly cache add: name, spec, args   'git+https://github.com/crcn/html-minifier.git',
+silly cache add: name, spec, args   [ 'html-minifier',
+silly cache add: name, spec, args     'git+https://github.com/crcn/html-minifier.git' ] ]
+verbose parsed url { protocol: 'githttps:',
+verbose parsed url   slashes: true,
+verbose parsed url   host: 'github.com',
+verbose parsed url   hostname: 'github.com',
+verbose parsed url   href: 'githttps://github.com/crcn/html-minifier.git',
+verbose parsed url   pathname: '/crcn/html-minifier.git',
+verbose parsed url   path: '/crcn/html-minifier.git' }
+verbose addRemoteGit [ 'https://github.com/crcn/html-minifier.git', 'master' ]
+verbose cache add [ 'beanpoll@0.2.x', null ]
+silly cache add: name, spec, args [ undefined, 'beanpoll@0.2.x', [ 'beanpoll@0.2.x', null ] ]
+verbose parsed url { pathname: 'beanpoll@0.2.x',
+verbose parsed url   path: 'beanpoll@0.2.x',
+verbose parsed url   href: 'beanpoll@0.2.x' }
+silly cache add: name, spec, args [ 'beanpoll', '0.2.x', [ 'beanpoll', '0.2.x' ] ]
+verbose parsed url { pathname: '0.2.x', path: '0.2.x', href: '0.2.x' }
+verbose addNamed [ 'beanpoll', '0.2.x' ]
+verbose addNamed [ null, '>=0.2.0- <0.3.0-' ]
+silly name, range, hasData [ 'beanpoll', '>=0.2.0- <0.3.0-', false ]
+verbose cache add [ 'plugin@0.0.x', null ]
+silly cache add: name, spec, args [ undefined, 'plugin@0.0.x', [ 'plugin@0.0.x', null ] ]
+verbose parsed url { pathname: 'plugin@0.0.x',
+verbose parsed url   path: 'plugin@0.0.x',
+verbose parsed url   href: 'plugin@0.0.x' }
+silly cache add: name, spec, args [ 'plugin', '0.0.x', [ 'plugin', '0.0.x' ] ]
+verbose parsed url { pathname: '0.0.x', path: '0.0.x', href: '0.0.x' }
+verbose addNamed [ 'plugin', '0.0.x' ]
+verbose addNamed [ null, '>=0.0.0- <0.1.0-' ]
+silly name, range, hasData [ 'plugin', '>=0.0.0- <0.1.0-', false ]
+verbose cache add [ 'walkr@0.0.x', null ]
+silly cache add: name, spec, args [ undefined, 'walkr@0.0.x', [ 'walkr@0.0.x', null ] ]
+verbose parsed url { pathname: 'walkr@0.0.x',
+verbose parsed url   path: 'walkr@0.0.x',
+verbose parsed url   href: 'walkr@0.0.x' }
+silly cache add: name, spec, args [ 'walkr', '0.0.x', [ 'walkr', '0.0.x' ] ]
+verbose parsed url { pathname: '0.0.x', path: '0.0.x', href: '0.0.x' }
+verbose addNamed [ 'walkr', '0.0.x' ]
+verbose addNamed [ null, '>=0.0.0- <0.1.0-' ]
+silly name, range, hasData [ 'walkr', '>=0.0.0- <0.1.0-', false ]
+verbose cache add [ 'capirona@0.0.x', null ]
+silly cache add: name, spec, args [ undefined, 'capirona@0.0.x', [ 'capirona@0.0.x', null ] ]
+verbose parsed url { pathname: 'capirona@0.0.x',
+verbose parsed url   path: 'capirona@0.0.x',
+verbose parsed url   href: 'capirona@0.0.x' }
+silly cache add: name, spec, args [ 'capirona', '0.0.x', [ 'capirona', '0.0.x' ] ]
+verbose parsed url { pathname: '0.0.x', path: '0.0.x', href: '0.0.x' }
+verbose addNamed [ 'capirona', '0.0.x' ]
+verbose addNamed [ null, '>=0.0.0- <0.1.0-' ]
+silly name, range, hasData [ 'capirona', '>=0.0.0- <0.1.0-', false ]
+verbose cache add [ 'sprintf@0.1.x', null ]
+silly cache add: name, spec, args [ undefined, 'sprintf@0.1.x', [ 'sprintf@0.1.x', null ] ]
+verbose parsed url { pathname: 'sprintf@0.1.x',
+verbose parsed url   path: 'sprintf@0.1.x',
+verbose parsed url   href: 'sprintf@0.1.x' }
+silly cache add: name, spec, args [ 'sprintf', '0.1.x', [ 'sprintf', '0.1.x' ] ]
+verbose parsed url { pathname: '0.1.x', path: '0.1.x', href: '0.1.x' }
+verbose addNamed [ 'sprintf', '0.1.x' ]
+verbose addNamed [ null, '>=0.1.0- <0.2.0-' ]
+silly name, range, hasData [ 'sprintf', '>=0.1.0- <0.2.0-', false ]
+verbose cache add [ 'celeri@<0.3', null ]
+silly cache add: name, spec, args [ undefined, 'celeri@<0.3', [ 'celeri@<0.3', null ] ]
+verbose parsed url { pathname: 'celeri@', path: 'celeri@', href: 'celeri@' }
+silly cache add: name, spec, args [ 'celeri', '<0.3', [ 'celeri', '<0.3' ] ]
+verbose parsed url { pathname: '0.3', path: '0.3', href: '0.3' }
+verbose addNamed [ 'celeri', '<0.3' ]
+verbose addNamed [ null, '<0.3.0-' ]
+silly name, range, hasData [ 'celeri', '<0.3.0-', false ]
+verbose raw, before any munging async
+verbose url resolving [ 'https://registry.npmjs.org/', './async' ]
+verbose url resolved https://registry.npmjs.org/async
+verbose etag "EG6PGE4JQACJ29D1MV0Z7959I"
+http GET https://registry.npmjs.org/async
+verbose raw, before any munging catchall
+verbose url resolving [ 'https://registry.npmjs.org/', './catchall' ]
+verbose url resolved https://registry.npmjs.org/catchall
+verbose etag "54ONPBXUPPP5UV4W8MBGYGNOI"
+http GET https://registry.npmjs.org/catchall
+verbose raw, before any munging structr
+verbose url resolving [ 'https://registry.npmjs.org/', './structr' ]
+verbose url resolved https://registry.npmjs.org/structr
+verbose etag "ERFG1L97AYT9SN5G44SD042ZE"
+http GET https://registry.npmjs.org/structr
+verbose raw, before any munging dirmr
+verbose url resolving [ 'https://registry.npmjs.org/', './dirmr' ]
+verbose url resolved https://registry.npmjs.org/dirmr
+verbose etag "DHL94NLWI4ZNN49CROFSX8IGJ"
+http GET https://registry.npmjs.org/dirmr
+verbose raw, before any munging traverse
+verbose url resolving [ 'https://registry.npmjs.org/', './traverse' ]
+verbose url resolved https://registry.npmjs.org/traverse
+verbose etag "B4MZM6CUNTBQ1QY64KH6WOO3H"
+http GET https://registry.npmjs.org/traverse
+verbose raw, before any munging beanpoll
+verbose url resolving [ 'https://registry.npmjs.org/', './beanpoll' ]
+verbose url resolved https://registry.npmjs.org/beanpoll
+verbose etag "CM7NXCWOUAZ5CP83J2F8TEF2H"
+http GET https://registry.npmjs.org/beanpoll
+verbose raw, before any munging plugin
+verbose url resolving [ 'https://registry.npmjs.org/', './plugin' ]
+verbose url resolved https://registry.npmjs.org/plugin
+verbose etag "C7SCM9DL3VWK5D54K98NCA6E0"
+http GET https://registry.npmjs.org/plugin
+verbose raw, before any munging walkr
+verbose url resolving [ 'https://registry.npmjs.org/', './walkr' ]
+verbose url resolved https://registry.npmjs.org/walkr
+verbose etag "AXII6ZGLDAHJ655MAX1EU1UZT"
+http GET https://registry.npmjs.org/walkr
+verbose raw, before any munging capirona
+verbose url resolving [ 'https://registry.npmjs.org/', './capirona' ]
+verbose url resolved https://registry.npmjs.org/capirona
+verbose etag "1SSABY8LU01ASWULU3MIUJK4E"
+http GET https://registry.npmjs.org/capirona
+verbose raw, before any munging sprintf
+verbose url resolving [ 'https://registry.npmjs.org/', './sprintf' ]
+verbose url resolved https://registry.npmjs.org/sprintf
+verbose etag "JYWX6AZRENISWTN5YGIA0KFL"
+http GET https://registry.npmjs.org/sprintf
+verbose raw, before any munging celeri
+verbose url resolving [ 'https://registry.npmjs.org/', './celeri' ]
+verbose url resolved https://registry.npmjs.org/celeri
+verbose etag "C7GYCYA3V5Y8BBRQ3DOKI00R5"
+http GET https://registry.npmjs.org/celeri
+verbose mkdir (expected) error ENOENT, no such file or directory 'C:\Users\ADMINI~1\AppData\Local\Temp\npm-1331071798931'
+verbose mkdir done: C:\Users\ADMINI~1\AppData\Local\Temp\npm-1331071798931 755
+silly exec git "clone" "https://github.com/crcn/html-minifier.git" "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\npm-1331071798931\\1331071798931-0.46502821426838636"
+silly spawning [ 'git',
+silly spawning   [ 'clone',
+silly spawning     'https://github.com/crcn/html-minifier.git',
+silly spawning     'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\npm-1331071798931\\1331071798931-0.46502821426838636' ],
+silly spawning   null ]
+http 304 https://registry.npmjs.org/beanie
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"7D0IG2GPGNAOVQM79TFYB9VZJ"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag beanie from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\beanie 755
+silly name, range, hasData 2 [ 'beanie', '>=0.0.0- <0.1.0-', true ]
+silly versions [ 'beanie', [ '0.0.1', '0.0.2', '0.0.3' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '4065eba42feee9ef4e2cdff6ce68b35c21b4355a',
+verbose bin dist     tarball: 'http://registry.npmjs.org/beanie/-/beanie-0.0.3.tgz' } ]
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\beanie\0.0.3\package\package.json
+verbose loadDefaults beanie@0.0.3
+http 304 https://registry.npmjs.org/outcome
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"A6GYE4KZ9WY0FTFZGHQVGBPIH"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag outcome from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\outcome 755
+silly name, range, hasData 2 [ 'outcome', '<0.2.0', true ]
+silly versions [ 'outcome', [ '0.0.1', '0.0.3', '0.0.5' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: 'f34eb2d2cbe3b115313eeccac371e9f04eace12f',
+verbose bin dist     tarball: 'http://registry.npmjs.org/outcome/-/outcome-0.0.5.tgz' } ]
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\outcome\0.0.5\package\package.json
+verbose loadDefaults outcome@0.0.5
+http 304 https://registry.npmjs.org/scaffoldit
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"243M6X568HNIF5YKFFBZHW7CG"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag scaffoldit from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\scaffoldit 755
+silly name, range, hasData 2 [ 'scaffoldit', '<0.2.0', true ]
+silly versions [ 'scaffoldit', [ '0.0.1', '0.0.2' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '59b754df3a0960e57ef8289707ea09f092c0bcd0',
+verbose bin dist     tarball: 'http://registry.npmjs.org/scaffoldit/-/scaffoldit-0.0.2.tgz' } ]
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\scaffoldit\0.0.2\package\package.json
+verbose loadDefaults scaffoldit@0.0.2
+http 304 https://registry.npmjs.org/mkdirp
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"3LGR1W8EVDSBJP7VP24G3K20R"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag mkdirp from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\mkdirp 755
+silly name, range, hasData 2 [ 'mkdirp', '>=0.3.0- <0.4.0-', true ]
+silly versions [ 'mkdirp',
+silly versions   [ '0.0.1',
+silly versions     '0.0.2',
+silly versions     '0.0.3',
+silly versions     '0.0.4',
+silly versions     '0.0.5',
+silly versions     '0.0.6',
+silly versions     '0.0.7',
+silly versions     '0.1.0',
+silly versions     '0.2.0',
+silly versions     '0.2.1',
+silly versions     '0.2.2',
+silly versions     '0.3.0' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '1bbf5ab1ba827af23575143490426455f481fe1e',
+verbose bin dist     tarball: 'http://registry.npmjs.org/mkdirp/-/mkdirp-0.3.0.tgz' } ]
+http 304 https://registry.npmjs.org/ncp
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"3WMSRMQK4U6UCOHPP0V7PLIXU"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag ncp from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\ncp 755
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\mkdirp\0.3.0\package\package.json
+verbose loadDefaults mkdirp@0.3.0
+silly name, range, hasData 2 [ 'ncp', '<0.3.0-', true ]
+silly versions [ 'ncp',
+silly versions   [ '0.0.0',
+silly versions     '0.0.1',
+silly versions     '0.0.2',
+silly versions     '0.1.0',
+silly versions     '0.1.1',
+silly versions     '0.1.2',
+silly versions     '0.2.0',
+silly versions     '0.2.1',
+silly versions     '0.2.2',
+silly versions     '0.2.3',
+silly versions     '0.2.4',
+silly versions     '0.2.5' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: 'f00f7a0247e33642896d55e42f27162541696308',
+verbose bin dist     tarball: 'http://registry.npmjs.org/ncp/-/ncp-0.2.5.tgz' } ]
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\ncp\0.2.5\package\package.json
+verbose loadDefaults ncp@0.2.5
+http 304 https://registry.npmjs.org/findit
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"1I1O5T5PR0NS9HST46ZUPG2YF"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag findit from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\findit 755
+silly name, range, hasData 2 [ 'findit', '>=0.1.0- <0.2.0-', true ]
+silly versions [ 'findit',
+silly versions   [ '0.0.1',
+silly versions     '0.0.2',
+silly versions     '0.0.3',
+silly versions     '0.0.4',
+silly versions     '0.0.5',
+silly versions     '0.1.0',
+silly versions     '0.1.1',
+silly versions     '0.1.2' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: 'ac7fe600cd6a32a35672836b74cf6f1dde2e11f8',
+verbose bin dist     tarball: 'http://registry.npmjs.org/findit/-/findit-0.1.2.tgz' } ]
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\findit\0.1.2\package\package.json
+verbose loadDefaults findit@0.1.2
+http 304 https://registry.npmjs.org/underscore
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"75BE4YPNT17L9W5PADLHPKRGV"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag underscore from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\underscore 755
+silly name, range, hasData 2 [ 'underscore', '>=1.3.0- <1.4.0-', true ]
+silly versions [ 'underscore',
+silly versions   [ '1.0.3',
+silly versions     '1.0.4',
+silly versions     '1.1.0',
+silly versions     '1.1.1',
+silly versions     '1.1.2',
+silly versions     '1.1.3',
+silly versions     '1.1.4',
+silly versions     '1.1.5',
+silly versions     '1.1.6',
+silly versions     '1.1.7',
+silly versions     '1.2.0',
+silly versions     '1.2.1',
+silly versions     '1.2.2',
+silly versions     '1.2.3',
+silly versions     '1.2.4',
+silly versions     '1.3.0',
+silly versions     '1.3.1' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '6cb8aad0e77eb5dbbfb54b22bcd8697309cf9641',
+verbose bin dist     tarball: 'http://registry.npmjs.org/underscore/-/underscore-1.3.1.tgz' } ]
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\underscore\1.3.1\package\package.json
+verbose loadDefaults underscore@1.3.1
+http 304 https://registry.npmjs.org/handlebars
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"9D6KC2S53GM0UMCJ85BA0CMDU"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag handlebars from cache
+http 304 https://registry.npmjs.org/colors
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"D2E9E101SLB9I0ACBW4L4RQI4"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag colors from cache
+http 304 https://registry.npmjs.org/stepc
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"5FJHYIS2TL01GZPTDEY61QBM1"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag stepc from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\handlebars 755
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\colors 755
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\stepc 755
+silly name, range, hasData 2 [ 'handlebars', '>=1.0.0- <1.1.0-', true ]
+silly versions [ 'handlebars', [ '1.0.2beta', '1.0.4beta', '1.0.5beta' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: 'a75b5312239748aeb352a9a2fa682242fefeaf9f',
+verbose bin dist     tarball: 'http://registry.npmjs.org/handlebars/-/handlebars-1.0.5beta.tgz' } ]
+silly name, range, hasData 2 [ 'colors', '>=0.6.0- <0.7.0-', true ]
+silly versions [ 'colors', [ '0.3.0', '0.5.0', '0.5.1', '0.6.0', '0.6.0-1' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '6dbb68ceb8bc60f2b313dcc5ce1599f06d19e67a',
+verbose bin dist     tarball: 'http://registry.npmjs.org/colors/-/colors-0.6.0-1.tgz' } ]
+silly name, range, hasData 2 [ 'stepc', '>=0.0.0- <0.1.0-', true ]
+silly versions [ 'stepc', [ '0.0.3' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '9b684e9445a8ea38d30868e95921b977cd34a6c3',
+verbose bin dist     tarball: 'http://registry.npmjs.org/stepc/-/stepc-0.0.3.tgz' } ]
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\handlebars\1.0.5beta\package\package.json
+verbose loadDefaults handlebars@1.0.5beta
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\colors\0.6.0-1\package\package.json
+verbose loadDefaults colors@0.6.0-1
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\stepc\0.0.3\package\package.json
+verbose loadDefaults stepc@0.0.3
+http 304 https://registry.npmjs.org/seq
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"3R7RC6DTDOOTUAGKQTB21S8HW"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag seq from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\seq 755
+silly name, range, hasData 2 [ 'seq', '>=0.3.0- <0.4.0-', true ]
+silly versions [ 'seq',
+silly versions   [ '0.0.1',
+silly versions     '0.0.2',
+silly versions     '0.0.3',
+silly versions     '0.0.4',
+silly versions     '0.0.6',
+silly versions     '0.0.7',
+silly versions     '0.0.8',
+silly versions     '0.0.9',
+silly versions     '0.0.10',
+silly versions     '0.0.11',
+silly versions     '0.0.12',
+silly versions     '0.0.13',
+silly versions     '0.1.0',
+silly versions     '0.1.1',
+silly versions     '0.1.2',
+silly versions     '0.1.3',
+silly versions     '0.1.4',
+silly versions     '0.1.5',
+silly versions     '0.1.6',
+silly versions     '0.1.7',
+silly versions     '0.1.8',
+silly versions     '0.2.0',
+silly versions     '0.2.1',
+silly versions     '0.2.2',
+silly versions     '0.2.3',
+silly versions     '0.2.4',
+silly versions     '0.2.5',
+silly versions     '0.3.0',
+silly versions     '0.3.1',
+silly versions     '0.3.2',
+silly versions     '0.3.3',
+silly versions     '0.3.5' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: 'ae02af3a424793d8ccbf212d69174e0c54dffe38',
+verbose bin dist     tarball: 'http://registry.npmjs.org/seq/-/seq-0.3.5.tgz' } ]
+http 304 https://registry.npmjs.org/crc32
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"2EBJMOFXYNXO3DVKFJS4DI0SH"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag crc32 from cache
+http 304 https://registry.npmjs.org/rmdirr
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"19S8SDOKAWCNAXT8VR3IZD4VG"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag rmdirr from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\crc32 755
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\rmdirr 755
+http 304 https://registry.npmjs.org/resolve
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"29FU7JVT6GJCKVNJ3AFWSOQC9"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag resolve from cache
+http 304 https://registry.npmjs.org/uglify-js
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"CJRCOK6P1T1H29IUPM78BQHZ4"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag uglify-js from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\resolve 755
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\uglify-js 755
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\seq\0.3.5\package\package.json
+verbose loadDefaults seq@0.3.5
+silly name, range, hasData 2 [ 'crc32', '>=0.2.0- <0.3.0-', true ]
+silly versions [ 'crc32', [ '0.2.2' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '7ad220d6ffdcd119f9fc127a7772cacea390a4ba',
+verbose bin dist     tarball: 'http://registry.npmjs.org/crc32/-/crc32-0.2.2.tgz' } ]
+silly name, range, hasData 2 [ 'rmdirr', '>=0.0.0- <0.1.0-', true ]
+silly versions [ 'rmdirr', [ '0.0.1' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '91a8e704801020918d741ffc2e9e729ece7f15f0',
+verbose bin dist     tarball: 'http://registry.npmjs.org/rmdirr/-/rmdirr-0.0.1.tgz' } ]
+silly name, range, hasData 2 [ 'resolve', '>=0.1.0- <0.2.0-', true ]
+silly versions [ 'resolve',
+silly versions   [ '0.0.0',
+silly versions     '0.0.1',
+silly versions     '0.0.2',
+silly versions     '0.0.3',
+silly versions     '0.0.4',
+silly versions     '0.1.0',
+silly versions     '0.1.2',
+silly versions     '0.1.3',
+silly versions     '0.2.0' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '204c18364bc529a0b376e4a714b7ba44f0d390d1',
+verbose bin dist     tarball: 'http://registry.npmjs.org/resolve/-/resolve-0.1.3.tgz' } ]
+silly name, range, hasData 2 [ 'uglify-js', '>=1.2.0- <1.3.0-', true ]
+silly versions [ 'uglify-js',
+silly versions   [ '0.0.1',
+silly versions     '0.0.2',
+silly versions     '0.0.3',
+silly versions     '0.0.4',
+silly versions     '0.0.5',
+silly versions     '1.0.1',
+silly versions     '1.0.2',
+silly versions     '1.0.3',
+silly versions     '1.0.4',
+silly versions     '1.0.5',
+silly versions     '1.0.6',
+silly versions     '1.0.7',
+silly versions     '1.1.0',
+silly versions     '1.1.1',
+silly versions     '1.2.0',
+silly versions     '1.2.1',
+silly versions     '1.2.2',
+silly versions     '1.2.3',
+silly versions     '1.2.4',
+silly versions     '1.2.5' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: 'b542c2c76f78efb34b200b20177634330ff702b6',
+verbose bin dist     tarball: 'http://registry.npmjs.org/uglify-js/-/uglify-js-1.2.5.tgz' } ]
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\crc32\0.2.2\package\package.json
+verbose loadDefaults crc32@0.2.2
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\rmdirr\0.0.1\package\package.json
+verbose loadDefaults rmdirr@0.0.1
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\resolve\0.1.3\package\package.json
+verbose loadDefaults resolve@0.1.3
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\uglify-js\1.2.5\package\package.json
+verbose loadDefaults uglify-js@1.2.5
+http 304 https://registry.npmjs.org/async
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"EG6PGE4JQACJ29D1MV0Z7959I"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag async from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\async 755
+silly name, range, hasData 2 [ 'async', '>=0.1.0- <0.2.0-', true ]
+silly versions [ 'async',
+silly versions   [ '0.1.0',
+silly versions     '0.1.1',
+silly versions     '0.1.2',
+silly versions     '0.1.3',
+silly versions     '0.1.4',
+silly versions     '0.1.5',
+silly versions     '0.1.6',
+silly versions     '0.1.7',
+silly versions     '0.1.8',
+silly versions     '0.1.9',
+silly versions     '0.1.10',
+silly versions     '0.1.11',
+silly versions     '0.1.12',
+silly versions     '0.1.13',
+silly versions     '0.1.14',
+silly versions     '0.1.15',
+silly versions     '0.1.16',
+silly versions     '0.1.17',
+silly versions     '0.1.18' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: 'c59c923920b76d5bf23248c04433920c4d45086a',
+verbose bin dist     tarball: 'http://registry.npmjs.org/async/-/async-0.1.18.tgz' } ]
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\async\0.1.18\package\package.json
+verbose loadDefaults async@0.1.18
+http 304 https://registry.npmjs.org/traverse
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"B4MZM6CUNTBQ1QY64KH6WOO3H"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag traverse from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\traverse 755
+silly name, range, hasData 2 [ 'traverse', '>=0.6.0- <0.7.0-', true ]
+silly versions [ 'traverse',
+silly versions   [ '0.1.2',
+silly versions     '0.1.3',
+silly versions     '0.2.0',
+silly versions     '0.2.1',
+silly versions     '0.2.2',
+silly versions     '0.2.3',
+silly versions     '0.2.4',
+silly versions     '0.3.0',
+silly versions     '0.3.1',
+silly versions     '0.2.5',
+silly versions     '0.2.6',
+silly versions     '0.3.2',
+silly versions     '0.3.3',
+silly versions     '0.3.4',
+silly versions     '0.3.5',
+silly versions     '0.3.6',
+silly versions     '0.3.7',
+silly versions     '0.3.8',
+silly versions     '0.4.0',
+silly versions     '0.4.1',
+silly versions     '0.4.2',
+silly versions     '0.3.9',
+silly versions     '0.4.3',
+silly versions     '0.4.4',
+silly versions     '0.4.5',
+silly versions     '0.4.6',
+silly versions     '0.5.0',
+silly versions     '0.5.1',
+silly versions     '0.5.2',
+silly versions     '0.6.0' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: 'e11243dc2eeedc9bbce6b605654b92df25f3dbc3',
+verbose bin dist     tarball: 'http://registry.npmjs.org/traverse/-/traverse-0.6.0.tgz' } ]
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\traverse\0.6.0\package\package.json
+verbose loadDefaults traverse@0.6.0
+http 304 https://registry.npmjs.org/dirmr
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"DHL94NLWI4ZNN49CROFSX8IGJ"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag dirmr from cache
+http 304 https://registry.npmjs.org/beanpoll
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"CM7NXCWOUAZ5CP83J2F8TEF2H"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag beanpoll from cache
+http 304 https://registry.npmjs.org/catchall
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"54ONPBXUPPP5UV4W8MBGYGNOI"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag catchall from cache
+http 304 https://registry.npmjs.org/structr
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"ERFG1L97AYT9SN5G44SD042ZE"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag structr from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\dirmr 755
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\beanpoll 755
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\catchall 755
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\structr 755
+silly name, range, hasData 2 [ 'dirmr', '>=0.0.0- <0.1.0-', true ]
+silly versions [ 'dirmr', [ '0.0.1' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '8dbe86896976018896fb479feec5d1575ebd51e6',
+verbose bin dist     tarball: 'http://registry.npmjs.org/dirmr/-/dirmr-0.0.1.tgz' } ]
+silly name, range, hasData 2 [ 'beanpoll', '>=0.2.0- <0.3.0-', true ]
+silly versions [ 'beanpoll',
+silly versions   [ '0.2.0',
+silly versions     '0.2.1',
+silly versions     '0.1.16',
+silly versions     '0.1.17',
+silly versions     '0.2.3',
+silly versions     '0.2.4',
+silly versions     '0.2.6',
+silly versions     '0.2.7',
+silly versions     '0.2.8',
+silly versions     '0.2.9',
+silly versions     '0.2.10',
+silly versions     '0.2.11',
+silly versions     '0.2.12',
+silly versions     '0.2.13',
+silly versions     '0.2.14' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '1f3ddc059efe64d42dea43aad53c6406c1d21641',
+verbose bin dist     tarball: 'http://registry.npmjs.org/beanpoll/-/beanpoll-0.2.14.tgz' } ]
+silly name, range, hasData 2 [ 'catchall', '>=0.0.0- <0.1.0-', true ]
+silly versions [ 'catchall', [ '0.0.1', '0.0.2', '0.0.3', '0.0.4' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '4bb5e97a2a7c051a13cadfd713b10ff5881933f4',
+verbose bin dist     tarball: 'http://registry.npmjs.org/catchall/-/catchall-0.0.4.tgz' } ]
+silly name, range, hasData 2 [ 'structr', '>=0.1.0- <0.2.0-', true ]
+silly versions [ 'structr',
+silly versions   [ '0.0.1',
+silly versions     '0.0.2',
+silly versions     '0.0.3',
+silly versions     '0.0.4',
+silly versions     '0.0.4-1',
+silly versions     '0.0.4-2',
+silly versions     '0.0.4-3',
+silly versions     '0.0.5',
+silly versions     '0.0.8',
+silly versions     '0.0.10',
+silly versions     '0.1.0',
+silly versions     '0.1.3' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: 'f51ae6ee982470322e4e8e2e83904bd4f95366d2',
+verbose bin dist     tarball: 'http://registry.npmjs.org/structr/-/structr-0.1.3.tgz' } ]
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\dirmr\0.0.1\package\package.json
+verbose loadDefaults dirmr@0.0.1
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\beanpoll\0.2.14\package\package.json
+verbose loadDefaults beanpoll@0.2.14
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\catchall\0.0.4\package\package.json
+verbose loadDefaults catchall@0.0.4
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\structr\0.1.3\package\package.json
+verbose loadDefaults structr@0.1.3
+http 304 https://registry.npmjs.org/plugin
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"C7SCM9DL3VWK5D54K98NCA6E0"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag plugin from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\plugin 755
+silly name, range, hasData 2 [ 'plugin', '>=0.0.0- <0.1.0-', true ]
+silly versions [ 'plugin', [ '0.0.13', '0.0.14', '0.0.15' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '370e541c670f470d8620118d55843633ae1d4035',
+verbose bin dist     tarball: 'http://registry.npmjs.org/plugin/-/plugin-0.0.15.tgz' } ]
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\plugin\0.0.15\package\package.json
+verbose loadDefaults plugin@0.0.15
+http 304 https://registry.npmjs.org/walkr
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"AXII6ZGLDAHJ655MAX1EU1UZT"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag walkr from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\walkr 755
+silly name, range, hasData 2 [ 'walkr', '>=0.0.0- <0.1.0-', true ]
+silly versions [ 'walkr', [ '0.0.1', '0.0.2', '0.0.3' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '0ab90a63f673b115e857f9cdc63e091f8f1ce354',
+verbose bin dist     tarball: 'http://registry.npmjs.org/walkr/-/walkr-0.0.3.tgz' } ]
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\walkr\0.0.3\package\package.json
+verbose loadDefaults walkr@0.0.3
+http 304 https://registry.npmjs.org/sprintf
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"JYWX6AZRENISWTN5YGIA0KFL"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag sprintf from cache
+http 304 https://registry.npmjs.org/capirona
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"1SSABY8LU01ASWULU3MIUJK4E"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag capirona from cache
+http 304 https://registry.npmjs.org/celeri
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"C7GYCYA3V5Y8BBRQ3DOKI00R5"',
+silly get cb     date: 'Tue, 06 Mar 2012 22:09:59 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag celeri from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\sprintf 755
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\capirona 755
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\celeri 755
+silly name, range, hasData 2 [ 'sprintf', '>=0.1.0- <0.2.0-', true ]
+silly versions [ 'sprintf', [ '0.1.0', '0.1.1' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { tarball: 'http://registry.npmjs.org/sprintf/-/sprintf-0.1.1.tgz' } ]
+silly name, range, hasData 2 [ 'capirona', '>=0.0.0- <0.1.0-', true ]
+silly versions [ 'capirona',
+silly versions   [ '0.0.0',
+silly versions     '0.0.1',
+silly versions     '0.0.2',
+silly versions     '0.0.3',
+silly versions     '0.0.4',
+silly versions     '0.0.5',
+silly versions     '0.0.6',
+silly versions     '0.0.7',
+silly versions     '0.0.8',
+silly versions     '0.0.9',
+silly versions     '0.0.10',
+silly versions     '0.0.11' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '25ba3784659d8a0e98c4443abd3a0f59e7e726f3',
+verbose bin dist     tarball: 'http://registry.npmjs.org/capirona/-/capirona-0.0.11.tgz' } ]
+silly name, range, hasData 2 [ 'celeri', '<0.3.0-', true ]
+silly versions [ 'celeri',
+silly versions   [ '0.0.3',
+silly versions     '0.0.5',
+silly versions     '0.0.6',
+silly versions     '0.0.7',
+silly versions     '0.0.8',
+silly versions     '0.0.9',
+silly versions     '0.0.10',
+silly versions     '0.1.0',
+silly versions     '0.1.1',
+silly versions     '0.1.2',
+silly versions     '0.1.3',
+silly versions     '0.2.0',
+silly versions     '0.2.1',
+silly versions     '0.2.2',
+silly versions     '0.2.3',
+silly versions     '0.2.4',
+silly versions     '0.2.5',
+silly versions     '0.2.6',
+silly versions     '0.2.7',
+silly versions     '0.2.8',
+silly versions     '0.2.9',
+silly versions     '0.2.10',
+silly versions     '0.2.11',
+silly versions     '0.2.12',
+silly versions     '0.2.13',
+silly versions     '0.2.14' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl0.9.8r-v83.6.6.24-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '4b2a1d09e238bc9f2da6f7e1ea384a8f51084046',
+verbose bin dist     tarball: 'http://registry.npmjs.org/celeri/-/celeri-0.2.14.tgz' } ]
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\sprintf\0.1.1\package\package.json
+verbose loadDefaults sprintf@0.1.1
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\capirona\0.0.11\package\package.json
+verbose loadDefaults capirona@0.0.11
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\celeri\0.2.14\package\package.json
+verbose loadDefaults celeri@0.2.14
+verbose git clone https://github.com/crcn/html-minifier.git Cloning into 'C:\Users\ADMINI~1\AppData\Local\Temp\npm-1331071798931\1331071798931-0.46502821426838636'...
+silly exec git "checkout" "master"
+silly spawning [ 'git',
+silly spawning   [ 'checkout', 'master' ],
+silly spawning   'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\npm-1331071798931\\1331071798931-0.46502821426838636' ]
+verbose git checkout master Branch master set up to track remote branch master from origin.
+verbose git checkout master Switched to a new branch 'master'
+verbose about to build c:\Users\Administrator\Documents\Development\eyebrowse\node_modules\mesh
+ERR! error installing mesh@0.0.12
+info unbuild c:\Users\Administrator\Documents\Development\eyebrowse\node_modules\mesh
+verbose from cache c:\Users\Administrator\Documents\Development\eyebrowse\node_modules\mesh\package.json
+info preuninstall mesh@0.0.12
+info uninstall mesh@0.0.12
+verbose unbuild mesh@0.0.12 [ true,
+verbose unbuild mesh@0.0.12   'c:\\Users\\Administrator\\Documents\\Development\\eyebrowse\\node_modules',
+verbose unbuild mesh@0.0.12   'c:\\Users\\Administrator\\Documents\\Development\\eyebrowse\\node_modules' ]
+verbose binRoot [ 'c:\\Users\\Administrator\\Documents\\Development\\eyebrowse\\node_modules\\.bin',
+verbose binRoot   { mesh: './bin/mesh' } ]
+info postuninstall mesh@0.0.12
+verbose installOne cb mesh@0.0.12
+ERR! Error: ENOENT, no such file or directory 'C:\Users\ADMINI~1\AppData\Local\Temp\npm-1331071798931\1331071798931-0.46502821426838636\package.json'
+ERR! You may report this log at:
+ERR!     <http://github.com/isaacs/npm/issues>
+ERR! or email it to:
+ERR!     <npm-@googlegroups.com>
+ERR! 
+ERR! System Windows_NT 6.0.6002
+ERR! command "c:\\Program Files\\nodejs\\node.exe" "c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "mesh"
+ERR! cwd c:\Users\Administrator\Documents\Development\eyebrowse
+ERR! node -v v0.6.12
+ERR! npm -v 1.1.4
+ERR! path C:\Users\ADMINI~1\AppData\Local\Temp\npm-1331071798931\1331071798931-0.46502821426838636\package.json
+ERR! code ENOENT
+ERR! message ENOENT, no such file or directory 'C:\Users\ADMINI~1\AppData\Local\Temp\npm-1331071798931\1331071798931-0.46502821426838636\package.json'
+ERR! errno {}
+verbose exit [ 1, true ]
