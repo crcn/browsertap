@@ -31,6 +31,8 @@ namespace Control
 
 		Graphics::Bitmap* print(Geom::Padding bounds);
 
+
+
 	private:
 
 		BaseWindow* _window;
