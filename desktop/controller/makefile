@@ -2,8 +2,6 @@ include ../../makefile.inc
 
 #-----------------------------------------------------------
 
-# source code inclues
-IDIR = ./inc
 
 # source dir
 SDIR = ./src
@@ -17,7 +15,7 @@ BDIR = ./bin
 
 LIBS = -lgdi32 -lkernel32 -luser32 -lws2_32 -lmingw32
 
-CFLAGS :=  $(LIBS) -I$(IDIR) -I$(VDIR) $(EFLAGS) -Wall
+CFLAGS :=  $(LIBS) -I./inc/common -I./inc/windows $(EFLAGS) -Wall
 
 # objects to compile
 SOURCES := $(shell find $(SOURCEDIR) -name '*.cpp')
@@ -29,7 +27,7 @@ all: cli
 
 
 cli: $(OBJECTS)
-	@cd $(BDIR); $(CC) $(OBJECTS) -o cli
+	$(CC) $(OBJECTS) -o $(BDIR)/cli
 
 
 $(BDIR)/%.o: %.cpp

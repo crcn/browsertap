@@ -2,8 +2,6 @@
 #define WINVER 0x0500
 #include <stdio.h>
 #include <windows.h>
-#include <windef.h>
-#include <winuser.h>
 
 
 int main(int argc, const char* argv[]) {
