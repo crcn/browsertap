@@ -1,13 +1,12 @@
 #ifndef CONTROL_GRAPHICS_H_
 #define CONTROL_GRAPHICS_H_
 
-#include "geom/rectangle.h"
-#include "graphics/bitmap.h"
+#include "common/geom/padding.h"
+#include "common/graphics/bitmap.h"
 
 namespace Control 
 {
-
-	class Window;
+	class BaseWindow;
 
 	class WindowGraphics 
 	{
@@ -17,7 +16,7 @@ namespace Control
 		/**
 		 */
 
-		WindowGraphics(Window* target);
+		WindowGraphics(BaseWindow* target);
 
 		/**
 		 * prints the entire window
@@ -30,11 +29,11 @@ namespace Control
 		 * prints a cutout of the target window
 		 */
 
-		Graphics::Bitmap* print(Geom::Rectangle& bounds);
+		Graphics::Bitmap* print(Geom::Padding bounds);
 
 	private:
 
-		Window* _window;
+		BaseWindow* _window;
 
 	};
 }

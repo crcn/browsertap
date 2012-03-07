@@ -1,7 +1,7 @@
 #ifndef GRAPHICS_BITMAP_H_
 #define GRAPHICS_BITMAP_H_
 
-#include "geom/rectangle.h"
+#include "common/geom/rectangle.h"
 
 
 namespace Graphics 

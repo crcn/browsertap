@@ -1,7 +1,7 @@
 #ifndef MOUSE_H_
 #define MOUSE_H_
 
-#include "geom/point.h"
+#include "common/geom/point.h"
 
 namespace Control
 {
@@ -28,8 +28,6 @@ namespace Control
 		 */
 
 		void offset(Geom::Point newOffset);
-
-
 
 
 	private:

@@ -1,4 +1,4 @@
-#include "geom/rectangle.h"
+#include "common/geom/rectangle.h"
 
 namespace Geom 
 {

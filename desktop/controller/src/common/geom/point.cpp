@@ -1,4 +1,4 @@
-#include "geom/point.h"
+#include "common/geom/point.h"
 
 namespace Geom 
 {

@@ -13,9 +13,10 @@ VPATH = control
 
 BDIR = ./bin
 
-LIBS = -lgdi32 -lkernel32 -luser32 -lws2_32 -lmingw32
+LIBS = -lgdi32 
 
-CFLAGS :=  $(LIBS) -I./inc/common -I./inc/windows $(EFLAGS) -Wall
+MINGWFLAGS := -static-libgcc -static-libstdc++
+CFLAGS :=  -I./inc  -I./inc/windows -I./src $(EFLAGS) -Wall
 
 # objects to compile
 SOURCES := $(shell find $(SOURCEDIR) -name '*.cpp')
@@ -27,7 +28,7 @@ all: cli
 
 
 cli: $(OBJECTS)
-	$(CC) $(OBJECTS) -o $(BDIR)/cli
+	$(CC) $(OBJECTS) $(MINGWFLAGS) $(LIBS) -o $(BDIR)/cli
 
 
 $(BDIR)/%.o: %.cpp

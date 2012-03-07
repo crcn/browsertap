@@ -1,4 +1,4 @@
-#include "control/mouse.h"
+#include "base/control/mouse.h"
 
 namespace Control
 {
@@ -7,11 +7,16 @@ namespace Control
 		//do nothing
 	}
 
-
+	/**
+	 */
+	
 	void Mouse::offset(Geom::Point newOffset)
 	{
 		this->_offset = newOffset;
 	}
+
+	/**
+	 */
 
 	Geom::Point& Mouse::offset()
 	{
