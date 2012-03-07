@@ -1,6 +1,29 @@
+
+#define WINVER 0x0500
 #include <stdio.h>
-#include <Windows.h>
+#include <windows.h>
+#include <windef.h>
+#include <winuser.h>
+
 
 int main(int argc, const char* argv[]) {
-	printf("hello world!");
+
+	
+	/**
+
+	pseudocode
+
+	DesktopWindow^ target = new DesktopWindow();
+	FFMPegBroadcaster^ broadcaster = new FFMpegBroadcaster();
+	ThriftClient^ client = new ThriftClient();
+
+	while(client.control(target)) {
+
+		broadcaster.dispatch(target->print());
+		
+	}
+	
+
+	*/
+
 }

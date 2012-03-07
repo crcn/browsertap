@@ -1,37 +1,40 @@
+include ../../makefile.inc
 
-#---------------------------------------------------
-CC=gcc
+#-----------------------------------------------------------
 
 # source code inclues
-IDIR=./inc
+IDIR = ./inc
 
 # source dir
-SDIR=./src
+SDIR = ./src
 
 # third-party source code headers to include
-VDIR=./vendors
+VDIR = ./vendors
 
-BDIR=./bin
+VPATH = control
 
-CFLAGS=-I$(IDIR) -I$(VDIR) $(EFLAGS)
+BDIR = ./bin
+
+LIBS = -lgdi32 -lkernel32 -luser32 -lws2_32 -lmingw32
+
+CFLAGS :=  $(LIBS) -I$(IDIR) -I$(VDIR) $(EFLAGS) -Wall
 
 # objects to compile
-OBJS=cli.o
+SOURCES := $(shell find $(SOURCEDIR) -name '*.cpp')
+OBJECTS := $(addprefix $(BDIR)/,$(SOURCES:%.cpp=%.o))
 
-LIBS = 
-
-#---------------------------------------------------
+#-----------------------------------------------------------
 
 all: cli
 
 
-cli: $(OBJS)
-	cd $(BDIR); $(CC) $(OBJS) -o cli
+cli: $(OBJECTS)
+	@cd $(BDIR); $(CC) $(OBJECTS) -o cli
 
 
-%.o: $(SDIR)/%.cpp
-	@mkdir -p $(BDIR)
-	$(CC) $(CFLAGS) -c $< -o $(BDIR)/$@
+$(BDIR)/%.o: %.cpp
+	@mkdir -p `dirname $@`
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf bin
+	rm -rf $(BDIR)

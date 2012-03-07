@@ -20,7 +20,10 @@
 	"buffers":
 	[
 		{
+			"contents": "",
 			"file": "/tmp/subl stdin gJ3bsA.txt",
+			"file_size": -1,
+			"file_write_time": -1,
 			"settings":
 			{
 				"buffer_size": 0,
@@ -36,11 +39,87 @@
 			}
 		},
 		{
+			"contents": "",
 			"file": "/tmp/subl stdin OT5mH0.txt",
+			"file_size": -1,
+			"file_write_time": -1,
 			"settings":
 			{
 				"buffer_size": 0,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/cli.cpp",
+			"settings":
+			{
+				"buffer_size": 179,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "S",
+			"settings":
+			{
+				"buffer_size": 1,
+				"line_ending": "Windows",
+				"name": "S"
+			}
+		},
+		{
+			"contents": "S",
+			"settings":
+			{
+				"buffer_size": 1,
+				"line_ending": "Windows",
+				"name": "S"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/makefile",
+			"settings":
+			{
+				"buffer_size": 631,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/makefile2.inc",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/makefile",
+			"settings":
+			{
+				"buffer_size": 261,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/.gitignore",
+			"settings":
+			{
+				"buffer_size": 47,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "project.sublime-project",
+			"settings":
+			{
+				"buffer_size": 126,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -68,6 +147,7 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Administrator/Documents/Development/eyebrowse/project.sublime-workspace",
 		"/Users/craig/Dropbox/Developer/Public/mesh.js/default/lib/web/package.json",
 		"/Users/craig/Dropbox/Developer/Public/mesh.js/default/make/include/index.js",
 		"/Users/craig/Dropbox/Developer/Public/mesh.js/default/make/load/index.js",
@@ -194,8 +274,7 @@
 		"/Users/craig/.cupboard/projects/spice.io/beans/groups.part.saved.subscription.email/index.js",
 		"/Users/craig/.cupboard/projects/spice.io/beans/spice.io.core/index.js",
 		"/Volumes/minimac/Users/craig/Dropbox/Developer/Jobs/Spice/private/spice.io/beans/spice.io.core/index.js",
-		"/Users/craig/.cupboard/projects/spice.io/beans/scraper.core/index.js",
-		"/Users/craig/.cupboard/projects/spice.io/beans/scraper.part.diffbot/index.js"
+		"/Users/craig/.cupboard/projects/spice.io/beans/scraper.core/index.js"
 	],
 	"find":
 	{
@@ -213,6 +292,22 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"mouse_event",
+			"MOUSEEVENTF_MOVE",
+			" = ",
+			"LIBPATH",
+			"build_system",
+			"++ < ",
+			"COMMAND",
+			" $$",
+			"desktop",
+			"do",
+			"find",
+			"CLI",
+			"echo",
+			"SDIR",
+			"=./",
+			" \"$(",
 			".name",
 			"ops.cwd =",
 			"linkToParent",
@@ -324,23 +419,7 @@
 			"onSucc",
 			"DirMerge",
 			"DirM",
-			"DirMerge",
-			"getTplData",
-			"_end",
-			"mesh",
-			"latte",
-			"prop",
-			"_pass",
-			"password",
-			"group/valida",
-			"groups/generate/publicName",
-			"callback",
-			"Un",
-			"Unauth",
-			"perm",
-			"send",
-			"scope",
-			"profile"
+			"DirMerge"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -358,7 +437,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -432,6 +511,244 @@
 						"settings":
 						{
 							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/cli.cpp",
+					"settings":
+					{
+						"buffer_size": 179,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								168,
+								168
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "C:\\Users\\Administrator\\Documents\\Development\\eyebrowse\\desktop\\controller\\src",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"settings":
+					{
+						"buffer_size": 1,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1,
+								1
+							]
+						],
+						"settings":
+						{
+							"auto_name": "S",
+							"default_dir": "C:\\Users\\Administrator\\Documents\\Development\\eyebrowse\\desktop\\controller\\src",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"settings":
+					{
+						"buffer_size": 1,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1,
+								1
+							]
+						],
+						"settings":
+						{
+							"auto_name": "S",
+							"default_dir": "C:\\Users\\Administrator\\Documents\\Development\\eyebrowse\\desktop\\controller\\src",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/makefile",
+					"settings":
+					{
+						"buffer_size": 631,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								534,
+								499
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/makefile2.inc",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/makefile",
+					"settings":
+					{
+						"buffer_size": 261,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								102,
+								102
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/.gitignore",
+					"settings":
+					{
+						"buffer_size": 47,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								46,
+								46
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "project.sublime-project",
+					"settings":
+					{
+						"buffer_size": 126,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								120,
+								120
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
