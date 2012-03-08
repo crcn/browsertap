@@ -20,3 +20,9 @@ app.on "browserProxy", (proxy) ->
 
 	proxy.on "focus", () ->
 		console.log proxy.location.href
+
+
+
+
+app.on "loaded", () ->
+	app.start('firefox 9', 'http://google.com');

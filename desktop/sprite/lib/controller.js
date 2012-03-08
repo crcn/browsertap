@@ -36,6 +36,11 @@
       return this;
     };
 
+    /*
+    */
+
+    _Class.prototype.start = function(browser, url) {};
+
     return _Class;
 
   })(EventEmitter);

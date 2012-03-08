@@ -6,8 +6,11 @@
 - ability to invoke selenium-like commands
 
 
+
+
 ## Setup
 
+- set proxy to localhost:8888
 - set lan settings to "bypass proxy server for local address"
 
 ## Usage
@@ -24,7 +27,7 @@ create({
 listen(8888);
 
 
-inst.on('proxy', function(browserProxy) {
+inst.on('browserProxy', function(browserProxy) {
 
 	browserProxy.getTitle(function(title) {
 		console.log(title);
@@ -46,15 +49,11 @@ inst.start('firefox 6', 'http://google.com');
 
 starts the sprite instance with given config. the config consis
 
-### .load(fn)
-
-loads the controller
-
 ### .listen(port)
 
-starts the proxy HTTP server
+starts the proxy HTTP proxy server. Also enables the event `browserProxy`
 
-### .run(browserName)
+### .start(browserName)
 
 starts the given browser
 
@@ -71,25 +70,36 @@ returns the browser instance
 
 - `proxy` - called when a proxy is ready
 - `browserOpen` - called when a browser is opened
+- `loaded` - called when the config files are loaded
 
 
 ## Proxy API
 
-### .browser
+### .title
 
-the browser instance 
+the title of the document
 
-### .getTitle(fn)
+### .location
 
-### .getLocation(fn)
+the current location
 
-get the title
+### .history.back()
+
+hits back button for user
+
+### .history.forward()
+
+hits forward button for user
+
+### .history.setLocation()
+
+sets the location of the browser
 
 ## Proxy Events
 
 - `locationChange` - called when the location in the browser changes
-- `end` - called when the browser is closed
-- `load` - called when the body has completely loaded
+- `documentready` - called when the body has completely loaded
+- `focus` - called when the user is focusing on this particular browser instance
 
 
 

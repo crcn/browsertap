@@ -18,4 +18,8 @@ module.exports = class extends EventEmitter
 		em.on "browserProxy", (proxy) => @emit "browserProxy", proxy
 		@
 
-	
+	###
+	###
+
+	start: (browser, url) ->
+		

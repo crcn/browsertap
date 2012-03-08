@@ -20,4 +20,8 @@
     });
   });
 
+  app.on("loaded", function() {
+    return app.start('firefox 9', 'http://google.com');
+  });
+
 }).call(this);
