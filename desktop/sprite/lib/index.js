@@ -1,5 +1,5 @@
 (function() {
-  var Controller;
+  var Controller, app;
 
   Controller = require("./controller");
 
@@ -7,19 +7,17 @@
     return new Controller().config(config);
   };
 
-  exports.create({
+  app = exports.create({
     directory: "~/Desktop/browsers"
   }).listen(8088);
 
-  /*
-  proxy = filternet.createProxyServer({ port: 8088 })
-  
-  proxy.on "interceptResponseContent", (buffer, responseObject, isSsl, charset, callback) ->
-  	console.log(responseObject)
-  	console.log("GO")
-  	content = buffer.toString('utf8')
-  	css = "<"+"link rel='stylesheet' href='http://axiak.github.com/filternet/blink.css'>"
-  	callback(content.replace(/<\/head>/i, css + "</head>"))
-  */
+  app.on("browserProxy", function(proxy) {
+    proxy.on("locationChange", function(location) {
+      return console.log(location.href);
+    });
+    return proxy.on("focus", function() {
+      return console.log(proxy.location.href);
+    });
+  });
 
 }).call(this);

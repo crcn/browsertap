@@ -1,5 +1,5 @@
 (function() {
-  var clientScript, dnode, express, filternet, fs, serverScript, wrapScript;
+  var EventEmitter, browserify, dnode, express, filternet, fs, wrapBrowserClient, wrapScript;
 
   filternet = require("filternet");
 
@@ -7,43 +7,46 @@
 
   dnode = require("dnode");
 
+  EventEmitter = require("events").EventEmitter;
+
+  browserify = require("browserify");
+
+  wrapBrowserClient = require("./wrapBrowserClient");
+
   fs = require("fs");
 
   /*
   */
 
   exports.listen = function(port) {
-    var assetServer, dnodeServer, httpPort, mitm;
+    var assetServer, dnodeServer, em, httpPort, mitm, wrap;
+    em = new EventEmitter();
+    wrap = wrapBrowserClient();
     mitm = filternet.createProxyServer({
       port: port
     });
     assetServer = express.createServer();
-    dnodeServer = dnode(function() {
-      return console.log("CONNECT");
+    dnodeServer = dnode(function(client, con) {
+      return con.on("ready", function() {
+        wrap(client, con);
+        return em.emit("browserProxy", client);
+      });
     });
     httpPort = port + 1;
-    assetServer.enable("jsonp callback");
-    assetServer.get("/client.js", serverScript(httpPort));
+    assetServer.use(browserify({
+      entry: __dirname + "/client/client.js",
+      mount: '/client.js'
+    }));
     assetServer.listen(httpPort);
     dnodeServer.listen(assetServer);
-    return mitm.on('interceptResponseContent', function(buffer, responseObject, isSsl, charset, callback) {
+    mitm.on('interceptResponseContent', function(buffer, responseObject, isSsl, charset, callback) {
       var content, script;
       content = buffer.toString("utf8");
       script = wrapScript("dnode.js", httpPort);
       script += wrapScript("client.js", httpPort);
       return callback(content.replace(/<\/head>/i, script + "</head>"));
     });
-  };
-
-  /*
-  */
-
-  clientScript = fs.readFileSync(__dirname + "/client.js", "utf8");
-
-  serverScript = function(port) {
-    return function(req, res) {
-      return res.end(clientScript.replace("{{host}}", "localhost:" + port));
-    };
+    return em;
   };
 
   /*

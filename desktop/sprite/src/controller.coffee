@@ -1,6 +1,7 @@
 server = require "./proxy/server"
+EventEmitter = require("events").EventEmitter
 
-module.exports = class 
+module.exports = class extends EventEmitter
 
 	###
 	###
@@ -13,7 +14,8 @@ module.exports = class
 	###
 
 	listen: (port) ->
-		server.listen(port)
+		em = server.listen(port)
+		em.on "browserProxy", (proxy) => @emit "browserProxy", proxy
 		@
 
 	

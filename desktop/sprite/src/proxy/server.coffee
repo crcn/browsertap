@@ -7,6 +7,11 @@ express   = require "express"
 
 dnode     = require "dnode"
 
+
+EventEmitter      = require("events").EventEmitter
+browserify        = require "browserify"
+wrapBrowserClient = require "./wrapBrowserClient"
+
 # fs
 fs = require "fs"
 
@@ -15,22 +20,24 @@ fs = require "fs"
 ###
 
 exports.listen = (port) ->
+	
+	em = new EventEmitter()
+	wrap = wrapBrowserClient()
+
 
 	mitm        = filternet.createProxyServer({ port: port })
 	assetServer = express.createServer()
-	dnodeServer = dnode () ->
-		console.log "CONNECT"
+	dnodeServer = dnode (client, con) -> 
+
+		con.on "ready", () ->
+			wrap client, con
+			em.emit "browserProxy", client
 
 	httpPort = port + 1
 
-	# enable JSON p
-	assetServer.enable "jsonp callback"
 
 	# server the client js
-	assetServer.get "/client.js", serverScript(httpPort)
-
-
-
+	assetServer.use(browserify({ entry: __dirname + "/client/client.js", mount:'/client.js' }))
 
 	# listen
 	assetServer.listen(httpPort)
@@ -46,17 +53,7 @@ exports.listen = (port) ->
 		callback content.replace(/<\/head>/i, script + "</head>")
 
 
-###
-###
-
-clientScript = fs.readFileSync __dirname + "/client.js", "utf8"
-
-serverScript = (port) ->
-	
-	return (req, res) ->
-		
-		res.end clientScript.replace "{{host}}", "localhost:#{port}"
-
+	em
 
 ###
 ###
