@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"Wind",
+				"WindowGraphics"
+			],
+			[
 				"outputD",
 				"outputModulesDir"
 			],
@@ -53,7 +57,60 @@
 			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/cli.cpp",
 			"settings":
 			{
-				"buffer_size": 179,
+				"buffer_size": 660,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/control/mouse.h",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/utils.h",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/graphics/point.h",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/graphics/point.cpp",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		},
@@ -83,10 +140,28 @@
 			}
 		},
 		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/window.cpp",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows",
+				"name": "S"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/mouse.cpp",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows",
+				"name": "S"
+			}
+		},
+		{
 			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/makefile",
 			"settings":
 			{
-				"buffer_size": 631,
+				"buffer_size": 706,
 				"line_ending": "Windows"
 			}
 		},
@@ -107,10 +182,34 @@
 			}
 		},
 		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/makefile",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/control/makefile",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/.gitignore",
 			"settings":
 			{
 				"buffer_size": 47,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/makefile.inc",
+			"settings":
+			{
+				"buffer_size": 126,
 				"line_ending": "Windows"
 			}
 		},
@@ -120,6 +219,344 @@
 			{
 				"buffer_size": 126,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/control/mouse.cpp",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/control/window.cpp",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/control/window.h",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows",
+				"name": "#ifndef CONTROL_WINDOW_"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/control/graphics.h",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/control/graphics.cpp",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/graphics/bitmap.h",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/graphics/bitmap.cpp",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/graphics/padding.h",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/graphics/padding.cpp",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/graphics/box.cpp",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/graphics/rectangle.h",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/graphics/rectangle.cpp",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/geom/padding.cpp",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/geom/point.cpp",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/geom/rectangle.cpp",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/geom/padding.h",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/geom/point.h",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/geom/rectangle.h",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "#ifndef CONTROL_WINDOW_\n#define CONTROL_WINDOW_\n\n#include \"common/geom/rectangle.h\"\n\nnamespace Control \n{\n	class WindowGraphics;\n	\n	class Window\n	{\n		public:\n\n		/**\n		 */\n\n		Window()\n		{\n			this->_graphics = 0;\n		}\n\n\n		/**\n		 * prints the window content\n		 */\n\n		WindowGraphics* graphics() \n		{\n			if(this->_graphics == 0)\n			{\n				this->_graphics = new WindowGraphics(this);\n			}	\n\n			return this->_graphics;\n		}\n\n\n		/**\n		 * the position of the window\n		 */\n\n		Geom::Rectangle bounds(); // ABSTRACT - virtual throws undefined vtable\n\n		private:\n\n		/**\n		 */\n\n		WindowGraphics* _graphics;\n	};\n\n\n\n\n	class Windows \n	{\n\n		/**\n		 * returns the desktop window\n		 */\n\n		static Window* desktop();\n\n		//Window[] find(const char* name);\n\n		//WIndow[] findOne(const char* name);\n	};\n}\n\n#endif",
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/common/control/window.h",
+			"file_size": 852,
+			"file_write_time": 129755646939937103,
+			"settings":
+			{
+				"buffer_size": 783,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/base/control/window.cpp",
+			"settings":
+			{
+				"buffer_size": 545,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/base/control/graphics.cpp",
+			"settings":
+			{
+				"buffer_size": 313,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/windows/control/window.cpp",
+			"settings":
+			{
+				"buffer_size": 632,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/windows/control/window.h",
+			"settings":
+			{
+				"buffer_size": 430,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/common/control/graphics.h",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/windows/control/graphics.cpp",
+			"settings":
+			{
+				"buffer_size": 5051,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/windows/control/mouse.cpp",
+			"settings":
+			{
+				"buffer_size": 21,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/base/control/mouse.cpp",
+			"settings":
+			{
+				"buffer_size": 255,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/common/control/mouse.h",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/common/graphics/bitmap.h",
+			"settings":
+			{
+				"buffer_size": 370,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/common/graphics/padding.h",
+			"settings":
+			{
+				"buffer_size": 256,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/common/geom/padding.cpp",
+			"settings":
+			{
+				"buffer_size": 237,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/common/geom/point.cpp",
+			"settings":
+			{
+				"buffer_size": 139,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/common/geom/rectangle.cpp",
+			"settings":
+			{
+				"buffer_size": 327,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/common/graphics/bitmap.cpp",
+			"settings":
+			{
+				"buffer_size": 314,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/base/control/graphics.h",
+			"settings":
+			{
+				"buffer_size": 486,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/base/control/window.h",
+			"settings":
+			{
+				"buffer_size": 715,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/base/control/mouse.h",
+			"settings":
+			{
+				"buffer_size": 365,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/client/src/node/index.js",
+			"settings":
+			{
+				"buffer_size": 173,
+				"line_ending": "Windows",
+				"name": "var"
 			}
 		}
 	],
@@ -292,6 +729,19 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"CaptureAnImage",
+			"COLORREF",
+			"WindowGraphics",
+			" = ",
+			"Geom",
+			"Padding",
+			"Bitmap",
+			"Control",
+			"		",
+			"Point",
+			"		",
+			"echo",
+			"broadcaster",
 			"mouse_event",
 			"MOUSEEVENTF_MOVE",
 			" = ",
@@ -406,20 +856,7 @@
 			"res.succ",
 			"linkToParent",
 			"console.",
-			"res.succ",
-			"linkToParent",
-			"console.l",
-			"outputDir",
-			"_writeF",
-			"getTplData",
-			"fs",
-			"getPackagePath",
-			"_includePath",
-			"@file",
-			"onSucc",
-			"DirMerge",
-			"DirM",
-			"DirMerge"
+			"res.succ"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -437,7 +874,7 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 65,
 			"sheets":
 			[
 				{
@@ -523,21 +960,22 @@
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/cli.cpp",
 					"settings":
 					{
-						"buffer_size": 179,
+						"buffer_size": 660,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								168,
-								168
+								338,
+								338
 							]
 						],
 						"settings":
 						{
 							"auto_name": "",
-							"syntax": "Packages/C++/C++.tmLanguage"
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -547,6 +985,193 @@
 				},
 				{
 					"buffer": 4,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/control/mouse.h",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "C:\\Users\\Administrator\\Documents\\Development\\eyebrowse\\desktop\\controller\\inc\\utils",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/utils.h",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "C:\\Users\\Administrator\\Documents\\Development\\eyebrowse\\desktop\\controller\\inc\\draw",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/graphics/point.h",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/graphics/point.cpp",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "C:\\Users\\Administrator\\Documents\\Development\\eyebrowse\\desktop\\controller\\inc\\utils",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
 					"settings":
 					{
 						"buffer_size": 0,
@@ -572,7 +1197,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 12,
 					"settings":
 					{
 						"buffer_size": 1,
@@ -599,7 +1224,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 13,
 					"settings":
 					{
 						"buffer_size": 1,
@@ -626,19 +1251,73 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 14,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/window.cpp",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "S",
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/mouse.cpp",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "S",
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 16,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/makefile",
 					"settings":
 					{
-						"buffer_size": 631,
+						"buffer_size": 706,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								534,
-								499
+								584,
+								584
 							]
 						],
 						"settings":
@@ -652,7 +1331,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 17,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/makefile2.inc",
 					"settings":
 					{
@@ -678,7 +1357,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 18,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/makefile",
 					"settings":
 					{
@@ -689,8 +1368,8 @@
 						"selection":
 						[
 							[
-								102,
-								102
+								0,
+								0
 							]
 						],
 						"settings":
@@ -704,7 +1383,61 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 19,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/makefile",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 20,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/control/makefile",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 21,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/.gitignore",
 					"settings":
 					{
@@ -730,7 +1463,33 @@
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 22,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/makefile.inc",
+					"settings":
+					{
+						"buffer_size": 126,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								62,
+								62
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 23,
 					"file": "project.sublime-project",
 					"settings":
 					{
@@ -749,6 +1508,1126 @@
 						{
 							"syntax": "Packages/JavaScript/JSON.tmLanguage",
 							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 24,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/control/mouse.cpp",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 25,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/control/window.cpp",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 26,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/control/window.h",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "#ifndef CONTROL_WINDOW_",
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 27,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/control/graphics.h",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 28,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/control/graphics.cpp",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 29,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"default_dir": "C:\\Users\\Administrator\\Documents\\Development\\eyebrowse\\desktop\\controller\\inc\\graphics",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 30,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/graphics/bitmap.h",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 31,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/graphics/bitmap.cpp",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 32,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/graphics/padding.h",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 33,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/graphics/padding.cpp",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 34,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/graphics/box.cpp",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 35,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/graphics/rectangle.h",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 36,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/graphics/rectangle.cpp",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 37,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/geom/padding.cpp",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 38,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/geom/point.cpp",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 39,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/geom/rectangle.cpp",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 40,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/geom/padding.h",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 41,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/geom/point.h",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 42,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/geom/rectangle.h",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 43,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/common/control/window.h",
+					"settings":
+					{
+						"buffer_size": 783,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								130,
+								130
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 44,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/base/control/window.cpp",
+					"settings":
+					{
+						"buffer_size": 545,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								539,
+								539
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 45,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/base/control/graphics.cpp",
+					"settings":
+					{
+						"buffer_size": 313,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								267,
+								267
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 46,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "C:\\Users\\Administrator\\Documents\\Development\\eyebrowse\\desktop\\controller\\inc\\common\\control",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 47,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/windows/control/window.cpp",
+					"settings":
+					{
+						"buffer_size": 632,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								271,
+								271
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 54.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 48,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "C:\\Users\\Administrator\\Documents\\Development\\eyebrowse\\desktop\\controller\\inc\\main",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 49,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/windows/control/window.h",
+					"settings":
+					{
+						"buffer_size": 430,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								247,
+								247
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 54.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 50,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/common/control/graphics.h",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 51,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/windows/control/graphics.cpp",
+					"settings":
+					{
+						"buffer_size": 5051,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3548,
+								3548
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1944.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 52,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/windows/control/mouse.cpp",
+					"settings":
+					{
+						"buffer_size": 21,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								19,
+								19
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 53,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/base/control/mouse.cpp",
+					"settings":
+					{
+						"buffer_size": 255,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								103,
+								103
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 54,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/common/control/mouse.h",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 55,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/common/graphics/bitmap.h",
+					"settings":
+					{
+						"buffer_size": 370,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								144,
+								144
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 56,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/common/graphics/padding.h",
+					"settings":
+					{
+						"buffer_size": 256,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 57,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/common/geom/padding.cpp",
+					"settings":
+					{
+						"buffer_size": 237,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								17,
+								17
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 58,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/common/geom/point.cpp",
+					"settings":
+					{
+						"buffer_size": 139,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								17,
+								17
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 59,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/common/geom/rectangle.cpp",
+					"settings":
+					{
+						"buffer_size": 327,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								260,
+								260
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 60,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/common/graphics/bitmap.cpp",
+					"settings":
+					{
+						"buffer_size": 314,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								311,
+								311
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 61,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/base/control/graphics.h",
+					"settings":
+					{
+						"buffer_size": 486,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								436,
+								436
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 62,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/base/control/window.h",
+					"settings":
+					{
+						"buffer_size": 715,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								150,
+								150
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 63,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/base/control/mouse.h",
+					"settings":
+					{
+						"buffer_size": 365,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								313,
+								313
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 64,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "C:\\Users\\Administrator\\Documents\\Development\\eyebrowse\\desktop\\client\\src",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 65,
+					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/client/src/node/index.js",
+					"settings":
+					{
+						"buffer_size": 173,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								170,
+								170
+							]
+						],
+						"settings":
+						{
+							"auto_name": "var",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

@@ -3,9 +3,13 @@
 
   Controller = require("./controller");
 
-  exports.create = function() {
-    return new Controller();
+  exports.create = function(config) {
+    return new Controller().config(config);
   };
+
+  exports.create({
+    directory: "~/Desktop/browsers"
+  }).listen(8088);
 
   /*
   proxy = filternet.createProxyServer({ port: 8088 })

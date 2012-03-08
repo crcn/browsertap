@@ -1,7 +1,13 @@
 Controller = require "./controller"
 
-exports.create = () -> new Controller()
+exports.create = (config) -> new Controller().config(config)
 
+
+
+exports.create({
+	directory: "~/Desktop/browsers"
+}).
+listen(8088)
 
 #filternet = require("filternet")
 

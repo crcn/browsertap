@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <windows.h>
 #include <iostream>
-#include "control/window.h"
+#include "control/window.h" 
 
 void enter()
 {
@@ -14,7 +14,7 @@ void enter()
 
 
 int main(int argc, const char* argv[]) {
-
+  
 
 	enter();
 

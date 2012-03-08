@@ -1,0 +1,20 @@
+{
+  "name": "desktopcontroller",
+  "description": "Remote Desktop Controller",
+  "version": "0.0.1",
+  "repository": {
+  },
+  "engines": {
+  },
+  "dependencies": {
+    "dnode":"*",
+    "haba":"*",
+    "haba.dnode":"*",
+    "beanpoll":"*",
+    "thrift":"*",
+    "express":"*"
+  },
+  "devDependencies": {
+  },
+  "main":"./lib/index.js"
+}

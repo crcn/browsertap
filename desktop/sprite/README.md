@@ -5,6 +5,11 @@
 - ability to auto-inject javascript into any html doc by proxying requests
 - ability to invoke selenium-like commands
 
+
+## Setup
+
+- set lan settings to "bypass proxy server for local address"
+
 ## Usage
 
 ```javascript
