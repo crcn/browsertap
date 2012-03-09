@@ -1,6 +1,7 @@
 {
-	"main":"./lib/index.js",
-	"dependencies": {
-		
-	}
+  "name": "sprite",
+  "main": "./src/index.js",
+  "dependencies": {
+
+  }
 }
