@@ -10,7 +10,8 @@
     "beanie": "0.0.x",
     "mesh": "0.0.x",
     "mesh-winston": "0.0.x",
-    "sprintf": "0.1.x"
+    "sprintf": "0.1.x",
+    "spice.io":"git+git@github.com:crcn/spice.io.git"
   },
   "devDependencies": {},
   "main": "./lib/node/index.js",

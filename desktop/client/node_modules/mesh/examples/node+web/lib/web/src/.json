@@ -1,0 +1,20 @@
+{
+  "name": "",
+  "description": "",
+  "author": "",
+  "dependencies": {
+    "fig": "*",
+    "plugin": "0.0.x",
+    "daisy": "*",
+    "mesh-http": "*"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "install": "make node"
+  },
+  "main": "./lib/web/js/index.js",
+  "directories": {
+    "mesh-src": "./src",
+    "lib": "./lib"
+  }
+}
