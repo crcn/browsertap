@@ -1,71 +1,130 @@
-(function() {
-  var async, fixPaths, fs, loadBrowser, mapBrowserVersions, outcome, path, step;
+var outcome = require("outcome"),
+step = require("stepc"),
+fs = require("fs"),
+path = require("path"),
+async = require("async");
 
-  outcome = require("outcome");
 
-  step = require("stepc");
 
-  fs = require("fs");
+module.exports = function(directory, callback) {
 
-  path = require("path");
+	var on = outcome.error(callback),
+	directory = directory.replace("~", process.env.HOME);
 
-  async = require("async");
+	step(
 
-  module.exports = function(directory, callback) {
-    var on_;
-    on_ = outcome.error(callback);
-    directory = directory.replace('~', process.env.home);
-    return step.async(function() {
-      return fs.readdir(directory, this);
-    }, on_.success(function(dirs) {
-      var browsers;
-      browsers = {};
-      return async.map(fixPaths(directory, dirs), loadBrowser, this);
-    }), on_.success(function(browsers) {
-      var toObj;
-      toObj = {};
-      browsers.forEach(function(browser) {
-        return toObj[browser.name.toLowerCase()] = browser;
-      });
-      return callback(null, toObj);
-    }));
-  };
+		/**
+		 */
 
-  /*
-  */
+		function() {
+			fs.readdir(directory, this);
+		},
 
-  loadBrowser = function(directory, callback) {
-    var browsers, on_;
-    on_ = outcome.error(callback);
-    browsers = {
-      name: path.basename(directory),
-      executables: []
-    };
-    return step.async(function() {
-      return fs.readdir(directory, this);
-    }, on_.success(function(executables) {
-      return async.map(fixPaths(directory, executables), mapBrowserVersions, function() {
-        return console.log("NEXT");
-      });
-    }), callback);
-  };
+		/**
+		 */
 
-  /*
-  */
+		on.success(function(dirs) {
+			async.map(fixPaths(directory, dirs), loadBrowser, this);
+		}),
 
-  mapBrowserVersions = function(executable, next) {
-    return console.log(executable);
-  };
+		/**
+		 */
 
-  /*
-  */
+		on.success(function(browsers) {
+			var toObj = {}
 
-  fixPaths = function(parent, paths) {
-    return paths.filter(function(dir) {
-      return parent.substr(0, 1) !== ".";
-    }).map(function(dir) {
-      return path.normalize(parent + "/" + dir);
-    });
-  };
+			//flatten
+			browsers = Array.prototype.concat.apply([], browsers);
 
-}).call(this);
+
+			browsers.forEach(function(browser, index) {
+				toObj[browser.name.toLowerCase()] = browser;
+			});
+
+			callback(null, toObj);
+		})
+	)
+}
+
+
+function loadBrowser(directory, callback) {
+
+	var on   = outcome.error(callback),
+	name     = path.basename(directory), 
+	browsers = [];
+
+	step(
+
+		/**
+		 */
+
+		function() {
+			fs.readdir(directory, this);
+		},
+
+		/**
+		 */
+
+		on.success(function(executables) {
+			async.map(fixPaths(directory, executables), mapBrowserVersions, this);
+		}),
+
+		/**
+		 */
+
+		on.success(function(versions) {
+
+			browsers = versions.map(function(version) {
+				version.name = name + " " + version.name;
+				return version;
+			});
+
+			this(null, browsers);
+		}),
+
+		/**
+		 */
+
+		callback
+	)
+}
+
+function mapBrowserVersions(executable, next) {
+
+	var name = path.basename(executable).replace(/\.\w+/g,'');
+
+	//use mklink for windows
+	var link = fs.readlinkSync(executable);
+
+	//relative vs abs path?
+	if(link.indexOf('.') == 0) {
+		link = path.dirname(executable) + "/" + link;
+	}
+	
+	var realpath = path.normalize(link);
+
+
+
+	var on = outcome.error(next),
+	exe = path.basename(realpath);
+
+
+
+	next(null, {
+		name: name,
+		cwd: path.dirname(realpath),
+		filename: exe,
+		path: realpath
+	})
+}
+
+
+
+function fixPaths(parent, paths) {
+	return paths.filter(function(dir) {
+		return dir.substr(0, 1) !== "."
+	}).
+	map(function(dir) {
+		return path.normalize(parent + "/" + dir);
+	})
+}

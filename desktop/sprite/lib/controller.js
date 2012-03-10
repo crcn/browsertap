@@ -1,65 +1,125 @@
-(function() {
-  var EventEmitter, loadDirectory, server, tq,
-    __hasProp = Object.prototype.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  server = require("./proxy/server");
+var server    = require("./proxy/server"),
+EventEmitter  = require("events").EventEmitter,
+loadDirectory = require("./load/loadDirectory"),
+tq            = require("tq"),
+structr       = require("structr"),
+step          = require("stepc"),
+ProcessCollection = require('./process/collection'),
+outcome       = require("outcome"),
+Screenshot    = require("./screenshot");
 
-  EventEmitter = require("events").EventEmitter;
 
-  loadDirectory = require("./load/loadDirectory");
+module.exports = structr(EventEmitter, {
 
-  tq = require("tq");
+	/**
+	 */
 
-  module.exports = (function(_super) {
+	"override __construct": function() {
 
-    __extends(_Class, _super);
+		this._super();
 
-    /*
-    */
+		this._tq = tq.queue();
+		this._tq.start();
 
-    function _Class() {
-      this._tq = tq.queue().start();
-    }
+		var self = this;
 
-    /*
-    */
+		self._screenshot = new Screenshot(this);
 
-    _Class.prototype.config = function(config) {
-      var self;
-      self = this;
-      this._tq.push(function() {
-        var _this = this;
-        return loadDirectory(config.directory, function(err, browsers) {
-          console.log(browsers);
-          return _this;
-        });
-      });
-      return this;
-    };
+		this._on = outcome.error(function(err) {
+			self.emit("error", err);
+		})
 
-    /*
-    */
+	},
 
-    _Class.prototype.listen = function(port) {
-      var em,
-        _this = this;
-      em = server.listen(port);
-      em.on("browserProxy", function(proxy) {
-        return _this.emit("browserProxy", proxy);
-      });
-      return this;
-    };
+	/**
+	 */
 
-    /*
-    */
+	"config": function(config) {
 
-    _Class.prototype.start = function(browser, url) {
-      return this._tq.add(function() {});
-    };
+		var self = this;
 
-    return _Class;
 
-  })(EventEmitter);
+		this._tq.push(function() {
 
-}).call(this);
+			var next = this;
+
+			loadDirectory(config.directory, self._on.success(function(browsers) {
+				self._processes = new ProcessCollection(browsers);
+				next();
+			}));
+
+		});
+
+		return this;
+	},
+
+	/**
+	 */
+
+	"getAvailableBrowsers": function(next) {
+		self = this;
+		this._tq.push(function() {
+			self._processes.getAvailableBrowsers(next);
+			this();
+		})
+	},
+
+	/**
+	 */
+
+	"listen": function(port) {
+
+		var em = server.listen(port),
+		self   = this;
+
+		em.on("browserProxy", function(proxy) {
+
+			self.emit("browserProxy", proxy);
+
+		});
+
+		return this;
+	},
+
+	/**
+	 */
+
+	"start": function(browser, url, callback) {
+
+		var self = this;
+
+
+		this._tq.push(function() {	
+
+
+			var next = this;
+
+			self._processes.start(browser, url, function(err, browser) {
+
+				next();
+
+				if(callback) callback(err, browser);
+			});
+
+		});
+	},
+
+
+	/**
+	 */
+
+
+	"snap": function(browsers, next) {
+
+		var self = this;
+
+		this._tq.push(function() {
+
+			self._screenshot.snap(browsers, next);
+
+			this();
+		})
+	}
+})
+

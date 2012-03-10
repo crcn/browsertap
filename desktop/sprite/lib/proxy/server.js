@@ -1,59 +1,56 @@
-(function() {
-  var EventEmitter, browserify, dnode, express, filternet, fs, wrapBrowserClient, wrapScript;
+var filternet = require("filternet"),
+express 	  = require("express"),
+dnode         = require("dnode"),
+EventEmitter  = require("events").EventEmitter,
+browserify    = require("browserify"),
+wrapBrowserClient = require("./wrapBrowserClient"),
+fs  = require("fs");
 
-  filternet = require("filternet");
 
-  express = require("express");
+exports.listen = function(port) {
 
-  dnode = require("dnode");
+	console.log('listening to port %d', port)
 
-  EventEmitter = require("events").EventEmitter;
+	var em = new EventEmitter(),
+	wrap   = wrapBrowserClient(),
+	mitm = filternet.createProxyServer({ port: port}),
+	assetServer = express.createServer(),
+	dnodeServer,
+	httpPort = port + 1;
 
-  browserify = require("browserify");
+	dnodeServer = dnode(function(client, con) {
 
-  wrapBrowserClient = require("./wrapBrowserClient");
+		con.on("ready", function() {
 
-  fs = require("fs");
+			wrap(client, con);
+			em.emit("browserProxy", client);
 
-  /*
-  */
+		});
+	});
 
-  exports.listen = function(port) {
-    var assetServer, dnodeServer, em, httpPort, mitm, wrap;
-    em = new EventEmitter();
-    wrap = wrapBrowserClient();
-    mitm = filternet.createProxyServer({
-      port: port
-    });
-    assetServer = express.createServer();
-    dnodeServer = dnode(function(client, con) {
-      return con.on("ready", function() {
-        wrap(client, con);
-        return em.emit("browserProxy", client);
-      });
-    });
-    httpPort = port + 1;
-    assetServer.use(browserify({
-      entry: __dirname + "/client/client.js",
-      mount: '/client.js'
-    }));
-    assetServer.listen(httpPort);
-    dnodeServer.listen(assetServer);
-    mitm.on('interceptResponseContent', function(buffer, responseObject, isSsl, charset, callback) {
-      var content, script;
-      content = buffer.toString("utf8");
-      script = wrapScript("dnode.js", httpPort);
-      script += wrapScript("client.js", httpPort);
-      return callback(content.replace(/<\/head>/i, script + "</head>"));
-    });
-    return em;
-  };
 
-  /*
-  */
+	assetServer.use(browserify({ entry: __dirname + "/client/client.js", mount:'/client.js' }));
 
-  wrapScript = function(path, port) {
-    return "<script src=\"http://127.0.0.1:" + port + "/" + path + "?" + (Math.random()) + "\" type=\"text/javascript\"></script>";
-  };
+	assetServer.listen(httpPort);
+	dnodeServer.listen(assetServer);
 
-}).call(this);
+
+	mitm.on("interceptResponseContent", function (buffer, responseObject, isSsl, charset, callback) {
+
+		var content = buffer.toString("utf8");
+		var script  = wrapScript("dnode.js", httpPort);
+		script     += wrapScript("client.js", httpPort);
+
+		callback(content.replace(/<\/head>/i, script + "</head>"))
+	});
+
+
+	return em
+}
+
+
+function wrapScript(path, port) {
+
+	return "<script src=\"http://127.0.0.1:"+port+"/"+path+"?#{Math.random()}\" type=\"text/javascript\"></script>"
+
+}

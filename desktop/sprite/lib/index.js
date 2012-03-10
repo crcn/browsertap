@@ -1,27 +1,37 @@
-(function() {
-  var Controller, app;
+var Controller = require("./controller");
 
-  Controller = require("./controller");
 
-  exports.create = function(config) {
-    return new Controller().config(config);
-  };
+exports.create = function(config) {
 
-  app = exports.create({
-    directory: "~/Desktop/browsers"
-  }).listen(8088);
+	return new Controller().config(config);
 
-  app.on("browserProxy", function(proxy) {
-    proxy.on("locationChange", function(location) {
-      return console.log(location.href);
-    });
-    return proxy.on("focus", function() {
-      return console.log(proxy.location.href);
-    });
-  });
+}
 
-  app.on("loaded", function() {
-    return app.start('firefox 9', 'http://google.com');
-  });
 
-}).call(this);
+var app = exports.create({
+	directory: "~/Desktop/browsers"
+}).
+listen(8088);
+
+
+app.on("browserProxy", function(proxy) {
+
+	console.log(proxy.location.href);
+
+
+	proxy.on("locationChange", function(location) {
+		console.log(location.href);
+	})
+
+	proxy.on("focus", function() {
+		console.log(proxy.location.href);
+	})
+
+
+});
+
+//app.start('chrome 19', 'http://google.com');
+app.snap("http://google.com");
+
+
+

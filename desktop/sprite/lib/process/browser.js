@@ -36,10 +36,20 @@ module.exports = structr(EventEmitter, {
 
 		if(this._proc) {
 
-			this._proc.kill();
+			this._proc.stdin.write("kill\n");
 			this._proc = undefined;
 		}
 
+	},
+
+	/**
+	 */
+
+	'screenshot': function(path) {
+
+		if(this._proc) {
+			this._proc.stdin.write("screenshot\n" + path + "\n");
+		}
 	},
 
 	/**
@@ -52,18 +62,6 @@ module.exports = structr(EventEmitter, {
 
 		step(
 
-			/**
-			 */
-
-			function() {
-
-				console.log("killing browser %s (guard)", self.name);
-
-				//first fill any processes before spawning, OTHERWISE we'll exit immediately.
-				//FIXME - some processes have diff names ~ "Link to iexplore.exe" for example
-				exec("taskkill /F /IM " + self.filename, this);
-
-			},
 
 			/**
 			 */
@@ -72,10 +70,10 @@ module.exports = structr(EventEmitter, {
 
 				console.log("starting browser %s", self.name);
 
-				console.log(self.filename);
-				console.log(self.cwd)
 
-				self._proc = spawn(self.filename, [url], { cwd: self.cwd });
+				var proc = self.cwd + "\\" + self.filename;
+
+				self._proc = spawn('winproc.exe', [proc, url], { cwd: __dirname});
 
 				self._proc.on("exit", function() {
 					console.log("browser %s has exited", self.name);
@@ -93,6 +91,7 @@ module.exports = structr(EventEmitter, {
 				self._proc.on("error", function(err) {
 					console.error(err)
 				});
+
 
 
 				this(null);

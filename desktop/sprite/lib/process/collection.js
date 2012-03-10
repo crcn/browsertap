@@ -43,6 +43,17 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
+	'killPrevious': function() {
+
+		//already a browser up? close it.
+		if(this._currentBrowser) this._currentBrowser.kill();
+		this._currentBrowser = null;
+
+	},
+
+	/**
+	 */
+
 	'start': function(browserName, url, next) {
 
 		var browser = this._browsers[browserName];
@@ -50,8 +61,7 @@ module.exports = structr(EventEmitter, {
 		//browser doesn't exist? ERROR
 		if(!browser) return next(new Error("browser does not exist"));
 
-		//already a browser up? close it.
-		if(this._currentBrowser) this._currentBrowser.kill();
+		this.killPrevious();
 		this._currentBrowser = browser;
 
 		browser.start(url, function() {

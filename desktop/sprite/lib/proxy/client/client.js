@@ -1,142 +1,132 @@
-(function() {
-  var EventEmitter, URL, client, debounce, em, host, listen, location, port, tapFunction, throttle, watchLocation;
+var EventEmitter = require("events").EventEmitter,
+URL	             = require("url");
 
-  EventEmitter = require("events").EventEmitter;
 
-  URL = require("url");
+var host = "localhost",
+port     = 8089,
+em       = new EventEmitter(),
+client;
 
-  if (window.top !== window.self) return;
 
-  host = 'localhost';
+client = DNode({
+	title: window.title,
+	location: location(),
+	history: {
+		back: function() {
+			history.back();
+		},
+		forward: function() {
+			history.forward();
+		}
+	},
+	navigator: {
+		appCodeName: navigator.appCodeName,
+		appName: navigator.appName,
+		version: navigator.appVersion,
+		cookieEnabled: navigator.cookieEnabled,
+		platform: navigator.platform,
+		userAgent: navigator.userAgent
+	},
+	setLocation: function(url) {
+		window.location = url;
+	},
+	on: function(type, callback) {
+		em.on(type, callback);
+	},
+	emit: function() {
+		em.emit.apply(em, arguments);
+	}
+});
 
-  port = 8089;
 
-  /*
-  */
+//bootstrap
+if(window.top == window.self) {
 
-  tapFunction = function(object, property, newFn) {
-    var oldFn;
-    oldFn = object[property];
-    return object[property] = function() {
-      newFn.apply(object, arguments);
-      if (oldFn) return oldFn.apply(object, arguments);
-    };
-  };
+	tapFunction(document, "onready", function() {
+		em.emit("documentready");
+	});
 
-  /*
-  */
+	tapFunction(document, "onmousemove", throttle(function() {
+		em.emit("mousemove");
+	}, 1000));
 
-  debounce = function(fn, delay) {
-    var onTimeout, timeout;
-    timeout = null;
-    onTimeout = function() {
-      return fn.apply(this, arguments);
-    };
-    return function() {
-      clearTimeout(timeout);
-      return timeout = setTimeout(onTimeout, delay);
-    };
-  };
 
-  /*
-  */
+	watchLocation();
 
-  throttle = function(fn, delay) {
-    var onTimeout, running;
-    running = false;
-    onTimeout = function() {
-      running = false;
-      return fn.apply(this, arguments);
-    };
-    return function() {
-      if (running) return false;
-      running = true;
-      return setTimeout(onTimeout, delay);
-    };
-  };
 
-  /*
-  */
 
-  location = function() {
-    return URL.parse(window.location.href, true);
-  };
+	client.connect(port, host);
+}
 
-  /*
-  */
+//private
 
-  em = new EventEmitter();
 
-  client = DNode({
-    title: document.title,
-    location: location(),
-    history: {
-      back: function() {
-        return history.back();
-      },
-      forward: function() {
-        return history.forward();
-      },
-      go: function(index) {
-        return history.go(index);
-      }
-    },
-    setLocation: function(url) {
-      return window.location = url;
-    },
-    on: function(type, callback) {
-      return em.addListener(type, callback);
-    },
-    emit: function() {
-      return em.emit.apply(em, arguments);
-    }
-  });
+function listen(target, event) {
 
-  /*
-   listens for an event to fire on a dom object
-  */
+	if(event instanceof Array) {
+		for(var i = event.length; i--;) {
+			listen(target, event[i]);
+		}	
+		return;
+	}
 
-  listen = function(target, events) {
-    var event, _i, _len, _results;
-    _results = [];
-    for (_i = 0, _len = events.length; _i < _len; _i++) {
-      event = events[_i];
-      _results.push((function(event) {
-        return tapFunction(target, event, function(arg1) {
-          return em.emit(event, arg1);
-        });
-      })(event));
-    }
-    return _results;
-  };
+	tapFunction(target, event, function(arg1) {
+		em.emit(event, arg1);
+	})
+}
 
-  /*
-   watches for the top url to change
-  */
 
-  watchLocation = function() {
-    var currentHRef;
-    currentHRef = window.location.href;
-    return setInterval(function() {
-      var newLoc;
-      newLoc = location().href;
-      if (currentHRef === newLoc) return;
-      console.log("location change");
-      currentHRef = newLoc;
-      return em.emit("locationChange", location());
-    }, 500);
-  };
+function watchLocation() {
+	var currentHRef = location().href;
 
-  tapFunction(document, "onready", function() {
-    return bridge.emit("documentready");
-  });
+	setInterval(function() {
+		var newLoc = location().href;
 
-  tapFunction(document, "onmousemove", throttle(function() {
-    return em.emit("mousemove");
-  }, 1000));
+		console.log(newLoc)
+		if(currentHRef == newLoc) {
+			return;
+		}
+		currentHRef = newLoc;
+		em.emit("locationChange", location());
+	}, 500)
+}
 
-  watchLocation();
+function tapFunction(object, property, newFn) {
+	var oldFn = object[property];
+	object[property] = function() {
+		newFn.apply(object, arguments);
+		if(oldFn) {
+			oldFn.apply(object, arguments);
+		}
+	}
+}
 
-  client.connect(port, host);
+function debounce(fn, delay) {
+	var timeout = null,
+	onTimeout = function() {
+		fn.apply(this, arguments);
+	}
 
-}).call(this);
+	return function() {
+		clearTimeout(timeout);
+		timeout = setTimeout(onTimeout, delay);
+	}
+}
+
+function throttle(fn, delay) {
+	var running = false,
+	onTimeout = function() {
+		running = false;
+		fn.apply(this, arguments);
+	}
+
+	return function() {
+		if(running) return false;
+		running = true;
+		setTimeout(onTimeout, delay);
+	}
+}
+
+function location() {
+	return URL.parse(window.location.href, true);
+}
