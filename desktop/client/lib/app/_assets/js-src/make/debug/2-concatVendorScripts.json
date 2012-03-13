@@ -1,0 +1,7 @@
+[
+    {
+        "include": "<%-venDirs %>/combine",
+        "output": "<%-libDir %>/vendors.js",
+        "task": "concat"
+    }
+]

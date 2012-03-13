@@ -1,0 +1,7 @@
+[
+    {
+        "include": "<%-venDirs %>/copy",
+        "output": "<%-libDir %>",
+        "task": "copy"
+    }
+]

@@ -11,26 +11,17 @@
     "mesh": "0.0.x",
     "mesh-winston": "0.0.x",
     "sprintf": "0.1.x",
-    "spice.io":"git+git@github.com:crcn/spice.io.git"
+    "spice.io": "git+git@github.com:crcn/spice.io.git",
+    "stepc": "0.0.x",
+    "connect": "2.0.x"
   },
   "devDependencies": {},
   "main": "./lib/node/index.js",
   "directories": {
-    "src": "./src",
+    "src":"./src",
     "lib": "./lib"
   },
   "mesh": {
-    "tasks": {
-      "merge -> make/:target/:command": "<%-command %>/<%-target %>",
-      ":command/:target": [
-        {
-          "cwd": "./src/<%-target %>",
-          "load": "./src/<%-target %>/make.json"
-        },
-        {
-          "task": "<%=command %>"
-        }
-      ]
-    }
+    "load": "./make.json"
   }
 }

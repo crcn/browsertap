@@ -1,28 +1,17 @@
-(function() {
-  var beanie, loader, soda;
+var connect = require('connect'),
+app = connect.createServer();
 
-  beanie = require('beanie');
+console.log(process.cwd());
 
-  loader = beanie.loader();
+app.use(connect.static(process.cwd()))
 
-  soda = require("soda");
+app.use(function(req, res, next) {
+	req.url = '/index.html';
+	next();
+});
 
-  loader.require(__dirname + "/plugins").params({
-    browsers: {
-      directory: '~/Desktop/browsers',
-      firefox: {
-        commands: {
-          'crtl+t': 'ctrl+t'
-        },
-        chromeless: {}
-      },
-      ie: {
-        chromeless: {}
-      },
-      chrome: {
-        chromeless: {}
-      }
-    }
-  }).load();
+app.use(connect.static(process.cwd()))
 
-}).call(this);
+console.log('listening on port 8081');
+
+app.listen(8081);
