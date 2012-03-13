@@ -1,0 +1,10 @@
+{
+	"directory": "./_site",
+	"find": {
+        ".*\\.(html|mu|css)$": {
+            "entry": "<%-file %>",
+            "output": "<%-file %>",
+            "task": "hashify"
+        }
+    }
+}
