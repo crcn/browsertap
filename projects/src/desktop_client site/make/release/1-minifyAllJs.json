@@ -1,5 +1,12 @@
 [
     {
-        "log": "TODO MINIFY ALL JS"
+        "directory": "./_site/js",
+        "find": {
+        	".*\\.js$": {
+        		"entry": "<%-file %>",
+        		"output": "<%-file %>",
+        		"task": "./closure"
+        	}
+        }
     }
 ]

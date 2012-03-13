@@ -1,5 +1,6 @@
 [commands]
 subl-proj = subl --project ./projects/project.sublime-project
 make-web = make web_debug
+make-web-release = make web_release
 run-web = make web_run
 publish = git add -A, git commit -m "$@", git push origin master

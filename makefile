@@ -22,6 +22,10 @@ web_debug:
 	cd $(PROJ_DIR); mesh site:make:debug
 
 
+web_release:
+	cd $(PROJ_DIR); mesh site:make:release
+
+
 web_run:
 	cd $(PROJ_DIR); mesh site:run
 

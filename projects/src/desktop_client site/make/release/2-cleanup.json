@@ -1,0 +1,17 @@
+[
+    {
+        "log": "cleaning up..."
+    },
+    {
+        "exec": "mkdir -p /tmp/__site; cp -r ./_site/* /tmp/__site;"
+    },
+    {
+        "exec": "rm -rf `ls`"
+    },
+    {
+        "exec": "mv /tmp/__site/* ./"
+    },
+    {
+        "exec": "rm -rf ./js-src ./less ./make ./make.json ./make.*.json ./package.json ./views"
+    }
+]
