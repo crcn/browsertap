@@ -38,9 +38,9 @@
 
 ### Requirements
 
-- [Node.js](http://nodejs.org/) - used for the build system
-- [Mesh](https://github.com/crcn/mesh)
-- [Macports](http://www.macports.org/)
+- [Node.js](http://nodejs.org/) - used to run the app
+- [Mesh](https://github.com/crcn/mesh) - used to build the application
+- [Macports](http://www.macports.org/) - used to install additional dependencies such as [git](http://git-scm.com/).
 
 
 ### Installation
