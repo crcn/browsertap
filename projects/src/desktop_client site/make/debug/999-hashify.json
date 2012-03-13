@@ -1,5 +1,5 @@
 {
-	"directory": "./_site",
+	"directory": "./",
 	"find": {
         ".*\\.(html|mu|css)$": {
             "entry": "<%-file %>",

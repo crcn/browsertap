@@ -1,6 +1,6 @@
 [
     {
-        "directory": "./_site/js",
+        "directory": "./",
         "find": {
         	".*\\.js$": {
         		"entry": "<%-file %>",

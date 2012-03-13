@@ -12,6 +12,6 @@
         "exec": "mv /tmp/__site/* ./"
     },
     {
-        "exec": "rm -rf ./js-src ./less ./make ./make.json ./make.*.json ./package.json ./views"
+        "exec": "rm -rf ./js-src ./less ./views"
     }
 ]
