@@ -1,0 +1,9 @@
+{
+	"dependencies": {
+		"beanie":"*",
+		"mesh-http":"*"
+	},
+	"directories": {
+		"mesh-src": "./src"
+	}
+}

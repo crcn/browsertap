@@ -1,0 +1,12 @@
+[
+	{
+		"directory": "<%-srcDir %>",
+		"find": {
+			"\\w+\\.entry\\.js": {
+				"entry": "<%-file %>",
+				"output": "<%-file.replace(srcDir, libDir) %>",
+				"task": "sardines"
+			}
+		}
+	}
+]

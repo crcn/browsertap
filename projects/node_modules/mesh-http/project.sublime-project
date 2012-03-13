@@ -1,0 +1,23 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+	"build_systems":
+	[
+		{
+			"name":"cbd make",
+			"cmd":["cbd","make","mesh-http"]
+		},
+		{
+			"name":"cbd start",
+			"cmd":["cbd","start","mesh-http"]
+		},
+		{
+			"name":"cbd make+start",
+			"cmd":["cbd","make+start","mesh-http"]
+		}
+	]
+}

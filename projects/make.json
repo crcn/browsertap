@@ -1,8 +1,5 @@
 [
 	{
-		"exec": "rm -rf ./apps"
-	},
-	{
 		"directory": "./src",
 		"find": {
 			"make\\.(\\w+)\\.json": {

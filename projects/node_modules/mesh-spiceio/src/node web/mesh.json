@@ -1,0 +1,4 @@
+{
+    "modules": ["plugin.dnode"],
+    "entries": ["plugin.entry"]
+}

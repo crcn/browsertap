@@ -1,0 +1,14 @@
+{
+    "build": {
+        "web:debug": ["combine"],
+        "web:release": ["web:debug", "uglify"]
+    },
+    "targets": [
+        {
+            "entry": "./js/index.js",
+            "include": "./js",
+            "output": "./js/index.js",
+            "build": "web:*"
+        }
+    ]
+}

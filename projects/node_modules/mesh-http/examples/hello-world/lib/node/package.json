@@ -1,0 +1,7 @@
+{
+  "directories": {},
+  "dependencies": {
+    "beanie": "*",
+    "mesh-http": "*"
+  }
+}

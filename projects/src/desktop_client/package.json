@@ -1,6 +1,3 @@
 {
-	"directories": {
-    	"src":"./_assets/js-src",
-    	"lib": "./_assets/js"
-	}
+	"platforms": ["web"]
 }

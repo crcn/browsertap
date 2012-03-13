@@ -12,12 +12,19 @@
     "mesh-winston": "0.0.x",
     "sprintf": "0.1.x",
     "stepc": "0.0.x",
-    "connect": "2.0.x"
+    "connect": "2.0.x",
+    "beanpoll-store": "0.0.x",
+    "mesh-spiceio": "0.0.x",
+    "daisy": "0.1.x",
+    "spice.io": "0.0.x",
+    "mesh-http": "0.0.x",
+    "fig": "0.0.x",
+    "malt": "0.0.x"
   },
   "devDependencies": {},
   "main": "./lib/node/index.js",
   "directories": {
-    "src":"./src",
+    "src": "./src",
     "lib": "./apps"
   },
   "mesh": {
