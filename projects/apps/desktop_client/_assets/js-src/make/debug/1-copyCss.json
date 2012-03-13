@@ -1,7 +1,0 @@
-[
-    {
-        "include": "<%-assetsDir %>/less/copy",
-        "output": "<%-assetsDir %>/css",
-        "task": "copy"
-    }
-]
