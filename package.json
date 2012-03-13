@@ -1,6 +1,0 @@
-{
-	"name":"eyebrowse",
-	"directories": {
-		"player-src": "./client/player/src"
-	}
-}
