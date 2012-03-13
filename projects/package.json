@@ -1,0 +1,27 @@
+{
+  "name": "xtest-client",
+  "description": "",
+  "author": "author",
+  "version": "0.0.1",
+  "dependencies": {
+    "async": "0.1.x",
+    "outcome": "0.0.x",
+    "step": "0.0.x",
+    "beanie": "0.0.x",
+    "mesh": "0.0.x",
+    "mesh-winston": "0.0.x",
+    "sprintf": "0.1.x",
+    "spice.io": "git+git@github.com:crcn/spice.io.git",
+    "stepc": "0.0.x",
+    "connect": "2.0.x"
+  },
+  "devDependencies": {},
+  "main": "./lib/node/index.js",
+  "directories": {
+    "src":"./src",
+    "lib": "./apps"
+  },
+  "mesh": {
+    "load": "./make.json"
+  }
+}

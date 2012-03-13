@@ -1,0 +1,21 @@
+[
+	{
+		"exec": "rm -rf ./apps"
+	},
+	{
+		"directory": "./src",
+		"find": {
+			"make\\.(\\w+)\\.json": {
+				"currentPlatform": "<%-file.match(/make\\.(\\w+)\\.json/)[1] %>",
+				"task": [
+					"merge:<%-currentPlatform %>",
+					{
+						"namespace": "<%-currentPlatform %>",
+						"cwd": "./apps/<%-currentPlatform %>",
+						"load": "./apps/<%-currentPlatform %>/make.<%-currentPlatform %>.json"
+					}
+				]
+			}
+		}
+	}
+]
