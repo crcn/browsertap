@@ -1,4 +1,5 @@
 
+
 ### Project Structure
 
 - `projects/` - the projects directory
@@ -13,11 +14,17 @@
 - `designs/` - PSD files / designs go here
 - `brainstorm/` - Your thoughts go here
 
-### Commands
+### Terminal Commands
 
 - `cbd run-web eyebrowse` - make & run eyebrowse
 - `cbd make-web eyebrowse` - just make eyebrowse, don't run.
 - `cbd publish eyebrowse "your commit message"` - commit eyebrowse to github.
+
+
+### Videos
+
+- [Installation](http://cl.ly/0G0L1u1a3F0Q0u0z293i)
+- [Using The Project](http://cl.ly/2d1w0f0r2N1V1N3e0k1F)
 
 
 ### Resources
@@ -32,8 +39,8 @@
 ### Requirements
 
 - [Node.js](http://nodejs.org/) - used for the build system
-- [Macports](http://www.macports.org/), or [Homebrew](http://mxcl.github.com/homebrew/) - used for installing additional deps required by TD
 - [Mesh](https://github.com/crcn/mesh)
+- [Macports](http://www.macports.org/)
 
 
 ### Installation
@@ -41,13 +48,12 @@
 After installing [Node.js](http://nodejs.org/), open terminal, and copy & paste this script:
 
 ```bash
-npm install mesh -g # needed for building eyebrowse
-npm install cupboard -g # needed for building eyebrowse
-git clone git@github.com:crcn/eyebrowse.git eyebrowse
+sudo port install git-core
+sudo npm install mesh -g
+sudo npm install cupboard -g
+sudo git clone git@github.com:crcn/eyebrowse.git eyebrowse
 cd eyebrowse 
-cbd init # add to your projects cupboard
-cd projects
-npm install # install eyebrowse now
+sudo cbd init
 ```
 
 #### 4. Run it!
@@ -55,7 +61,17 @@ npm install # install eyebrowse now
 From your terminal, call:
 
 ```bash
-sudo cbd run-web eyebrowse;
+sudo cbd run-web eyebrowse
+```
+
+### Tips
+
+- To stop a process in terminal, call `ctrl+c`
+- To sync the project with newest updates, call `git pull` in the project directory. Simply Call:
+
+```bash
+cd `cbd dir eyebrowse`;
+git pull;
 ```
 
 
