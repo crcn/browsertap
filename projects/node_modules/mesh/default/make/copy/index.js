@@ -4,7 +4,7 @@ exports.run = function(target, next) {
 
 	var ops = target;
 	
-	var include = ops.include instanceof Array ? ops.include : [ops.include],
+	var include = getInput(target),
 
 	exclude     = (ops.exclude || []).map(function(filter) {
 		return new RegExp("^" + filter + "$");
@@ -21,4 +21,13 @@ exports.run = function(target, next) {
 	}).
 	join(ops.output).
 	complete(next);
+}
+
+exports.taskMessage = function(target) {
+	return "copy " + getInput(target).join(', ') + " -> " + target.output;
+}
+
+
+function getInput(target) {
+	return target.include instanceof Array ? target.include : [target.include];
 }

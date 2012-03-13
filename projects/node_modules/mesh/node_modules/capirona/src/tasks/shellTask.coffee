@@ -31,10 +31,12 @@ module.exports = class ShellTask extends BaseTask
 		child.stderr.removeAllListeners('data')
 
 		child.stdout.on 'data', (data) ->
-			process.stdout.write(data)
+			String(data).split('\n').forEach (msg) ->
+				console.info msg
 
 		child.stderr.on 'data', (data) ->
-			process.stderr.write(data)
+			String(data).split('\n').forEach (msg) ->
+				console.error msg
 
 
 

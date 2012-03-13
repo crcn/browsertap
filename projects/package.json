@@ -6,6 +6,7 @@
   "dependencies": {
     "async": "0.1.x",
     "outcome": "0.0.x",
+    "underscore":"*",
     "step": "0.0.x",
     "beanie": "0.0.x",
     "mesh": "0.0.x",
@@ -16,7 +17,6 @@
     "beanpoll-store": "0.0.x",
     "mesh-spiceio": "0.0.x",
     "daisy": "0.1.x",
-    "spice.io": "0.0.x",
     "mesh-http": "0.0.x",
     "fig": "0.0.x",
     "malt": "0.0.x"

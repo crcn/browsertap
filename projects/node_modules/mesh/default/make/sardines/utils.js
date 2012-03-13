@@ -164,6 +164,9 @@ var modulePath = exports.modulePath = function(script) {
 
 exports.getPathInfo = function(required, cwd) {
 
+	if(required == "net") {
+		console.log(cwd)
+	}
 
 	try {
 

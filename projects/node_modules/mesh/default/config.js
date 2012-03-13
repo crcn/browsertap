@@ -5,7 +5,7 @@ step   = require('stepc'),
 outcome = require('outcome');
 
 
-exports.load = function(config, next) {
+exports.load = function(target, next) {
 
 	var on = outcome.error(next), tasks,
 	taskDir = __dirname + "/make";

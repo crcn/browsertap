@@ -1,8 +1,6 @@
 ejs      = require 'ejs'
-structr  = require 'structr'
 traverse = require 'traverse'
 path     = require 'path'
-structr  = require 'structr'
 
 
 render = (value, data) ->

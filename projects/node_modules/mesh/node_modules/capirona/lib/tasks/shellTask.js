@@ -42,10 +42,14 @@
       child.stdout.removeAllListeners('data');
       child.stderr.removeAllListeners('data');
       child.stdout.on('data', function(data) {
-        return process.stdout.write(data);
+        return String(data).split('\n').forEach(function(msg) {
+          return console.info(msg);
+        });
       });
       return child.stderr.on('data', function(data) {
-        return process.stderr.write(data);
+        return String(data).split('\n').forEach(function(msg) {
+          return console.error(msg);
+        });
       });
     };
 

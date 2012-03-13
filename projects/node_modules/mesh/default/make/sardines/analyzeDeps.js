@@ -234,7 +234,6 @@ mainScriptPath  = utils.mainScriptPath;
 
 			scanRequired(content, cwd, on.success(function(deps) {
 				scanInclude(content, cwd, on.success(function(incDeps) {
-					// console.log(incDeps)
 					self(null, deps.concat(incDeps));
 				}));
 			}));

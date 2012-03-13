@@ -1,15 +1,11 @@
 (function() {
-  var ejs, path, render, structr, traverse;
+  var ejs, path, render, traverse;
 
   ejs = require('ejs');
-
-  structr = require('structr');
 
   traverse = require('traverse');
 
   path = require('path');
-
-  structr = require('structr');
 
   render = function(value, data) {
     var clone;

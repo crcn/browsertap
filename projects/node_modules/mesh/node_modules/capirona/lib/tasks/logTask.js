@@ -45,7 +45,7 @@
     */
 
     LogTask.prototype._taskMessage = function(target) {
-      return "" + (tpl.render(this.log, target));
+      return "log " + (tpl.render(this.log, target));
     };
 
     return LogTask;

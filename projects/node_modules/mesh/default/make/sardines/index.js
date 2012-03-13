@@ -40,6 +40,6 @@ exports.run = function(target, next) {
 }
 
 
-exports.buildMessage = function(target) {
-	return "combining " + path.basename(target.entry);
+exports.taskMessage = function(target) {
+	return "browserify " + target.entry;
 }

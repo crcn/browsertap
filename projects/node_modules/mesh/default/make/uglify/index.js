@@ -50,7 +50,7 @@ exports.run = function(target, next) {
 }
 
 
-exports.buildMessage = function(target) {
-	return "uglifying - beautify: " + (!!target.beautfy)
+exports.taskMessage = function(target) {
+	return "uglify " + target.input;
 }
 

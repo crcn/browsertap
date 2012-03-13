@@ -44,7 +44,7 @@
       _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         rawTask = _ref[_i];
-        _results.push(this.chains.push(this.tasks.factory.newTask(null, rawTask, this)));
+        _results.push(this.chains.push(this.childTask(null, rawTask, this)));
       }
       return _results;
     };
@@ -76,7 +76,7 @@
   })(BaseTask);
 
   module.exports.test = function(config) {
-    return (config instanceof Array) || config.chain;
+    return (config instanceof Array) || (config.chain instanceof Array);
   };
 
 }).call(this);
