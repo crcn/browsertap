@@ -1,5 +1,5 @@
 [commands]
-subl-proj = subl --project ./projects/project.sublime-project
+subl-proj = subl --project ./project_files/project.sublime-project
 make-web = make web_debug
 make-web-release = make web_release
 run-web = make web_run
