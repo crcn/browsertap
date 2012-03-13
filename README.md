@@ -1,8 +1,3 @@
-### Notes
-
-- The architecture for eyebrowse must be kept as minimalistic as possible. In general, more moving parts = more bugs.
-- All **design material** goes in `site/`, or `desktop/client/src/web`. Any other folder is for muah. 
-
 
 ### Project Structure
 
@@ -18,8 +13,11 @@
 - `designs/` - PSD files / designs go here
 - `brainstorm/` - Your thoughts go here
 
+### Commands
 
-## Building The Project
+- `cbd run-web eyebrowse` - make & run eyebrowse
+- `cbd make-web eyebrowse` - just make eyebrowse, don't run.
+- `cbd publish eyebrowse "your commit message"` - commit eyebrowse to github.
 
 
 ### Resources
