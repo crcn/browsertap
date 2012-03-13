@@ -1,10 +1,33 @@
+#---------------------------------------------------
 
-DIRS := desktop provision site
-# recursively finds other makefiles and calls the given command
+PROJ_DIR = projects
+SRC_DIR = projects/src
+APPS_DIR = projects/apps
 
-%:
-	@find $(DIRS) -name "makefile" -exec $(MAKE) recursive COMMAND=$@ MAKEFILE={} --no-print-directory \;
+#---------------------------------------------------
 
-recursive: 
-	@$(MAKE) -C `dirname $$MAKEFILE` $$COMMAND
 
+
+all: desktop_player web_debug sprite desktop_controller 
+all_release: 
+
+
+desktop_player:
+	make -C $(SRC_DIR)/desktop_player all;
+
+sprite:
+
+
+web_debug:
+	cd $(PROJ_DIR); mesh site:make:debug
+
+
+web_run:
+	cd $(PROJ_DIR); mesh site:run
+
+
+desktop_controller:
+	make -C $(SRC_DIR)/desktop_controller all;
+
+clean:
+	rm -rf $(APPS_DIR);

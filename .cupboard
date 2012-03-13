@@ -1,2 +1,4 @@
 [commands]
 subl-proj = subl --project ./projects/project.sublime-project
+make-web = make web_debug
+run-web = make web_run
