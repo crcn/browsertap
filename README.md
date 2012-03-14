@@ -25,6 +25,7 @@
 
 - [Installation](http://cl.ly/0G0L1u1a3F0Q0u0z293i)
 - [Using The Project](http://cl.ly/2d1w0f0r2N1V1N3e0k1F)
+- [Project Hot Reloading](http://cl.ly/421R1s2A0k0P0L2m023a)
 
 
 ### Resources

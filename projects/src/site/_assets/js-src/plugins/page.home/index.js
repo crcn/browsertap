@@ -8,8 +8,8 @@ exports.plugin = function(router) {
 
 		'pull -http /': function() {
 			
-			alert("WELCOME!!!!!!!!!!!!!");
-			
+			//alert("YOKOSO");
+
 		},
 
 

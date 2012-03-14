@@ -34,30 +34,38 @@
                 "\\w+.json": {
                     "cwd": "./",
                     "load": "<%-file %>"
-                }
+                }  
             }
         },
         "make": {
             "debug": "../../findAndLoad:debug",
             "release": [
                 "../debug",
-                "../../findAndLoad:release"
+                "../../findAndLoad:release",
+                ""
             ]
         },
         "run": [
-            "../make/debug",
             {
                 "parallel": true,
-                "chain": [
-                    {
+                "chain": [  
+                    { 
                         "exec": "node ../http_server"
                     },
                     [
-                        {
+                        { 
                             "sleep": 500
                         },
                         {
-                            "exec": "open http://`hostname`:8081"
+                            "watch": "../../src",   
+                            "task" : [
+                                "merge:<%-currentPlatform %>",
+                                "../make/debug",
+                                {
+                                    "exec": "open http://`hostname`:8081"   
+                                }
+                                
+                            ]
                         }
                     ]
                 ]

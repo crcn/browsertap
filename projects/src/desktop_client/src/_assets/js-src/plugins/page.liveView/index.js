@@ -1,3 +1,3 @@
 exports.plugin = function(router) {
 	
-}
+} 

@@ -14,14 +14,14 @@ var rpc = new easyXDM.Rpc({
 	remote: {
 		request: {}
 	}
-})
-
+})     
+ 
 module.exports = {
 	transport: {
 		jsonp: {
 			host: host,
 			protocol: protocol,
 			rpc: rpc
-		}
-	}
+		}        
+	}  
 }
