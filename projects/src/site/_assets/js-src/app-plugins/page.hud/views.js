@@ -25,8 +25,30 @@ module.exports = function(fig) {
 		'override ready': function() {
 			this._super();
 
+
+			this._beautifyScrollbars();
+		},
+
+
+		/**
+		 */
+
+		'_beautifyScrollbars': function() {
+
+			//scroll-paine that shit.
 			$('.hud-scroll').jScrollPane();
-			//$('.dropdown-toggle').dropdown();
+
+			//next, add some animations
+			$('.hud-scroll').hover(function() {
+
+
+				$(this).find('.jspVerticalBar, .jspHorizontalBar').last().fadeIn(50);
+			}, 
+			function() {
+
+				$(this).find('.jspVerticalBar, .jspHorizontalBar').last().fadeOut(20);
+
+			});
 		}
 
 

@@ -16,7 +16,7 @@ module.exports = function(fig) {
 		/**
 		 */
 
-		'el': '#hud-content-view',
+		'el': '#hud_content_view',
 
 
 		/**
@@ -25,9 +25,6 @@ module.exports = function(fig) {
 		'override ready': function() {
 			this._super();
 
-			//$('.dropdown-toggle').dropdown();
-
-			$('.hud-scroll').jScrollPane();
 		}
 
 

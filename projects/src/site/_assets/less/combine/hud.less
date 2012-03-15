@@ -1,17 +1,24 @@
 #hud_holder {
 	background-color: rgba(0,0,0,0.5);
-	width: 500px;
-	height: 350px;
+	width: @hudWidth;
+	height: @hudHeight;
 	color: #FFF;
-	padding: 8px;
+	padding: @hudInnerPadding;
 	position: relative;
 	top: 150px;
 
 	.centered();
 	.rounded(2px);
-	overflow-y: scroll;
+	overflow: hidden;
 }
 
-::-webkit-scrollbar {
-	
+
+.hud-scroll {
+	overflow: hidden;
+}
+
+
+#hud_content_view {
+	width: @hudWidth;
+	height: 100%;
 }

@@ -1,0 +1,14 @@
+
+/* HUD specific */
+@hudCellPadding: 8px;
+@hudInnerPadding: 8px;
+@hudGutterWidth: 75px;
+@hudCellWidth: 150px;
+@hudCellHeight: 100px;
+@numHudCellsX: 3;
+@numHudCellsY: 3;
+@hudCellHolderWidth: @numHudCellsX * (@hudCellWidth + @hudCellPadding);
+@hudInnerWidth: @hudCellHolderWidth + @hudGutterWidth;
+@hudWidth: @hudInnerWidth;
+@hudHeight: @hudCellHeight * @numHudCellsY + @hudInnerPadding * 2;
+

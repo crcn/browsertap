@@ -1,69 +1,113 @@
 <script id="hud-select-template" type="text/x-tmpl-mu"> 
      
 	<div class="hud_select_row  hud-scroll">
-		<div class="row-fluid" style="width:700px;">
-			<div class="span2">
+		<div class="hud_select_logo">
 				IE
-			</div>
-			<div class="span3">
-				7
-			</div>
-			<div class="span3">
-				8
-			</div>
-			<div class="span3">
-				9
-			</div>
+		</div>
+		<div class="hud_select_cell">
+			7
+		</div>
+		<div class="hud_select_cell">
+			8
+		</div>
+		<div class="hud_select_cell">
+			9
+		</div>
+
+		<div class="hud_select_cell">
+			9
+		</div>
+
+		<div class="hud_select_cell">
+			9
+		</div>
+		
+		<div class="hud_select_cell">
+			9
 		</div>
 	</div>
+
 	<div class="hud_select_row  hud-scroll">
-		<div class="row-fluid" style="width:700px;">
-			<div class="span2">
+		<div class="hud_select_logo">
 				Chrome
-			</div>
-			<div class="span3">
-				7
-			</div>
-			<div class="span3">
-				8
-			</div>
-			<div class="span3">
-				9
-			</div>
+		</div>
+		<div class="hud_select_cell">
+			7
+		</div>
+		<div class="hud_select_cell">
+			8
+		</div>
+		<div class="hud_select_cell">
+			9
+		</div>
+
+		<div class="hud_select_cell">
+			9
+		</div>
+
+		<div class="hud_select_cell">
+			9
+		</div>
+		
+		<div class="hud_select_cell">
+			9
 		</div>
 	</div>
+
 	<div class="hud_select_row  hud-scroll">
-		<div class="row-fluid" style="width:700px;">
-			<div class="span2">
+		<div class="hud_select_logo">
 				Firefox
-			</div>
-			<div class="span3">
-				7
-			</div>
-			<div class="span3">
-				8
-			</div>
-			<div class="span3">
-				9
-			</div>
+		</div>
+		<div class="hud_select_cell">
+			7
+		</div>
+		<div class="hud_select_cell">
+			8
+		</div>
+		<div class="hud_select_cell">
+			9
+		</div>
+
+		<div class="hud_select_cell">
+			9
+		</div>
+
+		<div class="hud_select_cell">
+			9
+		</div>
+		
+		<div class="hud_select_cell">
+			9
 		</div>
 	</div>
+
 	<div class="hud_select_row  hud-scroll">
-		<div class="row-fluid" style="width:700px;">
-			<div class="span2">
+		<div class="hud_select_logo">
 				Safari
-			</div>
-			<div class="span3">
-				7
-			</div>
-			<div class="span3">
-				8
-			</div>
-			<div class="span3">
-				9
-			</div>
+		</div>
+		<div class="hud_select_cell">
+			7
+		</div>
+		<div class="hud_select_cell">
+			8
+		</div>
+		<div class="hud_select_cell">
+			9
+		</div>
+
+		<div class="hud_select_cell">
+			9
+		</div>
+
+		<div class="hud_select_cell">
+			9
+		</div>
+		
+		<div class="hud_select_cell">
+			9
 		</div>
 	</div>
+	
 
 </script> 
 
@@ -71,7 +115,8 @@
 
 
 
-<div id="hud_holder" class="hud-scroll">
-	<div id="hud-content-view"></div>
+<div id="hud_holder">
+	
+	<div id="hud_content_view" class="hud-scroll"></div>
 </div>
 

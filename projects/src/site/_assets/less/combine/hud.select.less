@@ -1,5 +1,25 @@
 .hud_select_row {
-	margin-bottom: 8px;
-	height: 100px;
+	width: @hudInnerWidth;
 	overflow-x: scroll;
+    white-space:nowrap;
+    margin-bottom: 8px;
 }
+
+.hud_select_logo {
+	width: 75px;
+	display: inline-block;
+}
+
+
+
+.hud_select_cell {
+	background-color: rgba(0,0,0, 0.1);
+	height: @hudCellHeight;
+	width: @hudCellWidth;
+	display: inline-block;
+	*display: inline;
+	overflow: hidden;
+	margin-right:@hudCellPadding;
+	.rounded(5px);
+}
+

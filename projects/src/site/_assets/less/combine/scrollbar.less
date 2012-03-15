@@ -5,7 +5,8 @@
  * may not operate correctly without them.
  */
 
-@scrollbarSize: 8px;
+@scrollbarSize: 10px;
+@scrollbarBorderSize: 1px;
 
 
 .jspContainer
@@ -26,6 +27,7 @@
 	right: 0;
 	width: @scrollbarSize;
 	height: 100%;
+	display: none;
 }
 
 .jspHorizontalBar
@@ -35,6 +37,7 @@
 	left: 0;
 	width: 100%;
 	height: @scrollbarSize;
+	display: none;
 }
 
 .jspVerticalBar *,
@@ -62,19 +65,20 @@
 
 .jspDrag
 {
-	background: rgba(0,0,0,0.5);
+	background: rgba(0,0,0,0.3);
 	position: relative;
 	top: 0;
 	left: 0;
 	cursor: pointer;
-	.rounded(3px);
+	border: @scrollbarBorderSize solid rgba(255, 255, 255, 0.4);
+	.rounded(@scrollbarSize/2);
 }
 
 .jspHorizontalBar .jspTrack,
 .jspHorizontalBar .jspDrag
 {
 	float: left;
-	height: 100%;
+	height: @scrollbarSize - @scrollbarBorderSize*2;
 }
 
 .jspArrow
