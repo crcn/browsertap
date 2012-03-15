@@ -1,0 +1,73 @@
+{
+    "assetsDir": "./_assets",
+    "srcDir": "<%-assetsDir %>/js-src",
+    "libDir": "<%-assetsDir %>/js",
+    "venDirs": "<%-srcDir %>/vendors",
+    "concatDir": "<%-venDirs %>/cat",
+    "tasks": {
+        "closure": {
+            "exec": "mv <%-entry %> ./tmp.js; closure --js=./tmp.js --js_output_file=<%-output %>; rm ./tmp.js;"
+        },
+        "lessc": {
+            "exec": "lessc <%-entry %> -x > <%-output %>"
+        },
+        "concatLess": {
+            "lessco": "./tmp.less",
+            "task": [
+                {
+                    "include": "<%-input %>",
+                    "output": "<%-lessco %>",
+                    "task": "concat"
+                },
+                {
+                    "entry": "<%-lessco %>",
+                    "task": "../lessc"
+                },
+                {
+                    "exec": "rm ./tmp.less"
+                }
+            ]
+        },
+        "findAndLoad/:dir": {
+            "directory": "./make/<%-dir %>",
+            "find": {
+                "\\w+.json": {
+                    "cwd": "./",
+                    "load": "<%-file %>"
+                }  
+            }
+        },
+        "make": {
+            "debug": "../../findAndLoad:debug",
+            "release": [
+                "../debug",
+                "../../findAndLoad:release"
+            ]
+        }, 
+        "run": [  
+            {
+                "parallel": true,
+                "chain": [    
+                    { 
+                        "exec": "node ../http_server"
+                    },
+                    [
+                        { 
+                            "sleep": 500
+                        },
+                        {
+                            "watch": "../../src",   
+                            "task" : [
+                                "merge:<%-currentPlatform %>",
+                                "../make/debug"
+                            ]
+                        },
+                        {
+                            "exec": "open http://`hostname`:8081"   
+                        }
+                    ]
+                ]
+            }
+        ]
+    }
+}

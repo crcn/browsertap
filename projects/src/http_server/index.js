@@ -6,7 +6,7 @@ console.log(process.cwd());
 app.use(connect.static(process.cwd()))
 
 app.use(function(req, res, next) {
-	req.url = '/index.html';
+	req.url = '/app.html';
 	next();
 });
 

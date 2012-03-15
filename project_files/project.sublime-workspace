@@ -572,15 +572,15 @@
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/controller/src/cli.cpp",
 			"settings":
 			{
-				"buffer_size": 663,
-				"line_ending": "Windows"
+				"buffer_size": 0,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/lib/node/package.json",
 			"settings":
 			{
-				"buffer_size": 551,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -588,7 +588,7 @@
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/package.json",
 			"settings":
 			{
-				"buffer_size": 546,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -623,7 +623,7 @@
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/index.js",
 			"settings":
 			{
-				"buffer_size": 294,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -631,7 +631,7 @@
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/make.node.json",
 			"settings":
 			{
-				"buffer_size": 5,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -639,7 +639,7 @@
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/index.js",
 			"settings":
 			{
-				"buffer_size": 347,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -766,7 +766,7 @@
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/lib/node/make.json",
 			"settings":
 			{
-				"buffer_size": 132,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -921,7 +921,7 @@
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/README.md",
 			"settings":
 			{
-				"buffer_size": 1675,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -1085,7 +1085,7 @@
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/node_modules/dnode-protocol/index.js",
 			"settings":
 			{
-				"buffer_size": 9450,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -1104,7 +1104,7 @@
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/package.json",
 			"settings":
 			{
-				"buffer_size": 432,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -1128,23 +1128,23 @@
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/winproc/Program.cs",
 			"settings":
 			{
-				"buffer_size": 980,
-				"line_ending": "Windows"
+				"buffer_size": 0,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/winproc/Commands.cs",
 			"settings":
 			{
-				"buffer_size": 951,
-				"line_ending": "Windows"
+				"buffer_size": 0,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/lib/process/browser.js",
 			"settings":
 			{
-				"buffer_size": 1682,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -1152,7 +1152,7 @@
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/make.json",
 			"settings":
 			{
-				"buffer_size": 359,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -1182,7 +1182,7 @@
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/make/index.js",
 			"settings":
 			{
-				"buffer_size": 233,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -1190,16 +1190,16 @@
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/web/make.web.json",
 			"settings":
 			{
-				"buffer_size": 854,
-				"line_ending": "Windows"
+				"buffer_size": 0,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/site/index.html",
 			"settings":
 			{
-				"buffer_size": 136,
-				"line_ending": "Windows"
+				"buffer_size": 0,
+				"line_ending": "Unix"
 			}
 		},
 		{
@@ -1214,23 +1214,23 @@
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/web/package.json",
 			"settings":
 			{
-				"buffer_size": 82,
-				"line_ending": "Windows"
+				"buffer_size": 0,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/web/index.html",
 			"settings":
 			{
-				"buffer_size": 250,
-				"line_ending": "Windows"
+				"buffer_size": 0,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/lib/node/index.js",
 			"settings":
 			{
-				"buffer_size": 294,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -1245,16 +1245,16 @@
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/lib/web/make.site.json",
 			"settings":
 			{
-				"buffer_size": 886,
-				"line_ending": "Windows"
+				"buffer_size": 0,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/site/make.site.json",
 			"settings":
 			{
-				"buffer_size": 1033,
-				"line_ending": "Windows"
+				"buffer_size": 0,
+				"line_ending": "Unix"
 			}
 		},
 		{
@@ -1269,7 +1269,7 @@
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/app site/package.json",
 			"settings":
 			{
-				"buffer_size": 82,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -1277,15 +1277,23 @@
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/site/package.json",
 			"settings":
 			{
-				"buffer_size": 82,
-				"line_ending": "Windows"
+				"buffer_size": 0,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/app site/make.json",
 			"settings":
 			{
-				"buffer_size": 545,
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/tmp/subl stdin ojXepD.txt",
+			"settings":
+			{
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		}
@@ -1604,7 +1612,6 @@
 	"groups":
 	[
 		{
-			"selected": 149,
 			"sheets":
 			[
 				{
@@ -3370,15 +3377,15 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/controller/src/cli.cpp",
 					"settings":
 					{
-						"buffer_size": 663,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								111,
-								111
+								0,
+								0
 							]
 						],
 						"settings":
@@ -3397,7 +3404,7 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/lib/node/package.json",
 					"settings":
 					{
-						"buffer_size": 551,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
@@ -3425,15 +3432,15 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/package.json",
 					"settings":
 					{
-						"buffer_size": 546,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								496,
-								496
+								0,
+								0
 							]
 						],
 						"settings":
@@ -3531,15 +3538,15 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/index.js",
 					"settings":
 					{
-						"buffer_size": 294,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								231,
-								231
+								0,
+								0
 							]
 						],
 						"settings":
@@ -3557,15 +3564,15 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/make.node.json",
 					"settings":
 					{
-						"buffer_size": 5,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3,
-								3
+								0,
+								0
 							]
 						],
 						"settings":
@@ -3583,7 +3590,7 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/index.js",
 					"settings":
 					{
-						"buffer_size": 347,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
@@ -3976,7 +3983,7 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/lib/node/make.json",
 					"settings":
 					{
-						"buffer_size": 132,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
@@ -4453,15 +4460,15 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/README.md",
 					"settings":
 					{
-						"buffer_size": 1675,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1437,
-								1437
+								0,
+								0
 							]
 						],
 						"settings":
@@ -4931,15 +4938,15 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/node_modules/dnode-protocol/index.js",
 					"settings":
 					{
-						"buffer_size": 9450,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5639,
-								5639
+								0,
+								0
 							]
 						],
 						"settings":
@@ -4985,15 +4992,15 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/package.json",
 					"settings":
 					{
-						"buffer_size": 432,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								430,
-								430
+								0,
+								0
 							]
 						],
 						"settings":
@@ -5066,7 +5073,7 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/winproc/Program.cs",
 					"settings":
 					{
-						"buffer_size": 980,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
@@ -5094,15 +5101,15 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/winproc/Commands.cs",
 					"settings":
 					{
-						"buffer_size": 951,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								312,
-								312
+								0,
+								0
 							]
 						],
 						"settings":
@@ -5122,15 +5129,15 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/lib/process/browser.js",
 					"settings":
 					{
-						"buffer_size": 1682,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1236,
-								1236
+								0,
+								0
 							]
 						],
 						"settings":
@@ -5149,15 +5156,15 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/make.json",
 					"settings":
 					{
-						"buffer_size": 359,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								186,
-								186
+								0,
+								0
 							]
 						],
 						"settings":
@@ -5227,7 +5234,7 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/make/index.js",
 					"settings":
 					{
-						"buffer_size": 233,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
@@ -5254,15 +5261,15 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/web/make.web.json",
 					"settings":
 					{
-						"buffer_size": 854,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								280,
-								280
+								0,
+								0
 							]
 						],
 						"settings":
@@ -5282,15 +5289,15 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/site/index.html",
 					"settings":
 					{
-						"buffer_size": 136,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								15,
-								15
+								0,
+								0
 							]
 						],
 						"settings":
@@ -5334,15 +5341,15 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/web/package.json",
 					"settings":
 					{
-						"buffer_size": 82,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								19,
-								19
+								0,
+								0
 							]
 						],
 						"settings":
@@ -5360,15 +5367,15 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/web/index.html",
 					"settings":
 					{
-						"buffer_size": 250,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								233,
-								233
+								0,
+								0
 							]
 						],
 						"settings":
@@ -5386,7 +5393,7 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/lib/node/index.js",
 					"settings":
 					{
-						"buffer_size": 294,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
@@ -5438,15 +5445,15 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/lib/web/make.site.json",
 					"settings":
 					{
-						"buffer_size": 886,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								274,
-								274
+								0,
+								0
 							]
 						],
 						"settings":
@@ -5466,15 +5473,15 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/site/make.site.json",
 					"settings":
 					{
-						"buffer_size": 1033,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								362,
-								362
+								0,
+								0
 							]
 						],
 						"settings":
@@ -5520,15 +5527,15 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/app site/package.json",
 					"settings":
 					{
-						"buffer_size": 82,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								82,
-								82
+								0,
+								0
 							]
 						],
 						"settings":
@@ -5546,15 +5553,15 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/site/package.json",
 					"settings":
 					{
-						"buffer_size": 82,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								66,
-								66
+								0,
+								0
 							]
 						],
 						"settings":
@@ -5572,15 +5579,15 @@
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/app site/make.json",
 					"settings":
 					{
-						"buffer_size": 545,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								366,
-								358
+								0,
+								0
 							]
 						],
 						"settings":
@@ -5588,6 +5595,32 @@
 							"syntax": "Packages/JavaScript/JSON.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 150,
+					"file": "/tmp/subl stdin ojXepD.txt",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
