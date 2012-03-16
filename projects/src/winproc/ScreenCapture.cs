@@ -14,7 +14,7 @@ namespace winproc
         /// Creates an Image object containing a screen shot of the entire desktop
         /// </summary>
         /// <returns></returns>
-        public Bitmap CaptureScreen()
+        public Image CaptureScreen()
         {
             return CaptureWindow(User32.GetDesktopWindow());
         }
@@ -24,20 +24,61 @@ namespace winproc
         /// </summary>
         /// <param name="handle">The handle to the window. (In windows forms, this is obtained by the Handle property)</param>
         /// <returns></returns>
-        public Bitmap CaptureWindow(IntPtr handle)
+        /*public Bitmap CaptureWindow(IntPtr handle)
         {
             User32.RECT rc;
             User32.GetWindowRect(handle, out rc);
+
+
+            Console.WriteLine(rc.right + " " + rc.left + " " + rc.top + " " + rc.bottom);
 
 
             Bitmap bmp = new Bitmap(rc.right - rc.left, rc.bottom - rc.top, PixelFormat.Format32bppArgb);
             Graphics gfxBmp = Graphics.FromImage(bmp);
             IntPtr hdcBitmap = gfxBmp.GetHdc();
 
+
             User32.PrintWindow(handle, hdcBitmap, 0);
             gfxBmp.ReleaseHdc(hdcBitmap);
             return bmp;
-        }
+        }*/
+
+
+        /// <summary>
+        /// Creates an Image object containing a screen shot of a specific window.
+        /// </summary>
+        /// <param name="handle">The handle to the window. (In windows forms, this is obtained by the Handle property)</param>
+        public static Image CaptureWindow(IntPtr handle)
+        {
+            // get te hDC of the target window
+            IntPtr hdcSrc = User32.GetWindowDC(handle);
+            // get the size
+            User32.RECT windowRect = new User32.RECT();
+            User32.GetWindowRect(handle, ref windowRect);
+            int width = windowRect.right - windowRect.left;
+            int height = windowRect.bottom - windowRect.top;
+            // create a device context we can copy to
+            IntPtr hdcDest = GDI32.CreateCompatibleDC(hdcSrc);
+            // create a bitmap we can copy it to,
+            // using GetDeviceCaps to get the width/height
+            IntPtr hBitmap = GDI32.CreateCompatibleBitmap(hdcSrc, width, height);
+            // select the bitmap object
+            IntPtr hOld = GDI32.SelectObject(hdcDest, hBitmap);
+            // bitblt over
+            GDI32.BitBlt(hdcDest, 0, 0, width, height, hdcSrc, 0, 0, GDI32.SRCCOPY);
+            // restore selection
+            GDI32.SelectObject(hdcDest, hOld);
+            // clean up 
+            GDI32.DeleteDC(hdcDest);
+            User32.ReleaseDC(handle, hdcSrc);
+
+            // get a .NET image object for it
+            Image img = Image.FromHbitmap(hBitmap);
+            // free up the Bitmap object
+            GDI32.DeleteObject(hBitmap);
+
+            return img;
+        } 
 
         /// <summary>
         /// Captures a screen shot of a specific window, and saves it to a file
@@ -47,7 +88,7 @@ namespace winproc
         /// <param name="format"></param>
         public void CaptureWindowToFile(IntPtr handle, string filename, ImageFormat format)
         {
-            Bitmap img = CaptureWindow(handle);
+            Image img = CaptureWindow(handle);
             img.Save(filename, format);
         }
 
@@ -58,7 +99,7 @@ namespace winproc
         /// <param name="format"></param>
         public void CaptureScreenToFile(string filename, ImageFormat format)
         {
-            Bitmap img = CaptureScreen();
+            Image img = CaptureScreen();
             img.Save(filename, format);
         }
 
@@ -99,6 +140,7 @@ namespace winproc
                 public int top;
                 public int right;
                 public int bottom;
+                
             }
 
             [DllImport("user32.dll")]
@@ -109,7 +151,7 @@ namespace winproc
             public static extern IntPtr ReleaseDC(IntPtr hWnd, IntPtr hDC);
 
             [DllImport("user32.dll")]
-            public static extern IntPtr GetWindowRect(IntPtr hWnd, out RECT rect);
+            public static extern IntPtr GetWindowRect(IntPtr hWnd, ref RECT rect);
 
             [DllImport("user32.dll")]
             public static extern bool PrintWindow(IntPtr hWnd, IntPtr hdcBlt, int nFlags);

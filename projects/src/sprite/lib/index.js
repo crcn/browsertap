@@ -8,7 +8,7 @@ exports.create = function(config) {
 }
 
 
-var app = exports.create({
+/*var app = exports.create({
 	directory: "~/Desktop/browsers"
 }).
 listen(8088);
@@ -31,7 +31,7 @@ app.on("browserProxy", function(proxy) {
 });
 
 //app.start('chrome 19', 'http://google.com');
-app.snap("http://google.com");
+app.snap("http://google.com");*/
 
 
 

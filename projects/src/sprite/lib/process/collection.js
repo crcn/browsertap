@@ -11,13 +11,13 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	'override __construct': function(browsers) {
+	'override __construct': function(browsers, cache, proxy) {
 
 		this._browsers = {};
 		this._available = {};
 
 		for(var name in browsers) {
-			this._browsers[name] = new Browser(browsers[name]);
+			this._browsers[name] = new Browser(browsers[name], cache, proxy);
 
 			var nameParts = name.split(' '),
 			version = nameParts.pop(),
@@ -43,13 +43,13 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	'killPrevious': function() {
+	/*'killPrevious': function() {
 
 		//already a browser up? close it.
 		if(this._currentBrowser) this._currentBrowser.kill();
 		this._currentBrowser = null;
 
-	},
+	},*/
 
 	/**
 	 */
@@ -61,8 +61,8 @@ module.exports = structr(EventEmitter, {
 		//browser doesn't exist? ERROR
 		if(!browser) return next(new Error("browser does not exist"));
 
-		this.killPrevious();
-		this._currentBrowser = browser;
+		//this.killPrevious();
+		//this._currentBrowser = browser;
 
 		browser.start(url, function() {
 

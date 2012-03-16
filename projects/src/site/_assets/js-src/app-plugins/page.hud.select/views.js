@@ -1,12 +1,14 @@
+require('./spin');
+
 module.exports = function(fig) {
 
 
 	var browsers = {
-		'ie': [10, 9, 8, 7, 6],
-		'chrome': ['nightly', 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
-		'firefox': ['nightly', 10, 9, 8, 7, 6, 5, 4, 3.6, 3.5, 3.0],
-		'safari': [5.1, 5.0, 4.0],
-		'opera': [11.6, 11.5, 11.0, 10.5, 10.0]
+		/*'ie': [10, 9, 8, 7, 6],*/
+		'chrome': [19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3],
+		'firefox': [12,11,10,9,8,7,6,5,4,3.6,3.5,3],
+		'safari': [5.1,"5.0.5",4],
+		'opera': [11.6, 11.5, 11.1, 11, 10]
 	}
 
 	var views = fig.views;
@@ -31,7 +33,23 @@ module.exports = function(fig) {
 		'override ready': function() {
 			this._super();
 
-			$(this.el).click(this.getMethod('select'))
+			var $el = $(this.el);
+
+			$el.click(this.getMethod('select'));
+
+			$el.spin({
+				lines: 12,
+				length: 3,
+				radius: 16,
+				speed: 0.6,
+				color: '#333'
+
+			});
+
+
+			$el.find('img').load(function() {
+				$el.data().spinner.stop();
+			})
 		},
 
 		/**
@@ -63,7 +81,9 @@ module.exports = function(fig) {
 
 		'templateData': function() {
 			return {
-				browserVersion: this.ops.browserVersion
+				browserVersion: this.ops.browserVersion,
+				//screenshotUrl: 'http://10.0.1.28:8083/screenshot/chrome/19?url=http://wired.com'
+				screenshotUrl: 'http://10.0.1.28:8083/screenshot/'+this.ops.browserName+'/'+this.ops.browserVersion+'?url=http://wired.com'
 			}
 		}
 	});
@@ -270,7 +290,7 @@ module.exports = function(fig) {
 
 			for(var i = row.length; i--;) {
 				var rc = row[i],
-				var relPos = this._relPos(rc);
+				relPos = this._relPos(rc);
 
 				if(relPos < 0) continue;
 
@@ -290,7 +310,7 @@ module.exports = function(fig) {
 
 		 '_relPos': function(cell) {
 		 	var cmp = $(cell.el),
-			holder = cmp.closest('.hud-scroll').data('jsp'),
+			holder = cmp.closest('.hud-scroll').data('jsp');
 			return cmp.position().left - holder.getContentPositionX();
 		 }
 

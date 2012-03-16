@@ -1,11 +1,14 @@
 <script id="browser-cell-template" type="text/x-tmpl-mu"> 
      
     
-	<h2>{{browserVersion}}</h2>
+	<h4>{{browserVersion}}</h4>
+
+	<img src="{{screenshotUrl}}" width="100%" height="100%"></img>
 
 	<div class="hud-browser-cell-overlay">
 
 	</div>
+
 
 
 </script> 

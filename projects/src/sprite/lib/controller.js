@@ -45,7 +45,7 @@ module.exports = structr(EventEmitter, {
 			var next = this;
 
 			loadDirectory(config.directory, self._on.success(function(browsers) {
-				self._processes = new ProcessCollection(browsers);
+				self._processes = new ProcessCollection(browsers, config.cache, self);
 				next();
 			}));
 
@@ -110,13 +110,14 @@ module.exports = structr(EventEmitter, {
 	 */
 
 
-	"snap": function(browsers, next) {
+	"snap": function(url, browsers, next) {
+
 
 		var self = this;
 
 		this._tq.push(function() {
 
-			self._screenshot.snap(browsers, next);
+			self._screenshot.snap(url, browsers, next);
 
 			this();
 		})

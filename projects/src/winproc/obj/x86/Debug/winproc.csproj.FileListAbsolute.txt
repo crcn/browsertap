@@ -12,3 +12,10 @@ Z:\craigcondon\Development\eyebrowse\desktop\desktop\sprite\lib\process\winproc\
 Z:\craigcondon\Development\eyebrowse\desktop\desktop\sprite\lib\process\winproc\Debug\winproc.pdb
 Z:\craigcondon\Development\eyebrowse\desktop\sprite\lib\process\winproc\Debug\winproc.exe
 Z:\craigcondon\Development\eyebrowse\desktop\sprite\lib\process\winproc\Debug\winproc.pdb
+Z:\craigcondon\Development\eyebrowse\projects\src\winproc\obj\x86\Debug\winproc.exe
+Z:\craigcondon\Development\eyebrowse\projects\src\winproc\obj\x86\Debug\winproc.pdb
+Z:\craigcondon\Development\eyebrowse\projects\src\sprite\lib\process\winproc\Debug\winproc.exe
+Z:\craigcondon\Development\eyebrowse\projects\src\winproc\obj\x86\Debug\ResolveAssemblyReference.cache
+Z:\craigcondon\Development\eyebrowse\projects\src\sprite\lib\process\winproc\Debug\winproc.pdb
+Z:\craigcondon\Development\eyebrowse\projects\src\winproc\obj\x86\Debug\Interop.Shell32.dll
+Z:\craigcondon\Development\eyebrowse\projects\src\winproc\obj\x86\Debug\winproc.csproj.ResolveComReference.cache

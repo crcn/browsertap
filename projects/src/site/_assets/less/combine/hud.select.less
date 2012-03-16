@@ -38,16 +38,22 @@
 
 
 .hud_select_cell {
-	text-align: center;
+	text-align: right;
 	white-space: nowrap;
 	overflow: hidden;
 }
 
-.hud_select_cell > h2 {
-	top: 20px;
+.hud_select_cell > h4 {
 	position: relative;
+	padding: 5px;
 }
 
+.hud_select_cell > img {
+	top: -27px;
+	position: relative;
+	min-width: @hudCellWidth;
+	min-height: @hudCellHeight;
+}
 
 .hud-browser-cell-overlay {
 	width: @hudCellWidth;

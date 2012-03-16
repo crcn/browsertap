@@ -7,6 +7,8 @@ using System.Threading;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
+
 
 namespace winproc
 {
@@ -19,11 +21,13 @@ namespace winproc
     {
 
         private String _path;
+        private String _realpath;
         private Process _process;
         
         public App(String path)
         {
             this._path = path;
+            this._realpath = Lnk.GetShortcutTarget(path);
         }
 
         /**
@@ -75,7 +79,7 @@ namespace winproc
             {
                 try
                 {
-                    if (proc.MainModule.FileName == this._path)
+                    if (proc.MainModule.FileName == this._realpath)
                     {
                         Console.WriteLine("Killing already running process");
                         proc.Kill();
@@ -112,7 +116,7 @@ namespace winproc
         public void CaptureWindowToFile(String Location, ImageFormat Format)
         {
             ScreenCapture sc = new ScreenCapture();
-            sc.CaptureWindowToFile(this.MainWindowHandle, Location, Format);
+            sc.CaptureScreenToFile(Location, Format);
         }
 
 

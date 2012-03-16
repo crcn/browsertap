@@ -11,9 +11,8 @@ namespace winproc
     {
         static void Main(string[] args)
         {
-            //args = new string[2]{"C:\\Program Files\\Mozilla Firefox\\firefox.exe", "http://google.com"};
+            //args = new string[2]{"C:\\Users\\Administrator\\Desktop\\browsers\\firefox\\12.lnk", "http://google.com"};
 
-              
             if (args.Length < 2) Error("Usage: [app path] [args]");
 
             String Application = args[0];
@@ -27,6 +26,8 @@ namespace winproc
             {
                 Error("Unable to open application - is it already running?");
             }
+
+            Console.WriteLine("Main window found");
 
             new Commands(app).Process();
 

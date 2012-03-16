@@ -44,6 +44,10 @@ exports.listen = function(port) {
 		callback(content.replace(/<\/head>/i, script + "</head>"))
 	});
 
+	mitm.on("error", function() {
+		
+	})
+
 
 	return em
 }

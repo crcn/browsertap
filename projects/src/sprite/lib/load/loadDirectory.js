@@ -94,14 +94,15 @@ function mapBrowserVersions(executable, next) {
 	var name = path.basename(executable).replace(/\.\w+/g,'');
 
 	//use mklink for windows
-	var link = fs.readlinkSync(executable);
+	//var link = fs.readlinkSync(executable);
 
 	//relative vs abs path?
-	if(link.indexOf('.') == 0) {
+	/*if(link.indexOf('.') == 0) {
 		link = path.dirname(executable) + "/" + link;
-	}
+	}*/
 	
-	var realpath = path.normalize(link);
+	var realpath = path.normalize(executable);
+
 
 
 
