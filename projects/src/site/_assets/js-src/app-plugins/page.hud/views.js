@@ -41,7 +41,6 @@ module.exports = function(fig) {
 			//next, add some animations
 			$('.hud-scroll').hover(function() {
 
-
 				$(this).find('.jspVerticalBar, .jspHorizontalBar').last().fadeIn(50);
 			}, 
 			function() {

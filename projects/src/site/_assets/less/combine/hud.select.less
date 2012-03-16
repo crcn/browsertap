@@ -3,6 +3,10 @@
 	margin-bottom: @hudCellPadding;
 }
 
+.hud-scroll:focus {
+	outline: none;
+}
+
 .hud_select_row .hud-scroll {
 	overflow-x: scroll;
     white-space:nowrap;
@@ -22,8 +26,6 @@
 }
 
 
-
-
 .hud_select_cell {
 	background-color: rgba(0,0,0, 0.1);
 	height: @hudCellHeight;
@@ -31,7 +33,7 @@
 	display: inline-block;
 	*display: inline;
 	margin-left:@hudCellPadding;
-	.rounded(4px);
+	.rounded(@hudCellCorner);
 }
 
 
@@ -41,11 +43,28 @@
 	overflow: hidden;
 }
 
-.hud_select_cell h2 {
-	display: inline;
-	top: @hudCellHeight/4;
+.hud_select_cell > h2 {
+	top: 20px;
 	position: relative;
-	margin: 0px;
-	padding: 0;
 }
+
+
+.hud-browser-cell-overlay {
+	width: @hudCellWidth;
+	height: @hudCellHeight;
+	background-color: rgba(0,0,0, 0);
+	position: relative;
+	top: -35px;
+	.rounded(@hudCellCorner);
+	cursor: pointer;
+
+	&:hover {
+		background-color: rgba(0,0,0, 0.5);
+	}
+}
+
+.selected-browser {
+	.inner-glow(5px,#FF6600);
+}
+
 

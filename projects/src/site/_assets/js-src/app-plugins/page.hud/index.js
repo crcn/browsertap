@@ -10,6 +10,7 @@ exports.plugin = function(router) {
 		'push -pull fig': function(fig) {
 
 			views = require('./views')(fig);
+			
 		},
 
 		/**
