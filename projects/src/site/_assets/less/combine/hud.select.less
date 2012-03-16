@@ -1,14 +1,26 @@
 .hud_select_row {
-	width: @hudInnerWidth;
+	width: 100%;
+}
+
+.hud_select_row .hud-scroll {
 	overflow-x: scroll;
     white-space:nowrap;
-    margin-bottom: 8px;
+	width: @hudCellHolderWidth;
+	float: right;
+	height: @hudCellHeight;
+	margin-bottom: @hudCellPadding;
 }
 
 .hud_select_logo {
-	width: 75px;
-	display: inline-block;
+	width: @hudGutterWidth;
+	height: @hudCellHeight;
+	float: left;
+	background-size: 50px 50px;
+	background-repeat: no-repeat;
+	background-position: center;
+	margin-bottom: @hudCellPadding;
 }
+
 
 
 
@@ -18,8 +30,22 @@
 	width: @hudCellWidth;
 	display: inline-block;
 	*display: inline;
+	margin-left:@hudCellPadding;
+	.rounded(4px);
+}
+
+
+.hud_select_cell {
+	text-align: center;
+	white-space: nowrap;
 	overflow: hidden;
-	margin-right:@hudCellPadding;
-	.rounded(5px);
+}
+
+.hud_select_cell h2 {
+	display: inline;
+	top: @hudCellHeight/4;
+	position: relative;
+	margin: 0px;
+	padding: 0;
 }
 

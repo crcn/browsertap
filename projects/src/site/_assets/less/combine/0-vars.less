@@ -2,13 +2,12 @@
 /* HUD specific */
 @hudCellPadding: 8px;
 @hudInnerPadding: 8px;
-@hudGutterWidth: 75px;
+@hudGutterWidth: 60px;
 @hudCellWidth: 150px;
 @hudCellHeight: 100px;
 @numHudCellsX: 3;
 @numHudCellsY: 3;
 @hudCellHolderWidth: @numHudCellsX * (@hudCellWidth + @hudCellPadding);
-@hudInnerWidth: @hudCellHolderWidth + @hudGutterWidth;
+@hudInnerWidth: @hudCellHolderWidth + @hudGutterWidth + @hudCellPadding/2;
 @hudWidth: @hudInnerWidth;
-@hudHeight: @hudCellHeight * @numHudCellsY + @hudInnerPadding * 2;
-
+@hudHeight: (@hudCellHeight + @hudCellPadding)  * @numHudCellsY - @hudCellPadding;
