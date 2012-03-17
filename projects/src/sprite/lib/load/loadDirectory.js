@@ -91,7 +91,7 @@ function loadBrowser(directory, callback) {
 
 function mapBrowserVersions(executable, next) {
 
-	var name = path.basename(executable).replace(/\.\w+/g,'');
+	var name = path.basename(executable).replace(/\.\w+$/g,'');
 
 	//use mklink for windows
 	//var link = fs.readlinkSync(executable);

@@ -20,10 +20,10 @@ exports.plugin = function(router) {
 		/**
 		 */
 
-		'pull -hook -method=GET /screenshot/:browser/:version': function(req, res) {
+		'pull -hook -method=GET validate/browser+version+url /screenshot': function(req, res) {
 
-			var browser = req.params.browser,
-			version     = req.params.version,
+			var browser = req.query.browser,
+			version     = req.query.version,
 			url         = req.query.url,
 			hash        = req.query.hash || '1', //cache hash
 			_id         = [url, browser, version, hash].join('|');
@@ -57,7 +57,7 @@ exports.plugin = function(router) {
 
 						var nx = this;
 						ss.save(res.success(function() {
-							router.push('thyme/job', { path: 'take/screenshot', data: ss, queue: 'desktop_client' });
+							router.push('thyme/job', { path: 'take/screenshot', data: JSON.parse(JSON.stringify(ss)), queue: 'desktop_client' });
 							nx(null, ss);
 						}));
 

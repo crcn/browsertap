@@ -1,7 +1,8 @@
 var step = require('step'),
 request  = require('request'),
 vine     = require('vine'),
-fs       = require('fs')
+fs       = require('fs'),
+outcome  = require('outcome');
 
 exports.plugin = function(router) {
 
@@ -22,19 +23,26 @@ exports.plugin = function(router) {
 
 		'pull -hook take/screenshot': function(req, res) {
 
-			console.log(req.query);
-		},
-
-		/**
-		 */
-
-		'pull -hook take/screenshot': function(req, res) {
-
 			var browser = req.query.browser,
 			version     = req.query.version,
 			url         = req.query.url;
 
 			console.log('taking screenshot...');
+
+			var on = outcome.error(function(err) {
+
+				req.query.error = err.message;
+
+				onScreenshot();
+			});
+
+
+			function onScreenshot() {
+
+				router.push('add/screenshot', req.query);
+
+				res.end();
+			}
 
 
 				
@@ -50,7 +58,7 @@ exports.plugin = function(router) {
 				/**
 				 */
 
-				res.success(function(screenshot) {
+				on.success(function(screenshot) {
 					// fs.createReadStream(screenshot.path).pipe(res);
 
 					//res.request('send/file')
@@ -79,12 +87,7 @@ exports.plugin = function(router) {
 				/**
 				 */
 
-				function() {
-
-					router.push('add/screenshot', req.query);
-
-					res.end();
-				}
+				onScreenshot
 
 			);
 
