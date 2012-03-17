@@ -62,11 +62,14 @@ module.exports = function(fig) {
 
 				self.
 				router.
-				request('screenshot/' + self.ops.browserName + '/' + self.ops.browserVersion, { url: self.ops.url, hash: self.ops.hash }).
+				request('screenshot', { 
+					url: self.ops.url, 
+					browser: self.ops.browser,
+					version: self.ops.version,
+					hash: self.ops.hash, }).
 				tag('method', 'GET').
 				response(function(err, resp) {
 
-					console.log(resp.result)
 
 					if(resp.result.screenshot) {
 						clearInterval(interval);

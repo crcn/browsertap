@@ -69,7 +69,7 @@ exports.plugin = function(router) {
 
 					router.request('store/file', {
 						path: screenshot.path,
-						savePath: 'ss_' + browser + '_' + version + '_' + Date.now() + '_' + Math.round(Math.random() + 9999) + '.png' 
+						savePath: 'ss_' + browser + '_' + version + '_' + Date.now() + '_' + Math.round(Math.random() * 9999) + '.png' 
 					}).
 					error(function(err) {
 						req.query.error = err.message;
