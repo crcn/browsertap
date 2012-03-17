@@ -38,7 +38,7 @@ module.exports = structr(EventEmitter, {
 				console.log("browser " + browserName + " proxy detected");
 				self.emit('browserProxy', browserProxy);
 			}
-		})
+		});
 
 	},
 
@@ -78,18 +78,6 @@ module.exports = structr(EventEmitter, {
 
 		step(
 
-			function() {
- 				
- 				if(!self.cache.directories[self.browserName]) return this();
-
-				var cacheDir = self.cache.prefix.replace('~', process.env.HOME) + "/" + self.cache.directories[self.browserName];
-
-				var next = this;
-
-				setTimeout(function() {
-					rmdirr(cacheDir, next);
-				}, 500);
-			},
 
 
 			/**
@@ -106,9 +94,20 @@ module.exports = structr(EventEmitter, {
 				self.running = true;
 
 				self._proc.on("exit", function() {
-					console.log("browser %s has exited", self.name);
-					self.emit("exit");
+					console.log("browser %s has exited, cleaning up...", self.name);
 					self.running = false;
+
+ 				
+					if(!self.cache.directories[self.browserName]) return this();
+
+					var cacheDir = self.cache.prefix.replace('~', process.env.HOME) + "/" + self.cache.directories[self.browserName];
+
+					exec('DEL /S /Q "' + cacheDir.replace(/\/+/g,'\\') + '"', function(err, stdout, stderr) {
+
+						//console.log(stdout);
+						//console.log(stderr);
+						self.emit('exit');
+					});
 				});
 
 

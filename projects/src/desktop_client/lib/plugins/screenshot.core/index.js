@@ -20,30 +20,71 @@ exports.plugin = function(router) {
 		/**
 		 */
 
-		'pull -method=GET /screenshot/:browser/:version': function(req, res) {
+		'pull -hook take/screenshot': function(req, res) {
+
+			console.log(req.query);
+		},
+
+		/**
+		 */
+
+		'pull -hook take/screenshot': function(req, res) {
+
+			var browser = req.query.browser,
+			version     = req.query.version,
+			url         = req.query.url;
+
+			console.log('taking screenshot...');
+
+
 				
-			if(!req.query.url) return vine.error(new Error("Url not present")).end(res);
-
-
 			step(
 
 				/**
 				 */
 
 				function() {
-					sprite.snap(req.query.url, req.params.browser+" "+req.params.version, this);
+					sprite.snap(url, browser+" "+version, this);
 				},
 
 				/**
 				 */
 
 				res.success(function(screenshot) {
-					fs.createReadStream(screenshot.path).pipe(res);
-				})
+					// fs.createReadStream(screenshot.path).pipe(res);
+
+					//res.request('send/file')
+
+					// router.request('add/screenshot').pull();
+
+					var next = this;
+
+					router.request('store/file', {
+						path: screenshot.path,
+						savePath: 'ss_' + browser + '_' + version + '_' + Date.now() + '_' + Math.round(Math.random() + 9999) + '.png' 
+					}).
+					error(function(err) {
+						req.query.error = err.message;
+						next();
+					}).
+					success(function(response) {
+						req.query.url = response.url;
+						next();
+					}).
+					pull();
+
+				}),
 
 
 				/**
 				 */
+
+				function() {
+
+					router.push('add/screenshot', req.query);
+
+					res.end();
+				}
 
 			);
 

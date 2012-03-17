@@ -11,7 +11,7 @@ namespace winproc
     {
         static void Main(string[] args)
         {
-            //args = new string[2]{"C:\\Users\\Administrator\\Desktop\\browsers\\firefox\\12.lnk", "http://google.com"};
+            //args = new string[2]{"C:\\Users\\Administrator\\Desktop\\browsers\\chrome\\19.lnk", "http://google.com"};
 
             if (args.Length < 2) Error("Usage: [app path] [args]");
 

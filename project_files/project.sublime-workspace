@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"brows",
+				"browsernName"
+			],
+			[
+				"bro",
+				"browser"
+			],
+			[
+				"browse",
+				"browserMap"
+			],
+			[
+				"_",
+				"_beautifyScrollbars"
+			],
+			[
 				"_bro",
 				"_browsers"
 			],
@@ -45,14 +61,6 @@
 		},
 		{
 			"file": "README.md",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/tmp/subl stdin OT5mH0.txt",
 			"settings":
 			{
 				"buffer_size": 0,
@@ -1296,6 +1304,760 @@
 				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
+		},
+		{
+			"file": "/tmp/subl stdin AYm05p.txt",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/apps/site/index.html",
+			"settings":
+			{
+				"buffer_size": 1434,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/index.html",
+			"settings":
+			{
+				"buffer_size": 226,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "{\n    \"assetsDir\": \"./_assets\",\n    \"srcDir\": \"<%-assetsDir %>/js-src\",\n    \"libDir\": \"<%-assetsDir %>/js\",\n    \"venDirs\": \"<%-srcDir %>/vendors\",\n    \"concatDir\": \"<%-venDirs %>/cat\",\n    \"tasks\": {\n        \"closure\": {\n            \"exec\": \"mv <%-entry %> ./tmp.js; closure --js=./tmp.js --js_output_file=<%-output %>; rm ./tmp.js;\"\n        },\n        \"lessc\": {\n            \"exec\": \"lessc <%-entry %> -x > <%-output %>\"\n        }, \n        \"concatLess\": {\n            \"lessco\": \"./tmp.less\",\n            \"task\": [\n                {\n                    \"include\": \"<%-input %>\",\n                    \"output\": \"<%-lessco %>\",\n                    \"task\": \"concat\"\n                },\n                {\n                    \"entry\": \"<%-lessco %>\",\n                    \"task\": \"../lessc\"\n                },\n                {\n                    \"exec\": \"rm ./tmp.less\"\n                }\n            ]\n        },\n        \"findAndLoad/:dir\": {\n            \"directory\": \"./make/<%-dir %>\",\n            \"find\": {\n                \"\\\\w+.json\": {\n                    \"cwd\": \"./\",\n                    \"load\": \"<%-file %>\"\n                }  \n            }\n        },\n        \"make\": {\n            \"debug\": \"../../findAndLoad:debug\",\n            \"release\": [\n                \"../debug\",\n                \"../../findAndLoad:release\",\n                \"\"\n            ]\n        },\n        \"run\": [\n            {\n                \"parallel\": true,\n                \"chain\": [  \n                    { \n                        \"exec\": \"node ../http_server\"\n                    },\n                    [\n                        { \n                            \"sleep\": 500\n                        },\n                        {\n                            \"watch\": \"../../src\",   \n                            \"task\" : [\n                                \"merge:<%-currentPlatform %>\",\n                                \"../make/debug\",\n                                {\n                                    \"exec\": \"open http://`hostname`:8081\"   \n                                }\n                                \n                            ]\n                        }\n                    ]\n                ]\n            }\n        ]\n    }\n}",
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/apps/site/make.json",
+			"file_size": 2136,
+			"file_write_time": 1331870947000000,
+			"settings":
+			{
+				"buffer_size": 2209,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/http_server/make.http_server.json",
+			"settings":
+			{
+				"buffer_size": 5,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/http_server/index.js",
+			"settings":
+			{
+				"buffer_size": 305,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/app.html",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/app.html",
+			"settings":
+			{
+				"buffer_size": 165,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/make.json",
+			"settings":
+			{
+				"buffer_size": 2136,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.hud.signup/index.js",
+			"settings":
+			{
+				"buffer_size": 39,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.hud.select/index.js",
+			"settings":
+			{
+				"buffer_size": 299,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/views/app/hud.mu",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/views/app/hud/index.mu",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/views/app/live/index.mu",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.liveView/views.js",
+			"settings":
+			{
+				"buffer_size": 339,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.hud/views.js",
+			"settings":
+			{
+				"buffer_size": 703,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.hud.select/views.js",
+			"settings":
+			{
+				"buffer_size": 5760,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "//fgnass.github.com/spin.js#v1.2.4\n(function(window, document, undefined) {\n\n/**\n * Copyright (c) 2011 Felix Gnass [fgnass at neteye dot de]\n * Licensed under the MIT license\n */\n\n  var prefixes = ['webkit', 'Moz', 'ms', 'O']; /* Vendor prefixes */\n  var animations = {}; /* Animation rules keyed by their name */\n  var useCssAnimations;\n\n  /**\n   * Utility function to create elements. If no tag name is given,\n   * a DIV is created. Optionally properties can be passed.\n   */\n  function createEl(tag, prop) {\n    var el = document.createElement(tag || 'div');\n    var n;\n\n    for(n in prop) {\n      el[n] = prop[n];\n    }\n    return el;\n  }\n\n  /**\n   * Appends children and returns the parent.\n   */\n  function ins(parent /* child1, child2, ...*/) {\n    for (var i=1, n=arguments.length; i<n; i++) {\n      parent.appendChild(arguments[i]);\n    }\n    return parent;\n  }\n\n  /**\n   * Insert a new stylesheet to hold the @keyframe or VML rules.\n   */\n  var sheet = function() {\n    var el = createEl('style');\n    ins(document.getElementsByTagName('head')[0], el);\n    return el.sheet || el.styleSheet;\n  }();\n\n  /**\n   * Creates an opacity keyframe animation rule and returns its name.\n   * Since most mobile Webkits have timing issues with animation-delay,\n   * we create separate rules for each line/segment.\n   */\n  function addAnimation(alpha, trail, i, lines) {\n    var name = ['opacity', trail, ~~(alpha*100), i, lines].join('-');\n    var start = 0.01 + i/lines*100;\n    var z = Math.max(1-(1-alpha)/trail*(100-start) , alpha);\n    var prefix = useCssAnimations.substring(0, useCssAnimations.indexOf('Animation')).toLowerCase();\n    var pre = prefix && '-'+prefix+'-' || '';\n\n    if (!animations[name]) {\n      sheet.insertRule(\n        '@' + pre + 'keyframes ' + name + '{' +\n        '0%{opacity:'+z+'}' +\n        start + '%{opacity:'+ alpha + '}' +\n        (start+0.01) + '%{opacity:1}' +\n        (start+trail)%100 + '%{opacity:'+ alpha + '}' +\n        '100%{opacity:'+ z + '}' +\n        '}', 0);\n      animations[name] = 1;\n    }\n    return name;\n  }\n\n  /**\n   * Tries various vendor prefixes and returns the first supported property.\n   **/\n  function vendor(el, prop) {\n    var s = el.style;\n    var pp;\n    var i;\n\n    if(s[prop] !== undefined) return prop;\n    prop = prop.charAt(0).toUpperCase() + prop.slice(1);\n    for(i=0; i<prefixes.length; i++) {\n      pp = prefixes[i]+prop;\n      if(s[pp] !== undefined) return pp;\n    }\n  }\n\n  /**\n   * Sets multiple style properties at once.\n   */\n  function css(el, prop) {\n    for (var n in prop) {\n      el.style[vendor(el, n)||n] = prop[n];\n    }\n    return el;\n  }\n\n  /**\n   * Fills in default values.\n   */\n  function merge(obj) {\n    for (var i=1; i < arguments.length; i++) {\n      var def = arguments[i];\n      for (var n in def) {\n        if (obj[n] === undefined) obj[n] = def[n];\n      }\n    }\n    return obj;\n  }\n\n  /**\n   * Returns the absolute page-offset of the given element.\n   */\n  function pos(el) {\n    var o = {x:el.offsetLeft, y:el.offsetTop};\n    while((el = el.offsetParent)) {\n      o.x+=el.offsetLeft;\n      o.y+=el.offsetTop;\n    }\n    return o;\n  }\n\n  var defaults = {\n    lines: 12,            // The number of lines to draw\n    length: 7,            // The length of each line\n    width: 5,             // The line thickness\n    radius: 10,           // The radius of the inner circle\n    color: '#000',        // #rgb or #rrggbb\n    speed: 1,             // Rounds per second\n    trail: 100,           // Afterglow percentage\n    opacity: 1/4,         // Opacity of the lines\n    fps: 20,              // Frames per second when using setTimeout()\n    zIndex: 2e9,          // Use a high z-index by default\n    className: 'spinner', // CSS class to assign to the element\n    top: 'auto',          // center vertically\n    left: 'auto'          // center horizontally\n  };\n\n  /** The constructor */\n  var Spinner = function Spinner(o) {\n    if (!this.spin) return new Spinner(o);\n    this.opts = merge(o || {}, Spinner.defaults, defaults);\n  };\n\n  Spinner.defaults = {};\n  Spinner.prototype = {\n    spin: function(target) {\n      this.stop();\n      var self = this;\n      var o = self.opts;\n      var el = self.el = css(createEl(0, {className: o.className}), {position: 'relative', zIndex: o.zIndex});\n      var mid = o.radius+o.length+o.width;\n      var ep; // element position\n      var tp; // target position\n\n      if (target) {\n        target.insertBefore(el, target.firstChild||null);\n        tp = pos(target);\n        ep = pos(el);\n        css(el, {\n          left: (o.left == 'auto' ? tp.x-ep.x + (target.offsetWidth >> 1) : o.left+mid) + 'px',\n          top: (o.top == 'auto' ? tp.y-ep.y + (target.offsetHeight >> 1) : o.top+mid)  + 'px'\n        });\n      }\n\n      el.setAttribute('aria-role', 'progressbar');\n      self.lines(el, self.opts);\n\n      if (!useCssAnimations) {\n        // No CSS animation support, use setTimeout() instead\n        var i = 0;\n        var fps = o.fps;\n        var f = fps/o.speed;\n        var ostep = (1-o.opacity)/(f*o.trail / 100);\n        var astep = f/o.lines;\n\n        !function anim() {\n          i++;\n          for (var s=o.lines; s; s--) {\n            var alpha = Math.max(1-(i+s*astep)%f * ostep, o.opacity);\n            self.opacity(el, o.lines-s, alpha, o);\n          }\n          self.timeout = self.el && setTimeout(anim, ~~(1000/fps));\n        }();\n      }\n      return self;\n    },\n    stop: function() {\n      var el = this.el;\n      if (el) {\n        clearTimeout(this.timeout);\n        if (el.parentNode) el.parentNode.removeChild(el);\n        this.el = undefined;\n      }\n      return this;\n    },\n    lines: function(el, o) {\n      var i = 0;\n      var seg;\n\n      function fill(color, shadow) {\n        return css(createEl(), {\n          position: 'absolute',\n          width: (o.length+o.width) + 'px',\n          height: o.width + 'px',\n          background: color,\n          boxShadow: shadow,\n          transformOrigin: 'left',\n          transform: 'rotate(' + ~~(360/o.lines*i) + 'deg) translate(' + o.radius+'px' +',0)',\n          borderRadius: (o.width>>1) + 'px'\n        });\n      }\n      for (; i < o.lines; i++) {\n        seg = css(createEl(), {\n          position: 'absolute',\n          top: 1+~(o.width/2) + 'px',\n          transform: o.hwaccel ? 'translate3d(0,0,0)' : '',\n          opacity: o.opacity,\n          animation: useCssAnimations && addAnimation(o.opacity, o.trail, i, o.lines) + ' ' + 1/o.speed + 's linear infinite'\n        });\n        if (o.shadow) ins(seg, css(fill('#000', '0 0 4px ' + '#000'), {top: 2+'px'}));\n        ins(el, ins(seg, fill(o.color, '0 0 1px rgba(0,0,0,.1)')));\n      }\n      return el;\n    },\n    opacity: function(el, i, val) {\n      if (i < el.childNodes.length) el.childNodes[i].style.opacity = val;\n    }\n  };\n\n  /////////////////////////////////////////////////////////////////////////\n  // VML rendering for IE\n  /////////////////////////////////////////////////////////////////////////\n\n  /**\n   * Check and init VML support\n   */\n  !function() {\n    var s = css(createEl('group'), {behavior: 'url(#default#VML)'});\n    var i;\n\n    if (!vendor(s, 'transform') && s.adj) {\n\n      // VML support detected. Insert CSS rules ...\n      for (i=4; i--;) sheet.addRule(['group', 'roundrect', 'fill', 'stroke'][i], 'behavior:url(#default#VML)');\n\n      Spinner.prototype.lines = function(el, o) {\n        var r = o.length+o.width;\n        var s = 2*r;\n\n        function grp() {\n          return css(createEl('group', {coordsize: s +' '+s, coordorigin: -r +' '+-r}), {width: s, height: s});\n        }\n\n        var margin = -(o.width+o.length)*2+'px';\n        var g = css(grp(), {position: 'absolute', top: margin, left: margin});\n\n        var i;\n\n        function seg(i, dx, filter) {\n          ins(g,\n            ins(css(grp(), {rotation: 360 / o.lines * i + 'deg', left: ~~dx}),\n              ins(css(createEl('roundrect', {arcsize: 1}), {\n                  width: r,\n                  height: o.width,\n                  left: o.radius,\n                  top: -o.width>>1,\n                  filter: filter\n                }),\n                createEl('fill', {color: o.color, opacity: o.opacity}),\n                createEl('stroke', {opacity: 0}) // transparent stroke to fix color bleeding upon opacity change\n              )\n            )\n          );\n        }\n\n        if (o.shadow) {\n          for (i = 1; i <= o.lines; i++) {\n            seg(i, -2, 'progid:DXImageTransform.Microsoft.Blur(pixelradius=2,makeshadow=1,shadowopacity=.3)');\n          }\n        }\n        for (i = 1; i <= o.lines; i++) seg(i);\n        return ins(el, g);\n      };\n      Spinner.prototype.opacity = function(el, i, val, o) {\n        var c = el.firstChild;\n        o = o.shadow && o.lines || 0;\n        if (c && i+o < c.childNodes.length) {\n          c = c.childNodes[i+o]; c = c && c.firstChild; c = c && c.firstChild;\n          if (c) c.opacity = val;\n        }\n      };\n    }\n    else {\n      useCssAnimations = vendor(s, 'animation');\n    }\n  }();\n\n  window.Spinner = Spinner;\n\n})(window, document);",
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.hud.signup/spin.js",
+			"file_size": 9074,
+			"file_write_time": 1331888442000000,
+			"settings":
+			{
+				"buffer_size": 9074,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "var structr = require('structr');\n\nmodule.exports = structr({\n\n\n	/**\n	 */\n\n	'__construct': function(parent, cells) {\n\n		this._parent = parent;\n		this._cells  = cells;\n\n	},\n});",
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.hud.select/cellSelector.js",
+			"file_size": 143,
+			"file_write_time": 1331871167000000,
+			"settings":
+			{
+				"buffer_size": 175,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.liveView/index.js",
+			"settings":
+			{
+				"buffer_size": 329,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.core/index.js",
+			"settings":
+			{
+				"buffer_size": 146,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.hud/index.js",
+			"settings":
+			{
+				"buffer_size": 280,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/hud.signup.less",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/index.entry.js",
+			"settings":
+			{
+				"buffer_size": 113,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_layouts/default.html",
+			"settings":
+			{
+				"buffer_size": 1242,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/api/lib/index.js",
+			"settings":
+			{
+				"buffer_size": 1131,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/api/bin/api",
+			"settings":
+			{
+				"buffer_size": 230,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/api/lib/plugins/provision.core/index.js",
+			"settings":
+			{
+				"buffer_size": 39,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/api/lib/plugins/screenshot.core/index.js",
+			"settings":
+			{
+				"buffer_size": 1929,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/api/lib/plugins/sendfile/index.js",
+			"settings":
+			{
+				"buffer_size": 274,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/plugins/sendfile/index.js",
+			"settings":
+			{
+				"buffer_size": 274,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "exports.plugin = function(router) {\n\n	var storage = this.params('storage');\n\n\n	router.on\n}",
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/plugins/storage.core/index.js",
+			"file_size": 87,
+			"file_write_time": 1332007067000000,
+			"settings":
+			{
+				"buffer_size": 90,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/plugins/storage/transports/ec2.js",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/plugins/storage/transports/remote.js",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/plugins/storage.transport.s3/index.js",
+			"settings":
+			{
+				"buffer_size": 687,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/plugins/storage.transport.s3/transport.js",
+			"settings":
+			{
+				"buffer_size": 311,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "exports.plugin = function(router) {\n\n\n	router.on({\n\n		\n	})\n}",
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/plugins/storage.transport.remote/index.js",
+			"file_size": 39,
+			"file_write_time": 1332007171000000,
+			"settings":
+			{
+				"buffer_size": 60,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/api/lib/plugins/storage.ec2/index.js",
+			"settings":
+			{
+				"buffer_size": 68,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "exports.plugin = function()",
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/api/lib/plugins/storage.remote/index.js",
+			"file_size": 0,
+			"file_write_time": 1332006818000000,
+			"settings":
+			{
+				"buffer_size": 27,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/api/lib/plugins/screenshot.core/models.js",
+			"settings":
+			{
+				"buffer_size": 419,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/make/debug/999-cleanup.json",
+			"settings":
+			{
+				"buffer_size": 277,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/views/app/live/index.mu",
+			"settings":
+			{
+				"buffer_size": 160,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/live.less",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/hud.css",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/live.controlbar.less",
+			"settings":
+			{
+				"buffer_size": 70,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/views/app/hud/index.mu",
+			"settings":
+			{
+				"buffer_size": 565,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/hud.less",
+			"settings":
+			{
+				"buffer_size": 395,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/hud.scrollbar.less",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/scrollbar.less",
+			"settings":
+			{
+				"buffer_size": 1636,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/vendors/combine/3-jquery.mousewheel.js",
+			"settings":
+			{
+				"buffer_size": 2400,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/vendors/combine/4-jquery.mwheelintent.js",
+			"settings":
+			{
+				"buffer_size": 1735,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/vendors/combine/4-jquery.mwheelintent.js",
+			"settings":
+			{
+				"buffer_size": 1735,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/vendors/combine/5-jquery.jscrollpane.min.js",
+			"settings":
+			{
+				"buffer_size": 44533,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/0-functions.less",
+			"settings":
+			{
+				"buffer_size": 2047,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/common.less",
+			"settings":
+			{
+				"buffer_size": 80,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/0-vars.less",
+			"settings":
+			{
+				"buffer_size": 448,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/hud.select.less",
+			"settings":
+			{
+				"buffer_size": 1251,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/apps/site/views/app/hud/index.mu",
+			"settings":
+			{
+				"buffer_size": 161,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/config/index.js",
+			"settings":
+			{
+				"buffer_size": 455,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.hud.select/spin.js",
+			"settings":
+			{
+				"buffer_size": 9415,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/package.json",
+			"settings":
+			{
+				"buffer_size": 433,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/sprite.js",
+			"settings":
+			{
+				"buffer_size": 41,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/index.js",
+			"settings":
+			{
+				"buffer_size": 463,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/plugins/desktop_client.core/index.js",
+			"settings":
+			{
+				"buffer_size": 38,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/plugins/screenshot.core/index.js",
+			"settings":
+			{
+				"buffer_size": 1413,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/make.desktop_client.json",
+			"settings":
+			{
+				"buffer_size": 5,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/package.json",
+			"settings":
+			{
+				"buffer_size": 53,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/apps/desktop_client/make.desktop_client.json",
+			"settings":
+			{
+				"buffer_size": 5,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "var beanie = require('beanie');\n\n\nbeanie.\nloader().\nparams({\n	http: {\n		port: 8081\n	}\n}).\npaths(__dirname + \"/../node_modules\").\nrequire('beanpoll-http').\nrequire(__dirname + '/plugins').\nload();",
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/apps/desktop_client/lib/index.js",
+			"file_size": 156,
+			"file_write_time": 1331890264000000,
+			"settings":
+			{
+				"buffer_size": 195,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/lib/index.js",
+			"settings":
+			{
+				"buffer_size": 534,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/plugins/sprite/index.js",
+			"settings":
+			{
+				"buffer_size": 657,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/lib/screenshot/index.js",
+			"settings":
+			{
+				"buffer_size": 2685,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "var BrowserDetect = {\n	init: function () {\n		this.browser = this.searchString(this.dataBrowser) || \"An unknown browser\";\n		this.version = this.searchVersion(navigator.userAgent)\n			|| this.searchVersion(navigator.appVersion)\n			|| \"an unknown version\";\n		this.OS = this.searchString(this.dataOS) || \"an unknown OS\";\n	},\n	searchString: function (data) {\n		for (var i=0;i<data.length;i++)	{\n			var dataString = data[i].string;\n			var dataProp = data[i].prop;\n			this.versionSearchString = data[i].versionSearch || data[i].identity;\n			if (dataString) {\n				if (dataString.indexOf(data[i].subString) != -1)\n					return data[i].identity;\n			}\n			else if (dataProp)\n				return data[i].identity;\n		}\n	},\n	searchVersion: function (dataString) {\n		var index = dataString.indexOf(this.versionSearchString);\n		if (index == -1) return;\n		return parseFloat(dataString.substring(index+this.versionSearchString.length+1));\n	},\n	dataBrowser: [\n		{\n			string: navigator.userAgent,\n			subString: \"Chrome\",\n			identity: \"Chrome\"\n		},\n		{ 	string: navigator.userAgent,\n			subString: \"OmniWeb\",\n			versionSearch: \"OmniWeb/\",\n			identity: \"OmniWeb\"\n		},\n		{\n			string: navigator.vendor,\n			subString: \"Apple\",\n			identity: \"Safari\",\n			versionSearch: \"Version\"\n		},\n		{\n			prop: window.opera,\n			identity: \"Opera\",\n			versionSearch: \"Version\"\n		},\n		{\n			string: navigator.vendor,\n			subString: \"iCab\",\n			identity: \"iCab\"\n		},\n		{\n			string: navigator.vendor,\n			subString: \"KDE\",\n			identity: \"Konqueror\"\n		},\n		{\n			string: navigator.userAgent,\n			subString: \"Firefox\",\n			identity: \"Firefox\"\n		},\n		{\n			string: navigator.vendor,\n			subString: \"Camino\",\n			identity: \"Camino\"\n		},\n		{		// for newer Netscapes (6+)\n			string: navigator.userAgent,\n			subString: \"Netscape\",\n			identity: \"Netscape\"\n		},\n		{\n			string: navigator.userAgent,\n			subString: \"MSIE\",\n			identity: \"Explorer\",\n			versionSearch: \"MSIE\"\n		},\n		{\n			string: navigator.userAgent,\n			subString: \"Gecko\",\n			identity: \"Mozilla\",\n			versionSearch: \"rv\"\n		},\n		{ 		// for older Netscapes (4-)\n			string: navigator.userAgent,\n			subString: \"Mozilla\",\n			identity: \"Netscape\",\n			versionSearch: \"Mozilla\"\n		}\n	],\n	dataOS : [\n		{\n			string: navigator.platform,\n			subString: \"Win\",\n			identity: \"Windows\"\n		},\n		{\n			string: navigator.platform,\n			subString: \"Mac\",\n			identity: \"Mac\"\n		},\n		{\n			   string: navigator.userAgent,\n			   subString: \"iPhone\",\n			   identity: \"iPhone/iPod\"\n	    },\n		{\n			string: navigator.platform,\n			subString: \"Linux\",\n			identity: \"Linux\"\n		}\n	]\n\n};",
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/lib/screenshot/detectBrowser.js",
+			"file_size": 0,
+			"file_write_time": 1331896940000000,
+			"settings":
+			{
+				"buffer_size": 2529,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/lib/controller.js",
+			"settings":
+			{
+				"buffer_size": 1795,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "var structr   = require('structr'),\nEventEmitter  = require('events').EventEmitter,\nchild_process = require('child_process'),\nstep          = require('stepc'),\nspawn         = child_process.spawn,\nexec          = child_process.exec,\noutcome       = require(\"outcome\"),\nrmdirr        = require('rmdirr');\n\n\nmodule.exports = structr(EventEmitter, {\n\n	/**\n	 */\n\n	'override __construct': function(info, cache, proxy) {\n\n\n		var browserName = info.name.split(' ').shift().toLowerCase();\n\n		this.cache    = cache;\n		this.name     = info.name //the name of the browser\n		this.filename = info.filename; //the physical EXE\n		this.cwd  	  = info.cwd; //where does the EXE live?\n		this.browserName = browserName;\n		this._super();\n\n\n		var self = this;\n\n		process.on('exit', function() {\n			self.kill();\n		});\n\n\n		proxy.on('browserProxy', function(browserProxy) {\n			if(browserProxy.browser[browserName]) {\n				console.log(\"browser \" + browserName + \" proxy detected\");\n				self.emit('browserProxy', browserProxy);\n			}\n		});\n\n	},\n\n	/**\n	 * kills the last process\n	 */\n\n	'kill': function(onExit) {\n\n		if(this._proc) {\n\n			if(onExit) this.once('exit', onExit);\n\n			this._proc.stdin.write(\"kill\\n\");\n			this._proc = undefined;\n		}\n\n	},\n\n	/**\n	 */\n\n	'screenshot': function(path) {\n\n		if(this._proc) {\n			this._proc.stdin.write(\"screenshot\\n\" + path + \"\\n\");\n		}\n	},\n\n	/**\n	 */\n\n	'start': function(url, next) {\n\n\n		var self = this, on = outcome.error(next);\n\n		step(\n\n\n`\n			/**\n			 */\n\n			function() {\n				var nx = this;\n\n				console.log(\"starting browser %s\", self.name);\n\n				var proc = self.cwd + \"\\\\\" + self.filename;\n\n				self._proc = spawn('winproc.exe', [proc, url], { cwd: __dirname + \"/winproc/Debug\"});\n				self.running = true;\n\n				self._proc.on(\"exit\", function() {\n					console.log(\"browser %s has exited, cleaning up...\", self.name);\n					self.running = false;\n\n 				\n					if(!self.cache.directories[self.browserName]) return this();\n\n					var cacheDir = self.cache.prefix.replace('~', process.env.HOME) + \"/\" + self.cache.directories[self.browserName];\n\n					exec('DEL /S /Q \"' + cacheDir.replace(/\\/+/g,'\\\\') + '\"', function(err, stdout, stderr) {\n\n						//console.log(stdout);\n						//console.log(stderr);\n						self.emit('exit');\n					});\n				});\n\n\n				self._proc.stdout.on(\"data\", function(data) {\n					process.stdout.write(data);\n\n					if(String(data).toLowerCase().indexOf('main window found') > -1) {\n						//nx();\n					}\n				});\n\n				self._proc.stderr.on(\"data\", function(data) {\n					process.stderr.write(data);\n				});\n\n				self._proc.on(\"error\", function(err) {\n					console.error(err)\n				});\n\n\n\n				this(null);\n			},\n\n			/**\n			 */\n\n			next\n		)\n	}\n\n});",
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/lib/process/browser.js",
+			"file_size": 2661,
+			"file_write_time": 1331931477000000,
+			"settings":
+			{
+				"buffer_size": 2662,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/lib/process/collection.js",
+			"settings":
+			{
+				"buffer_size": 1418,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/lib/proxy/wrapBrowserClient.js",
+			"settings":
+			{
+				"buffer_size": 854,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/lib/proxy/browserDetect.js",
+			"settings":
+			{
+				"buffer_size": 3553,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/lib/proxy/server.js",
+			"settings":
+			{
+				"buffer_size": 1363,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/lib/load/loadDirectory.js",
+			"settings":
+			{
+				"buffer_size": 2002,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/node_modules/filternet/lib/proxy.js",
+			"settings":
+			{
+				"buffer_size": 16423,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/node_modules/knox/lib/knox/client.js",
+			"settings":
+			{
+				"buffer_size": 8580,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/craigcondon/Development/eyebrowse/projects/node_modules/daisy/src/web/plugins/hooks.transport.jsonp/index.js",
+			"settings":
+			{
+				"buffer_size": 90,
+				"line_ending": "Unix"
+			}
 		}
 	],
 	"build_system": "",
@@ -1322,6 +2084,9 @@
 	},
 	"file_history":
 	[
+		"/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/hud.select.less",
+		"/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/common.less",
+		"/tmp/subl stdin OT5mH0.txt",
 		"/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/process/browser.js",
 		"/Users/craigcondon/Development/eyebrowse/desktop/sprite/package.json",
 		"/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/plugins/browsers.core/untitled",
@@ -1446,10 +2211,7 @@
 		"/tmp/subl stdin OQlyq7.txt",
 		"/Users/craig/.cupboard/projects/spice.io/beans/groups.core/index.js",
 		"/Users/craig/.cupboard/projects/spice.io/beans/groups.part.saved.core/index.js",
-		"/tmp/subl stdin qsZnjK.txt",
-		"/Users/craig/.cupboard/projects/spice.io/package.json",
-		"/Users/craig/.cupboard/projects/spice.io/beans/groups.part.saved.subscription.core/index.js",
-		"/Users/craig/.cupboard/projects/spice.io/beans/groups.part.saved.subscription.email/views.js"
+		"/tmp/subl stdin qsZnjK.txt"
 	],
 	"find":
 	{
@@ -1457,7 +2219,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
 		]
@@ -1467,6 +2229,31 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"join",
+			"daisy",
+			"exec",
+			"navigator",
+			"killPrev",
+			"next",
+			"snap",
+			"border",
+			"scrollTo",
+			"move",
+			"keyboardSpeed",
+			"scrollBy",
+			"mouseWheel",
+			"mouse",
+			"keyDownHandler",
+			"39",
+			"shadow",
+			"margin",
+			"hudCellHeight",
+			"hudCellHolderWidth",
+			"jspDrag",
+			"jspVerticalBar",
+			"overflow",
+			"jspTrack",
+			"jspHorizontalBar",
 			"console.l",
 			"fileAtts",
 			"fileAttsOffset",
@@ -1569,32 +2356,7 @@
 			"find/module/dir",
 			"incModules",
 			"forEach",
-			"walker(",
-			"mainPkg",
-			"targetPkg",
-			".original",
-			"targetPlatformDirs",
-			"targetPlatforms",
-			"targetPlatformDirs",
-			"toCopy",
-			"allDirs",
-			"platformDir",
-			"target/platform/",
-			"split(\"",
-			"split(\" ",
-			"_.inter",
-			"Socket.proto",
-			"Socket.",
-			"createPipe",
-			"normalizePath",
-			"inspect",
-			"flatten3d",
-			"findJsFiles",
-			"copyr",
-			".src",
-			"incModules",
-			"mesh.j",
-			"common"
+			"walker("
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1612,6 +2374,7 @@
 	"groups":
 	[
 		{
+			"selected": 167,
 			"sheets":
 			[
 				{
@@ -1668,32 +2431,6 @@
 				},
 				{
 					"buffer": 2,
-					"file": "/tmp/subl stdin OT5mH0.txt",
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/cli.cpp",
 					"settings":
 					{
@@ -1721,7 +2458,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 3,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/control/mouse.h",
 					"settings":
 					{
@@ -1749,7 +2486,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 4,
 					"settings":
 					{
 						"buffer_size": 0,
@@ -1775,7 +2512,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 5,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/utils.h",
 					"settings":
 					{
@@ -1802,7 +2539,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 6,
 					"settings":
 					{
 						"buffer_size": 0,
@@ -1828,7 +2565,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 7,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/graphics/point.h",
 					"settings":
 					{
@@ -1855,7 +2592,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 8,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/graphics/point.cpp",
 					"settings":
 					{
@@ -1882,7 +2619,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 9,
 					"settings":
 					{
 						"buffer_size": 0,
@@ -1908,7 +2645,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 10,
 					"settings":
 					{
 						"buffer_size": 0,
@@ -1924,6 +2661,33 @@
 						],
 						"settings":
 						{
+							"default_dir": "C:\\Users\\Administrator\\Documents\\Development\\eyebrowse\\desktop\\controller\\src",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"settings":
+					{
+						"buffer_size": 1,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1,
+								1
+							]
+						],
+						"settings":
+						{
+							"auto_name": "S",
 							"default_dir": "C:\\Users\\Administrator\\Documents\\Development\\eyebrowse\\desktop\\controller\\src",
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
@@ -1962,33 +2726,6 @@
 				},
 				{
 					"buffer": 13,
-					"settings":
-					{
-						"buffer_size": 1,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1,
-								1
-							]
-						],
-						"settings":
-						{
-							"auto_name": "S",
-							"default_dir": "C:\\Users\\Administrator\\Documents\\Development\\eyebrowse\\desktop\\controller\\src",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 14,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/window.cpp",
 					"settings":
 					{
@@ -2015,7 +2752,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 15,
+					"buffer": 14,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/mouse.cpp",
 					"settings":
 					{
@@ -2042,7 +2779,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 16,
+					"buffer": 15,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/makefile",
 					"settings":
 					{
@@ -2068,7 +2805,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 17,
+					"buffer": 16,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/makefile2.inc",
 					"settings":
 					{
@@ -2094,7 +2831,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 18,
+					"buffer": 17,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/makefile",
 					"settings":
 					{
@@ -2120,7 +2857,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 19,
+					"buffer": 18,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/makefile",
 					"settings":
 					{
@@ -2147,7 +2884,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 20,
+					"buffer": 19,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/control/makefile",
 					"settings":
 					{
@@ -2174,7 +2911,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 21,
+					"buffer": 20,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/.gitignore",
 					"settings":
 					{
@@ -2200,7 +2937,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 22,
+					"buffer": 21,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/makefile.inc",
 					"settings":
 					{
@@ -2226,7 +2963,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 23,
+					"buffer": 22,
 					"file": "project.sublime-project",
 					"settings":
 					{
@@ -2253,7 +2990,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 24,
+					"buffer": 23,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/control/mouse.cpp",
 					"settings":
 					{
@@ -2280,7 +3017,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 25,
+					"buffer": 24,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/control/window.cpp",
 					"settings":
 					{
@@ -2306,7 +3043,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 26,
+					"buffer": 25,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/control/window.h",
 					"settings":
 					{
@@ -2333,7 +3070,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 27,
+					"buffer": 26,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/control/graphics.h",
 					"settings":
 					{
@@ -2359,7 +3096,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 28,
+					"buffer": 27,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/control/graphics.cpp",
 					"settings":
 					{
@@ -2385,7 +3122,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 29,
+					"buffer": 28,
 					"settings":
 					{
 						"buffer_size": 0,
@@ -2412,7 +3149,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 30,
+					"buffer": 29,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/graphics/bitmap.h",
 					"settings":
 					{
@@ -2438,7 +3175,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 31,
+					"buffer": 30,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/graphics/bitmap.cpp",
 					"settings":
 					{
@@ -2464,7 +3201,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 32,
+					"buffer": 31,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/graphics/padding.h",
 					"settings":
 					{
@@ -2490,7 +3227,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 33,
+					"buffer": 32,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/graphics/padding.cpp",
 					"settings":
 					{
@@ -2516,7 +3253,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 34,
+					"buffer": 33,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/graphics/box.cpp",
 					"settings":
 					{
@@ -2542,7 +3279,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 35,
+					"buffer": 34,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/graphics/rectangle.h",
 					"settings":
 					{
@@ -2568,7 +3305,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 36,
+					"buffer": 35,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/graphics/rectangle.cpp",
 					"settings":
 					{
@@ -2594,7 +3331,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 37,
+					"buffer": 36,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/geom/padding.cpp",
 					"settings":
 					{
@@ -2620,7 +3357,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 38,
+					"buffer": 37,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/geom/point.cpp",
 					"settings":
 					{
@@ -2647,7 +3384,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 39,
+					"buffer": 38,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/geom/rectangle.cpp",
 					"settings":
 					{
@@ -2674,7 +3411,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 40,
+					"buffer": 39,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/geom/padding.h",
 					"settings":
 					{
@@ -2701,7 +3438,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 41,
+					"buffer": 40,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/geom/point.h",
 					"settings":
 					{
@@ -2728,7 +3465,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 42,
+					"buffer": 41,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/geom/rectangle.h",
 					"settings":
 					{
@@ -2755,7 +3492,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 43,
+					"buffer": 42,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/common/control/window.h",
 					"settings":
 					{
@@ -2782,7 +3519,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 44,
+					"buffer": 43,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/base/control/window.cpp",
 					"settings":
 					{
@@ -2809,7 +3546,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 45,
+					"buffer": 44,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/base/control/graphics.cpp",
 					"settings":
 					{
@@ -2836,7 +3573,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 46,
+					"buffer": 45,
 					"settings":
 					{
 						"buffer_size": 0,
@@ -2862,7 +3599,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 47,
+					"buffer": 46,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/windows/control/window.cpp",
 					"settings":
 					{
@@ -2889,7 +3626,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 48,
+					"buffer": 47,
 					"settings":
 					{
 						"buffer_size": 0,
@@ -2915,7 +3652,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 49,
+					"buffer": 48,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/windows/control/window.h",
 					"settings":
 					{
@@ -2942,7 +3679,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 50,
+					"buffer": 49,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/common/control/graphics.h",
 					"settings":
 					{
@@ -2969,7 +3706,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 51,
+					"buffer": 50,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/windows/control/graphics.cpp",
 					"settings":
 					{
@@ -2997,7 +3734,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 52,
+					"buffer": 51,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/windows/control/mouse.cpp",
 					"settings":
 					{
@@ -3024,7 +3761,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 53,
+					"buffer": 52,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/base/control/mouse.cpp",
 					"settings":
 					{
@@ -3051,7 +3788,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 54,
+					"buffer": 53,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/common/control/mouse.h",
 					"settings":
 					{
@@ -3078,7 +3815,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 55,
+					"buffer": 54,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/common/graphics/bitmap.h",
 					"settings":
 					{
@@ -3105,7 +3842,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 56,
+					"buffer": 55,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/common/graphics/padding.h",
 					"settings":
 					{
@@ -3132,7 +3869,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 57,
+					"buffer": 56,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/common/geom/padding.cpp",
 					"settings":
 					{
@@ -3158,7 +3895,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 58,
+					"buffer": 57,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/common/geom/point.cpp",
 					"settings":
 					{
@@ -3185,7 +3922,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 59,
+					"buffer": 58,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/common/geom/rectangle.cpp",
 					"settings":
 					{
@@ -3212,7 +3949,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 60,
+					"buffer": 59,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/src/common/graphics/bitmap.cpp",
 					"settings":
 					{
@@ -3239,7 +3976,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 61,
+					"buffer": 60,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/base/control/graphics.h",
 					"settings":
 					{
@@ -3266,7 +4003,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 62,
+					"buffer": 61,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/base/control/window.h",
 					"settings":
 					{
@@ -3293,7 +4030,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 63,
+					"buffer": 62,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/controller/inc/base/control/mouse.h",
 					"settings":
 					{
@@ -3320,7 +4057,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 64,
+					"buffer": 63,
 					"settings":
 					{
 						"buffer_size": 0,
@@ -3346,7 +4083,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 65,
+					"buffer": 64,
 					"file": "/C/Users/Administrator/Documents/Development/eyebrowse/desktop/client/src/node/index.js",
 					"settings":
 					{
@@ -3373,7 +4110,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 66,
+					"buffer": 65,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/controller/src/cli.cpp",
 					"settings":
 					{
@@ -3400,7 +4137,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 67,
+					"buffer": 66,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/lib/node/package.json",
 					"settings":
 					{
@@ -3428,7 +4165,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 68,
+					"buffer": 67,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/package.json",
 					"settings":
 					{
@@ -3448,6 +4185,32 @@
 							"syntax": "Packages/JavaScript/JSON.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 68,
+					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/make.json",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -3483,32 +4246,6 @@
 				},
 				{
 					"buffer": 70,
-					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/make.json",
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 71,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/make.json",
 					"settings":
 					{
@@ -3534,7 +4271,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 72,
+					"buffer": 71,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/index.js",
 					"settings":
 					{
@@ -3560,7 +4297,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 73,
+					"buffer": 72,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/make.node.json",
 					"settings":
 					{
@@ -3586,7 +4323,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 74,
+					"buffer": 73,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/index.js",
 					"settings":
 					{
@@ -3612,7 +4349,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 75,
+					"buffer": 74,
 					"settings":
 					{
 						"buffer_size": 0,
@@ -3638,7 +4375,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 76,
+					"buffer": 75,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/plugins/browsers.core/index.js",
 					"settings":
 					{
@@ -3664,7 +4401,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 77,
+					"buffer": 76,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/plugins/browsers.core/loadBrowsers.js",
 					"settings":
 					{
@@ -3690,7 +4427,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 78,
+					"buffer": 77,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/plugins/browser.ie/index.js",
 					"settings":
 					{
@@ -3716,7 +4453,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 79,
+					"buffer": 78,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/index.coffee",
 					"settings":
 					{
@@ -3742,7 +4479,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 80,
+					"buffer": 79,
 					"settings":
 					{
 						"buffer_size": 0,
@@ -3768,7 +4505,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 81,
+					"buffer": 80,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/plugins/browsers.core/index.coffee",
 					"settings":
 					{
@@ -3794,7 +4531,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 82,
+					"buffer": 81,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/plugins/screenshots.core/index.js",
 					"settings":
 					{
@@ -3820,7 +4557,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 83,
+					"buffer": 82,
 					"settings":
 					{
 						"buffer_size": 0,
@@ -3846,7 +4583,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 84,
+					"buffer": 83,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/plugins/browsers.core/ApplicationManager.coffee",
 					"settings":
 					{
@@ -3872,7 +4609,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 85,
+					"buffer": 84,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/plugins/browsers.core/proc/Launcher.coffee",
 					"settings":
 					{
@@ -3898,7 +4635,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 86,
+					"buffer": 85,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/plugins/browsers.core/proc/Application.coffee",
 					"settings":
 					{
@@ -3924,7 +4661,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 87,
+					"buffer": 86,
 					"settings":
 					{
 						"buffer_size": 3,
@@ -3951,7 +4688,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 88,
+					"buffer": 87,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/plugins/browsers.core/loadBrowsers.coffee",
 					"settings":
 					{
@@ -3979,7 +4716,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 89,
+					"buffer": 88,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/lib/node/make.json",
 					"settings":
 					{
@@ -4005,7 +4742,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 90,
+					"buffer": 89,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node-sec/plugins/browser.ie/index.js",
 					"settings":
 					{
@@ -4032,7 +4769,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 91,
+					"buffer": 90,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/plugins/browsers.ie/index.coffee",
 					"settings":
 					{
@@ -4058,7 +4795,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 92,
+					"buffer": 91,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/node/plugins/browsers.core/proc/ApplicationManager.coffee",
 					"settings":
 					{
@@ -4084,7 +4821,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 93,
+					"buffer": 92,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/index.coffee",
 					"settings":
 					{
@@ -4110,7 +4847,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 94,
+					"buffer": 93,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/index.js",
 					"settings":
 					{
@@ -4136,7 +4873,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 95,
+					"buffer": 94,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/screenshot/index.js",
 					"settings":
 					{
@@ -4163,7 +4900,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 96,
+					"buffer": 95,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/screenshot/grabber.js",
 					"settings":
 					{
@@ -4189,7 +4926,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 97,
+					"buffer": 96,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/controller.coffee",
 					"settings":
 					{
@@ -4215,7 +4952,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 98,
+					"buffer": 97,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/controller.js",
 					"settings":
 					{
@@ -4242,7 +4979,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 99,
+					"buffer": 98,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/process/collection.js",
 					"settings":
 					{
@@ -4268,7 +5005,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 100,
+					"buffer": 99,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/load/lnk-parse-1.0.pl",
 					"settings":
 					{
@@ -4296,7 +5033,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 101,
+					"buffer": 100,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/process/processGroup.coffee",
 					"settings":
 					{
@@ -4322,7 +5059,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 102,
+					"buffer": 101,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/proxy/server.js",
 					"settings":
 					{
@@ -4349,7 +5086,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 103,
+					"buffer": 102,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/proxy/client.coffee",
 					"settings":
 					{
@@ -4376,7 +5113,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 104,
+					"buffer": 103,
 					"settings":
 					{
 						"buffer_size": 0,
@@ -4402,7 +5139,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 105,
+					"buffer": 104,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/process/process.coffee",
 					"settings":
 					{
@@ -4428,7 +5165,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 106,
+					"buffer": 105,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/load/loadDirectory.coffee",
 					"settings":
 					{
@@ -4456,7 +5193,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 107,
+					"buffer": 106,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/README.md",
 					"settings":
 					{
@@ -4483,7 +5220,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 108,
+					"buffer": 107,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/params.coffee",
 					"settings":
 					{
@@ -4509,7 +5246,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 109,
+					"buffer": 108,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/proxy/server.coffee",
 					"settings":
 					{
@@ -4535,7 +5272,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 110,
+					"buffer": 109,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/proxy/server.js",
 					"settings":
 					{
@@ -4561,7 +5298,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 111,
+					"buffer": 110,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/proxy/wrapBrowserClient.coffee",
 					"settings":
 					{
@@ -4587,7 +5324,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 112,
+					"buffer": 111,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/proxy/wrapBrowserClient.js",
 					"settings":
 					{
@@ -4614,7 +5351,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 113,
+					"buffer": 112,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/proxy/browser.coffee",
 					"settings":
 					{
@@ -4640,7 +5377,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 114,
+					"buffer": 113,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/proxy/client/tapFunction.coffee",
 					"settings":
 					{
@@ -4666,7 +5403,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 115,
+					"buffer": 114,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/proxy/client/client.coffee",
 					"settings":
 					{
@@ -4693,7 +5430,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 116,
+					"buffer": 115,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/proxy/client/client.js",
 					"settings":
 					{
@@ -4720,7 +5457,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 117,
+					"buffer": 116,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/proxy/client/hook.coffee",
 					"settings":
 					{
@@ -4747,7 +5484,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 118,
+					"buffer": 117,
 					"settings":
 					{
 						"buffer_size": 0,
@@ -4773,7 +5510,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 119,
+					"buffer": 118,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/proxy/client/hook/listeners.coffee",
 					"settings":
 					{
@@ -4799,7 +5536,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 120,
+					"buffer": 119,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/proxy/client/hook/index.coffee",
 					"settings":
 					{
@@ -4826,7 +5563,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 121,
+					"buffer": 120,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/proxy/client/bridge/bridge.coffee",
 					"settings":
 					{
@@ -4853,7 +5590,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 122,
+					"buffer": 121,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/proxy/client/bridge/listeners.coffee",
 					"settings":
 					{
@@ -4880,7 +5617,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 123,
+					"buffer": 122,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/proxy/client/bridge.coffee",
 					"settings":
 					{
@@ -4907,7 +5644,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 124,
+					"buffer": 123,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/proxy/client/listeners.coffee",
 					"settings":
 					{
@@ -4934,7 +5671,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 125,
+					"buffer": 124,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/node_modules/dnode-protocol/index.js",
 					"settings":
 					{
@@ -4962,7 +5699,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 126,
+					"buffer": 125,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/makefile",
 					"settings":
 					{
@@ -4988,7 +5725,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 127,
+					"buffer": 126,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/package.json",
 					"settings":
 					{
@@ -5016,7 +5753,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 128,
+					"buffer": 127,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/load/loadDirectory.js",
 					"settings":
 					{
@@ -5042,7 +5779,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 129,
+					"buffer": 128,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/src/process/browser.js",
 					"settings":
 					{
@@ -5069,7 +5806,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 130,
+					"buffer": 129,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/winproc/Program.cs",
 					"settings":
 					{
@@ -5097,7 +5834,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 131,
+					"buffer": 130,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/winproc/Commands.cs",
 					"settings":
 					{
@@ -5125,7 +5862,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 132,
+					"buffer": 131,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/sprite/lib/process/browser.js",
 					"settings":
 					{
@@ -5152,7 +5889,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 133,
+					"buffer": 132,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/make.json",
 					"settings":
 					{
@@ -5178,7 +5915,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 134,
+					"buffer": 133,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/make.json",
 					"settings":
 					{
@@ -5204,7 +5941,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 135,
+					"buffer": 134,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/make.js",
 					"settings":
 					{
@@ -5230,7 +5967,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 136,
+					"buffer": 135,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/make/index.js",
 					"settings":
 					{
@@ -5257,7 +5994,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 137,
+					"buffer": 136,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/web/make.web.json",
 					"settings":
 					{
@@ -5285,7 +6022,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 138,
+					"buffer": 137,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/site/index.html",
 					"settings":
 					{
@@ -5311,7 +6048,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 139,
+					"buffer": 138,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/web/src/_config.yml",
 					"settings":
 					{
@@ -5337,7 +6074,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 140,
+					"buffer": 139,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/web/package.json",
 					"settings":
 					{
@@ -5363,7 +6100,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 141,
+					"buffer": 140,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/web/index.html",
 					"settings":
 					{
@@ -5389,7 +6126,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 142,
+					"buffer": 141,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/lib/node/index.js",
 					"settings":
 					{
@@ -5415,7 +6152,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 143,
+					"buffer": 142,
 					"settings":
 					{
 						"buffer_size": 0,
@@ -5441,7 +6178,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 144,
+					"buffer": 143,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/lib/web/make.site.json",
 					"settings":
 					{
@@ -5469,7 +6206,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 145,
+					"buffer": 144,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/site/make.site.json",
 					"settings":
 					{
@@ -5497,7 +6234,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 146,
+					"buffer": 145,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/site/_assets/js/ven",
 					"settings":
 					{
@@ -5523,7 +6260,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 147,
+					"buffer": 146,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/app site/package.json",
 					"settings":
 					{
@@ -5549,7 +6286,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 148,
+					"buffer": 147,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/site/package.json",
 					"settings":
 					{
@@ -5575,7 +6312,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 149,
+					"buffer": 148,
 					"file": "/Users/craigcondon/Development/eyebrowse/desktop/client/src/app site/make.json",
 					"settings":
 					{
@@ -5603,7 +6340,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 150,
+					"buffer": 149,
 					"file": "/tmp/subl stdin ojXepD.txt",
 					"settings":
 					{
@@ -5621,6 +6358,2444 @@
 						"settings":
 						{
 							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 150,
+					"file": "/tmp/subl stdin AYm05p.txt",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 151,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/apps/site/index.html",
+					"settings":
+					{
+						"buffer_size": 1434,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 152,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/index.html",
+					"settings":
+					{
+						"buffer_size": 226,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								185,
+								185
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 153,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "/Users/craigcondon/Development/eyebrowse/projects/src/site",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 154,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/apps/site/make.json",
+					"settings":
+					{
+						"buffer_size": 2209,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								433,
+								433
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 155,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/http_server/make.http_server.json",
+					"settings":
+					{
+						"buffer_size": 5,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 156,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/http_server/index.js",
+					"settings":
+					{
+						"buffer_size": 305,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								185,
+								185
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 157,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/app.html",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 158,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/app.html",
+					"settings":
+					{
+						"buffer_size": 165,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								107,
+								107
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 159,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/make.json",
+					"settings":
+					{
+						"buffer_size": 2136,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1316,
+								1316
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 330.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 160,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.hud.signup/index.js",
+					"settings":
+					{
+						"buffer_size": 39,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								19,
+								19
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 161,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.hud.select/index.js",
+					"settings":
+					{
+						"buffer_size": 299,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								289,
+								289
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 162,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/views/app/hud.mu",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 163,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/views/app/hud/index.mu",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 164,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/views/app/live/index.mu",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 165,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.liveView/views.js",
+					"settings":
+					{
+						"buffer_size": 339,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								339
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 166,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.hud/views.js",
+					"settings":
+					{
+						"buffer_size": 703,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								490,
+								490
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 167,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.hud.select/views.js",
+					"settings":
+					{
+						"buffer_size": 5760,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								75,
+								75
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 10.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 168,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.hud.signup/spin.js",
+					"settings":
+					{
+						"buffer_size": 9074,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7762,
+								7762
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4171.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 169,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.hud.select/cellSelector.js",
+					"settings":
+					{
+						"buffer_size": 175,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								167,
+								167
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 170,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/views/app",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 171,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.liveView/index.js",
+					"settings":
+					{
+						"buffer_size": 329,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								272,
+								272
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 172,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.core/index.js",
+					"settings":
+					{
+						"buffer_size": 146,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								136,
+								136
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 173,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 174,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.core",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 175,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.hud/index.js",
+					"settings":
+					{
+						"buffer_size": 280,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								151,
+								151
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 176,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/hud.signup.less",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 177,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/index.entry.js",
+					"settings":
+					{
+						"buffer_size": 113,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								113,
+								113
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 178,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_layouts/default.html",
+					"settings":
+					{
+						"buffer_size": 1242,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								32,
+								32
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 179,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/api/lib/index.js",
+					"settings":
+					{
+						"buffer_size": 1131,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								142,
+								151
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 92.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 180,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/api/bin/api",
+					"settings":
+					{
+						"buffer_size": 230,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								201,
+								201
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 181,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/api/lib/plugins/provision.core/index.js",
+					"settings":
+					{
+						"buffer_size": 39,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								39,
+								39
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 182,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "/Users/craigcondon/Development/eyebrowse/projects/src/api/lib/plugins",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 183,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "/Users/craigcondon/Development/eyebrowse/projects/src/api/lib/plugins/screenshot.core",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 184,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/api/lib/plugins/screenshot.core/index.js",
+					"settings":
+					{
+						"buffer_size": 1929,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								613,
+								613
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 185,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/api/lib/plugins/sendfile/index.js",
+					"settings":
+					{
+						"buffer_size": 274,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								274
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 186,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/plugins/sendfile/index.js",
+					"settings":
+					{
+						"buffer_size": 274,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								58,
+								58
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 187,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/plugins/storage.core/index.js",
+					"settings":
+					{
+						"buffer_size": 90,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								88,
+								88
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 188,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/plugins/storage/transports/ec2.js",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 189,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/plugins/storage/transports/remote.js",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 190,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/plugins/storage.transport.s3/index.js",
+					"settings":
+					{
+						"buffer_size": 687,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								424,
+								424
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 191,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/plugins/storage.transport.s3/transport.js",
+					"settings":
+					{
+						"buffer_size": 311,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								282,
+								282
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 192,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/plugins/storage.transport.remote/index.js",
+					"settings":
+					{
+						"buffer_size": 60,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								54,
+								54
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 193,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/api/lib/plugins/storage.ec2/index.js",
+					"settings":
+					{
+						"buffer_size": 68,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								60,
+								60
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 194,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/api/lib/plugins/storage.remote/index.js",
+					"settings":
+					{
+						"buffer_size": 27,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								26,
+								26
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 195,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/api/lib/plugins/screenshot.core/models.js",
+					"settings":
+					{
+						"buffer_size": 419,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								268,
+								268
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 196,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/make/debug/999-cleanup.json",
+					"settings":
+					{
+						"buffer_size": 277,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1,
+								1
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 197,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/views/app/live/index.mu",
+					"settings":
+					{
+						"buffer_size": 160,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								78,
+								78
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 198,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/live.less",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 199,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/hud.css",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 200,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/live.controlbar.less",
+					"settings":
+					{
+						"buffer_size": 70,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								67,
+								67
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 201,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 202,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/views/app/hud/index.mu",
+					"settings":
+					{
+						"buffer_size": 565,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								145,
+								145
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 203,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/hud.less",
+					"settings":
+					{
+						"buffer_size": 395,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								47,
+								47
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 204,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/hud.scrollbar.less",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 205,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/scrollbar.less",
+					"settings":
+					{
+						"buffer_size": 1636,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								866,
+								866
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 206,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/vendors/combine/3-jquery.mousewheel.js",
+					"settings":
+					{
+						"buffer_size": 2400,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1112,
+								1112
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 207,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/vendors/combine/4-jquery.mwheelintent.js",
+					"settings":
+					{
+						"buffer_size": 1735,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								330,
+								331
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 208,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/vendors/combine/4-jquery.mwheelintent.js",
+					"settings":
+					{
+						"buffer_size": 1735,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 209,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/vendors/combine/5-jquery.jscrollpane.min.js",
+					"settings":
+					{
+						"buffer_size": 44533,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								25038,
+								25046
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 12728.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 210,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/0-functions.less",
+					"settings":
+					{
+						"buffer_size": 2047,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1359,
+								1359
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 406.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 211,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/common.less",
+					"settings":
+					{
+						"buffer_size": 80,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								78,
+								78
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 212,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/0-vars.less",
+					"settings":
+					{
+						"buffer_size": 448,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								428,
+								441
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 213,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/less/combine/hud.select.less",
+					"settings":
+					{
+						"buffer_size": 1251,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								950,
+								950
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 331.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 214,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/apps/site/views/app/hud/index.mu",
+					"settings":
+					{
+						"buffer_size": 161,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								57,
+								57
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 215,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/config/index.js",
+					"settings":
+					{
+						"buffer_size": 455,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								192,
+								192
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 216,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/site/_assets/js-src/app-plugins/page.hud.select/spin.js",
+					"settings":
+					{
+						"buffer_size": 9415,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9415,
+								9415
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1671.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 217,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/package.json",
+					"settings":
+					{
+						"buffer_size": 433,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								427,
+								427
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 218,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 219,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/sprite.js",
+					"settings":
+					{
+						"buffer_size": 41,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								41,
+								41
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 220,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/index.js",
+					"settings":
+					{
+						"buffer_size": 463,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								299,
+								299
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 221,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/plugins/desktop_client.core/index.js",
+					"settings":
+					{
+						"buffer_size": 38,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								36,
+								36
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 222,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/plugins/screenshot.core/index.js",
+					"settings":
+					{
+						"buffer_size": 1413,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								708,
+								703
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 419.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 223,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/make.desktop_client.json",
+					"settings":
+					{
+						"buffer_size": 5,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3,
+								3
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 224,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/package.json",
+					"settings":
+					{
+						"buffer_size": 53,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								49,
+								49
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 225,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/apps/desktop_client/make.desktop_client.json",
+					"settings":
+					{
+						"buffer_size": 5,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 226,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/apps/desktop_client/lib/index.js",
+					"settings":
+					{
+						"buffer_size": 195,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								85,
+								85
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 227,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/lib/index.js",
+					"settings":
+					{
+						"buffer_size": 534,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								250,
+								250
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 228,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/lib/plugins/sprite/index.js",
+					"settings":
+					{
+						"buffer_size": 657,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								371,
+								371
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 229,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/lib/screenshot/index.js",
+					"settings":
+					{
+						"buffer_size": 2685,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								712,
+								712
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1211.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 230,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/lib/screenshot/detectBrowser.js",
+					"settings":
+					{
+						"buffer_size": 2529,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1078,
+								1082
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 500.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 231,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/lib/controller.js",
+					"settings":
+					{
+						"buffer_size": 1795,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								931,
+								931
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 119.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 232,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/lib/process/browser.js",
+					"settings":
+					{
+						"buffer_size": 2662,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2050,
+								2050
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1131.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 233,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "/Users/craigcondon/Development/eyebrowse/projects/src/server_provisioner",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 234,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/lib/process/collection.js",
+					"settings":
+					{
+						"buffer_size": 1418,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								542,
+								542
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 31.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 235,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/lib/proxy/wrapBrowserClient.js",
+					"settings":
+					{
+						"buffer_size": 854,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								619,
+								619
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 236,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/lib/proxy/browserDetect.js",
+					"settings":
+					{
+						"buffer_size": 3553,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3551,
+								3551
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 890.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 237,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/lib/proxy/server.js",
+					"settings":
+					{
+						"buffer_size": 1363,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1190,
+								1190
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 126.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 238,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/lib/load/loadDirectory.js",
+					"settings":
+					{
+						"buffer_size": 2002,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								911,
+								911
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 548.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 239,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/sprite/node_modules/filternet/lib/proxy.js",
+					"settings":
+					{
+						"buffer_size": 16423,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4919,
+								4919
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2083.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 240,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/src/desktop_client/node_modules/knox/lib/knox/client.js",
+					"settings":
+					{
+						"buffer_size": 8580,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								275,
+								275
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 59.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 241,
+					"file": "/Users/craigcondon/Development/eyebrowse/projects/node_modules/daisy/src/web/plugins/hooks.transport.jsonp/index.js",
+					"settings":
+					{
+						"buffer_size": 90,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								88,
+								88
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

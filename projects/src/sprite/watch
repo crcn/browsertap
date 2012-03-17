@@ -1,1 +1,0 @@
-nodemon --exec "make clean all" --watch ./src ./

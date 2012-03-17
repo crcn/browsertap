@@ -4,7 +4,7 @@ var host = 'teamdigest.spice.io', protocol = 'https:';
 
 if(/(localhost|\.local|10.0)/.test(String(window.location))) {
 	//host     = 'teamdigest.spice.io'; //change in hosts
-	host = "10.0.1.6:8082";
+	host = "10.0.1.14:8082";
 	protocol = 'http:';
 }
 

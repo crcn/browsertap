@@ -5,10 +5,10 @@ module.exports = function(fig) {
 
 	var browsers = {
 		/*'ie': [10, 9, 8, 7, 6],*/
-		'chrome': [19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3],
+		'chrome': [19,18,17,16,15,14,13,12,11,10,9,8,7,6],
 		'firefox': [12,11,10,9,8,7,6,5,4,3.6,3.5,3],
 		'safari': [5.1,"5.0.5",4],
-		'opera': [11.6, 11.5, 11.1, 11, 10]
+		//'opera': [11.6, 11.5, 11.1, 11, 10]
 	}
 
 	var views = fig.views;
@@ -47,11 +47,52 @@ module.exports = function(fig) {
 			});
 
 
-			$el.find('img').load(function() {
-				$el.data().spinner.stop();
-			})
+
+			this._loadScreenshot();
 		},
 
+		/**
+		 */
+
+		'_loadScreenshot': function() {
+
+			var self = this;
+
+			function loadScreenshots() {
+
+				self.
+				router.
+				request('screenshot/' + self.ops.browserName + '/' + self.ops.browserVersion, { url: self.ops.url, hash: self.ops.hash }).
+				tag('method', 'GET').
+				response(function(err, resp) {
+
+					console.log(resp.result)
+
+					if(resp.result.screenshot) {
+						clearInterval(interval);
+						self._setScreenshot(resp.result);
+
+					}
+				}).
+				pull();	
+			}
+
+
+			var interval = setInterval(loadScreenshots, 5000);
+			loadScreenshots();
+			
+		},
+
+		/**
+		 */
+
+		'_setScreenshot': function(ss) {
+			$(this.el).data().spinner.stop();
+ 
+			$(this.el).find('.cell_screenshot').attr('src', ss.screenshot);
+			// $(this.el).append('<img src="'+ss.screenshot+'" class="cell_screenshot" width="100%" height="100%"></img>');
+			
+		},
 		/**
 		 */
 
@@ -81,9 +122,7 @@ module.exports = function(fig) {
 
 		'templateData': function() {
 			return {
-				browserVersion: this.ops.browserVersion,
-				//screenshotUrl: 'http://10.0.1.28:8083/screenshot/chrome/19?url=http://wired.com'
-				screenshotUrl: 'http://10.0.1.28:8083/screenshot/'+this.ops.browserName+'/'+this.ops.browserVersion+'?url=http://wired.com'
+				browserVersion: this.ops.browserVersion
 			}
 		}
 	});
@@ -141,7 +180,7 @@ module.exports = function(fig) {
 
 					cellContainer.append('<div class="hud_select_cell" id="browserCell'+div+'"></div>');
 
-					var cell = new views.HUDCellView({ el: '#browserCell' + div, browserVersion: browserVersions[i], browserName: browserName });
+					var cell = new views.HUDCellView({ el: '#browserCell' + div, browserVersion: browserVersions[i], hash: 2, browserName: browserName, url: 'http://google.com' });
 
 
 					cellRow.push(this.addChild(cell));

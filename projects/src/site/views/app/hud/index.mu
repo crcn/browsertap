@@ -3,7 +3,7 @@
     
 	<h4>{{browserVersion}}</h4>
 
-	<img src="{{screenshotUrl}}" width="100%" height="100%"></img>
+	<img class="cell_screenshot" src="/img/blank.gif" width="100%" height="100%"></img>
 
 	<div class="hud-browser-cell-overlay">
 
