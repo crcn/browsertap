@@ -44,7 +44,6 @@ exports.plugin = function(router) {
 				res.end();
 			}
 
-
 				
 			step(
 

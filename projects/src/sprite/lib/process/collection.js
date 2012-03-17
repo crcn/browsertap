@@ -3,7 +3,7 @@ EventEmitter = require('events').EventEmitter,
 spawn        = require("child_process").spawn,
 Browser      = require("./browser");
 
-var fs = require('fs')
+var fs = require('fs');
 
 
 module.exports = structr(EventEmitter, {
@@ -11,13 +11,13 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	'override __construct': function(browsers, cache, proxy) {
+	'override __construct': function(browsers, params, proxy) {
 
 		this._browsers = {};
 		this._available = {};
 
 		for(var name in browsers) {
-			this._browsers[name] = new Browser(browsers[name], cache, proxy);
+			this._browsers[name] = new Browser(browsers[name], params, proxy);
 
 			var nameParts = name.split(' '),
 			version = nameParts.pop(),

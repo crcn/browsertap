@@ -5,7 +5,8 @@ step          = require('stepc'),
 spawn         = child_process.spawn,
 exec          = child_process.exec,
 outcome       = require("outcome"),
-rmdirr        = require('rmdirr');
+rmdirr        = require('rmdirr'),
+async         = require('async');
 
 
 module.exports = structr(EventEmitter, {
@@ -13,12 +14,13 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	'override __construct': function(info, cache, proxy) {
+	'override __construct': function(info, params, proxy) {
 
 
 		var browserName = info.name.split(' ').shift().toLowerCase();
 
-		this.cache    = cache;
+		this.cache    = params.cache;
+		this.params   = params;
 		this.name     = info.name //the name of the browser
 		this.filename = info.filename; //the physical EXE
 		this.cwd  	  = info.cwd; //where does the EXE live?
@@ -51,9 +53,11 @@ module.exports = structr(EventEmitter, {
 		if(this._proc) {
 
 			if(onExit) this.once('exit', onExit);
+			this._kill();
 
-			this._proc.stdin.write("kill\n");
+			// this._proc.stdin.write("kill\n");
 			this._proc = undefined;
+
 		}
 
 	},
@@ -64,7 +68,9 @@ module.exports = structr(EventEmitter, {
 	'screenshot': function(path) {
 
 		if(this._proc) {
-			this._proc.stdin.write("screenshot\n" + path + "\n");
+			//nircmd.exe cmdwait 2000 savescreenshot "f:\temp\shot.png"
+			// this._proc.stdin.write("screenshot\n" + path + "\n");
+			exec(__dirname + "/nircmdc.exe savescreenshot " + path.replace(/\\+/g,'/'));
 		}
 	},
 
@@ -78,45 +84,41 @@ module.exports = structr(EventEmitter, {
 
 		step(
 
-
+			function() {
+				self._shutdown(this);
+			},
 
 			/**
 			 */
 
-			function() {
+			function(err) {
+
+				if(err) console.error(err);
+
 				var nx = this;
 
 				console.log("starting browser %s", self.name);
 
 				var proc = self.cwd + "\\" + self.filename;
 
-				self._proc = spawn('winproc.exe', [proc, url], { cwd: __dirname + "/winproc/Debug"});
+				/*self._proc = spawn('winproc.exe', [proc, url], { cwd: __dirname + "/winproc/Debug"});*/
+
+				self._proc = exec('start /MAX /WAIT ' + proc + " " + url);
+
 				self.running = true;
 
 				self._proc.on("exit", function() {
 					console.log("browser %s has exited, cleaning up...", self.name);
 					self.running = false;
 
- 				
-					if(!self.cache.directories[self.browserName]) return this();
-
-					var cacheDir = self.cache.prefix.replace('~', process.env.HOME) + "/" + self.cache.directories[self.browserName];
-
-					exec('DEL /S /Q "' + cacheDir.replace(/\/+/g,'\\') + '"', function(err, stdout, stderr) {
-
-						//console.log(stdout);
-						//console.log(stderr);
-						self.emit('exit');
-					});
+ 					self._shutdown(function() {
+ 						self.emit('exit');
+ 					});
 				});
 
 
 				self._proc.stdout.on("data", function(data) {
 					process.stdout.write(data);
-
-					if(String(data).toLowerCase().indexOf('main window found') > -1) {
-						//nx();
-					}
 				});
 
 				self._proc.stderr.on("data", function(data) {
@@ -136,7 +138,71 @@ module.exports = structr(EventEmitter, {
 			 */
 
 			next
-		)
+		);
+
+	},
+
+	/**
+	 */
+
+	'_kill': function(next) {
+
+		console.log('killing process...');
+
+
+		async.forEach(this.params.processNames[this.browserName], function(pn, next) {
+
+			console.log('killing %s', pn);
+			exec('taskkill /F /IM ' + pn, function() {
+				next();
+			});
+
+		}, next);
+
+	},
+
+
+	/**
+	 */
+
+
+	'_shutdown': function(next) {
+
+		console.log('shutting down...');
+
+		var settingsDir = this.cache.directories[this.browserName],
+		cacheDir = this.cache.prefix.replace('~', process.env.HOME) + "/" + settingsDir;
+
+		var self = this;
+
+		step(
+
+			/**
+			 * kill the processes
+			 */
+
+			function() {
+
+				self._kill(this);
+
+			},
+
+			/**
+			 * remove the settings
+			 */
+
+			function() {
+
+				if(!settingsDir) return this();
+
+				console.log('cleaning up directory');
+
+				exec('DEL /S /Q "' + cacheDir.replace(/\/+/g,'\\') + '"', this);
+			},
+
+
+			next
+		);
 	}
 
 });

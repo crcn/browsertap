@@ -22,6 +22,13 @@ exports.plugin = function(router, params) {
 						'opera': '/Opera',
 						'ie': '/Microsoft/Internet Explorer'
 					}
+				},
+				processNames: {
+					'firefox': ['firefox*'],
+					'chrome': ['chrome*'],
+					'safari': ['safari*'],
+					'opera': ['opera*'],
+					'ie': ['iexplore*']
 				}
 			}).
 			listen(8088);

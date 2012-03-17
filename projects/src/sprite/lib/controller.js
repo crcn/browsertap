@@ -45,7 +45,7 @@ module.exports = structr(EventEmitter, {
 			var next = this;
 
 			loadDirectory(config.directory, self._on.success(function(browsers) {
-				self._processes = new ProcessCollection(browsers, config.cache, self);
+				self._processes = new ProcessCollection(browsers, config, self);
 				next();
 			}));
 

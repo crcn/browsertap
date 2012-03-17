@@ -53,16 +53,13 @@ namespace winproc
             //make sure to kill the process first so we don't exit immediately.
             this._KillRunning();
 
+
             this._process = new Process();
             this._process.StartInfo.FileName = this._path;
             this._process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
             this._process.StartInfo.Arguments = Arguments;
             this._process.Start();
 
-            if (WaitUntilWindow)
-            {
-                return this._WaitUntilWindow();
-            }
 
 
             return true;
@@ -117,30 +114,6 @@ namespace winproc
         {
             ScreenCapture sc = new ScreenCapture();
             sc.CaptureScreenToFile(Location, Format);
-        }
-
-
-        /**
-         * pauses the current thread until a main window is found
-         */
-
-        private bool _WaitUntilWindow()
-        {
-
-            bool DoesNotHaveMainWindow = true;
-            int MaxTries       = 20;
-            int Tries = 0;
-
-            while(!HasExited && DoesNotHaveMainWindow && Tries++ < MaxTries)
-            {
-                DoesNotHaveMainWindow = (int)this._process.MainWindowHandle.ToInt32() == 0;
-                Thread.Sleep(100);
-
-            }
-
-
-            return !DoesNotHaveMainWindow;
-
         }
     }
 }
