@@ -1,0 +1,2056 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/usr/local/bin/npm', 'update', 'npm', '-g' ]
+info using npm@1.1.8
+info using node@v0.6.11
+verbose config file /Users/craigcondon/.npmrc
+verbose config file /usr/local/etc/npmrc
+verbose config file /usr/local/lib/node_modules/npm/npmrc
+silly exec /usr/local/bin/node "/usr/local/lib/node_modules/npm/bin/npm-get-uid-gid.js" "nobody" 20
+silly spawning [ '/usr/local/bin/node',
+silly spawning   [ '/usr/local/lib/node_modules/npm/bin/npm-get-uid-gid.js',
+silly spawning     'nobody',
+silly spawning     20 ],
+silly spawning   null ]
+silly output from getuid/gid {"uid":-2,"gid":20}
+silly output from getuid/gid 
+verbose caching /usr/local/lib/node_modules/beanie/package.json
+verbose caching /usr/local/lib/node_modules/bean.http/package.json
+verbose loadDefaults bean.http@0.0.8
+verbose caching /usr/local/lib/node_modules/beandocs/package.json
+verbose loadDefaults beandocs@0.0.2
+verbose caching /usr/local/lib/node_modules/async/package.json
+verbose loadDefaults async@0.1.18
+verbose caching /usr/local/lib/node_modules/bonsai/package.json
+verbose loadDefaults bonsai@0.0.3
+verbose caching /usr/local/lib/node_modules/celeri/package.json
+verbose loadDefaults celeri@0.2.15
+verbose caching /usr/local/lib/node_modules/chard/package.json
+verbose loadDefaults chard@0.0.3
+verbose caching /usr/local/lib/node_modules/beanprep/package.json
+verbose loadDefaults beanprep@0.0.3
+verbose caching /usr/local/lib/node_modules/ebnf-diagram/package.json
+verbose loadDefaults ebnf-diagram@0.1.0
+verbose caching /usr/local/lib/node_modules/daisy/package.json
+verbose caching /usr/local/lib/node_modules/coffee-script/package.json
+verbose loadDefaults coffee-script@1.2.0
+verbose caching /usr/local/lib/node_modules/cupboard/package.json
+verbose loadDefaults cupboard@0.2.5
+verbose caching /usr/local/lib/node_modules/leche/package.json
+verbose loadDefaults leche@0.0.6
+verbose caching /usr/local/lib/node_modules/leche.spice.io/package.json
+verbose loadDefaults leche.spice.io@0.0.3
+verbose caching /usr/local/lib/node_modules/fanlime/package.json
+verbose loadDefaults fanlime@0.0.1
+verbose caching /usr/local/lib/node_modules/leche.core/package.json
+verbose loadDefaults leche.core@0.0.4
+verbose caching /usr/local/lib/node_modules/less/package.json
+verbose loadDefaults less@1.3.0
+verbose caching /usr/local/lib/node_modules/mesh-winston/package.json
+verbose loadDefaults mesh-winston@0.0.1
+verbose caching /usr/local/lib/node_modules/mesh/package.json
+verbose caching /usr/local/lib/node_modules/outcome/package.json
+verbose loadDefaults outcome@0.0.5
+verbose caching /usr/local/lib/node_modules/nodemon/package.json
+verbose loadDefaults nodemon@0.6.12
+verbose caching /usr/local/lib/node_modules/require-analyzer/package.json
+verbose caching /usr/local/lib/node_modules/step/package.json
+verbose loadDefaults step@0.0.5
+verbose caching /usr/local/lib/node_modules/n/package.json
+verbose loadDefaults n@0.7.0
+verbose caching /usr/local/lib/node_modules/stove/package.json
+verbose loadDefaults stove@0.0.7
+verbose caching /usr/local/lib/node_modules/spice.io/package.json
+verbose loadDefaults spice.io@0.0.4
+verbose caching /usr/local/lib/node_modules/mesh-http/package.json
+verbose caching /usr/local/lib/node_modules/node-inspector/package.json
+verbose loadDefaults node-inspector@0.1.10
+verbose caching /usr/local/lib/node_modules/thyme/package.json
+verbose caching /usr/local/lib/node_modules/teamdigest-front/package.json
+verbose loadDefaults teamdigest-front@0.0.1
+verbose caching /usr/local/lib/node_modules/teamdigest/package.json
+verbose loadDefaults teamdigest@0.0.3
+verbose caching /usr/local/lib/node_modules/sysalert/package.json
+verbose loadDefaults sysalert@0.0.2
+verbose caching /usr/local/lib/node_modules/sysalert-photomotr/package.json
+verbose loadDefaults sysalert@0.0.2
+WARN twilio2@0.3.2 package.json: 'modules' object is deprecated
+verbose caching /usr/local/lib/node_modules/twilio2/package.json
+verbose loadDefaults twilio2@0.3.2
+verbose caching /usr/local/lib/node_modules/npm/package.json
+verbose from cache /usr/local/lib/node_modules/beanie/package.json
+verbose from cache /usr/local/lib/node_modules/bean.http/package.json
+verbose from cache /usr/local/lib/node_modules/beandocs/package.json
+verbose from cache /usr/local/lib/node_modules/async/package.json
+verbose from cache /usr/local/lib/node_modules/bonsai/package.json
+verbose from cache /usr/local/lib/node_modules/celeri/package.json
+verbose from cache /usr/local/lib/node_modules/chard/package.json
+verbose from cache /usr/local/lib/node_modules/beanprep/package.json
+verbose from cache /usr/local/lib/node_modules/ebnf-diagram/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/package.json
+verbose from cache /usr/local/lib/node_modules/coffee-script/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/package.json
+verbose from cache /usr/local/lib/node_modules/leche/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/package.json
+verbose from cache /usr/local/lib/node_modules/less/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-winston/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/package.json
+verbose from cache /usr/local/lib/node_modules/outcome/package.json
+verbose from cache /usr/local/lib/node_modules/nodemon/package.json
+verbose from cache /usr/local/lib/node_modules/require-analyzer/package.json
+verbose from cache /usr/local/lib/node_modules/step/package.json
+verbose from cache /usr/local/lib/node_modules/n/package.json
+verbose from cache /usr/local/lib/node_modules/stove/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/package.json
+verbose from cache /usr/local/lib/node_modules/node-inspector/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/package.json
+verbose from cache /usr/local/lib/node_modules/sysalert/package.json
+verbose from cache /usr/local/lib/node_modules/twilio2/package.json
+verbose cache add [ 'npm', '*' ]
+silly cache add: name, spec, args [ 'npm', '*', [ 'npm', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'npm', '*' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'npm', '', false ]
+verbose raw, before any munging npm
+verbose url resolving [ 'https://registry.npmjs.org/', './npm' ]
+verbose url resolved https://registry.npmjs.org/npm
+http GET https://registry.npmjs.org/npm
+verbose caching /usr/local/lib/node_modules/bonsai/node_modules/gittyup/package.json
+verbose loadDefaults gittyup@0.0.21
+verbose caching /usr/local/lib/node_modules/bonsai/node_modules/haba/package.json
+verbose loadDefaults haba@0.0.2
+verbose caching /usr/local/lib/node_modules/bonsai/node_modules/beet/package.json
+verbose loadDefaults beet@0.1.12
+verbose caching /usr/local/lib/node_modules/bonsai/node_modules/node-fs/package.json
+verbose loadDefaults node-fs@0.1.0
+verbose caching /usr/local/lib/node_modules/bonsai/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/bonsai/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.14
+verbose caching /usr/local/lib/node_modules/bonsai/node_modules/structr/package.json
+verbose loadDefaults structr@0.2.0
+verbose from cache /usr/local/lib/node_modules/bonsai/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/bonsai/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/bonsai/node_modules/beet/package.json
+verbose from cache /usr/local/lib/node_modules/bonsai/node_modules/node-fs/package.json
+verbose from cache /usr/local/lib/node_modules/bonsai/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/bonsai/node_modules/gittyup/package.json
+verbose caching /usr/local/lib/node_modules/beanie/node_modules/plugin/package.json
+verbose caching /usr/local/lib/node_modules/beanie/node_modules/beanpoll/package.json
+verbose from cache /usr/local/lib/node_modules/beanie/node_modules/plugin/package.json
+verbose from cache /usr/local/lib/node_modules/beanie/node_modules/beanpoll/package.json
+verbose caching /usr/local/lib/node_modules/chard/node_modules/cashew/package.json
+verbose loadDefaults cashew@0.0.5
+verbose caching /usr/local/lib/node_modules/chard/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/chard/node_modules/gumbo/package.json
+verbose loadDefaults gumbo@0.1.2
+verbose caching /usr/local/lib/node_modules/chard/node_modules/daisy/package.json
+verbose loadDefaults daisy@0.0.7
+verbose caching /usr/local/lib/node_modules/chard/node_modules/http-proxy/package.json
+verbose loadDefaults http-proxy@0.7.6
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/amqp/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/colors/package.json
+verbose caching /usr/local/lib/node_modules/chard/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/http-proxy/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/beanpole/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/gumbo/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/cashew/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/daisy/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/cashew/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/beanpoll/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/crema/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/underscore/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/plugin/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/yaconfig/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/structr/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/sprintf/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/mesh-winston/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/crema/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/sprintf/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/beanpoll/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/plugin/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/amqp/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/cashew/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/underscore/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/yaconfig/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/mesh-winston/package.json
+verbose caching /usr/local/lib/node_modules/beandocs/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/beandocs/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/beandocs/node_modules/jstoxml/package.json
+verbose loadDefaults jstoxml@0.1.0
+verbose caching /usr/local/lib/node_modules/beandocs/node_modules/node-fs/package.json
+verbose loadDefaults node-fs@0.1.0
+verbose from cache /usr/local/lib/node_modules/beandocs/node_modules/node-fs/package.json
+verbose from cache /usr/local/lib/node_modules/beandocs/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/beandocs/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/beandocs/node_modules/jstoxml/package.json
+verbose caching /usr/local/lib/node_modules/beanprep/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/beanpoll/package.json
+verbose loadDefaults beanpoll@0.2.14
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/celeri/package.json
+verbose loadDefaults celeri@0.2.15
+verbose caching /usr/local/lib/node_modules/beanprep/node_modules/findit/package.json
+verbose loadDefaults findit@0.1.1
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/chowder/package.json
+verbose loadDefaults chowder@0.0.0
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/findit/package.json
+verbose loadDefaults findit@0.1.1
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/ini/package.json
+verbose loadDefaults ini@1.0.1
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/gumbo/package.json
+verbose loadDefaults gumbo@0.1.2
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/plugin/package.json
+verbose loadDefaults plugin@0.0.15
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/step/package.json
+verbose loadDefaults step@0.0.5
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/relative-date/package.json
+verbose loadDefaults relative-date@1.1.1
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/structr/package.json
+verbose loadDefaults structr@0.2.0
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.10
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/underscore/package.json
+verbose loadDefaults underscore@1.3.1
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/watch_r/package.json
+verbose loadDefaults watch_r@0.0.1
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/gumbo/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/celeri/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/ini/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/findit/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/relative-date/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/underscore/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/beanpoll/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/plugin/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/chowder/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/watch_r/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/step/package.json
+verbose caching /usr/local/lib/node_modules/beanprep/node_modules/celeri/package.json
+verbose loadDefaults celeri@0.1.3
+verbose caching /usr/local/lib/node_modules/leche/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/beanprep/node_modules/require-analyzer/package.json
+verbose loadDefaults require-analyzer@0.3.3
+verbose caching /usr/local/lib/node_modules/leche/node_modules/bean.notify.growl/package.json
+verbose loadDefaults bean.notify.growl@0.0.1
+verbose caching /usr/local/lib/node_modules/leche/node_modules/browserify/package.json
+verbose loadDefaults browserify@1.7.7
+verbose caching /usr/local/lib/node_modules/leche/node_modules/fig/package.json
+verbose loadDefaults fig@0.0.6
+verbose caching /usr/local/lib/node_modules/leche/node_modules/malt/package.json
+verbose loadDefaults malt@0.0.8
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/package.json
+verbose loadDefaults sardines@0.2.1
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/leche/node_modules/node-fs/package.json
+verbose loadDefaults node-fs@0.1.0
+verbose caching /usr/local/lib/node_modules/leche/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/package.json
+verbose loadDefaults fig@0.0.6
+verbose caching /usr/local/lib/node_modules/leche/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/bean.notify.growl/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/beanpole/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/fig/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/malt/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/node-fs/package.json
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/package.json
+verbose loadDefaults malt@0.0.8
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/bean.http/package.json
+verbose loadDefaults bean.http@0.0.5
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/malt/package.json
+verbose loadDefaults malt@0.0.8
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/fig/package.json
+verbose loadDefaults fig@0.0.6
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/vine/package.json
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/beanpole/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/bean.http/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/fig/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/malt/package.json
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/gridly/package.json
+verbose loadDefaults gridly@0.0.2
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanprep/package.json
+verbose loadDefaults beanprep@0.0.3
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/async/package.json
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/package.json
+verbose loadDefaults spice.io@0.0.4
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/capirona/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/catchall/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/beanpoll/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/beanie/package.json
+verbose caching /usr/local/lib/node_modules/mesh-winston/node_modules/winston/package.json
+verbose loadDefaults winston@0.5.10
+verbose from cache /usr/local/lib/node_modules/mesh-winston/node_modules/winston/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/colors/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/crc32/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/dirmr/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/handlebars/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/html-minifier/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/mkdirp/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/optimist/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/outcome/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/plugin/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/resolve/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/celeri/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/rmdirr/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/seq/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/sprintf/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/stepc/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/structr/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/underscore/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/underscore.string/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/walkr/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/uglify-js/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/traverse/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/ncp/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/scaffoldit/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/celeri/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/ncp/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/beanie/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/scaffoldit/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/outcome/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/underscore/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/mkdirp/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/async/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/stepc/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/handlebars/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/seq/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/resolve/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/uglify-js/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/crc32/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/rmdirr/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/catchall/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/dirmr/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/traverse/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/html-minifier/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/beanpoll/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/plugin/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/walkr/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/capirona/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/sprintf/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/underscore.string/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/optimist/package.json
+verbose caching /usr/local/lib/node_modules/require-analyzer/node_modules/colors/package.json
+verbose caching /usr/local/lib/node_modules/require-analyzer/node_modules/detective/package.json
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/beanpole/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/beanprep/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/spice.io/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/gridly/package.json
+verbose caching /usr/local/lib/node_modules/require-analyzer/node_modules/eyes/package.json
+verbose caching /usr/local/lib/node_modules/require-analyzer/node_modules/optimist/package.json
+verbose caching /usr/local/lib/node_modules/require-analyzer/node_modules/semver/package.json
+verbose caching /usr/local/lib/node_modules/require-analyzer/node_modules/findit/package.json
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/bean.http/package.json
+verbose loadDefaults bean.http@0.0.5
+verbose caching /usr/local/lib/node_modules/require-analyzer/node_modules/winston/package.json
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/bean.database.mongo/package.json
+verbose loadDefaults bean.database.mongo@0.0.2
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/cashew/package.json
+verbose loadDefaults cashew@0.0.5
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/celeri/package.json
+verbose loadDefaults celeri@0.1.3
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/bean.http.charded/package.json
+verbose loadDefaults bean.http.charded@0.0.2
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/coffee-script/package.json
+verbose loadDefaults coffee-script@1.1.3
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/daisy/package.json
+verbose loadDefaults daisy@0.0.7
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+WARN diffbot@0.1.0 package.json: bugs['web'] should probably be bugs['url']
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/diffbot/package.json
+verbose loadDefaults diffbot@0.1.0
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/express/package.json
+verbose loadDefaults express@2.5.1
+WARN htmlparser@1.7.3 package.json: bugs['web'] should probably be bugs['url']
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/htmlparser/package.json
+verbose loadDefaults htmlparser@1.7.3
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/nodepie/package.json
+verbose loadDefaults nodepie@0.4.0
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/imagemagick/package.json
+verbose loadDefaults imagemagick@0.1.2
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/oauth/package.json
+verbose loadDefaults oauth@0.9.5
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/mime/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/sprintf/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/bean.database.mongo/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/beanie/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/cashew/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/colors/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/disposable/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/daisy/package.json
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/redis/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/sprintf/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/outcome/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/stepc/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/vine/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/structr/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/underscore/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/winston/package.json
+verbose caching /usr/local/lib/node_modules/stove/node_modules/structr/package.json
+verbose loadDefaults structr@0.2.0
+verbose from cache /usr/local/lib/node_modules/stove/node_modules/structr/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/underscore/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/underscore/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/mime/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/sprintf/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/disposable/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/beanie/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/winston/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/sprintf/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/underscore/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/redis/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/cashew/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/bean.database.mongo/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/daisy/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/outcome/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/stepc/package.json
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/celeri/package.json
+verbose loadDefaults celeri@0.1.3
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/beanprep/package.json
+verbose loadDefaults beanprep@0.0.3
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/bean.database.mongo/package.json
+verbose loadDefaults bean.database.mongo@0.0.2
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/cashew/package.json
+verbose loadDefaults cashew@0.0.5
+WARN cron2@0.1.8 package.json: bugs['web'] should probably be bugs['url']
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/cron2/package.json
+verbose loadDefaults cron2@0.1.8
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/daisy/package.json
+verbose loadDefaults daisy@0.0.7
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/fig/package.json
+verbose loadDefaults fig@0.0.6
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/diffbot/package.json
+verbose loadDefaults diffbot@0.1.0
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/htmlparser/package.json
+verbose loadDefaults htmlparser@1.7.3
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/leche.core/package.json
+verbose loadDefaults leche.core@0.0.4
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/leche.spice.io/package.json
+verbose loadDefaults leche.spice.io@0.0.3
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/nodepie/package.json
+verbose loadDefaults nodepie@0.4.0
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/psk/package.json
+verbose loadDefaults psk@0.0.8
+WARN postmark-api@0.1.0 package.json: bugs['web'] should probably be bugs['url']
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/postmark-api/package.json
+verbose loadDefaults postmark-api@0.1.0
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/malt/package.json
+verbose loadDefaults malt@0.0.8
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/package.json
+verbose loadDefaults spice.io@0.0.4
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/bean.http/package.json
+verbose loadDefaults bean.http@0.0.8
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/cron/package.json
+verbose loadDefaults cron@1.0.0
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/bean.http.charded/package.json
+verbose loadDefaults bean.http.charded@0.0.1
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/gridly/package.json
+verbose loadDefaults gridly@0.0.2
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.core/package.json
+verbose loadDefaults leche.core@0.0.4
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/daisy/package.json
+verbose loadDefaults daisy@0.1.13
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.spice.io/package.json
+verbose loadDefaults leche.spice.io@0.0.3
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/beanpole/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/bean.http.charded/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/bean.http/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.spice.io/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.core/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/daisy/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/gridly/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/cron/package.json
+verbose caching /usr/local/lib/node_modules/sysalert/node_modules/twilio2/package.json
+verbose loadDefaults twilio2@0.3.2
+verbose caching /usr/local/lib/node_modules/sysalert/node_modules/bean.http/package.json
+verbose loadDefaults bean.http@0.0.5
+verbose caching /usr/local/lib/node_modules/sysalert/node_modules/mailgun/package.json
+verbose loadDefaults mailgun@0.4.2
+verbose caching /usr/local/lib/node_modules/sysalert/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/sysalert/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose from cache /usr/local/lib/node_modules/sysalert/node_modules/bean.http/package.json
+verbose from cache /usr/local/lib/node_modules/sysalert/node_modules/Structr/package.json
+verbose from cache /usr/local/lib/node_modules/sysalert/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/sysalert/node_modules/twilio2/package.json
+verbose from cache /usr/local/lib/node_modules/sysalert/node_modules/mailgun/package.json
+verbose caching /usr/local/lib/node_modules/beanprep/node_modules/npm/package.json
+verbose loadDefaults npm@1.0.106
+verbose has wscript [ undefined,
+verbose has wscript   { file: '/usr/local/lib/node_modules/spice.io/node_modules/compress/package.json',
+verbose has wscript     contributors: false,
+verbose has wscript     serverjs: false,
+verbose has wscript     gypfile: false,
+verbose has wscript     wscript: true } ]
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/compress/package.json
+verbose loadDefaults compress@0.1.9
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/beanpole/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/bean.http/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/bean.database.mongo/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/bean.http.charded/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/daisy/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/celeri/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/vine/package.json
+verbose caching /usr/local/lib/node_modules/require-analyzer/node_modules/npm/package.json
+verbose from cache /usr/local/lib/node_modules/require-analyzer/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/require-analyzer/node_modules/findit/package.json
+verbose cache add [ 'npm', '1.1.4' ]
+silly cache add: name, spec, args [ 'npm', '1.1.4', [ 'npm', '1.1.4' ] ]
+verbose parsed url { pathname: '1.1.4', path: '1.1.4', href: '1.1.4' }
+verbose addNamed [ 'npm', '1.1.4' ]
+verbose addNamed [ '1.1.4', '1.1.4' ]
+verbose from cache /usr/local/lib/node_modules/require-analyzer/node_modules/optimist/package.json
+verbose from cache /usr/local/lib/node_modules/require-analyzer/node_modules/semver/package.json
+verbose from cache /usr/local/lib/node_modules/require-analyzer/node_modules/winston/package.json
+verbose from cache /usr/local/lib/node_modules/require-analyzer/node_modules/detective/package.json
+verbose from cache /usr/local/lib/node_modules/require-analyzer/node_modules/eyes/package.json
+verbose has wscript [ undefined,
+verbose has wscript   { file: '/usr/local/lib/node_modules/teamdigest/node_modules/compress/package.json',
+verbose has wscript     gypfile: false,
+verbose has wscript     contributors: false,
+verbose has wscript     serverjs: false,
+verbose has wscript     wscript: true } ]
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/compress/package.json
+verbose loadDefaults compress@0.1.9
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/beanpole/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/beanprep/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/bean.database.mongo/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/celeri/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/leche.spice.io/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/leche.core/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/daisy/package.json
+http 200 https://registry.npmjs.org/npm
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"7MHLLR2DY66V3XS36UWUUJYH8"',
+silly get cb     date: 'Sun, 18 Mar 2012 19:14:49 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '248527' } ]
+verbose caching /usr/local/lib/node_modules/bonsai/node_modules/sk/node_modules/structr/package.json
+verbose loadDefaults structr@0.2.0
+verbose caching /usr/local/lib/node_modules/bonsai/node_modules/sk/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+verbose caching /usr/local/lib/node_modules/bonsai/node_modules/sk/node_modules/printf/package.json
+verbose loadDefaults printf@0.0.4
+verbose caching /usr/local/lib/node_modules/bonsai/node_modules/beet/node_modules/supervisord/package.json
+verbose loadDefaults supervisord@0.0.3
+verbose caching /usr/local/lib/node_modules/bonsai/node_modules/beet/node_modules/ini/package.json
+verbose loadDefaults ini@1.0.1
+verbose from cache /usr/local/lib/node_modules/bonsai/node_modules/beet/node_modules/supervisord/package.json
+verbose from cache /usr/local/lib/node_modules/bonsai/node_modules/beet/node_modules/ini/package.json
+verbose caching /usr/local/lib/node_modules/bonsai/node_modules/sk/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose from cache /usr/local/lib/node_modules/bonsai/node_modules/sk/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/bonsai/node_modules/sk/node_modules/printf/package.json
+verbose from cache /usr/local/lib/node_modules/bonsai/node_modules/sk/node_modules/dateformat/package.json
+verbose from cache /usr/local/lib/node_modules/bonsai/node_modules/sk/node_modules/websocket-client/package.json
+verbose caching /usr/local/lib/node_modules/beanie/node_modules/plugin/node_modules/structr/package.json
+verbose caching /usr/local/lib/node_modules/chard/node_modules/sk/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose caching /usr/local/lib/node_modules/beanie/node_modules/plugin/node_modules/tq/package.json
+verbose from cache /usr/local/lib/node_modules/beanie/node_modules/plugin/node_modules/tq/package.json
+verbose from cache /usr/local/lib/node_modules/beanie/node_modules/plugin/node_modules/structr/package.json
+verbose caching /usr/local/lib/node_modules/chard/node_modules/sk/node_modules/printf/package.json
+verbose loadDefaults printf@0.0.4
+verbose caching /usr/local/lib/node_modules/chard/node_modules/sk/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/sk/node_modules/printf/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/sk/node_modules/dateformat/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/sk/node_modules/websocket-client/package.json
+verbose caching /usr/local/lib/node_modules/beanie/node_modules/beanpoll/node_modules/crema/package.json
+verbose caching /usr/local/lib/node_modules/beanie/node_modules/beanpoll/node_modules/disposable/package.json
+verbose caching /usr/local/lib/node_modules/beanie/node_modules/beanpoll/node_modules/underscore/package.json
+verbose caching /usr/local/lib/node_modules/beanie/node_modules/beanpoll/node_modules/dolce/package.json
+verbose from cache /usr/local/lib/node_modules/beanie/node_modules/beanpoll/node_modules/disposable/package.json
+verbose from cache /usr/local/lib/node_modules/beanie/node_modules/beanpoll/node_modules/crema/package.json
+verbose from cache /usr/local/lib/node_modules/beanie/node_modules/beanpoll/node_modules/underscore/package.json
+verbose from cache /usr/local/lib/node_modules/beanie/node_modules/beanpoll/node_modules/dolce/package.json
+verbose caching /usr/local/lib/node_modules/chard/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose loadDefaults coffee-script@1.1.3
+verbose caching /usr/local/lib/node_modules/chard/node_modules/http-proxy/node_modules/optimist/package.json
+verbose loadDefaults optimist@0.2.8
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/http-proxy/node_modules/optimist/package.json
+verbose caching /usr/local/lib/node_modules/chard/node_modules/gumbo/node_modules/ini/package.json
+verbose loadDefaults ini@1.0.1
+verbose caching /usr/local/lib/node_modules/chard/node_modules/gumbo/node_modules/guava/package.json
+verbose loadDefaults guava@0.0.5
+verbose caching /usr/local/lib/node_modules/chard/node_modules/beanpole/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/chard/node_modules/beanpole/node_modules/mime/package.json
+verbose loadDefaults mime@1.2.4
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/beanpole/node_modules/mime/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/beanpole/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose caching /usr/local/lib/node_modules/chard/node_modules/cashew/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/cashew/node_modules/structr/package.json
+verbose caching /usr/local/lib/node_modules/chard/node_modules/gumbo/node_modules/malt/package.json
+verbose loadDefaults malt@0.0.8
+WARN amqp@0.1.0 package.json: bugs['web'] should probably be bugs['url']
+verbose caching /usr/local/lib/node_modules/chard/node_modules/daisy/node_modules/amqp/package.json
+verbose loadDefaults amqp@0.1.0
+verbose caching /usr/local/lib/node_modules/chard/node_modules/daisy/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/chard/node_modules/daisy/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/chard/node_modules/daisy/node_modules/underscore/package.json
+verbose loadDefaults underscore@1.2.1
+verbose caching /usr/local/lib/node_modules/chard/node_modules/daisy/node_modules/yaconfig/package.json
+verbose loadDefaults yaconfig@0.0.2
+verbose caching /usr/local/lib/node_modules/chard/node_modules/gumbo/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/chard/node_modules/gumbo/node_modules/node-fs/package.json
+verbose loadDefaults node-fs@0.1.0
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/gumbo/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/gumbo/node_modules/guava/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/gumbo/node_modules/node-fs/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/gumbo/node_modules/ini/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/gumbo/node_modules/malt/package.json
+verbose caching /usr/local/lib/node_modules/chard/node_modules/daisy/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/daisy/node_modules/amqp/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/daisy/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/daisy/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/daisy/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/daisy/node_modules/underscore/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/daisy/node_modules/yaconfig/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/beanpoll/node_modules/disposable/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/yaconfig/node_modules/node-fs/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/yaconfig/node_modules/node-fs/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/plugin/node_modules/structr/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/beanpoll/node_modules/dolce/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/vine/node_modules/outcome/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/vine/node_modules/outcome/package.json
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/cashew/package.json
+verbose loadDefaults cashew@0.0.6
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/malt/package.json
+verbose loadDefaults malt@0.0.17
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/guava/package.json
+verbose loadDefaults guava@0.0.5
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/node-fs/package.json
+verbose loadDefaults node-fs@0.1.0
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/celeri/node_modules/disposable/package.json
+verbose loadDefaults disposable@0.0.1
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/celeri/node_modules/crema/package.json
+verbose loadDefaults crema@0.1.1
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/celeri/node_modules/underscore/package.json
+verbose loadDefaults underscore@1.2.4
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/celeri/node_modules/tq/package.json
+verbose loadDefaults tq@0.0.3
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/findit/node_modules/seq/package.json
+verbose loadDefaults seq@0.3.5
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/findit/node_modules/seq/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/mesh-winston/node_modules/winston/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/mesh-winston/node_modules/winston/package.json
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/beanpoll/node_modules/crema/package.json
+verbose loadDefaults crema@0.1.1
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/beanpoll/node_modules/disposable/package.json
+verbose loadDefaults disposable@0.0.1
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/beanpoll/node_modules/dolce/package.json
+verbose loadDefaults dolce@0.0.12
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/beanpoll/node_modules/outcome/package.json
+verbose loadDefaults outcome@0.0.5
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/beanpoll/node_modules/disposable/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/beanpoll/node_modules/crema/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/beanpoll/node_modules/dolce/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/beanpoll/node_modules/outcome/package.json
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/plugin/node_modules/structr/package.json
+verbose loadDefaults structr@0.1.0
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/plugin/node_modules/tq/package.json
+verbose loadDefaults tq@0.0.1
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/plugin/node_modules/tq/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/plugin/node_modules/structr/package.json
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/chowder/node_modules/fglob/package.json
+verbose loadDefaults fglob@0.0.1
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/chowder/node_modules/fglob/package.json
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/guava/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/cashew/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/node-fs/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/malt/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/plugin/node_modules/tq/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/plugin/node_modules/tq/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/plugin/node_modules/structr/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/beanpoll/node_modules/outcome/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/beanpoll/node_modules/disposable/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/beanpoll/node_modules/dolce/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/beanpoll/node_modules/outcome/package.json
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/celeri/node_modules/outcome/package.json
+verbose loadDefaults outcome@0.0.5
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/celeri/node_modules/tq/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/celeri/node_modules/crema/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/celeri/node_modules/disposable/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/celeri/node_modules/outcome/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/celeri/node_modules/underscore/package.json
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sk/node_modules/printf/package.json
+verbose loadDefaults printf@0.0.4
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sk/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sk/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sk/node_modules/printf/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sk/node_modules/dateformat/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sk/node_modules/websocket-client/package.json
+verbose caching /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/cashew/package.json
+verbose loadDefaults cashew@0.0.5
+verbose caching /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose loadDefaults coffee-script@1.1.3
+verbose caching /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/ebnf-diagram/package.json
+verbose loadDefaults ebnf-diagram@0.1.0
+verbose caching /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/mime/package.json
+verbose loadDefaults mime@1.2.4
+verbose caching /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/jsdom/package.json
+verbose loadDefaults jsdom@0.2.9
+verbose caching /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/mime/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/cashew/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose caching /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/malt/package.json
+verbose loadDefaults malt@0.0.8
+verbose caching /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/malt/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/jsdom/package.json
+verbose caching /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/beanpole/package.json
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/aster/package.json
+verbose loadDefaults aster@0.0.3
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/mustache/package.json
+verbose loadDefaults mustache@0.3.1-dev
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/detective/package.json
+verbose loadDefaults detective@0.0.3
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/uglify-js/package.json
+verbose loadDefaults uglify-js@1.1.1
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/underscore/package.json
+verbose loadDefaults underscore@1.2.2
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/wrench/package.json
+verbose loadDefaults wrench@1.3.2
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/resolve/package.json
+verbose loadDefaults resolve@0.1.2
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/beanpole/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/resolve/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/wrench/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/underscore/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/uglify-js/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/detective/package.json
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/sk/node_modules/structr/package.json
+verbose loadDefaults structr@0.2.0
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/sk/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/sk/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/malt/package.json
+verbose loadDefaults malt@0.0.8
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/jsdom/package.json
+verbose loadDefaults jsdom@0.2.9
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/malt/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/jsdom/package.json
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/sk/node_modules/printf/package.json
+verbose loadDefaults printf@0.0.4
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/sk/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/sk/node_modules/printf/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/sk/node_modules/dateformat/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/sk/node_modules/websocket-client/package.json
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/sk/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/sk/node_modules/printf/package.json
+verbose loadDefaults printf@0.0.4
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/beanpole/package.json
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/sk/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/sk/node_modules/printf/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/sk/node_modules/dateformat/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/sk/node_modules/websocket-client/package.json
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/bean.http/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/bean.http/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/bean.http/node_modules/mime/package.json
+verbose loadDefaults mime@1.2.4
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/bean.http/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/bean.http/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/bean.http/node_modules/mime/package.json
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/cashew/package.json
+verbose loadDefaults cashew@0.0.5
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/mime/package.json
+verbose loadDefaults mime@1.2.4
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/ebnf-diagram/package.json
+verbose loadDefaults ebnf-diagram@0.1.0
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose loadDefaults coffee-script@1.1.3
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/mime/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/cashew/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/malt/package.json
+verbose loadDefaults malt@0.0.8
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/jsdom/package.json
+verbose loadDefaults jsdom@0.2.9
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/malt/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/jsdom/package.json
+verbose caching /usr/local/lib/node_modules/mesh-winston/node_modules/winston/node_modules/async/package.json
+verbose loadDefaults async@0.1.18
+verbose caching /usr/local/lib/node_modules/mesh-winston/node_modules/winston/node_modules/colors/package.json
+verbose loadDefaults colors@0.6.0-1
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/mesh-winston/node_modules/winston/node_modules/eyes/package.json
+verbose loadDefaults eyes@0.1.7
+verbose caching /usr/local/lib/node_modules/mesh-winston/node_modules/winston/node_modules/pkginfo/package.json
+verbose loadDefaults pkginfo@0.2.3
+verbose caching /usr/local/lib/node_modules/mesh-winston/node_modules/winston/node_modules/loggly/package.json
+verbose loadDefaults loggly@0.3.11
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/beanpole/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/celeri/node_modules/disposable/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/celeri/node_modules/colors/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/celeri/node_modules/tq/package.json
+verbose caching /usr/local/lib/node_modules/mesh-winston/node_modules/winston/node_modules/stack-trace/package.json
+verbose loadDefaults stack-trace@0.0.6
+verbose from cache /usr/local/lib/node_modules/mesh-winston/node_modules/winston/node_modules/async/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-winston/node_modules/winston/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-winston/node_modules/winston/node_modules/eyes/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-winston/node_modules/winston/node_modules/loggly/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-winston/node_modules/winston/node_modules/pkginfo/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-winston/node_modules/winston/node_modules/stack-trace/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/celeri/node_modules/crema/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/celeri/node_modules/structr/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/seq/node_modules/chainsaw/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/scaffoldit/node_modules/findit/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/seq/node_modules/hashish/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/seq/node_modules/chainsaw/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/seq/node_modules/hashish/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/catchall/node_modules/request/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/catchall/node_modules/yaconfig/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/catchall/node_modules/request/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/catchall/node_modules/yaconfig/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/beanpoll/node_modules/crema/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/beanpoll/node_modules/disposable/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/beanpoll/node_modules/dolce/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/beanpoll/node_modules/disposable/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/beanpoll/node_modules/crema/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/beanpoll/node_modules/dolce/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/capirona/node_modules/dolce/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/capirona/node_modules/colorcode/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/capirona/node_modules/crema/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/capirona/node_modules/ejs/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/capirona/node_modules/traverse/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/capirona/node_modules/underscore/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/capirona/node_modules/watch_r/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/walkr/node_modules/mustache/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/walkr/node_modules/ejs/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/walkr/node_modules/step/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/walkr/node_modules/step/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/walkr/node_modules/mustache/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/walkr/node_modules/ejs/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/scaffoldit/node_modules/mustache/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/plugin/node_modules/structr/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/plugin/node_modules/tq/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/plugin/node_modules/tq/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/plugin/node_modules/structr/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/optimist/node_modules/wordwrap/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/optimist/node_modules/wordwrap/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/scaffoldit/node_modules/step/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/scaffoldit/node_modules/mustache/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/scaffoldit/node_modules/step/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/scaffoldit/node_modules/findit/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/celeri/node_modules/underscore/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/celeri/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/celeri/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/celeri/node_modules/tq/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/celeri/node_modules/crema/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/celeri/node_modules/disposable/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/celeri/node_modules/underscore/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/capirona/node_modules/validator/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/capirona/node_modules/traverse/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/capirona/node_modules/underscore/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/capirona/node_modules/ejs/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/capirona/node_modules/dolce/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/capirona/node_modules/validator/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/capirona/node_modules/colorcode/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/capirona/node_modules/crema/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/capirona/node_modules/watch_r/package.json
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanprep/node_modules/celeri/package.json
+verbose loadDefaults celeri@0.1.3
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanprep/node_modules/findit/package.json
+verbose loadDefaults findit@0.1.1
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanprep/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanprep/node_modules/require-analyzer/package.json
+verbose loadDefaults require-analyzer@0.3.3
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/cashew/package.json
+verbose loadDefaults cashew@0.0.5
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose loadDefaults coffee-script@1.1.3
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/ebnf-diagram/package.json
+verbose loadDefaults ebnf-diagram@0.1.0
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/mime/package.json
+verbose loadDefaults mime@1.2.4
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/mime/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/cashew/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/cashew/package.json
+verbose loadDefaults cashew@0.0.5
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/bean.http/package.json
+verbose loadDefaults bean.http@0.0.5
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/bean.http.charded/package.json
+verbose loadDefaults bean.http.charded@0.0.2
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/coffee-script/package.json
+verbose loadDefaults coffee-script@1.1.3
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/bean.database.mongo/package.json
+verbose loadDefaults bean.database.mongo@0.0.2
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/express/package.json
+verbose loadDefaults express@2.5.1
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/daisy/package.json
+verbose loadDefaults daisy@0.0.7
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/diffbot/package.json
+verbose loadDefaults diffbot@0.1.0
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/celeri/package.json
+verbose loadDefaults celeri@0.1.3
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/htmlparser/package.json
+verbose loadDefaults htmlparser@1.7.3
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/nodepie/package.json
+verbose loadDefaults nodepie@0.4.0
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/oauth/package.json
+verbose loadDefaults oauth@0.9.5
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/imagemagick/package.json
+verbose loadDefaults imagemagick@0.1.2
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/psk/package.json
+verbose loadDefaults psk@0.0.8
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/underscore/package.json
+verbose loadDefaults underscore@1.2.2
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/connect/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/plugin/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/structr/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/tq/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/vine/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/winston/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/connect/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/plugin/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/winston/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/tq/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll/node_modules/disposable/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll/node_modules/crema/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/sk/node_modules/dateformat/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/sk/node_modules/htmlparser/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll/node_modules/dolce/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll/node_modules/disposable/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll/node_modules/crema/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll/node_modules/dolce/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/beanie/node_modules/beanpoll/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/winston/node_modules/async/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/beanie/node_modules/plugin/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/beanie/node_modules/plugin/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/beanie/node_modules/beanpoll/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/sk/node_modules/printf/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/winston/node_modules/stack-trace/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/winston/node_modules/pkginfo/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/amqp/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/winston/node_modules/eyes/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/bean.database.mongo/node_modules/mongoose/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/bean.database.mongo/node_modules/mongoose/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/beanpoll/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/cashew/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/crema/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/mesh-winston/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/structr/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/winston/node_modules/loggly/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/winston/node_modules/async/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/winston/node_modules/eyes/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/winston/node_modules/loggly/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/winston/node_modules/pkginfo/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/winston/node_modules/stack-trace/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/underscore/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/sk/node_modules/websocket-client/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/sk/node_modules/htmlparser/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/sk/node_modules/printf/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/sk/node_modules/dateformat/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/sk/node_modules/websocket-client/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/colors/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/plugin/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/yaconfig/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/crema/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/beanpoll/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/plugin/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/amqp/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/cashew/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/underscore/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/yaconfig/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/mesh-winston/package.json
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.spice.io/node_modules/malt/package.json
+verbose loadDefaults malt@0.0.8
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.spice.io/node_modules/fig/package.json
+verbose loadDefaults fig@0.0.6
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.spice.io/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose loadDefaults coffee-script@1.1.3
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/beanpole/node_modules/cashew/package.json
+verbose loadDefaults cashew@0.0.5
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/beanpole/node_modules/gumbo/package.json
+verbose loadDefaults gumbo@0.1.2
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/beanpole/node_modules/mime/package.json
+verbose loadDefaults mime@1.2.4
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.spice.io/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.spice.io/node_modules/fig/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.spice.io/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.spice.io/node_modules/malt/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.spice.io/node_modules/vine/package.json
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/beanpole/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.10
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/beanpole/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/beanpole/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/beanpole/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/beanpole/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/beanpole/node_modules/mime/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/beanpole/node_modules/gumbo/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/beanpole/node_modules/cashew/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/beanpole/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.core/node_modules/bean.http/package.json
+verbose loadDefaults bean.http@0.0.5
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.core/node_modules/fig/package.json
+verbose loadDefaults fig@0.0.6
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.core/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.core/node_modules/malt/package.json
+verbose loadDefaults malt@0.0.8
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.core/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.core/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.core/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.core/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.core/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.core/node_modules/beanpole/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.core/node_modules/bean.http/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.core/node_modules/fig/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.core/node_modules/malt/package.json
+verbose caching /usr/local/lib/node_modules/sysalert/node_modules/bean.http/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose raw, before any munging npm/1.1.4
+verbose url resolving [ 'https://registry.npmjs.org/', './npm/1.1.4' ]
+verbose url resolved https://registry.npmjs.org/npm/1.1.4
+verbose etag "7MHLLR2DY66V3XS36UWUUJYH8"
+http GET https://registry.npmjs.org/npm/1.1.4
+verbose caching /usr/local/lib/node_modules/sysalert/node_modules/bean.http/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/sysalert/node_modules/bean.http/node_modules/mime/package.json
+verbose loadDefaults mime@1.2.4
+verbose caching /usr/local/lib/node_modules/sysalert/node_modules/bean.http/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose from cache /usr/local/lib/node_modules/sysalert/node_modules/bean.http/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/sysalert/node_modules/bean.http/node_modules/mime/package.json
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/bean.http/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanprep/node_modules/npm/package.json
+verbose loadDefaults npm@1.0.106
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/bean.http/node_modules/mime/package.json
+verbose loadDefaults mime@1.2.4
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/leche.core/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/daisy/node_modules/yaconfig/package.json
+verbose loadDefaults yaconfig@0.0.2
+verbose from cache /usr/local/lib/node_modules/beanprep/node_modules/require-analyzer/package.json
+verbose from cache /usr/local/lib/node_modules/beanprep/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/beanprep/node_modules/celeri/package.json
+verbose from cache /usr/local/lib/node_modules/beanprep/node_modules/findit/package.json
+verbose cache add [ 'npm', '*' ]
+silly cache add: name, spec, args [ 'npm', '*', [ 'npm', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'npm', '*' ]
+http 304 https://registry.npmjs.org/npm/1.1.4
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"7MHLLR2DY66V3XS36UWUUJYH8"',
+silly get cb     date: 'Sun, 18 Mar 2012 19:14:53 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag npm/1.1.4 from cache
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/bean.http/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/beanpole/node_modules/cashew/package.json
+verbose loadDefaults cashew@0.0.5
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose loadDefaults coffee-script@1.1.3
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/bean.http/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/bean.http/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/bean.http/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/bean.http/node_modules/mime/package.json
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/beanpole/node_modules/ebnf-diagram/package.json
+verbose loadDefaults ebnf-diagram@0.1.0
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/beanpole/node_modules/mime/package.json
+verbose loadDefaults mime@1.2.4
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/beanpole/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose has wscript [ undefined,
+verbose has wscript   { file: '/usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/compress/package.json',
+verbose has wscript     contributors: false,
+verbose has wscript     serverjs: false,
+verbose has wscript     gypfile: false,
+verbose has wscript     wscript: true } ]
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/compress/package.json
+verbose loadDefaults compress@0.1.9
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/beanpole/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/bean.http/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/bean.database.mongo/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/bean.http.charded/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/daisy/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/celeri/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/underscore/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/psk/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/spice.io/node_modules/vine/package.json
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/bean.database.mongo/node_modules/mongoose/package.json
+verbose loadDefaults mongoose@2.3.13
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/bean.database.mongo/node_modules/mongoose/package.json
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/beanpole/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/celeri/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/celeri/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/celeri/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+WARN amqp@0.1.1 package.json: bugs['web'] should probably be bugs['url']
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/daisy/node_modules/amqp/package.json
+verbose loadDefaults amqp@0.1.1
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/daisy/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/daisy/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/daisy/node_modules/cashew/package.json
+verbose loadDefaults cashew@0.0.5
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/daisy/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/daisy/node_modules/yaconfig/package.json
+verbose loadDefaults yaconfig@0.0.2
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/daisy/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/beanpole/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/require-analyzer/node_modules/optimist/node_modules/wordwrap/package.json
+verbose from cache /usr/local/lib/node_modules/require-analyzer/node_modules/optimist/node_modules/wordwrap/package.json
+verbose caching /usr/local/lib/node_modules/require-analyzer/node_modules/detective/node_modules/burrito/package.json
+verbose from cache /usr/local/lib/node_modules/require-analyzer/node_modules/detective/node_modules/burrito/package.json
+verbose caching /usr/local/lib/node_modules/require-analyzer/node_modules/findit/node_modules/seq/package.json
+verbose from cache /usr/local/lib/node_modules/require-analyzer/node_modules/findit/node_modules/seq/package.json
+verbose caching /usr/local/lib/node_modules/require-analyzer/node_modules/winston/node_modules/loggly/package.json
+verbose caching /usr/local/lib/node_modules/require-analyzer/node_modules/winston/node_modules/async/package.json
+verbose caching /usr/local/lib/node_modules/require-analyzer/node_modules/winston/node_modules/stack-trace/package.json
+verbose caching /usr/local/lib/node_modules/spice.io/node_modules/daisy/node_modules/underscore/package.json
+verbose loadDefaults underscore@1.2.2
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/daisy/node_modules/beanpole/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/daisy/node_modules/amqp/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/daisy/node_modules/cashew/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/daisy/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/daisy/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/daisy/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/daisy/node_modules/underscore/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/daisy/node_modules/yaconfig/package.json
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/beanprep/node_modules/celeri/package.json
+verbose loadDefaults celeri@0.1.3
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/beanprep/node_modules/findit/package.json
+verbose loadDefaults findit@0.1.1
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/beanprep/node_modules/require-analyzer/package.json
+verbose loadDefaults require-analyzer@0.3.3
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/beanprep/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose loadDefaults coffee-script@1.1.3
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/beanpole/node_modules/ebnf-diagram/package.json
+verbose loadDefaults ebnf-diagram@0.1.0
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/beanpole/node_modules/cashew/package.json
+verbose loadDefaults cashew@0.0.5
+verbose caching /usr/local/lib/node_modules/require-analyzer/node_modules/winston/node_modules/pkginfo/package.json
+verbose from cache /usr/local/lib/node_modules/require-analyzer/node_modules/winston/node_modules/async/package.json
+verbose from cache /usr/local/lib/node_modules/require-analyzer/node_modules/winston/node_modules/loggly/package.json
+verbose from cache /usr/local/lib/node_modules/require-analyzer/node_modules/winston/node_modules/pkginfo/package.json
+verbose from cache /usr/local/lib/node_modules/require-analyzer/node_modules/winston/node_modules/stack-trace/package.json
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/beanpole/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/beanpole/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/celeri/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/celeri/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/beanpole/node_modules/mime/package.json
+verbose loadDefaults mime@1.2.4
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/celeri/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/beanpole/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/bean.database.mongo/package.json
+verbose loadDefaults bean.database.mongo@0.0.2
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/bean.database.mongo/node_modules/mongoose/package.json
+verbose loadDefaults mongoose@2.3.13
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/bean.database.mongo/node_modules/mongoose/package.json
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/bean.http/package.json
+verbose loadDefaults bean.http@0.0.5
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/bean.http.charded/package.json
+verbose loadDefaults bean.http.charded@0.0.2
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/cashew/package.json
+verbose loadDefaults cashew@0.0.5
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/celeri/package.json
+verbose loadDefaults celeri@0.1.3
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/coffee-script/package.json
+verbose loadDefaults coffee-script@1.1.3
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/diffbot/package.json
+verbose loadDefaults diffbot@0.1.0
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/express/package.json
+verbose loadDefaults express@2.5.1
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/htmlparser/package.json
+verbose loadDefaults htmlparser@1.7.3
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/imagemagick/package.json
+verbose loadDefaults imagemagick@0.1.2
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/oauth/package.json
+verbose loadDefaults oauth@0.9.5
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/nodepie/package.json
+verbose loadDefaults nodepie@0.4.0
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/psk/package.json
+verbose loadDefaults psk@0.0.8
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/daisy/package.json
+verbose loadDefaults daisy@0.0.7
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/underscore/package.json
+verbose loadDefaults underscore@1.2.2
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/leche.core/node_modules/bean.http/package.json
+verbose loadDefaults bean.http@0.0.5
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/leche.core/node_modules/fig/package.json
+verbose loadDefaults fig@0.0.6
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/leche.core/node_modules/malt/package.json
+verbose loadDefaults malt@0.0.8
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/leche.core/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/leche.core/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/leche.core/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/leche.spice.io/node_modules/fig/package.json
+verbose loadDefaults fig@0.0.6
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/daisy/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/leche.spice.io/node_modules/malt/package.json
+verbose loadDefaults malt@0.0.8
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/leche.spice.io/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/daisy/node_modules/amqp/package.json
+verbose loadDefaults amqp@0.1.1
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/leche.spice.io/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/leche.spice.io/node_modules/fig/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/leche.spice.io/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/leche.spice.io/node_modules/malt/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/leche.spice.io/node_modules/vine/package.json
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/daisy/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/daisy/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/daisy/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/daisy/node_modules/underscore/package.json
+verbose loadDefaults underscore@1.2.2
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/daisy/node_modules/cashew/package.json
+verbose loadDefaults cashew@0.0.5
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/daisy/node_modules/beanpole/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/daisy/node_modules/amqp/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/daisy/node_modules/cashew/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/daisy/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/daisy/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/daisy/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/daisy/node_modules/underscore/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/daisy/node_modules/yaconfig/package.json
+silly name, range, hasData 2 [ 'npm', '', true ]
+silly versions [ 'npm',
+silly versions   [ '1.0.106',
+silly versions     '0.2.19',
+silly versions     '1.1.0',
+silly versions     '1.1.0-1',
+silly versions     '1.1.0-2',
+silly versions     '1.1.0-3',
+silly versions     '1.1.1',
+silly versions     '1.1.2',
+silly versions     '1.1.3',
+silly versions     '1.1.4',
+silly versions     '1.1.5',
+silly versions     '1.1.6',
+silly versions     '1.1.7',
+silly versions     '1.1.8',
+silly versions     '1.1.9' ] ]
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl1.0.0e-v83.6.6.20-darwin-x64-10.7.0',
+verbose bin dist   { shasum: '550e906dfddcb8c470f7c38a5c6ff6545f834e06',
+verbose bin dist     tarball: 'http://registry.npmjs.org/npm/-/npm-1.1.9.tgz' } ]
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/beanpole/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/beanpole/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/beanpole/node_modules/mime/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/beanpole/node_modules/cashew/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/beanpole/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/celeri/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/celeri/node_modules/beanpole/package.json
+verbose from cache /usr/local/lib/node_modules/spice.io/node_modules/celeri/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/beanpole/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/beanpole/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/beanpole/node_modules/mime/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/beanpole/node_modules/cashew/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/beanpole/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/celeri/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/celeri/node_modules/beanpole/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/celeri/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/leche.core/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/leche.core/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/leche.core/node_modules/beanpole/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/leche.core/node_modules/bean.http/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/leche.core/node_modules/fig/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/leche.core/node_modules/malt/package.json
+verbose addRemoteTarball [ 'https://registry.npmjs.org/npm/-/npm-1.1.9.tgz',
+verbose addRemoteTarball   '550e906dfddcb8c470f7c38a5c6ff6545f834e06' ]
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/beanprep/node_modules/npm/package.json
+verbose loadDefaults npm@1.0.106
+verbose has wscript [ undefined,
+verbose has wscript   { file: '/usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/compress/package.json',
+verbose has wscript     contributors: false,
+verbose has wscript     serverjs: false,
+verbose has wscript     gypfile: false,
+verbose has wscript     wscript: true } ]
+verbose caching /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/compress/package.json
+verbose loadDefaults compress@0.1.9
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/beanpole/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/bean.http/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/bean.database.mongo/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/bean.http.charded/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/daisy/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/celeri/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/underscore/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/psk/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/teamdigest/node_modules/spice.io/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/beanprep/node_modules/require-analyzer/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/beanprep/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/beanprep/node_modules/celeri/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/beanprep/node_modules/findit/package.json
+verbose cache add [ 'npm', '*' ]
+silly cache add: name, spec, args [ 'npm', '*', [ 'npm', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+verbose addNamed [ 'npm', '*' ]
+verbose caching /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/bean.http/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.core/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/bonsai/node_modules/beet/node_modules/supervisord/node_modules/xmlrpc/package.json
+verbose loadDefaults xmlrpc@0.9.0
+verbose caching /usr/local/lib/node_modules/beanie/node_modules/beanpoll/node_modules/dolce/node_modules/underscore/package.json
+verbose caching /usr/local/lib/node_modules/beanie/node_modules/beanpoll/node_modules/dolce/node_modules/sift/package.json
+verbose from cache /usr/local/lib/node_modules/beanie/node_modules/beanpoll/node_modules/dolce/node_modules/sift/package.json
+verbose from cache /usr/local/lib/node_modules/beanie/node_modules/beanpoll/node_modules/dolce/node_modules/underscore/package.json
+verbose caching /usr/local/lib/node_modules/chard/node_modules/gumbo/node_modules/guava/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+verbose caching /usr/local/lib/node_modules/chard/node_modules/gumbo/node_modules/guava/node_modules/dnode-protocol/package.json
+verbose loadDefaults dnode-protocol@0.1.1
+verbose caching /usr/local/lib/node_modules/chard/node_modules/gumbo/node_modules/guava/node_modules/lazy/package.json
+verbose loadDefaults lazy@1.0.7
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/findit/node_modules/seq/node_modules/chainsaw/package.json
+verbose loadDefaults chainsaw@0.0.9
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/findit/node_modules/seq/node_modules/hashish/package.json
+verbose loadDefaults hashish@0.0.4
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/findit/node_modules/seq/node_modules/chainsaw/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/findit/node_modules/seq/node_modules/hashish/package.json
+verbose caching /usr/local/lib/node_modules/chard/node_modules/http-proxy/node_modules/optimist/node_modules/wordwrap/package.json
+verbose loadDefaults wordwrap@0.0.2
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/http-proxy/node_modules/optimist/node_modules/wordwrap/package.json
+verbose caching /usr/local/lib/node_modules/chard/node_modules/gumbo/node_modules/guava/node_modules/vows/package.json
+verbose loadDefaults vows@0.5.13
+verbose caching /usr/local/lib/node_modules/chard/node_modules/gumbo/node_modules/guava/node_modules/traverse/package.json
+verbose loadDefaults traverse@0.5.2
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/beanpoll/node_modules/dolce/node_modules/sift/package.json
+verbose loadDefaults sift@0.0.3
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/beanpoll/node_modules/dolce/node_modules/underscore/package.json
+verbose loadDefaults underscore@1.2.4
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/beanpoll/node_modules/dolce/node_modules/sift/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/beanpoll/node_modules/dolce/node_modules/underscore/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/mesh-winston/node_modules/winston/node_modules/loggly/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/mesh-winston/node_modules/winston/node_modules/async/package.json
+verbose caching /usr/local/lib/node_modules/chard/node_modules/daisy/node_modules/yaconfig/node_modules/node-fs/package.json
+verbose loadDefaults node-fs@0.1.0
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/daisy/node_modules/yaconfig/node_modules/node-fs/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/mesh-winston/node_modules/winston/node_modules/stack-trace/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/mesh-winston/node_modules/winston/node_modules/pkginfo/package.json
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/mesh-winston/node_modules/winston/node_modules/eyes/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/mesh-winston/node_modules/winston/node_modules/async/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/mesh-winston/node_modules/winston/node_modules/eyes/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/mesh-winston/node_modules/winston/node_modules/loggly/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/mesh-winston/node_modules/winston/node_modules/pkginfo/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/mesh-winston/node_modules/winston/node_modules/stack-trace/package.json
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/sk/node_modules/htmlparser/package.json
+verbose loadDefaults htmlparser@1.7.4
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/sk/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/sk/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/malt/node_modules/mesh-winston/package.json
+verbose loadDefaults mesh-winston@0.0.1
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/sk/node_modules/printf/package.json
+verbose loadDefaults printf@0.0.4
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/malt/node_modules/sprintf/package.json
+verbose loadDefaults sprintf@0.1.1
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/malt/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.14
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/malt/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/malt/node_modules/mesh-winston/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/malt/node_modules/sprintf/package.json
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/guava/node_modules/dnode-protocol/package.json
+verbose loadDefaults dnode-protocol@0.1.1
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/guava/node_modules/socket.io/package.json
+verbose loadDefaults socket.io@0.9.2
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/guava/node_modules/vows/package.json
+verbose loadDefaults vows@0.6.2
+verbose caching /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/gumbo/node_modules/guava/package.json
+verbose loadDefaults guava@0.0.5
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/guava/node_modules/traverse/package.json
+verbose loadDefaults traverse@0.6.0
+verbose caching /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/gumbo/node_modules/malt/package.json
+verbose loadDefaults malt@0.0.8
+verbose caching /usr/local/lib/node_modules/daisy/node_modules/beanpoll/node_modules/dolce/node_modules/sift/package.json
+verbose from cache /usr/local/lib/node_modules/daisy/node_modules/beanpoll/node_modules/dolce/node_modules/sift/package.json
+verbose caching /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/guava/node_modules/lazy/package.json
+verbose loadDefaults lazy@1.0.8
+verbose caching /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/sk/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+verbose caching /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/sk/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+verbose caching /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/gumbo/node_modules/ini/package.json
+verbose loadDefaults ini@1.0.1
+verbose caching /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/sk/node_modules/htmlparser/package.json
+verbose loadDefaults htmlparser@1.7.3
+verbose caching /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/sk/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/sk/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose caching /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/gumbo/node_modules/node-fs/package.json
+verbose loadDefaults node-fs@0.1.0
+verbose caching /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/jsdom/node_modules/cssom/package.json
+verbose loadDefaults cssom@0.2.1
+verbose caching /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/sk/node_modules/printf/package.json
+verbose loadDefaults printf@0.0.4
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/sk/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/sk/node_modules/htmlparser/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/sk/node_modules/printf/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/sk/node_modules/dateformat/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/sk/node_modules/websocket-client/package.json
+verbose caching /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/cashew/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/jsdom/node_modules/request/package.json
+verbose loadDefaults request@2.2.5
+verbose caching /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/jsdom/node_modules/htmlparser/package.json
+verbose loadDefaults htmlparser@1.7.3
+verbose caching /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/sk/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+verbose caching /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/sk/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+verbose caching /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/sk/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/sk/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose caching /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/sk/node_modules/htmlparser/package.json
+verbose loadDefaults htmlparser@1.7.3
+verbose caching /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/sk/node_modules/printf/package.json
+verbose loadDefaults printf@0.0.4
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/sk/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/sk/node_modules/htmlparser/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/sk/node_modules/printf/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/sk/node_modules/dateformat/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/sk/node_modules/websocket-client/package.json
+verbose caching /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/malt/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/malt/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/malt/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/sk/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+verbose caching /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/sk/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+verbose caching /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/malt/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/malt/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/malt/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/malt/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/fig/node_modules/malt/node_modules/beanpole/package.json
+verbose caching /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/sk/node_modules/htmlparser/package.json
+verbose loadDefaults htmlparser@1.7.3
+verbose caching /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/sk/node_modules/printf/package.json
+verbose loadDefaults printf@0.0.4
+verbose caching /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/sk/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose caching /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose loadDefaults coffee-script@1.1.3
+verbose caching /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/beanpole/node_modules/cashew/package.json
+verbose loadDefaults cashew@0.0.5
+verbose caching /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/beanpole/node_modules/mime/package.json
+verbose loadDefaults mime@1.2.4
+verbose caching /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/beanpole/node_modules/ebnf-diagram/package.json
+verbose loadDefaults ebnf-diagram@0.1.0
+verbose caching /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/beanpole/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/sk/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/sk/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/sk/node_modules/htmlparser/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/sk/node_modules/printf/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/sk/node_modules/dateformat/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/sk/node_modules/websocket-client/package.json
+verbose caching /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/beanpole/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/sk/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/sk/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/sk/node_modules/htmlparser/package.json
+verbose loadDefaults htmlparser@1.7.3
+verbose caching /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/beanpole/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/sk/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/sk/node_modules/printf/package.json
+verbose loadDefaults printf@0.0.4
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/beanpole/node_modules/cashew/package.json
+verbose loadDefaults cashew@0.0.5
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/sk/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/sk/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/sk/node_modules/htmlparser/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/sk/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/sk/node_modules/printf/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/sk/node_modules/dateformat/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/sk/node_modules/websocket-client/package.json
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/beanpole/node_modules/ebnf-diagram/package.json
+verbose loadDefaults ebnf-diagram@0.1.0
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose loadDefaults coffee-script@1.1.3
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/beanpole/node_modules/mime/package.json
+verbose loadDefaults mime@1.2.4
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/beanpole/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/beanpole/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/beanpole/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/detective/node_modules/findit/package.json
+verbose loadDefaults findit@0.1.0
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/sk/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/sk/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+verbose caching /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/detective/node_modules/burrito/package.json
+verbose loadDefaults burrito@0.2.11
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/detective/node_modules/burrito/package.json
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/sk/node_modules/printf/package.json
+verbose loadDefaults printf@0.0.4
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/sk/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/sk/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/malt/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/sk/node_modules/htmlparser/package.json
+verbose loadDefaults htmlparser@1.7.3
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/sk/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/sk/node_modules/htmlparser/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/sk/node_modules/printf/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/sk/node_modules/dateformat/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/sk/node_modules/websocket-client/package.json
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/malt/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/sk/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/sk/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/sk/node_modules/htmlparser/package.json
+verbose loadDefaults htmlparser@1.7.3
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/malt/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/malt/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/malt/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/malt/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/malt/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/malt/node_modules/beanpole/package.json
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/sk/node_modules/printf/package.json
+verbose loadDefaults printf@0.0.4
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/sk/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/jsdom/node_modules/cssom/package.json
+verbose loadDefaults cssom@0.2.1
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/sk/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/sk/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/sk/node_modules/htmlparser/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/sk/node_modules/printf/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/sk/node_modules/dateformat/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/sk/node_modules/websocket-client/package.json
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/jsdom/node_modules/htmlparser/package.json
+verbose loadDefaults htmlparser@1.7.3
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/fig/node_modules/jsdom/node_modules/request/package.json
+verbose loadDefaults request@2.2.5
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose loadDefaults coffee-script@1.1.3
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/beanpole/node_modules/ebnf-diagram/package.json
+verbose loadDefaults ebnf-diagram@0.1.0
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/beanpole/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/beanpole/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/beanpole/node_modules/cashew/package.json
+verbose loadDefaults cashew@0.0.5
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/beanpole/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/sk/node_modules/printf/package.json
+verbose loadDefaults printf@0.0.4
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/sk/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+verbose caching /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/beanpole/node_modules/mime/package.json
+verbose loadDefaults mime@1.2.4
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/sk/node_modules/htmlparser/package.json
+verbose loadDefaults htmlparser@1.7.3
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/sk/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/sk/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/sk/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/sk/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/sk/node_modules/htmlparser/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/sk/node_modules/printf/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/sk/node_modules/dateformat/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/sk/node_modules/websocket-client/package.json
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/gumbo/node_modules/ini/package.json
+verbose loadDefaults ini@1.0.1
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/gumbo/node_modules/node-fs/package.json
+verbose loadDefaults node-fs@0.1.0
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/gumbo/node_modules/guava/package.json
+verbose loadDefaults guava@0.0.5
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/gumbo/node_modules/malt/package.json
+verbose loadDefaults malt@0.0.8
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/cashew/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/sk/node_modules/htmlparser/package.json
+verbose loadDefaults htmlparser@1.7.3
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/sk/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/sk/node_modules/printf/package.json
+verbose loadDefaults printf@0.0.4
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/sk/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/sk/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/sk/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/sk/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/sk/node_modules/htmlparser/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/sk/node_modules/printf/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/sk/node_modules/dateformat/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/sk/node_modules/websocket-client/package.json
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/malt/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/malt/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/malt/node_modules/structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/jsdom/node_modules/cssom/package.json
+verbose loadDefaults cssom@0.2.1
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/jsdom/node_modules/htmlparser/package.json
+verbose loadDefaults htmlparser@1.7.3
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/malt/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/malt/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/malt/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/malt/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/malt/node_modules/beanpole/package.json
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/fig/node_modules/jsdom/node_modules/request/package.json
+verbose loadDefaults request@2.2.5
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/sk/node_modules/htmlparser/package.json
+verbose loadDefaults htmlparser@1.7.3
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/sk/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/sk/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/sk/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/sk/node_modules/printf/package.json
+verbose loadDefaults printf@0.0.4
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose loadDefaults coffee-script@1.1.3
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/sk/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/sk/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/sk/node_modules/htmlparser/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/sk/node_modules/printf/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/sk/node_modules/dateformat/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/sk/node_modules/websocket-client/package.json
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/beanpole/node_modules/cashew/package.json
+verbose loadDefaults cashew@0.0.5
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/beanpole/node_modules/ebnf-diagram/package.json
+verbose loadDefaults ebnf-diagram@0.1.0
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/seq/node_modules/chainsaw/node_modules/traverse/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/seq/node_modules/chainsaw/node_modules/traverse/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/catchall/node_modules/yaconfig/node_modules/node-fs/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/catchall/node_modules/yaconfig/node_modules/node-fs/package.json
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/beanpole/node_modules/mime/package.json
+verbose loadDefaults mime@1.2.4
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/beanpole/node_modules/sk/package.json
+verbose loadDefaults sk@0.0.8
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/beanpoll/node_modules/dolce/node_modules/sift/package.json
+verbose caching /usr/local/lib/node_modules/mesh-winston/node_modules/winston/node_modules/loggly/node_modules/timespan/package.json
+verbose loadDefaults timespan@2.2.0
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/beanpole/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/mesh-winston/node_modules/winston/node_modules/loggly/node_modules/request/package.json
+verbose loadDefaults request@2.9.153
+verbose from cache /usr/local/lib/node_modules/mesh-winston/node_modules/winston/node_modules/loggly/node_modules/request/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-winston/node_modules/winston/node_modules/loggly/node_modules/timespan/package.json
+verbose mkdir (expected) error ENOENT, no such file or directory '/tmp/npm-1332098093893'
+verbose caching /usr/local/lib/node_modules/leche.core/node_modules/malt/node_modules/beanpole/node_modules/vine/package.json
+verbose loadDefaults vine@0.0.11
+verbose bin dist [ '0.6-ares1.7.5-DEV-evundefined-openssl1.0.0e-v83.6.6.20-darwin-x64-10.7.0',
+verbose bin dist   { shasum: 'c76e71a66c41915914e12de26260a419c62c37a3',
+verbose bin dist     tarball: 'http://registry.npmjs.org/npm/-/npm-1.1.4.tgz' } ]
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/beanpoll/node_modules/dolce/node_modules/underscore/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/beanpoll/node_modules/dolce/node_modules/sift/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/beanpoll/node_modules/dolce/node_modules/underscore/package.json
+verbose caching /usr/local/lib/node_modules/mesh/node_modules/capirona/node_modules/dolce/node_modules/sift/package.json
+verbose from cache /usr/local/lib/node_modules/mesh/node_modules/capirona/node_modules/dolce/node_modules/sift/package.json
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/sk/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/sk/node_modules/htmlparser/package.json
+verbose loadDefaults htmlparser@1.7.3
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/sk/node_modules/printf/package.json
+verbose loadDefaults printf@0.0.4
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/sk/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/sk/node_modules/colors/package.json
+verbose loadDefaults colors@0.5.1
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/sk/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/sk/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/sk/node_modules/htmlparser/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/sk/node_modules/printf/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/sk/node_modules/dateformat/package.json
+verbose from cache /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/sk/node_modules/websocket-client/package.json
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/gumbo/node_modules/malt/package.json
+verbose loadDefaults malt@0.0.8
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/gumbo/node_modules/ini/package.json
+verbose loadDefaults ini@1.0.1
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/gumbo/node_modules/guava/package.json
+verbose loadDefaults guava@0.0.5
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/cashew/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/fanlime/node_modules/beanpole/node_modules/gumbo/node_modules/node-fs/package.json
+verbose loadDefaults node-fs@0.1.0
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/connect/node_modules/qs/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/plugin/node_modules/tq/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/plugin/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/plugin/node_modules/tq/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/plugin/node_modules/structr/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/connect/node_modules/formidable/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/connect/node_modules/qs/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/connect/node_modules/formidable/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/winston/node_modules/loggly/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/winston/node_modules/eyes/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/winston/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/gumbo/node_modules/guava/node_modules/vows/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/gumbo/node_modules/guava/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/gumbo/node_modules/guava/node_modules/lazy/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/gumbo/node_modules/guava/node_modules/traverse/package.json
+verbose from cache /usr/local/lib/node_modules/chard/node_modules/gumbo/node_modules/guava/node_modules/dnode-protocol/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/sk/node_modules/htmlparser/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/sk/node_modules/printf/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/sk/node_modules/dateformat/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/sk/node_modules/websocket-client/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/guava/node_modules/vows/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/guava/node_modules/socket.io/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/guava/node_modules/lazy/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/guava/node_modules/traverse/package.json
+verbose from cache /usr/local/lib/node_modules/cupboard/node_modules/gumbo/node_modules/guava/node_modules/dnode-protocol/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/gumbo/node_modules/guava/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/gumbo/node_modules/malt/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/gumbo/node_modules/ini/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/beanpole/node_modules/gumbo/node_modules/node-fs/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/beanpole/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/beanpole/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/beanpole/node_modules/mime/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/beanpole/node_modules/cashew/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/malt/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/beanpole/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/beanpole/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/beanpole/node_modules/mime/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/beanpole/node_modules/cashew/package.json
+verbose from cache /usr/local/lib/node_modules/leche/node_modules/sardines/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/winston/node_modules/pkginfo/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/beanie/node_modules/plugin/node_modules/structr/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/beanie/node_modules/plugin/node_modules/tq/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/beanie/node_modules/plugin/node_modules/tq/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/beanie/node_modules/plugin/node_modules/structr/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/beanie/node_modules/beanpoll/node_modules/crema/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/beanie/node_modules/beanpoll/node_modules/dolce/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/beanie/node_modules/beanpoll/node_modules/crema/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/beanie/node_modules/beanpoll/node_modules/dolce/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/bean.database.mongo/node_modules/mongoose/node_modules/hooks/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/winston/node_modules/stack-trace/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/winston/node_modules/colors/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/winston/node_modules/eyes/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/winston/node_modules/loggly/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/winston/node_modules/pkginfo/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll-http/node_modules/winston/node_modules/stack-trace/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll/node_modules/dolce/node_modules/sift/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/beanpoll/node_modules/dolce/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/beanpoll/node_modules/dolce/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/bean.database.mongo/node_modules/mongoose/node_modules/mongodb/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/bean.database.mongo/node_modules/mongoose/node_modules/hooks/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/bean.database.mongo/node_modules/mongoose/node_modules/mongodb/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/winston/node_modules/loggly/node_modules/timespan/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/plugin/node_modules/structr/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/beanpole/node_modules/sk/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/beanpole/node_modules/vine/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/beanpole/node_modules/mime/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/beanpole/node_modules/cashew/package.json
+verbose from cache /usr/local/lib/node_modules/leche.spice.io/node_modules/malt/node_modules/beanpole/node_modules/coffee-script/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/gumbo/node_modules/ini/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/gumbo/node_modules/node-fs/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/gumbo/node_modules/guava/package.json
+verbose from cache /usr/local/lib/node_modules/leche.core/node_modules/beanpole/node_modules/gumbo/node_modules/malt/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/winston/node_modules/loggly/node_modules/request/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/winston/node_modules/loggly/node_modules/request/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/winston/node_modules/loggly/node_modules/timespan/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/plugin/node_modules/tq/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/plugin/node_modules/tq/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/plugin/node_modules/structr/package.json
+verbose caching /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll/node_modules/dolce/node_modules/underscore/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll/node_modules/dolce/node_modules/sift/package.json
+verbose from cache /usr/local/lib/node_modules/mesh-http/node_modules/beanpoll/node_modules/dolce/node_modules/underscore/package.json
+verbose caching /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/yaconfig/node_modules/node-fs/package.json
+verbose from cache /usr/local/lib/node_modules/thyme/node_modules/daisy/node_modules/yaconfig/node_modules/node-fs/package.json
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.spice.io/node_modules/sk/node_modules/dateformat/package.json
+verbose loadDefaults dateformat@1.0.2-1.2.3
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.spice.io/node_modules/sk/node_modules/websocket-client/package.json
+verbose loadDefaults websocket-client@1.0.0
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.spice.io/node_modules/fig/node_modules/Structr/package.json
+verbose loadDefaults structr@0.0.10
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.spice.io/node_modules/fig/node_modules/jsdom/package.json
+verbose loadDefaults jsdom@0.2.9
+verbose caching /usr/local/lib/node_modules/teamdigest-front/node_modules/leche.spice.io/node_modules/malt/node_modules/beanpole/package.json
+verbose loadDefaults beanpole@0.1.16
