@@ -7,7 +7,7 @@ include ../../../makefile.inc
 SDIR = ./src
 
 
-BDIR = ../../apps/desktop_player/bin
+BDIR = ../site/_assets/flash
 
 
 #-----------------------------------------------------------

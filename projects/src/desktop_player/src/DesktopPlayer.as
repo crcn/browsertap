@@ -31,7 +31,7 @@ package
 		private var _debugInfo:TextField;
 		private var _debug:Boolean;
 		
-		[SWF(frameRate='60',backgroundColor='#ffffff')]
+		[SWF(frameRate='60',backgroundColor='#FFFFFF')]
 		
 		
 		
@@ -39,12 +39,12 @@ package
 		{
 			
 			
-			this._server =  this.root.loaderInfo.parameters.server || "rtmp://10.0.1.6:1935/live";
+			this._server =  this.root.loaderInfo.parameters.host || "rtmp://10.0.1.6:1935/live";
 			this._debug = Boolean(this.root.loaderInfo.parameters.debug);
 			
 			
 			this._debugInfo = new TextField();
-			this._debugInfo.text = "loading..";
+			this._debugInfo.text = "connecting to " + this._server;
 			this._debugInfo.autoSize = 'left';
 			if(this._debug) this.addChild(this._debugInfo);
 			
@@ -75,7 +75,6 @@ package
 				this.stage.addEventListener(mouseEvent, onMouseEvent);
 			}
 			
-			trace("G");
 			
 			for each(var keyboardEvent:String in keyboardEvents)
 			{
@@ -154,7 +153,7 @@ package
 		
 		private function onNetStatus(event:NetStatusEvent):void
 		{
-			this._debugInfo.text = event.info.code;
+			this._debugInfo.text = event.info.code + "\n";
 			
 			if(event.info.code == NetConnectionCodes.CONNECT_SUCCESS)
 			{

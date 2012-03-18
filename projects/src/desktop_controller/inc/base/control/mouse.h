@@ -30,9 +30,27 @@ namespace Control
 		void offset(Geom::Point newOffset);
 
 
+		/**
+		 */
+
+		void setPosition(int x, int y);
+
+		/**
+		 */
+
+		void dispatchEvent(int code, int x, int y, int dwData);
+
+		/**
+		 */
+
+		void dispatchEvent(int code);
+
+
+
 	private:
 
 		Geom::Point _offset;
+		int _x, _y;
 
 
 

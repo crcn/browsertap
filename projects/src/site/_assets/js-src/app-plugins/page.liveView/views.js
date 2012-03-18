@@ -25,7 +25,28 @@ module.exports = function(fig) {
 		'override ready': function() {
 			this._super();
 
-			$('.dropdown-toggle').dropdown();
+
+			this._embedSwf();
+		},
+
+
+		/**
+		 */
+
+		'_embedSwf': function() {
+
+			swfobject.embedSWF("/flash/DesktopPlayer.swf", 
+				"desktop-player", 
+				"100%", 
+				"100%", 
+				"9.0.0", 
+				"/flash/expressInstall.swf", {
+					host: 'http://localhost:1935/live',
+					debug: true
+				}, {
+					bgcolor: "#FFFFFF"
+				});
+
 		}
 
 

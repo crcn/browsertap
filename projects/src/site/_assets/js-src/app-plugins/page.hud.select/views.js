@@ -64,8 +64,8 @@ module.exports = function(fig) {
 				router.
 				request('screenshot', { 
 					url: self.ops.url, 
-					browser: self.ops.browser,
-					version: self.ops.version,
+					browser: self.ops.browserName,
+					version: self.ops.browserVersion,
 					hash: self.ops.hash, }).
 				tag('method', 'GET').
 				response(function(err, resp) {
@@ -183,7 +183,7 @@ module.exports = function(fig) {
 
 					cellContainer.append('<div class="hud_select_cell" id="browserCell'+div+'"></div>');
 
-					var cell = new views.HUDCellView({ el: '#browserCell' + div, browserVersion: browserVersions[i], hash: 2, browserName: browserName, url: 'http://google.com' });
+					var cell = new views.HUDCellView({ el: '#browserCell' + div, browserVersion: browserVersions[i], hash: 3, browserName: browserName, url: 'http://google.com' });
 
 
 					cellRow.push(this.addChild(cell));

@@ -12,6 +12,7 @@ VDIR = ./vendors
 VPATH = control
 
 BDIR = ../../apps/desktop_controller/bin
+BDIR = ./bin
 
 LIBS = -lgdi32 
 

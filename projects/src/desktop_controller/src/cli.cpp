@@ -4,6 +4,9 @@
 #include <windows.h>
 #include <iostream>
 #include "control/window.h" 
+#include "base/control/mouse.h" 
+#include "base/control/keyboard.h" 
+#include "common/client/console.h"
 
 void enter()
 {
@@ -16,11 +19,15 @@ void enter()
 int main(int argc, const char* argv[]) {
   
 
-	enter();
+//	enter();
 
 	Control::Window* win = Control::Windows::desktop();
+	Control::Mouse* mouse = new Control::Mouse();
+	Control::Keyboard* keyboard = new Control::Keyboard();
+	Client::Console* cli = new Client::Console(win, mouse, keyboard);
 
-	win->graphics()->print();
+	cli->start();
+
 
 
 	//Geom::Rectangle* win = new Geom::Rectangle();

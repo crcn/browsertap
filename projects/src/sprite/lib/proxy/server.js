@@ -13,7 +13,10 @@ exports.listen = function(port) {
 
 	var em = new EventEmitter(),
 	wrap   = wrapBrowserClient(),
-	mitm = filternet.createProxyServer({ port: port}),
+	mitm = filternet.createProxyServer({ port: port, transSslPort: port + 2, via: 'my test proxy/1.1', sslCerts: {
+			'*': [__dirname + '/google.com.key', __dirname + "/google.com.crt"]
+		}
+	}),
 	assetServer = express.createServer(),
 	dnodeServer,
 	httpPort = port + 1;
