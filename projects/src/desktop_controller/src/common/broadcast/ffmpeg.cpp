@@ -28,13 +28,13 @@ AVFrame *alloc_picture(enum PixelFormat pix_fmt, int width, int height)
 #define ENCODE_PX_FORMAT PIX_FMT_YUV420P
 
 
-namespace Broadcase 
+namespace Broadcast
 {
 
 
 	FFMPeg::FFMPeg(const char *url)
 	{
-		avcodec_init();
+		//avcodec_init();
 		avcodec_register_all();	
 		avformat_network_init();
 		av_register_all();
@@ -50,22 +50,23 @@ namespace Broadcase
 		_dstPicture      = NULL;
 		_needsRefreshing = true;
 
-		this->_ctx = gcnew WindowCaptureContext();
+		this->_ctx = new FFmpegContext();
 	}
 
-	void FFMPeg::broadcast(PrintData* data)
+	void FFMPeg::broadcast(Graphics::Bitmap* data)
 	{
-		resize(data->width, data->height);
+		resize(&data->bounds());
 		refresh(true);
 
+		Geom::Rectangle& bounds = data->bounds();
 
 
-		avpicture_fill((AVPicture*)_srcPicture, data->buffer, PIX_FMT_BGRA, data->width, data->height);
+		avpicture_fill((AVPicture*)_srcPicture, (uint8_t*)data->buffer(), PIX_FMT_BGRA, bounds.width, bounds.height);
 		sws_scale(_convertCtx, 
 			_srcPicture->data, 
 			_srcPicture->linesize, 
 			0, 
-			data->height, 
+			bounds.height, 
 			_dstPicture->data, 
 			_dstPicture->linesize);
 
@@ -86,7 +87,6 @@ namespace Broadcase
 			} else
 			{
 				
-				Console::WriteLine("AV  PTS VALUE");
 			}
 
 			if(_videoCodecCtx->coded_frame->key_frame)
@@ -111,13 +111,11 @@ namespace Broadcase
 	}
 
 
-	void FFMPeg::resize(int width, int height)
+	void FFMPeg::resize(Geom::Rectangle* rect)
 	{
 		//no change in size? return.
-		if(width == _width && height == _height) return;
+		if(!this->_bounds.resize(rect)) return;
 
-		_width = width;
-		_height = height;
 		_needsRefreshing = true;
 	}
 
@@ -137,15 +135,14 @@ namespace Broadcase
 	}
 
 
-	void FFMPeg::update(WindowCaptureContext^ ctx)
+	void FFMPeg::update(FFmpegContext* ctx)
 	{
 		_needsRefreshing = _needsRefreshing || ctx->copy(this->_ctx);
 	}
 
 	void FFMPeg::prepare()
 	{
-		Console::Write("Preparing RTMP connection for ");
-		Console::WriteLine(_url);
+		printf("Preparing RTMP connection for \n %s \n", _url);
 
 		cleanup();
 		_prepared = true;
@@ -167,7 +164,7 @@ namespace Broadcase
 
 		av_dump_format(_formatCtx, 0, _url, 1);
 
-		Console::WriteLine("Opening RTMP connection");
+		printf("Opening RTMP connection");
 
 		//open the file
 		if (!(_outputFmt->flags & AVFMT_NOFILE)) 
@@ -182,10 +179,10 @@ namespace Broadcase
 		}
 
 		
-		Console::WriteLine("Opening Video Stream");
+		printf("Opening Video Stream");
 		openVideoStream();
-		av_write_header(_formatCtx);
-		Console::WriteLine("Connected to RTMP server");
+		avformat_write_header(_formatCtx, NULL);
+		printf("Connected to RTMP server");
 
 	}
 
@@ -215,12 +212,8 @@ namespace Broadcase
 
 		int br = _ctx->bitRate * 1000;
 		
-		Console::WriteLine("Open rtmp stream ctx:");
-		Console::WriteLine("bitrate: " + br + 
-		"\nframeRate: " + _ctx->frameRate + 
-		"\ngopSize: "+ _ctx->gopSize +
-		"\nqmin: "+ _ctx->qmin +
-		"\nqmax: "+ _ctx->qmax);
+		printf("Open rtmp stream ctx:");
+		//printf("bitrate: %f\nframeRate: %f\ngopSize: %f\nqmin: %f\nqmax: %f", br, _ctx->frameRate, _ctx->gopSize, _ctx->qmin, _ctx->qmax);
 		
 
 
@@ -236,8 +229,8 @@ namespace Broadcase
 		//_videoCodecCtx->rc_min_rate   = 0; //max bit rate
 		//_videoCodecCtx->rc_max_rate   = 0; //max bit rate
 		//_videoCodecCtx->rc_buffer_size   = 0; 
-		_videoCodecCtx->width         = _width;
-		_videoCodecCtx->height        = _height;
+		_videoCodecCtx->width         = this->_bounds.width;
+		_videoCodecCtx->height        = this->_bounds.height;
 
 		_videoCodecCtx->time_base.den = _ctx->frameRate; // HIGH framerate = smooth playback.
 		_videoCodecCtx->time_base.num = 1;
@@ -305,12 +298,12 @@ namespace Broadcase
 		//_videoCodecCtx->qmin       = 1; 
 		//_videoCodecCtx->qmax       = 3; 
 
-#define CTO(prop) if(_ctx->prop != -1){ Console::WriteLine(#prop + ": " + _ctx->prop); _videoCodecCtx->prop = _ctx->prop; }
+#define CTO(prop) if(_ctx->prop != -1){ /*printf("%s:%f", #prop, _ctx->prop);*/ _videoCodecCtx->prop = _ctx->prop; }
 		CTO(bit_rate_tolerance)
 			CTO(max_qdiff)
 			CTO(b_quant_factor)
-			CTO(luma_elim_threshold)
-			CTO(chroma_elim_threshold)
+			//CTO(luma_elim_threshold)
+			//CTO(chroma_elim_threshold)
 			CTO(rc_max_rate)
 			CTO(rc_min_rate)
 			CTO(bits_per_coded_sample)
@@ -329,11 +322,11 @@ namespace Broadcase
 			CTO(mb_decision)
 			CTO(lmin)
 			CTO(lmax)
-			CTO(qscale)
+			//CTO(qscale)
 			CTO(scenechange_threshold)
 			CTO(noise_reduction)
-			CTO(inter_threshold)
-			CTO(quantizer_noise_shaping)
+			//CTO(inter_threshold)
+			// CTO(quantizer_noise_shaping)©
 			CTO(me_threshold)
 			CTO(mb_threshold)
 			CTO(intra_dc_precision)
@@ -348,20 +341,20 @@ namespace Broadcase
 			CTO(keyint_min)
 			CTO(refs)
 			CTO(chromaoffset)
-			CTO(bframebias)
+			// CTO(bframebias)
 			CTO(trellis)
-			CTO(deblockalpha)
-			CTO(deblockbeta)
-			CTO(partitions)
-			CTO(directpred)
+			//CTO(deblockalpha)
+			//CTO(deblockbeta)
+			//CTO(partitions)
+			//CTO(directpred)
 			CTO(scenechange_factor)
 			CTO(b_sensitivity)
 			CTO(compression_level)
 			//CTO(use_lpc)
-			CTO(lpc_coeff_precision)
+			//CTO(lpc_coeff_precision)
 			CTO(min_prediction_order)
 			CTO(max_prediction_order)
-			CTO(prediction_order_method)
+			//CTO(prediction_order_method)
 			CTO(qcompress)
 			CTO(qblur)
 			CTO(b_quant_offset)
@@ -375,10 +368,10 @@ namespace Broadcase
 			CTO(spatial_cplx_masking)
 			CTO(p_masking)
 			CTO(dark_masking)
-			CTO(crf)
-			CTO(cqp)
-			CTO(complexityblur)
-			CTO(aq_mode)
+			//CTO(crf)
+			//CTO(cqp)
+			//CTO(complexityblur)
+			//CTO(aq_mode)
 			//CTO(psyd_rd)
 			//CTO(psy_trellis)
 #undef CTO

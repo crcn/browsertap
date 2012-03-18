@@ -27,6 +27,17 @@ namespace Geom {
 		 */
 
 		Rectangle();
+
+		/**
+		 */
+
+		bool equals(Rectangle* rect);
+
+
+		/**
+		 */
+
+		bool resize(Rectangle* rect);
 	};
 }
 

@@ -14,13 +14,13 @@ VPATH = control
 BDIR = ../../apps/desktop_controller/bin
 BDIR = ./bin
 
-LIBS = -lgdi32 
+LIBS = -L./libs -lgdi32 -lavcodec -lavdevice -lavformat -lavutil -lswscale -lavfilter
 
 MINGWFLAGS := -static-libgcc -static-libstdc++
-CFLAGS :=  -I./inc  -I./inc/windows -I./src $(EFLAGS) -Wall
+CFLAGS :=  -I./inc  -I./inc/windows -I./vendors/ffmpeg -I./src $(EFLAGS) -Wall
 
 # objects to compile
-SOURCES := $(shell find $(SOURCEDIR) -name '*.cpp')
+SOURCES := $(shell find $(SDIR) -name '*.cpp')
 OBJECTS := $(addprefix $(BDIR)/,$(SOURCES:%.cpp=%.o))
 
 #-----------------------------------------------------------
@@ -30,6 +30,7 @@ all: cli
 
 cli: $(OBJECTS)
 	$(CC) $(OBJECTS) $(MINGWFLAGS) $(LIBS) -o $(BDIR)/cli
+	cp ./libs/* ./bin
 
 
 $(BDIR)/%.o: %.cpp

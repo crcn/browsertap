@@ -8,6 +8,7 @@
 #include "base/control/keyboard.h" 
 #include "common/client/console.h"
 
+
 void enter()
 {
 	char ch;
@@ -18,7 +19,7 @@ void enter()
 
 int main(int argc, const char* argv[]) {
   
-
+	std::cout << "DONE" << std::endl;
 //	enter();
 
 	Control::Window* win = Control::Windows::desktop();

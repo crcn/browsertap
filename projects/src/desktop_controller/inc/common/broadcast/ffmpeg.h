@@ -1,3 +1,5 @@
+#ifndef BROADCAST_FFMPEG_H_
+#define BROADCAST_FFMPEG_H_
 
 extern "C"
 {
@@ -12,23 +14,19 @@ extern "C"
 #include <libavutil/fifo.h>
 #include <libavutil/intreadwrite.h>
 #include <libavutil/avstring.h>
-#include <libavcore/parseutils.h>
+//#include <libavcore/parseutils.h>
 
 }
 
 
-#include "Window.h"
-#include "WindowPrinter.h"
-#include "WindowCaptureContext.h"
-#include <vcclr.h>
+#include "common/broadcast/ffmpeg_context.h"
+#include "common/graphics/bitmap.h"
+#include "common/geom/rectangle.h"
 
-using namespace System;
-
-#pragma once
 
 namespace Broadcast 
 {
-	public class FFMPeg
+	class FFMPeg
 	{
 
 	public:
@@ -46,19 +44,19 @@ namespace Broadcast
 		/**
 		 */
 
-		void update(WindowCaptureContext^ ctx);
+		void update(FFmpegContext* ctx);
 
 		/**
 		* broadcasts screenshot data
 		*/
 
-		void broadcast(PrintData* data);
+		void broadcast(Graphics::Bitmap* data);
 
 
 		/**
 		*/
 
-		~RTMPBroadcaster() 
+		~FFMPeg() 
 		{
 			cleanup();
 		}
@@ -68,9 +66,11 @@ namespace Broadcast
 		/**
 		*/
 
-		int _width, _height, _bufferSize;
+		Geom::Rectangle _bounds;
+		int _bufferSize;
 		//int _width, _height, _bitRate, _frameRate, _bufferSize, _gopSize, _qmin, _qmax;
 		 
+		FFmpegContext* _ctx;
 		//gcroot<WindowCaptureContext^> _ctx;
 
 		/**
@@ -110,7 +110,7 @@ namespace Broadcast
 		/**
 		*/
 
-		void resize(int width, int height);
+		void resize(Geom::Rectangle* rect);
 
 
 		/**
@@ -156,3 +156,5 @@ namespace Broadcast
 	};
 
 }
+
+#endif
