@@ -8,11 +8,28 @@ namespace Client {
 	/**
 	 */
 
-	Console::Console(Control::Window* window, Control::Mouse* mouse, Control::Keyboard* keyboard) 
+	Console::Console(Control::Window* window, Broadcast::FFMPeg* broadcaster, Control::Mouse* mouse, Control::Keyboard* keyboard) 
 	{
-		this->_window = window;
-		this->_keyboard = keyboard;
-		this->_mouse = mouse;
+		this->_window           = window;
+		this->_keyboard         = keyboard;
+		this->_mouse            = mouse;
+		this->_mediaBroadcaster = broadcaster;
+	}
+
+	/**
+	 */
+
+	Broadcast::FFMPeg* Console::mediaBroadcaster() 
+	{
+		return this->_mediaBroadcaster;
+	}
+
+	/**
+	 */
+
+	Control::Window* Console::window()
+	{
+		return this->_window;
 	}
 
 	/**
@@ -45,7 +62,10 @@ namespace Client {
 				std::cin >> code >> bScan >> dwFlags;
 
 				this->_keyboard->dispatchEvent(code, bScan, dwFlags);
-			} 
+			} else 
+			if(!strcmp(command.c_str(), "quality")) {
+
+			}
 
 		}
 	}

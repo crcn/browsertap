@@ -46,7 +46,7 @@ namespace Geom
 
 	bool Rectangle::resize(Rectangle* rect)
 	{
-		if(!this->equals(rect)) return false;
+		if(this->equals(rect)) return false;
 
 		this->x = rect->x;
 		this->y = rect->y;

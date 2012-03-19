@@ -28,6 +28,11 @@ namespace Graphics
 
 		Geom::Rectangle &bounds();
 
+		/**
+		 */
+
+		~Bitmap();
+
 	private:
 
 		const char *_buffer;

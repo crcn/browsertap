@@ -29,9 +29,11 @@ all: cli
 
 
 cli: $(OBJECTS)
-	$(CC) $(OBJECTS) $(MINGWFLAGS) $(LIBS) -o $(BDIR)/cli
-	cp ./libs/* ./bin
+	$(CC) $(OBJECTS) $(MINGWFLAGS) $(LIBS) -D__STDC_CONSTANT_MACROS -o $(BDIR)/cli
 
+
+copy: 
+	cp ./libs/* ./bin
 
 $(BDIR)/%.o: %.cpp
 	@mkdir -p `dirname $@`

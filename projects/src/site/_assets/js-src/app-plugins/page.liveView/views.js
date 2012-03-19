@@ -41,7 +41,7 @@ module.exports = function(fig) {
 				"100%", 
 				"9.0.0", 
 				"/flash/expressInstall.swf", {
-					host: 'http://localhost:1935/live',
+					host: 'rtmp://localhost:1935/live',
 					debug: true
 				}, {
 					bgcolor: "#FFFFFF"

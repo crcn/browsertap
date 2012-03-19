@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <iostream>
 
-int CaptureAnImage(HWND hWnd)
+char* CaptureAnImage(HWND hWnd)
 {
     HDC hdcScreen;
     HDC hdcWindow;
@@ -79,7 +79,7 @@ int CaptureAnImage(HWND hWnd)
      
     bi.biSize = sizeof(BITMAPINFOHEADER);    
     bi.biWidth = bmpScreen.bmWidth;    
-    bi.biHeight = bmpScreen.bmHeight;  
+    bi.biHeight = -bmpScreen.bmHeight;  
     bi.biPlanes = 1;    
     bi.biBitCount = 32;    
     bi.biCompression = BI_RGB;    
@@ -94,8 +94,9 @@ int CaptureAnImage(HWND hWnd)
     // Starting with 32-bit Windows, GlobalAlloc and LocalAlloc are implemented as wrapper functions that 
     // call HeapAlloc using a handle to the process's default heap. Therefore, GlobalAlloc and LocalAlloc 
     // have greater overhead than HeapAlloc.
-    HANDLE hDIB = GlobalAlloc(GHND,dwBmpSize); 
-    char *lpbitmap = (char *)GlobalLock(hDIB);    
+    // HANDLE hDIB = GlobalAlloc(GHND,dwBmpSize); 
+    char *lpbitmap = new char[dwBmpSize];//(char *)GlobalLock(hDIB);    
+
 
     // Gets the "bits" from the bitmap and copies them into a buffer 
     // which is pointed to by lpbitmap.
@@ -105,36 +106,37 @@ int CaptureAnImage(HWND hWnd)
         (BITMAPINFO *)&bi, DIB_RGB_COLORS);
 
     // A file is created, this is where we will save the screen capture.
-    HANDLE hFile = CreateFile("/captureqwsx.png",
+    /*HANDLE hFile = CreateFile("/captureqwsx.png",
         GENERIC_WRITE,
         0,
         NULL,
         CREATE_ALWAYS,
-        FILE_ATTRIBUTE_NORMAL, NULL);   
+        FILE_ATTRIBUTE_NORMAL, NULL);  */ 
     
     // Add the size of the headers to the size of the bitmap to get the total file size
-    DWORD dwSizeofDIB = dwBmpSize + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
+    //DWORD dwSizeofDIB = dwBmpSize + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
  
     //Offset to where the actual bitmap bits start.
-    bmfHeader.bfOffBits = (DWORD)sizeof(BITMAPFILEHEADER) + (DWORD)sizeof(BITMAPINFOHEADER); 
+    //bmfHeader.bfOffBits = (DWORD)sizeof(BITMAPFILEHEADER) + (DWORD)sizeof(BITMAPINFOHEADER); 
     
     //Size of the file
-    bmfHeader.bfSize = dwSizeofDIB; 
+    //bmfHeader.bfSize = dwSizeofDIB; 
     
     //bfType must always be BM for Bitmaps
-    bmfHeader.bfType = 0x4D42; //BM   
+    //bmfHeader.bfType = 0x4D42; //BM   
  
-    DWORD dwBytesWritten = 0;
-    WriteFile(hFile, (LPSTR)&bmfHeader, sizeof(BITMAPFILEHEADER), &dwBytesWritten, NULL);
-    WriteFile(hFile, (LPSTR)&bi, sizeof(BITMAPINFOHEADER), &dwBytesWritten, NULL);
-    WriteFile(hFile, (LPSTR)lpbitmap, dwBmpSize, &dwBytesWritten, NULL);
+    // DWORD dwBytesWritten = 0;
+    // WriteFile(hFile, (LPSTR)&bmfHeader, sizeof(BITMAPFILEHEADER), &dwBytesWritten, NULL);
+    // WriteFile(hFile, (LPSTR)&bi, sizeof(BITMAPINFOHEADER), &dwBytesWritten, NULL);
+    // WriteFile(hFile, (LPSTR)lpbitmap, dwBmpSize, &dwBytesWritten, NULL);
     
+
     //Unlock and Free the DIB from the heap
-    GlobalUnlock(hDIB);    
-    GlobalFree(hDIB);
+    // GlobalUnlock(hDIB);    
+    // GlobalFree(hDIB);
 
     //Close the handle for the file that was created
-    CloseHandle(hFile);
+    // CloseHandle(hFile);
 
     //Clean up
     DeleteObject(hbmScreen);
@@ -142,7 +144,7 @@ int CaptureAnImage(HWND hWnd)
     ReleaseDC(NULL,hdcScreen);
     ReleaseDC(hWnd,hdcWindow);
 
-    return 0;
+    return lpbitmap;
 }
 
 namespace Control 
@@ -165,9 +167,9 @@ namespace Control
 		//unable to print - too small
 		if(rect.width < 10 || rect.height < 10) return 0;
 
-		
-		CaptureAnImage(win->target());
+		const char* buffer = CaptureAnImage(win->target());
 
-		return 0;
+
+        return new Graphics::Bitmap(buffer, rect);
 	}
 }

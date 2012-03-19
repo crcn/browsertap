@@ -6,7 +6,7 @@
 				"namespace": "<%-currentPlatform %>",
 				"cwd": "./apps/<%-currentPlatform %>",
 				"load": "./apps/<%-currentPlatform %>/make.<%-currentPlatform %>.json"
-			}
+			} 
 		]
 	},
 

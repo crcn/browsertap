@@ -25,8 +25,30 @@ AVFrame *alloc_picture(enum PixelFormat pix_fmt, int width, int height)
 	return picture;
 }
 
+/* prepare a dummy image */
+/*static void fill_yuv_image(AVFrame *pict, int frame_index, int width, int height)
+{
+    int x, y, i;
+
+    i = frame_index;
+
+    for (y = 0; y < height; y++) {
+        for (x = 0; x < width; x++) {
+            pict->data[0][y * pict->linesize[0] + x] = x + y + i * 3;
+        }
+    }
+
+    for (y = 0; y < height/2; y++) {
+        for (x = 0; x < width/2; x++) {
+            pict->data[1][y * pict->linesize[1] + x] = 128 + y + i * 2;
+            pict->data[2][y * pict->linesize[2] + x] = 64 + x + i * 5;
+        }
+    }
+}*/
+
 #define ENCODE_PX_FORMAT PIX_FMT_YUV420P
 
+int frame_count = 0;
 
 namespace Broadcast
 {
@@ -62,6 +84,7 @@ namespace Broadcast
 
 
 		avpicture_fill((AVPicture*)_srcPicture, (uint8_t*)data->buffer(), PIX_FMT_BGRA, bounds.width, bounds.height);
+		//fill_yuv_image((AVFrame*)_dstPicture, frame_count++, bounds.width, bounds.height);
 		sws_scale(_convertCtx, 
 			_srcPicture->data, 
 			_srcPicture->linesize, 
@@ -86,7 +109,7 @@ namespace Broadcast
 				pkt.pts = av_rescale_q(_videoCodecCtx->coded_frame->pts, _videoCodecCtx->time_base, _videoStream->time_base);
 			} else
 			{
-				
+				// std::cout << "G" << std::endl;
 			}
 
 			if(_videoCodecCtx->coded_frame->key_frame)
@@ -95,6 +118,7 @@ namespace Broadcast
 			pkt.stream_index = _videoStream->index;
 			pkt.data = _outputBuffer;
 			pkt.size = outSize;
+
 
 			/* write the compressed frame in the media file */
 			ret = av_interleaved_write_frame(_formatCtx, &pkt);
@@ -116,6 +140,7 @@ namespace Broadcast
 		//no change in size? return.
 		if(!this->_bounds.resize(rect)) return;
 
+
 		_needsRefreshing = true;
 	}
 
@@ -126,6 +151,11 @@ namespace Broadcast
 		_needsRefreshing = true;
 	}
 
+
+	const char* FFMPeg::location()
+	{
+		return _url;
+	}
 
 	void FFMPeg::refresh(bool force)
 	{
@@ -232,9 +262,9 @@ namespace Broadcast
 		_videoCodecCtx->width         = this->_bounds.width;
 		_videoCodecCtx->height        = this->_bounds.height;
 
-		_videoCodecCtx->time_base.den = _ctx->frameRate; // HIGH framerate = smooth playback.
+		_videoCodecCtx->time_base.den = 25; // HIGH framerate = smooth playback.
 		_videoCodecCtx->time_base.num = 1;
-		_videoCodecCtx->gop_size      = _ctx->gopSize;//_gopSize; //lower = less chunkyZ
+		_videoCodecCtx->gop_size      = 12;//_gopSize; //lower = less chunkyZ
 		//_videoCodecCtx->level = 30;Z
 		//_videoCodecCtx->flags		  |= CODEC_FLAG_PSNR;
 		//_videoCodecCtx->partitions		  &= ~(X264_PART_I4X4 | X264_PART_I8X8 | X264_PART_P8X8 | X264_PART_P4X4 | X264_PART_B8X8);
@@ -284,7 +314,7 @@ namespace Broadcast
 		
 		//_videoCodecCtx->qmin = 1;
 		//_videoCodecCtx->qmax = 10;
-		_videoCodecCtx->me_method = ME_EPZS;
+	//	_videoCodecCtx->me_method = ME_EPZS;
 
 
 		//_videoCodecCtx->max_qdiff = 3;
@@ -411,13 +441,14 @@ namespace Broadcast
 		_bufferSize = avpicture_get_size(_videoCodecCtx->pix_fmt, _videoCodecCtx->width, _videoCodecCtx->height);
 		_outputBuffer = (uint8_t *)av_malloc(_bufferSize);
 		_dstPicture = alloc_picture(_videoCodecCtx->pix_fmt, _videoCodecCtx->width, _videoCodecCtx->height);
-		_srcPicture = alloc_picture(PIX_FMT_BGRA, _videoCodecCtx->width, _videoCodecCtx->height);
+		_srcPicture = alloc_picture(PIX_FMT_YUV420P, _videoCodecCtx->width, _videoCodecCtx->height);
 
 		if(_dstPicture == NULL || _srcPicture == NULL)
 		{
 			fprintf(stderr, "Unable to allocate pictures\n");
 			exit(1);
 		}
+
 
 		_convertCtx = sws_getContext(_videoCodecCtx->width,
 			_videoCodecCtx->height, 

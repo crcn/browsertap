@@ -1,10 +1,19 @@
 #ifndef BROADCAST_FFMPEG_H_
 #define BROADCAST_FFMPEG_H_
 
+
 extern "C"
 {
-#ifndef __STDC_CONSTANT_MACROS
-#  define __STDC_CONSTANT_MACROS
+#ifdef __cplusplus
+ #define __STDC_CONSTANT_MACROS
+ #ifdef _STDINT_H
+  #undef _STDINT_H
+ #endif
+ # include <stdint.h>
+#endif
+	#ifndef INT64_C
+#define INT64_C(c) (c ## LL)
+#define UINT64_C(c) (c ## ULL)
 #endif
 
 #include <libavformat/avformat.h>
@@ -40,6 +49,11 @@ namespace Broadcast
 		*/
 
 		void location(const char *value);
+
+		/**
+		 */
+
+		const char* location();
 
 		/**
 		 */

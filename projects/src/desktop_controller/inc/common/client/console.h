@@ -4,6 +4,7 @@
 #include "control/window.h"
 #include "base/control/mouse.h"
 #include "base/control/keyboard.h"
+#include "common/broadcast/ffmpeg.h"
 
 namespace Client 
 {
@@ -15,7 +16,10 @@ namespace Client
 		/**
 		 */
 
-		Console(Control::Window* window, Control::Mouse* mouse, Control::Keyboard* keyboard);
+		Console(Control::Window* window, 
+			Broadcast::FFMPeg* broadcaster, 
+			Control::Mouse* mouse, 
+			Control::Keyboard* keyboard);
 
 		/**
 		 */
@@ -39,6 +43,18 @@ namespace Client
 		void keyUp(int key);
 
 
+		/**
+		 */
+
+		Broadcast::FFMPeg* mediaBroadcaster();
+
+
+		/**
+		 */
+
+		Control::Window* window();
+
+
 	private:
 
 		/**
@@ -47,6 +63,7 @@ namespace Client
 		Control::Window* _window;
 		Control::Mouse* _mouse;
 		Control::Keyboard* _keyboard;
+		Broadcast::FFMPeg* _mediaBroadcaster;
 	};
 }
 

@@ -67,6 +67,8 @@ package
 				MouseEvent.MOUSE_OVER,
 				MouseEvent.MOUSE_UP,
 				MouseEvent.MOUSE_WHEEL];
+
+			_trace("ev listen")
 			
 			var keyboardEvents:Array = [KeyboardEvent.KEY_DOWN, KeyboardEvent.KEY_UP];
 			
@@ -90,7 +92,6 @@ package
 		
 		private function onKeyboardEvent(event:KeyboardEvent):void
 		{     
-			trace("KEY DOWN");
 			//if(event.keyCode == Keyboard.SHIFT || event.keyCode == Keyboard.CONTROL) return;
 			
 			ExternalInterface.call('desktopEvents.' + event.type, { keyCode: event.keyCode, altKey: event.altKey, shiftKey: event.shiftKey, ctrlKey: event.ctrlKey });
@@ -99,6 +100,7 @@ package
 		
 		private function openVideo():void
 		{
+			_trace("selecting stream...");
 			
 			var video:Video = this._video = new Video(this.stage.stageWidth, this.stage.stageHeight);
 			video.attachNetStream(this._stream);
@@ -106,16 +108,27 @@ package
 			video.deblocking = 2;
 			video.smoothing = true;
 			
-			this._stream.play("desktop");
+			this._stream.play("default");
 			this.addChildAt(this._video, 0);
 			
 		}
 		
+
+		private function _trace(arg:String): void
+		{
+
+			this._debugInfo.text = this._debugInfo.text + "\n" + arg;
+
+			trace(arg);
+		}
 			
 		
 		private function openStream():void
 		{
-			trace("OPEN STREAM: " + this._server);
+
+			_trace("Connecting to " + this._server);
+
+
 			
 			this._connection = new NetConnection();
 			this._connection.addEventListener(NetStatusEvent.NET_STATUS, onNetStatus);
@@ -153,10 +166,10 @@ package
 		
 		private function onNetStatus(event:NetStatusEvent):void
 		{
-			this._debugInfo.text = event.info.code + "\n";
-			
-			if(event.info.code == NetConnectionCodes.CONNECT_SUCCESS)
+			_trace(event.info.code + "\n");
+			if(event.info.code == "NetConnection.Connect.Success")
 			{
+
 				this._stream = new NetStream(this._connection);
 				this._stream.addEventListener(AsyncErrorEvent.ASYNC_ERROR, onError);
 				this._stream.client={onMetaData:function(obj:Object):void{} }
@@ -167,12 +180,12 @@ package
 		
 		private function onError(event:*):void
 		{
-			trace("IO ERROR");
+			_trace("IO ERROR");
 		}
 		
 		private function onSecurityError(event:SecurityErrorEvent):void
 		{
-			trace("SEC ERROR");
+			_trace("SEC ERROR");
 		}
 		
 		private function onMetaData(obj:Object):void
