@@ -17,7 +17,9 @@ module.exports = structr(EventEmitter, {
 	'override __construct': function(info, params, proxy) {
 
 
-		var browserName = info.name.split(' ').shift().toLowerCase();
+		var browserParts = info.name.toLowerCase().split(' '),
+		browserName = browserParts.shift(),
+		browserVersion = browserParts.shift();
 
 		this.cache    = params.cache;
 		this.params   = params;
@@ -25,6 +27,9 @@ module.exports = structr(EventEmitter, {
 		this.filename = info.filename; //the physical EXE
 		this.cwd  	  = info.cwd; //where does the EXE live?
 		this.browserName = browserName;
+		this.version     = Number(browserVersion);
+		this.padding     = this._findPadding();
+		this._proxy      = proxy;
 		this._super();
 
 
@@ -42,6 +47,43 @@ module.exports = structr(EventEmitter, {
 			}
 		});
 
+	},
+
+	/**
+	 * finds the chrome padding based on the version. This doesn't change as much as versions, so 
+	 * we find it.
+	 */
+
+	'_findPadding': function() {
+
+
+		var bpadding = this.params.padding[this.browserName];
+
+
+		var versions = Object.keys(bpadding || {}).
+		sort(function(a, b) {
+			return Number(a) > Number(b) ? -1 : 1;
+		});
+
+		var cpadding = {};
+
+
+		for(var i = versions.length; i--;) {
+			var version = versions[i];
+
+
+			cpadding = bpadding[version] || {};
+
+
+			if(Number(version) >= Number(this.version)) break;
+
+		}
+
+		// console.log(this.version+" "+version+" "+cpadding.top);
+
+
+
+		return cpadding;
 	},
 
 	/**
@@ -77,7 +119,10 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	'start': function(url, next) {
+	'start': function(options, next) {
+
+		var url = options.url,
+		chromeless = options.chromeless;
 
 
 		var self = this, on = outcome.error(next);
@@ -132,6 +177,18 @@ module.exports = structr(EventEmitter, {
 
 
 				this(null);
+			},
+
+			/**
+			 */
+
+			function() {
+
+				if(chromeless) {
+					self._proxy.client.padding(self.padding.left, self.padding.right, self.padding.top, self.padding.bottom);
+				}
+
+				this();
 			},
 
 			/**

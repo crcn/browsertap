@@ -3,4 +3,5 @@ subl-proj = subl --project ./project_files/project.sublime-project
 make-web = make web_debug
 make-web-release = make web_release
 run-web = make web_run
+run-api = cd projects/src/api, ./bin/api --type=master
 publish = git add -A, git commit -m "$@", git push origin master

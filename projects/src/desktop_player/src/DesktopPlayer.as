@@ -86,6 +86,7 @@ package
 		
 		private function onMouseEvent(event:MouseEvent):void
 		{
+			_trace(event.type);
 			
 			ExternalInterface.call('desktopEvents.' + event.type, { x: event.stageX, y: event.stageY, delta: event.delta, ctrlKey: event.ctrlKey, shiftKey: event.shiftKey });
 		}
@@ -93,6 +94,8 @@ package
 		private function onKeyboardEvent(event:KeyboardEvent):void
 		{     
 			//if(event.keyCode == Keyboard.SHIFT || event.keyCode == Keyboard.CONTROL) return;
+
+			_trace(event.type);
 			
 			ExternalInterface.call('desktopEvents.' + event.type, { keyCode: event.keyCode, altKey: event.altKey, shiftKey: event.shiftKey, ctrlKey: event.ctrlKey });
 		}
@@ -111,13 +114,14 @@ package
 			this._stream.play("default");
 			this.addChildAt(this._video, 0);
 			
+			this.onStageResize();
 		}
 		
 
 		private function _trace(arg:String): void
 		{
 
-			this._debugInfo.text = this._debugInfo.text + "\n" + arg;
+			this._debugInfo.text = (arg + "\n" + this._debugInfo.text).substr(0, 100);
 
 			trace(arg);
 		}
@@ -155,13 +159,15 @@ package
 		}*/
 		
 		
-		private function onStageResize(event:Event):void
+		private function onStageResize(event:Event = null):void
 		{
 			if(!this._video) return;
 			
 			
 			this._video.width = this.stage.stageWidth;
 			this._video.height = this.stage.stageHeight;
+
+			ExternalInterface.call('desktopEvents.resize', { width: this._video.width, height: this._video.height });
 		}
 		
 		private function onNetStatus(event:NetStatusEvent):void

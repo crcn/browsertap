@@ -1,9 +1,9 @@
 
-<div id="live_controlbar" class="row-fluid live_container">
+<!--div id="live_controlbar" class="row-fluid live_container">
 	<div class="span12">
-		abcde
+		
 	</div>
-</div>
+</div-->
 
 <div class="row-fluid">
 	<div id="desktop-player" class="span10">

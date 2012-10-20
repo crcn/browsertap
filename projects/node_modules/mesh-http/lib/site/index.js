@@ -110,7 +110,10 @@ exports.plugin = function(router)
 		var newLocation      = Url.parse(path.normalize("/"+location), true);
 
 
-		if(data) _.extend(newLocation.query, data);
+		if(data) {
+			_.extend(newLocation.query, data);
+		}
+
 
 		return newLocation;
 	}
@@ -198,12 +201,16 @@ exports.plugin = function(router)
 					return;
 				}
 
+
+				var stringified = qs.stringify(urlParts.query || {});
+
+				var href = urlParts.pathname + stringified.length ? '?' + stringified : '';
                                                       
-				logger.info(sprintf('redirect to %s', urlParts.href));
+				logger.info(sprintf('redirect to %s', href));
 
-				window.history.pushState(urlParts, null, urlParts.href);     
+				window.history.pushState(urlParts, null, href);     
 
-				router.push('track/pageView', { page: urlParts.href });
+				router.push('track/pageView', { page: href });
 
 			} else {
 

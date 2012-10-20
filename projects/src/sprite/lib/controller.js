@@ -7,7 +7,8 @@ structr       = require("structr"),
 step          = require("stepc"),
 ProcessCollection = require('./process/collection'),
 outcome       = require("outcome"),
-Screenshot    = require("./screenshot");
+Screenshot    = require("./screenshot"),
+Client        = require('./client');
 
 
 module.exports = structr(EventEmitter, {
@@ -28,7 +29,10 @@ module.exports = structr(EventEmitter, {
 
 		this._on = outcome.error(function(err) {
 			self.emit("error", err);
-		})
+		});
+
+		//controls the desktop
+		this.client = new Client();
 
 	},
 

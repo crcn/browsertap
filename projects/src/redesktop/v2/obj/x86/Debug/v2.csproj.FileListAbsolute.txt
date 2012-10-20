@@ -1,0 +1,7 @@
+\\vmware-host\Shared Folders\craigcondon\Development\eyebrowse\projects\src\redesktop\v2\bin\Debug\v2.exe
+\\vmware-host\Shared Folders\craigcondon\Development\eyebrowse\projects\src\redesktop\v2\bin\Debug\v2.pdb
+\\vmware-host\Shared Folders\craigcondon\Development\eyebrowse\projects\src\redesktop\v2\obj\x86\Debug\ResolveAssemblyReference.cache
+\\vmware-host\Shared Folders\craigcondon\Development\eyebrowse\projects\src\redesktop\v2\obj\x86\Debug\v2.exe
+\\vmware-host\Shared Folders\craigcondon\Development\eyebrowse\projects\src\redesktop\v2\obj\x86\Debug\v2.pdb
+\\vmware-host\Shared Folders\craigcondon\Development\eyebrowse\projects\src\redesktop\v2\bin\Debug\AxMSTSCLib.dll
+\\vmware-host\Shared Folders\craigcondon\Development\eyebrowse\projects\src\redesktop\v2\bin\Debug\MSTSCLib.dll

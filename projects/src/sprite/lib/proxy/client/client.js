@@ -10,8 +10,14 @@ client;
 
 client = DNode({
 	title: window.title,
-	location: location(),
-	history: {
+	location: {
+		get: function(callback) {
+			callback(null, String(window.location));
+		},
+		set: function(location, callback) {
+			window.location = location;
+			callback(null, String(window.location));
+		},
 		back: function() {
 			history.back();
 		},
@@ -26,9 +32,6 @@ client = DNode({
 		cookieEnabled: navigator.cookieEnabled,
 		platform: navigator.platform,
 		userAgent: navigator.userAgent
-	},
-	setLocation: function(url) {
-		window.location = url;
 	},
 	on: function(type, callback) {
 		em.on(type, callback);

@@ -109,7 +109,7 @@ var SnapQueue = structr({
 				 */
 
 				function() {
-					controller.start(fullName, url, this);
+					controller.start(fullName, { url: url, chromeless: true }, this);
 
 				},
 

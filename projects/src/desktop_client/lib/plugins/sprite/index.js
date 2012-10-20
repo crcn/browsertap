@@ -11,7 +11,7 @@ exports.plugin = function(router, params) {
 
 		'pull load/+': function(req, res) {
 
-			app = sprite.create({
+			router.sprite = app = sprite.create({
 				directory: params.directory || "~/Desktop/browsers",
 				cache: {
 					prefix: '~/AppData/Local',
@@ -29,6 +29,39 @@ exports.plugin = function(router, params) {
 					'safari': ['safari*'],
 					'opera': ['opera*'],
 					'ie': ['iexplore*']
+				},
+				padding: {
+					"chrome": {
+						19: {
+							top: 61
+						},
+						5: {
+							top: 63
+						}
+					},
+					"firefox": {
+						12: {
+							top: 87
+						},
+						3.6: { 
+							top: 135
+						},
+						3: {
+							top: 106
+						}
+					},
+					"safari": {
+						6: {
+							top: 80
+						}
+					},
+					"opera": {
+						12: {
+							top: 80
+						}
+					}
+					
+					
 				}
 			}).
 			listen(8088);

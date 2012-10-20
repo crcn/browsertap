@@ -9,10 +9,10 @@ params({
 	},
 	daisy: {
 		name: 'desktop_client',
-		host: "10.0.1.14",
+		host: "192.168.2.2",
 		transport: {
 			rabbitmq: {
-				host: "10.0.1.14"
+				host: "192.168.2.2"
 			}
 		}
 	},

@@ -4,6 +4,7 @@ dnode         = require("dnode"),
 EventEmitter  = require("events").EventEmitter,
 browserify    = require("browserify"),
 wrapBrowserClient = require("./wrapBrowserClient"),
+getBrowserInfo    = require("./browserDetect"),
 fs  = require("fs");
 
 
@@ -12,7 +13,6 @@ exports.listen = function(port) {
 	console.log('listening to port %d', port)
 
 	var em = new EventEmitter(),
-	wrap   = wrapBrowserClient(),
 	mitm = filternet.createProxyServer({ port: port, transSslPort: port + 2, via: 'my test proxy/1.1', sslCerts: {
 			'*': [__dirname + '/google.com.key', __dirname + "/google.com.crt"]
 		}
@@ -24,10 +24,7 @@ exports.listen = function(port) {
 	dnodeServer = dnode(function(client, con) {
 
 		con.on("ready", function() {
-
-			wrap(client, con);
 			em.emit("browserProxy", client);
-
 		});
 	});
 
@@ -52,7 +49,18 @@ exports.listen = function(port) {
 	})
 
 
-	return em
+	return {
+
+		/**
+		 */
+
+
+		getBrowserProxy: function(browser, callback) {
+
+			function onProxy(proxy) {}
+			em.on("browserProxy")
+		} 
+	}
 }
 
 

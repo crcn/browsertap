@@ -54,7 +54,7 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	'start': function(browserName, url, next) {
+	'start': function(browserName, options, next) {
 
 		var browser = this._browsers[browserName];
 
@@ -64,7 +64,7 @@ module.exports = structr(EventEmitter, {
 		//this.killPrevious();
 		//this._currentBrowser = browser;
 
-		browser.start(url, function() {
+		browser.start(options, function() {
 
 			next(null, browser);
 
