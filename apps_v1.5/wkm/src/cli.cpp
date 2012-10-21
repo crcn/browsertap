@@ -17,11 +17,21 @@ DWORD WINAPI broadcast_video(LPVOID param)
 
 	while(true) 
 	{
-		Graphics::Bitmap* bmp = cli->window()->graphics()->print(cli->padding);
+		Geom::Rectangle bounds;
+
+		// std::cout << cli->bounds.width << " " << cli->bounds.height << std::endl;
+
+		if(cli->bounds.width > 0 && cli->bounds.height > 0) {
+			bounds = cli->bounds;
+		} else {
+			bounds = cli->window()->bounds();
+		}
+
+		Graphics::Bitmap* bmp = cli->window()->graphics()->print(cli->padding, bounds);
 
 		cli->mediaBroadcaster()->broadcast(bmp);
 
-		std::cout << "broadcasting rtmp video" << std::endl;
+		//std::cout << "broadcasting rtmp video" << std::endl;
 
 		delete bmp;
 

@@ -56,6 +56,7 @@ namespace Client
 
 
 		Geom::Padding padding;
+		Geom::Rectangle bounds;
 
 
 	private:

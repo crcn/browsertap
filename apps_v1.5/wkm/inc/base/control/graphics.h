@@ -2,6 +2,7 @@
 #define CONTROL_GRAPHICS_H_
 
 #include "common/geom/padding.h"
+#include "common/geom/rectangle.h"
 #include "common/graphics/bitmap.h"
 
 namespace Control 
@@ -29,7 +30,13 @@ namespace Control
 		 * prints a cutout of the target window
 		 */
 
-		Graphics::Bitmap* print(Geom::Padding bounds);
+		Graphics::Bitmap* print(Geom::Padding padding, Geom::Rectangle bounds);
+
+		/**
+		 */
+
+		Graphics::Bitmap* print(Geom::Padding padding);
+		
 
 
 

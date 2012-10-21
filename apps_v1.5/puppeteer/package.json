@@ -1,0 +1,12 @@
+{
+  "name": "puppeteer",
+  "version": "0.0.0",
+  "description": "node.js server that takes actions from the client, and uses them to connect to the puppet",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD"
+}

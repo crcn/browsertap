@@ -153,22 +153,21 @@ namespace Control
 	/**
 	 */
 	
-	Graphics::Bitmap* WindowGraphics::print(Geom::Padding padding)
+	Graphics::Bitmap* WindowGraphics::print(Geom::Padding padding, Geom::Rectangle bounds)
 	{
 		Window* win;
-		Geom::Rectangle rect;
 
 		win = (Window*)this->_window;
 
 
 		//next we need the bounds for the given window
-		rect = win->bounds();	
+		//rect = win->bounds();	
 
 		//unable to print - too small
-		if(rect.width < 10 || rect.height < 10) return 0;
+		if(bounds.width < 10 || bounds.height < 10) return 0;
 
 
-        Geom::Rectangle resized = Geom::Rectangle(rect.x + padding.left, rect.y + padding.top, rect.width - padding.left - padding.right, rect.height - padding.top - padding.bottom);
+        Geom::Rectangle resized = Geom::Rectangle(bounds.x + padding.left, bounds.y + padding.top, bounds.width - padding.left - padding.right, bounds.height - padding.top - padding.bottom);
 
         // std::cout << padding.left << " " << padding.right << " " << padding.top << " " << padding.bottom << std::endl;
         // std::cout << resized.x << " " << resized.y << " " << resized.width << " " << resized.height << std::endl;
@@ -180,4 +179,12 @@ namespace Control
 
         return new Graphics::Bitmap(buffer, resized);
 	}
+
+    Graphics::Bitmap* WindowGraphics::print(Geom::Padding padding)
+    {
+        Window* win = (Window*)this->_window;
+        return this->print(padding, win->bounds());
+    }
+
+
 }

@@ -13,8 +13,9 @@ module.exports = structr({
 	'__construct': function(options) {
 		this._padding = [0, 0, 0, 0]; 
 		if(options.rtmp) {
-			this.start(options.rtmp.host);
+			this.start([options.rtmp.protocol, "//", options.rtmp.hostname, ":", options.rtmp.port, options.rtmp.path].join(""));
 		}
+		this._width = this._height = 0;
 	},
 
 	/**
@@ -53,6 +54,7 @@ module.exports = structr({
 
 
 		this.padding(this._padding[0], this._padding[1], this._padding[2], this._padding[3]);
+		this._resize(this._width, this._height);
 
 		return this;
 	},
@@ -74,22 +76,26 @@ module.exports = structr({
 
 	'resizeDesktop': function(width, height) {
 
-		console.log(height)
+		if(!arguments.length) {
+			return this._resizeAllWindows();
+		}
+
+		if(!width) width = this._width;
+		if(!height) height = this._height;
+
+
 
 		width  += (this._padding[1] + this._padding[0]);
 		height += (this._padding[3] + this._padding[2]);
 
+
+		this._width  = width;
+		this._height = height;
+
+
 		console.log('resize: %d, %d', width, height);
 
-		var bin = __dirname + "/../../../window_resize/Debug/resize.exe";//'C:\\Program Files\\VMware\\VMware Tools\\VMwareResolutionSet.exe';
-
-		exec(bin+" "+width + ' ' + height, function(err, stdout, stderr) {
-			process.stdout.write(stdout);
-			process.stderr.write(stderr);
-		});
-
-		this.restart();
-
+		this._resizeAllWindows();
 	},
 
 	/**
@@ -97,7 +103,7 @@ module.exports = structr({
 	 */
 
 	'mouseEvent': function(code, x, y, dwData) {
-		if(this._proc) this._proc.stdin.write('mouse\n' + this._args(code, x, y, dwData).join(' '));
+		if(this._proc) this._proc.stdin.write('mouse\n' + this._args(code, x, y, dwData).join(' ') + "\n");
 	},
 
 	/**
@@ -105,7 +111,7 @@ module.exports = structr({
 	 */
 
 	'keyboardEvent': function(code, bScan, dwFlags) {
-		if(this._proc) this._proc.stdin.write('keyboard\n' + this._args(code, bScan, dwFlags).join(' '));
+		if(this._proc) this._proc.stdin.write('keyboard\n' + this._args(code, bScan, dwFlags).join(' ') + "\n");
 	},
 
 	/**
@@ -114,8 +120,32 @@ module.exports = structr({
 
 	'padding': function(padding) {
 		this._padding = this._args(padding.left, padding.right, padding.top, padding.bottom);
-		if(this._proc) this._proc.stdin.write('padding\n' + this._padding.join(' '));
+		if(this._proc) this._proc.stdin.write('padding\n' + this._padding.join(' ') + "\n");
 		//resize here???
+	},
+
+	/**
+	 */
+
+	"_resize": function(width, height) {
+		// this._width = width || this._width;
+		// this._height = height || this._height;
+		if(this._proc) this._proc.stdin.write('resize\n' + this._args(this._width, this._height).join(" ") + "\n");
+	},
+
+	/**
+	 */
+
+	"_resizeAllWindows": function() {
+		var width = this._width,
+		height = this._height;
+		var bin = __dirname + "/../../../window_resize/Debug/resize.exe";//'C:\\Program Files\\VMware\\VMware Tools\\VMwareResolutionSet.exe';
+
+		exec(bin+" "+width + ' ' + height, function(err, stdout, stderr) {
+			process.stdout.write(stdout);
+			process.stderr.write(stderr);
+		});
+		this._resize(width, height);
 	},
 
 	/**

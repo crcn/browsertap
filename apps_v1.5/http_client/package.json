@@ -1,0 +1,23 @@
+{
+  "name": "http_client",
+  "version": "0.0.0",
+  "description": "ERROR: No README.md file found!",
+  "main": "./lib/index.js",
+  "dependencies": {
+    "browserify": "~1.16.1",
+    "clone": "~0.1.1",
+    "less-middleware": "~0.1.8",
+    "express": "~3.0.0rc5",
+    "shoe": "~0.0.7",
+    "dnode": "~1.0.1",
+    "traverse": "~0.6.3",
+    "underscore": "~1.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD"
+}

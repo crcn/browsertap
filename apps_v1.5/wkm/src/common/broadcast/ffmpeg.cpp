@@ -139,7 +139,6 @@ namespace Broadcast
 		//no change in size? return.
 		if(!this->_bounds.resize(rect)) return;
 
-
 		_needsRefreshing = true;
 	}
 
@@ -323,7 +322,7 @@ namespace Broadcast
 		//_videoCodecCtx->b_quant_offset = 1.25;
 		//_videoCodecCtx->max_b_frames = 4;
 		_videoCodecCtx->pix_fmt       = ENCODE_PX_FORMAT;
-		//_videoCodecCtx->compression_level       = -8; //best, -5 = default
+		_videoCodecCtx->compression_level       = -8; //best, -5 = default
 		//_videoCodecCtx->aq_mode       = 0; //best
 		//_videoCodecCtx->qmin       = 1; 
 		//_videoCodecCtx->qmax       = 3; 
@@ -482,6 +481,7 @@ namespace Broadcast
 		SwsContext* _convertCtx;
 
 		uint8_t *_outputBuffer;*/
+
 
 		if(!_prepared) return;
 

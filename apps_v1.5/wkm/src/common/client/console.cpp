@@ -43,6 +43,13 @@ namespace Client {
 
 			std::cin >> command;
 
+			//std::cout << "command: " << command << std::endl;
+
+
+			if(!strcmp(command.c_str(), "resize")) {
+				std::cin >> this->bounds.width >> this->bounds.height;
+				// std::cout << "resize to " << this->bounds.width << "x" << this->bounds.height << std::endl;
+			} else
 			if(!strcmp(command.c_str(), "padding")) {
 
 				std::cin >> this->padding.left >> this->padding.right >> this->padding.top >> this->padding.bottom;

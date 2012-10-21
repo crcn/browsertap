@@ -45,6 +45,13 @@ module.exports = structr({
 	/**
 	 */
 
+	"getAll": function(callback) {
+		callback(null, this._browsers);
+	},
+
+	/**
+	 */
+
 	"step killAll": function(callback) {
 		killProcesses(this._processNames, callback);
 	},
