@@ -10,6 +10,7 @@ namespace Broadcast
 	{
 	public:
 
+		const char* output;
 
 		/**
 		* left offset (bounds)
@@ -21,12 +22,12 @@ namespace Broadcast
 			bottom,
 			width,
 			height,
-			bitRate,
-			gopSize,
+			bit_rate,
+			gop_size,
 			qmin,
 			qmax,
-			frameRate,
-			captureTimeout,
+			frame_rate,
+			capture_timeout,
 
 			bit_rate_tolerance,
 			max_qdiff,
@@ -118,15 +119,17 @@ namespace Broadcast
 			top(top),
 			bottom(bottom)
 		{
+			this->output = NULL;
 			this->init();
 		}
 
-		FFmpegContext():
+		FFmpegContext(const char* output):
 		left(0),
 			right(0),
 			top(0),
 			bottom(0)
 		{
+			this->output = output;
 			this->init();
 		}
 
@@ -142,9 +145,9 @@ namespace Broadcast
 			
 			WTO(qmin)
 			WTO(qmax)
-			WTO(bitRate)
-			WTO(gopSize)
-			WTO(frameRate)
+			WTO(bit_rate)
+			WTO(gop_size)
+			WTO(frame_rate)
 			WTO(width)
 			WTO(height)
 			WTO(height)WTO(bit_rate_tolerance)
@@ -236,19 +239,6 @@ namespace Broadcast
 
 		void init() 
 		{
-			//minGop    = 1;
-			//maxGop    = 11;
-
-			//ffmpeg default
-			qmin    = 1;
-			qmax	  = 11;
-
-			bitRate   = 68;
-			gopSize   = 250;
-			frameRate = 24;
-			width     = 500;
-			height    = 500;
-
 			bit_rate_tolerance = -1;
 			max_qdiff = -1;
 			b_quant_factor = -1;

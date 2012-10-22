@@ -54,25 +54,19 @@ namespace Broadcast
 {
 
 
-	FFMPeg::FFMPeg(const char *url)
+	FFMPeg::FFMPeg(FFmpegContext* ctx)
 	{
 		//avcodec_init();
 		avcodec_register_all();	
 		avformat_network_init();
 		av_register_all();
 
-		_url			 = url;
-		/*_frameRate		 = 24;
-		_gopSize		 = 250;
-		_qmin			 = 1;
-		_qmax			 = 11;*/
 		_prepared		 = false;
-		//_bitRate		 = 64;
 		_srcPicture      = NULL;
 		_dstPicture      = NULL;
 		_needsRefreshing = true;
 
-		this->_ctx = new FFmpegContext();
+		this->_ctx = ctx;
 	}
 
 	void FFMPeg::broadcast(Graphics::Bitmap* data)
@@ -147,18 +141,6 @@ namespace Broadcast
 	}
 
 
-	void FFMPeg::location(const char *value)
-	{
-		_url = value;
-		_needsRefreshing = true;
-	}
-
-
-	const char* FFMPeg::location()
-	{
-		return _url;
-	}
-
 	void FFMPeg::refresh(bool force)
 	{
 		if(_prepared && (!_needsRefreshing || !force)) return;
@@ -174,7 +156,7 @@ namespace Broadcast
 
 	void FFMPeg::prepare()
 	{
-		printf("Preparing RTMP connection for \n %s \n", _url);
+		printf("Preparing RTMP connection for \n %s \n", _ctx->output);
 
 		cleanup();
 		_prepared = true;
@@ -182,7 +164,7 @@ namespace Broadcast
 		
 
 		//open the RTMP server
-		avformat_alloc_output_context2(&_formatCtx, NULL, "flv", _url);
+		avformat_alloc_output_context2(&_formatCtx, NULL, "flv", _ctx->output);
 
 		//unable to open the connection? probably down...
 		if(_formatCtx == NULL)
@@ -194,17 +176,17 @@ namespace Broadcast
 
 		addVideoStream();
 
-		av_dump_format(_formatCtx, 0, _url, 1);
+		av_dump_format(_formatCtx, 0, _ctx->output, 1);
 
 		printf("Opening RTMP connection");
 
 		//open the file
 		if (!(_outputFmt->flags & AVFMT_NOFILE)) 
 		{
-			int code = avio_open(&_formatCtx->pb, _url, AVIO_FLAG_WRITE);
+			int code = avio_open(&_formatCtx->pb, _ctx->output, AVIO_FLAG_WRITE);
 			if (code < 0) 
 			{
-				fprintf(stderr, "Could not open '%s'\n", _url);
+				fprintf(stderr, "Could not open '%s'\n", _ctx->output);
 
 				exit(1);
 			}
@@ -216,6 +198,11 @@ namespace Broadcast
 		avformat_write_header(_formatCtx, NULL);
 		printf("Connected to RTMP server");
 
+	}
+
+	FFmpegContext* FFMPeg::context()
+	{
+		return _ctx;
 	}
 
 
@@ -242,13 +229,8 @@ namespace Broadcast
 		avcodec_get_context_defaults3(_videoCodecCtx, _videoCodec);
 		_videoCodecCtx->codec_id = _outputFmt->video_codec;
 
-		int br = _ctx->bitRate * 1000;
+		int br = _ctx->bit_rate * 1000;
 		
-		printf("Open rtmp stream ctx:");
-		//printf("bitrate: %f\nframeRate: %f\ngopSize: %f\nqmin: %f\nqmax: %f", br, _ctx->frameRate, _ctx->gopSize, _ctx->qmin, _ctx->qmax);
-		
-
-
 		
 		//_videoCodecCtx->flags |= CODEC_FLAG_GRAY;
 		//_videoCodecCtx->flags |= CODEC_FLAG_LOW_DELAY;
@@ -264,9 +246,9 @@ namespace Broadcast
 		_videoCodecCtx->width         = this->_bounds.width;
 		_videoCodecCtx->height        = this->_bounds.height;
 
-		_videoCodecCtx->time_base.den = _ctx->frameRate; // HIGH framerate = smooth playback.
+		_videoCodecCtx->time_base.den = _ctx->frame_rate; // HIGH framerate = smooth playback.
 		_videoCodecCtx->time_base.num = 1;
-		_videoCodecCtx->gop_size      = 300;//_ctx->gopSize;//_gopSize; //lower = less chunkyZ
+		_videoCodecCtx->gop_size      = _ctx->gop_size;
 		//_videoCodecCtx->level = 30;Z
 		//_videoCodecCtx->flags		  |= CODEC_FLAG_PSNR;
 		//_videoCodecCtx->partitions		  &= ~(X264_PART_I4X4 | X264_PART_I8X8 | X264_PART_P8X8 | X264_PART_P4X4 | X264_PART_B8X8);
@@ -281,7 +263,6 @@ namespace Broadcast
 		//_videoCodecCtx->scenechange_threshold = 40;
 		//_videoCodecCtx->b_quant_offset = 1.25;
 		//_videoCodecCtx->scenechange_threshold = -500;
-		_videoCodecCtx->scenechange_threshold = 500;
 		
 		//_videoCodecCtx->me_method = ME_ZERO;
 		//_videoCodecCtx->qmin = 1;
@@ -299,7 +280,6 @@ namespace Broadcast
 		
 		//_videoCodecCtx->flags |= CODEC_FLAG_LOOP_FILTER;//|CODEC_FLAG_GRAY;
 		//_videoCodecCtx->me_cmp |= FF_CMP_CHROMA;
-		_videoCodecCtx->qcompress = 0.6;
 		//_videoCodecCtx->qmin = 10;
 		//_videoCodecCtx->qmax = 51;
 		//_videoCodecCtx->max_qdiff = 4;
@@ -341,6 +321,8 @@ namespace Broadcast
 			CTO(b_quant_factor)
 			//CTO(luma_elim_threshold)
 			//CTO(chroma_elim_threshold)
+			CTO(qmin)
+			CTO(qmax)
 			CTO(rc_max_rate)
 			CTO(rc_min_rate)
 			CTO(bits_per_coded_sample)

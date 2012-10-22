@@ -43,17 +43,17 @@ namespace Broadcast
 		/**
 		*/
 
-		FFMPeg(const char *url);
+		FFMPeg(FFmpegContext* ctx);
 
 		/**
 		*/
 
-		void location(const char *value);
+		//void location(const char *value);
 
 		/**
 		 */
 
-		const char* location();
+		//const char* location();
 
 		/**
 		 */
@@ -66,6 +66,10 @@ namespace Broadcast
 
 		void broadcast(Graphics::Bitmap* data);
 
+		/**
+		 */
+
+		FFmpegContext* context();
 
 		/**
 		*/
@@ -102,7 +106,7 @@ namespace Broadcast
 		* RTMP server
 		*/
 
-		const char *_url;
+		//const char *_url;
 
 		/**
 		*/

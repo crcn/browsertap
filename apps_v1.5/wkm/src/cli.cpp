@@ -15,6 +15,8 @@ DWORD WINAPI broadcast_video(LPVOID param)
 {
 	Client::Console* cli = (Client::Console*) param;
 
+	int timeout = cli->mediaBroadcaster()->context()->capture_timeout;
+
 	while(true) 
 	{
 		Geom::Rectangle bounds;
@@ -35,7 +37,10 @@ DWORD WINAPI broadcast_video(LPVOID param)
 
 		delete bmp;
 
-		Sleep(10);
+		if(timeout > 0)
+		{
+			Sleep(timeout);
+		}
 	}
 
 	return 0;
@@ -44,8 +49,6 @@ DWORD WINAPI broadcast_video(LPVOID param)
 
 void init_broadcast_thread(Client::Console* cli) 
 {
-	std::cout << "broadcasting desktop to " << cli->mediaBroadcaster()->location() << std::endl;
-
 	DWORD threadId;
 	CreateThread(NULL, 0, broadcast_video, cli, 0, &threadId);
 
@@ -61,20 +64,66 @@ int usage() {
 	return 1;
 }
 
+#define MAP_ATOI(to, flag) \
+	if(strcmp(flag, argv[i]) == 0) \
+		to = atoi(argv[++i]);
+
+#define MAP_CHAR(to, flag) \
+	if(strcmp(flag, argv[i]) == 0) \
+		to = argv[++i];
+
 
 int main(int argc, const char* argv[]) {
 
 
 	//arg must be present
-	if(argc < 8) {
+	/*if(argc < 8) {
 		return usage();
+	}*/
+
+	Geom::Rectangle bounds;
+	Geom::Padding padding;
+	Broadcast::FFmpegContext* ctx = new Broadcast::FFmpegContext(NULL);
+
+	ctx->qmin = 1; //good mix of quality
+	ctx->qmax = 11;
+	ctx->me_subpel_quality = 0; //low quality
+	ctx->gop_size = 300;
+	ctx->scenechange_threshold = 500;
+	ctx->frame_rate = 25;
+
+	for(int i = 1; i < argc; i++)
+	{
+
+		MAP_CHAR(ctx->output, "-o")
+		MAP_ATOI(bounds.width, "-w")
+		MAP_ATOI(bounds.height, "-h")
+		MAP_ATOI(padding.left, "-pl")
+		MAP_ATOI(padding.right, "-pr")
+		MAP_ATOI(padding.top, "-pt")
+		MAP_ATOI(padding.bottom, "-pb")
+		MAP_ATOI(ctx->capture_timeout, "-timeout")
+		MAP_ATOI(ctx->me_subpel_quality, "-subq")
+		MAP_ATOI(ctx->qmin, "-qmin")
+		MAP_ATOI(ctx->qmax, "-qmin")
+		MAP_ATOI(ctx->gop_size, "-gop_size")
+		MAP_ATOI(ctx->frame_rate, "-fr")
+		MAP_ATOI(ctx->scenechange_threshold, "-scenechange_threshold")
+		MAP_ATOI(ctx->qcompress, "-qcompress")
+		MAP_ATOI(ctx->qblur, "-qblur")
+	}
+
+	if(ctx->output == NULL) 
+	{
+		std::cerr << "-o must be defined" << std::endl;
+		return 1;
 	}
 
 
-	const char* output = argv[1];
 
 
-	Broadcast::FFMPeg* bf = new Broadcast::FFMPeg(output);
+
+	Broadcast::FFMPeg* bf = new Broadcast::FFMPeg(ctx);
   
   	//the window we're controlling
 	Control::Window* win        = Control::Windows::desktop();
@@ -87,12 +136,15 @@ int main(int argc, const char* argv[]) {
 
 	//the client which controls everything
 	Client::Console* cli        = new Client::Console(win, bf, mouse, keyboard);
-	cli->bounds.width = atoi(argv[2]);
+	/*cli->bounds.width = atoi(argv[2]);
 	cli->bounds.height = atoi(argv[3]);
 	cli->padding.left = atoi(argv[4]);
 	cli->padding.right = atoi(argv[5]);
 	cli->padding.top = atoi(argv[6]);
-	cli->padding.bottom = atoi(argv[7]);
+	cli->padding.bottom = atoi(argv[7]);*/
+		
+	//skip first seg (rtmp server)
+	
 
 
 	init_broadcast_thread(cli);
