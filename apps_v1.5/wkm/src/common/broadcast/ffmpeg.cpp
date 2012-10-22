@@ -296,12 +296,11 @@ namespace Broadcast
 
 			
 		_videoCodecCtx->me_subpel_quality = 0;	
-		//_videoCodecCtx->subme = 1;
-		//_videoCodecCtx->thread_count = 1;
+		_videoCodecCtx->thread_count = 0;
 
 		//_videoCodecCtx->qmin = 1;
 		//_videoCodecCtx->qmax = 10;
-		//_videoCodecCtx->me_method = 7;//ME_EPZS;
+		_videoCodecCtx->me_method = ME_EPZS;
 
 
 		//_videoCodecCtx->max_qdiff = 3;
