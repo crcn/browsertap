@@ -1,7 +1,0 @@
-\\vmware-host\Shared Folders\craigcondon\Development\eyebrowse\projects\src\redesktop\redesktop\bin\Debug\redesktop.exe
-\\vmware-host\Shared Folders\craigcondon\Development\eyebrowse\projects\src\redesktop\redesktop\bin\Debug\redesktop.pdb
-\\vmware-host\Shared Folders\craigcondon\Development\eyebrowse\projects\src\redesktop\redesktop\obj\x86\Debug\ResolveAssemblyReference.cache
-\\vmware-host\Shared Folders\craigcondon\Development\eyebrowse\projects\src\redesktop\redesktop\obj\x86\Debug\Interop.MSTSCLib.dll
-\\vmware-host\Shared Folders\craigcondon\Development\eyebrowse\projects\src\redesktop\redesktop\obj\x86\Debug\redesktop.csproj.ResolveComReference.cache
-\\vmware-host\Shared Folders\craigcondon\Development\eyebrowse\projects\src\redesktop\redesktop\obj\x86\Debug\redesktop.exe
-\\vmware-host\Shared Folders\craigcondon\Development\eyebrowse\projects\src\redesktop\redesktop\obj\x86\Debug\redesktop.pdb
