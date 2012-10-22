@@ -25,10 +25,7 @@
  *   http://www.csse.monash.edu.au/~timf/
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
+#include "libavutil/avassert.h"
 #include "avcodec.h"
 #include "bytestream.h"
 #include "roqvideo.h"
@@ -153,7 +150,7 @@ static void roqvideo_decode_frame(RoqContext *ri)
                     }
                     break;
                 default:
-                    av_log(ri->avctx, AV_LOG_ERROR, "Unknown vq code: %d\n", vqid);
+                    av_assert2(0);
             }
         }
 
@@ -179,7 +176,7 @@ static av_cold int roq_decode_init(AVCodecContext *avctx)
     avcodec_get_frame_defaults(&s->frames[1]);
     s->last_frame    = &s->frames[0];
     s->current_frame = &s->frames[1];
-    avctx->pix_fmt = PIX_FMT_YUV444P;
+    avctx->pix_fmt = AV_PIX_FMT_YUV444P;
 
     return 0;
 }
@@ -192,11 +189,12 @@ static int roq_decode_frame(AVCodecContext *avctx,
     int buf_size = avpkt->size;
     RoqContext *s = avctx->priv_data;
     int copy= !s->current_frame->data[0];
+    int ret;
 
     s->current_frame->reference = 3;
-    if (avctx->reget_buffer(avctx, s->current_frame)) {
-        av_log(avctx, AV_LOG_ERROR, "  RoQ: get_buffer() failed\n");
-        return -1;
+    if ((ret = avctx->reget_buffer(avctx, s->current_frame)) < 0) {
+        av_log(avctx, AV_LOG_ERROR, "reget_buffer() failed\n");
+        return ret;
     }
 
     if(copy)
@@ -231,11 +229,11 @@ static av_cold int roq_decode_end(AVCodecContext *avctx)
 AVCodec ff_roq_decoder = {
     .name           = "roqvideo",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_ROQ,
+    .id             = AV_CODEC_ID_ROQ,
     .priv_data_size = sizeof(RoqContext),
     .init           = roq_decode_init,
     .close          = roq_decode_end,
     .decode         = roq_decode_frame,
     .capabilities   = CODEC_CAP_DR1,
-    .long_name = NULL_IF_CONFIG_SMALL("id RoQ video"),
+    .long_name      = NULL_IF_CONFIG_SMALL("id RoQ video"),
 };

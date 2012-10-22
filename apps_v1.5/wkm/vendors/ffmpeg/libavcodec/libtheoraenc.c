@@ -31,6 +31,7 @@
  */
 
 /* FFmpeg includes */
+#include "libavutil/common.h"
 #include "libavutil/intreadwrite.h"
 #include "libavutil/log.h"
 #include "libavutil/base64.h"
@@ -186,11 +187,11 @@ static av_cold int encode_init(AVCodecContext* avc_context)
     else
         t_info.colorspace = TH_CS_UNSPECIFIED;
 
-    if (avc_context->pix_fmt == PIX_FMT_YUV420P)
+    if (avc_context->pix_fmt == AV_PIX_FMT_YUV420P)
         t_info.pixel_fmt = TH_PF_420;
-    else if (avc_context->pix_fmt == PIX_FMT_YUV422P)
+    else if (avc_context->pix_fmt == AV_PIX_FMT_YUV422P)
         t_info.pixel_fmt = TH_PF_422;
-    else if (avc_context->pix_fmt == PIX_FMT_YUV444P)
+    else if (avc_context->pix_fmt == AV_PIX_FMT_YUV444P)
         t_info.pixel_fmt = TH_PF_444;
     else {
         av_log(avc_context, AV_LOG_ERROR, "Unsupported pix_fmt\n");
@@ -328,10 +329,8 @@ static int encode_frame(AVCodecContext* avc_context, AVPacket *pkt,
     }
 
     /* Copy ogg_packet content out to buffer */
-    if ((ret = ff_alloc_packet(pkt, o_packet.bytes)) < 0) {
-        av_log(avc_context, AV_LOG_ERROR, "Error getting output packet of size %ld.\n", o_packet.bytes);
+    if ((ret = ff_alloc_packet2(avc_context, pkt, o_packet.bytes)) < 0)
         return ret;
-    }
     memcpy(pkt->data, o_packet.packet, o_packet.bytes);
 
     // HACK: assumes no encoder delay, this is true until libtheora becomes
@@ -361,14 +360,16 @@ static av_cold int encode_close(AVCodecContext* avc_context)
 
 /** AVCodec struct exposed to libavcodec */
 AVCodec ff_libtheora_encoder = {
-    .name = "libtheora",
-    .type = AVMEDIA_TYPE_VIDEO,
-    .id = CODEC_ID_THEORA,
+    .name           = "libtheora",
+    .type           = AVMEDIA_TYPE_VIDEO,
+    .id             = AV_CODEC_ID_THEORA,
     .priv_data_size = sizeof(TheoraContext),
-    .init = encode_init,
-    .close = encode_close,
-    .encode2 = encode_frame,
-    .capabilities = CODEC_CAP_DELAY, // needed to get the statsfile summary
-    .pix_fmts= (const enum PixelFormat[]){PIX_FMT_YUV420P, PIX_FMT_YUV422P, PIX_FMT_YUV444P, PIX_FMT_NONE},
-    .long_name = NULL_IF_CONFIG_SMALL("libtheora Theora"),
+    .init           = encode_init,
+    .close          = encode_close,
+    .encode2        = encode_frame,
+    .capabilities   = CODEC_CAP_DELAY, // needed to get the statsfile summary
+    .pix_fmts       = (const enum AVPixelFormat[]){
+        AV_PIX_FMT_YUV420P, AV_PIX_FMT_YUV422P, AV_PIX_FMT_YUV444P, AV_PIX_FMT_NONE
+    },
+    .long_name      = NULL_IF_CONFIG_SMALL("libtheora Theora"),
 };

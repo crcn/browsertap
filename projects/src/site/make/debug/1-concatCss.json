@@ -1,5 +1,0 @@
-{
-    "input": "<%-assetsDir %>/less/combine",
-    "output": "<%-assetsDir %>/css/main.css",
-    "task": "./concatLess"
-}

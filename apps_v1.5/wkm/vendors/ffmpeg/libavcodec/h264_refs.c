@@ -123,10 +123,10 @@ int ff_h264_fill_default_ref_list(H264Context *h){
         for(list= 0; list<2; list++){
             len= add_sorted(sorted    , h->short_ref, h->short_ref_count, cur_poc, 1^list);
             len+=add_sorted(sorted+len, h->short_ref, h->short_ref_count, cur_poc, 0^list);
-            assert(len<=32);
+            av_assert0(len<=32);
             len= build_def_list(h->default_ref_list[list]    , sorted     , len, 0, s->picture_structure);
             len+=build_def_list(h->default_ref_list[list]+len, h->long_ref, 16 , 1, s->picture_structure);
-            assert(len<=32);
+            av_assert0(len<=32);
 
             if(len < h->ref_count[list])
                 memset(&h->default_ref_list[list][len], 0, sizeof(Picture)*(h->ref_count[list] - len));
@@ -141,17 +141,17 @@ int ff_h264_fill_default_ref_list(H264Context *h){
     }else{
         len = build_def_list(h->default_ref_list[0]    , h->short_ref, h->short_ref_count, 0, s->picture_structure);
         len+= build_def_list(h->default_ref_list[0]+len, h-> long_ref, 16                , 1, s->picture_structure);
-        assert(len <= 32);
+        av_assert0(len<=32);
         if(len < h->ref_count[0])
             memset(&h->default_ref_list[0][len], 0, sizeof(Picture)*(h->ref_count[0] - len));
     }
 #ifdef TRACE
     for (i=0; i<h->ref_count[0]; i++) {
-        tprintf(h->s.avctx, "List0: %s fn:%d 0x%p\n", (h->default_ref_list[0][i].long_ref ? "LT" : "ST"), h->default_ref_list[0][i].pic_id, h->default_ref_list[0][i].data[0]);
+        tprintf(h->s.avctx, "List0: %s fn:%d 0x%p\n", (h->default_ref_list[0][i].long_ref ? "LT" : "ST"), h->default_ref_list[0][i].pic_id, h->default_ref_list[0][i].f.data[0]);
     }
     if(h->slice_type_nos==AV_PICTURE_TYPE_B){
         for (i=0; i<h->ref_count[1]; i++) {
-            tprintf(h->s.avctx, "List1: %s fn:%d 0x%p\n", (h->default_ref_list[1][i].long_ref ? "LT" : "ST"), h->default_ref_list[1][i].pic_id, h->default_ref_list[1][i].data[0]);
+            tprintf(h->s.avctx, "List1: %s fn:%d 0x%p\n", (h->default_ref_list[1][i].long_ref ? "LT" : "ST"), h->default_ref_list[1][i].pic_id, h->default_ref_list[1][i].f.data[0]);
         }
     }
 #endif
@@ -443,6 +443,9 @@ void ff_h264_remove_all_refs(H264Context *h){
         h->short_ref[i]= NULL;
     }
     h->short_ref_count=0;
+
+    memset(h->default_ref_list, 0, sizeof(h->default_ref_list));
+    memset(h->ref_list, 0, sizeof(h->ref_list));
 }
 
 /**
@@ -655,6 +658,8 @@ int ff_h264_execute_ref_pic_marking(H264Context *h, MMCO *mmco, int mmco_count){
 
     if(err >= 0 && h->long_ref_count==0 && h->short_ref_count<=2 && h->pps.ref_count[0]<=1 + (s->picture_structure != PICT_FRAME) && s->current_picture_ptr->f.pict_type == AV_PICTURE_TYPE_I){
         s->current_picture_ptr->sync |= 1;
+        if(!h->s.avctx->has_b_frames)
+            h->sync = 2;
     }
 
     return (h->s.avctx->err_recognition & AV_EF_EXPLODE) ? err : 0;

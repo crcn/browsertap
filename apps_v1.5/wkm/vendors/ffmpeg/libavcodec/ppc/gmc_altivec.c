@@ -20,9 +20,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
+#include "libavutil/mem.h"
+#include "libavutil/ppc/types_altivec.h"
+#include "libavutil/ppc/util_altivec.h"
 #include "libavcodec/dsputil.h"
-#include "util_altivec.h"
-#include "types_altivec.h"
 #include "dsputil_altivec.h"
 
 /*
@@ -48,7 +49,7 @@ void ff_gmc1_altivec(uint8_t *dst /* align 8 */, uint8_t *src /* align1 */, int 
     unsigned long dst_odd = (unsigned long)dst & 0x0000000F;
     unsigned long src_really_odd = (unsigned long)src & 0x0000000F;
 
-    tempA = vec_ld(0, (unsigned short*)ABCD);
+    tempA = vec_ld(0, (const unsigned short*)ABCD);
     Av = vec_splat(tempA, 0);
     Bv = vec_splat(tempA, 1);
     Cv = vec_splat(tempA, 2);

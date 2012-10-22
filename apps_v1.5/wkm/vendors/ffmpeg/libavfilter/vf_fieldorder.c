@@ -25,9 +25,16 @@
 
 /* #define DEBUG */
 
+#include <stdio.h>
+#include <string.h>
+
 #include "libavutil/imgutils.h"
+#include "libavutil/internal.h"
 #include "libavutil/pixdesc.h"
 #include "avfilter.h"
+#include "formats.h"
+#include "internal.h"
+#include "video.h"
 
 typedef struct
 {
@@ -35,7 +42,7 @@ typedef struct
     int          line_size[4]; ///< bytes of pixel data per line for each plane
 } FieldOrderContext;
 
-static av_cold int init(AVFilterContext *ctx, const char *args, void *opaque)
+static av_cold int init(AVFilterContext *ctx, const char *args)
 {
     FieldOrderContext *fieldorder = ctx->priv;
 
@@ -55,7 +62,7 @@ static av_cold int init(AVFilterContext *ctx, const char *args, void *opaque)
         return AVERROR(EINVAL);
     }
 
-    av_log(ctx, AV_LOG_INFO, "output field order: %s\n",
+    av_log(ctx, AV_LOG_VERBOSE, "output field order: %s\n",
             fieldorder->dst_tff ? tff : bff);
 
     return 0;
@@ -64,24 +71,25 @@ static av_cold int init(AVFilterContext *ctx, const char *args, void *opaque)
 static int query_formats(AVFilterContext *ctx)
 {
     AVFilterFormats  *formats;
-    enum PixelFormat pix_fmt;
+    enum AVPixelFormat pix_fmt;
     int              ret;
 
     /** accept any input pixel format that is not hardware accelerated, not
      *  a bitstream format, and does not have vertically sub-sampled chroma */
     if (ctx->inputs[0]) {
         formats = NULL;
-        for (pix_fmt = 0; pix_fmt < PIX_FMT_NB; pix_fmt++)
-            if (!(  av_pix_fmt_descriptors[pix_fmt].flags & PIX_FMT_HWACCEL
-                 || av_pix_fmt_descriptors[pix_fmt].flags & PIX_FMT_BITSTREAM)
-                && av_pix_fmt_descriptors[pix_fmt].nb_components
-                && !av_pix_fmt_descriptors[pix_fmt].log2_chroma_h
-                && (ret = avfilter_add_format(&formats, pix_fmt)) < 0) {
-                avfilter_formats_unref(&formats);
+        for (pix_fmt = 0; pix_fmt < AV_PIX_FMT_NB; pix_fmt++) {
+            const AVPixFmtDescriptor *desc = av_pix_fmt_desc_get(pix_fmt);
+            if (!(desc->flags & PIX_FMT_HWACCEL ||
+                  desc->flags & PIX_FMT_BITSTREAM) &&
+                desc->nb_components && !desc->log2_chroma_h &&
+                (ret = ff_add_format(&formats, pix_fmt)) < 0) {
+                ff_formats_unref(&formats);
                 return ret;
             }
-        avfilter_formats_ref(formats, &ctx->inputs[0]->out_formats);
-        avfilter_formats_ref(formats, &ctx->outputs[0]->in_formats);
+        }
+        ff_formats_ref(formats, &ctx->inputs[0]->out_formats);
+        ff_formats_ref(formats, &ctx->outputs[0]->in_formats);
     }
 
     return 0;
@@ -110,23 +118,38 @@ static AVFilterBufferRef *get_video_buffer(AVFilterLink *inlink, int perms, int 
     AVFilterContext   *ctx        = inlink->dst;
     AVFilterLink      *outlink    = ctx->outputs[0];
 
-    return avfilter_get_video_buffer(outlink, perms, w, h);
+    return ff_get_video_buffer(outlink, perms, w, h);
 }
 
-static void start_frame(AVFilterLink *inlink, AVFilterBufferRef *inpicref)
+static int start_frame(AVFilterLink *inlink, AVFilterBufferRef *inpicref)
 {
     AVFilterContext   *ctx        = inlink->dst;
     AVFilterLink      *outlink    = ctx->outputs[0];
 
-    AVFilterBufferRef *outpicref;
+    AVFilterBufferRef *outpicref, *for_next_filter;
+    int ret = 0;
 
     outpicref = avfilter_ref_buffer(inpicref, ~0);
-    outlink->out_buf = outpicref;
+    if (!outpicref)
+        return AVERROR(ENOMEM);
 
-    avfilter_start_frame(outlink, outpicref);
+    for_next_filter = avfilter_ref_buffer(outpicref, ~0);
+    if (!for_next_filter) {
+        avfilter_unref_bufferp(&outpicref);
+        return AVERROR(ENOMEM);
+    }
+
+    ret = ff_start_frame(outlink, for_next_filter);
+    if (ret < 0) {
+        avfilter_unref_bufferp(&outpicref);
+        return ret;
+    }
+
+    outlink->out_buf = outpicref;
+    return 0;
 }
 
-static void draw_slice(AVFilterLink *inlink, int y, int h, int slice_dir)
+static int draw_slice(AVFilterLink *inlink, int y, int h, int slice_dir)
 {
     AVFilterContext   *ctx        = inlink->dst;
     FieldOrderContext *fieldorder = ctx->priv;
@@ -140,11 +163,12 @@ static void draw_slice(AVFilterLink *inlink, int y, int h, int slice_dir)
      *  and that complexity will be added later */
     if (  !inpicref->video->interlaced
         || inpicref->video->top_field_first == fieldorder->dst_tff) {
-        avfilter_draw_slice(outlink, y, h, slice_dir);
+        return ff_draw_slice(outlink, y, h, slice_dir);
     }
+    return 0;
 }
 
-static void end_frame(AVFilterLink *inlink)
+static int end_frame(AVFilterLink *inlink)
 {
     AVFilterContext   *ctx        = inlink->dst;
     FieldOrderContext *fieldorder = ctx->priv;
@@ -202,15 +226,36 @@ static void end_frame(AVFilterLink *inlink)
             }
         }
         outpicref->video->top_field_first = fieldorder->dst_tff;
-        avfilter_draw_slice(outlink, 0, h, 1);
+        ff_draw_slice(outlink, 0, h, 1);
     } else {
         av_dlog(ctx,
                 "not interlaced or field order already correct\n");
     }
 
-    avfilter_end_frame(outlink);
-    avfilter_unref_buffer(inpicref);
+    return ff_end_frame(outlink);
 }
+
+static const AVFilterPad avfilter_vf_fieldorder_inputs[] = {
+    {
+        .name             = "default",
+        .type             = AVMEDIA_TYPE_VIDEO,
+        .config_props     = config_input,
+        .start_frame      = start_frame,
+        .get_video_buffer = get_video_buffer,
+        .draw_slice       = draw_slice,
+        .end_frame        = end_frame,
+        .min_perms        = AV_PERM_READ | AV_PERM_PRESERVE,
+    },
+    { NULL }
+};
+
+static const AVFilterPad avfilter_vf_fieldorder_outputs[] = {
+    {
+        .name = "default",
+        .type = AVMEDIA_TYPE_VIDEO,
+    },
+    { NULL }
+};
 
 AVFilter avfilter_vf_fieldorder = {
     .name          = "fieldorder",
@@ -218,17 +263,6 @@ AVFilter avfilter_vf_fieldorder = {
     .init          = init,
     .priv_size     = sizeof(FieldOrderContext),
     .query_formats = query_formats,
-    .inputs        = (const AVFilterPad[]) {{ .name       = "default",
-                                        .type             = AVMEDIA_TYPE_VIDEO,
-                                        .config_props     = config_input,
-                                        .start_frame      = start_frame,
-                                        .get_video_buffer = get_video_buffer,
-                                        .draw_slice       = draw_slice,
-                                        .end_frame        = end_frame,
-                                        .min_perms        = AV_PERM_READ,
-                                        .rej_perms        = AV_PERM_REUSE2|AV_PERM_PRESERVE,},
-                                      { .name = NULL}},
-    .outputs       = (const AVFilterPad[]) {{ .name       = "default",
-                                        .type             = AVMEDIA_TYPE_VIDEO, },
-                                      { .name = NULL}},
+    .inputs        = avfilter_vf_fieldorder_inputs,
+    .outputs       = avfilter_vf_fieldorder_outputs,
 };

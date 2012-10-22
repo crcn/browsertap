@@ -19,6 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
+#include "libavutil/float_dsp.h"
 #include "avcodec.h"
 #include "get_bits.h"
 #include "dsputil.h"
@@ -176,6 +177,7 @@ typedef struct TwinContext {
     AVCodecContext *avctx;
     AVFrame frame;
     DSPContext      dsp;
+    AVFloatDSPContext fdsp;
     FFTContext mdct_ctx[3];
 
     const ModeTab *mtab;
@@ -664,7 +666,7 @@ static void imdct_and_window(TwinContext *tctx, enum FrameType ftype, int wtype,
 }
 
 static void imdct_output(TwinContext *tctx, enum FrameType ftype, int wtype,
-                         float *out)
+                         float **out)
 {
     const ModeTab *mtab = tctx->mtab;
     int size1, size2;
@@ -683,24 +685,15 @@ static void imdct_output(TwinContext *tctx, enum FrameType ftype, int wtype,
 
     size2 = tctx->last_block_pos[0];
     size1 = mtab->size - size2;
+
+    memcpy(&out[0][0    ], prev_buf,         size1 * sizeof(out[0][0]));
+    memcpy(&out[0][size1], tctx->curr_frame, size2 * sizeof(out[0][0]));
+
     if (tctx->avctx->channels == 2) {
-        tctx->dsp.butterflies_float_interleave(out, prev_buf,
-                                               &prev_buf[2*mtab->size],
-                                               size1);
-
-        out += 2 * size1;
-
-        tctx->dsp.butterflies_float_interleave(out, tctx->curr_frame,
-                                               &tctx->curr_frame[2*mtab->size],
-                                               size2);
-    } else {
-        memcpy(out, prev_buf, size1 * sizeof(*out));
-
-        out += size1;
-
-        memcpy(out, tctx->curr_frame, size2 * sizeof(*out));
+        memcpy(&out[1][0],     &prev_buf[2*mtab->size],         size1 * sizeof(out[1][0]));
+        memcpy(&out[1][size1], &tctx->curr_frame[2*mtab->size], size2 * sizeof(out[1][0]));
+        tctx->dsp.butterflies_float(out[0], out[1], mtab->size);
     }
-
 }
 
 static void dec_bark_env(TwinContext *tctx, const uint8_t *in, int use_hist,
@@ -787,8 +780,8 @@ static void read_and_decode_spectrum(TwinContext *tctx, GetBitContext *gb,
             dec_bark_env(tctx, bark1[i][j], bark_use_hist[i][j], i,
                          tctx->tmp_buf, gain[sub*i+j], ftype);
 
-            tctx->dsp.vector_fmul(chunk + block_size*j, chunk + block_size*j, tctx->tmp_buf,
-                                  block_size);
+            tctx->fdsp.vector_fmul(chunk + block_size*j, chunk + block_size*j,
+                                   tctx->tmp_buf, block_size);
 
         }
 
@@ -809,7 +802,7 @@ static void read_and_decode_spectrum(TwinContext *tctx, GetBitContext *gb,
         dec_lpc_spectrum_inv(tctx, lsp, ftype, tctx->tmp_buf);
 
         for (j = 0; j < mtab->fmode[ftype].sub; j++) {
-            tctx->dsp.vector_fmul(chunk, chunk, tctx->tmp_buf, block_size);
+            tctx->fdsp.vector_fmul(chunk, chunk, tctx->tmp_buf, block_size);
             chunk += block_size;
         }
     }
@@ -823,7 +816,7 @@ static int twin_decode_frame(AVCodecContext * avctx, void *data,
     TwinContext *tctx = avctx->priv_data;
     GetBitContext gb;
     const ModeTab *mtab = tctx->mtab;
-    float *out = NULL;
+    float **out = NULL;
     enum FrameType ftype;
     int window_type, ret;
     static const enum FrameType wtype_to_ftype_table[] = {
@@ -844,7 +837,7 @@ static int twin_decode_frame(AVCodecContext * avctx, void *data,
             av_log(avctx, AV_LOG_ERROR, "get_buffer() failed\n");
             return ret;
         }
-        out = (float *)tctx->frame.data[0];
+        out = (float **)tctx->frame.extended_data;
     }
 
     init_get_bits(&gb, buf, buf_size * 8);
@@ -1000,14 +993,16 @@ static av_cold void construct_perm_table(TwinContext *tctx,enum FrameType ftype)
 {
     int block_size;
     const ModeTab *mtab = tctx->mtab;
-    int size = tctx->avctx->channels*mtab->fmode[ftype].sub;
+    int size;
     int16_t *tmp_perm = (int16_t *) tctx->tmp_buf;
 
     if (ftype == FT_PPC) {
         size  = tctx->avctx->channels;
         block_size = mtab->ppc_shape_len;
-    } else
+    } else {
+        size       = tctx->avctx->channels * mtab->fmode[ftype].sub;
         block_size = mtab->size / mtab->fmode[ftype].sub;
+    }
 
     permutate_in_line(tmp_perm, tctx->n_div[ftype], size,
                       block_size, tctx->length[ftype],
@@ -1115,7 +1110,7 @@ static av_cold int twin_decode_init(AVCodecContext *avctx)
     int isampf, ibps;
 
     tctx->avctx       = avctx;
-    avctx->sample_fmt = AV_SAMPLE_FMT_FLT;
+    avctx->sample_fmt = AV_SAMPLE_FMT_FLTP;
 
     if (!avctx->extradata || avctx->extradata_size < 12) {
         av_log(avctx, AV_LOG_ERROR, "Missing or incomplete extradata\n");
@@ -1154,6 +1149,7 @@ static av_cold int twin_decode_init(AVCodecContext *avctx)
     }
 
     ff_dsputil_init(&tctx->dsp, avctx);
+    avpriv_float_dsp_init(&tctx->fdsp, avctx->flags & CODEC_FLAG_BITEXACT);
     if ((ret = init_mdct_win(tctx))) {
         av_log(avctx, AV_LOG_ERROR, "Error initializing MDCT\n");
         twin_decode_close(avctx);
@@ -1172,11 +1168,13 @@ static av_cold int twin_decode_init(AVCodecContext *avctx)
 AVCodec ff_twinvq_decoder = {
     .name           = "twinvq",
     .type           = AVMEDIA_TYPE_AUDIO,
-    .id             = CODEC_ID_TWINVQ,
+    .id             = AV_CODEC_ID_TWINVQ,
     .priv_data_size = sizeof(TwinContext),
     .init           = twin_decode_init,
     .close          = twin_decode_close,
     .decode         = twin_decode_frame,
     .capabilities   = CODEC_CAP_DR1,
     .long_name      = NULL_IF_CONFIG_SMALL("VQF TwinVQ"),
+    .sample_fmts    = (const enum AVSampleFormat[]) { AV_SAMPLE_FMT_FLTP,
+                                                      AV_SAMPLE_FMT_NONE },
 };

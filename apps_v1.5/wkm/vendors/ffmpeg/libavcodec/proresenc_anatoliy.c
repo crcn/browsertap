@@ -21,11 +21,13 @@
  */
 
 /**
- * @file libavcodec/proresenc.c
+ * @file
+ * Apple ProRes encoder (Anatoliy Wasserman version)
  * Known FOURCCs: 'apch' (HQ), 'apcn' (SD), 'apcs' (LT), 'acpo' (Proxy)
  */
 
 #include "avcodec.h"
+#include "internal.h"
 #include "put_bits.h"
 #include "bytestream.h"
 #include "dsputil.h"
@@ -168,8 +170,7 @@ static void encode_codeword(PutBitContext *pb, int val, int codebook)
         exp = av_log2(val);
         zeros = exp - exp_order + switch_bits + 1;
         put_bits(pb, zeros, 0);
-        put_bits(pb, 1, 1);
-        put_bits(pb, exp, val);
+        put_bits(pb, exp + 1, val);
     } else if (rice_order) {
         mask = (1 << rice_order) - 1;
         put_bits(pb, (val >> rice_order), 0);
@@ -366,7 +367,7 @@ static void subimage_with_fill(uint16_t *src, unsigned x, unsigned y,
     }
 }
 
-static int encode_slice(AVCodecContext *avctx, AVFrame *pic, int mb_x,
+static int encode_slice(AVCodecContext *avctx, const AVFrame *pic, int mb_x,
         int mb_y, unsigned mb_count, uint8_t *buf, unsigned data_size,
         int unsafe, int *qp)
 {
@@ -436,7 +437,7 @@ static int encode_slice(AVCodecContext *avctx, AVFrame *pic, int mb_x,
     return hdr_size + y_data_size + u_data_size + v_data_size;
 }
 
-static int prores_encode_picture(AVCodecContext *avctx, AVFrame *pic,
+static int prores_encode_picture(AVCodecContext *avctx, const AVFrame *pic,
         uint8_t *buf, const int buf_size)
 {
     int mb_width = (avctx->width + 15) >> 4;
@@ -493,11 +494,8 @@ static int prores_encode_frame(AVCodecContext *avctx, AVPacket *pkt,
     int frame_size = FFALIGN(avctx->width, 16) * FFALIGN(avctx->height, 16)*16 + 500 + FF_MIN_BUFFER_SIZE; //FIXME choose tighter limit
 
 
-    if (!pkt->data &&
-        (ret = av_new_packet(pkt, frame_size + FF_MIN_BUFFER_SIZE)) < 0) {
-        av_log(avctx, AV_LOG_ERROR, "Error getting output packet.\n");
+    if ((ret = ff_alloc_packet2(avctx, pkt, frame_size + FF_MIN_BUFFER_SIZE)) < 0)
         return ret;
-    }
 
     buf = pkt->data;
     pic_size = prores_encode_picture(avctx, pict, buf + header_size + 8,
@@ -542,7 +540,7 @@ static av_cold int prores_encode_init(AVCodecContext *avctx)
     int i;
     ProresContext* ctx = avctx->priv_data;
 
-    if (avctx->pix_fmt != PIX_FMT_YUV422P10) {
+    if (avctx->pix_fmt != AV_PIX_FMT_YUV422P10) {
         av_log(avctx, AV_LOG_ERROR, "need YUV422P10\n");
         return -1;
     }
@@ -601,25 +599,27 @@ static av_cold int prores_encode_close(AVCodecContext *avctx)
 AVCodec ff_prores_anatoliy_encoder = {
     .name           = "prores_anatoliy",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_PRORES,
+    .id             = AV_CODEC_ID_PRORES,
     .priv_data_size = sizeof(ProresContext),
     .init           = prores_encode_init,
     .close          = prores_encode_close,
     .encode2        = prores_encode_frame,
-    .pix_fmts       = (const enum PixelFormat[]){PIX_FMT_YUV422P10, PIX_FMT_NONE},
+    .pix_fmts       = (const enum AVPixelFormat[]){AV_PIX_FMT_YUV422P10, AV_PIX_FMT_NONE},
     .long_name      = NULL_IF_CONFIG_SMALL("Apple ProRes"),
+    .capabilities   = CODEC_CAP_FRAME_THREADS | CODEC_CAP_INTRA_ONLY,
     .profiles       = profiles
 };
 
 AVCodec ff_prores_encoder = {
     .name           = "prores",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_PRORES,
+    .id             = AV_CODEC_ID_PRORES,
     .priv_data_size = sizeof(ProresContext),
     .init           = prores_encode_init,
     .close          = prores_encode_close,
     .encode2        = prores_encode_frame,
-    .pix_fmts       = (const enum PixelFormat[]){PIX_FMT_YUV422P10, PIX_FMT_NONE},
+    .pix_fmts       = (const enum AVPixelFormat[]){AV_PIX_FMT_YUV422P10, AV_PIX_FMT_NONE},
     .long_name      = NULL_IF_CONFIG_SMALL("Apple ProRes"),
+    .capabilities   = CODEC_CAP_FRAME_THREADS | CODEC_CAP_INTRA_ONLY,
     .profiles       = profiles
 };

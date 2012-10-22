@@ -2,22 +2,24 @@
  * CDXL video decoder
  * Copyright (c) 2011-2012 Paul B Mahol
  *
- * This file is part of Libav.
+ * This file is part of FFmpeg.
  *
- * Libav is free software; you can redistribute it and/or
+ * FFmpeg is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
  *
- * Libav is distributed in the hope that it will be useful,
+ * FFmpeg is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with Libav; if not, write to the Free Software
+ * License along with FFmpeg; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
+
+#define UNCHECKED_BITSTREAM_READER 1
 
 #include "libavutil/intreadwrite.h"
 #include "libavutil/imgutils.h"
@@ -25,8 +27,8 @@
 #include "get_bits.h"
 
 #define BIT_PLANAR   0x00
-#define BYTE_PLANAR  0x20
-#define CHUNKY       0x40
+#define CHUNKY       0x20
+#define BYTE_PLANAR  0x40
 #define BIT_LINE     0x80
 #define BYTE_LINE    0xC0
 
@@ -247,11 +249,11 @@ static int cdxl_decode_frame(AVCodecContext *avctx, void *data,
     if (c->video_size < aligned_width * avctx->height * c->bpp / 8)
         return AVERROR_INVALIDDATA;
     if (!encoding && c->palette_size && c->bpp <= 8) {
-        avctx->pix_fmt = PIX_FMT_PAL8;
+        avctx->pix_fmt = AV_PIX_FMT_PAL8;
     } else if (encoding == 1 && (c->bpp == 6 || c->bpp == 8)) {
         if (c->palette_size != (1 << (c->bpp - 1)))
             return AVERROR_INVALIDDATA;
-        avctx->pix_fmt = PIX_FMT_BGR24;
+        avctx->pix_fmt = AV_PIX_FMT_BGR24;
     } else {
         av_log_ask_for_sample(avctx, "unsupported encoding %d and bpp %d\n",
                               encoding, c->bpp);
@@ -300,7 +302,7 @@ static av_cold int cdxl_decode_end(AVCodecContext *avctx)
 AVCodec ff_cdxl_decoder = {
     .name           = "cdxl",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_CDXL,
+    .id             = AV_CODEC_ID_CDXL,
     .priv_data_size = sizeof(CDXLVideoContext),
     .init           = cdxl_decode_init,
     .close          = cdxl_decode_end,

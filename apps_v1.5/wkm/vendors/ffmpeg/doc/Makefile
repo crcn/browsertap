@@ -6,18 +6,22 @@ HTMLPAGES   = $(PROGS-yes:%=doc/%.html)                                 \
               doc/fate.html                                             \
               doc/general.html                                          \
               doc/git-howto.html                                        \
-              doc/libavfilter.html                                      \
+              doc/nut.html                                              \
               doc/platform.html                                         \
+              doc/syntax.html                                           \
 
 TXTPAGES    = doc/fate.txt                                              \
 
 
-DOCS = $(HTMLPAGES) $(MANPAGES) $(PODPAGES)
-ifdef HAVE_MAKEINFO
-DOCS += $(TXTPAGES)
-endif
+DOCS-$(CONFIG_HTMLPAGES) += $(HTMLPAGES)
+DOCS-$(CONFIG_PODPAGES)  += $(PODPAGES)
+DOCS-$(CONFIG_MANPAGES)  += $(MANPAGES)
+DOCS-$(CONFIG_TXTPAGES)  += $(TXTPAGES)
+DOCS = $(DOCS-yes)
 
-all-$(CONFIG_DOC): documentation
+all-$(CONFIG_DOC): doc
+
+doc: documentation
 
 documentation: $(DOCS)
 
@@ -28,28 +32,38 @@ doc/%.txt: doc/%.texi
 	$(Q)$(TEXIDEP)
 	$(M)makeinfo --force --no-headers -o $@ $< 2>/dev/null
 
+GENTEXI  = format codec
+GENTEXI := $(GENTEXI:%=doc/avoptions_%.texi)
+
+$(GENTEXI): TAG = GENTEXI
+$(GENTEXI): doc/avoptions_%.texi: doc/print_options$(HOSTEXESUF)
+	$(M)doc/print_options $* > $@
+
 doc/%.html: TAG = HTML
-doc/%.html: doc/%.texi $(SRC_PATH)/doc/t2h.init
+doc/%.html: doc/%.texi $(SRC_PATH)/doc/t2h.init $(GENTEXI)
 	$(Q)$(TEXIDEP)
-	$(M)texi2html -monolithic --init-file $(SRC_PATH)/doc/t2h.init --output $@ $<
+	$(M)texi2html -I doc -monolithic --init-file $(SRC_PATH)/doc/t2h.init --output $@ $<
 
 doc/%.pod: TAG = POD
-doc/%.pod: doc/%.texi
+doc/%.pod: doc/%.texi $(GENTEXI)
 	$(Q)$(TEXIDEP)
-	$(M)$(SRC_PATH)/doc/texi2pod.pl $< $@
+	$(M)perl $(SRC_PATH)/doc/texi2pod.pl -Idoc $< $@
 
 doc/%.1: TAG = MAN
-doc/%.1: doc/%.pod
+doc/%.1: doc/%.pod $(GENTEXI)
 	$(M)pod2man --section=1 --center=" " --release=" " $< > $@
 
-$(DOCS): | doc
-OBJDIRS += doc
+$(DOCS): | doc/
 
+install-man:
+
+ifdef CONFIG_MANPAGES
 install-progs-$(CONFIG_DOC): install-man
 
 install-man: $(MANPAGES)
 	$(Q)mkdir -p "$(MANDIR)/man1"
 	$(INSTALL) -m 644 $(MANPAGES) "$(MANDIR)/man1"
+endif
 
 uninstall: uninstall-man
 
@@ -57,8 +71,8 @@ uninstall-man:
 	$(RM) $(addprefix "$(MANDIR)/man1/",$(ALLMANPAGES))
 
 clean::
-	$(RM) $(TXTPAGES) doc/*.html doc/*.pod doc/*.1 $(CLEANSUFFIXES:%=doc/%)
+	$(RM) $(TXTPAGES) doc/*.html doc/*.pod doc/*.1 $(CLEANSUFFIXES:%=doc/%) doc/avoptions_*.texi
 
 -include $(wildcard $(DOCS:%=%.d))
 
-.PHONY: documentation
+.PHONY: doc documentation

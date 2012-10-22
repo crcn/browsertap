@@ -25,39 +25,6 @@
 #include "internal.h"
 #include "ffm.h"
 #include "avio_internal.h"
-#if CONFIG_FFSERVER
-#include <unistd.h>
-
-int64_t ffm_read_write_index(int fd)
-{
-    uint8_t buf[8];
-
-    lseek(fd, 8, SEEK_SET);
-    if (read(fd, buf, 8) != 8)
-        return AVERROR(EIO);
-    return AV_RB64(buf);
-}
-
-int ffm_write_write_index(int fd, int64_t pos)
-{
-    uint8_t buf[8];
-    int i;
-
-    for(i=0;i<8;i++)
-        buf[i] = (pos >> (56 - i * 8)) & 0xff;
-    lseek(fd, 8, SEEK_SET);
-    if (write(fd, buf, 8) != 8)
-        return AVERROR(EIO);
-    return 8;
-}
-
-void ffm_set_write_index(AVFormatContext *s, int64_t pos, int64_t file_size)
-{
-    FFMContext *ffm = s->priv_data;
-    ffm->write_index = pos;
-    ffm->file_size = file_size;
-}
-#endif // CONFIG_FFSERVER
 
 static int ffm_is_avail_data(AVFormatContext *s, int size)
 {
@@ -144,8 +111,8 @@ static int ffm_read_data(AVFormatContext *s,
             if (ffm->first_packet || (frame_offset & 0x8000)) {
                 if (!frame_offset) {
                     /* This packet has no frame headers in it */
-                    if (avio_tell(pb) >= ffm->packet_size * 3) {
-                        avio_seek(pb, -ffm->packet_size * 2, SEEK_CUR);
+                    if (avio_tell(pb) >= ffm->packet_size * 3LL) {
+                        avio_seek(pb, -ffm->packet_size * 2LL, SEEK_CUR);
                         goto retry_read;
                     }
                     /* This is bad, we cannot find a valid frame header */
@@ -246,9 +213,6 @@ static void adjust_write_index(AVFormatContext *s)
         ffm->write_index += pos_max;
     }
 
-    //printf("Adjusted write index from %"PRId64" to %"PRId64": pts=%0.6f\n", orig_write_index, ffm->write_index, pts / 1000000.);
-    //printf("pts range %0.6f - %0.6f\n", get_dts(s, 0) / 1000000. , get_dts(s, ffm->file_size - 2 * FFM_PACKET_SIZE) / 1000000. );
-
  end:
     avio_seek(pb, ptr, SEEK_SET);
 }
@@ -285,7 +249,7 @@ static int ffm_read_header(AVFormatContext *s)
     /* get also filesize */
     if (pb->seekable) {
         ffm->file_size = avio_size(pb);
-        if (ffm->write_index)
+        if (ffm->write_index && 0)
             adjust_write_index(s);
     } else {
         ffm->file_size = (UINT64_C(1) << 63) - 1;
@@ -363,7 +327,6 @@ static int ffm_read_header(AVFormatContext *s)
             codec->sample_rate = avio_rb32(pb);
             codec->channels = avio_rl16(pb);
             codec->frame_size = avio_rl16(pb);
-            codec->sample_fmt = (int16_t) avio_rl16(pb);
             break;
         default:
             goto fail;
@@ -423,7 +386,9 @@ static int ffm_read_packet(AVFormatContext *s, AVPacket *pkt)
 
         duration = AV_RB24(ffm->header + 5);
 
-        av_new_packet(pkt, size);
+        if (av_new_packet(pkt, size) < 0) {
+            return AVERROR(ENOMEM);
+        }
         pkt->stream_index = ffm->header[0];
         if ((unsigned)pkt->stream_index >= s->nb_streams) {
             av_log(s, AV_LOG_ERROR, "invalid stream index %d\n", pkt->stream_index);
@@ -480,7 +445,7 @@ static int ffm_seek(AVFormatContext *s, int stream_index, int64_t wanted_pts, in
     while (pos_min <= pos_max) {
         pts_min = get_dts(s, pos_min);
         pts_max = get_dts(s, pos_max);
-        if (pts_min > wanted_pts || pts_max < wanted_pts) {
+        if (pts_min > wanted_pts || pts_max <= wanted_pts) {
             pos = pts_min > wanted_pts ? pos_min : pos_max;
             goto found;
         }
@@ -528,7 +493,7 @@ static int ffm_probe(AVProbeData *p)
 
 AVInputFormat ff_ffm_demuxer = {
     .name           = "ffm",
-    .long_name      = NULL_IF_CONFIG_SMALL("FFM (FFserver live feed) format"),
+    .long_name      = NULL_IF_CONFIG_SMALL("FFM (FFserver live feed)"),
     .priv_data_size = sizeof(FFMContext),
     .read_probe     = ffm_probe,
     .read_header    = ffm_read_header,

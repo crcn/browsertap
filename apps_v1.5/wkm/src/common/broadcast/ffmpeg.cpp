@@ -266,7 +266,7 @@ namespace Broadcast
 
 		_videoCodecCtx->time_base.den = _ctx->frameRate; // HIGH framerate = smooth playback.
 		_videoCodecCtx->time_base.num = 1;
-		_videoCodecCtx->gop_size      = 12;//_ctx->gopSize;//_gopSize; //lower = less chunkyZ
+		_videoCodecCtx->gop_size      = 300;//_ctx->gopSize;//_gopSize; //lower = less chunkyZ
 		//_videoCodecCtx->level = 30;Z
 		//_videoCodecCtx->flags		  |= CODEC_FLAG_PSNR;
 		//_videoCodecCtx->partitions		  &= ~(X264_PART_I4X4 | X264_PART_I8X8 | X264_PART_P8X8 | X264_PART_P4X4 | X264_PART_B8X8);
@@ -281,25 +281,25 @@ namespace Broadcast
 		//_videoCodecCtx->scenechange_threshold = 40;
 		//_videoCodecCtx->b_quant_offset = 1.25;
 		//_videoCodecCtx->scenechange_threshold = -500;
-		//_videoCodecCtx->scenechange_threshold = 500;
+		_videoCodecCtx->scenechange_threshold = 500;
 		
 		//_videoCodecCtx->me_method = ME_ZERO;
 		//_videoCodecCtx->qmin = 1;
 		//_videoCodecCtx->qmax = 10;
 		//_videoCodecCtx->coder_type = FF_CODER_TYPE_VLC;
 		
-		_videoCodecCtx->qmin = _ctx->qmin;
-		_videoCodecCtx->qmax = _ctx->qmax;
+		//s_videoCodecCtx->qmin = _ctx->qmin;
+		//_videoCodecCtx->qmax = _ctx->qmax;
 
 		//_videoCodecCtx->qmin = 1;
 		//_videoCodecCtx->qmax = 3;
 		//_videoCodecCtx->rc_qsquish = 1;
-
+		
 		//_videoCodecCtx->flags2 |= CODEC_FLAG2_FAST|CODEC_FLAG2_STRICT_GOP|CODEC_FLAG2_DROP_FRAME_TIMECODE|CODEC_FLAG2_SKIP_RD;
 		
 		//_videoCodecCtx->flags |= CODEC_FLAG_LOOP_FILTER;//|CODEC_FLAG_GRAY;
 		//_videoCodecCtx->me_cmp |= FF_CMP_CHROMA;
-		//_videoCodecCtx->qcompress = 0.6;
+		_videoCodecCtx->qcompress = 0.6;
 		//_videoCodecCtx->qmin = 10;
 		//_videoCodecCtx->qmax = 51;
 		//_videoCodecCtx->max_qdiff = 4;
@@ -315,9 +315,9 @@ namespace Broadcast
 		//_videoCodecCtx->me_subpel_quality = 0;
 
 			
-		_videoCodecCtx->me_subpel_quality = 1;	
+		_videoCodecCtx->me_subpel_quality = 0;	
 		//_videoCodecCtx->subme = 1;
-		_videoCodecCtx->thread_count = 1;
+		//_videoCodecCtx->thread_count = 1;
 
 		//_videoCodecCtx->qmin = 1;
 		//_videoCodecCtx->qmax = 10;
@@ -333,6 +333,7 @@ namespace Broadcast
 		//_videoCodecCtx->aq_mode       = 0; //best
 		//_videoCodecCtx->qmin       = 1; 
 		//_videoCodecCtx->qmax       = 3; 
+		
 
 #define CTO(prop) if(_ctx->prop != -1){ /*printf("%s:%f", #prop, _ctx->prop);*/ _videoCodecCtx->prop = _ctx->prop; }
 		CTO(bit_rate_tolerance)

@@ -63,10 +63,10 @@ const char *ff_rtp_enc_name(int payload_type);
  *
  * @param buf A pointer to the string containing the encoding name
  * @param codec_type The codec type
- * @return In case of unknown encoding name, CODEC_ID_NONE is returned;
+ * @return In case of unknown encoding name, AV_CODEC_ID_NONE is returned;
  * otherwise, the codec id is returned
  */
-enum CodecID ff_rtp_codec_id(const char *buf, enum AVMediaType codec_type);
+enum AVCodecID ff_rtp_codec_id(const char *buf, enum AVMediaType codec_type);
 
 #define RTP_PT_PRIVATE 96
 #define RTP_VERSION 2
@@ -77,20 +77,31 @@ enum CodecID ff_rtp_codec_id(const char *buf, enum AVMediaType codec_type);
 #define RTCP_TX_RATIO_DEN 1000
 
 /* An arbitrary id value for RTP Xiph streams - only relevant to indicate
- * the the configuration has changed within a stream (by changing the
+ * that the configuration has changed within a stream (by changing the
  * ident value sent).
  */
 #define RTP_XIPH_IDENT 0xfecdba
 
 /* RTCP packet types */
 enum RTCPType {
+    RTCP_FIR    = 192,
+    RTCP_NACK, // 193
+    RTCP_SMPTETC,// 194
+    RTCP_IJ,   // 195
     RTCP_SR     = 200,
     RTCP_RR,   // 201
     RTCP_SDES, // 202
     RTCP_BYE,  // 203
-    RTCP_APP   // 204
+    RTCP_APP,  // 204
+    RTCP_RTPFB,// 205
+    RTCP_PSFB, // 206
+    RTCP_XR,   // 207
+    RTCP_AVB,  // 208
+    RTCP_RSI,  // 209
+    RTCP_TOKEN,// 210
 };
 
-#define RTP_PT_IS_RTCP(x) ((x) >= RTCP_SR && (x) <= RTCP_APP)
+#define RTP_PT_IS_RTCP(x) (((x) >= RTCP_FIR && (x) <= RTCP_IJ) || \
+                           ((x) >= RTCP_SR  && (x) <= RTCP_TOKEN))
 
 #endif /* AVFORMAT_RTP_H */

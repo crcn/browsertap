@@ -27,7 +27,15 @@
  * Ported from MPlayer libmpcodecs/vf_blackframe.c.
  */
 
+#include <stdio.h>
+#include <inttypes.h>
+
+#include "libavutil/internal.h"
 #include "avfilter.h"
+#include "internal.h"
+#include "formats.h"
+#include "internal.h"
+#include "video.h"
 
 typedef struct {
     unsigned int bamount; ///< black amount
@@ -39,17 +47,17 @@ typedef struct {
 
 static int query_formats(AVFilterContext *ctx)
 {
-    static const enum PixelFormat pix_fmts[] = {
-        PIX_FMT_YUV410P, PIX_FMT_YUV420P, PIX_FMT_GRAY8, PIX_FMT_NV12,
-        PIX_FMT_NV21, PIX_FMT_YUV444P, PIX_FMT_YUV422P, PIX_FMT_YUV411P,
-        PIX_FMT_NONE
+    static const enum AVPixelFormat pix_fmts[] = {
+        AV_PIX_FMT_YUV410P, AV_PIX_FMT_YUV420P, AV_PIX_FMT_GRAY8, AV_PIX_FMT_NV12,
+        AV_PIX_FMT_NV21, AV_PIX_FMT_YUV444P, AV_PIX_FMT_YUV422P, AV_PIX_FMT_YUV411P,
+        AV_PIX_FMT_NONE
     };
 
-    avfilter_set_common_pixel_formats(ctx, avfilter_make_format_list(pix_fmts));
+    ff_set_common_formats(ctx, ff_make_format_list(pix_fmts));
     return 0;
 }
 
-static av_cold int init(AVFilterContext *ctx, const char *args, void *opaque)
+static av_cold int init(AVFilterContext *ctx, const char *args)
 {
     BlackFrameContext *blackframe = ctx->priv;
 
@@ -62,7 +70,7 @@ static av_cold int init(AVFilterContext *ctx, const char *args, void *opaque)
     if (args)
         sscanf(args, "%u:%u", &blackframe->bamount, &blackframe->bthresh);
 
-    av_log(ctx, AV_LOG_INFO, "bamount:%u bthresh:%u\n",
+    av_log(ctx, AV_LOG_VERBOSE, "bamount:%u bthresh:%u\n",
            blackframe->bamount, blackframe->bthresh);
 
     if (blackframe->bamount > 100 || blackframe->bthresh > 255) {
@@ -73,7 +81,7 @@ static av_cold int init(AVFilterContext *ctx, const char *args, void *opaque)
     return 0;
 }
 
-static void draw_slice(AVFilterLink *inlink, int y, int h, int slice_dir)
+static int draw_slice(AVFilterLink *inlink, int y, int h, int slice_dir)
 {
     AVFilterContext *ctx = inlink->dst;
     BlackFrameContext *blackframe = ctx->priv;
@@ -87,10 +95,10 @@ static void draw_slice(AVFilterLink *inlink, int y, int h, int slice_dir)
         p += picref->linesize[0];
     }
 
-    avfilter_draw_slice(ctx->outputs[0], y, h, slice_dir);
+    return ff_draw_slice(ctx->outputs[0], y, h, slice_dir);
 }
 
-static void end_frame(AVFilterLink *inlink)
+static int end_frame(AVFilterLink *inlink)
 {
     AVFilterContext *ctx = inlink->dst;
     BlackFrameContext *blackframe = ctx->priv;
@@ -110,8 +118,28 @@ static void end_frame(AVFilterLink *inlink)
 
     blackframe->frame++;
     blackframe->nblack = 0;
-    avfilter_end_frame(inlink->dst->outputs[0]);
+    return ff_end_frame(inlink->dst->outputs[0]);
 }
+
+static const AVFilterPad avfilter_vf_blackframe_inputs[] = {
+    {
+        .name             = "default",
+        .type             = AVMEDIA_TYPE_VIDEO,
+        .draw_slice       = draw_slice,
+        .get_video_buffer = ff_null_get_video_buffer,
+        .start_frame      = ff_null_start_frame,
+        .end_frame        = end_frame,
+    },
+    { NULL }
+};
+
+static const AVFilterPad avfilter_vf_blackframe_outputs[] = {
+    {
+        .name = "default",
+        .type = AVMEDIA_TYPE_VIDEO
+    },
+    { NULL }
+};
 
 AVFilter avfilter_vf_blackframe = {
     .name        = "blackframe",
@@ -122,15 +150,7 @@ AVFilter avfilter_vf_blackframe = {
 
     .query_formats = query_formats,
 
-    .inputs    = (const AVFilterPad[]) {{ .name       = "default",
-                                    .type             = AVMEDIA_TYPE_VIDEO,
-                                    .draw_slice       = draw_slice,
-                                    .get_video_buffer = avfilter_null_get_video_buffer,
-                                    .start_frame      = avfilter_null_start_frame,
-                                    .end_frame        = end_frame, },
-                                  { .name = NULL}},
+    .inputs    = avfilter_vf_blackframe_inputs,
 
-    .outputs   = (const AVFilterPad[]) {{ .name       = "default",
-                                    .type             = AVMEDIA_TYPE_VIDEO },
-                                  { .name = NULL}},
+    .outputs   = avfilter_vf_blackframe_outputs,
 };

@@ -23,6 +23,7 @@
 #include "avformat.h"
 #include "internal.h"
 #include "gxf.h"
+#include "libavcodec/mpeg12data.h"
 
 struct gxf_stream_info {
     int64_t first_field;
@@ -111,34 +112,34 @@ static int get_sindex(AVFormatContext *s, int id, int format) {
         case 3:
         case 4:
             st->codec->codec_type = AVMEDIA_TYPE_VIDEO;
-            st->codec->codec_id = CODEC_ID_MJPEG;
+            st->codec->codec_id = AV_CODEC_ID_MJPEG;
             break;
         case 13:
         case 15:
             st->codec->codec_type = AVMEDIA_TYPE_VIDEO;
-            st->codec->codec_id = CODEC_ID_DVVIDEO;
+            st->codec->codec_id = AV_CODEC_ID_DVVIDEO;
             break;
         case 14:
         case 16:
             st->codec->codec_type = AVMEDIA_TYPE_VIDEO;
-            st->codec->codec_id = CODEC_ID_DVVIDEO;
+            st->codec->codec_id = AV_CODEC_ID_DVVIDEO;
             break;
         case 11:
         case 12:
         case 20:
             st->codec->codec_type = AVMEDIA_TYPE_VIDEO;
-            st->codec->codec_id = CODEC_ID_MPEG2VIDEO;
+            st->codec->codec_id = AV_CODEC_ID_MPEG2VIDEO;
             st->need_parsing = AVSTREAM_PARSE_HEADERS; //get keyframe flag etc.
             break;
         case 22:
         case 23:
             st->codec->codec_type = AVMEDIA_TYPE_VIDEO;
-            st->codec->codec_id = CODEC_ID_MPEG1VIDEO;
+            st->codec->codec_id = AV_CODEC_ID_MPEG1VIDEO;
             st->need_parsing = AVSTREAM_PARSE_HEADERS; //get keyframe flag etc.
             break;
         case 9:
             st->codec->codec_type = AVMEDIA_TYPE_AUDIO;
-            st->codec->codec_id = CODEC_ID_PCM_S24LE;
+            st->codec->codec_id = AV_CODEC_ID_PCM_S24LE;
             st->codec->channels = 1;
             st->codec->sample_rate = 48000;
             st->codec->bit_rate = 3 * 1 * 48000 * 8;
@@ -147,7 +148,7 @@ static int get_sindex(AVFormatContext *s, int id, int format) {
             break;
         case 10:
             st->codec->codec_type = AVMEDIA_TYPE_AUDIO;
-            st->codec->codec_id = CODEC_ID_PCM_S16LE;
+            st->codec->codec_id = AV_CODEC_ID_PCM_S16LE;
             st->codec->channels = 1;
             st->codec->sample_rate = 48000;
             st->codec->bit_rate = 2 * 1 * 48000 * 8;
@@ -156,7 +157,7 @@ static int get_sindex(AVFormatContext *s, int id, int format) {
             break;
         case 17:
             st->codec->codec_type = AVMEDIA_TYPE_AUDIO;
-            st->codec->codec_id = CODEC_ID_AC3;
+            st->codec->codec_id = AV_CODEC_ID_AC3;
             st->codec->channels = 2;
             st->codec->sample_rate = 48000;
             break;
@@ -165,11 +166,11 @@ static int get_sindex(AVFormatContext *s, int id, int format) {
         case 8:
         case 24:
             st->codec->codec_type = AVMEDIA_TYPE_DATA;
-            st->codec->codec_id = CODEC_ID_NONE;
+            st->codec->codec_id = AV_CODEC_ID_NONE;
             break;
         default:
             st->codec->codec_type = AVMEDIA_TYPE_UNKNOWN;
-            st->codec->codec_id = CODEC_ID_NONE;
+            st->codec->codec_id = AV_CODEC_ID_NONE;
             break;
     }
     return s->nb_streams - 1;
@@ -201,15 +202,26 @@ static void gxf_material_tags(AVIOContext *pb, int *len, struct gxf_stream_info 
     }
 }
 
+static const AVRational frame_rate_tab[] = {
+    {   60,    1},
+    {60000, 1001},
+    {   50,    1},
+    {   30,    1},
+    {30000, 1001},
+    {   25,    1},
+    {   24,    1},
+    {24000, 1001},
+    {    0,    0},
+};
+
 /**
  * @brief convert fps tag value to AVRational fps
  * @param fps fps value from tag
  * @return fps as AVRational, or 0 / 0 if unknown
  */
 static AVRational fps_tag2avr(int32_t fps) {
-    extern const AVRational avpriv_frame_rate_tab[];
     if (fps < 1 || fps > 9) fps = 9;
-    return avpriv_frame_rate_tab[9 - fps]; // values have opposite order
+    return frame_rate_tab[fps - 1];
 }
 
 /**
@@ -503,8 +515,8 @@ static int gxf_packet(AVFormatContext *s, AVPacket *pkt) {
         avio_rb32(pb); // "timeline" field number
         avio_r8(pb); // flags
         avio_r8(pb); // reserved
-        if (st->codec->codec_id == CODEC_ID_PCM_S24LE ||
-            st->codec->codec_id == CODEC_ID_PCM_S16LE) {
+        if (st->codec->codec_id == AV_CODEC_ID_PCM_S24LE ||
+            st->codec->codec_id == AV_CODEC_ID_PCM_S16LE) {
             int first = field_info >> 16;
             int last  = field_info & 0xffff; // last is exclusive
             int bps = av_get_bits_per_sample(st->codec->codec_id)>>3;
@@ -522,12 +534,12 @@ static int gxf_packet(AVFormatContext *s, AVPacket *pkt) {
         pkt->dts = field_nr;
 
         //set duration manually for DV or else lavf misdetects the frame rate
-        if (st->codec->codec_id == CODEC_ID_DVVIDEO)
+        if (st->codec->codec_id == AV_CODEC_ID_DVVIDEO)
             pkt->duration = si->fields_per_frame;
 
         return ret;
     }
-    return AVERROR(EIO);
+    return AVERROR_EOF;
 }
 
 static int gxf_seek(AVFormatContext *s, int stream_index, int64_t timestamp, int flags) {
@@ -569,7 +581,7 @@ static int64_t gxf_read_timestamp(AVFormatContext *s, int stream_index,
 
 AVInputFormat ff_gxf_demuxer = {
     .name           = "gxf",
-    .long_name      = NULL_IF_CONFIG_SMALL("GXF format"),
+    .long_name      = NULL_IF_CONFIG_SMALL("GXF (General eXchange Format)"),
     .priv_data_size = sizeof(struct gxf_stream_info),
     .read_probe     = gxf_probe,
     .read_header    = gxf_header,

@@ -195,7 +195,7 @@ static int decode_frame(AVCodecContext *avctx, void *data, int *data_size, AVPac
 
     /* Decompress frame */
     switch (avctx->codec_id) {
-    case CODEC_ID_MSZH:
+    case AV_CODEC_ID_MSZH:
         switch (c->compression) {
         case COMP_MSZH:
             if (c->flags & FLAG_MULTITHREAD) {
@@ -258,7 +258,7 @@ static int decode_frame(AVCodecContext *avctx, void *data, int *data_size, AVPac
         }
         break;
 #if CONFIG_ZLIB_DECODER
-    case CODEC_ID_ZLIB:
+    case AV_CODEC_ID_ZLIB:
         /* Using the original dll with normal compression (-1) and RGB format
          * gives a file with ZLIB fourcc, but frame is really uncompressed.
          * To be sure that's true check also frame size */
@@ -296,7 +296,7 @@ static int decode_frame(AVCodecContext *avctx, void *data, int *data_size, AVPac
 
 
     /* Apply PNG filter */
-    if (avctx->codec_id == CODEC_ID_ZLIB && (c->flags & FLAG_PNGFILTER)) {
+    if (avctx->codec_id == AV_CODEC_ID_ZLIB && (c->flags & FLAG_PNGFILTER)) {
         switch (c->imgtype) {
         case IMGTYPE_YUV111:
         case IMGTYPE_RGB24:
@@ -492,8 +492,8 @@ static av_cold int decode_init(AVCodecContext *avctx)
     }
 
     /* Check codec type */
-    if ((avctx->codec_id == CODEC_ID_MSZH  && avctx->extradata[7] != CODEC_MSZH) ||
-        (avctx->codec_id == CODEC_ID_ZLIB  && avctx->extradata[7] != CODEC_ZLIB)) {
+    if ((avctx->codec_id == AV_CODEC_ID_MSZH  && avctx->extradata[7] != CODEC_MSZH) ||
+        (avctx->codec_id == AV_CODEC_ID_ZLIB  && avctx->extradata[7] != CODEC_ZLIB)) {
         av_log(avctx, AV_LOG_ERROR, "Codec id and codec type mismatch. This should not happen.\n");
     }
 
@@ -502,37 +502,37 @@ static av_cold int decode_init(AVCodecContext *avctx)
     case IMGTYPE_YUV111:
         c->decomp_size = basesize * 3;
         max_decomp_size = max_basesize * 3;
-        avctx->pix_fmt = PIX_FMT_YUV444P;
+        avctx->pix_fmt = AV_PIX_FMT_YUV444P;
         av_log(avctx, AV_LOG_DEBUG, "Image type is YUV 1:1:1.\n");
         break;
     case IMGTYPE_YUV422:
         c->decomp_size = basesize * 2;
         max_decomp_size = max_basesize * 2;
-        avctx->pix_fmt = PIX_FMT_YUV422P;
+        avctx->pix_fmt = AV_PIX_FMT_YUV422P;
         av_log(avctx, AV_LOG_DEBUG, "Image type is YUV 4:2:2.\n");
         break;
     case IMGTYPE_RGB24:
         c->decomp_size = basesize * 3;
         max_decomp_size = max_basesize * 3;
-        avctx->pix_fmt = PIX_FMT_BGR24;
+        avctx->pix_fmt = AV_PIX_FMT_BGR24;
         av_log(avctx, AV_LOG_DEBUG, "Image type is RGB 24.\n");
         break;
     case IMGTYPE_YUV411:
         c->decomp_size = basesize / 2 * 3;
         max_decomp_size = max_basesize / 2 * 3;
-        avctx->pix_fmt = PIX_FMT_YUV411P;
+        avctx->pix_fmt = AV_PIX_FMT_YUV411P;
         av_log(avctx, AV_LOG_DEBUG, "Image type is YUV 4:1:1.\n");
         break;
     case IMGTYPE_YUV211:
         c->decomp_size = basesize * 2;
         max_decomp_size = max_basesize * 2;
-        avctx->pix_fmt = PIX_FMT_YUV422P;
+        avctx->pix_fmt = AV_PIX_FMT_YUV422P;
         av_log(avctx, AV_LOG_DEBUG, "Image type is YUV 2:1:1.\n");
         break;
     case IMGTYPE_YUV420:
         c->decomp_size = basesize / 2 * 3;
         max_decomp_size = max_basesize / 2 * 3;
-        avctx->pix_fmt = PIX_FMT_YUV420P;
+        avctx->pix_fmt = AV_PIX_FMT_YUV420P;
         av_log(avctx, AV_LOG_DEBUG, "Image type is YUV 4:2:0.\n");
         break;
     default:
@@ -543,7 +543,7 @@ static av_cold int decode_init(AVCodecContext *avctx)
     /* Detect compression method */
     c->compression = (int8_t)avctx->extradata[5];
     switch (avctx->codec_id) {
-    case CODEC_ID_MSZH:
+    case AV_CODEC_ID_MSZH:
         switch (c->compression) {
         case COMP_MSZH:
             av_log(avctx, AV_LOG_DEBUG, "Compression enabled.\n");
@@ -558,7 +558,7 @@ static av_cold int decode_init(AVCodecContext *avctx)
         }
         break;
 #if CONFIG_ZLIB_DECODER
-    case CODEC_ID_ZLIB:
+    case AV_CODEC_ID_ZLIB:
         switch (c->compression) {
         case COMP_ZLIB_HISPEED:
             av_log(avctx, AV_LOG_DEBUG, "High speed compression.\n");
@@ -597,14 +597,14 @@ static av_cold int decode_init(AVCodecContext *avctx)
         av_log(avctx, AV_LOG_DEBUG, "Multithread encoder flag set.\n");
     if (c->flags & FLAG_NULLFRAME)
         av_log(avctx, AV_LOG_DEBUG, "Nullframe insertion flag set.\n");
-    if (avctx->codec_id == CODEC_ID_ZLIB && (c->flags & FLAG_PNGFILTER))
+    if (avctx->codec_id == AV_CODEC_ID_ZLIB && (c->flags & FLAG_PNGFILTER))
         av_log(avctx, AV_LOG_DEBUG, "PNG filter flag set.\n");
     if (c->flags & FLAGMASK_UNUSED)
         av_log(avctx, AV_LOG_ERROR, "Unknown flag set (%d).\n", c->flags);
 
     /* If needed init zlib */
 #if CONFIG_ZLIB_DECODER
-    if (avctx->codec_id == CODEC_ID_ZLIB) {
+    if (avctx->codec_id == AV_CODEC_ID_ZLIB) {
         int zret;
         c->zstream.zalloc = Z_NULL;
         c->zstream.zfree = Z_NULL;
@@ -634,7 +634,7 @@ static av_cold int decode_end(AVCodecContext *avctx)
     if (c->pic.data[0])
         avctx->release_buffer(avctx, &c->pic);
 #if CONFIG_ZLIB_DECODER
-    if (avctx->codec_id == CODEC_ID_ZLIB)
+    if (avctx->codec_id == AV_CODEC_ID_ZLIB)
         inflateEnd(&c->zstream);
 #endif
 
@@ -645,13 +645,13 @@ static av_cold int decode_end(AVCodecContext *avctx)
 AVCodec ff_mszh_decoder = {
     .name           = "mszh",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_MSZH,
+    .id             = AV_CODEC_ID_MSZH,
     .priv_data_size = sizeof(LclDecContext),
     .init           = decode_init,
     .close          = decode_end,
     .decode         = decode_frame,
     .capabilities   = CODEC_CAP_DR1,
-    .long_name = NULL_IF_CONFIG_SMALL("LCL (LossLess Codec Library) MSZH"),
+    .long_name      = NULL_IF_CONFIG_SMALL("LCL (LossLess Codec Library) MSZH"),
 };
 #endif
 
@@ -659,12 +659,12 @@ AVCodec ff_mszh_decoder = {
 AVCodec ff_zlib_decoder = {
     .name           = "zlib",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_ZLIB,
+    .id             = AV_CODEC_ID_ZLIB,
     .priv_data_size = sizeof(LclDecContext),
     .init           = decode_init,
     .close          = decode_end,
     .decode         = decode_frame,
     .capabilities   = CODEC_CAP_DR1,
-    .long_name = NULL_IF_CONFIG_SMALL("LCL (LossLess Codec Library) ZLIB"),
+    .long_name      = NULL_IF_CONFIG_SMALL("LCL (LossLess Codec Library) ZLIB"),
 };
 #endif

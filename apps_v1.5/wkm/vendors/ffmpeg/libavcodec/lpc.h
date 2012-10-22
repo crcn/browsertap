@@ -23,6 +23,7 @@
 #define AVCODEC_LPC_H
 
 #include <stdint.h>
+#include "libavutil/avassert.h"
 #include "dsputil.h"
 
 #define ORDER_METHOD_EST     0
@@ -51,6 +52,7 @@ typedef struct LPCContext {
     int blocksize;
     int max_order;
     enum FFLPCType lpc_type;
+    double *windowed_buffer;
     double *windowed_samples;
 
     /**
@@ -120,6 +122,8 @@ static inline int compute_lpc_coefs(const LPC_TYPE *autoc, int max_order,
     int i, j;
     LPC_TYPE err;
     LPC_TYPE *lpc_last = lpc;
+
+    av_assert2(normalize || !fail);
 
     if (normalize)
         err = *autoc++;

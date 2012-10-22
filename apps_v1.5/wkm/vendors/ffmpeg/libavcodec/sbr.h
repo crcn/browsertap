@@ -37,7 +37,7 @@
 /**
  * Spectral Band Replication header - spectrum parameters that invoke a reset if they differ from the previous header.
  */
-typedef struct {
+typedef struct SpectrumParameters {
     uint8_t bs_start_freq;
     uint8_t bs_stop_freq;
     uint8_t bs_xover_band;
@@ -57,7 +57,7 @@ typedef struct {
 /**
  * Spectral Band Replication per channel data
  */
-typedef struct {
+typedef struct SBRData {
     /**
      * @name Main bitstream data variables
      * @{
@@ -78,8 +78,8 @@ typedef struct {
      * @name State variables
      * @{
      */
-    DECLARE_ALIGNED(16, float, synthesis_filterbank_samples)[SBR_SYNTHESIS_BUF_SIZE];
-    DECLARE_ALIGNED(16, float, analysis_filterbank_samples) [1312];
+    DECLARE_ALIGNED(32, float, synthesis_filterbank_samples)[SBR_SYNTHESIS_BUF_SIZE];
+    DECLARE_ALIGNED(32, float, analysis_filterbank_samples) [1312];
     int                synthesis_filterbank_samples_offset;
     ///l_APrev and l_A
     int                e_a[2];
@@ -111,7 +111,7 @@ typedef struct {
 /**
  * Spectral Band Replication
  */
-typedef struct {
+typedef struct SpectralBandReplication {
     int                sample_rate;
     int                start;
     int                reset;
@@ -133,6 +133,7 @@ typedef struct {
     unsigned           kx[2];
     ///M' and M respectively, M is the number of QMF subbands that use SBR.
     unsigned           m[2];
+    unsigned           kx_and_m_pushed;
     ///The number of frequency bands in f_master
     unsigned           n_master;
     SBRData            data[2];
@@ -179,7 +180,7 @@ typedef struct {
     ///Sinusoidal levels
     float              s_m[7][48];
     float              gain[7][48];
-    DECLARE_ALIGNED(16, float, qmf_filter_scratch)[5][64];
+    DECLARE_ALIGNED(32, float, qmf_filter_scratch)[5][64];
     FFTContext         mdct_ana;
     FFTContext         mdct;
     SBRDSPContext      dsp;

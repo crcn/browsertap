@@ -28,7 +28,9 @@
  * bitstream api.
  */
 
+#include "libavutil/avassert.h"
 #include "avcodec.h"
+#include "mathops.h"
 #include "get_bits.h"
 #include "put_bits.h"
 
@@ -46,7 +48,7 @@ void avpriv_align_put_bits(PutBitContext *s)
     put_bits(s,s->bit_left & 7,0);
 }
 
-void ff_put_string(PutBitContext *pb, const char *string, int terminate_string)
+void avpriv_put_string(PutBitContext *pb, const char *string, int terminate_string)
 {
     while(*string){
         put_bits(pb, 8, *string);
@@ -114,10 +116,10 @@ static int alloc_table(VLC *vlc, int size, int use_static)
 }
 
 static av_always_inline uint32_t bitswap_32(uint32_t x) {
-    return (uint32_t)av_reverse[x&0xFF]<<24
-         | (uint32_t)av_reverse[(x>>8)&0xFF]<<16
-         | (uint32_t)av_reverse[(x>>16)&0xFF]<<8
-         | (uint32_t)av_reverse[x>>24];
+    return (uint32_t)ff_reverse[x&0xFF]<<24
+         | (uint32_t)ff_reverse[(x>>8)&0xFF]<<16
+         | (uint32_t)ff_reverse[(x>>16)&0xFF]<<8
+         | (uint32_t)ff_reverse[x>>24];
 }
 
 typedef struct {
@@ -157,6 +159,8 @@ static int build_table(VLC *vlc, int table_nb_bits, int nb_codes,
     VLC_TYPE (*table)[2];
 
     table_size = 1 << table_nb_bits;
+    if (table_nb_bits > 30)
+       return -1;
     table_index = alloc_table(vlc, table_size, flags & INIT_VLC_USE_NEW_STATIC);
     av_dlog(NULL, "new table index=%d size=%d\n", table_index, table_size);
     if (table_index < 0)
@@ -281,7 +285,7 @@ int ff_init_vlc_sparse(VLC *vlc, int nb_bits, int nb_codes,
 
     buf = av_malloc((nb_codes+1)*sizeof(VLCcode));
 
-    assert(symbols_size <= 2 || !symbols);
+    av_assert0(symbols_size <= 2 || !symbols);
     j = 0;
 #define COPY(condition)\
     for (i = 0; i < nb_codes; i++) {\

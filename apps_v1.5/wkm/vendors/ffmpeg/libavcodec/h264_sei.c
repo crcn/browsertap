@@ -47,8 +47,8 @@ void ff_h264_reset_sei(H264Context *h) {
 static int decode_picture_timing(H264Context *h){
     MpegEncContext * const s = &h->s;
     if(h->sps.nal_hrd_parameters_present_flag || h->sps.vcl_hrd_parameters_present_flag){
-        h->sei_cpb_removal_delay = get_bits(&s->gb, h->sps.cpb_removal_delay_length);
-        h->sei_dpb_output_delay = get_bits(&s->gb, h->sps.dpb_output_delay_length);
+        h->sei_cpb_removal_delay = get_bits_long(&s->gb, h->sps.cpb_removal_delay_length);
+        h->sei_dpb_output_delay = get_bits_long(&s->gb, h->sps.dpb_output_delay_length);
     }
     if(h->sps.pic_struct_present_flag){
         unsigned int i, num_clock_ts;
@@ -95,6 +95,43 @@ static int decode_picture_timing(H264Context *h){
     return 0;
 }
 
+static int decode_user_data_itu_t_t35(H264Context *h, int size) {
+    MpegEncContext * const s = &h->s;
+    uint32_t user_identifier;
+    int dtg_active_format;
+
+    if (size < 7)
+        return -1;
+    size -= 7;
+
+    skip_bits(&s->gb, 8);   // country_code
+    skip_bits(&s->gb, 16);  // provider_code
+    user_identifier = get_bits_long(&s->gb, 32);
+
+    switch (user_identifier) {
+        case 0x44544731:    // "DTG1" - AFD_data
+            if (size < 1)
+                return -1;
+            skip_bits(&s->gb, 1);
+            if (get_bits(&s->gb, 1)) {
+                skip_bits(&s->gb, 6);
+                if (size < 2)
+                    return -1;
+                skip_bits(&s->gb, 4);
+                dtg_active_format = get_bits(&s->gb, 4);
+                s->avctx->dtg_active_format = dtg_active_format;
+            } else {
+                skip_bits(&s->gb, 6);
+            }
+            break;
+        default:
+            skip_bits(&s->gb, size * 8);
+            break;
+    }
+
+    return 0;
+}
+
 static int decode_unregistered_user_data(H264Context *h, int size){
     MpegEncContext * const s = &h->s;
     uint8_t user_data[16+256];
@@ -111,6 +148,8 @@ static int decode_unregistered_user_data(H264Context *h, int size){
     e= sscanf(user_data+16, "x264 - core %d"/*%s - H.264/MPEG-4 AVC codec - Copyleft 2005 - http://www.videolan.org/x264.html*/, &build);
     if(e==1 && build>0)
         h->x264_build= build;
+    if(e==1 && build==1 && !strncmp(user_data+16, "x264 - core 0000", 16))
+        h->x264_build = 67;
 
     if(s->avctx->debug & FF_DEBUG_BUGS)
         av_log(s->avctx, AV_LOG_DEBUG, "user data:\"%s\"\n", user_data+16);
@@ -146,13 +185,13 @@ static int decode_buffering_period(H264Context *h){
     // NOTE: This is really so duplicated in the standard... See H.264, D.1.1
     if (sps->nal_hrd_parameters_present_flag) {
         for (sched_sel_idx = 0; sched_sel_idx < sps->cpb_cnt; sched_sel_idx++) {
-            h->initial_cpb_removal_delay[sched_sel_idx] = get_bits(&s->gb, sps->initial_cpb_removal_delay_length);
+            h->initial_cpb_removal_delay[sched_sel_idx] = get_bits_long(&s->gb, sps->initial_cpb_removal_delay_length);
             skip_bits(&s->gb, sps->initial_cpb_removal_delay_length); // initial_cpb_removal_delay_offset
         }
     }
     if (sps->vcl_hrd_parameters_present_flag) {
         for (sched_sel_idx = 0; sched_sel_idx < sps->cpb_cnt; sched_sel_idx++) {
-            h->initial_cpb_removal_delay[sched_sel_idx] = get_bits(&s->gb, sps->initial_cpb_removal_delay_length);
+            h->initial_cpb_removal_delay[sched_sel_idx] = get_bits_long(&s->gb, sps->initial_cpb_removal_delay_length);
             skip_bits(&s->gb, sps->initial_cpb_removal_delay_length); // initial_cpb_removal_delay_offset
         }
     }
@@ -187,6 +226,10 @@ int ff_h264_decode_sei(H264Context *h){
         switch(type){
         case SEI_TYPE_PIC_TIMING: // Picture timing SEI
             if(decode_picture_timing(h) < 0)
+                return -1;
+            break;
+        case SEI_TYPE_USER_DATA_ITU_T_T35:
+            if(decode_user_data_itu_t_t35(h, size) < 0)
                 return -1;
             break;
         case SEI_TYPE_USER_DATA_UNREGISTERED:

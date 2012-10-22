@@ -62,11 +62,11 @@ SECTION .text
 %define cntr_reg fltsizeq
 %define movsx mov
 %else
-%define cntr_reg r11
+%define cntr_reg r7
 %define movsx movsxd
 %endif
 
-cglobal yuv2planeX_%1, %3, 7, %2, filter, fltsize, src, dst, w, dither, offset
+cglobal yuv2planeX_%1, %3, 8, %2, filter, fltsize, src, dst, w, dither, offset
 %if %1 == 8 || %1 == 9 || %1 == 10
     pxor            m6,  m6
 %endif ; %1 == 8/9/10
@@ -267,7 +267,7 @@ yuv2planeX_fn  9,  7, 5
 yuv2planeX_fn 10,  7, 5
 yuv2planeX_fn 16,  8, 5
 
-%if HAVE_AVX
+%if HAVE_AVX_EXTERNAL
 INIT_XMM avx
 yuv2planeX_fn  8, 10, 7
 yuv2planeX_fn  9,  7, 5
@@ -407,7 +407,7 @@ yuv2plane1_fn 16, 6, 3
 INIT_XMM sse4
 yuv2plane1_fn 16, 5, 3
 
-%if HAVE_AVX
+%if HAVE_AVX_EXTERNAL
 INIT_XMM avx
 yuv2plane1_fn  8, 5, 5
 yuv2plane1_fn  9, 5, 3

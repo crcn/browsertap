@@ -57,10 +57,8 @@ static int encode_frame(AVCodecContext *avctx, AVPacket *pkt,
     const uint16_t *v = (const uint16_t*)pic->data[2];
     PutByteContext p;
 
-    if ((ret = ff_alloc_packet(pkt, avctx->height * stride)) < 0) {
-        av_log(avctx, AV_LOG_ERROR, "Error getting output packet.\n");
+    if ((ret = ff_alloc_packet2(avctx, pkt, avctx->height * stride)) < 0)
         return ret;
-    }
 
     bytestream2_init_writer(&p, pkt->data, pkt->size);
 
@@ -119,10 +117,10 @@ static av_cold int encode_close(AVCodecContext *avctx)
 AVCodec ff_v210_encoder = {
     .name           = "v210",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_V210,
+    .id             = AV_CODEC_ID_V210,
     .init           = encode_init,
     .encode2        = encode_frame,
     .close          = encode_close,
-    .pix_fmts       = (const enum PixelFormat[]){PIX_FMT_YUV422P10, PIX_FMT_NONE},
-    .long_name = NULL_IF_CONFIG_SMALL("Uncompressed 4:2:2 10-bit"),
+    .pix_fmts       = (const enum AVPixelFormat[]){ AV_PIX_FMT_YUV422P10, AV_PIX_FMT_NONE },
+    .long_name      = NULL_IF_CONFIG_SMALL("Uncompressed 4:2:2 10-bit"),
 };

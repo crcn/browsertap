@@ -39,7 +39,7 @@ static av_cold int decode_init(AVCodecContext *avctx)
     AnmContext *s = avctx->priv_data;
     int i;
 
-    avctx->pix_fmt = PIX_FMT_PAL8;
+    avctx->pix_fmt = AV_PIX_FMT_PAL8;
 
     avcodec_get_frame_defaults(&s->frame);
     s->frame.reference = 3;
@@ -56,8 +56,9 @@ static av_cold int decode_init(AVCodecContext *avctx)
 
 /**
  * Perform decode operation
- * @param dst, dst_end Destination image buffer
- * @param gb, GetByteContext (optional, see below)
+ * @param dst     pointer to destination image buffer
+ * @param dst_end pointer to end of destination image buffer
+ * @param gb GetByteContext (optional, see below)
  * @param pixel Fill color (optional, see below)
  * @param count Pixel count
  * @param x Pointer to x-axis counter
@@ -66,8 +67,8 @@ static av_cold int decode_init(AVCodecContext *avctx)
  * @return non-zero if destination buffer is exhausted
  *
  * a copy operation is achieved when 'gb' is set
- * a fill operation is acheived when 'gb' is null and pixel is >= 0
- * a skip operation is acheived when 'gb' is null and pixel is < 0
+ * a fill operation is achieved when 'gb' is null and pixel is >= 0
+ * a skip operation is achieved when 'gb' is null and pixel is < 0
  */
 static inline int op(uint8_t **dst, const uint8_t *dst_end,
                      GetByteContext *gb,
@@ -186,11 +187,11 @@ static av_cold int decode_end(AVCodecContext *avctx)
 AVCodec ff_anm_decoder = {
     .name           = "anm",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_ANM,
+    .id             = AV_CODEC_ID_ANM,
     .priv_data_size = sizeof(AnmContext),
     .init           = decode_init,
     .close          = decode_end,
     .decode         = decode_frame,
     .capabilities   = CODEC_CAP_DR1,
-    .long_name = NULL_IF_CONFIG_SMALL("Deluxe Paint Animation"),
+    .long_name      = NULL_IF_CONFIG_SMALL("Deluxe Paint Animation"),
 };

@@ -27,16 +27,13 @@
 * (http://dirac.sourceforge.net/specification.html).
 */
 
-#undef NDEBUG
-#include <assert.h>
-
 #include <schroedinger/schro.h>
 #include <schroedinger/schrodebug.h>
 #include <schroedinger/schrovideoformat.h>
 
+#include "libavutil/avassert.h"
 #include "avcodec.h"
 #include "internal.h"
-#include "libdirac_libschro.h"
 #include "libschroedinger.h"
 #include "bytestream.h"
 
@@ -65,7 +62,7 @@ typedef struct SchroEncoderParams {
     int enc_buf_size;
 
     /** queue storing encoded frames */
-    DiracSchroQueue enc_frame_queue;
+    FFSchroQueue enc_frame_queue;
 
     /** end of sequence signalled */
     int eos_signalled;
@@ -80,7 +77,7 @@ typedef struct SchroEncoderParams {
 /**
 * Works out Schro-compatible chroma format.
 */
-static int SetSchroChromaFormat(AVCodecContext *avccontext)
+static int set_chroma_format(AVCodecContext *avccontext)
 {
     int num_formats = sizeof(schro_pixel_format_map) /
                       sizeof(schro_pixel_format_map[0]);
@@ -129,7 +126,7 @@ static int libschroedinger_encode_init(AVCodecContext *avccontext)
     p_schro_params->format->width  = avccontext->width;
     p_schro_params->format->height = avccontext->height;
 
-    if (SetSchroChromaFormat(avccontext) == -1)
+    if (set_chroma_format(avccontext) == -1)
         return -1;
 
     if (avccontext->color_primaries == AVCOL_PRI_BT709) {
@@ -236,7 +233,7 @@ static int libschroedinger_encode_init(AVCodecContext *avccontext)
     schro_encoder_start(p_schro_params->encoder);
 
     /* Initialize the encoded frame queue. */
-    ff_dirac_schro_queue_init(&p_schro_params->enc_frame_queue);
+    ff_schro_queue_init(&p_schro_params->enc_frame_queue);
     return 0;
 }
 
@@ -259,9 +256,9 @@ static SchroFrame *libschroedinger_frame_from_data(AVCodecContext *avccontext,
     return in_frame;
 }
 
-static void SchroedingerFreeFrame(void *data)
+static void libschroedinger_free_frame(void *data)
 {
-    DiracSchroEncodedFrame *enc_frame = data;
+    FFSchroEncodedFrame *enc_frame = data;
 
     av_freep(&enc_frame->p_encbuf);
     av_free(enc_frame);
@@ -273,7 +270,7 @@ static int libschroedinger_encode_frame(AVCodecContext *avccontext, AVPacket *pk
     int enc_size = 0;
     SchroEncoderParams *p_schro_params = avccontext->priv_data;
     SchroEncoder *encoder = p_schro_params->encoder;
-    struct DiracSchroEncodedFrame *p_frame_output = NULL;
+    struct FFSchroEncodedFrame *p_frame_output = NULL;
     int go = 1;
     SchroBuffer *enc_buf;
     int presentation_frame;
@@ -306,8 +303,7 @@ static int libschroedinger_encode_frame(AVCodecContext *avccontext, AVPacket *pk
         case SCHRO_STATE_HAVE_BUFFER:
         case SCHRO_STATE_END_OF_STREAM:
             enc_buf = schro_encoder_pull(encoder, &presentation_frame);
-            assert(enc_buf->length > 0);
-            assert(enc_buf->length <= buf_size);
+            av_assert0(enc_buf->length > 0);
             parse_code = enc_buf->data[4];
 
             /* All non-frame data is prepended to actual frame data to
@@ -333,7 +329,7 @@ static int libschroedinger_encode_frame(AVCodecContext *avccontext, AVPacket *pk
             }
 
             /* Create output frame. */
-            p_frame_output = av_mallocz(sizeof(DiracSchroEncodedFrame));
+            p_frame_output = av_mallocz(sizeof(FFSchroEncodedFrame));
             /* Set output data. */
             p_frame_output->size     = p_schro_params->enc_buf_size;
             p_frame_output->p_encbuf = p_schro_params->enc_buf;
@@ -345,8 +341,8 @@ static int libschroedinger_encode_frame(AVCodecContext *avccontext, AVPacket *pk
              * through 17 represesent the frame number. */
             p_frame_output->frame_num = AV_RB32(enc_buf->data + 13);
 
-            ff_dirac_schro_queue_push_back(&p_schro_params->enc_frame_queue,
-                                           p_frame_output);
+            ff_schro_queue_push_back(&p_schro_params->enc_frame_queue,
+                                     p_frame_output);
             p_schro_params->enc_buf_size = 0;
             p_schro_params->enc_buf      = NULL;
 
@@ -373,7 +369,7 @@ static int libschroedinger_encode_frame(AVCodecContext *avccontext, AVPacket *pk
         p_schro_params->eos_pulled)
         last_frame_in_sequence = 1;
 
-    p_frame_output = ff_dirac_schro_queue_pop(&p_schro_params->enc_frame_queue);
+    p_frame_output = ff_schro_queue_pop(&p_schro_params->enc_frame_queue);
 
     if (!p_frame_output)
         return 0;
@@ -381,10 +377,8 @@ static int libschroedinger_encode_frame(AVCodecContext *avccontext, AVPacket *pk
     pkt_size = p_frame_output->size;
     if (last_frame_in_sequence && p_schro_params->enc_buf_size > 0)
         pkt_size += p_schro_params->enc_buf_size;
-    if ((ret = ff_alloc_packet(pkt, pkt_size)) < 0) {
-        av_log(avccontext, AV_LOG_ERROR, "Error getting output packet of size %d.\n", pkt_size);
+    if ((ret = ff_alloc_packet2(avccontext, pkt, pkt_size)) < 0)
         goto error;
-    }
 
     memcpy(pkt->data, p_frame_output->p_encbuf, p_frame_output->size);
     avccontext->coded_frame->key_frame = p_frame_output->key_frame;
@@ -412,7 +406,7 @@ static int libschroedinger_encode_frame(AVCodecContext *avccontext, AVPacket *pk
 
 error:
     /* free frame */
-    SchroedingerFreeFrame(p_frame_output);
+    libschroedinger_free_frame(p_frame_output);
     return ret;
 }
 
@@ -425,8 +419,8 @@ static int libschroedinger_encode_close(AVCodecContext *avccontext)
     schro_encoder_free(p_schro_params->encoder);
 
     /* Free data in the output frame queue. */
-    ff_dirac_schro_queue_free(&p_schro_params->enc_frame_queue,
-                              SchroedingerFreeFrame);
+    ff_schro_queue_free(&p_schro_params->enc_frame_queue,
+                        libschroedinger_free_frame);
 
 
     /* Free the encoder buffer. */
@@ -443,12 +437,14 @@ static int libschroedinger_encode_close(AVCodecContext *avccontext)
 AVCodec ff_libschroedinger_encoder = {
     .name           = "libschroedinger",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_DIRAC,
+    .id             = AV_CODEC_ID_DIRAC,
     .priv_data_size = sizeof(SchroEncoderParams),
     .init           = libschroedinger_encode_init,
     .encode2        = libschroedinger_encode_frame,
     .close          = libschroedinger_encode_close,
-   .capabilities = CODEC_CAP_DELAY,
-   .pix_fmts     = (const enum PixelFormat[]){PIX_FMT_YUV420P, PIX_FMT_YUV422P, PIX_FMT_YUV444P, PIX_FMT_NONE},
-   .long_name    = NULL_IF_CONFIG_SMALL("libschroedinger Dirac 2.2"),
+    .capabilities   = CODEC_CAP_DELAY,
+    .pix_fmts       = (const enum AVPixelFormat[]){
+        AV_PIX_FMT_YUV420P, AV_PIX_FMT_YUV422P, AV_PIX_FMT_YUV444P, AV_PIX_FMT_NONE
+    },
+    .long_name      = NULL_IF_CONFIG_SMALL("libschroedinger Dirac 2.2"),
 };

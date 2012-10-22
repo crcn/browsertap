@@ -125,11 +125,15 @@ const char *ff_id3v2_picture_types[21] = {
 };
 
 const CodecMime ff_id3v2_mime_tags[] = {
-    {"image/gif" , CODEC_ID_GIF},
-    {"image/jpeg", CODEC_ID_MJPEG},
-    {"image/png" , CODEC_ID_PNG},
-    {"image/tiff", CODEC_ID_TIFF},
-    {"",           CODEC_ID_NONE},
+    {"image/gif" , AV_CODEC_ID_GIF},
+    {"image/jpeg", AV_CODEC_ID_MJPEG},
+    {"image/jpg",  AV_CODEC_ID_MJPEG},
+    {"image/png" , AV_CODEC_ID_PNG},
+    {"image/tiff", AV_CODEC_ID_TIFF},
+    {"image/bmp",  AV_CODEC_ID_BMP},
+    {"JPG",        AV_CODEC_ID_MJPEG}, /* ID3v2.2  */
+    {"PNG" ,       AV_CODEC_ID_PNG},   /* ID3v2.2  */
+    {"",           AV_CODEC_ID_NONE},
 };
 
 int ff_id3v2_match(const uint8_t *buf, const char * magic)
@@ -271,7 +275,7 @@ static int decode_str(AVFormatContext *s, AVIOContext *pb, int encoding,
 static void read_ttag(AVFormatContext *s, AVIOContext *pb, int taglen, const char *key)
 {
     uint8_t *dst;
-    int encoding, dict_flags = AV_DICT_DONT_OVERWRITE;
+    int encoding, dict_flags = AV_DICT_DONT_OVERWRITE | AV_DICT_DONT_STRDUP_VAL;
     unsigned genre;
 
     if (taglen < 1)
@@ -289,7 +293,7 @@ static void read_ttag(AVFormatContext *s, AVIOContext *pb, int taglen, const cha
         && (sscanf(dst, "(%d)", &genre) == 1 || sscanf(dst, "%d", &genre) == 1)
         && genre <= ID3v1_GENRE_MAX) {
         av_freep(&dst);
-        dst = ff_id3v1_genre_str[genre];
+        dst = av_strdup(ff_id3v1_genre_str[genre]);
     } else if (!(strcmp(key, "TXXX") && strcmp(key, "TXX"))) {
         /* dst now contains the key, need to get value */
         key = dst;
@@ -298,10 +302,9 @@ static void read_ttag(AVFormatContext *s, AVIOContext *pb, int taglen, const cha
             av_freep(&key);
             return;
         }
-        dict_flags |= AV_DICT_DONT_STRDUP_VAL | AV_DICT_DONT_STRDUP_KEY;
-    }
-    else if (*dst)
-        dict_flags |= AV_DICT_DONT_STRDUP_VAL;
+        dict_flags |= AV_DICT_DONT_STRDUP_KEY;
+    } else if (!*dst)
+        av_freep(&dst);
 
     if (dst)
         av_dict_set(&s->metadata, key, dst, dict_flags);
@@ -440,7 +443,7 @@ static void read_apic(AVFormatContext *s, AVIOContext *pb, int taglen, char *tag
     int enc, pic_type;
     char             mimetype[64];
     const CodecMime     *mime = ff_id3v2_mime_tags;
-    enum CodecID           id = CODEC_ID_NONE;
+    enum AVCodecID           id = AV_CODEC_ID_NONE;
     ID3v2ExtraMetaAPIC  *apic = NULL;
     ID3v2ExtraMeta *new_extra = NULL;
     int64_t               end = avio_tell(pb) + taglen;
@@ -458,14 +461,14 @@ static void read_apic(AVFormatContext *s, AVIOContext *pb, int taglen, char *tag
 
     /* mimetype */
     taglen -= avio_get_str(pb, taglen, mimetype, sizeof(mimetype));
-    while (mime->id != CODEC_ID_NONE) {
-        if (!strncmp(mime->str, mimetype, sizeof(mimetype))) {
+    while (mime->id != AV_CODEC_ID_NONE) {
+        if (!av_strncasecmp(mime->str, mimetype, sizeof(mimetype))) {
             id = mime->id;
             break;
         }
         mime++;
     }
-    if (id == CODEC_ID_NONE) {
+    if (id == AV_CODEC_ID_NONE) {
         av_log(s, AV_LOG_WARNING, "Unknown attached picture mimetype: %s, skipping.\n", mimetype);
         goto fail;
     }
@@ -488,7 +491,7 @@ static void read_apic(AVFormatContext *s, AVIOContext *pb, int taglen, char *tag
 
     apic->len   = taglen;
     apic->data  = av_malloc(taglen);
-    if (!apic->data || avio_read(pb, apic->data, taglen) != taglen)
+    if (!apic->data || !apic->len || avio_read(pb, apic->data, taglen) != taglen)
         goto fail;
 
     new_extra->tag    = "APIC";
@@ -576,21 +579,21 @@ static void ff_id3v2_parse(AVFormatContext *s, int len, uint8_t version, uint8_t
 
     unsync = flags & 0x80;
 
-    /* Extended header present, just skip over it */
-    if (isv34 && flags & 0x40) {
-        int size = get_size(s->pb, 4);
-        if (size < 6) {
-            reason = "extended header too short.";
+    if (isv34 && flags & 0x40) { /* Extended header present, just skip over it */
+        int extlen = get_size(s->pb, 4);
+        if (version == 4)
+            extlen -= 4;     // in v2.4 the length includes the length field we just read
+
+        if (extlen < 0) {
+            reason = "invalid extended header length";
             goto error;
         }
-        len -= size;
+        avio_skip(s->pb, extlen);
+        len -= extlen + 4;
         if (len < 0) {
             reason = "extended header too long.";
             goto error;
         }
-        /* already seeked past size, skip the reset */
-        size -= 4;
-        avio_skip(s->pb, size);
     }
 
     while (len >= taghdrlen) {
@@ -711,7 +714,7 @@ static void ff_id3v2_parse(AVFormatContext *s, int len, uint8_t version, uint8_t
         }
         else if (!tag[0]) {
             if (tag[1])
-                av_log(s, AV_LOG_WARNING, "invalid frame id, assuming padding");
+                av_log(s, AV_LOG_WARNING, "invalid frame id, assuming padding\n");
             avio_skip(s->pb, tlen);
             break;
         }
@@ -803,6 +806,7 @@ int ff_id3v2_parse_apic(AVFormatContext *s, ID3v2ExtraMeta **extra_meta)
         st->attached_pic.size         = apic->len;
         st->attached_pic.destruct     = av_destruct_packet;
         st->attached_pic.stream_index = st->index;
+        st->attached_pic.flags       |= AV_PKT_FLAG_KEY;
 
         apic->data = NULL;
         apic->len  = 0;

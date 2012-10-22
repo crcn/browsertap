@@ -236,7 +236,7 @@ static av_cold int decode_init(AVCodecContext *avctx){
         avctx->idct_algo = FF_IDCT_SIMPLE;
     p->qstride= 0;
     p->qscale_table= av_mallocz(a->mb_width);
-    avctx->pix_fmt= PIX_FMT_YUVJ420P;
+    avctx->pix_fmt= AV_PIX_FMT_YUVJ420P;
 
     return 0;
 }
@@ -267,14 +267,14 @@ static av_cold int decode_end(AVCodecContext *avctx){
 }
 
 AVCodec ff_mdec_decoder = {
-    .name           = "mdec",
-    .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_MDEC,
-    .priv_data_size = sizeof(MDECContext),
-    .init           = decode_init,
-    .close          = decode_end,
-    .decode         = decode_frame,
-    .capabilities   = CODEC_CAP_DR1 | CODEC_CAP_FRAME_THREADS,
-    .long_name= NULL_IF_CONFIG_SMALL("Sony PlayStation MDEC (Motion DECoder)"),
-    .init_thread_copy= ONLY_IF_THREADS_ENABLED(decode_init_thread_copy)
+    .name             = "mdec",
+    .type             = AVMEDIA_TYPE_VIDEO,
+    .id               = AV_CODEC_ID_MDEC,
+    .priv_data_size   = sizeof(MDECContext),
+    .init             = decode_init,
+    .close            = decode_end,
+    .decode           = decode_frame,
+    .capabilities     = CODEC_CAP_DR1 | CODEC_CAP_FRAME_THREADS,
+    .long_name        = NULL_IF_CONFIG_SMALL("Sony PlayStation MDEC (Motion DECoder)"),
+    .init_thread_copy = ONLY_IF_THREADS_ENABLED(decode_init_thread_copy)
 };

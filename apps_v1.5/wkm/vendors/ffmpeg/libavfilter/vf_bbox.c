@@ -27,13 +27,14 @@
 #include "libavutil/timestamp.h"
 #include "avfilter.h"
 #include "bbox.h"
+#include "internal.h"
 
 typedef struct {
     unsigned int frame;
     int vsub, hsub;
 } BBoxContext;
 
-static av_cold int init(AVFilterContext *ctx, const char *args, void *opaque)
+static av_cold int init(AVFilterContext *ctx, const char *args)
 {
     BBoxContext *bbox = ctx->priv;
     bbox->frame = 0;
@@ -42,20 +43,20 @@ static av_cold int init(AVFilterContext *ctx, const char *args, void *opaque)
 
 static int query_formats(AVFilterContext *ctx)
 {
-    static const enum PixelFormat pix_fmts[] = {
-        PIX_FMT_YUV420P,
-        PIX_FMT_YUV444P,
-        PIX_FMT_YUV440P,
-        PIX_FMT_YUV422P,
-        PIX_FMT_YUV411P,
-        PIX_FMT_NONE,
+    static const enum AVPixelFormat pix_fmts[] = {
+        AV_PIX_FMT_YUV420P,
+        AV_PIX_FMT_YUV444P,
+        AV_PIX_FMT_YUV440P,
+        AV_PIX_FMT_YUV422P,
+        AV_PIX_FMT_YUV411P,
+        AV_PIX_FMT_NONE,
     };
 
-    avfilter_set_common_pixel_formats(ctx, avfilter_make_format_list(pix_fmts));
+    ff_set_common_formats(ctx, ff_make_format_list(pix_fmts));
     return 0;
 }
 
-static void end_frame(AVFilterLink *inlink)
+static int end_frame(AVFilterLink *inlink)
 {
     AVFilterContext *ctx = inlink->dst;
     BBoxContext *bbox = ctx->priv;
@@ -76,7 +77,7 @@ static void end_frame(AVFilterLink *inlink)
 
     if (has_bbox) {
         av_log(ctx, AV_LOG_INFO,
-               "x1:%d x2:%d y1:%d y2:%d w:%d h:%d"
+               " x1:%d x2:%d y1:%d y2:%d w:%d h:%d"
                " crop=%d:%d:%d:%d drawbox=%d:%d:%d:%d",
                box.x1, box.x2, box.y1, box.y2, w, h,
                w, h, box.x1, box.y1,    /* crop params */
@@ -85,7 +86,7 @@ static void end_frame(AVFilterLink *inlink)
     av_log(ctx, AV_LOG_INFO, "\n");
 
     bbox->frame++;
-    avfilter_end_frame(inlink->dst->outputs[0]);
+    return ff_end_frame(inlink->dst->outputs[0]);
 }
 
 AVFilter avfilter_vf_bbox = {
@@ -98,8 +99,8 @@ AVFilter avfilter_vf_bbox = {
     .inputs = (const AVFilterPad[]) {
         { .name             = "default",
           .type             = AVMEDIA_TYPE_VIDEO,
-          .get_video_buffer = avfilter_null_get_video_buffer,
-          .start_frame      = avfilter_null_start_frame,
+          .get_video_buffer = ff_null_get_video_buffer,
+          .start_frame      = ff_null_start_frame,
           .end_frame        = end_frame,
           .min_perms        = AV_PERM_READ, },
         { .name = NULL }

@@ -28,6 +28,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "libavutil/common.h"
 #include "libavutil/intreadwrite.h"
 #include "avcodec.h"
 
@@ -474,13 +475,13 @@ static av_cold int decode_init(AVCodecContext *avctx)
 
     switch(c->bpp){
     case 8:
-        avctx->pix_fmt = PIX_FMT_PAL8;
+        avctx->pix_fmt = AV_PIX_FMT_PAL8;
         break;
     case 16:
-        avctx->pix_fmt = PIX_FMT_RGB555;
+        avctx->pix_fmt = AV_PIX_FMT_RGB555;
         break;
     case 32:
-        avctx->pix_fmt = PIX_FMT_RGB32;
+        avctx->pix_fmt = AV_PIX_FMT_RGB32;
         break;
     default:
         av_log(avctx, AV_LOG_ERROR, "Unsupported bitdepth %i\n", c->bpp);
@@ -513,11 +514,11 @@ static av_cold int decode_end(AVCodecContext *avctx)
 AVCodec ff_vmnc_decoder = {
     .name           = "vmnc",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_VMNC,
+    .id             = AV_CODEC_ID_VMNC,
     .priv_data_size = sizeof(VmncContext),
     .init           = decode_init,
     .close          = decode_end,
     .decode         = decode_frame,
     .capabilities   = CODEC_CAP_DR1,
-    .long_name = NULL_IF_CONFIG_SMALL("VMware Screen Codec / VMware Video"),
+    .long_name      = NULL_IF_CONFIG_SMALL("VMware Screen Codec / VMware Video"),
 };

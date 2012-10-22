@@ -52,10 +52,11 @@ static int mpegvideo_probe(AVProbeData *p)
             else if((code & 0x1e0) == AUDIO_ID)   apes++;
         }
     }
-    if(seq && seq*9<=pic*10 && pic*9<=slice*10 && !pspack && !apes && !res)
+    if(seq && seq*9<=pic*10 && pic*9<=slice*10 && !pspack && !apes && !res) {
         if(vpes) return AVPROBE_SCORE_MAX/8;
         else     return pic>1 ? AVPROBE_SCORE_MAX/2+1 : AVPROBE_SCORE_MAX/4; // +1 for .mpg
+    }
     return 0;
 }
 
-FF_DEF_RAWVIDEO_DEMUXER(mpegvideo, "raw MPEG video", mpegvideo_probe, NULL, CODEC_ID_MPEG1VIDEO)
+FF_DEF_RAWVIDEO_DEMUXER(mpegvideo, "raw MPEG video", mpegvideo_probe, NULL, AV_CODEC_ID_MPEG1VIDEO)

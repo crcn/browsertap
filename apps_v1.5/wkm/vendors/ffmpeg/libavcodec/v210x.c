@@ -20,6 +20,8 @@
 
 #include "avcodec.h"
 #include "libavutil/bswap.h"
+#include "libavutil/internal.h"
+#include "libavutil/mem.h"
 
 static av_cold int decode_init(AVCodecContext *avctx)
 {
@@ -27,7 +29,7 @@ static av_cold int decode_init(AVCodecContext *avctx)
         av_log(avctx, AV_LOG_ERROR, "v210x needs even width\n");
         return -1;
     }
-    avctx->pix_fmt = PIX_FMT_YUV422P16;
+    avctx->pix_fmt = AV_PIX_FMT_YUV422P16;
     avctx->bits_per_raw_sample= 10;
 
     avctx->coded_frame= avcodec_alloc_frame();
@@ -137,10 +139,10 @@ static av_cold int decode_close(AVCodecContext *avctx)
 AVCodec ff_v210x_decoder = {
     .name           = "v210x",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_V210X,
+    .id             = AV_CODEC_ID_V210X,
     .init           = decode_init,
     .close          = decode_close,
     .decode         = decode_frame,
     .capabilities   = CODEC_CAP_DR1,
-    .long_name = NULL_IF_CONFIG_SMALL("Uncompressed 4:2:2 10-bit"),
+    .long_name      = NULL_IF_CONFIG_SMALL("Uncompressed 4:2:2 10-bit"),
 };

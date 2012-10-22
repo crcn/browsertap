@@ -86,7 +86,7 @@ static av_cold int cdg_decode_init(AVCodecContext *avctx)
 
     avctx->width   = CDG_FULL_WIDTH;
     avctx->height  = CDG_FULL_HEIGHT;
-    avctx->pix_fmt = PIX_FMT_PAL8;
+    avctx->pix_fmt = AV_PIX_FMT_PAL8;
 
     return 0;
 }
@@ -126,7 +126,7 @@ static void cdg_load_palette(CDGraphicsContext *cc, uint8_t *data, int low)
         r = ((color >> 8) & 0x000F) * 17;
         g = ((color >> 4) & 0x000F) * 17;
         b = ((color     ) & 0x000F) * 17;
-        palette[i + array_offset] = 0xFF << 24 | r << 16 | g << 8 | b;
+        palette[i + array_offset] = 0xFFU << 24 | r << 16 | g << 8 | b;
     }
     cc->frame.palette_has_changed = 1;
 }
@@ -280,6 +280,10 @@ static int cdg_decode_frame(AVCodecContext *avctx,
         av_log(avctx, AV_LOG_ERROR, "buffer too small for decoder\n");
         return AVERROR(EINVAL);
     }
+    if (buf_size > CDG_HEADER_SIZE + CDG_DATA_SIZE) {
+        av_log(avctx, AV_LOG_ERROR, "buffer too big for decoder\n");
+        return AVERROR(EINVAL);
+    }
 
     ret = avctx->reget_buffer(avctx, &cc->frame);
     if (ret) {
@@ -370,11 +374,11 @@ static av_cold int cdg_decode_end(AVCodecContext *avctx)
 AVCodec ff_cdgraphics_decoder = {
     .name           = "cdgraphics",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_CDGRAPHICS,
+    .id             = AV_CODEC_ID_CDGRAPHICS,
     .priv_data_size = sizeof(CDGraphicsContext),
     .init           = cdg_decode_init,
     .close          = cdg_decode_end,
     .decode         = cdg_decode_frame,
     .capabilities   = CODEC_CAP_DR1,
-    .long_name = NULL_IF_CONFIG_SMALL("CD Graphics video"),
+    .long_name      = NULL_IF_CONFIG_SMALL("CD Graphics video"),
 };

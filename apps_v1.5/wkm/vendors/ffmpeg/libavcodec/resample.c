@@ -24,10 +24,15 @@
  * samplerate conversion for both audio and video
  */
 
+#include <string.h>
+
 #include "avcodec.h"
 #include "audioconvert.h"
 #include "libavutil/opt.h"
+#include "libavutil/mem.h"
 #include "libavutil/samplefmt.h"
+
+#if FF_API_AVCODEC_RESAMPLE
 
 #define MAX_CHANNELS 8
 
@@ -426,3 +431,5 @@ void audio_resample_close(ReSampleContext *s)
     av_audio_convert_free(s->convert_ctx[1]);
     av_free(s);
 }
+
+#endif

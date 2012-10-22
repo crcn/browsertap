@@ -27,6 +27,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "libavutil/common.h"
 #include "libavutil/intreadwrite.h"
 #include "avcodec.h"
 
@@ -495,21 +496,25 @@ static int decode_frame(AVCodecContext *avctx, void *data, int *data_size, AVPac
         c->decode_intra= decode_intra;
     }
 
-     if (c->decode_intra == NULL) {
-         av_log(avctx, AV_LOG_ERROR, "Error! Got no format or no keyframe!\n");
-         return AVERROR_INVALIDDATA;
-     }
+    if (c->decode_intra == NULL) {
+        av_log(avctx, AV_LOG_ERROR, "Error! Got no format or no keyframe!\n");
+        return AVERROR_INVALIDDATA;
+    }
 
     if (c->comp == 0) { //Uncompressed data
         memcpy(c->decomp_buf, buf, len);
         c->decomp_size = 1;
     } else { // ZLIB-compressed data
         c->zstream.total_in = c->zstream.total_out = 0;
-        c->zstream.next_in = buf;
+        c->zstream.next_in = (uint8_t*)buf;
         c->zstream.avail_in = len;
         c->zstream.next_out = c->decomp_buf;
         c->zstream.avail_out = c->decomp_size;
-        inflate(&c->zstream, Z_FINISH);
+        zret = inflate(&c->zstream, Z_SYNC_FLUSH);
+        if (zret != Z_OK && zret != Z_STREAM_END) {
+            av_log(avctx, AV_LOG_ERROR, "inflate error %d\n", zret);
+            return AVERROR_INVALIDDATA;
+        }
         c->decomp_len = c->zstream.total_out;
     }
     if (c->flags & ZMBV_KEYFRAME) {
@@ -620,7 +625,7 @@ static av_cold int decode_init(AVCodecContext *avctx)
     // Needed if zlib unused or init aborted before inflateInit
     memset(&c->zstream, 0, sizeof(z_stream));
 
-    avctx->pix_fmt = PIX_FMT_RGB24;
+    avctx->pix_fmt = AV_PIX_FMT_RGB24;
     c->decomp_size = (avctx->width + 255) * 4 * (avctx->height + 64);
 
     /* Allocate decompression buffer */
@@ -669,11 +674,11 @@ static av_cold int decode_end(AVCodecContext *avctx)
 AVCodec ff_zmbv_decoder = {
     .name           = "zmbv",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_ZMBV,
+    .id             = AV_CODEC_ID_ZMBV,
     .priv_data_size = sizeof(ZmbvContext),
     .init           = decode_init,
     .close          = decode_end,
     .decode         = decode_frame,
     .capabilities   = CODEC_CAP_DR1,
-    .long_name = NULL_IF_CONFIG_SMALL("Zip Motion Blocks Video"),
+    .long_name      = NULL_IF_CONFIG_SMALL("Zip Motion Blocks Video"),
 };

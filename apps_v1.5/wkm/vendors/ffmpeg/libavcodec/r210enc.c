@@ -38,15 +38,14 @@ static int encode_frame(AVCodecContext *avctx, AVPacket *pkt,
                         const AVFrame *pic, int *got_packet)
 {
     int i, j, ret;
-    int aligned_width = FFALIGN(avctx->width, 64);
+    int aligned_width = FFALIGN(avctx->width,
+                                avctx->codec_id == AV_CODEC_ID_R10K ? 1 : 64);
     int pad = (aligned_width - avctx->width) * 4;
     uint8_t *src_line;
     uint8_t *dst;
 
-    if ((ret = ff_alloc_packet(pkt, 4 * aligned_width * avctx->height)) < 0) {
-        av_log(avctx, AV_LOG_ERROR, "Error getting output packet\n");
+    if ((ret = ff_alloc_packet2(avctx, pkt, 4 * aligned_width * avctx->height)) < 0)
         return ret;
-    }
 
     avctx->coded_frame->reference = 0;
     avctx->coded_frame->key_frame = 1;
@@ -61,11 +60,11 @@ static int encode_frame(AVCodecContext *avctx, AVPacket *pkt,
             uint16_t r = *src++ >> 6;
             uint16_t g = *src++ >> 6;
             uint16_t b = *src++ >> 4;
-            if (avctx->codec_id == CODEC_ID_R210)
+            if (avctx->codec_id == AV_CODEC_ID_R210)
                 pixel = (r << 20) | (g << 10) | b >> 2;
             else
                 pixel = (r << 22) | (g << 12) | b;
-            if (avctx->codec_id == CODEC_ID_AVRP)
+            if (avctx->codec_id == AV_CODEC_ID_AVRP)
                 bytestream_put_le32(&dst, pixel);
             else
                 bytestream_put_be32(&dst, pixel);
@@ -91,11 +90,11 @@ static av_cold int encode_close(AVCodecContext *avctx)
 AVCodec ff_r210_encoder = {
     .name           = "r210",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_R210,
+    .id             = AV_CODEC_ID_R210,
     .init           = encode_init,
     .encode2        = encode_frame,
     .close          = encode_close,
-    .pix_fmts       = (const enum PixelFormat[]) { PIX_FMT_RGB48, PIX_FMT_NONE },
+    .pix_fmts       = (const enum AVPixelFormat[]) { AV_PIX_FMT_RGB48, AV_PIX_FMT_NONE },
     .long_name      = NULL_IF_CONFIG_SMALL("Uncompressed RGB 10-bit"),
 };
 #endif
@@ -103,11 +102,11 @@ AVCodec ff_r210_encoder = {
 AVCodec ff_r10k_encoder = {
     .name           = "r10k",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_R10K,
+    .id             = AV_CODEC_ID_R10K,
     .init           = encode_init,
     .encode2        = encode_frame,
     .close          = encode_close,
-    .pix_fmts       = (const enum PixelFormat[]) { PIX_FMT_RGB48, PIX_FMT_NONE },
+    .pix_fmts       = (const enum AVPixelFormat[]) { AV_PIX_FMT_RGB48, AV_PIX_FMT_NONE },
     .long_name      = NULL_IF_CONFIG_SMALL("AJA Kona 10-bit RGB Codec"),
 };
 #endif
@@ -115,11 +114,11 @@ AVCodec ff_r10k_encoder = {
 AVCodec ff_avrp_encoder = {
     .name           = "avrp",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_AVRP,
+    .id             = AV_CODEC_ID_AVRP,
     .init           = encode_init,
     .encode2        = encode_frame,
     .close          = encode_close,
-    .pix_fmts       = (const enum PixelFormat[]) { PIX_FMT_RGB48, PIX_FMT_NONE },
+    .pix_fmts       = (const enum AVPixelFormat[]) { AV_PIX_FMT_RGB48, AV_PIX_FMT_NONE },
     .long_name      = NULL_IF_CONFIG_SMALL("Avid 1:1 10-bit RGB Packer"),
 };
 #endif

@@ -32,7 +32,7 @@ static int rso_read_header(AVFormatContext *s)
     AVIOContext *pb = s->pb;
     int id, rate, bps;
     unsigned int size;
-    enum CodecID codec;
+    enum AVCodecID codec;
     AVStream *st;
 
     id   = avio_rb16(pb);
@@ -42,7 +42,7 @@ static int rso_read_header(AVFormatContext *s)
 
     codec = ff_codec_get_id(ff_codec_rso_tags, id);
 
-    if (codec == CODEC_ID_ADPCM_IMA_WAV) {
+    if (codec == AV_CODEC_ID_ADPCM_IMA_WAV) {
         av_log(s, AV_LOG_ERROR, "ADPCM in RSO not implemented\n");
         return AVERROR_PATCHWELCOME;
     }
@@ -80,17 +80,15 @@ static int rso_read_packet(AVFormatContext *s, AVPacket *pkt)
     if (ret < 0)
         return ret;
 
+    pkt->flags &= ~AV_PKT_FLAG_CORRUPT;
     pkt->stream_index = 0;
-
-    /* note: we need to modify the packet size here to handle the last packet */
-    pkt->size = ret;
 
     return 0;
 }
 
 AVInputFormat ff_rso_demuxer = {
     .name           =   "rso",
-    .long_name      =   NULL_IF_CONFIG_SMALL("Lego Mindstorms RSO format"),
+    .long_name      =   NULL_IF_CONFIG_SMALL("Lego Mindstorms RSO"),
     .extensions     =   "rso",
     .read_header    =   rso_read_header,
     .read_packet    =   rso_read_packet,

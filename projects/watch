@@ -1,2 +1,0 @@
-nodemon --exec "mesh make:node:debug" --watch ./src ./
-

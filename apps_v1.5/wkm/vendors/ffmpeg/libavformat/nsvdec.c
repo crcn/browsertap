@@ -19,6 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
+#include "libavutil/attributes.h"
 #include "libavutil/mathematics.h"
 #include "avformat.h"
 #include "internal.h"
@@ -99,8 +100,8 @@ struct NSVs_header {
     uint32_t chunk_tag; /* 'NSVs' */
     uint32_t v4cc;      /* or 'NONE' */
     uint32_t a4cc;      /* or 'NONE' */
-    uint16_t vwidth;    /* assert(vwidth%16==0) */
-    uint16_t vheight;   /* assert(vheight%16==0) */
+    uint16_t vwidth;    /* av_assert(vwidth%16==0) */
+    uint16_t vheight;   /* av_assert(vheight%16==0) */
     uint8_t framerate;  /* value = (framerate&0x80)?frtable[frameratex0x7f]:framerate */
     uint16_t unknown;
 };
@@ -183,33 +184,33 @@ typedef struct {
 } NSVContext;
 
 static const AVCodecTag nsv_codec_video_tags[] = {
-    { CODEC_ID_VP3, MKTAG('V', 'P', '3', ' ') },
-    { CODEC_ID_VP3, MKTAG('V', 'P', '3', '0') },
-    { CODEC_ID_VP3, MKTAG('V', 'P', '3', '1') },
-    { CODEC_ID_VP5, MKTAG('V', 'P', '5', ' ') },
-    { CODEC_ID_VP5, MKTAG('V', 'P', '5', '0') },
-    { CODEC_ID_VP6, MKTAG('V', 'P', '6', ' ') },
-    { CODEC_ID_VP6, MKTAG('V', 'P', '6', '0') },
-    { CODEC_ID_VP6, MKTAG('V', 'P', '6', '1') },
-    { CODEC_ID_VP6, MKTAG('V', 'P', '6', '2') },
-    { CODEC_ID_VP8, MKTAG('V', 'P', '8', '0') },
+    { AV_CODEC_ID_VP3, MKTAG('V', 'P', '3', ' ') },
+    { AV_CODEC_ID_VP3, MKTAG('V', 'P', '3', '0') },
+    { AV_CODEC_ID_VP3, MKTAG('V', 'P', '3', '1') },
+    { AV_CODEC_ID_VP5, MKTAG('V', 'P', '5', ' ') },
+    { AV_CODEC_ID_VP5, MKTAG('V', 'P', '5', '0') },
+    { AV_CODEC_ID_VP6, MKTAG('V', 'P', '6', ' ') },
+    { AV_CODEC_ID_VP6, MKTAG('V', 'P', '6', '0') },
+    { AV_CODEC_ID_VP6, MKTAG('V', 'P', '6', '1') },
+    { AV_CODEC_ID_VP6, MKTAG('V', 'P', '6', '2') },
+    { AV_CODEC_ID_VP8, MKTAG('V', 'P', '8', '0') },
 /*
-    { CODEC_ID_VP4, MKTAG('V', 'P', '4', ' ') },
-    { CODEC_ID_VP4, MKTAG('V', 'P', '4', '0') },
+    { AV_CODEC_ID_VP4, MKTAG('V', 'P', '4', ' ') },
+    { AV_CODEC_ID_VP4, MKTAG('V', 'P', '4', '0') },
 */
-    { CODEC_ID_MPEG4, MKTAG('X', 'V', 'I', 'D') }, /* cf sample xvid decoder from nsv_codec_sdk.zip */
-    { CODEC_ID_RAWVIDEO, MKTAG('R', 'G', 'B', '3') },
-    { CODEC_ID_NONE, 0 },
+    { AV_CODEC_ID_MPEG4, MKTAG('X', 'V', 'I', 'D') }, /* cf sample xvid decoder from nsv_codec_sdk.zip */
+    { AV_CODEC_ID_RAWVIDEO, MKTAG('R', 'G', 'B', '3') },
+    { AV_CODEC_ID_NONE, 0 },
 };
 
 static const AVCodecTag nsv_codec_audio_tags[] = {
-    { CODEC_ID_MP3,       MKTAG('M', 'P', '3', ' ') },
-    { CODEC_ID_AAC,       MKTAG('A', 'A', 'C', ' ') },
-    { CODEC_ID_AAC,       MKTAG('A', 'A', 'C', 'P') },
-    { CODEC_ID_AAC,       MKTAG('V', 'L', 'B', ' ') },
-    { CODEC_ID_SPEEX,     MKTAG('S', 'P', 'X', ' ') },
-    { CODEC_ID_PCM_U16LE, MKTAG('P', 'C', 'M', ' ') },
-    { CODEC_ID_NONE,      0 },
+    { AV_CODEC_ID_MP3,       MKTAG('M', 'P', '3', ' ') },
+    { AV_CODEC_ID_AAC,       MKTAG('A', 'A', 'C', ' ') },
+    { AV_CODEC_ID_AAC,       MKTAG('A', 'A', 'C', 'P') },
+    { AV_CODEC_ID_AAC,       MKTAG('V', 'L', 'B', ' ') },
+    { AV_CODEC_ID_SPEEX,     MKTAG('S', 'P', 'X', ' ') },
+    { AV_CODEC_ID_PCM_U16LE, MKTAG('P', 'C', 'M', ' ') },
+    { AV_CODEC_ID_NONE,      0 },
 };
 
 //static int nsv_load_index(AVFormatContext *s);
@@ -272,7 +273,7 @@ static int nsv_parse_NSVf_header(AVFormatContext *s)
 {
     NSVContext *nsv = s->priv_data;
     AVIOContext *pb = s->pb;
-    unsigned int file_size;
+    unsigned int av_unused file_size;
     unsigned int size;
     int64_t duration;
     int strings_size;
@@ -594,7 +595,7 @@ null_chunk_retry:
     av_dlog(s, "NSV CHUNK %d aux, %u bytes video, %d bytes audio\n", auxcount, vsize, asize);
     /* skip aux stuff */
     for (i = 0; i < auxcount; i++) {
-        uint32_t auxtag;
+        uint32_t av_unused auxtag;
         auxsize = avio_rl16(pb);
         auxtag = avio_rl32(pb);
         av_dlog(s, "NSV aux data: '%c%c%c%c', %d bytes\n",
@@ -652,9 +653,12 @@ null_chunk_retry:
                 if (bps != 16) {
                     av_dlog(s, "NSV AUDIO bit/sample != 16 (%d)!!!\n", bps);
                 }
-                bps /= channels; // ???
+                if(channels)
+                    bps /= channels; // ???
+                else
+                    av_log(s, AV_LOG_WARNING, "Channels is 0\n");
                 if (bps == 8)
-                    st[NSV_ST_AUDIO]->codec->codec_id = CODEC_ID_PCM_U8;
+                    st[NSV_ST_AUDIO]->codec->codec_id = AV_CODEC_ID_PCM_U8;
                 samplerate /= 4;/* UGH ??? XXX */
                 channels = 1;
                 st[NSV_ST_AUDIO]->codec->channels = channels;

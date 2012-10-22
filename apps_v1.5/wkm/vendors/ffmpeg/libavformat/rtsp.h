@@ -52,6 +52,7 @@ enum RTSPLowerTransport {
 enum RTSPTransport {
     RTSP_TRANSPORT_RTP, /**< Standards-compliant RTP */
     RTSP_TRANSPORT_RDT, /**< Realmedia Data Transport */
+    RTSP_TRANSPORT_RAW, /**< Raw data (over UDP) */
     RTSP_TRANSPORT_NB
 };
 
@@ -101,6 +102,9 @@ typedef struct RTSPTransportField {
     /** time-to-live value (required for multicast); the amount of HOPs that
      * packets will be allowed to make before being discarded. */
     int ttl;
+
+    /** transport set to record data */
+    int mode_record;
 
     struct sockaddr_storage destination; /**< destination IP address */
     char source[INET6_ADDRSTRLEN + 1]; /**< source IP address */
@@ -171,6 +175,11 @@ typedef struct RTSPMessageHeader {
      * returned
      */
     char reason[256];
+
+    /**
+     * Content type header
+     */
+    char content_type[64];
 } RTSPMessageHeader;
 
 /**
@@ -302,6 +311,13 @@ typedef struct RTSPState {
      * other cases, this is a copy of AVFormatContext->filename. */
     char control_uri[1024];
 
+    /** The following are used for parsing raw mpegts in udp */
+    //@{
+    struct MpegTSContext *ts;
+    int recvbuf_pos;
+    int recvbuf_len;
+    //@}
+
     /** Additional output handle, used when input and output are done
      * separately, eg for HTTP tunneling. */
     URLContext *rtsp_hd_out;
@@ -364,11 +380,22 @@ typedef struct RTSPState {
      * Minimum and maximum local UDP ports.
      */
     int rtp_port_min, rtp_port_max;
+
+    /**
+     * Timeout to wait for incoming connections.
+     */
+    int initial_timeout;
+
+    /**
+     * Size of RTP packet reordering queue.
+     */
+    int reordering_queue_size;
 } RTSPState;
 
 #define RTSP_FLAG_FILTER_SRC  0x1    /**< Filter incoming UDP packets -
                                           receive packets only from the right
                                           source address and port. */
+#define RTSP_FLAG_LISTEN      0x2    /**< Wait for incoming connections. */
 
 /**
  * Describe a single stream, as identified by a single m= line block in the
@@ -397,7 +424,7 @@ typedef struct RTSPStream {
     int sdp_payload_type;     /**< payload type */
     //@}
 
-    /** The following are used for dynamic protocols (rtp_*.c/rdt.c) */
+    /** The following are used for dynamic protocols (rtpdec_*.c/rdt.c) */
     //@{
     /** handler structure */
     RTPDynamicProtocolHandler *dynamic_handler;
@@ -521,6 +548,12 @@ int ff_rtsp_setup_input_streams(AVFormatContext *s, RTSPMessageHeader *reply);
 int ff_rtsp_setup_output_streams(AVFormatContext *s, const char *addr);
 
 /**
+ * Parse RTSP commands (OPTIONS, PAUSE and TEARDOWN) during streaming in
+ * listen mode.
+ */
+int ff_rtsp_parse_streaming_commands(AVFormatContext *s);
+
+/**
  * Parse an SDP description of streams by populating an RTSPState struct
  * within the AVFormatContext; also allocate the RTP streams and the
  * pollfd array used for UDP streams.
@@ -552,6 +585,11 @@ int ff_rtsp_make_setup_request(AVFormatContext *s, const char *host, int port,
  * transport_priv and rtp_handle fields.
  */
 void ff_rtsp_undo_setup(AVFormatContext *s);
+
+/**
+ * Open RTSP transport context.
+ */
+int ff_rtsp_open_transport_ctx(AVFormatContext *s, RTSPStream *rtsp_st);
 
 extern const AVOption ff_rtsp_options[];
 

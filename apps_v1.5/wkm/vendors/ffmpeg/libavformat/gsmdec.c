@@ -47,7 +47,6 @@ static int gsm_read_packet(AVFormatContext *s, AVPacket *pkt)
         av_free_packet(pkt);
         return ret < 0 ? ret : AVERROR(EIO);
     }
-    pkt->size     = ret;
     pkt->duration = 1;
     pkt->pts      = pkt->pos / GSM_BLOCK_SIZE;
 
@@ -74,7 +73,7 @@ static int gsm_read_header(AVFormatContext *s)
 
 static const AVOption options[] = {
     { "sample_rate", "", offsetof(GSMDemuxerContext, sample_rate),
-       AV_OPT_TYPE_INT, {.dbl = GSM_SAMPLE_RATE}, 1, INT_MAX / GSM_BLOCK_SIZE,
+       AV_OPT_TYPE_INT, {.i64 = GSM_SAMPLE_RATE}, 1, INT_MAX / GSM_BLOCK_SIZE,
        AV_OPT_FLAG_DECODING_PARAM },
     { NULL },
 };
@@ -94,6 +93,6 @@ AVInputFormat ff_gsm_demuxer = {
     .read_packet    = gsm_read_packet,
     .flags          = AVFMT_GENERIC_INDEX,
     .extensions     = "gsm",
-    .raw_codec_id   = CODEC_ID_GSM,
+    .raw_codec_id   = AV_CODEC_ID_GSM,
     .priv_class     = &class,
 };

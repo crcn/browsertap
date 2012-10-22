@@ -1,7 +1,0 @@
-Z:\craigcondon\Development\eyebrowse\desktop\winproc\bin\Release\winproc.exe
-Z:\craigcondon\Development\eyebrowse\desktop\winproc\bin\Release\winproc.pdb
-Z:\craigcondon\Development\eyebrowse\desktop\winproc\obj\x86\Release\ResolveAssemblyReference.cache
-Z:\craigcondon\Development\eyebrowse\desktop\winproc\obj\x86\Release\winproc.exe
-Z:\craigcondon\Development\eyebrowse\desktop\winproc\obj\x86\Release\winproc.pdb
-Z:\craigcondon\Development\eyebrowse\desktop\sprite\lib\process\winproc\Release\winproc.exe
-Z:\craigcondon\Development\eyebrowse\desktop\sprite\lib\process\winproc\Release\winproc.pdb

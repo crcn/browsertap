@@ -23,8 +23,14 @@
  * Ported from MPlayer libmpcodecs/vf_cropdetect.c.
  */
 
+#include <stdio.h>
+
 #include "libavutil/imgutils.h"
+#include "libavutil/internal.h"
 #include "avfilter.h"
+#include "formats.h"
+#include "internal.h"
+#include "video.h"
 
 typedef struct {
     int x1, y1, x2, y2;
@@ -37,16 +43,16 @@ typedef struct {
 
 static int query_formats(AVFilterContext *ctx)
 {
-    static const enum PixelFormat pix_fmts[] = {
-        PIX_FMT_YUV420P, PIX_FMT_YUVJ420P,
-        PIX_FMT_YUV422P, PIX_FMT_YUVJ422P,
-        PIX_FMT_YUV444P, PIX_FMT_YUVJ444P,
-        PIX_FMT_YUV411P, PIX_FMT_GRAY8,
-        PIX_FMT_NV12,    PIX_FMT_NV21,
-        PIX_FMT_NONE
+    static const enum AVPixelFormat pix_fmts[] = {
+        AV_PIX_FMT_YUV420P, AV_PIX_FMT_YUVJ420P,
+        AV_PIX_FMT_YUV422P, AV_PIX_FMT_YUVJ422P,
+        AV_PIX_FMT_YUV444P, AV_PIX_FMT_YUVJ444P,
+        AV_PIX_FMT_YUV411P, AV_PIX_FMT_GRAY8,
+        AV_PIX_FMT_NV12,    AV_PIX_FMT_NV21,
+        AV_PIX_FMT_NONE
     };
 
-    avfilter_set_common_pixel_formats(ctx, avfilter_make_format_list(pix_fmts));
+    ff_set_common_formats(ctx, ff_make_format_list(pix_fmts));
     return 0;
 }
 
@@ -77,7 +83,7 @@ static int checkline(void *ctx, const unsigned char *src, int stride, int len, i
     return total;
 }
 
-static av_cold int init(AVFilterContext *ctx, const char *args, void *opaque)
+static av_cold int init(AVFilterContext *ctx, const char *args)
 {
     CropDetectContext *cd = ctx->priv;
 
@@ -89,7 +95,7 @@ static av_cold int init(AVFilterContext *ctx, const char *args, void *opaque)
     if (args)
         sscanf(args, "%d:%d:%d", &cd->limit, &cd->round, &cd->reset_count);
 
-    av_log(ctx, AV_LOG_INFO, "limit:%d round:%d reset_count:%d\n",
+    av_log(ctx, AV_LOG_VERBOSE, "limit:%d round:%d reset_count:%d\n",
            cd->limit, cd->round, cd->reset_count);
 
     return 0;
@@ -101,7 +107,7 @@ static int config_input(AVFilterLink *inlink)
     CropDetectContext *cd = ctx->priv;
 
     av_image_fill_max_pixsteps(cd->max_pixsteps, NULL,
-                               &av_pix_fmt_descriptors[inlink->format]);
+                               av_pix_fmt_desc_get(inlink->format));
 
     cd->x1 = inlink->w - 1;
     cd->y1 = inlink->h - 1;
@@ -111,7 +117,7 @@ static int config_input(AVFilterLink *inlink)
     return 0;
 }
 
-static void end_frame(AVFilterLink *inlink)
+static int end_frame(AVFilterLink *inlink)
 {
     AVFilterContext *ctx = inlink->dst;
     CropDetectContext *cd = ctx->priv;
@@ -188,8 +194,28 @@ static void end_frame(AVFilterLink *inlink)
                w, h, x, y);
     }
 
-    avfilter_end_frame(inlink->dst->outputs[0]);
+    return ff_end_frame(inlink->dst->outputs[0]);
 }
+
+static const AVFilterPad avfilter_vf_cropdetect_inputs[] = {
+    {
+        .name             = "default",
+        .type             = AVMEDIA_TYPE_VIDEO,
+        .config_props     = config_input,
+        .get_video_buffer = ff_null_get_video_buffer,
+        .start_frame      = ff_null_start_frame,
+        .end_frame        = end_frame,
+    },
+    { NULL }
+};
+
+static const AVFilterPad avfilter_vf_cropdetect_outputs[] = {
+    {
+        .name = "default",
+        .type = AVMEDIA_TYPE_VIDEO
+    },
+    { NULL }
+};
 
 AVFilter avfilter_vf_cropdetect = {
     .name        = "cropdetect",
@@ -200,15 +226,7 @@ AVFilter avfilter_vf_cropdetect = {
 
     .query_formats = query_formats,
 
-    .inputs    = (const AVFilterPad[]) {{ .name       = "default",
-                                    .type             = AVMEDIA_TYPE_VIDEO,
-                                    .config_props     = config_input,
-                                    .get_video_buffer = avfilter_null_get_video_buffer,
-                                    .start_frame      = avfilter_null_start_frame,
-                                    .end_frame        = end_frame, },
-                                  { .name = NULL}},
+    .inputs    = avfilter_vf_cropdetect_inputs,
 
-    .outputs   = (const AVFilterPad[]) {{ .name       = "default",
-                                    .type             = AVMEDIA_TYPE_VIDEO },
-                                  { .name = NULL}},
+    .outputs   = avfilter_vf_cropdetect_outputs,
 };

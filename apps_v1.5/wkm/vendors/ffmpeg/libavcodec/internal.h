@@ -36,7 +36,7 @@ typedef struct InternalBuffer {
     int linesize[AV_NUM_DATA_POINTERS];
     int width;
     int height;
-    enum PixelFormat pix_fmt;
+    enum AVPixelFormat pix_fmt;
     uint8_t **extended_data;
     int audio_data_size;
     int nb_channels;
@@ -70,6 +70,25 @@ typedef struct AVCodecInternal {
      */
     int sample_count;
 #endif
+
+    /**
+     * An audio frame with less than required samples has been submitted and
+     * padded with silence. Reject all subsequent frames.
+     */
+    int last_audio_frame;
+
+    /**
+     * temporary buffer used for encoders to store their bitstream
+     */
+    uint8_t *byte_buffer;
+    unsigned int byte_buffer_size;
+
+    void *frame_thread_encoder;
+
+    /**
+     * Number of audio samples to skip at the start of the next decoded frame
+     */
+    int skip_samples;
 } AVCodecInternal;
 
 struct AVCodecDefault {
@@ -80,7 +99,7 @@ struct AVCodecDefault {
 /**
  * Determine whether pix_fmt is a hardware accelerated format.
  */
-int ff_is_hwaccel_pix_fmt(enum PixelFormat pix_fmt);
+int ff_is_hwaccel_pix_fmt(enum AVPixelFormat pix_fmt);
 
 /**
  * Return the hardware accelerated codec for codec codec_id and
@@ -90,7 +109,7 @@ int ff_is_hwaccel_pix_fmt(enum PixelFormat pix_fmt);
  * @param pix_fmt the pixel format to match
  * @return the hardware accelerated codec, or NULL if none was found.
  */
-AVHWAccel *ff_find_hwaccel(enum CodecID codec_id, enum PixelFormat pix_fmt);
+AVHWAccel *ff_find_hwaccel(enum AVCodecID codec_id, enum AVPixelFormat pix_fmt);
 
 /**
  * Return the index into tab at which {a,b} match elements {[0],[1]} of tab.
@@ -103,7 +122,7 @@ unsigned int avpriv_toupper4(unsigned int x);
 /**
  * does needed setup of pkt_pts/pos and such for (re)get_buffer();
  */
-void ff_init_buffer_info(AVCodecContext *s, AVFrame *pic);
+void ff_init_buffer_info(AVCodecContext *s, AVFrame *frame);
 
 /**
  * Remove and free all side data from packet.
@@ -127,6 +146,7 @@ int avpriv_unlock_avformat(void);
  * ensure the output packet data is large enough, whether provided by the user
  * or allocated in this function.
  *
+ * @param avctx   the AVCodecContext of the encoder
  * @param avpkt   the AVPacket
  *                If avpkt->data is already set, avpkt->size is checked
  *                to ensure it is large enough.
@@ -136,6 +156,8 @@ int avpriv_unlock_avformat(void);
  * @param size    the minimum required packet size
  * @return        0 on success, negative error code on failure
  */
+int ff_alloc_packet2(AVCodecContext *avctx, AVPacket *avpkt, int size);
+
 int ff_alloc_packet(AVPacket *avpkt, int size);
 
 /**
@@ -144,8 +166,28 @@ int ff_alloc_packet(AVPacket *avpkt, int size);
 static av_always_inline int64_t ff_samples_to_time_base(AVCodecContext *avctx,
                                                         int64_t samples)
 {
+    if(samples == AV_NOPTS_VALUE)
+        return AV_NOPTS_VALUE;
     return av_rescale_q(samples, (AVRational){ 1, avctx->sample_rate },
                         avctx->time_base);
 }
+
+int ff_thread_can_start_frame(AVCodecContext *avctx);
+
+int ff_get_logical_cpus(AVCodecContext *avctx);
+
+int avpriv_h264_has_num_reorder_frames(AVCodecContext *avctx);
+
+/**
+ * Call avcodec_open2 recursively by decrementing counter, unlocking mutex,
+ * calling the function and then restoring again. Assumes the mutex is
+ * already locked
+ */
+int ff_codec_open2_recursive(AVCodecContext *avctx, const AVCodec *codec, AVDictionary **options);
+
+/**
+ * Call avcodec_close recursively, counterpart to avcodec_open2_recursive.
+ */
+int ff_codec_close_recursive(AVCodecContext *avctx);
 
 #endif /* AVCODEC_INTERNAL_H */

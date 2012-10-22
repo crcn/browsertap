@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005  Ole André Vadla Ravnås <oleavr@gmail.com>
+ * Copyright (C) 2005  Ole AndrÃ© Vadla RavnÃ¥s <oleavr@gmail.com>
  * Copyright (C) 2008  Ramiro Polla
  *
  * This file is part of FFmpeg.
@@ -340,7 +340,7 @@ static int mimic_decode_frame(AVCodecContext *avctx, void *data,
         ctx->avctx     = avctx;
         avctx->width   = width;
         avctx->height  = height;
-        avctx->pix_fmt = PIX_FMT_YUV420P;
+        avctx->pix_fmt = AV_PIX_FMT_YUV420P;
         for(i = 0; i < 3; i++) {
             ctx->num_vblocks[i] = -((-height) >> (3 + !!i));
             ctx->num_hblocks[i] =     width   >> (3 + !!i) ;
@@ -420,14 +420,14 @@ static av_cold int mimic_decode_end(AVCodecContext *avctx)
 }
 
 AVCodec ff_mimic_decoder = {
-    .name           = "mimic",
-    .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_MIMIC,
-    .priv_data_size = sizeof(MimicContext),
-    .init           = mimic_decode_init,
-    .close          = mimic_decode_end,
-    .decode         = mimic_decode_frame,
-    .capabilities   = CODEC_CAP_DR1 | CODEC_CAP_FRAME_THREADS,
-    .long_name = NULL_IF_CONFIG_SMALL("Mimic"),
+    .name                  = "mimic",
+    .type                  = AVMEDIA_TYPE_VIDEO,
+    .id                    = AV_CODEC_ID_MIMIC,
+    .priv_data_size        = sizeof(MimicContext),
+    .init                  = mimic_decode_init,
+    .close                 = mimic_decode_end,
+    .decode                = mimic_decode_frame,
+    .capabilities          = CODEC_CAP_DR1 | CODEC_CAP_FRAME_THREADS,
+    .long_name             = NULL_IF_CONFIG_SMALL("Mimic"),
     .update_thread_context = ONLY_IF_THREADS_ENABLED(mimic_decode_update_thread_context)
 };

@@ -1,3 +1,0 @@
-{
-    "exec": "mkdir -p <%-assetsDir %>/{js,css}"
-}

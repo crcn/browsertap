@@ -61,7 +61,8 @@ typedef struct TTAContext {
     GetBitContext gb;
     const AVCRC *crc_table;
 
-    int format, channels, bps, data_length;
+    int format, channels, bps;
+    unsigned data_length;
     int frame_length, last_frame_length, total_frames;
 
     int32_t *decode_buffer;
@@ -98,67 +99,35 @@ static void ttafilter_init(TTAFilter *c, int32_t shift) {
 //    c->round = 1 << (shift - 1);
 }
 
-// FIXME: copy paste from original
-static inline void memshl(register int32_t *a, register int32_t *b) {
-    *a++ = *b++;
-    *a++ = *b++;
-    *a++ = *b++;
-    *a++ = *b++;
-    *a++ = *b++;
-    *a++ = *b++;
-    *a++ = *b++;
-    *a = *b;
-}
-
 static inline void ttafilter_process(TTAFilter *c, int32_t *in)
 {
     register int32_t *dl = c->dl, *qm = c->qm, *dx = c->dx, sum = c->round;
 
-    if (!c->error) {
-        sum += *dl++ * *qm, qm++;
-        sum += *dl++ * *qm, qm++;
-        sum += *dl++ * *qm, qm++;
-        sum += *dl++ * *qm, qm++;
-        sum += *dl++ * *qm, qm++;
-        sum += *dl++ * *qm, qm++;
-        sum += *dl++ * *qm, qm++;
-        sum += *dl++ * *qm, qm++;
-        dx += 8;
-    } else if(c->error < 0) {
-        sum += *dl++ * (*qm -= *dx++), qm++;
-        sum += *dl++ * (*qm -= *dx++), qm++;
-        sum += *dl++ * (*qm -= *dx++), qm++;
-        sum += *dl++ * (*qm -= *dx++), qm++;
-        sum += *dl++ * (*qm -= *dx++), qm++;
-        sum += *dl++ * (*qm -= *dx++), qm++;
-        sum += *dl++ * (*qm -= *dx++), qm++;
-        sum += *dl++ * (*qm -= *dx++), qm++;
-    } else {
-        sum += *dl++ * (*qm += *dx++), qm++;
-        sum += *dl++ * (*qm += *dx++), qm++;
-        sum += *dl++ * (*qm += *dx++), qm++;
-        sum += *dl++ * (*qm += *dx++), qm++;
-        sum += *dl++ * (*qm += *dx++), qm++;
-        sum += *dl++ * (*qm += *dx++), qm++;
-        sum += *dl++ * (*qm += *dx++), qm++;
-        sum += *dl++ * (*qm += *dx++), qm++;
+    if (c->error < 0) {
+        qm[0] -= dx[0]; qm[1] -= dx[1]; qm[2] -= dx[2]; qm[3] -= dx[3];
+        qm[4] -= dx[4]; qm[5] -= dx[5]; qm[6] -= dx[6]; qm[7] -= dx[7];
+    } else if (c->error > 0) {
+        qm[0] += dx[0]; qm[1] += dx[1]; qm[2] += dx[2]; qm[3] += dx[3];
+        qm[4] += dx[4]; qm[5] += dx[5]; qm[6] += dx[6]; qm[7] += dx[7];
     }
 
-    *(dx-0) = ((*(dl-1) >> 30) | 1) << 2;
-    *(dx-1) = ((*(dl-2) >> 30) | 1) << 1;
-    *(dx-2) = ((*(dl-3) >> 30) | 1) << 1;
-    *(dx-3) = ((*(dl-4) >> 30) | 1);
+    sum += dl[0] * qm[0] + dl[1] * qm[1] + dl[2] * qm[2] + dl[3] * qm[3] +
+           dl[4] * qm[4] + dl[5] * qm[5] + dl[6] * qm[6] + dl[7] * qm[7];
+
+    dx[0] = dx[1]; dx[1] = dx[2]; dx[2] = dx[3]; dx[3] = dx[4];
+    dl[0] = dl[1]; dl[1] = dl[2]; dl[2] = dl[3]; dl[3] = dl[4];
+
+    dx[4] = ((dl[4] >> 30) | 1);
+    dx[5] = ((dl[5] >> 30) | 2) & ~1;
+    dx[6] = ((dl[6] >> 30) | 2) & ~1;
+    dx[7] = ((dl[7] >> 30) | 4) & ~3;
 
     c->error = *in;
     *in += (sum >> c->shift);
-    *dl = *in;
 
-    *(dl-1) = *dl - *(dl-1);
-    *(dl-2) = *(dl-1) - *(dl-2);
-    *(dl-3) = *(dl-2) - *(dl-3);
-
-    memshl(c->dl, c->dl + 1);
-    memshl(c->dx, c->dx + 1);
+    dl[4] = -dl[5]; dl[5] = -dl[6];
+    dl[6] = *in - dl[7]; dl[7] = *in;
+    dl[5] += dl[6]; dl[4] += dl[5];
 }
 
 static void rice_init(TTARice *c, uint32_t k0, uint32_t k1)
@@ -211,7 +180,7 @@ static av_cold int tta_decode_init(AVCodecContext * avctx)
 
     // 30bytes includes a seektable with one frame
     if (avctx->extradata_size < 30)
-        return -1;
+        return AVERROR_INVALIDDATA;
 
     init_get_bits(&s->gb, avctx->extradata, avctx->extradata_size * 8);
     if (show_bits_long(&s->gb, 32) == AV_RL32("TTA1"))
@@ -227,17 +196,17 @@ static av_cold int tta_decode_init(AVCodecContext * avctx)
         s->format = get_bits(&s->gb, 16);
         if (s->format > 2) {
             av_log(s->avctx, AV_LOG_ERROR, "Invalid format\n");
-            return -1;
+            return AVERROR_INVALIDDATA;
         }
         if (s->format == FORMAT_ENCRYPTED) {
             av_log_missing_feature(s->avctx, "Encrypted TTA", 0);
-            return AVERROR(EINVAL);
+            return AVERROR_PATCHWELCOME;
         }
         avctx->channels = s->channels = get_bits(&s->gb, 16);
         if (s->channels > 1 && s->channels < 9)
             avctx->channel_layout = tta_channel_layouts[s->channels-2];
-        avctx->bits_per_coded_sample = get_bits(&s->gb, 16);
-        s->bps = (avctx->bits_per_coded_sample + 7) / 8;
+        avctx->bits_per_raw_sample = get_bits(&s->gb, 16);
+        s->bps = (avctx->bits_per_raw_sample + 7) / 8;
         avctx->sample_rate = get_bits_long(&s->gb, 32);
         s->data_length = get_bits_long(&s->gb, 32);
         skip_bits_long(&s->gb, 32); // CRC32 of header
@@ -254,11 +223,9 @@ static av_cold int tta_decode_init(AVCodecContext * avctx)
         case 1: avctx->sample_fmt = AV_SAMPLE_FMT_U8; break;
         case 2:
             avctx->sample_fmt = AV_SAMPLE_FMT_S16;
-            avctx->bits_per_raw_sample = 16;
             break;
         case 3:
             avctx->sample_fmt = AV_SAMPLE_FMT_S32;
-            avctx->bits_per_raw_sample = 24;
             break;
         //case 4: avctx->sample_fmt = AV_SAMPLE_FMT_S32; break;
         default:
@@ -267,7 +234,7 @@ static av_cold int tta_decode_init(AVCodecContext * avctx)
         }
 
         // prevent overflow
-        if (avctx->sample_rate > 0x7FFFFF) {
+        if (avctx->sample_rate > 0x7FFFFFu) {
             av_log(avctx, AV_LOG_ERROR, "sample_rate too large\n");
             return AVERROR(EINVAL);
         }
@@ -283,11 +250,15 @@ static av_cold int tta_decode_init(AVCodecContext * avctx)
         av_log(s->avctx, AV_LOG_DEBUG, "data_length: %d frame_length: %d last: %d total: %d\n",
             s->data_length, s->frame_length, s->last_frame_length, s->total_frames);
 
+        if (s->total_frames < 0)
+            return AVERROR_INVALIDDATA;
+
         // FIXME: seek table
-        if (get_bits_left(&s->gb) < 32 * s->total_frames + 32)
+        if (avctx->extradata_size <= 26 || s->total_frames > INT_MAX / 4 ||
+            avctx->extradata_size - 26 < s->total_frames * 4)
             av_log(avctx, AV_LOG_WARNING, "Seek table missing or too small\n");
         else if (avctx->err_recognition & AV_EF_CRCCHECK) {
-            if (tta_check_crc(s, avctx->extradata + 22, s->total_frames * 4))
+            if (avctx->extradata_size < 26 + s->total_frames * 4 || tta_check_crc(s, avctx->extradata + 22, s->total_frames * 4))
                 return AVERROR_INVALIDDATA;
         }
         skip_bits_long(&s->gb, 32 * s->total_frames);
@@ -295,7 +266,7 @@ static av_cold int tta_decode_init(AVCodecContext * avctx)
 
         if(s->frame_length >= UINT_MAX / (s->channels * sizeof(int32_t))){
             av_log(avctx, AV_LOG_ERROR, "frame_length too large\n");
-            return -1;
+            return AVERROR_INVALIDDATA;
         }
 
         if (s->bps < 3) {
@@ -311,7 +282,7 @@ static av_cold int tta_decode_init(AVCodecContext * avctx)
         }
     } else {
         av_log(avctx, AV_LOG_ERROR, "Wrong extradata present\n");
-        return -1;
+        return AVERROR_INVALIDDATA;
     }
 
     avcodec_get_frame_defaults(&s->frame);
@@ -429,7 +400,7 @@ static int tta_decode_frame(AVCodecContext *avctx, void *data,
         if (cur_chan < (s->channels-1))
             cur_chan++;
         else {
-            // decorrelate in case of stereo integer
+            // decorrelate in case of multiple channels
             if (s->channels > 1) {
                 int32_t *r = p - 1;
                 for (*p += *r / 2; r > p - s->channels; r--)
@@ -454,7 +425,7 @@ static int tta_decode_frame(AVCodecContext *avctx, void *data,
         break;
         }
     case 2: {
-        uint16_t *samples = (int16_t *)s->frame.data[0];
+        int16_t *samples = (int16_t *)s->frame.data[0];
         for (p = s->decode_buffer; p < s->decode_buffer + (framelen * s->channels); p++)
             *samples++ = *p;
         break;
@@ -495,11 +466,11 @@ static av_cold int tta_decode_close(AVCodecContext *avctx) {
 AVCodec ff_tta_decoder = {
     .name           = "tta",
     .type           = AVMEDIA_TYPE_AUDIO,
-    .id             = CODEC_ID_TTA,
+    .id             = AV_CODEC_ID_TTA,
     .priv_data_size = sizeof(TTAContext),
     .init           = tta_decode_init,
     .close          = tta_decode_close,
     .decode         = tta_decode_frame,
     .capabilities   = CODEC_CAP_DR1,
-    .long_name = NULL_IF_CONFIG_SMALL("True Audio (TTA)"),
+    .long_name      = NULL_IF_CONFIG_SMALL("TTA (True Audio)"),
 };

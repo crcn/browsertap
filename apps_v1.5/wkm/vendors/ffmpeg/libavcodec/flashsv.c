@@ -114,7 +114,7 @@ static av_cold int flashsv_decode_init(AVCodecContext *avctx)
         av_log(avctx, AV_LOG_ERROR, "Inflate init error: %d\n", zret);
         return 1;
     }
-    avctx->pix_fmt = PIX_FMT_BGR24;
+    avctx->pix_fmt = AV_PIX_FMT_BGR24;
     avcodec_get_frame_defaults(&s->frame);
     s->frame.data[0] = NULL;
 
@@ -122,10 +122,11 @@ static av_cold int flashsv_decode_init(AVCodecContext *avctx)
 }
 
 
-static void flashsv2_prime(FlashSVContext *s, uint8_t *src,
-                           int size, int unp_size)
+static int flashsv2_prime(FlashSVContext *s, uint8_t *src,
+                          int size, int unp_size)
 {
     z_stream zs;
+    int zret; // Zlib return code
 
     zs.zalloc = NULL;
     zs.zfree  = NULL;
@@ -137,7 +138,8 @@ static void flashsv2_prime(FlashSVContext *s, uint8_t *src,
     s->zstream.avail_out = s->block_size * 3;
     inflate(&s->zstream, Z_SYNC_FLUSH);
 
-    deflateInit(&zs, 0);
+    if (deflateInit(&zs, 0) != Z_OK)
+        return -1;
     zs.next_in   = s->tmpblock;
     zs.avail_in  = s->block_size * 3 - s->zstream.avail_out;
     zs.next_out  = s->deflate_block;
@@ -145,13 +147,18 @@ static void flashsv2_prime(FlashSVContext *s, uint8_t *src,
     deflate(&zs, Z_SYNC_FLUSH);
     deflateEnd(&zs);
 
-    inflateReset(&s->zstream);
+    if ((zret = inflateReset(&s->zstream)) != Z_OK) {
+        av_log(s->avctx, AV_LOG_ERROR, "Inflate reset error: %d\n", zret);
+        return AVERROR_UNKNOWN;
+    }
 
     s->zstream.next_in   = s->deflate_block;
     s->zstream.avail_in  = s->deflate_block_size - zs.avail_out;
     s->zstream.next_out  = s->tmpblock;
     s->zstream.avail_out = s->block_size * 3;
     inflate(&s->zstream, Z_SYNC_FLUSH);
+
+    return 0;
 }
 
 static int flashsv_decode_block(AVCodecContext *avctx, AVPacket *avpkt,
@@ -164,11 +171,14 @@ static int flashsv_decode_block(AVCodecContext *avctx, AVPacket *avpkt,
     int k;
     int ret = inflateReset(&s->zstream);
     if (ret != Z_OK) {
-        //return -1;
+        av_log(avctx, AV_LOG_ERROR, "Inflate reset error: %d\n", ret);
+        return AVERROR_UNKNOWN;
     }
     if (s->zlibprime_curr || s->zlibprime_prev) {
-        flashsv2_prime(s, s->blocks[blk_idx].pos, s->blocks[blk_idx].size,
+        ret = flashsv2_prime(s, s->blocks[blk_idx].pos, s->blocks[blk_idx].size,
                        s->blocks[blk_idx].unp_size);
+        if (ret < 0)
+            return ret;
     }
     s->zstream.next_in   = avpkt->data + get_bits_count(gb) / 8;
     s->zstream.avail_in  = block_size;
@@ -456,13 +466,13 @@ static av_cold int flashsv_decode_end(AVCodecContext *avctx)
 AVCodec ff_flashsv_decoder = {
     .name           = "flashsv",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_FLASHSV,
+    .id             = AV_CODEC_ID_FLASHSV,
     .priv_data_size = sizeof(FlashSVContext),
     .init           = flashsv_decode_init,
     .close          = flashsv_decode_end,
     .decode         = flashsv_decode_frame,
     .capabilities   = CODEC_CAP_DR1,
-    .pix_fmts       = (const enum PixelFormat[]){PIX_FMT_BGR24, PIX_FMT_NONE},
+    .pix_fmts       = (const enum AVPixelFormat[]){ AV_PIX_FMT_BGR24, AV_PIX_FMT_NONE },
     .long_name      = NULL_IF_CONFIG_SMALL("Flash Screen Video v1"),
 };
 #endif /* CONFIG_FLASHSV_DECODER */
@@ -519,13 +529,13 @@ static av_cold int flashsv2_decode_end(AVCodecContext *avctx)
 AVCodec ff_flashsv2_decoder = {
     .name           = "flashsv2",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_FLASHSV2,
+    .id             = AV_CODEC_ID_FLASHSV2,
     .priv_data_size = sizeof(FlashSVContext),
     .init           = flashsv2_decode_init,
     .close          = flashsv2_decode_end,
     .decode         = flashsv_decode_frame,
     .capabilities   = CODEC_CAP_DR1,
-    .pix_fmts       = (const enum PixelFormat[]){PIX_FMT_BGR24, PIX_FMT_NONE},
+    .pix_fmts       = (const enum AVPixelFormat[]){ AV_PIX_FMT_BGR24, AV_PIX_FMT_NONE },
     .long_name      = NULL_IF_CONFIG_SMALL("Flash Screen Video v2"),
 };
 #endif /* CONFIG_FLASHSV2_DECODER */

@@ -30,8 +30,7 @@
 #include "dsputil.h"
 #include "get_bits.h"
 
-//#undef NDEBUG
-//#include <assert.h>
+#include "libavutil/avassert.h"
 
 #define BLOCK_TYPE_VLC_BITS 5
 #define ACDC_VLC_BITS 9
@@ -240,15 +239,18 @@ static void idct(DCTELEM block[64])
 
 static av_cold void init_vlcs(FourXContext *f)
 {
-    static VLC_TYPE table[8][32][2];
-    int i;
+    static VLC_TYPE table[2][4][32][2];
+    int i, j;
 
-    for (i = 0; i < 8; i++) {
-        block_type_vlc[0][i].table           = table[i];
-        block_type_vlc[0][i].table_allocated = 32;
-        init_vlc(&block_type_vlc[0][i], BLOCK_TYPE_VLC_BITS, 7,
-                 &block_type_tab[0][i][0][1], 2, 1,
-                 &block_type_tab[0][i][0][0], 2, 1, INIT_VLC_USE_NEW_STATIC);
+    for (i = 0; i < 2; i++) {
+        for (j = 0; j < 4; j++) {
+            block_type_vlc[i][j].table           = table[i][j];
+            block_type_vlc[i][j].table_allocated = 32;
+            init_vlc(&block_type_vlc[i][j], BLOCK_TYPE_VLC_BITS, 7,
+                     &block_type_tab[i][j][0][1], 2, 1,
+                     &block_type_tab[i][j][0][0], 2, 1,
+                     INIT_VLC_USE_NEW_STATIC);
+        }
     }
 }
 
@@ -325,7 +327,7 @@ static inline void mcdc(uint16_t *dst, const uint16_t *src, int log2w,
         }
         break;
     default:
-        assert(0);
+        av_assert2(0);
     }
 }
 
@@ -340,7 +342,7 @@ static void decode_p_block(FourXContext *f, uint16_t *dst, uint16_t *src,
     uint16_t *start = (uint16_t *)f->last_picture.data[0];
     uint16_t *end   = start + stride * (f->avctx->height - h + 1) - (1 << log2w);
 
-    assert(code >= 0 && code <= 6);
+    av_assert2(code >= 0 && code <= 6);
 
     if (code == 0) {
         if (f->g.buffer_end - f->g.buffer < 1) {
@@ -578,7 +580,7 @@ static int decode_i_mb(FourXContext *f)
 static const uint8_t *read_huffman_tables(FourXContext *f,
                                           const uint8_t * const buf, int buf_size)
 {
-    int frequency[512];
+    int frequency[512] = { 0 };
     uint8_t flag[512];
     int up[512];
     uint8_t len_tab[257];
@@ -588,7 +590,6 @@ static const uint8_t *read_huffman_tables(FourXContext *f,
     const uint8_t *ptr_end = buf + buf_size;
     int j;
 
-    memset(frequency, 0, sizeof(frequency));
     memset(up, -1, sizeof(up));
 
     start = *ptr++;
@@ -691,10 +692,9 @@ static int decode_i2_frame(FourXContext *f, const uint8_t *buf, int length)
 
     for (y = 0; y < height; y += 16) {
         for (x = 0; x < width; x += 16) {
-            unsigned int color[4], bits;
+            unsigned int color[4] = { 0 }, bits;
             if (buf_end - buf < 8)
                 return -1;
-            memset(color, 0, sizeof(color));
             // warning following is purely guessed ...
             color[0] = bytestream2_get_le16u(&g3);
             color[1] = bytestream2_get_le16u(&g3);
@@ -836,7 +836,7 @@ static int decode_frame(AVCodecContext *avctx, void *data,
                                      cfrm->size + data_size + FF_INPUT_BUFFER_PADDING_SIZE);
         // explicit check needed as memcpy below might not catch a NULL
         if (!cfrm->data) {
-            av_log(f->avctx, AV_LOG_ERROR, "realloc falure");
+            av_log(f->avctx, AV_LOG_ERROR, "realloc falure\n");
             return -1;
         }
 
@@ -950,9 +950,9 @@ static av_cold int decode_init(AVCodecContext *avctx)
     init_vlcs(f);
 
     if (f->version > 2)
-        avctx->pix_fmt = PIX_FMT_RGB565;
+        avctx->pix_fmt = AV_PIX_FMT_RGB565;
     else
-        avctx->pix_fmt = PIX_FMT_BGR555;
+        avctx->pix_fmt = AV_PIX_FMT_BGR555;
 
     return 0;
 }
@@ -981,7 +981,7 @@ static av_cold int decode_end(AVCodecContext *avctx)
 AVCodec ff_fourxm_decoder = {
     .name           = "4xm",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_4XM,
+    .id             = AV_CODEC_ID_4XM,
     .priv_data_size = sizeof(FourXContext),
     .init           = decode_init,
     .close          = decode_end,

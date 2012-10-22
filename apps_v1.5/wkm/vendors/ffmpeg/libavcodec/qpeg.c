@@ -307,7 +307,7 @@ static av_cold int decode_init(AVCodecContext *avctx){
     avcodec_get_frame_defaults(&a->pic);
     avcodec_get_frame_defaults(&a->ref);
     a->avctx = avctx;
-    avctx->pix_fmt= PIX_FMT_PAL8;
+    avctx->pix_fmt= AV_PIX_FMT_PAL8;
 
     return 0;
 }
@@ -328,11 +328,11 @@ static av_cold int decode_end(AVCodecContext *avctx){
 AVCodec ff_qpeg_decoder = {
     .name           = "qpeg",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_QPEG,
+    .id             = AV_CODEC_ID_QPEG,
     .priv_data_size = sizeof(QpegContext),
     .init           = decode_init,
     .close          = decode_end,
     .decode         = decode_frame,
     .capabilities   = CODEC_CAP_DR1,
-    .long_name = NULL_IF_CONFIG_SMALL("Q-team QPEG"),
+    .long_name      = NULL_IF_CONFIG_SMALL("Q-team QPEG"),
 };

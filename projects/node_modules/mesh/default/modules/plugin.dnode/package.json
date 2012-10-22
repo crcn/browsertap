@@ -1,8 +1,0 @@
-{
-	"name":"plugin.dnode",
-	"main": "./lib/index.js",
-	"directories": {	
-		"lib": "./lib",
-		"mesh-src": "./src"
-	}
-}

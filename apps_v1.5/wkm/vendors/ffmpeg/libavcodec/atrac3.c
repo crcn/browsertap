@@ -36,9 +36,10 @@
 #include <stddef.h>
 #include <stdio.h>
 
+#include "libavutil/float_dsp.h"
+#include "libavutil/libm.h"
 #include "avcodec.h"
 #include "get_bits.h"
-#include "dsputil.h"
 #include "bytestream.h"
 #include "fft.h"
 #include "fmtconvert.h"
@@ -111,7 +112,6 @@ typedef struct {
     //@}
     //@{
     /** data buffers */
-    float              *outSamples[2];
     uint8_t*            decoded_bytes_buffer;
     float               tempBuf[1070];
     //@}
@@ -125,13 +125,13 @@ typedef struct {
 
     FFTContext          mdct_ctx;
     FmtConvertContext   fmt_conv;
+    AVFloatDSPContext   fdsp;
 } ATRAC3Context;
 
 static DECLARE_ALIGNED(32, float, mdct_window)[MDCT_SIZE];
 static VLC              spectral_coeff_tab[7];
 static float            gain_tab1[16];
 static float            gain_tab2[31];
-static DSPContext       dsp;
 
 
 /**
@@ -164,7 +164,7 @@ static void IMLT(ATRAC3Context *q, float *pInput, float *pOutput, int odd_band)
     q->mdct_ctx.imdct_calc(&q->mdct_ctx,pOutput,pInput);
 
     /* Perform windowing on the output. */
-    dsp.vector_fmul(pOutput, pOutput, mdct_window, MDCT_SIZE);
+    q->fdsp.vector_fmul(pOutput, pOutput, mdct_window, MDCT_SIZE);
 
 }
 
@@ -197,7 +197,7 @@ static int decode_bytes(const uint8_t* inbuffer, uint8_t* out, int bytes){
 }
 
 
-static av_cold int init_atrac3_transforms(ATRAC3Context *q, int is_float) {
+static av_cold int init_atrac3_transforms(ATRAC3Context *q) {
     float enc_window[256];
     int i;
 
@@ -213,7 +213,7 @@ static av_cold int init_atrac3_transforms(ATRAC3Context *q, int is_float) {
         }
 
     /* Initialize the MDCT transform. */
-    return ff_mdct_init(&q->mdct_ctx, 9, 1, is_float ? 1.0 / 32768 : 1.0);
+    return ff_mdct_init(&q->mdct_ctx, 9, 1, 1.0 / 32768);
 }
 
 /**
@@ -226,7 +226,6 @@ static av_cold int atrac3_decode_close(AVCodecContext *avctx)
 
     av_free(q->pUnits);
     av_free(q->decoded_bytes_buffer);
-    av_freep(&q->outSamples[0]);
 
     ff_mdct_end(&q->mdct_ctx);
 
@@ -609,7 +608,7 @@ static void reverseMatrixing(float *su1, float *su2, int *pPrevCode, int *pCurrC
                 }
                 break;
             default:
-                assert(0);
+                av_assert1(0);
         }
     }
 }
@@ -837,8 +836,6 @@ static int atrac3_decode_frame(AVCodecContext *avctx, void *data,
     ATRAC3Context *q = avctx->priv_data;
     int result;
     const uint8_t* databuf;
-    float   *samples_flt;
-    int16_t *samples_s16;
 
     if (buf_size < avctx->block_align) {
         av_log(avctx, AV_LOG_ERROR,
@@ -852,8 +849,6 @@ static int atrac3_decode_frame(AVCodecContext *avctx, void *data,
         av_log(avctx, AV_LOG_ERROR, "get_buffer() failed\n");
         return result;
     }
-    samples_flt = (float   *)q->frame.data[0];
-    samples_s16 = (int16_t *)q->frame.data[0];
 
     /* Check if we need to descramble and what buffer to pass on. */
     if (q->scrambled_stream) {
@@ -863,25 +858,11 @@ static int atrac3_decode_frame(AVCodecContext *avctx, void *data,
         databuf = buf;
     }
 
-    if (q->channels == 1 && avctx->sample_fmt == AV_SAMPLE_FMT_FLT)
-        result = decodeFrame(q, databuf, &samples_flt);
-    else
-        result = decodeFrame(q, databuf, q->outSamples);
+    result = decodeFrame(q, databuf, (float **)q->frame.extended_data);
 
     if (result != 0) {
         av_log(NULL,AV_LOG_ERROR,"Frame decoding error!\n");
         return result;
-    }
-
-    /* interleave */
-    if (q->channels == 2 && avctx->sample_fmt == AV_SAMPLE_FMT_FLT) {
-        q->fmt_conv.float_interleave(samples_flt,
-                                     (const float **)q->outSamples,
-                                     SAMPLES_PER_FRAME, 2);
-    } else if (avctx->sample_fmt == AV_SAMPLE_FMT_S16) {
-        q->fmt_conv.float_to_int16_interleave(samples_s16,
-                                              (const float **)q->outSamples,
-                                              SAMPLES_PER_FRAME, q->channels);
     }
 
     *got_frame_ptr   = 1;
@@ -1005,12 +986,9 @@ static av_cold int atrac3_decode_init(AVCodecContext *avctx)
         vlcs_initialized = 1;
     }
 
-    if (avctx->request_sample_fmt == AV_SAMPLE_FMT_FLT)
-        avctx->sample_fmt = AV_SAMPLE_FMT_FLT;
-    else
-        avctx->sample_fmt = AV_SAMPLE_FMT_S16;
+    avctx->sample_fmt = AV_SAMPLE_FMT_FLTP;
 
-    if ((ret = init_atrac3_transforms(q, avctx->sample_fmt == AV_SAMPLE_FMT_FLT))) {
+    if ((ret = init_atrac3_transforms(q))) {
         av_log(avctx, AV_LOG_ERROR, "Error initializing MDCT\n");
         av_freep(&q->decoded_bytes_buffer);
         return ret;
@@ -1020,10 +998,10 @@ static av_cold int atrac3_decode_init(AVCodecContext *avctx)
 
     /* Generate gain tables. */
     for (i=0 ; i<16 ; i++)
-        gain_tab1[i] = powf (2.0, (4 - i));
+        gain_tab1[i] = exp2f (4 - i);
 
     for (i=-15 ; i<16 ; i++)
-        gain_tab2[i+15] = powf (2.0, i * -0.125);
+        gain_tab2[i+15] = exp2f (i * -0.125);
 
     /* init the joint-stereo decoding data */
     q->weighting_delay[0] = 0;
@@ -1039,22 +1017,13 @@ static av_cold int atrac3_decode_init(AVCodecContext *avctx)
         q->matrix_coeff_index_next[i] = 3;
     }
 
-    ff_dsputil_init(&dsp, avctx);
+    avpriv_float_dsp_init(&q->fdsp, avctx->flags & CODEC_FLAG_BITEXACT);
     ff_fmt_convert_init(&q->fmt_conv, avctx);
 
     q->pUnits = av_mallocz(sizeof(channel_unit)*q->channels);
     if (!q->pUnits) {
         atrac3_decode_close(avctx);
         return AVERROR(ENOMEM);
-    }
-
-    if (avctx->channels > 1 || avctx->sample_fmt == AV_SAMPLE_FMT_S16) {
-        q->outSamples[0] = av_mallocz(SAMPLES_PER_FRAME * avctx->channels * sizeof(*q->outSamples[0]));
-        q->outSamples[1] = q->outSamples[0] + SAMPLES_PER_FRAME;
-        if (!q->outSamples[0]) {
-            atrac3_decode_close(avctx);
-            return AVERROR(ENOMEM);
-        }
     }
 
     avcodec_get_frame_defaults(&q->frame);
@@ -1066,13 +1035,15 @@ static av_cold int atrac3_decode_init(AVCodecContext *avctx)
 
 AVCodec ff_atrac3_decoder =
 {
-    .name = "atrac3",
-    .type = AVMEDIA_TYPE_AUDIO,
-    .id = CODEC_ID_ATRAC3,
+    .name           = "atrac3",
+    .type           = AVMEDIA_TYPE_AUDIO,
+    .id             = AV_CODEC_ID_ATRAC3,
     .priv_data_size = sizeof(ATRAC3Context),
-    .init = atrac3_decode_init,
-    .close = atrac3_decode_close,
-    .decode = atrac3_decode_frame,
-    .capabilities = CODEC_CAP_SUBFRAMES | CODEC_CAP_DR1,
-    .long_name = NULL_IF_CONFIG_SMALL("Atrac 3 (Adaptive TRansform Acoustic Coding 3)"),
+    .init           = atrac3_decode_init,
+    .close          = atrac3_decode_close,
+    .decode         = atrac3_decode_frame,
+    .capabilities   = CODEC_CAP_SUBFRAMES | CODEC_CAP_DR1,
+    .long_name      = NULL_IF_CONFIG_SMALL("Atrac 3 (Adaptive TRansform Acoustic Coding 3)"),
+    .sample_fmts     = (const enum AVSampleFormat[]) { AV_SAMPLE_FMT_FLTP,
+                                                       AV_SAMPLE_FMT_NONE },
 };

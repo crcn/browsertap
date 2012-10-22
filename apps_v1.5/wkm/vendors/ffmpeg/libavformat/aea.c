@@ -67,7 +67,7 @@ static int aea_read_header(AVFormatContext *s)
 
 
     st->codec->codec_type     = AVMEDIA_TYPE_AUDIO;
-    st->codec->codec_id       = CODEC_ID_ATRAC1;
+    st->codec->codec_id       = AV_CODEC_ID_ATRAC1;
     st->codec->sample_rate    = 44100;
     st->codec->bit_rate       = 292000;
 
@@ -100,6 +100,6 @@ AVInputFormat ff_aea_demuxer = {
     .read_header    = aea_read_header,
     .read_packet    = aea_read_packet,
     .read_seek      = ff_pcm_read_seek,
-    .flags= AVFMT_GENERIC_INDEX,
-    .extensions = "aea",
+    .flags          = AVFMT_GENERIC_INDEX,
+    .extensions     = "aea",
 };

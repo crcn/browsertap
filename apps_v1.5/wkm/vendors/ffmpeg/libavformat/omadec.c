@@ -219,6 +219,12 @@ static int decrypt_init(AVFormatContext *s, ID3v2ExtraMeta *em, uint8_t *header)
         av_log(s, AV_LOG_ERROR, "Invalid encryption header\n");
         return -1;
     }
+    if (   OMA_ENC_HEADER_SIZE + oc->k_size + oc->e_size + oc->i_size + 8 > geob->datasize
+        || OMA_ENC_HEADER_SIZE + 48 > geob->datasize
+    ) {
+        av_log(s, AV_LOG_ERROR, "Too little GEOB data\n");
+        return AVERROR_INVALIDDATA;
+    }
     oc->rid = AV_RB32(&gdata[OMA_ENC_HEADER_SIZE + 28]);
     av_log(s, AV_LOG_DEBUG, "RID: %.8x\n", oc->rid);
 
@@ -340,7 +346,7 @@ static int oma_read_header(AVFormatContext *s)
             av_log(s, AV_LOG_ERROR, "Unsupported codec ATRAC3+!\n");
             break;
         case OMA_CODECID_MP3:
-            st->need_parsing = AVSTREAM_PARSE_FULL;
+            st->need_parsing = AVSTREAM_PARSE_FULL_RAW;
             framesize = 1024;
             break;
         case OMA_CODECID_LPCM:
@@ -377,7 +383,7 @@ static int oma_read_packet(AVFormatContext *s, AVPacket *pkt)
 
     if (oc->encrypted) {
         /* previous unencrypted block saved in IV for the next packet (CBC mode) */
-        av_des_crypt(&oc->av_des, pkt->data, pkt->data, (packet_size >> 3), oc->iv, 1);
+        av_des_crypt(&oc->av_des, pkt->data, pkt->data, (ret >> 3), oc->iv, 1);
     }
 
     return ret;

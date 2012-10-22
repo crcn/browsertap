@@ -49,6 +49,7 @@
 #include <string.h>
 
 #include "avcodec.h"
+#include "libavutil/internal.h"
 
 #define HUFFMAN_TABLE_SIZE 64 * 1024
 #define HUF_TOKENS 256
@@ -150,7 +151,7 @@ static av_cold int idcin_decode_init(AVCodecContext *avctx)
     unsigned char *histograms;
 
     s->avctx = avctx;
-    avctx->pix_fmt = PIX_FMT_PAL8;
+    avctx->pix_fmt = AV_PIX_FMT_PAL8;
 
     /* make sure the Huffman tables make it */
     if (s->avctx->extradata_size != HUFFMAN_TABLE_SIZE) {
@@ -172,7 +173,7 @@ static av_cold int idcin_decode_init(AVCodecContext *avctx)
     return 0;
 }
 
-static void idcin_decode_vlcs(IdcinContext *s)
+static int idcin_decode_vlcs(IdcinContext *s)
 {
     hnode *hnodes;
     long x, y;
@@ -191,7 +192,7 @@ static void idcin_decode_vlcs(IdcinContext *s)
                 if(!bit_pos) {
                     if(dat_pos >= s->size) {
                         av_log(s->avctx, AV_LOG_ERROR, "Huffman decode error.\n");
-                        return;
+                        return -1;
                     }
                     bit_pos = 8;
                     v = s->buf[dat_pos++];
@@ -206,6 +207,8 @@ static void idcin_decode_vlcs(IdcinContext *s)
             prev = node_num;
         }
     }
+
+    return 0;
 }
 
 static int idcin_decode_frame(AVCodecContext *avctx,
@@ -216,6 +219,7 @@ static int idcin_decode_frame(AVCodecContext *avctx,
     int buf_size = avpkt->size;
     IdcinContext *s = avctx->priv_data;
     const uint8_t *pal = av_packet_get_side_data(avpkt, AV_PKT_DATA_PALETTE, NULL);
+    int ret;
 
     s->buf = buf;
     s->size = buf_size;
@@ -223,12 +227,13 @@ static int idcin_decode_frame(AVCodecContext *avctx,
     if (s->frame.data[0])
         avctx->release_buffer(avctx, &s->frame);
 
-    if (avctx->get_buffer(avctx, &s->frame)) {
-        av_log(avctx, AV_LOG_ERROR, "  id CIN Video: get_buffer() failed\n");
-        return -1;
+    if ((ret = avctx->get_buffer(avctx, &s->frame))) {
+        av_log(avctx, AV_LOG_ERROR, "get_buffer() failed\n");
+        return ret;
     }
 
-    idcin_decode_vlcs(s);
+    if (idcin_decode_vlcs(s))
+        return AVERROR_INVALIDDATA;
 
     if (pal) {
         s->frame.palette_has_changed = 1;
@@ -257,11 +262,11 @@ static av_cold int idcin_decode_end(AVCodecContext *avctx)
 AVCodec ff_idcin_decoder = {
     .name           = "idcinvideo",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_IDCIN,
+    .id             = AV_CODEC_ID_IDCIN,
     .priv_data_size = sizeof(IdcinContext),
     .init           = idcin_decode_init,
     .close          = idcin_decode_end,
     .decode         = idcin_decode_frame,
     .capabilities   = CODEC_CAP_DR1,
-    .long_name = NULL_IF_CONFIG_SMALL("id Quake II CIN video"),
+    .long_name      = NULL_IF_CONFIG_SMALL("id Quake II CIN video"),
 };

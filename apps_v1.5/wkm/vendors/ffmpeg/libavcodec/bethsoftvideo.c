@@ -44,7 +44,7 @@ static av_cold int bethsoftvid_decode_init(AVCodecContext *avctx)
     vid->frame.reference = 3;
     vid->frame.buffer_hints = FF_BUFFER_HINTS_VALID |
         FF_BUFFER_HINTS_PRESERVE | FF_BUFFER_HINTS_REUSABLE;
-    avctx->pix_fmt = PIX_FMT_PAL8;
+    avctx->pix_fmt = AV_PIX_FMT_PAL8;
     return 0;
 }
 
@@ -77,9 +77,9 @@ static int bethsoftvid_decode_frame(AVCodecContext *avctx,
     int code, ret;
     int yoffset;
 
-    if (avctx->reget_buffer(avctx, &vid->frame)) {
+    if ((ret = avctx->reget_buffer(avctx, &vid->frame)) < 0) {
         av_log(avctx, AV_LOG_ERROR, "reget_buffer() failed\n");
-        return -1;
+        return ret;
     }
     wrap_to_next_line = vid->frame.linesize[0] - avctx->width;
 
@@ -107,7 +107,7 @@ static int bethsoftvid_decode_frame(AVCodecContext *avctx,
         case VIDEO_YOFF_P_FRAME:
             yoffset = bytestream2_get_le16(&vid->g);
             if(yoffset >= avctx->height)
-                return -1;
+                return AVERROR_INVALIDDATA;
             dst += vid->frame.linesize[0] * yoffset;
     }
 
@@ -153,13 +153,13 @@ static av_cold int bethsoftvid_decode_end(AVCodecContext *avctx)
 }
 
 AVCodec ff_bethsoftvid_decoder = {
-    .name = "bethsoftvid",
-    .type = AVMEDIA_TYPE_VIDEO,
-    .id = CODEC_ID_BETHSOFTVID,
+    .name           = "bethsoftvid",
+    .type           = AVMEDIA_TYPE_VIDEO,
+    .id             = AV_CODEC_ID_BETHSOFTVID,
     .priv_data_size = sizeof(BethsoftvidContext),
-    .init = bethsoftvid_decode_init,
-    .close = bethsoftvid_decode_end,
-    .decode = bethsoftvid_decode_frame,
-    .capabilities = CODEC_CAP_DR1,
-    .long_name = NULL_IF_CONFIG_SMALL("Bethesda VID video"),
+    .init           = bethsoftvid_decode_init,
+    .close          = bethsoftvid_decode_end,
+    .decode         = bethsoftvid_decode_frame,
+    .capabilities   = CODEC_CAP_DR1,
+    .long_name      = NULL_IF_CONFIG_SMALL("Bethesda VID video"),
 };

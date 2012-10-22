@@ -25,7 +25,6 @@
 #include "libavutil/imgutils.h"
 #include "bytestream.h"
 #include "avcodec.h"
-#include "bytestream.h"
 #include "s3tc.h"
 
 typedef struct TXDContext {
@@ -47,7 +46,7 @@ static int txd_decode_frame(AVCodecContext *avctx, void *data, int *data_size,
     GetByteContext gb;
     AVFrame *picture = data;
     AVFrame * const p = &s->picture;
-    unsigned int version, w, h, d3d_format, depth, stride, mipmap_count, flags;
+    unsigned int version, w, h, d3d_format, depth, stride, flags;
     unsigned int y, v;
     uint8_t *ptr;
     uint32_t *pal;
@@ -59,8 +58,7 @@ static int txd_decode_frame(AVCodecContext *avctx, void *data, int *data_size,
     w               = bytestream2_get_le16(&gb);
     h               = bytestream2_get_le16(&gb);
     depth           = bytestream2_get_byte(&gb);
-    mipmap_count    = bytestream2_get_byte(&gb);
-    bytestream2_skip(&gb, 1);
+    bytestream2_skip(&gb, 2);
     flags           = bytestream2_get_byte(&gb);
 
     if (version < 8 || version > 9) {
@@ -70,9 +68,9 @@ static int txd_decode_frame(AVCodecContext *avctx, void *data, int *data_size,
     }
 
     if (depth == 8) {
-        avctx->pix_fmt = PIX_FMT_PAL8;
+        avctx->pix_fmt = AV_PIX_FMT_PAL8;
     } else if (depth == 16 || depth == 32) {
-        avctx->pix_fmt = PIX_FMT_RGB32;
+        avctx->pix_fmt = AV_PIX_FMT_RGB32;
     } else {
         av_log(avctx, AV_LOG_ERROR, "depth of %i is unsupported\n", depth);
         return -1;
@@ -165,11 +163,11 @@ static av_cold int txd_end(AVCodecContext *avctx) {
 AVCodec ff_txd_decoder = {
     .name           = "txd",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_TXD,
+    .id             = AV_CODEC_ID_TXD,
     .priv_data_size = sizeof(TXDContext),
     .init           = txd_init,
     .close          = txd_end,
     .decode         = txd_decode_frame,
     .capabilities   = CODEC_CAP_DR1,
-    .long_name = NULL_IF_CONFIG_SMALL("Renderware TXD (TeXture Dictionary) image"),
+    .long_name      = NULL_IF_CONFIG_SMALL("Renderware TXD (TeXture Dictionary) image"),
 };

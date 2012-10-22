@@ -24,6 +24,7 @@
  */
 
 #include "avcodec.h"
+#include "libavutil/internal.h"
 
 typedef struct AuraDecodeContext {
     AVCodecContext *avctx;
@@ -38,7 +39,7 @@ static av_cold int aura_decode_init(AVCodecContext *avctx)
     /* width needs to be divisible by 4 for this codec to work */
     if (avctx->width & 0x3)
         return -1;
-    avctx->pix_fmt = PIX_FMT_YUV422P;
+    avctx->pix_fmt = AV_PIX_FMT_YUV422P;
     avcodec_get_frame_defaults(&s->frame);
 
     return 0;
@@ -126,11 +127,11 @@ static av_cold int aura_decode_end(AVCodecContext *avctx)
 AVCodec ff_aura2_decoder = {
     .name           = "aura2",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_AURA2,
+    .id             = AV_CODEC_ID_AURA2,
     .priv_data_size = sizeof(AuraDecodeContext),
     .init           = aura_decode_init,
     .close          = aura_decode_end,
     .decode         = aura_decode_frame,
     .capabilities   = CODEC_CAP_DR1,
-    .long_name = NULL_IF_CONFIG_SMALL("Auravision Aura 2"),
+    .long_name      = NULL_IF_CONFIG_SMALL("Auravision Aura 2"),
 };

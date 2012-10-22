@@ -25,8 +25,12 @@
  * @author Michael Niedermayer <michaelni@gmx.at>
  */
 
+#include "libavutil/avassert.h"
 #include "avcodec.h"
 #include "dsputil.h"
+#include "libavutil/common.h"
+
+#if FF_API_AVCODEC_RESAMPLE
 
 #ifndef CONFIG_RESAMPLE_HP
 #define FILTER_SHIFT 15
@@ -301,7 +305,7 @@ int av_resample(AVResampleContext *c, short *dst, short *src, int *consumed, int
 
     if(compensation_distance){
         compensation_distance -= dst_index;
-        assert(compensation_distance > 0);
+        av_assert2(compensation_distance > 0);
     }
     if(update_ctx){
         c->frac= frac;
@@ -319,3 +323,5 @@ av_log(NULL, AV_LOG_DEBUG, "%d %d %d\n", c->dst_incr, c->ideal_dst_incr, c->comp
 
     return dst_index;
 }
+
+#endif

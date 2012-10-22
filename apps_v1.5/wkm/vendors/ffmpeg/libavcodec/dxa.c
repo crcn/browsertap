@@ -27,6 +27,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "libavutil/common.h"
 #include "libavutil/intreadwrite.h"
 #include "avcodec.h"
 
@@ -208,7 +209,7 @@ static int decode_frame(AVCodecContext *avctx, void *data, int *data_size, AVPac
             r = *buf++;
             g = *buf++;
             b = *buf++;
-            c->pal[i] = 0xFF << 24 | r << 16 | g << 8 | b;
+            c->pal[i] = 0xFFU << 24 | r << 16 | g << 8 | b;
         }
         pc = 1;
         buf_size -= 768+4;
@@ -291,7 +292,7 @@ static av_cold int decode_init(AVCodecContext *avctx)
 {
     DxaDecContext * const c = avctx->priv_data;
 
-    avctx->pix_fmt = PIX_FMT_PAL8;
+    avctx->pix_fmt = AV_PIX_FMT_PAL8;
 
     avcodec_get_frame_defaults(&c->pic);
     avcodec_get_frame_defaults(&c->prev);
@@ -321,11 +322,11 @@ static av_cold int decode_end(AVCodecContext *avctx)
 AVCodec ff_dxa_decoder = {
     .name           = "dxa",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_DXA,
+    .id             = AV_CODEC_ID_DXA,
     .priv_data_size = sizeof(DxaDecContext),
     .init           = decode_init,
     .close          = decode_end,
     .decode         = decode_frame,
     .capabilities   = CODEC_CAP_DR1,
-    .long_name = NULL_IF_CONFIG_SMALL("Feeble Files/ScummVM DXA"),
+    .long_name      = NULL_IF_CONFIG_SMALL("Feeble Files/ScummVM DXA"),
 };

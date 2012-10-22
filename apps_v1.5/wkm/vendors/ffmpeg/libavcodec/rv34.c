@@ -260,20 +260,15 @@ static inline void decode_subblock1(DCTELEM *dst, int code, GetBitContext *gb, V
     decode_coeff(dst, coeff, 3, gb, vlc, q);
 }
 
-static inline void decode_subblock3(DCTELEM *dst, int code, const int is_block2, GetBitContext *gb, VLC *vlc,
+static inline void decode_subblock3(DCTELEM *dst, int code, GetBitContext *gb, VLC *vlc,
                                     int q_dc, int q_ac1, int q_ac2)
 {
     int flags = modulo_three_table[code];
 
-    decode_coeff(    dst+0*4+0, (flags >> 6)    , 3, gb, vlc, q_dc);
-    if(is_block2){
-        decode_coeff(dst+1*4+0, (flags >> 4) & 3, 2, gb, vlc, q_ac1);
-        decode_coeff(dst+0*4+1, (flags >> 2) & 3, 2, gb, vlc, q_ac1);
-    }else{
-        decode_coeff(dst+0*4+1, (flags >> 4) & 3, 2, gb, vlc, q_ac1);
-        decode_coeff(dst+1*4+0, (flags >> 2) & 3, 2, gb, vlc, q_ac1);
-    }
-    decode_coeff(    dst+1*4+1, (flags >> 0) & 3, 2, gb, vlc, q_ac2);
+    decode_coeff(dst+0*4+0, (flags >> 6)    , 3, gb, vlc, q_dc);
+    decode_coeff(dst+0*4+1, (flags >> 4) & 3, 2, gb, vlc, q_ac1);
+    decode_coeff(dst+1*4+0, (flags >> 2) & 3, 2, gb, vlc, q_ac1);
+    decode_coeff(dst+1*4+1, (flags >> 0) & 3, 2, gb, vlc, q_ac2);
 }
 
 /**
@@ -287,7 +282,7 @@ static inline void decode_subblock3(DCTELEM *dst, int code, const int is_block2,
  *  o--o
  */
 
-static inline int rv34_decode_block(DCTELEM *dst, GetBitContext *gb, RV34VLC *rvlc, int fc, int sc, int q_dc, int q_ac1, int q_ac2)
+static int rv34_decode_block(DCTELEM *dst, GetBitContext *gb, RV34VLC *rvlc, int fc, int sc, int q_dc, int q_ac1, int q_ac2)
 {
     int code, pattern, has_ac = 1;
 
@@ -298,7 +293,7 @@ static inline int rv34_decode_block(DCTELEM *dst, GetBitContext *gb, RV34VLC *rv
     code >>= 3;
 
     if (modulo_three_table[code] & 0x3F) {
-        decode_subblock3(dst, code, 0, gb, &rvlc->coefficient, q_dc, q_ac1, q_ac2);
+        decode_subblock3(dst, code, gb, &rvlc->coefficient, q_dc, q_ac1, q_ac2);
     } else {
         decode_subblock1(dst, code, gb, &rvlc->coefficient, q_dc);
         if (!pattern)
@@ -318,7 +313,7 @@ static inline int rv34_decode_block(DCTELEM *dst, GetBitContext *gb, RV34VLC *rv
         code = get_vlc2(gb, rvlc->third_pattern[sc].table, 9, 2);
         decode_subblock(dst + 4*2+2, code, 0, gb, &rvlc->coefficient, q_ac2);
     }
-    return has_ac || pattern;
+    return has_ac | pattern;
 }
 
 /**
@@ -521,7 +516,7 @@ static void rv34_pred_mv(RV34DecContext *r, int block_type, int subblock_no, int
  */
 static int calc_add_mv(RV34DecContext *r, int dir, int val)
 {
-    int mul = dir ? -r->weight2 : r->weight1;
+    int mul = dir ? -r->mv_weight2 : r->mv_weight1;
 
     return (val * mul + 0x2000) >> 14;
 }
@@ -554,7 +549,7 @@ static void rv34_pred_mv_b(RV34DecContext *r, int block_type, int dir)
     MpegEncContext *s = &r->s;
     int mb_pos = s->mb_x + s->mb_y * s->mb_stride;
     int mv_pos = s->mb_x * 2 + s->mb_y * 2 * s->b8_stride;
-    int A[2], B[2], C[2];
+    int A[2] = { 0 }, B[2] = { 0 }, C[2] = { 0 };
     int has_A = 0, has_B = 0, has_C = 0;
     int mx, my;
     int i, j;
@@ -562,9 +557,6 @@ static void rv34_pred_mv_b(RV34DecContext *r, int block_type, int dir)
     const int mask = dir ? MB_TYPE_L1 : MB_TYPE_L0;
     int type = cur_pic->f.mb_type[mb_pos];
 
-    memset(A, 0, sizeof(A));
-    memset(B, 0, sizeof(B));
-    memset(C, 0, sizeof(C));
     if((r->avail_cache[6-1] & type) & mask){
         A[0] = cur_pic->f.motion_val[dir][mv_pos - 1][0];
         A[1] = cur_pic->f.motion_val[dir][mv_pos - 1][1];
@@ -779,24 +771,24 @@ static void rv34_mc_1mv(RV34DecContext *r, const int block_type,
 
 static void rv4_weight(RV34DecContext *r)
 {
-    r->rdsp.rv40_weight_pixels_tab[0](r->s.dest[0],
-                                      r->tmp_b_block_y[0],
-                                      r->tmp_b_block_y[1],
-                                      r->weight1,
-                                      r->weight2,
-                                      r->s.linesize);
-    r->rdsp.rv40_weight_pixels_tab[1](r->s.dest[1],
-                                      r->tmp_b_block_uv[0],
-                                      r->tmp_b_block_uv[2],
-                                      r->weight1,
-                                      r->weight2,
-                                      r->s.uvlinesize);
-    r->rdsp.rv40_weight_pixels_tab[1](r->s.dest[2],
-                                      r->tmp_b_block_uv[1],
-                                      r->tmp_b_block_uv[3],
-                                      r->weight1,
-                                      r->weight2,
-                                      r->s.uvlinesize);
+    r->rdsp.rv40_weight_pixels_tab[r->scaled_weight][0](r->s.dest[0],
+                                                        r->tmp_b_block_y[0],
+                                                        r->tmp_b_block_y[1],
+                                                        r->weight1,
+                                                        r->weight2,
+                                                        r->s.linesize);
+    r->rdsp.rv40_weight_pixels_tab[r->scaled_weight][1](r->s.dest[1],
+                                                        r->tmp_b_block_uv[0],
+                                                        r->tmp_b_block_uv[2],
+                                                        r->weight1,
+                                                        r->weight2,
+                                                        r->s.uvlinesize);
+    r->rdsp.rv40_weight_pixels_tab[r->scaled_weight][1](r->s.dest[2],
+                                                        r->tmp_b_block_uv[1],
+                                                        r->tmp_b_block_uv[3],
+                                                        r->weight1,
+                                                        r->weight2,
+                                                        r->s.uvlinesize);
 }
 
 static void rv34_mc_2mv(RV34DecContext *r, const int block_type)
@@ -1340,7 +1332,7 @@ static int check_slice_end(RV34DecContext *r, MpegEncContext *s)
     if(r->s.mb_skip_run > 1)
         return 0;
     bits = get_bits_left(&s->gb);
-    if(bits < 0 || (bits < 8 && !show_bits(&s->gb, bits)))
+    if(bits <= 0 || (bits < 8 && !show_bits(&s->gb, bits)))
         return 1;
     return 0;
 }
@@ -1396,7 +1388,7 @@ static int rv34_decode_slice(RV34DecContext *r, int end, const uint8_t* buf, int
 {
     MpegEncContext *s = &r->s;
     GetBitContext *gb = &s->gb;
-    int mb_pos;
+    int mb_pos, slice_type;
     int res;
 
     init_get_bits(&r->s.gb, buf, buf_size*8);
@@ -1406,64 +1398,14 @@ static int rv34_decode_slice(RV34DecContext *r, int end, const uint8_t* buf, int
         return -1;
     }
 
-    if ((s->mb_x == 0 && s->mb_y == 0) || s->current_picture_ptr==NULL) {
-        if (s->width != r->si.width || s->height != r->si.height) {
-            int err;
-
-            av_log(s->avctx, AV_LOG_WARNING, "Changing dimensions to %dx%d\n",
-                   r->si.width, r->si.height);
-            ff_MPV_common_end(s);
-            s->width  = r->si.width;
-            s->height = r->si.height;
-            avcodec_set_dimensions(s->avctx, s->width, s->height);
-            if ((err = ff_MPV_common_init(s)) < 0)
-                return err;
-            if ((err = rv34_decoder_realloc(r)) < 0)
-                return err;
-        }
-        s->pict_type = r->si.type ? r->si.type : AV_PICTURE_TYPE_I;
-        if(ff_MPV_frame_start(s, s->avctx) < 0)
-            return -1;
-        ff_er_frame_start(s);
-        if (!r->tmp_b_block_base) {
-            int i;
-
-            r->tmp_b_block_base = av_malloc(s->linesize * 48);
-            for (i = 0; i < 2; i++)
-                r->tmp_b_block_y[i] = r->tmp_b_block_base + i * 16 * s->linesize;
-            for (i = 0; i < 4; i++)
-                r->tmp_b_block_uv[i] = r->tmp_b_block_base + 32 * s->linesize
-                                       + (i >> 1) * 8 * s->uvlinesize + (i & 1) * 16;
-        }
-        r->cur_pts = r->si.pts;
-        if(s->pict_type != AV_PICTURE_TYPE_B){
-            r->last_pts = r->next_pts;
-            r->next_pts = r->cur_pts;
-        }else{
-            int refdist = GET_PTS_DIFF(r->next_pts, r->last_pts);
-            int dist0   = GET_PTS_DIFF(r->cur_pts,  r->last_pts);
-            int dist1   = GET_PTS_DIFF(r->next_pts, r->cur_pts);
-
-            if(!refdist){
-                r->weight1 = r->weight2 = 8192;
-            }else{
-                r->weight1 = (dist0 << 14) / refdist;
-                r->weight2 = (dist1 << 14) / refdist;
-            }
-        }
-        s->mb_x = s->mb_y = 0;
-        ff_thread_finish_setup(s->avctx);
-    } else {
-        int slice_type = r->si.type ? r->si.type : AV_PICTURE_TYPE_I;
-
-        if (slice_type != s->pict_type) {
-            av_log(s->avctx, AV_LOG_ERROR, "Slice type mismatch\n");
-            return AVERROR_INVALIDDATA;
-        }
-        if (s->width != r->si.width || s->height != r->si.height) {
-            av_log(s->avctx, AV_LOG_ERROR, "Size mismatch\n");
-            return AVERROR_INVALIDDATA;
-        }
+    slice_type = r->si.type ? r->si.type : AV_PICTURE_TYPE_I;
+    if (slice_type != s->pict_type) {
+        av_log(s->avctx, AV_LOG_ERROR, "Slice type mismatch\n");
+        return AVERROR_INVALIDDATA;
+    }
+    if (s->width != r->si.width || s->height != r->si.height) {
+        av_log(s->avctx, AV_LOG_ERROR, "Size mismatch\n");
+        return AVERROR_INVALIDDATA;
     }
 
     r->si.end = end;
@@ -1541,21 +1483,21 @@ av_cold int ff_rv34_decode_init(AVCodecContext *avctx)
     r->s.avctx = avctx;
     avctx->flags |= CODEC_FLAG_EMU_EDGE;
     r->s.flags |= CODEC_FLAG_EMU_EDGE;
-    avctx->pix_fmt = PIX_FMT_YUV420P;
+    avctx->pix_fmt = AV_PIX_FMT_YUV420P;
     avctx->has_b_frames = 1;
     s->low_delay = 0;
 
     if ((ret = ff_MPV_common_init(s)) < 0)
         return ret;
 
-    ff_h264_pred_init(&r->h, CODEC_ID_RV40, 8, 1);
+    ff_h264_pred_init(&r->h, AV_CODEC_ID_RV40, 8, 1);
 
 #if CONFIG_RV30_DECODER
-    if (avctx->codec_id == CODEC_ID_RV30)
+    if (avctx->codec_id == AV_CODEC_ID_RV30)
         ff_rv30dsp_init(&r->rdsp, &r->s.dsp);
 #endif
 #if CONFIG_RV40_DECODER
-    if (avctx->codec_id == CODEC_ID_RV40)
+    if (avctx->codec_id == AV_CODEC_ID_RV40)
         ff_rv40dsp_init(&r->rdsp, &r->s.dsp);
 #endif
 
@@ -1595,10 +1537,9 @@ int ff_rv34_decode_update_thread_context(AVCodecContext *dst, const AVCodecConte
         return 0;
 
     if (s->height != s1->height || s->width != s1->width) {
-        ff_MPV_common_end(s);
         s->height = s1->height;
         s->width  = s1->width;
-        if ((err = ff_MPV_common_init(s)) < 0)
+        if ((err = ff_MPV_common_frame_size_change(s)) < 0)
             return err;
         if ((err = rv34_decoder_realloc(r)) < 0)
             return err;
@@ -1613,10 +1554,6 @@ int ff_rv34_decode_update_thread_context(AVCodecContext *dst, const AVCodecConte
 
     memset(&r->si, 0, sizeof(r->si));
 
-    /* necessary since it is it the condition checked for in decode_slice
-     * to call ff_MPV_frame_start. cmp. comment at the end of decode_frame */
-    s->current_picture_ptr = NULL;
-
     return 0;
 }
 
@@ -1626,8 +1563,34 @@ static int get_slice_offset(AVCodecContext *avctx, const uint8_t *buf, int n)
     else                   return AV_RL32(buf + n*8 - 4) == 1 ? AV_RL32(buf + n*8) :  AV_RB32(buf + n*8);
 }
 
+static int finish_frame(AVCodecContext *avctx, AVFrame *pict)
+{
+    RV34DecContext *r = avctx->priv_data;
+    MpegEncContext *s = &r->s;
+    int got_picture = 0;
+
+    ff_er_frame_end(s);
+    ff_MPV_frame_end(s);
+    s->mb_num_left = 0;
+
+    if (HAVE_THREADS && (s->avctx->active_thread_type & FF_THREAD_FRAME))
+        ff_thread_report_progress(&s->current_picture_ptr->f, INT_MAX, 0);
+
+    if (s->pict_type == AV_PICTURE_TYPE_B || s->low_delay) {
+        *pict = s->current_picture_ptr->f;
+        got_picture = 1;
+    } else if (s->last_picture_ptr != NULL) {
+        *pict = s->last_picture_ptr->f;
+        got_picture = 1;
+    }
+    if (got_picture)
+        ff_print_debug_info(s, pict);
+
+    return got_picture;
+}
+
 int ff_rv34_decode_frame(AVCodecContext *avctx,
-                            void *data, int *data_size,
+                            void *data, int *got_picture_ptr,
                             AVPacket *avpkt)
 {
     const uint8_t *buf = avpkt->data;
@@ -1648,7 +1611,7 @@ int ff_rv34_decode_frame(AVCodecContext *avctx,
             *pict = s->next_picture_ptr->f;
             s->next_picture_ptr = NULL;
 
-            *data_size = sizeof(AVFrame);
+            *got_picture_ptr = 1;
         }
         return 0;
     }
@@ -1683,6 +1646,80 @@ int ff_rv34_decode_frame(AVCodecContext *avctx,
        ||  avctx->skip_frame >= AVDISCARD_ALL)
         return avpkt->size;
 
+    /* first slice */
+    if (si.start == 0) {
+        if (s->mb_num_left > 0) {
+            av_log(avctx, AV_LOG_ERROR, "New frame but still %d MB left.\n",
+                   s->mb_num_left);
+            ff_er_frame_end(s);
+            ff_MPV_frame_end(s);
+        }
+
+        if (s->width != si.width || s->height != si.height) {
+            int err;
+
+            av_log(s->avctx, AV_LOG_WARNING, "Changing dimensions to %dx%d\n",
+                   si.width, si.height);
+
+            s->width  = si.width;
+            s->height = si.height;
+            avcodec_set_dimensions(s->avctx, s->width, s->height);
+            if ((err = ff_MPV_common_frame_size_change(s)) < 0)
+                return err;
+            if ((err = rv34_decoder_realloc(r)) < 0)
+                return err;
+        }
+        s->pict_type = si.type ? si.type : AV_PICTURE_TYPE_I;
+        if (ff_MPV_frame_start(s, s->avctx) < 0)
+            return -1;
+        ff_er_frame_start(s);
+        if (!r->tmp_b_block_base) {
+            int i;
+
+            r->tmp_b_block_base = av_malloc(s->linesize * 48);
+            for (i = 0; i < 2; i++)
+                r->tmp_b_block_y[i] = r->tmp_b_block_base
+                                      + i * 16 * s->linesize;
+            for (i = 0; i < 4; i++)
+                r->tmp_b_block_uv[i] = r->tmp_b_block_base + 32 * s->linesize
+                                       + (i >> 1) * 8 * s->uvlinesize
+                                       + (i &  1) * 16;
+        }
+        r->cur_pts = si.pts;
+        if (s->pict_type != AV_PICTURE_TYPE_B) {
+            r->last_pts = r->next_pts;
+            r->next_pts = r->cur_pts;
+        } else {
+            int refdist = GET_PTS_DIFF(r->next_pts, r->last_pts);
+            int dist0   = GET_PTS_DIFF(r->cur_pts,  r->last_pts);
+            int dist1   = GET_PTS_DIFF(r->next_pts, r->cur_pts);
+
+            if(!refdist){
+                r->mv_weight1 = r->mv_weight2 = r->weight1 = r->weight2 = 8192;
+                r->scaled_weight = 0;
+            }else{
+                r->mv_weight1 = (dist0 << 14) / refdist;
+                r->mv_weight2 = (dist1 << 14) / refdist;
+                if((r->mv_weight1|r->mv_weight2) & 511){
+                    r->weight1 = r->mv_weight1;
+                    r->weight2 = r->mv_weight2;
+                    r->scaled_weight = 0;
+                }else{
+                    r->weight1 = r->mv_weight1 >> 9;
+                    r->weight2 = r->mv_weight2 >> 9;
+                    r->scaled_weight = 1;
+                }
+            }
+        }
+        s->mb_x = s->mb_y = 0;
+        ff_thread_finish_setup(s->avctx);
+    } else if (HAVE_THREADS &&
+               (s->avctx->active_thread_type & FF_THREAD_FRAME)) {
+        av_log(s->avctx, AV_LOG_ERROR, "Decoder needs full frames in frame "
+               "multithreading mode (start MB is %d).\n", si.start);
+        return AVERROR_INVALIDDATA;
+    }
+
     for(i = 0; i < slice_count; i++){
         int offset = get_slice_offset(avctx, slices_hdr, i);
         int size;
@@ -1697,6 +1734,8 @@ int ff_rv34_decode_frame(AVCodecContext *avctx,
         }
 
         r->si.end = s->mb_width * s->mb_height;
+        s->mb_num_left = r->s.mb_x + r->s.mb_y*r->s.mb_width - r->si.start;
+
         if(i+1 < slice_count){
             if (get_slice_offset(avctx, slices_hdr, i+1) < 0 ||
                 get_slice_offset(avctx, slices_hdr, i+1) > buf_size) {
@@ -1717,32 +1756,29 @@ int ff_rv34_decode_frame(AVCodecContext *avctx,
             break;
         }
         last = rv34_decode_slice(r, r->si.end, buf + offset, size);
-        s->mb_num_left = r->s.mb_x + r->s.mb_y*r->s.mb_width - r->si.start;
         if(last)
             break;
     }
 
-    if(last && s->current_picture_ptr){
-        if(r->loop_filter)
-            r->loop_filter(r, s->mb_height - 1);
-        ff_er_frame_end(s);
-        ff_MPV_frame_end(s);
+    if (s->current_picture_ptr) {
+        if (last) {
+            if(r->loop_filter)
+                r->loop_filter(r, s->mb_height - 1);
 
-        if (HAVE_THREADS && (s->avctx->active_thread_type & FF_THREAD_FRAME))
+            *got_picture_ptr = finish_frame(avctx, pict);
+        } else if (HAVE_THREADS &&
+                   (s->avctx->active_thread_type & FF_THREAD_FRAME)) {
+            av_log(avctx, AV_LOG_INFO, "marking unfished frame as finished\n");
+            /* always mark the current frame as finished, frame-mt supports
+             * only complete frames */
+            ff_er_frame_end(s);
+            ff_MPV_frame_end(s);
+            s->mb_num_left = 0;
             ff_thread_report_progress(&s->current_picture_ptr->f, INT_MAX, 0);
-
-        if (s->pict_type == AV_PICTURE_TYPE_B || s->low_delay) {
-            *pict = s->current_picture_ptr->f;
-        } else if (s->last_picture_ptr != NULL) {
-            *pict = s->last_picture_ptr->f;
+            return AVERROR_INVALIDDATA;
         }
-
-        if(s->last_picture_ptr || s->low_delay){
-            *data_size = sizeof(AVFrame);
-            ff_print_debug_info(s, pict);
-        }
-        s->current_picture_ptr = NULL; //so we can detect if frame_end wasnt called (find some nicer solution...)
     }
+
     return avpkt->size;
 }
 

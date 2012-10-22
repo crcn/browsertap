@@ -58,7 +58,12 @@ typedef struct RV34DSPContext {
     qpel_mc_func avg_pixels_tab[4][16];
     h264_chroma_mc_func put_chroma_pixels_tab[3];
     h264_chroma_mc_func avg_chroma_pixels_tab[3];
-    rv40_weight_func rv40_weight_pixels_tab[2];
+    /**
+     * Biweight functions, first dimension is transform size (16/8),
+     * second is whether the weight is prescaled by 1/512 to skip
+     * the intermediate shifting.
+     */
+    rv40_weight_func rv40_weight_pixels_tab[2][2];
     rv34_inv_transform_func rv34_inv_transform;
     rv34_inv_transform_func rv34_inv_transform_dc;
     rv34_idct_add_func rv34_idct_add;
@@ -72,10 +77,10 @@ void ff_rv30dsp_init(RV34DSPContext *c, DSPContext* dsp);
 void ff_rv34dsp_init(RV34DSPContext *c, DSPContext* dsp);
 void ff_rv40dsp_init(RV34DSPContext *c, DSPContext* dsp);
 
-void ff_rv34dsp_init_neon(RV34DSPContext *c, DSPContext *dsp);
+void ff_rv34dsp_init_arm(RV34DSPContext *c, DSPContext *dsp);
 void ff_rv34dsp_init_x86(RV34DSPContext *c, DSPContext *dsp);
 
 void ff_rv40dsp_init_x86(RV34DSPContext *c, DSPContext *dsp);
-void ff_rv40dsp_init_neon(RV34DSPContext *c, DSPContext *dsp);
+void ff_rv40dsp_init_arm(RV34DSPContext *c, DSPContext *dsp);
 
 #endif /* AVCODEC_RV34DSP_H */

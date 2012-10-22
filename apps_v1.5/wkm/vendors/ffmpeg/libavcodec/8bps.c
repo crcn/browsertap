@@ -33,13 +33,15 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
+#include "libavutil/internal.h"
 #include "libavutil/intreadwrite.h"
 #include "avcodec.h"
 
 
-static const enum PixelFormat pixfmt_rgb24[] = {
-    PIX_FMT_BGR24, PIX_FMT_RGB32, PIX_FMT_NONE };
+static const enum AVPixelFormat pixfmt_rgb24[] = {
+    AV_PIX_FMT_BGR24, AV_PIX_FMT_RGB32, AV_PIX_FMT_NONE };
 
 /*
  * Decoder context
@@ -162,7 +164,7 @@ static av_cold int decode_init(AVCodecContext *avctx)
     avcodec_get_frame_defaults(&c->pic);
     switch (avctx->bits_per_coded_sample) {
     case 8:
-        avctx->pix_fmt = PIX_FMT_PAL8;
+        avctx->pix_fmt = AV_PIX_FMT_PAL8;
         c->planes      = 1;
         c->planemap[0] = 0; // 1st plane is palette indexes
         break;
@@ -174,7 +176,7 @@ static av_cold int decode_init(AVCodecContext *avctx)
         c->planemap[2] = 0; // 3rd plane is blue
         break;
     case 32:
-        avctx->pix_fmt = PIX_FMT_RGB32;
+        avctx->pix_fmt = AV_PIX_FMT_RGB32;
         c->planes      = 4;
 #if HAVE_BIGENDIAN
         c->planemap[0] = 1; // 1st plane is red
@@ -220,7 +222,7 @@ static av_cold int decode_end(AVCodecContext *avctx)
 AVCodec ff_eightbps_decoder = {
     .name           = "8bps",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_8BPS,
+    .id             = AV_CODEC_ID_8BPS,
     .priv_data_size = sizeof(EightBpsContext),
     .init           = decode_init,
     .close          = decode_end,

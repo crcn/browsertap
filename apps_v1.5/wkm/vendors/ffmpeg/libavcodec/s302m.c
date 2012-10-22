@@ -21,7 +21,9 @@
  */
 
 #include "libavutil/intreadwrite.h"
+#include "libavutil/log.h"
 #include "avcodec.h"
+#include "mathops.h"
 
 #define AES3_HEADER_LEN 4
 
@@ -74,6 +76,9 @@ static int s302m_parse_frame_header(AVCodecContext *avctx, const uint8_t *buf,
         case 4:
             avctx->channel_layout = AV_CH_LAYOUT_QUAD;
             break;
+        case 6:
+            avctx->channel_layout = AV_CH_LAYOUT_5POINT1_BACK;
+            break;
         case 8:
             avctx->channel_layout = AV_CH_LAYOUT_5POINT1_BACK | AV_CH_LAYOUT_STEREO_DOWNMIX;
     }
@@ -114,34 +119,34 @@ static int s302m_decode_frame(AVCodecContext *avctx, void *data,
     if (avctx->bits_per_coded_sample == 24) {
         uint32_t *o = (uint32_t *)s->frame.data[0];
         for (; buf_size > 6; buf_size -= 7) {
-            *o++ = (av_reverse[buf[2]]        << 24) |
-                   (av_reverse[buf[1]]        << 16) |
-                   (av_reverse[buf[0]]        <<  8);
-            *o++ = (av_reverse[buf[6] & 0xf0] << 28) |
-                   (av_reverse[buf[5]]        << 20) |
-                   (av_reverse[buf[4]]        << 12) |
-                   (av_reverse[buf[3] & 0x0f] <<  4);
+            *o++ = (ff_reverse[buf[2]]        << 24) |
+                   (ff_reverse[buf[1]]        << 16) |
+                   (ff_reverse[buf[0]]        <<  8);
+            *o++ = (ff_reverse[buf[6] & 0xf0] << 28) |
+                   (ff_reverse[buf[5]]        << 20) |
+                   (ff_reverse[buf[4]]        << 12) |
+                   (ff_reverse[buf[3] & 0x0f] <<  4);
             buf += 7;
         }
     } else if (avctx->bits_per_coded_sample == 20) {
         uint32_t *o = (uint32_t *)s->frame.data[0];
         for (; buf_size > 5; buf_size -= 6) {
-            *o++ = (av_reverse[buf[2] & 0xf0] << 28) |
-                   (av_reverse[buf[1]]        << 20) |
-                   (av_reverse[buf[0]]        << 12);
-            *o++ = (av_reverse[buf[5] & 0xf0] << 28) |
-                   (av_reverse[buf[4]]        << 20) |
-                   (av_reverse[buf[3]]        << 12);
+            *o++ = (ff_reverse[buf[2] & 0xf0] << 28) |
+                   (ff_reverse[buf[1]]        << 20) |
+                   (ff_reverse[buf[0]]        << 12);
+            *o++ = (ff_reverse[buf[5] & 0xf0] << 28) |
+                   (ff_reverse[buf[4]]        << 20) |
+                   (ff_reverse[buf[3]]        << 12);
             buf += 6;
         }
     } else {
         uint16_t *o = (uint16_t *)s->frame.data[0];
         for (; buf_size > 4; buf_size -= 5) {
-            *o++ = (av_reverse[buf[1]]        <<  8) |
-                    av_reverse[buf[0]];
-            *o++ = (av_reverse[buf[4] & 0xf0] << 12) |
-                   (av_reverse[buf[3]]        <<  4) |
-                   (av_reverse[buf[2]]        >>  4);
+            *o++ = (ff_reverse[buf[1]]        <<  8) |
+                    ff_reverse[buf[0]];
+            *o++ = (ff_reverse[buf[4] & 0xf0] << 12) |
+                   (ff_reverse[buf[3]]        <<  4) |
+                   (ff_reverse[buf[2]]        >>  4);
             buf += 5;
         }
     }
@@ -166,7 +171,7 @@ static int s302m_decode_init(AVCodecContext *avctx)
 AVCodec ff_s302m_decoder = {
     .name           = "s302m",
     .type           = AVMEDIA_TYPE_AUDIO,
-    .id             = CODEC_ID_S302M,
+    .id             = AV_CODEC_ID_S302M,
     .priv_data_size = sizeof(S302MDecodeContext),
     .init           = s302m_decode_init,
     .decode         = s302m_decode_frame,

@@ -146,9 +146,11 @@ enum BlockTypes {
  */
 static void init_lengths(BinkContext *c, int width, int bw)
 {
+    width = FFALIGN(width, 8);
+
     c->bundle[BINK_SRC_BLOCK_TYPES].len = av_log2((width >> 3) + 511) + 1;
 
-    c->bundle[BINK_SRC_SUB_BLOCK_TYPES].len = av_log2(((width + 7) >> 4) + 511) + 1;
+    c->bundle[BINK_SRC_SUB_BLOCK_TYPES].len = av_log2((width >> 4) + 511) + 1;
 
     c->bundle[BINK_SRC_COLORS].len = av_log2(bw*64 + 511) + 1;
 
@@ -231,7 +233,7 @@ static void merge(GetBitContext *gb, uint8_t *dst, uint8_t *src, int size)
  */
 static void read_tree(GetBitContext *gb, Tree *tree)
 {
-    uint8_t tmp1[16], tmp2[16], *in = tmp1, *out = tmp2;
+    uint8_t tmp1[16] = { 0 }, tmp2[16], *in = tmp1, *out = tmp2;
     int i, t, len;
 
     tree->vlc_num = get_bits(gb, 4);
@@ -242,7 +244,6 @@ static void read_tree(GetBitContext *gb, Tree *tree)
     }
     if (get_bits1(gb)) {
         len = get_bits(gb, 3);
-        memset(tmp1, 0, sizeof(tmp1));
         for (i = 0; i <= len; i++) {
             tree->syms[i] = get_bits(gb, 4);
             tmp1[tree->syms[i]] = 1;
@@ -1127,6 +1128,11 @@ static int bink_decode_plane(BinkContext *c, GetBitContext *gb, int plane_idx,
                 xoff = get_value(c, BINK_SRC_X_OFF);
                 yoff = get_value(c, BINK_SRC_Y_OFF);
                 ref = prev + xoff + yoff * stride;
+                if (ref < ref_start || ref > ref_end) {
+                    av_log(c->avctx, AV_LOG_ERROR, "Copy out of bounds @%d, %d\n",
+                           bx*8 + xoff, by*8 + yoff);
+                    return -1;
+                }
                 c->dsp.put_pixels_tab[1][0](dst, ref, stride, 8);
                 memset(dctblock, 0, sizeof(*dctblock) * 64);
                 dctblock[0] = get_value(c, BINK_SRC_INTER_DC);
@@ -1222,41 +1228,28 @@ static int decode_frame(AVCodecContext *avctx, void *data, int *data_size, AVPac
 static av_cold void binkb_calc_quant(void)
 {
     uint8_t inv_bink_scan[64];
-    double s[64];
+    static const int s[64]={
+        1073741824,1489322693,1402911301,1262586814,1073741824, 843633538, 581104888, 296244703,
+        1489322693,2065749918,1945893874,1751258219,1489322693,1170153332, 806015634, 410903207,
+        1402911301,1945893874,1832991949,1649649171,1402911301,1102260336, 759250125, 387062357,
+        1262586814,1751258219,1649649171,1484645031,1262586814, 992008094, 683307060, 348346918,
+        1073741824,1489322693,1402911301,1262586814,1073741824, 843633538, 581104888, 296244703,
+         843633538,1170153332,1102260336, 992008094, 843633538, 662838617, 456571181, 232757969,
+         581104888, 806015634, 759250125, 683307060, 581104888, 456571181, 314491699, 160326478,
+         296244703, 410903207, 387062357, 348346918, 296244703, 232757969, 160326478,  81733730,
+    };
     int i, j;
-
-    for (j = 0; j < 8; j++) {
-        for (i = 0; i < 8; i++) {
-            if (j && j != 4)
-               if (i && i != 4)
-                   s[j*8 + i] = cos(j * M_PI/16.0) * cos(i * M_PI/16.0) * 2.0;
-               else
-                   s[j*8 + i] = cos(j * M_PI/16.0) * sqrt(2.0);
-            else
-               if (i && i != 4)
-                   s[j*8 + i] = cos(i * M_PI/16.0) * sqrt(2.0);
-               else
-                   s[j*8 + i] = 1.0;
-        }
-    }
-
+#define C (1LL<<30)
     for (i = 0; i < 64; i++)
         inv_bink_scan[bink_scan[i]] = i;
 
     for (j = 0; j < 16; j++) {
         for (i = 0; i < 64; i++) {
             int k = inv_bink_scan[i];
-            if (s[i] == 1.0) {
-                binkb_intra_quant[j][k] = (1L << 12) * binkb_intra_seed[i] *
-                                          binkb_num[j]/binkb_den[j];
-                binkb_inter_quant[j][k] = (1L << 12) * binkb_inter_seed[i] *
-                                          binkb_num[j]/binkb_den[j];
-            } else {
-                binkb_intra_quant[j][k] = (1L << 12) * binkb_intra_seed[i] * s[i] *
-                                          binkb_num[j]/(double)binkb_den[j];
-                binkb_inter_quant[j][k] = (1L << 12) * binkb_inter_seed[i] * s[i] *
-                                          binkb_num[j]/(double)binkb_den[j];
-            }
+            binkb_intra_quant[j][k] = binkb_intra_seed[i] * (int64_t)s[i] *
+                                        binkb_num[j]/(binkb_den[j] * (C>>12));
+            binkb_inter_quant[j][k] = binkb_inter_seed[i] * (int64_t)s[i] *
+                                        binkb_num[j]/(binkb_den[j] * (C>>12));
         }
     }
 }
@@ -1295,7 +1288,7 @@ static av_cold int decode_init(AVCodecContext *avctx)
         return 1;
     }
 
-    avctx->pix_fmt = c->has_alpha ? PIX_FMT_YUVA420P : PIX_FMT_YUV420P;
+    avctx->pix_fmt = c->has_alpha ? AV_PIX_FMT_YUVA420P : AV_PIX_FMT_YUV420P;
 
     avctx->idct_algo = FF_IDCT_BINK;
     ff_dsputil_init(&c->dsp, avctx);
@@ -1329,10 +1322,10 @@ static av_cold int decode_end(AVCodecContext *avctx)
 AVCodec ff_bink_decoder = {
     .name           = "binkvideo",
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_BINKVIDEO,
+    .id             = AV_CODEC_ID_BINKVIDEO,
     .priv_data_size = sizeof(BinkContext),
     .init           = decode_init,
     .close          = decode_end,
     .decode         = decode_frame,
-    .long_name = NULL_IF_CONFIG_SMALL("Bink video"),
+    .long_name      = NULL_IF_CONFIG_SMALL("Bink video"),
 };

@@ -93,15 +93,7 @@ static PayloadContext *new_context(void)
 
 static void free_context(PayloadContext * data)
 {
-    int i;
-    for (i = 0; i < data->nb_au_headers; i++) {
-         /* according to rtp_parse_mp4_au, we treat multiple
-          * au headers as one, so nb_au_headers is always 1.
-          * loop anyway in case this changes.
-          * (note: changes done carelessly might lead to a double free)
-          */
-       av_free(&data->au_headers[i]);
-    }
+    av_free(data->au_headers);
     av_free(data->mode);
     av_free(data);
 }
@@ -138,7 +130,7 @@ static int rtp_parse_mp4_au(PayloadContext *data, const uint8_t *buf)
 
     init_get_bits(&getbitcontext, buf, data->au_headers_length_bytes * 8);
 
-    /* XXX: Wrong if optionnal additional sections are present (cts, dts etc...) */
+    /* XXX: Wrong if optional additional sections are present (cts, dts etc...) */
     au_header_size = data->sizelength + data->indexlength;
     if (au_header_size <= 0 || (au_headers_length % au_header_size != 0))
         return -1;
@@ -202,7 +194,7 @@ static int parse_fmtp(AVStream *stream, PayloadContext *data,
             return res;
     }
 
-    if (codec->codec_id == CODEC_ID_AAC) {
+    if (codec->codec_id == AV_CODEC_ID_AAC) {
         /* Looking for a known attribute */
         for (i = 0; attr_names[i].str; ++i) {
             if (!av_strcasecmp(attr, attr_names[i].str)) {
@@ -223,6 +215,9 @@ static int parse_sdp_line(AVFormatContext *s, int st_index,
 {
     const char *p;
 
+    if (st_index < 0)
+        return 0;
+
     if (av_strstart(line, "fmtp:", &p))
         return ff_parse_fmtp(s->streams[st_index], data, p, parse_fmtp);
 
@@ -232,14 +227,14 @@ static int parse_sdp_line(AVFormatContext *s, int st_index,
 RTPDynamicProtocolHandler ff_mp4v_es_dynamic_handler = {
     .enc_name           = "MP4V-ES",
     .codec_type         = AVMEDIA_TYPE_VIDEO,
-    .codec_id           = CODEC_ID_MPEG4,
+    .codec_id           = AV_CODEC_ID_MPEG4,
     .parse_sdp_a_line   = parse_sdp_line,
 };
 
 RTPDynamicProtocolHandler ff_mpeg4_generic_dynamic_handler = {
     .enc_name           = "mpeg4-generic",
     .codec_type         = AVMEDIA_TYPE_AUDIO,
-    .codec_id           = CODEC_ID_AAC,
+    .codec_id           = AV_CODEC_ID_AAC,
     .parse_sdp_a_line   = parse_sdp_line,
     .alloc              = new_context,
     .free               = free_context,

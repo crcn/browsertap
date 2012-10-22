@@ -19,6 +19,7 @@
  */
 
 #include "log.h"
+#include "mem.h"
 #include "tree.h"
 
 typedef struct AVTreeNode {
@@ -27,7 +28,14 @@ typedef struct AVTreeNode {
     int state;
 } AVTreeNode;
 
+#if FF_API_CONTEXT_SIZE
 const int av_tree_node_size = sizeof(AVTreeNode);
+#endif
+
+struct AVTreeNode *av_tree_node_alloc(void)
+{
+    return av_mallocz(sizeof(struct AVTreeNode));
+}
 
 void *av_tree_find(const AVTreeNode *t, void *key,
                    int (*cmp)(void *key, const void *b), void *next[2])
@@ -157,6 +165,7 @@ void av_tree_enumerate(AVTreeNode *t, void *opaque,
 
 #ifdef TEST
 
+#include "common.h"
 #include "lfg.h"
 
 static int check(AVTreeNode *t)
@@ -211,7 +220,7 @@ int main (void)
         }
         av_log(NULL, AV_LOG_ERROR, "inserting %4d\n", j);
         if (!node)
-            node = av_mallocz(av_tree_node_size);
+            node = av_tree_node_alloc();
         av_tree_insert(&root, (void *) (j + 1), cmp, &node);
 
         j = av_lfg_get(&prng) % 86294;

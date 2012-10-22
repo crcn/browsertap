@@ -34,6 +34,7 @@
 #include "bswap.h"
 #include "intreadwrite.h"
 #include "md5.h"
+#include "mem.h"
 
 typedef struct AVMD5{
     uint64_t len;
@@ -41,7 +42,14 @@ typedef struct AVMD5{
     uint32_t ABCD[4];
 } AVMD5;
 
+#if FF_API_CONTEXT_SIZE
 const int av_md5_size = sizeof(AVMD5);
+#endif
+
+struct AVMD5 *av_md5_alloc(void)
+{
+    return av_mallocz(sizeof(struct AVMD5));
+}
 
 static const uint8_t S[4][4] = {
     { 7, 12, 17, 22 },  /* round 1 */
@@ -88,12 +96,12 @@ static const uint32_t T[64] = { // T[i]= fabs(sin(i+1)<<32)
 
 static void body(uint32_t ABCD[4], uint32_t X[16])
 {
-    int t;
     int i av_unused;
-    unsigned int a = ABCD[3];
-    unsigned int b = ABCD[2];
-    unsigned int c = ABCD[1];
-    unsigned int d = ABCD[0];
+    uint32_t t;
+    uint32_t a = ABCD[3];
+    uint32_t b = ABCD[2];
+    uint32_t c = ABCD[1];
+    uint32_t d = ABCD[0];
 
 #if HAVE_BIGENDIAN
     for (i = 0; i < 16; i++)

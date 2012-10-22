@@ -21,11 +21,12 @@
  */
 
 #include "avcodec.h"
+#include "libavutil/common.h"
 #include "libavutil/intreadwrite.h"
 
 static av_cold int decode_init(AVCodecContext *avctx)
 {
-    avctx->pix_fmt     = PIX_FMT_YUV420P;
+    avctx->pix_fmt     = AV_PIX_FMT_YUV420P;
     avctx->coded_frame = avcodec_alloc_frame();
     if (!avctx->coded_frame)
         return AVERROR(ENOMEM);
@@ -101,7 +102,7 @@ AVCodec ff_dxtory_decoder = {
     .name           = "dxtory",
     .long_name      = NULL_IF_CONFIG_SMALL("Dxtory"),
     .type           = AVMEDIA_TYPE_VIDEO,
-    .id             = CODEC_ID_DXTORY,
+    .id             = AV_CODEC_ID_DXTORY,
     .init           = decode_init,
     .close          = decode_close,
     .decode         = decode_frame,

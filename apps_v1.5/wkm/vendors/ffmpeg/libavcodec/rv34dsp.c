@@ -26,6 +26,7 @@
  */
 #include "dsputil.h"
 #include "rv34dsp.h"
+#include "libavutil/common.h"
 
 /**
  * @name RV30/40 inverse transform functions
@@ -88,15 +89,15 @@ static void rv34_inv_transform_noround_c(DCTELEM *block){
     rv34_row_transform(temp, block);
 
     for(i = 0; i < 4; i++){
-        const int z0 = 13*(temp[4*0+i] +    temp[4*2+i]);
-        const int z1 = 13*(temp[4*0+i] -    temp[4*2+i]);
-        const int z2 =  7* temp[4*1+i] - 17*temp[4*3+i];
-        const int z3 = 17* temp[4*1+i] +  7*temp[4*3+i];
+        const int z0 = 39*(temp[4*0+i] +    temp[4*2+i]);
+        const int z1 = 39*(temp[4*0+i] -    temp[4*2+i]);
+        const int z2 = 21* temp[4*1+i] - 51*temp[4*3+i];
+        const int z3 = 51* temp[4*1+i] + 21*temp[4*3+i];
 
-        block[i*4+0] = ((z0 + z3) * 3) >> 11;
-        block[i*4+1] = ((z1 + z2) * 3) >> 11;
-        block[i*4+2] = ((z1 - z2) * 3) >> 11;
-        block[i*4+3] = ((z0 - z3) * 3) >> 11;
+        block[i*4+0] = (z0 + z3) >> 11;
+        block[i*4+1] = (z1 + z2) >> 11;
+        block[i*4+2] = (z1 - z2) >> 11;
+        block[i*4+3] = (z0 - z3) >> 11;
     }
 }
 
@@ -134,8 +135,8 @@ av_cold void ff_rv34dsp_init(RV34DSPContext *c, DSPContext* dsp) {
     c->rv34_idct_add    = rv34_idct_add_c;
     c->rv34_idct_dc_add = rv34_idct_dc_add_c;
 
-    if (HAVE_NEON)
-        ff_rv34dsp_init_neon(c, dsp);
-    if (HAVE_MMX)
+    if (ARCH_ARM)
+        ff_rv34dsp_init_arm(c, dsp);
+    if (ARCH_X86)
         ff_rv34dsp_init_x86(c, dsp);
 }

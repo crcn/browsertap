@@ -67,12 +67,13 @@ typedef struct PGSSubContext {
     PGSSubPresentation presentation;
     uint32_t           clut[256];
     PGSSubPicture      pictures[UINT16_MAX];
+    int64_t            pts;
     int forced_subs_only;
 } PGSSubContext;
 
 static av_cold int init_decoder(AVCodecContext *avctx)
 {
-    avctx->pix_fmt     = PIX_FMT_PAL8;
+    avctx->pix_fmt     = AV_PIX_FMT_PAL8;
 
     return 0;
 }
@@ -378,6 +379,7 @@ static int display_end_segment(AVCodecContext *avctx, void *data,
 {
     AVSubtitle    *sub = data;
     PGSSubContext *ctx = avctx->priv_data;
+    int64_t pts;
 
     uint16_t rect;
 
@@ -387,7 +389,10 @@ static int display_end_segment(AVCodecContext *avctx, void *data,
      *      not been cleared by a subsequent empty display command.
      */
 
+    pts = ctx->pts != AV_NOPTS_VALUE ? ctx->pts : sub->pts;
     memset(sub, 0, sizeof(*sub));
+    sub->pts = pts;
+    ctx->pts = AV_NOPTS_VALUE;
 
     // Blank if last object_count was 0.
     if (!ctx->presentation.object_count)
@@ -423,6 +428,9 @@ static int display_end_segment(AVCodecContext *avctx, void *data,
         sub->rects[rect]->nb_colors    = 256;
         sub->rects[rect]->pict.data[1] = av_mallocz(AVPALETTE_SIZE);
 
+        /* Copy the forced flag */
+        sub->rects[rect]->forced = (ctx->presentation.objects[rect].composition & 0x40) != 0;
+
         if (!ctx->forced_subs_only || ctx->presentation.objects[rect].composition & 0x40)
         memcpy(sub->rects[rect]->pict.data[1], ctx->clut, sub->rects[rect]->nb_colors * sizeof(uint32_t));
     }
@@ -433,8 +441,10 @@ static int display_end_segment(AVCodecContext *avctx, void *data,
 static int decode(AVCodecContext *avctx, void *data, int *data_size,
                   AVPacket *avpkt)
 {
+    PGSSubContext *ctx = avctx->priv_data;
     const uint8_t *buf = avpkt->data;
     int buf_size       = avpkt->size;
+    AVSubtitle *sub    = data;
 
     const uint8_t *buf_end;
     uint8_t       segment_type;
@@ -479,6 +489,7 @@ static int decode(AVCodecContext *avctx, void *data, int *data_size,
             break;
         case PRESENTATION_SEGMENT:
             parse_presentation_segment(avctx, buf, segment_length);
+            ctx->pts = sub->pts;
             break;
         case WINDOW_SEGMENT:
             /*
@@ -508,7 +519,7 @@ static int decode(AVCodecContext *avctx, void *data, int *data_size,
 #define OFFSET(x) offsetof(PGSSubContext, x)
 #define SD AV_OPT_FLAG_SUBTITLE_PARAM | AV_OPT_FLAG_DECODING_PARAM
 static const AVOption options[] = {
-    {"forced_subs_only", "Only show forced subtitles", OFFSET(forced_subs_only), AV_OPT_TYPE_INT, {.dbl = 0}, 0, 1, SD},
+    {"forced_subs_only", "Only show forced subtitles", OFFSET(forced_subs_only), AV_OPT_TYPE_INT, {.i64 = 0}, 0, 1, SD},
     { NULL },
 };
 
@@ -522,11 +533,11 @@ static const AVClass pgsdec_class = {
 AVCodec ff_pgssub_decoder = {
     .name           = "pgssub",
     .type           = AVMEDIA_TYPE_SUBTITLE,
-    .id             = CODEC_ID_HDMV_PGS_SUBTITLE,
+    .id             = AV_CODEC_ID_HDMV_PGS_SUBTITLE,
     .priv_data_size = sizeof(PGSSubContext),
     .init           = init_decoder,
     .close          = close_decoder,
     .decode         = decode,
-    .long_name = NULL_IF_CONFIG_SMALL("HDMV Presentation Graphic Stream subtitles"),
+    .long_name      = NULL_IF_CONFIG_SMALL("HDMV Presentation Graphic Stream subtitles"),
     .priv_class     = &pgsdec_class,
 };
