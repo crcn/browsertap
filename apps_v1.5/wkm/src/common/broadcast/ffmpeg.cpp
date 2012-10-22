@@ -82,6 +82,8 @@ namespace Broadcast
 
 		Geom::Rectangle& bounds = data->bounds();
 
+		//std::cout << bounds.width << " " << bounds.height << std::endl;
+
 
 		avpicture_fill((AVPicture*)_srcPicture, (uint8_t*)data->buffer(), PIX_FMT_BGRA, bounds.width, bounds.height);
 		//fill_yuv_image((AVFrame*)_dstPicture, frame_count++, bounds.width, bounds.height);
@@ -112,7 +114,9 @@ namespace Broadcast
 			}
 
 			if(_videoCodecCtx->coded_frame->key_frame)
+			{
 				pkt.flags |= AV_PKT_FLAG_KEY;
+			}
 
 			pkt.stream_index = _videoStream->index;
 			pkt.data = _outputBuffer;
@@ -249,7 +253,7 @@ namespace Broadcast
 		//_videoCodecCtx->flags |= CODEC_FLAG_GRAY;
 		//_videoCodecCtx->flags |= CODEC_FLAG_LOW_DELAY;
 		//_videoCodecCtx->rc_min_rate      = br;// 64 * 1000; //average bit rate
-		_videoCodecCtx->bit_rate      = br;// 64 * 1000; //average bit rate
+		_videoCodecCtx->bit_rate      = br; //average bit rate
 		//_videoCodecCtx->rc_max_rate      = br;// 64 * 1000; //average bit rate
 		//_videoCodecCtx->qblur      = 1.0;// 64 * 1000; //average bit rate
 		//_videoCodecCtx->qcompress      = 1.0;// 64 * 1000; //average bit rate
@@ -262,7 +266,7 @@ namespace Broadcast
 
 		_videoCodecCtx->time_base.den = _ctx->frameRate; // HIGH framerate = smooth playback.
 		_videoCodecCtx->time_base.num = 1;
-		_videoCodecCtx->gop_size      = _ctx->gopSize;//_gopSize; //lower = less chunkyZ
+		_videoCodecCtx->gop_size      = 12;//_ctx->gopSize;//_gopSize; //lower = less chunkyZ
 		//_videoCodecCtx->level = 30;Z
 		//_videoCodecCtx->flags		  |= CODEC_FLAG_PSNR;
 		//_videoCodecCtx->partitions		  &= ~(X264_PART_I4X4 | X264_PART_I8X8 | X264_PART_P8X8 | X264_PART_P4X4 | X264_PART_B8X8);
@@ -277,7 +281,7 @@ namespace Broadcast
 		//_videoCodecCtx->scenechange_threshold = 40;
 		//_videoCodecCtx->b_quant_offset = 1.25;
 		//_videoCodecCtx->scenechange_threshold = -500;
-		_videoCodecCtx->scenechange_threshold = 500;
+		//_videoCodecCtx->scenechange_threshold = 500;
 		
 		//_videoCodecCtx->me_method = ME_ZERO;
 		//_videoCodecCtx->qmin = 1;
@@ -293,36 +297,39 @@ namespace Broadcast
 
 		//_videoCodecCtx->flags2 |= CODEC_FLAG2_FAST|CODEC_FLAG2_STRICT_GOP|CODEC_FLAG2_DROP_FRAME_TIMECODE|CODEC_FLAG2_SKIP_RD;
 		
-		/*_videoCodecCtx->flags |= CODEC_FLAG_LOOP_FILTER;//|CODEC_FLAG_GRAY;
-		_videoCodecCtx->me_cmp |= FF_CMP_CHROMA;
+		//_videoCodecCtx->flags |= CODEC_FLAG_LOOP_FILTER;//|CODEC_FLAG_GRAY;
+		//_videoCodecCtx->me_cmp |= FF_CMP_CHROMA;
 		//_videoCodecCtx->qcompress = 0.6;
 		//_videoCodecCtx->qmin = 10;
 		//_videoCodecCtx->qmax = 51;
 		//_videoCodecCtx->max_qdiff = 4;
-		_videoCodecCtx->directpred = 1;
-		_videoCodecCtx->flags2 |= CODEC_FLAG2_FASTPSKIP|CODEC_FLAG2_MBTREE;
-		_videoCodecCtx->cqp = 0;
-		_videoCodecCtx->crf = 22;
-		_videoCodecCtx->b_frame_strategy = 1;
-		_videoCodecCtx->i_quant_factor = 1.0;
-		_videoCodecCtx->scenechange_threshold = 40;
-		_videoCodecCtx->keyint_min = 25;
-		_videoCodecCtx->me_range = 16;
-		_videoCodecCtx->me_subpel_quality = 0;*/
+		//_videoCodecCtx->directpred = 1;
+		//_videoCodecCtx->flags2 |= CODEC_FLAG2_FASTPSKIP|CODEC_FLAG2_MBTREE;
+		// _videoCodecCtx->cqp = 0;
+		//_videoCodecCtx->crf = 22;
+		//_videoCodecCtx->b_frame_strategy = 1;
+		//_videoCodecCtx->i_quant_factor = 1.0;
+		//_videoCodecCtx->scenechange_threshold = 40;
+		//_videoCodecCtx->keyint_min = 25;
+		//_videoCodecCtx->me_range = 16;
+		//_videoCodecCtx->me_subpel_quality = 0;
 
-		
+			
+		_videoCodecCtx->me_subpel_quality = 1;	
+		//_videoCodecCtx->subme = 1;
+		_videoCodecCtx->thread_count = 1;
+
 		//_videoCodecCtx->qmin = 1;
 		//_videoCodecCtx->qmax = 10;
-		// _videoCodecCtx->me_method = ME_EPZS;
+		//_videoCodecCtx->me_method = 7;//ME_EPZS;
 
 
 		//_videoCodecCtx->max_qdiff = 3;
 		//_videoCodecCtx->i_quant_factor = -0.8;
 		//_videoCodecCtx->b_quant_factor = 1.25;
 		//_videoCodecCtx->b_quant_offset = 1.25;
-		//_videoCodecCtx->max_b_frames = 4;
 		_videoCodecCtx->pix_fmt       = ENCODE_PX_FORMAT;
-		_videoCodecCtx->compression_level       = -8; //best, -5 = default
+		//_videoCodecCtx->compression_level       = -8; //best, -5 = default
 		//_videoCodecCtx->aq_mode       = 0; //best
 		//_videoCodecCtx->qmin       = 1; 
 		//_videoCodecCtx->qmax       = 3; 
@@ -455,7 +462,7 @@ namespace Broadcast
 			_videoCodecCtx->width,
 			_videoCodecCtx->height, 
 			_videoCodecCtx->pix_fmt,
-			SWS_BICUBIC,
+			SWS_FAST_BILINEAR,
 			NULL, 
 			NULL, 	
 			NULL);

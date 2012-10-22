@@ -150,10 +150,12 @@ var Connection = structr(EventEmitter, {
 			host: this.host
 		};
 
-		console.log(puppet)
-		/*puppet.rtmp = {
-			host: "rtmp://" + this.hostInfo.hostname + ":1935/live"
-		};*/
+		var info = Url.parse(puppet.rtmp.host);
+
+		//localhost rtmp server? no go - use given IP address 
+		if(info.hostname == "localhost" || info.hostname == "127.0.0.1") {
+			puppet.rtmp.host = puppet.rtmp.host.replace(info.hostname, this.hostInfo.hostname);
+		}
 
 		this.emit("connect");
 	}

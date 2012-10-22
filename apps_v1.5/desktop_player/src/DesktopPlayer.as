@@ -9,6 +9,7 @@ package
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.events.NetStatusEvent;
+	import flash.events.StatusEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.external.ExternalInterface;
 	import flash.media.Video;
@@ -17,6 +18,9 @@ package
 	import flash.net.ObjectEncoding;
 	import flash.text.TextField;
 	import flash.ui.Keyboard;
+	import flash.utils.*;
+
+	
 	
 	import org.osmf.net.NetConnectionCodes;
 	import org.osmf.net.NetStreamCodes;
@@ -30,8 +34,9 @@ package
 		private var _server: String;
 		private var _debugInfo:TextField;
 		private var _debug:Boolean;
+		private var _checkCount:int;
 		
-		[SWF(frameRate='60',backgroundColor='#FFFFFF')]
+		[SWF(frameRate='24',backgroundColor='#FFFFFF')]
 		
 		
 		
@@ -46,6 +51,9 @@ package
 			this._debugInfo.text = "connecting to " + this._server;
 			this._debugInfo.autoSize = 'left';
 			this._debugInfo.width = 700;
+			this._debugInfo.height = 700;
+			this._debugInfo.background = true;
+			this._debugInfo.backgroundColor = 0xFFFFFF;
 			if(this._debug) this.addChild(this._debugInfo);
 			
 			
@@ -82,6 +90,8 @@ package
 			{
 				this.stage.addEventListener(keyboardEvent, onKeyboardEvent);
 			}
+
+			setInterval(this._checkFramerate, 500);
 		}
 		
 		private function onMouseEvent(event:MouseEvent):void
@@ -104,6 +114,10 @@ package
 		private function openVideo():void
 		{
 			_trace("selecting stream...");
+
+			if(this._video) {
+				this.removeChild(this._video);
+			}
 			
 			var video:Video = this._video = new Video(this.stage.stageWidth, this.stage.stageHeight);
 			video.attachNetStream(this._stream);
@@ -121,7 +135,7 @@ package
 		private function _trace(arg:String): void
 		{
 
-			this._debugInfo.text = (arg + "\n" + this._debugInfo.text).substr(0, 100);
+			this._debugInfo.text = (arg + "\n" + this._debugInfo.text).substr(0, 1000);//arg;//(arg + "\n" + this._debugInfo.text).substr(0, 100);
 
 			trace(arg);
 		}
@@ -135,10 +149,10 @@ package
 
 			
 			this._connection = new NetConnection();
-			this._connection.addEventListener(NetStatusEvent.NET_STATUS, onNetStatus);
-			this._connection.addEventListener(IOErrorEvent.IO_ERROR, onError);
-			this._connection.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onError);
-			this._connection.addEventListener(AsyncErrorEvent.ASYNC_ERROR, onError);
+			this._connection.addEventListener(NetStatusEvent.NET_STATUS, onNetStatus, false, 0, true);
+			this._connection.addEventListener(IOErrorEvent.IO_ERROR, onError, false, 0, true);
+			this._connection.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onError, false, 0, true);
+			this._connection.addEventListener(AsyncErrorEvent.ASYNC_ERROR, onError, false, 0, true);
 			this._connection.objectEncoding = ObjectEncoding.AMF0;
 			this._connection.connect(this._server);
 			
@@ -172,14 +186,19 @@ package
 		
 		private function onNetStatus(event:NetStatusEvent):void
 		{
-			_trace(event.info.code + "\n");
+			_trace(event.info.code);
 			if(event.info.code == "NetConnection.Connect.Success")
 			{
 
 				this._stream = new NetStream(this._connection);
-				this._stream.addEventListener(AsyncErrorEvent.ASYNC_ERROR, onError);
+				this._stream.addEventListener(AsyncErrorEvent.ASYNC_ERROR, onError, false, 0, true);
+				this._stream.addEventListener(IOErrorEvent.IO_ERROR, onError, false, 0, true);
+				this._stream.addEventListener(StatusEvent.STATUS, onStatus, false, 0, true);
+				this._stream.addEventListener(NetStatusEvent.NET_STATUS, onNetStatus, false, 0, true);
 				this._stream.client={onMetaData:function(obj:Object):void{} }
+				//this._stream.receiveVideoFPS(60);
 				this._stream.bufferTime = 0; //we're running live.
+				//this._stream.bufferTimeMax = 0;
 				this.openVideo();
 			}
 		}
@@ -197,6 +216,29 @@ package
 		private function onMetaData(obj:Object):void
 		{
 		
+		}
+
+		private function _checkFramerate():void 
+		{
+
+			if(!this._stream) return;
+			var fps:Number = this._stream.currentFPS;
+			_trace("current framerate: " + fps+" cc: "+this._checkCount);
+
+			return;
+			if(fps == 0 && this._checkCount++ >= 2) {
+				_trace("resetting");
+				this.openStream();
+				this._checkCount = 0;
+			}
+			else if(fps > 0) {
+				this._checkCount = 0;
+			}
+		} 
+
+		private function onStatus(event:*):void
+		{
+			_trace("stream status");
 		}
 		
 	}

@@ -35,7 +35,7 @@ DWORD WINAPI broadcast_video(LPVOID param)
 
 		delete bmp;
 
-		// Sleep(10);
+		Sleep(30);
 	}
 
 	return 0;
@@ -56,7 +56,7 @@ void init_broadcast_thread(Client::Console* cli)
 int usage() {
 
 	// std::cout << "Some parameters are missing.." << std::cout;
-	std::cout << "Usage: cli.exe [rtmp_path]" << std::endl;
+	std::cout << "Usage: cli.exe [rtmp_path] [width] [height] [left] [right] [top] [bottom]" << std::endl;
 
 	return 1;
 }
@@ -64,8 +64,9 @@ int usage() {
 
 int main(int argc, const char* argv[]) {
 
+
 	//arg must be present
-	if(argc < 2) {
+	if(argc < 8) {
 		return usage();
 	}
 
@@ -86,7 +87,12 @@ int main(int argc, const char* argv[]) {
 
 	//the client which controls everything
 	Client::Console* cli        = new Client::Console(win, bf, mouse, keyboard);
-
+	cli->bounds.width = atoi(argv[2]);
+	cli->bounds.height = atoi(argv[3]);
+	cli->padding.left = atoi(argv[4]);
+	cli->padding.right = atoi(argv[5]);
+	cli->padding.top = atoi(argv[6]);
+	cli->padding.bottom = atoi(argv[7]);
 
 
 	init_broadcast_thread(cli);

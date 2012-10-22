@@ -89,7 +89,7 @@ module.exports  = Ember.ContainerView.extend({
 		window.desktopEvents = {
 			mouseMove: _.throttle(function(coords) {
 				self._mouseEvent(wkmEvents.mouse.MOUSEEVENTF_ABSOLUTE | wkmEvents.mouse.MOUSEEVENTF_MOVE, coords);
-			}, 1),
+			}, 10),
 			keyDown: function(data) {
 				self._keyboardEvent(data.keyCode, 0, 0);
 			},
