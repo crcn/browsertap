@@ -35,7 +35,7 @@ DWORD WINAPI broadcast_video(LPVOID param)
 
 		delete bmp;
 
-		// Sleep(30);
+		Sleep(30);
 	}
 
 	return 0;
