@@ -92,6 +92,9 @@ int main(int argc, const char* argv[]) {
 	ctx->scenechange_threshold = 500;
 	ctx->frame_rate = 25;
 
+	// last_redictor_count, 
+	// directpred
+
 	for(int i = 1; i < argc; i++)
 	{
 

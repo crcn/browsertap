@@ -239,6 +239,7 @@ namespace Broadcast
 
 		void init() 
 		{
+
 			bit_rate_tolerance = -1;
 			max_qdiff = -1;
 			b_quant_factor = -1;
