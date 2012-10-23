@@ -1,6 +1,7 @@
 var service = require("../business/desktopService"),
 _ = require("underscore"),
-wkmEvents = require("./events");
+wkmEvents = require("./events"),
+Url = require("url");
 
 var DesktopPlayer = require("./flashPlayer").extend({
 	"source": "/swf/DesktopPlayer.swf",
@@ -33,6 +34,8 @@ module.exports  = Ember.ContainerView.extend({
 		this._createChildViews();
 		this._connect();
 		this._createListeners();
+		this._query = Url.parse(String(window.location), true).query;
+		this._video = {};
 	},
 
 	/**
@@ -113,7 +116,9 @@ module.exports  = Ember.ContainerView.extend({
 		this._width = width || this._width || jQuery(window).width();
 		this._height = height || this._height || jQuery(window).height();
 		if(!this._puppet) return;
-		this._puppet.desktop.resize(this._width, this._height);
+		// this._puppet.desktop.resize(this._width, this._height);
+		// this._video.width = 
+		this._reset();
 
 	},
 
@@ -136,6 +141,13 @@ module.exports  = Ember.ContainerView.extend({
 	"_keyboardEvent": function(key, mods, dwFlags) {
 		if(!this._puppet) return;
 		this._puppet.keyboard.sendEvent(key, mods, dwFlags);
+	},
+
+	"_reset": function() {
+		this._puppet.desktop.restart(_.extend(this._query, {
+			width: this._width,
+			height: this._height,
+		}));
 	}
 
 });

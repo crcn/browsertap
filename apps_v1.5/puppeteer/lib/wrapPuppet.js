@@ -24,6 +24,9 @@ module.exports = function(target) {
 			resize: function() {
 				target.desktop.resize.apply(target.desktop, arguments);
 			},
+			restart: function(options) {
+				target.desktop.restart(options);
+			},
 			screenshot: {
 				snapUrl: function() {
 				var args = arguments;

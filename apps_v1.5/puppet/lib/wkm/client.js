@@ -2,7 +2,8 @@ var structr   = require('structr'),
 child_process = require('child_process'),
 spawn         = child_process.spawn,
 exec          = child_process.exec,
-path          = require('path')
+path          = require('path'),
+_   = require("underscore");
 
 
 module.exports = structr({
@@ -11,49 +12,68 @@ module.exports = structr({
 	 */
 
 	'__construct': function(options) {
-		this._padding = [0, 0, 0, 0]; 
-		if(options.rtmp) {
-			this.start([options.rtmp.protocol, "//", options.rtmp.hostname, ":", options.rtmp.port, options.rtmp.path].join(""));
+
+		this._video = {
+			width: 0,
+			height: 0,
+			padding: {
+				left: 0,
+				right: 0,
+				top: 0,
+				bottom: 0
+			},
+			gop_size: 50,
+			qmin: 1,
+			qmax: 11,
+			timeout: 1
 		}
-		this._width = this._height = 0;
+
+		this._rtmpUrl = [options.rtmp.protocol, "//", options.rtmp.hostname, ":", options.rtmp.port, options.rtmp.path].join("");
+
+		if(options.rtmp) {
+			this.start();
+		}
+
 		this._killing = false;
 	},
 
 	/**
 	 */
 
-	'restart': function() {
-		if(this._rtmpUrl) this.start(this._rtmpUrl);
+	'restart': function(options) {
+		if(this._rtmpUrl) {
+			this.start(options);
+		}
 	},
+
 
 	/**
 	 * starts wkm which broadcasts the given rtmp url
 	 */
 
-	'start': function(rtmpUrl) {
+	'start': function(options) {
 
-		var self = this;
-		// rtmpUrl = "C:\\Users\\Administrator\\Desktop\\test.flv"
-
-		if(arguments.length) this._rtmpUrl = rtmpUrl || this._rtmpUrl;
-
-
+		var self = this,
+		video = _.extend(this._video, options || {});
 
 		this.kill(function() {
-			console.log("broadcasting to rtmp server %s", self._rtmpUrl);
-			self._proc = spawn(__dirname + "/../../../wkm/bin/cli.exe", [
+			var args = __dirname + "/../../../wkm/bin/cli.exe", [
 				"-o", self._rtmpUrl, 
-				"-w", self._width, 
-				"-h", self._height, 
-				"-pl", self._padding[0], 
-				"-pr", self._padding[1],
-				"-pt", self._padding[2],
-				"-pb", self._padding[3],
-				"-gop_size", 300,
-				"-bit_rate", 64,
-				"-qmin", 1,
-				"-qmax", 11,
-				"-timeout", 1]);
+				"-w", video.width, 
+				"-h", video.height, 
+				"-pl", video.padding.left || 0, 
+				"-pr", video.padding.right || 0,
+				"-pt", video.padding.top || 0,
+				"-pb", video.padding.bottom || 0,
+				"-gop_size", video.gop_size || 500,
+				"-bit_rate", video.bit_rate || 64,
+				"-qmin", video.qmin || 1,
+				"-qmax", video.qmax || 11,
+				"-timeout", video.timeout || 1];
+
+			console.log("broadcast %s", args.join(" "));
+
+			self._proc = spawn(__dirname + "/../../../wkm/bin/cli.exe", args);
 
 			self._proc.stdout.on('data', function(data) {
 				process.stdout.write(String(data));
@@ -69,11 +89,7 @@ module.exports = structr({
 			});
 		});
 
-		
-
-
-		//this.padding(this._padding[0], this._padding[1], this._padding[2], this._padding[3]);
-		//this._resize(this._width, this._height);
+		self._resizeAllWindows();
 
 		return this;
 	},
@@ -110,22 +126,17 @@ module.exports = structr({
 			return this._resizeAllWindows();
 		}
 
-		if(!width) width = this._width;
-		if(!height) height = this._height;
+		/*width  += (this._video.padding.right + this._video.padding.left);
+		height += (this._video.padding.bottom + this._video.padding.top);*/
 
 
-
-		width  += (this._padding[1] + this._padding[0]);
-		height += (this._padding[3] + this._padding[2]);
-
-
-		this._width  = width;
-		this._height = height;
+		this._video.width  = width;
+		this._video.height = height;
 
 
 		console.log('resize: %d, %d', width, height);
 
-		this._resizeAllWindows();
+		this.start();
 	},
 
 	/**
@@ -149,27 +160,24 @@ module.exports = structr({
 	 */
 
 	'padding': function(padding) {
-		this._padding = this._args(padding.left, padding.right, padding.top, padding.bottom);
+		this._video.padding = padding;
 		if(!this._proc) return;
-		 // this._proc.stdin.write('padding\n' + this._padding.join(' ') + "\n");
-		//resize here???
 		this.resizeDesktop();
 	},
-
 
 	/**
 	 */
 
 	"_resizeAllWindows": function() {
-		var width = this._width,
-		height = this._height;
+		var width = this._video.width,
+		height = this._video.height;
 		var bin = __dirname + "/../../../window_resize/Debug/resize.exe";//'C:\\Program Files\\VMware\\VMware Tools\\VMwareResolutionSet.exe';
 
 		exec(bin+" "+width + ' ' + height, function(err, stdout, stderr) {
 			process.stdout.write(stdout);
 			process.stderr.write(stderr);
 		});
-		this.start(); //restart
+		// this.start(); //restart
 	},
 
 	/**
