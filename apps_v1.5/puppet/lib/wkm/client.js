@@ -53,7 +53,6 @@ module.exports = structr({
 
 	'start': function(options) {
 
-		if(options.width) options.width += 
 
 		var self = this,
 		video = _.extend(this._video, options || {});
