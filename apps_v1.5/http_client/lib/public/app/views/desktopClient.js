@@ -63,7 +63,7 @@ module.exports  = Ember.ContainerView.extend({
 		this._puppet = puppet;
 		this._player.set("params.host", puppet.rtmp.host);
 		this._onResize();
-		puppet.browsers.open("http://youtube.com", "chrome 19");
+		puppet.browsers.open(this._query.url, "chrome 19");
 	},
 
 	/**
