@@ -51,7 +51,7 @@ exports.start({
 	puppeteer: {
 		port: 8000
 	},
-	rtmp: Url.parse("rtmp://192.168.2.3:1935/live/default"),
+	rtmp: Url.parse("rtmp://127.0.0.1:1935/live/default"),
 	browsers: {
 		directory: "~/Desktop/browsers",
 		cache: {
