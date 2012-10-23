@@ -108,7 +108,7 @@ int main(int argc, const char* argv[]) {
 		MAP_ATOI(ctx->capture_timeout, "-timeout")
 		MAP_ATOI(ctx->me_subpel_quality, "-subq")
 		MAP_ATOI(ctx->qmin, "-qmin")
-		MAP_ATOI(ctx->qmax, "-qmin")
+		MAP_ATOI(ctx->qmax, "-qmax")
 		MAP_ATOI(ctx->gop_size, "-gop_size")
 		MAP_ATOI(ctx->frame_rate, "-fr")
 		MAP_ATOI(ctx->scenechange_threshold, "-scenechange_threshold")
