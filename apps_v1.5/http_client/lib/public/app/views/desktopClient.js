@@ -102,7 +102,7 @@ module.exports  = Ember.ContainerView.extend({
 			},
 			mouseWheel: _.throttle(function(coords) {
 				self._mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, coords, coords.delta);
-			}, 50),
+			}, 1),
 			resize: _.debounce(function(data) {
 				self._onResize(data.width, data.height);
 			}, 250)
