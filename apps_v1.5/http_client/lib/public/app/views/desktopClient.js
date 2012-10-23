@@ -9,7 +9,8 @@ var DesktopPlayer = require("./flashPlayer").extend({
 	"init": function() {
 		this._super();
 		this.set("params", Ember.Object.create({
-			host: "http://localhost"
+			host: "http://localhost",
+			debug: true
 		}));
 		this.get("params").addObserver("host", this, "_onRtmpUrlChange");
 	},
