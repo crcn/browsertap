@@ -11,11 +11,14 @@
 #include <windows.h>
 
 
-int broadcast_video(Client::Console* cli) 
+DWORD WINAPI broadcast_video(LPVOID param) 
 {
-	//Client::Console* cli = (Client::Console*) param;
+	Client::Console* cli = (Client::Console*) param;
 
 	int timeout = cli->mediaBroadcaster()->context()->capture_timeout;
+
+	//MUST give CPU a rest...
+	if(timeout == 0) timeout = 1; 
 
 
 	while(true) 
@@ -39,24 +42,20 @@ int broadcast_video(Client::Console* cli)
 		delete bmp;
 	
 
-		if(timeout > 0)
-		{
-			std::cout << timeout << std::endl;
-			Sleep(timeout);
-		}
+		Sleep(timeout);
 	}
 
 	return 0;
 }
 
 
-/*void init_broadcast_thread(Client::Console* cli) 
+void init_broadcast_thread(Client::Console* cli) 
 {
 	DWORD threadId;
 	CreateThread(NULL, 0, broadcast_video, cli, 0, &threadId);
 
 	//pthread_create(&t1, NULL, &broadcast_video, NULL);
-}*/
+}
 
 
 int usage() {
@@ -142,6 +141,8 @@ int main(int argc, const char* argv[]) {
 
 	//the client which controls everything
 	Client::Console* cli        = new Client::Console(win, bf, mouse, keyboard);
+	cli->bounds = bounds;
+	cli->padding = padding;
 	/*cli->bounds.width = atoi(argv[2]);
 	cli->bounds.height = atoi(argv[3]);
 	cli->padding.left = atoi(argv[4]);
@@ -153,12 +154,11 @@ int main(int argc, const char* argv[]) {
 	
 
 
-	//init_broadcast_thread(cli);
-
-	broadcast_video(cli);
+	init_broadcast_thread(cli);
 
 
-	//cli->start();
+
+	cli->start();
 
 
 

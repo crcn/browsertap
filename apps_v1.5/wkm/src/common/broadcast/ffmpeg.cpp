@@ -129,6 +129,8 @@ namespace Broadcast
 		{
 			fprintf(stderr, "Error writing video frame\n");
 		}
+
+		
 	}
 
 
@@ -237,8 +239,8 @@ namespace Broadcast
 		//_videoCodecCtx->rc_min_rate      = br;// 64 * 1000; //average bit rate
 		_videoCodecCtx->bit_rate      = br; //average bit rate
 		//_videoCodecCtx->rc_max_rate      = br;// 64 * 1000; //average bit rate
-		//_videoCodecCtx->qblur      = 1.0;// 64 * 1000; //average bit rate
-		//_videoCodecCtx->qcompress      = 1.0;// 64 * 1000; //average bit rate
+		_videoCodecCtx->qblur      = 1.0;// 64 * 1000; //average bit rate
+		_videoCodecCtx->qcompress      = 1.0;// 64 * 1000; //average bit rate
 		//_videoCodecCtx->bit_rate_tolerance      = br * 2;// kb * 1000;
 		//_videoCodecCtx->rc_min_rate   = 0; //max bit rate
 		//_videoCodecCtx->rc_max_rate   = 0; //max bit rate
@@ -263,6 +265,7 @@ namespace Broadcast
 		//_videoCodecCtx->scenechange_threshold = 40;
 		//_videoCodecCtx->b_quant_offset = 1.25;
 		//_videoCodecCtx->scenechange_threshold = -500;
+
 		
 		//_videoCodecCtx->me_method = ME_ZERO;
 		//_videoCodecCtx->qmin = 1;
@@ -295,8 +298,8 @@ namespace Broadcast
 		//_videoCodecCtx->me_subpel_quality = 0;
 
 			
-		_videoCodecCtx->me_subpel_quality = 0;	
-		_videoCodecCtx->thread_count = 0;
+		_videoCodecCtx->me_subpel_quality = 0;
+		_videoCodecCtx->thread_count = 1;
 
 		//_videoCodecCtx->qmin = 1;
 		//_videoCodecCtx->qmax = 10;
