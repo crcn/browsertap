@@ -11,11 +11,12 @@
 #include <windows.h>
 
 
-DWORD WINAPI broadcast_video(LPVOID param) 
+int broadcast_video(Client::Console* cli) 
 {
-	Client::Console* cli = (Client::Console*) param;
+	//Client::Console* cli = (Client::Console*) param;
 
 	int timeout = cli->mediaBroadcaster()->context()->capture_timeout;
+
 
 	while(true) 
 	{
@@ -36,9 +37,11 @@ DWORD WINAPI broadcast_video(LPVOID param)
 		//std::cout << "broadcasting rtmp video" << std::endl;
 
 		delete bmp;
+	
 
 		if(timeout > 0)
 		{
+			std::cout << timeout << std::endl;
 			Sleep(timeout);
 		}
 	}
@@ -47,13 +50,13 @@ DWORD WINAPI broadcast_video(LPVOID param)
 }
 
 
-void init_broadcast_thread(Client::Console* cli) 
+/*void init_broadcast_thread(Client::Console* cli) 
 {
 	DWORD threadId;
 	CreateThread(NULL, 0, broadcast_video, cli, 0, &threadId);
 
 	//pthread_create(&t1, NULL, &broadcast_video, NULL);
-}
+}*/
 
 
 int usage() {
@@ -150,11 +153,12 @@ int main(int argc, const char* argv[]) {
 	
 
 
-	init_broadcast_thread(cli);
+	//init_broadcast_thread(cli);
+
+	broadcast_video(cli);
 
 
-
-	cli->start();
+	//cli->start();
 
 
 
