@@ -58,14 +58,16 @@ module.exports = structr({
 		video = _.extend(this._video, options || {});
 
 		this.kill(function() {
+
+			video.padding = _.default(video.padding, { left: 0, right: 0, top: 0, bottom: 0 })
 			var args = [
 				"-o", self._rtmpUrl, 
 				"-w", video.width + (video.padding.left + video.padding.right), 
 				"-h", video.height + (video.padding.top + video.padding.bottom), 
-				"-pl", video.padding.left || 0, 
-				"-pr", video.padding.right || 0,
-				"-pt", video.padding.top || 0,
-				"-pb", video.padding.bottom || 0,
+				"-pl", video.padding.left 
+				"-pr", video.padding.right,
+				"-pt", video.padding.top,
+				"-pb", video.padding.bottom,
 				"-gop_size", video.gop_size || 500,
 				"-bit_rate", video.bit_rate || 64,
 				"-qmin", video.qmin || 1,
