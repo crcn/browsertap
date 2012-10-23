@@ -67,7 +67,7 @@ module.exports = structr({
 				"-o", self._rtmpUrl, 
 				"-w", video.width + (video.padding.left + video.padding.right), 
 				"-h", video.height + (video.padding.top + video.padding.bottom), 
-				"-pl", video.padding.left 
+				"-pl", video.padding.left,
 				"-pr", video.padding.right,
 				"-pt", video.padding.top,
 				"-pb", video.padding.bottom,
