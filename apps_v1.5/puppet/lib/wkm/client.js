@@ -57,7 +57,7 @@ module.exports = structr({
 		video = _.extend(this._video, options || {});
 
 		this.kill(function() {
-			var args = __dirname + "/../../../wkm/bin/cli.exe", [
+			var args = [
 				"-o", self._rtmpUrl, 
 				"-w", video.width, 
 				"-h", video.height, 
@@ -172,7 +172,7 @@ module.exports = structr({
 		var width = this._video.width,
 		height = this._video.height;
 		var bin = __dirname + "/../../../window_resize/Debug/resize.exe";//'C:\\Program Files\\VMware\\VMware Tools\\VMwareResolutionSet.exe';
-
+		;
 		exec(bin+" "+width + ' ' + height, function(err, stdout, stderr) {
 			process.stdout.write(stdout);
 			process.stderr.write(stderr);

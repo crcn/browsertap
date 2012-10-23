@@ -30,7 +30,7 @@ module.exports = structr({
 
 	"restart": function(options) {
 		this._client.restart(options);
-	}
+	},
 
 	/**
 	 */
