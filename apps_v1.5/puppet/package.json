@@ -8,5 +8,22 @@
   },
   "repository": "",
   "author": "",
-  "license": "BSD"
+  "license": "BSD",
+  "dependencies": {
+    "async": "0.1.x",
+    "domready": "0.2.x",
+    "mkdirp": "0.3.x",
+    "outcome": "0.0.x",
+    "sift": "0.0.x",
+    "step": "0.0.x",
+    "structr": "0.2.x",
+    "structr-step": "0.0.x",
+    "tq": "0.0.x",
+    "underscore": "1.4.x",
+    "filternet": "0.0.x",
+    "browserify": "1.16.x",
+    "dnode": "1.0.x",
+    "shoe": "0.0.x",
+    "express": ">= undefined"
+  }
 }

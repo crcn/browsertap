@@ -11,7 +11,8 @@
     "shoe": "~0.0.7",
     "dnode": "~1.0.1",
     "traverse": "~0.6.3",
-    "underscore": "~1.4.2"
+    "underscore": "~1.4.2",
+    "structr": "0.2.x"
   },
   "devDependencies": {},
   "scripts": {

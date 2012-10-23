@@ -8,5 +8,11 @@
   },
   "repository": "",
   "author": "",
-  "license": "BSD"
+  "license": "BSD",
+  "dependencies": {
+    "clone": "0.1.x",
+    "traverse": "0.6.x",
+    "dnode": "1.0.x",
+    "shoe": "0.0.x"
+  }
 }
