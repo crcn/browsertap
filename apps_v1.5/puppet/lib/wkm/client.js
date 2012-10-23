@@ -53,14 +53,16 @@ module.exports = structr({
 
 	'start': function(options) {
 
+		if(options.width) options.width += 
+
 		var self = this,
 		video = _.extend(this._video, options || {});
 
 		this.kill(function() {
 			var args = [
 				"-o", self._rtmpUrl, 
-				"-w", video.width, 
-				"-h", video.height, 
+				"-w", video.width + (video.padding.left + video.padding.right), 
+				"-h", video.height + (video.padding.top + video.padding.bottom), 
 				"-pl", video.padding.left || 0, 
 				"-pr", video.padding.right || 0,
 				"-pt", video.padding.top || 0,
@@ -104,7 +106,6 @@ module.exports = structr({
 		this._killing = true;
 		if(!callback) callback = function(){};
 		if(this._proc) {
-			console.log("KILL")
 			this._proc.once("exit", function() {
 				self._killing = false;
 				callback();

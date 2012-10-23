@@ -44,7 +44,7 @@ package
 		{
 			
 			this._server =  this.root.loaderInfo.parameters.host || "rtmp://192.168.2.3:1935/live";
-			this._debug = true;//Boolean(this.root.loaderInfo.parameters.debug);
+			this._debug = Boolean(this.root.loaderInfo.parameters.debug);
 			
 			
 			this._debugInfo = new TextField();
@@ -54,6 +54,7 @@ package
 			this._debugInfo.height = 700;
 			this._debugInfo.background = true;
 			this._debugInfo.backgroundColor = 0xFFFFFF;
+			this._debugInfo.alpha = 0.5;
 			if(this._debug) this.addChild(this._debugInfo);
 			
 			
