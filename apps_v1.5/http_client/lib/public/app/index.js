@@ -1,12 +1,16 @@
+var Url = require("url");
+
 
 window.App = Em.Application.create({
 	//"rootElement": "#someId"
 });
 
 
+var info = Url.parse(String(window.location))
+
 window.App.DesktopClient = require("./views/desktopClient").extend({
 	service: {
-		host: "http://192.168.2.2:8082/dnode"
+		host: "http://"+info.hostname+":"+(Number(info.port || 80) + 2)+"/dnode"
 	}
 })
 
