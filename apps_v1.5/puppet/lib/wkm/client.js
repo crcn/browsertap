@@ -41,13 +41,19 @@ module.exports = structr({
 
 		this.kill(function() {
 			console.log("broadcasting to rtmp server %s", self._rtmpUrl);
-			self._proc = spawn(__dirname + "/../../../wkm/bin/cli.exe", [self._rtmpUrl, 
-				self._width, 
-				self._height, 
-				self._padding[0], 
-				self._padding[1],
-				self._padding[2],
-				self._padding[3]]);
+			self._proc = spawn(__dirname + "/../../../wkm/bin/cli.exe", [
+				"-o", self._rtmpUrl, 
+				"-w", self._width, 
+				"-h", self._height, 
+				"-pl", self._padding[0], 
+				"-pr", self._padding[1],
+				"-pt", self._padding[2],
+				"-pb", self._padding[3],
+				"-gop_size", 300,
+				"-bit_rate", 64,
+				"-qmin", 1,
+				"-qmax", 11,
+				"-timeout", 1]);
 
 			self._proc.stdout.on('data', function(data) {
 				process.stdout.write(String(data));
