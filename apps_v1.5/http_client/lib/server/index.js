@@ -18,7 +18,8 @@ exports.listen = function() {
 
 
 	var desktops = [
-		"http://ec2-23-23-57-189.compute-1.amazonaws.com:8000"
+		"http://54.243.45.252:8000"
+		// "http://ec2-23-23-57-189.compute-1.amazonaws.com:8000"
 		// "http://192.168.72.129:8000"
 	];
 
