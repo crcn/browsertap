@@ -11,8 +11,8 @@ _ = require("underscore");
 module.exports = function(options, callback) {
 
 	var on = outcome.error(callback),
-	directory = options.directory.replace("~", process.env.HOME);
-	options.cache.prefix = options.cache.prefix.replace("~", process.env.HOME);
+	directory = options.directory.replace("~", process.env.HOME || process.env.HOMEPATH);
+	options.cache.prefix = options.cache.prefix.replace("~", process.env.HOME || process.env.HOMEPATH);
 
 	step(
 
