@@ -183,6 +183,7 @@ package
 			this._video.height = this.stage.stageHeight;
 
 			ExternalInterface.call('desktopEvents.resize', { width: this._video.width, height: this._video.height });
+			this._debugInfo.y = this.stage.stageHeight - 200;
 		}
 		
 		private function onNetStatus(event:NetStatusEvent):void
