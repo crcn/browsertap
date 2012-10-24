@@ -1,0 +1,251 @@
+<HTML><HEAD>
+<meta NAME="GENERATOR" CONTENT="ChkInf">
+<TITLE>Summary of ChkInf results for .\fakegfx.inf</TITLE></HEAD>
+<BODY VLINK=#000000>
+<H1>Summary of "<FONT COLOR=#990099>.\fakegfx.inf</FONT>"</H1>
+<TABLE CELLSPACING=0 CELLPADDING=0 BORDER=0>
+	<TR><TD><H3><A HREF="#ERRORS">Total Errors:</A></TD>
+	    <TD>&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+	    <TD ALIGN=RIGHT><H3><FONT COLOR=RED>6</FONT></TD></TR>
+	<TR><TD><H3><A HREF="#WARNINGS">Total Warnings:</A></TD>
+	    <TD>&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+	    <TD ALIGN=RIGHT><H3><FONT COLOR=BLUE>5</FONT></TD></TR>
+</TABLE><BR>
+	<HR>
+	<FONT COLOR=RED><H3><A NAME="ERRORS">Errors:</A></H3>
+		<LI><A HREF="#Lnum0">Line 0</A>: (E22.1.1003) Section [SourceDisksNames] not defined. 
+		<LI><A HREF="#Lnum23">Line 23</A>: (E22.1.1081) Directive: CatalogFile required (and must not be blank) in section [Version] for WHQL digital signature. 
+		<LI><A HREF="#Lnum25">Line 25</A>: (E22.1.1004) Provider listed is Microsoft, but should be the organization who wrote this INF. 
+		<LI><A HREF="#Lnum98">Line 98</A>: (DE22.11.6029) Running on Vista or later, should have Feature Score directive 
+		<LI><A HREF="#Lnum171">Line 171</A>: (E22.1.1047) String tokens should be in quotes (and not blank) or should be numeric. 
+		<LI><A HREF="#Lnum198">Line 198</A>: (E22.1.1047) String tokens should be in quotes (and not blank) or should be numeric. 
+	</FONT>
+	<HR>
+	<FONT COLOR=BLUE><H3><A NAME="WARNINGS">Warnings:</A></H3>
+		<LI><A HREF="#Lnum0">Line 0</A>: (W22.1.2111) [SourceDisksFiles] section not defined - full CopyFiles checking not done. 
+		<LI><A HREF="#Lnum31">Line 31</A>: (W22.1.2202) Unrecognized directive: LayoutFile 
+		<LI><A HREF="#Lnum105">Line 105</A>: (W22.1.2112) File "fakemonminiport.sys" is not listed in the [SourceDisksFiles]. 
+		<LI><A HREF="#Lnum108">Line 108</A>: (W22.1.2112) File "fakemonitor.dll" is not listed in the [SourceDisksFiles]. 
+		<LI><A HREF="#Lnum119">Line 119</A>: (W22.1.2027) StartType of 1 should only be specified by drivers that may detect legacy hardware. 
+	</FONT>
+	<BR><HR>
+<H3>Annotated INF:</H3>
+<PRE>
+<A NAME="Lnum0">
+<FONT COLOR=RED>; (E22.1.1003) Section [SourceDisksNames] not defined. 
+</FONT><FONT COLOR=BLUE>; (W22.1.2111) [SourceDisksFiles] section not defined - full CopyFiles checking not done. 
+</FONT><A NAME="Lnum1">;***********************************************************************</A>
+<A NAME="Lnum2">; Toby Opferman VMWare Graphics Driver</A>
+<A NAME="Lnum3">;</A>
+<A NAME="Lnum4">; Note:</A>
+<A NAME="Lnum5">; </A>
+<A NAME="Lnum6">; INF files for system-supplied drivers (in-the-box drivers) are</A>
+<A NAME="Lnum7">; slightly different from the INF for OEM supplied drivers.  This </A>
+<A NAME="Lnum8">; sample INF file is currently structured as an INF for the in-the-box </A>
+<A NAME="Lnum9">; perm2 driver. Instructions have been provided in the comments which</A>
+<A NAME="Lnum10">; describe how to modify this INF so that it can be used to install</A>
+<A NAME="Lnum11">; stand alone drivers.</A>
+<A NAME="Lnum12">;</A>
+<A NAME="Lnum13">; OEM driver developers should follow the instrctions below to comment</A>
+<A NAME="Lnum14">; out or uncomment related sections.</A>
+<A NAME="Lnum15">;</A>
+<A NAME="Lnum16">;</A>
+<A NAME="Lnum17">; Copyright (c) 1994-1998 3Dlabs Inc. Ltd. All rights reserved.            </A>
+<A NAME="Lnum18">; Copyright (c) 1995-1999 Microsoft Corporation.  All Rights Reserved.</A>
+<A NAME="Lnum19">; Copyright (c) 2005 Toby Opferman. All Rights Reserved.</A>
+<A NAME="Lnum20">;</A>
+<A NAME="Lnum21">;***********************************************************************</A>
+<A NAME="Lnum22"></A>
+<A NAME="Lnum23">[Version]</A>
+<FONT COLOR=RED>; (E22.1.1081) Directive: CatalogFile required (and must not be blank) in section [Version] for WHQL digital signature. 
+</FONT><A NAME="Lnum24">Signature="$CHICAGO$"</A>
+<A NAME="Lnum25">Provider=%MS%</A>
+<FONT COLOR=RED>; (E22.1.1004) Provider listed is Microsoft, but should be the organization who wrote this INF. 
+</FONT><A NAME="Lnum26"></A>
+<A NAME="Lnum27">;-----------------------------------------------------------------------</A>
+<A NAME="Lnum28">; OEM drivers should remove LayoutFile entry. LayoutFile entry used </A>
+<A NAME="Lnum29">; ONLY by internal Microsoft engineering. </A>
+<A NAME="Lnum30">;-----------------------------------------------------------------------</A>
+<A NAME="Lnum31">LayoutFile=layout.inf</A>
+<FONT COLOR=BLUE>; (W22.1.2202) Unrecognized directive: LayoutFile 
+</FONT><A NAME="Lnum32"></A>
+<A NAME="Lnum33">ClassGUID={4D36E968-E325-11CE-BFC1-08002BE10318}</A>
+<A NAME="Lnum34">Class=Display</A>
+<A NAME="Lnum35">DriverVer=06/21/2006,6.1.7600.16385</A>
+<A NAME="Lnum36"></A>
+<A NAME="Lnum37">[DestinationDirs]</A>
+<A NAME="Lnum38">DefaultDestDir  = 11</A>
+<A NAME="Lnum39">perm2.Miniport  = 12  ; drivers</A>
+<A NAME="Lnum40">perm2.Display   = 11  ; system32</A>
+<A NAME="Lnum41"></A>
+<A NAME="Lnum42">;</A>
+<A NAME="Lnum43">; Driver information</A>
+<A NAME="Lnum44">;</A>
+<A NAME="Lnum45"></A>
+<A NAME="Lnum46">[Manufacturer]</A>
+<A NAME="Lnum47">%TDDDF%    = 3dlabs.Mfg</A>
+<A NAME="Lnum48">%Diamond%  = diamond.Mfg</A>
+<A NAME="Lnum49">%Accel%    = Accel.Mfg</A>
+<A NAME="Lnum50">%ELSA%     = Elsa.Mfg</A>
+<A NAME="Lnum51">%Creative% = CL.Mfg</A>
+<A NAME="Lnum52">%Appian%   = Appian.Mfg</A>
+<A NAME="Lnum53">%Leadtek%  = Leadtek.Mfg</A>
+<A NAME="Lnum54">%Compaq%   = Compaq.Mfg</A>
+<A NAME="Lnum55"></A>
+<A NAME="Lnum56">[Accel.Mfg]</A>
+<A NAME="Lnum57">%Accel% %AccelStar% = perm2, PCI\VEN_104C&DEV_3D07&SUBSYS_000F1040</A>
+<A NAME="Lnum58">%Accel% %AccelStar% = perm2, PCI\VEN_104C&DEV_3D07&SUBSYS_00111040</A>
+<A NAME="Lnum59">%Accel% %AccelStar% = perm2, PCI\VEN_3D3D&DEV_0009&SUBSYS_00111040</A>
+<A NAME="Lnum60"></A>
+<A NAME="Lnum61">[Elsa.Mfg]</A>
+<A NAME="Lnum62">%ELSA% %Winner%  = perm2, PCI\VEN_104C&DEV_3D07&SUBSYS_0A311048</A>
+<A NAME="Lnum63">%ELSA% %Synergy% = perm2, PCI\VEN_104C&DEV_3D07&SUBSYS_0A321048</A>
+<A NAME="Lnum64">%ELSA% %Synergy% = perm2, PCI\VEN_104C&DEV_3d07&SUBSYS_0A351048</A>
+<A NAME="Lnum65"></A>
+<A NAME="Lnum66">[CL.Mfg]</A>
+<A NAME="Lnum67">%Creative% %Blaster% = perm2, PCI\VEN_104C&DEV_3D07&SUBSYS_100F1102</A>
+<A NAME="Lnum68"></A>
+<A NAME="Lnum69">[Appian.Mfg]</A>
+<A NAME="Lnum70">%Appian% %Jernimo%   = perm2, PCI\VEN_104C&DEV_3D07&SUBSYS_3D011097</A>
+<A NAME="Lnum71"> </A>
+<A NAME="Lnum72">[3dlabs.Mfg]</A>
+<A NAME="Lnum73">%TDDDF% %Permedia2%  = perm2, PCI\VEN_104C&DEV_3D07</A>
+<A NAME="Lnum74">%TDDDF% %Permedia2%  = perm2, PCI\VEN_3D3D&DEV_0007</A>
+<A NAME="Lnum75">%TDDDF% %Permedia2%  = perm2, PCI\VEN_3D3D&DEV_0009</A>
+<A NAME="Lnum76"></A>
+<A NAME="Lnum77">[diamond.Mfg]</A>
+<A NAME="Lnum78">%Diamond% %FireGL%   = perm2, PCI\VEN_104C&DEV_3D07&SUBSYS_01411092&REV_01</A>
+<A NAME="Lnum79">%Diamond% %FireGL%   = perm2, PCI\VEN_104C&DEV_3D07&SUBSYS_01461092&REV_01</A>
+<A NAME="Lnum80">%Diamond% %FireGL%   = perm2, PCI\VEN_104C&DEV_3D07&SUBSYS_01271092</A>
+<A NAME="Lnum81">%Diamond% %FireGL%   = perm2, PCI\VEN_104C&DEV_3D07&SUBSYS_01361092</A>
+<A NAME="Lnum82">%Diamond% %FireGL%   = perm2, PCI\VEN_104C&DEV_3D07&SUBSYS_01491092</A>
+<A NAME="Lnum83">%Diamond% %FireGL%   = perm2, PCI\VEN_104C&DEV_3D07&SUBSYS_01521092</A>
+<A NAME="Lnum84">%Diamond% %FireGL%   = perm2, PCI\VEN_104C&DEV_3D07&SUBSYS_01541092</A>
+<A NAME="Lnum85">%Diamond% %FireGL%   = perm2, PCI\VEN_104C&DEV_3D07&SUBSYS_01561092</A>
+<A NAME="Lnum86"></A>
+<A NAME="Lnum87">[Leadtek.Mfg]</A>
+<A NAME="Lnum88">%Leadtek% %WinFast%  = perm2, PCI\VEN_104C&DEV_3D07&SUBSYS_2633107D</A>
+<A NAME="Lnum89"></A>
+<A NAME="Lnum90">[Compaq.Mfg]</A>
+<A NAME="Lnum91">%Compaq% %Comet%     = perm2, PCI\VEN_104C&DEV_3D07&SUBSYS_4D101011</A>
+<A NAME="Lnum92"></A>
+<A NAME="Lnum93">;</A>
+<A NAME="Lnum94">; General installation section</A>
+<A NAME="Lnum95">;</A>
+<A NAME="Lnum96"></A>
+<A NAME="Lnum97">[perm2]</A>
+<A NAME="Lnum98">CopyFiles=perm2.Miniport, perm2.Display</A>
+<FONT COLOR=RED>; (DE22.11.6029) Running on Vista or later, should have Feature Score directive 
+</FONT><A NAME="Lnum99"></A>
+<A NAME="Lnum100">;</A>
+<A NAME="Lnum101">; File sections</A>
+<A NAME="Lnum102">;</A>
+<A NAME="Lnum103"></A>
+<A NAME="Lnum104">[perm2.Miniport]</A>
+<A NAME="Lnum105">fakemonminiport.sys</A>
+<FONT COLOR=BLUE>; (W22.1.2112) File "fakemonminiport.sys" is not listed in the [SourceDisksFiles]. 
+</FONT><A NAME="Lnum106"></A>
+<A NAME="Lnum107">[perm2.Display]</A>
+<A NAME="Lnum108">fakemonitor.dll</A>
+<FONT COLOR=BLUE>; (W22.1.2112) File "fakemonitor.dll" is not listed in the [SourceDisksFiles]. 
+</FONT><A NAME="Lnum109"></A>
+<A NAME="Lnum110">;</A>
+<A NAME="Lnum111">; Service Installation</A>
+<A NAME="Lnum112">;</A>
+<A NAME="Lnum113"></A>
+<A NAME="Lnum114">[perm2.Services]</A>
+<A NAME="Lnum115">AddService = perm2, 0x00000002, perm2_Service_Inst, perm2_EventLog_Inst</A>
+<A NAME="Lnum116"></A>
+<A NAME="Lnum117">[perm2_Service_Inst]</A>
+<A NAME="Lnum118">ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER</A>
+<A NAME="Lnum119">StartType      = 1                  ; SERVICE_SYSTEM_START</A>
+<FONT COLOR=BLUE>; (W22.1.2027) StartType of 1 should only be specified by drivers that may detect legacy hardware. 
+</FONT><A NAME="Lnum120">ErrorControl   = 0                  ; SERVICE_ERROR_IGNORE</A>
+<A NAME="Lnum121">LoadOrderGroup = Video</A>
+<A NAME="Lnum122">ServiceBinary  = %12%\fakemonminiport.sys</A>
+<A NAME="Lnum123"></A>
+<A NAME="Lnum124">[perm2_EventLog_Inst]</A>
+<A NAME="Lnum125">AddReg = perm2_EventLog_AddReg</A>
+<A NAME="Lnum126"></A>
+<A NAME="Lnum127">[perm2_EventLog_AddReg]</A>
+<A NAME="Lnum128">HKR,,EventMessageFile,0x00020000,"%SystemRoot%\System32\IoLogMsg.dll;%SystemRoot%\System32\drivers\fakemonminiport.sys"</A>
+<A NAME="Lnum129">HKR,,TypesSupported,0x00010001,7</A>
+<A NAME="Lnum130"></A>
+<A NAME="Lnum131">;</A>
+<A NAME="Lnum132">; Software Installation</A>
+<A NAME="Lnum133">;</A>
+<A NAME="Lnum134"></A>
+<A NAME="Lnum135">[perm2.SoftwareSettings]</A>
+<A NAME="Lnum136">AddReg = perm2_SoftwareDeviceSettings</A>
+<A NAME="Lnum137"></A>
+<A NAME="Lnum138">[perm2_SoftwareDeviceSettings]</A>
+<A NAME="Lnum139">HKR,, InstalledDisplayDrivers,        %REG_MULTI_SZ%, fakemonitor</A>
+<A NAME="Lnum140">HKR,, VgaCompatible,                  %REG_DWORD%,    0</A>
+<A NAME="Lnum141">HKR,, ExportSingleBufferedModes,      %REG_DWORD%,    0</A>
+<A NAME="Lnum142">HKR,, PermediaClockSpeed,             %REG_DWORD%,    0</A>
+<A NAME="Lnum143"></A>
+<A NAME="Lnum144">;</A>
+<A NAME="Lnum145">;-----------------------------------------------------------------------</A>
+<A NAME="Lnum146">; OEM drivers should uncomment following commented sections</A>
+<A NAME="Lnum147">;-----------------------------------------------------------------------</A>
+<A NAME="Lnum148">;[SourceDisksNames]</A>
+<A NAME="Lnum149">;1 = %DiskId%,,,""</A>
+<A NAME="Lnum150">;</A>
+<A NAME="Lnum151">;[SourceDisksFiles.x86]</A>
+<A NAME="Lnum152">;perm2.sys = 1</A>
+<A NAME="Lnum153">;perm2.dll = 1</A>
+<A NAME="Lnum154">;</A>
+<A NAME="Lnum155">;[SourceDisksFiles.alpha]</A>
+<A NAME="Lnum156">;perm2.sys = 1</A>
+<A NAME="Lnum157">;perm2.dll = 1</A>
+<A NAME="Lnum158"></A>
+<A NAME="Lnum159"></A>
+<A NAME="Lnum160">[Strings]</A>
+<A NAME="Lnum161"></A>
+<A NAME="Lnum162">;</A>
+<A NAME="Lnum163">; Non-Localizable Strings</A>
+<A NAME="Lnum164">;</A>
+<A NAME="Lnum165"></A>
+<A NAME="Lnum166">REG_SZ         = 0x00000000</A>
+<A NAME="Lnum167">REG_MULTI_SZ   = 0x00010000</A>
+<A NAME="Lnum168">REG_EXPAND_SZ  = 0x00020000</A>
+<A NAME="Lnum169">REG_BINARY     = 0x00000001</A>
+<A NAME="Lnum170">REG_DWORD      = 0x00010001</A>
+<A NAME="Lnum171">serviceroot    = System\CurrentControlSet\Services</A>
+<FONT COLOR=RED>; (E22.1.1047) String tokens should be in quotes (and not blank) or should be numeric. 
+</FONT><A NAME="Lnum172"></A>
+<A NAME="Lnum173">;</A>
+<A NAME="Lnum174">; Localizable Strings</A>
+<A NAME="Lnum175">;</A>
+<A NAME="Lnum176"></A>
+<A NAME="Lnum177">;</A>
+<A NAME="Lnum178">;-----------------------------------------------------------------------</A>
+<A NAME="Lnum179">; OEM drivers should uncomment this line</A>
+<A NAME="Lnum180">;-----------------------------------------------------------------------</A>
+<A NAME="Lnum181">;DiskId="Windows 2000 Driver Installation Disk"</A>
+<A NAME="Lnum182"></A>
+<A NAME="Lnum183">MS         = "Microsoft"</A>
+<A NAME="Lnum184">TDDDF      = "Eyebrowse Video Display"</A>
+<A NAME="Lnum185">Accel      = "Accel Graphics"</A>
+<A NAME="Lnum186">ELSA       = "ELSA"</A>
+<A NAME="Lnum187">Creative   = "Creative Labs"</A>
+<A NAME="Lnum188">Diamond    = "Diamond Multimedia"</A>
+<A NAME="Lnum189">Appian     = "Appian Graphics"</A>
+<A NAME="Lnum190">Leadtek    = "Leadtek"</A>
+<A NAME="Lnum191">Compaq     = "Compaq (DEC) "</A>
+<A NAME="Lnum192"></A>
+<A NAME="Lnum193">AccelStar  = "AccelSTAR II"</A>
+<A NAME="Lnum194">Winner     = "WINNER 2000"</A>
+<A NAME="Lnum195">Synergy    = "GLoria Synergy"</A>
+<A NAME="Lnum196">Blaster    = "Graphics Blaster Extreme"</A>
+<A NAME="Lnum197">Jernimo    = "Jeronimo Pro"</A>
+<A NAME="Lnum198">Permedia2  = ""</A>
+<FONT COLOR=RED>; (E22.1.1047) String tokens should be in quotes (and not blank) or should be numeric. 
+</FONT><A NAME="Lnum199">FireGL     = "Fire GL1000 Pro"</A>
+<A NAME="Lnum200">WinFast    = "WinFast 3D L2300"</A>
+<A NAME="Lnum201">Comet      = "Comet"</A>
+<A NAME="Lnum202"></A>
+<A NAME="Lnum203"></A>
+<A NAME="Lnum204"></A>
+</PRE>
+</PRE>
