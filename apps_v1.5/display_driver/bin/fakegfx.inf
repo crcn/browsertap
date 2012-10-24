@@ -32,7 +32,7 @@ LayoutFile=layout.inf
 
 ClassGUID={4D36E968-E325-11CE-BFC1-08002BE10318}
 Class=Display
-DriverVer=07/01/1999,5.00.2072
+DriverVer=06/21/2006,6.1.7600.16385
 
 [DestinationDirs]
 DefaultDestDir  = 11
