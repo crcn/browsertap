@@ -59,14 +59,12 @@ module.exports = structr({
 
 		this.kill(function() {
 
-			console.log(video.padding);
-			console.log(video.height)
 
 			video.padding = _.defaults(video.padding, { left: 0, right: 0, top: 0, bottom: 0 })
 			var args = [
 				"-o", self._rtmpUrl, 
-				"-w", video.width + (video.padding.left + video.padding.right), 
-				"-h", video.height + (video.padding.top + video.padding.bottom), 
+				"-w", self._width(), 
+				"-h", self._height(), 
 				"-pl", video.padding.left,
 				"-pr", video.padding.right,
 				"-pt", video.padding.top,
@@ -122,6 +120,18 @@ module.exports = structr({
 	},
 
 	/**
+	 */
+	"_width": function() {
+		return this._video.width + ((this._video.padding.left || 0) + (this._video.padding.right || 0));
+	},
+
+	/**
+	 */
+	"_height": function() {
+		return this._video.height + ((this._video.padding.top || 0) + (this._video.padding.bottom || 0));
+	},
+
+	/**
 	 * resizes the desktop
 	 */
 
@@ -174,8 +184,8 @@ module.exports = structr({
 	 */
 
 	"_resizeAllWindows": function() {
-		var width = this._video.width,
-		height = this._video.height;
+		var width = this._width(),
+		height = this._height();
 		var bin = __dirname + "/../../../window_resize/Debug/resize.exe";//'C:\\Program Files\\VMware\\VMware Tools\\VMwareResolutionSet.exe';
 		;
 		exec(bin+" "+width + ' ' + height, function(err, stdout, stderr) {
