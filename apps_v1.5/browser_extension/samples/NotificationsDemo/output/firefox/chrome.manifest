@@ -1,0 +1,3 @@
+content NotificationsDemo_kango chrome/content/
+overlay chrome://browser/content/browser.xul chrome://NotificationsDemo_kango/content/content.xul
+resource NotificationsDemo_kango chrome/content/

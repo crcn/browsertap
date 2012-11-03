@@ -67,12 +67,13 @@ int usage() {
 }
 
 #define MAP_ATOI(to, flag) \
-	if(strcmp(flag, argv[i]) == 0) \
-		to = atoi(argv[++i]);
+	if(strcmp(flag, argv[i]) == 0) { \
+		to = atoi(argv[++i]); \
+	}
 
 #define MAP_CHAR(to, flag) \
 	if(strcmp(flag, argv[i]) == 0) \
-		to = argv[++i];
+		to = argv[++i]; 
 
 
 int main(int argc, const char* argv[]) {
@@ -93,6 +94,7 @@ int main(int argc, const char* argv[]) {
 	ctx->gop_size = 300;
 	ctx->scenechange_threshold = 500;
 	ctx->frame_rate = 25;
+	ctx->bit_rate = 64;
 
 	// last_redictor_count, 
 	// directpred
@@ -107,6 +109,7 @@ int main(int argc, const char* argv[]) {
 		MAP_ATOI(padding.right, "-pr")
 		MAP_ATOI(padding.top, "-pt")
 		MAP_ATOI(padding.bottom, "-pb")
+		MAP_ATOI(ctx->bit_rate, "-b")
 		MAP_ATOI(ctx->capture_timeout, "-timeout")
 		MAP_ATOI(ctx->me_subpel_quality, "-subq")
 		MAP_ATOI(ctx->qmin, "-qmin")
@@ -117,6 +120,7 @@ int main(int argc, const char* argv[]) {
 		MAP_ATOI(ctx->qcompress, "-qcompress")
 		MAP_ATOI(ctx->qblur, "-qblur")
 	}
+	std::cout << ctx->qmin << std::endl;
 
 	if(ctx->output == NULL) 
 	{

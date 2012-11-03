@@ -1,0 +1,12 @@
+{
+  "kango_version": "1.0.0 final", 
+  "content_scripts": [
+    "tree.js"
+  ], 
+  "description": "Displays Christmas tree on each loaded web page", 
+  "creator": "KangoExtensions", 
+  "homepage_url": "http://kangoextensions.com/", 
+  "version": "1.1.0", 
+  "id": "com.kangoextensions.jquerydemo", 
+  "name": "ChristmasTree"
+}

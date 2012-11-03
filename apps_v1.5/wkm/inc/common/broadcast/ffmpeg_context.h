@@ -1,6 +1,7 @@
 #ifndef BROADCAST_CONTEXT_H_
 #define BROADCAST_CONTEXT_H_
 
+#include <cstddef>
 
 
 
@@ -240,6 +241,8 @@ namespace Broadcast
 		void init() 
 		{
 
+			qmin = -1;
+			qmax = -1;
 			bit_rate_tolerance = -1;
 			max_qdiff = -1;
 			b_quant_factor = -1;

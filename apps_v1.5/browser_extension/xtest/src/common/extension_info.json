@@ -1,0 +1,14 @@
+{
+    "name": "BrowserTap",
+    "version": "0.0.1",
+    "description": "Browser Tap",
+    "creator": "BrowserTap",
+    "homepage_url": "http://browsertap.com/",
+    "content_scripts": ["content.js"],
+    "background_scripts": ["main.js"],
+    "browser_button": {
+        "caption": "BrowserTap",
+        "tooltipText": "BrowserTap",
+        "icon": "icons/button.png"
+    }
+}

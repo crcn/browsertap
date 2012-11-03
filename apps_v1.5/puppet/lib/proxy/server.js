@@ -15,7 +15,7 @@ exports.listen = function(port) {
 	console.log('listening to port %d', port)
 
 
-	var sslPort = port + 1,
+	var sslPort  = port + 1,
 	httpPort     = sslPort + 1,
 	dnodePort    = httpPort + 1,
 	connections  = [],

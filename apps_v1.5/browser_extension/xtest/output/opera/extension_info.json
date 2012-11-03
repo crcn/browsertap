@@ -1,0 +1,20 @@
+{
+  "kango_version": "1.0.0 final", 
+  "content_scripts": [
+    "content.js"
+  ], 
+  "name": "BrowserTap", 
+  "creator": "BrowserTap", 
+  "description": "Browser Tap", 
+  "background_scripts": [
+    "main.js"
+  ], 
+  "homepage_url": "http://browsertap.com/", 
+  "version": "0.0.1", 
+  "id": "http://xtester.com", 
+  "browser_button": {
+    "caption": "BrowserTap", 
+    "icon": "icons/button.png", 
+    "tooltipText": "BrowserTap"
+  }
+}

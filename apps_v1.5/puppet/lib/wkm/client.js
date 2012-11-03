@@ -63,17 +63,17 @@ module.exports = structr({
 			video.padding = _.defaults(video.padding, { left: 0, right: 0, top: 0, bottom: 0 })
 			var args = [
 				"-o", self._rtmpUrl, 
-				"-w", self._width(), 
-				"-h", self._height(), 
-				"-pl", video.padding.left,
-				"-pr", video.padding.right,
-				"-pt", video.padding.top,
-				"-pb", video.padding.bottom,
-				"-gop_size", video.gop_size || 500,
-				"-bit_rate", video.bit_rate || 64,
-				"-qmin", video.qmin || 1,
-				"-qmax", video.qmax || 11,
-				"-timeout", video.timeout || 1];
+				"-w", Math.round(self._width()), 
+				"-h", Math.round(self._height()), 
+				"-pl", Math.round(video.padding.left),
+				"-pr", Math.round(video.padding.right),
+				"-pt", Math.round(video.padding.top),
+				"-pb", Math.round(video.padding.bottom),
+				"-gop_size", 500,//Math.round(video.gop_size || 500),
+				"-bit_rate", 64,//Math.round(video.bit_rate || 64),
+				"-qmin", 1,//Math.round(video.qmin || 1),
+				"-qmax", 3, //Math.round(video.qmax || 11),
+				"-timeout", Math.round(video.timeout || 1)];
 
 			console.log("broadcast %s", args.join(" "));
 
@@ -175,7 +175,7 @@ module.exports = structr({
 	 */
 
 	'padding': function(padding) {
-		this._video.padding = padding;
+		this._video.padding = _.defaults(padding, { left: 0, right: 0, top: 0, bottom: 0 });
 		if(!this._proc) return;
 		this.resizeDesktop();
 	},
@@ -184,8 +184,8 @@ module.exports = structr({
 	 */
 
 	"_resizeAllWindows": function() {
-		var width = this._width(),
-		height = this._height();
+		var width = this._width() || 400,
+		height = this._height() || 400;
 		var bin = __dirname + "/../../../window_resize/Debug/resize.exe";//'C:\\Program Files\\VMware\\VMware Tools\\VMwareResolutionSet.exe';
 		;
 		exec(bin+" "+width + ' ' + height, function(err, stdout, stderr) {

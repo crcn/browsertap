@@ -1,7 +1,8 @@
 var service = require("../business/desktopService"),
 _ = require("underscore"),
 wkmEvents = require("./events"),
-Url = require("url");
+Url = require("url"),
+EventEmitter = require("events").EventEmitter;
 
 var DesktopPlayer = require("./flashPlayer").extend({
 	"source": "/swf/DesktopPlayer.swf",
@@ -35,7 +36,7 @@ module.exports  = Ember.ContainerView.extend({
 		this._createChildViews();
 		this._connect();
 		this._createListeners();
-		this._query = Url.parse(String(window.location), true).query;
+		this._query = { url: Url.parse(String(window.location), true).query.url };
 		this._video = {};
 	},
 
@@ -64,7 +65,11 @@ module.exports  = Ember.ContainerView.extend({
 		this._puppet = puppet;
 		this._player.set("params.host", puppet.rtmp.host);
 		this._onResize();
-		puppet.browsers.open(this._query.url || "http://google.com", "chrome 19");
+		var self = this;
+		puppet.browsers.open(this._query.url || "http://google.com", "ie 7", function() {
+			console.log("browser open");
+			self._onResize();
+		});
 	},
 
 	/**
@@ -74,9 +79,7 @@ module.exports  = Ember.ContainerView.extend({
 		var self = this,
 		win = jQuery(window);
 
-		/*win.resize(_.debounce(function() {
-			self._onResize();
-		}, 500));*/
+		window.__browsertap = new EventEmitter();
 
 		win.mousedown(function(e) {
 			// if(!$(e.target).closest('#desktop-player').length) return;
@@ -107,6 +110,10 @@ module.exports  = Ember.ContainerView.extend({
 				self._onResize(data.width, data.height);
 			}, 250)
 		}
+
+		window.__browsertap.on("refresh", function() {
+			// alert("REFRESH");
+		})
 	},
 
 	/**
@@ -117,8 +124,6 @@ module.exports  = Ember.ContainerView.extend({
 		this._width = width || this._width || jQuery(window).width();
 		this._height = height || this._height || jQuery(window).height();
 		if(!this._puppet) return;
-		// this._puppet.desktop.resize(this._width, this._height);
-		// this._video.width = 
 		this._reset();
 
 	},

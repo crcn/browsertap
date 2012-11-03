@@ -1,0 +1,18 @@
+{
+  "kango_version": "1.0.0 final", 
+  "browser_button": {
+    "caption": "BrowserEvents", 
+    "icon": "icons/button.png", 
+    "tooltipText": "BrowserEvents"
+  }, 
+  "creator": "KangoExtensions", 
+  "description": "Browser API demo", 
+  "developer_id": "YOUR_SAFARI_DEVELOPER_ID", 
+  "background_scripts": [
+    "main.js"
+  ], 
+  "homepage_url": "http://kangoextensions.com/", 
+  "version": "1.0.0", 
+  "id": "com.kangoextensions.browserevents", 
+  "name": "BrowserEvents"
+}

@@ -20,7 +20,7 @@
     "structr-step": "0.0.x",
     "tq": "0.0.x",
     "underscore": "1.4.x",
-    "filternet": "0.0.x",
+    "filternet": "git+https://crcn@github.com/crcn/filternet.git",
     "browserify": "1.16.x",
     "dnode": "1.0.x",
     "shoe": "0.0.x",
