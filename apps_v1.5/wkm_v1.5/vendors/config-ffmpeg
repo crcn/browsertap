@@ -1,0 +1,8 @@
+#!/bin/sh 
+cd ffmpeg
+./configure --prefix="/mingw" --extra-cflags="-mno-cygwin -mms-bitfields" --extra-ldflags="-Wl,–add-stdcall-alias" --enable-memalign-hack --target-os=mingw32 --arch=x86 --enable-shared --disable-static
+make
+
+mkdir ../../libs;
+for FILE in `find . -name "*.dll"`; do cp $FILE ../../libs; done;
+

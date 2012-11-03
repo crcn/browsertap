@@ -1,0 +1,76 @@
+
+#define WINVER 0x0500
+#include <string>
+#include <Windows.h>
+#include <iostream>
+#include <stdlib.h>
+#include "psapi.h"
+#include "common/events.h"
+
+
+typedef struct _RESOLUTION_ {
+	int x;
+	int y;
+} RESOLUTION, *PRESOLUTION;
+
+BOOL CALLBACK eachWindow(HWND hWnd, LPARAM lParam)
+{
+	RECT rect;
+	if(!GetWindowLong(hWnd, GWL_EXSTYLE) & WS_EX_APPWINDOW) return TRUE;
+	if(!IsWindowVisible(hWnd)) return TRUE;
+
+
+	int len = GetWindowTextLength(hWnd);
+	if(len == 0) return TRUE;
+
+
+	char class_name[80];
+	char title[80];
+	GetWindowTextA(hWnd, title, sizeof(title));
+	GetClassName(hWnd, class_name, sizeof(class_name));
+
+	DWORD pid;
+	DWORD tid = GetWindowThreadProcessId(hWnd, &pid);
+
+
+	HANDLE hProcess = OpenProcess( PROCESS_QUERY_INFORMATION |
+                                   PROCESS_VM_READ,
+                                   FALSE, pid );
+
+
+	if ( hProcess )
+    {
+        HMODULE hMod;
+        DWORD cbNeeded;
+ 		
+ 		char path[MAX_PATH];
+
+ 		std::cout << "OPEN" << std::endl;
+
+ 		// GetModuleFileNameEx
+ 		if(GetModuleFileNameEx(hProcess, 0, path, MAX_PATH)) 
+ 		{
+ 			std::cout << path << std::endl;
+ 		}
+ 
+    }
+
+	CloseHandle(hProcess);
+
+	std::cout << class_name << " " << pid << std::endl;
+
+	
+	return TRUE;
+}
+
+
+int main(int argc, const char* argv[])
+{
+
+	std::cout << "GO" << std::endl;
+
+	EnumWindows(eachWindow, NULL);
+
+	return 0;
+}
+
