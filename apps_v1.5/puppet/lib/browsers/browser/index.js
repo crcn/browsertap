@@ -1,6 +1,7 @@
 var structr = require("structr"),
 Process     = require("./process"),
-outcome = require("outcome");
+outcome = require("outcome"),
+dsync   = require("dsync")
 
 module.exports = structr({
 
@@ -30,6 +31,7 @@ module.exports = structr({
 
 		this.collection = options.collection;
 		this.puppet = options.collection.puppet;
+		this._process = new Process(this);
 	},
 
 	/**
@@ -37,12 +39,8 @@ module.exports = structr({
 
 	"step open": function(url, callback) {
 		var self = this;
-		this.__process().open(url, outcome.error(callback).success(function() {
-			callback(null, {
-				getClient: function(callback) {
-					self.getClient(callback);
-				}
-			});
+		this._process.open(url, outcome.error(callback).success(function() {
+			callback(null, dsync(self));
 		}));
 	},
 
@@ -50,21 +48,13 @@ module.exports = structr({
 	 */
 
 	"getClient": function(callback) {
-		this.__process().getClient(callback);
-	},
-
-	/**
-	 */
-
-	"__process": function() {
-		return this._process || (this._process = new Process(this));
+		this._process.getClient(callback);
 	},
 
 	/**
 	 */
 
 	"step close": function(callback) {
-		if(!this._process) return callback(null, true);
 		this._process.close(callback);
 	}
 });

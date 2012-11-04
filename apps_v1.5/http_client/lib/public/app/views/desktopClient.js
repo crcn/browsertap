@@ -149,6 +149,8 @@ module.exports  = Ember.ContainerView.extend({
 		setInterval(function() {
 			if(self._client)
 			self._client.getScrollBounds(function(err, bounds) {
+				
+				if(err) return;
 				$("#v-scrollbar").height(bounds.height || 0);
 				console.log(bounds.height);
 			});

@@ -69,10 +69,10 @@ module.exports = structr({
 				"-pr", Math.round(video.padding.right),
 				"-pt", Math.round(video.padding.top),
 				"-pb", Math.round(video.padding.bottom),
-				"-gop_size", 500,//Math.round(video.gop_size || 500),
-				"-bit_rate", 64,//Math.round(video.bit_rate || 64),
-				"-qmin", 1,//Math.round(video.qmin || 1),
-				"-qmax", 3, //Math.round(video.qmax || 11),
+				"-gop_size", Math.round(video.gop_size || 500),
+				"-bit_rate", Math.round(video.bit_rate || 64),
+				"-qmin", Math.round(video.qmin || 1),
+				"-qmax", Math.round(video.qmax || 11),
 				"-timeout", Math.round(video.timeout || 1)];
 
 			console.log("broadcast %s", args.join(" "));
@@ -159,7 +159,6 @@ module.exports = structr({
 	 */
 
 	'mouseEvent': function(code, x, y, dwData) {
-		console.log(x, y)
 		if(this._proc) this._proc.stdin.write('mouse\n' + this._args(code, x, y, dwData).join(' ') + "\n");
 	},
 

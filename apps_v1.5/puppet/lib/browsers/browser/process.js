@@ -6,7 +6,8 @@ child_process = require("child_process"),
 spawn         = child_process.spawn,
 exec          = child_process.exec,
 outcome       = require("outcome"),
-killProcesses = require("./killProcesses");
+killProcesses = require("./killProcesses"),
+Client        = require("./client");
 
 module.exports = structr(EventEmitter, {
 
@@ -17,6 +18,7 @@ module.exports = structr(EventEmitter, {
 		this.browser = browser;
 		this.puppet  = browser.collection.puppet;
 		this.server  = browser.collection.puppet.server;
+		this.client  = new Client();
 		this._listen();
 	},
 
@@ -88,18 +90,7 @@ module.exports = structr(EventEmitter, {
 			 */
 
 			function() {
-
-				//this can end badly... what happens if an image is sent?
-				var nx = this;
-				self.once("client", function(client) {
-					client.close = function(next) {
-						self.close(next);
-					}
-					nx(null, client);
-				});
-
 				self.puppet.desktop.padding(self.browser.padding);
-
 				this(null, self);
 			},
 
@@ -114,10 +105,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"getClient": function(callback) {
-		if(this._client) return callback(null, this._client);
-		this.once("client", function(client) {
-			callback(null, client);
-		});
+		callback(null, this.client);
 	},
 
 	/**
@@ -158,7 +146,11 @@ module.exports = structr(EventEmitter, {
 
 		proxy.on("connection", function() {
 			self._onConnection(proxy.client);
-		})
+		});
+
+		proxy.on("disconnected", function() {
+			self._client = null;
+		});
 	},
 
 	/**
@@ -181,6 +173,7 @@ module.exports = structr(EventEmitter, {
 
 	"_onConnection": function(client) {
 		this._client = client;
+		this.client.target(client)
 		console.log("client connected to %s %s", this.browser.name, this.browser.version);
 		this.emit("client", client);
 	}

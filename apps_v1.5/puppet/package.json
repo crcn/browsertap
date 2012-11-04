@@ -19,6 +19,7 @@
     "structr": "0.2.x",
     "structr-step": "0.0.x",
     "tq": "0.0.x",
+    "es5-shim": "*",
     "underscore": "1.4.x",
     "filternet": "git+https://crcn@github.com/crcn/filternet.git",
     "browserify": "1.16.x",

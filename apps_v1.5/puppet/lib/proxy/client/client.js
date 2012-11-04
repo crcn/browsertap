@@ -8,6 +8,8 @@ exports.listen = function() {
 
 	var scriptUrl = getHost();
 
+
+
 	var em = new EventEmitter(),
 	locEm  = new EventEmitter()
 	client = {
@@ -62,14 +64,7 @@ exports.listen = function() {
 		emit: function() {
 			em.emit.apply(em, arguments);
 		}
-	}
-
-	/*setTimeout(function() {
-	alert(document.body.scrollHeight, document.scrollHeight)
-}, 1000)*/
-	/*setInterval(function() {
-		alert(window.innerHeight+" "+document.documentElement.clientHeight+" "+document.body.clientHeight)
-	}, 2000);*/
+	}	
 
 	var d = dnode(client);
 	watchLocation(client);
@@ -105,5 +100,5 @@ function watchLocation(client) {
 
 
 function location(loc) {
-	return URL.parse(loc || window.location.href, true);
+	return URL.parse(window.location.href, true);
 }

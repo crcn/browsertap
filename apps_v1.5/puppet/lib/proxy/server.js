@@ -42,10 +42,16 @@ exports.listen = function(port) {
 
 	var sock = shoe(function(stream) {
 		var d = dnode(function(client, con) {
+
+			var proxy;
+
 			con.on("ready", function() {
 				var info = getBrowserInfo(client.navigator);
 				ret.browserProxy(info).listen(client, con);
 			});
+			con.on("end", function() {
+				console.log("EXIT")
+			})
 		});
 		d.pipe(stream).pipe(d);
 	});
@@ -88,13 +94,10 @@ exports.listen = function(port) {
 
 			proxy    = sift({ name: browser.name, version: String(browser.version) }, connections).pop();
 
-			console.log({ name: browser.name, version: String(browser.version) });
+			//console.log({ name: browser.name, version: String(browser.version) });
 
 			if(!proxy) {
 				proxy = new BrowserProxy(browser);
-				proxy.once("disconnect", function() {
-					connections.splice(connections.indexOf(proxy), 1);
-				});
 				connections.push(proxy);
 			}
 
