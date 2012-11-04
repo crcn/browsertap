@@ -36,7 +36,6 @@ exports.listen = function(port) {
   		next();
 	});
 
-
 	assetServer.use(browserify({ entry: __dirname + "/client/index.js", mount:'/client.js', watch: true, cache: false }));
 	assetServer.use(express.static(__dirname + "/client"));
 
@@ -47,6 +46,8 @@ exports.listen = function(port) {
 
 			con.on("ready", function() {
 				var info = getBrowserInfo(client.navigator);
+				console.log("proxy connected");
+				console.log(info)
 				ret.browserProxy(info).listen(client, con);
 			});
 			con.on("end", function() {
@@ -94,8 +95,7 @@ exports.listen = function(port) {
 
 			proxy    = sift({ name: browser.name, version: String(browser.version) }, connections).pop();
 
-			//console.log({ name: browser.name, version: String(browser.version) });
-
+			// console.log({ name: browser.name, version: String(browser.version)})
 			if(!proxy) {
 				proxy = new BrowserProxy(browser);
 				connections.push(proxy);

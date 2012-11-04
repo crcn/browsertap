@@ -66,7 +66,7 @@ exports.start({
 				7: {
 					top: 86,
 					left: 6,
-					right: 6,
+					right: 6 + 18, //gutter is always shown
 					bottom: 6
 				}
 			}

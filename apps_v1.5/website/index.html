@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+
+	<meta charset="utf-8">
+	<title>Tap into many browsers</title>
+	
+	<link href="css/layout.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="screen" />
+	
+	<script src="js/html5.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#email-form").submit(function() {
+
+				var e = $("#email").val();
+
+				if(!e) return alert("please enter your email");
+				//http://localhost:8992/signup
+				$.get("http://spice.io:8992/signup?email=" + encodeURIComponent(e), function() {
+					alert("Thanks for signing up!");
+				});
+			})
+		})
+	</script>
+	
+</head>
+
+<body>
+
+	<div class="logo_header">
+		<div class="center_content">
+		<img src="images/browser_tap.png" alt="" />
+		<form id="email-form" action="#">
+			<button type="submit" class="btn">Submit</button>
+			<input id="email" type="text" name="" value="" class="email" placeholder="Enter your email to sign up…" />
+		</form>
+		</div>
+	</div>
+
+	<!-- top header (class="background_1 or background_2 or background_3") -->
+	<header id="top_header" class="background_1">
+		<!-- center content -->
+		<section class="center_content">
+			<hgroup class="content_left">
+				<h1>Fast and beautiful cross-browser testing.</h1>
+				<strong class="site_slogan">Use your favorite browser with any<br/>rendering engine, no installs, no fuss.</strong>
+				<!-- video box -->
+				<div class="video_box">
+					<a href="#" class="video">
+						<!-- video preview 94 x 54 (px) -->
+						<img src="pictures/video_preview.jpg" width="94" height="54" alt="App video" />
+						<span class="play_button">Play</span>
+					</a>
+					<span class="description">See in action</span>
+				</div>
+				<!-- /video box -->
+				<a href="#" class="download_button">Try a live browser!</a>
+			</hgroup>
+			<!-- hand with iphone you can delete class animated for disable animation -->
+		</section>
+		<div id="laptop" class="animated">
+			<!-- app screenshot 208 x 310 (px) -->
+		</div>
+		
+		<!-- /center content -->
+	</header>
+	<!-- /top header -->
+	<div id="content">
+		<section class="center_content">
+			<!-- app process -->
+			<!-- /app process -->
+			<br />
+			<img src="images/Group 1.png" alt="" /><br /><br />
+			<img src="images/browser cluster.png" alt="" />
+			<!-- social box (for any data entered address dribbble) -->
+			<div class="social_box">
+				<div class="content_left">
+					<div class="box_tweeter">
+						<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://browsertap.com/">Tweet</a>
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+					</div>
+				</div>
+				<div class="content_right">Launched at Startup Weekend: Twin Cities 4</div>
+			</div>
+			<!-- /social box -->
+		</section>
+	</div>
+	<!-- footer -->
+	<footer id="footer">
+		<section class="center_content">
+			<div class="content_left">&copy; 2012 <a href="#">browsertap.com</a></div>
+			<nav class="footer_nav">
+				<ul>
+					<li><a href="#">Blog</a></li>
+					<li><a href="#">Help</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Jobs</a></li>
+				</ul>
+			</nav>
+		</section>
+	</footer>
+	<!-- /footer -->
+</body>
+</html>

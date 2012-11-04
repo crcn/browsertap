@@ -9,7 +9,6 @@ exports.listen = function() {
 	var scriptUrl = getHost();
 
 
-
 	var em = new EventEmitter(),
 	locEm  = new EventEmitter()
 	client = {
@@ -65,12 +64,19 @@ exports.listen = function() {
 			em.emit.apply(em, arguments);
 		}
 	}	
+/*
+	var pos = 0;
+
+	setInterval(function() {
+		window.scrollTo(0, pos += 10);
+	}, 10);
+*/
 
 	var d = dnode(client);
 	watchLocation(client);
 
 	d.pipe(shoe("http://" + scriptUrl.host + "/dnode", {
-		protocols_whitelist: ['xdr-streaming', 'xhr-streaming', 'iframe-eventsource', 'iframe-htmlfile', 'xdr-polling', 'xhr-polling', 'iframe-xhr-polling', 'jsonp-polling']
+		protocols_whitelist: ['xhr-polling', 'xdr-streaming', 'xhr-streaming', 'iframe-eventsource', 'iframe-htmlfile', 'xdr-polling', 'iframe-xhr-polling', 'jsonp-polling']
 	})).pipe(d);
 
 

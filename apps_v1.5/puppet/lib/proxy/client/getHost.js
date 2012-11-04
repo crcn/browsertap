@@ -7,7 +7,13 @@ module.exports = function() {
 	for(var i = scripts.length; i--;) {
 		var script = scripts[i];
 		if(~script.src.indexOf("?dnodeClient")) {
-			return Url.parse(script.src);
+			var src = script.src;
+			
+			//IE doesn't like Url.parse
+			var hostname = src.match(/\/\/([^:\/?#]+)/)[1],
+			port = src.match(/\:(\d+)/)[1];
+
+			return { host: hostname + ":" + (port || 80) };
 		}
 	}
 }
