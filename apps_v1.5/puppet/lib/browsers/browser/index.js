@@ -1,5 +1,6 @@
 var structr = require("structr"),
-Process     = require("./process");
+Process     = require("./process"),
+outcome = require("outcome");
 
 module.exports = structr({
 
@@ -35,8 +36,28 @@ module.exports = structr({
 	 */
 
 	"step open": function(url, callback) {
-		if(!this._process) this._process = new Process(this);
-		this._process.open(url, callback);
+		var self = this;
+		this.__process().open(url, outcome.error(callback).success(function() {
+			callback(null, {
+				getClient: function(callback) {
+					self.getClient(callback);
+				}
+			});
+		}));
+	},
+
+	/**
+	 */
+
+	"getClient": function(callback) {
+		this.__process().getClient(callback);
+	},
+
+	/**
+	 */
+
+	"__process": function() {
+		return this._process || (this._process = new Process(this));
 	},
 
 	/**

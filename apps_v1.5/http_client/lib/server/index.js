@@ -22,7 +22,7 @@ exports.listen = function() {
 		//"http://54.243.45.252:8000"
 		// "http://ec2-23-23-57-189.compute-1.amazonaws.com:8000"
 		// "http://192.168.2.3:8000"
-		"http://134.84.51.93:8000"
+		"http://160.94.117.248:8000"
 	];
 
 	var controller = new DesktopHook({ desktops: desktops }).connect();

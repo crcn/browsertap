@@ -36,6 +36,18 @@ exports.listen = function() {
 				locEm.apply(em, arguments);
 			}
 		},
+		scrollTo: function(x, y) {
+			window.scrollTo(x, y);
+		},
+		getScrollBounds: function(callback) {
+
+			var doc = document.body;
+
+			callback(null, {
+				width: doc.scrollWidth,
+				height: doc.scrollHeight
+			})
+		},
 		navigator: {
 			appCodeName: navigator.appCodeName,
 			appName: navigator.appName,
@@ -52,10 +64,19 @@ exports.listen = function() {
 		}
 	}
 
+	/*setTimeout(function() {
+	alert(document.body.scrollHeight, document.scrollHeight)
+}, 1000)*/
+	/*setInterval(function() {
+		alert(window.innerHeight+" "+document.documentElement.clientHeight+" "+document.body.clientHeight)
+	}, 2000);*/
+
 	var d = dnode(client);
 	watchLocation(client);
 
-	d.pipe(shoe("http://" + scriptUrl.host + "/dnode")).pipe(d);
+	d.pipe(shoe("http://" + scriptUrl.host + "/dnode", {
+		protocols_whitelist: ['xdr-streaming', 'xhr-streaming', 'iframe-eventsource', 'iframe-htmlfile', 'xdr-polling', 'xhr-polling', 'iframe-xhr-polling', 'jsonp-polling']
+	})).pipe(d);
 
 
 	return client;

@@ -37,16 +37,14 @@ exports.listen = function(port) {
 	});
 
 
-	assetServer.use(browserify({ entry: __dirname + "/client/index.js", mount:'/client.js' }));
-	
+	assetServer.use(browserify({ entry: __dirname + "/client/index.js", mount:'/client.js', watch: true, cache: false }));
+	assetServer.use(express.static(__dirname + "/client"));
 
 	var sock = shoe(function(stream) {
 		var d = dnode(function(client, con) {
-
 			con.on("ready", function() {
 				var info = getBrowserInfo(client.navigator);
 				ret.browserProxy(info).listen(client, con);
-
 			});
 		});
 		d.pipe(stream).pipe(d);
@@ -56,7 +54,13 @@ exports.listen = function(port) {
 		console.log(line);
 	});
 
-	sock.install(assetServer.listen(httpPort), "/dnode");
+	var hopts = {
+		// protocols_whitelist: ['xdr-streaming', 'xhr-streaming', 'iframe-eventsource', 'iframe-htmlfile', 'xdr-polling', 'xhr-polling', 'iframe-xhr-polling', 'jsonp-polling'],
+		// protocols_whitelist: ['xhr-streaming'],
+		prefix: "/dnode"
+	}
+
+	sock.install(assetServer.listen(httpPort), hopts);
 
 
 
@@ -65,8 +69,9 @@ exports.listen = function(port) {
 
 		var content = buffer.toString("utf8");
 		var script  = wrapScript("client.js?dnodeClient", httpPort);
+		var cssFix  = wrapCss("/css-fix.css", httpPort);
 
-		callback(content.replace(/<\/head>/i, script + "</head>"))
+		callback(content.replace(/<\/head>/i, script + cssFix + "</head>"))
 	});
 
 	mitm.on("error", function() {
@@ -79,10 +84,11 @@ exports.listen = function(port) {
 		/**
 		 */
 
-
 		browserProxy: function(browser) {
 
 			proxy    = sift({ name: browser.name, version: String(browser.version) }, connections).pop();
+
+			console.log({ name: browser.name, version: String(browser.version) });
 
 			if(!proxy) {
 				proxy = new BrowserProxy(browser);
@@ -99,7 +105,9 @@ exports.listen = function(port) {
 
 
 function wrapScript(path, port) {
-
 	return "<script src=\"http://localhost:"+port+"/"+path+"\" type=\"text/javascript\"></script>"
+}
 
+function wrapCss(path, port) {
+	return "<link rel=\"stylesheet\" href=\"http://localhost:"+port+"/"+path+"\" type=\"text/css\">"
 }

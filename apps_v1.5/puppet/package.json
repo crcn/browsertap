@@ -23,7 +23,7 @@
     "filternet": "git+https://crcn@github.com/crcn/filternet.git",
     "browserify": "1.16.x",
     "dnode": "1.0.x",
-    "shoe": "0.0.x",
+    "shoe": "git+https://crcn@github.com/crcn/shoe.git",
     "express": "*"
   }
 }

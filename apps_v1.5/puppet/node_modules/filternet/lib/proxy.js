@@ -9,7 +9,6 @@ var http = require('http')
   , zlib = require('zlib')
   , sniparse = require('./sniparse');
 
-require('bufferjs/concat');
 require('bufferjs/add-chunk');
 require('./regexp-escape');
 
@@ -137,7 +136,7 @@ module.exports.createProxyServer = function (opts) {
                                 proxyResponse.headers['content-type'].toLowerCase().indexOf("html") != -1);
 
                   var writeResponse = function (shouldBuffer) {
-                      var buffer = undefined, bufferLength = 0;
+                      var buffer = undefined, buffers = [], bufferLength = 0;
                       if (shouldBuffer) {
                           bufferLength = ~~(proxyResponse.headers['content-length'] || 0);
                           delete proxyResponse.headers['content-length'];
@@ -151,7 +150,8 @@ module.exports.createProxyServer = function (opts) {
 
                       proxyResponse.on('data', function (chunk) {
                            if (shouldBuffer) {
-                               buffer = Buffer.concat(buffer, chunk);
+                              // buffer = Buffer.concat(buffer, chunk);
+                               buffers.push(chunk);
                            } else {
                                response.write(chunk);
                            }
@@ -193,6 +193,8 @@ module.exports.createProxyServer = function (opts) {
                                emitOrRun('interceptResponseContent', function () { writeResponse(newBuffer); },
                                          newBuffer, proxyResponse, isSsl, charset, writeResponse);
                            };
+
+                           buffer = Buffer.concat(buffers, bufferLength);
                            switch (responseEncoding) {
                            case 'gzip':
                                zlib.gunzip(buffer, setupIntercept);
@@ -340,7 +342,7 @@ module.exports.createProxyServer = function (opts) {
                     socket.write('HTTP/1.0 200 Connection established\r\n\r\n');
                 }
             } catch (error) {
-                emitter.emit('error', error, 'httpsSocketConnect');
+                emitter.emit('error', error, 'httpsSocket');
             }
         });
 
@@ -355,11 +357,6 @@ module.exports.createProxyServer = function (opts) {
             }
         });
 
-        clientSocket.on('error', function (error) {
-            socket.end(); 
-            emitter.emit('error', error, 'httpsClientSocket');
-        });
-
         clientSocket.on('end', function () { socket.end(); });
 
         socket.on('data', function (data) {
@@ -372,12 +369,6 @@ module.exports.createProxyServer = function (opts) {
                 emitter.emit('error', error, 'httpsClientSocketData');
             }
         });
-
-        socket.on('error', function (error) {
-            clientSocket.end(); 
-            emitter.emit('error', error, 'httpsSocket');
-        });
-
         socket.on('end', function () { clientSocket.end(); });
     };
 

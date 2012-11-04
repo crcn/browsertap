@@ -90,13 +90,13 @@ module.exports = structr(EventEmitter, {
 			function() {
 
 				//this can end badly... what happens if an image is sent?
-				/*var nx = this;
+				var nx = this;
 				self.once("client", function(client) {
 					client.close = function(next) {
 						self.close(next);
 					}
 					nx(null, client);
-				})*/
+				});
 
 				self.puppet.desktop.padding(self.browser.padding);
 
@@ -108,6 +108,16 @@ module.exports = structr(EventEmitter, {
 
 			next
 		);
+	},
+
+	/**
+	 */
+
+	"getClient": function(callback) {
+		if(this._client) return callback(null, this._client);
+		this.once("client", function(client) {
+			callback(null, client);
+		});
 	},
 
 	/**
@@ -170,6 +180,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_onConnection": function(client) {
+		this._client = client;
 		console.log("client connected to %s %s", this.browser.name, this.browser.version);
 		this.emit("client", client);
 	}

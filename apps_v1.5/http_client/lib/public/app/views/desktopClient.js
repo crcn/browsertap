@@ -16,7 +16,6 @@ var DesktopPlayer = require("./flashPlayer").extend({
 		this.get("params").addObserver("host", this, "_onRtmpUrlChange");
 	},
 	"_onRtmpUrlChange": function() {
-		console.log(JSON.stringify(this.get("params")));
 		this.render();
 	}
 });
@@ -27,6 +26,8 @@ module.exports  = Ember.ContainerView.extend({
 	 */
 
 	"templateName": "desktop-client",
+
+	"classNames": ["desktop-client"],
 
 	/**
 	 */
@@ -51,7 +52,7 @@ module.exports  = Ember.ContainerView.extend({
 	 */
 
 	"_browser": function() {
-		return this._query.browser || "ie 7";
+		return this._query.browser || "chrome 19";
 	},
 
 	/**
@@ -67,6 +68,7 @@ module.exports  = Ember.ContainerView.extend({
 
 	"connect": function() {
 		var self = this;
+		self._loading = true;
 		this.get("notifications").updateBrowserInfo(this._browserParts());
 		this.get("notifications").showNotification();
 		this._service = service.connect(this.get("service"), function(err, puppet) {
@@ -83,11 +85,26 @@ module.exports  = Ember.ContainerView.extend({
 		this._player.set("params.host", puppet.rtmp.host);
 		this._onResize();
 		var self = this;
-		puppet.browsers.open(this._query.url || "http://google.com", this._browser(), function() {
+		puppet.browsers.open(this._query.url || "http://google.com", this._browser(), function(err, browser) {
+
+			self._client = null;
+			browser.getClient(function() {
+				self._onClient.apply(self, arguments);
+			});
+
 			console.log("browser open");
-			self._onResize();
+			self._loading = false;
 			self.get("notifications").hideNotification();
+			self._onResize();
 		});
+	},
+
+	/**
+	 */
+
+	"_onClient": function(err, client) {
+		this._client = client;
+		console.log("browser proxy connected");
 	},
 
 	/**
@@ -121,13 +138,26 @@ module.exports  = Ember.ContainerView.extend({
 			keyUp: function(data) {
 				self._keyboardEvent(data.keyCode, 0, wkmEvents.keyboard.KEYEVENTF_KEYUP);
 			},
-			mouseWheel: _.throttle(function(coords) {
+			/*mouseWheel: _.throttle(function(coords) {
 				self._mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, coords, coords.delta);
-			}, 1),
+			}, 1),*/
 			resize: _.debounce(function(data) {
 				self._onResize(data.width, data.height);
 			}, 250)
 		}
+
+		setInterval(function() {
+			if(self._client)
+			self._client.getScrollBounds(function(err, bounds) {
+				$("#v-scrollbar").height(bounds.height || 0);
+				console.log(bounds.height);
+			});
+		}, 2000);
+
+		win.scroll(_.throttle(function() {
+			if(!self._client) return;
+			self._client.scrollTo(0, win.scrollTop());
+		}, 50));
 
 		window.__browsertap.on("refresh", function() {
 			// alert("REFRESH");
@@ -138,7 +168,6 @@ module.exports  = Ember.ContainerView.extend({
 	 */
 
 	"_onResize": function(width, height) {
-		console.log("resize")
 		this._width = width || this._width || jQuery(window).width();
 		this._height = height || this._height || jQuery(window).height();
 		if(!this._puppet) return;
@@ -162,17 +191,18 @@ module.exports  = Ember.ContainerView.extend({
 			coords = this._prevCoords;
 		}
 
-		if(!this._puppet) return;
+		if(!this._puppet || this._loading) return;
 
 		this._puppet.mouse.sendEvent(code, coords.x, coords.y, data);
 	},
 
 	"_keyboardEvent": function(key, mods, dwFlags) {
-		if(!this._puppet) return;
+		if(!this._puppet || this._loading) return;
 		this._puppet.keyboard.sendEvent(key, mods, dwFlags);
 	},
 
 	"_reset": function() {
+		if(this._loading) return;
 		this._puppet.desktop.restart(_.extend(this._query, {
 			width: this._width,
 			height: this._height,
