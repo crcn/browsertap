@@ -33,10 +33,10 @@ module.exports  = Ember.ContainerView.extend({
 
 	"init": function() {
 		this._super();
+		this._query = Url.parse(String(window.location), true).query;
 		this._createChildViews();
-		this._connect();
+		// this._connect();
 		this._createListeners();
-		this._query = { url: Url.parse(String(window.location), true).query.url };
 		this._video = {};
 	},
 
@@ -50,8 +50,25 @@ module.exports  = Ember.ContainerView.extend({
 	/**
 	 */
 
-	"_connect": function() {
+	"_browser": function() {
+		return this._query.browser || "ie 7";
+	},
+
+	/**
+	 */
+
+	"_browserParts": function() {
+		var parts = this._browser().split(" ");
+		return { version: parts.pop(), name: parts.join(" ") };
+	},
+
+	/**
+	 */
+
+	"connect": function() {
 		var self = this;
+		this.get("notifications").updateBrowserInfo(this._browserParts());
+		this.get("notifications").showNotification();
 		this._service = service.connect(this.get("service"), function(err, puppet) {
 			if(err) return alert(err.message);
 			self._onPuppet(puppet);
@@ -66,9 +83,10 @@ module.exports  = Ember.ContainerView.extend({
 		this._player.set("params.host", puppet.rtmp.host);
 		this._onResize();
 		var self = this;
-		puppet.browsers.open(this._query.url || "http://google.com", "ie 7", function() {
+		puppet.browsers.open(this._query.url || "http://google.com", this._browser(), function() {
 			console.log("browser open");
 			self._onResize();
+			self.get("notifications").hideNotification();
 		});
 	},
 
@@ -126,6 +144,11 @@ module.exports  = Ember.ContainerView.extend({
 		if(!this._puppet) return;
 		this._reset();
 
+	},
+
+	"didInsertElement": function() {
+		this._super();
+		this.connect();
 	},
 
 	/**

@@ -31,7 +31,6 @@ module.exports = Ember.View.extend({
 		}, 500)
 	},
 
-
 	/**
 	 */
 

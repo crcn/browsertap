@@ -159,6 +159,7 @@ module.exports = structr({
 	 */
 
 	'mouseEvent': function(code, x, y, dwData) {
+		console.log(x, y)
 		if(this._proc) this._proc.stdin.write('mouse\n' + this._args(code, x, y, dwData).join(' ') + "\n");
 	},
 

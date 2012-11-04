@@ -60,7 +60,7 @@ exports.start({
 		ie: {
 			processNames:["iexplore*"],
 			cache: {
-				directory: '/Mozilla'
+				directory: '/Microsoft/Internet Explorer'
 			},
 			padding: {
 				7: {

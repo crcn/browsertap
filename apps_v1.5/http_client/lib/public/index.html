@@ -6,14 +6,27 @@
 		<script type="text/javascript" src="./vendors/swfobject.js"></script>
 		<script type="text/javascript" src="./vendors/ember.js"></script>
 		<script type="text/javascript" src="./vendors/less.js"></script>
+		<script type="text/javascript" src="./vendors/transit.js"></script>
 		<script type="text/javascript" src="/app.js"></script>
 		<script type="text/x-handlebars" data-template-name='flash-player'>
 			You need to enable flash player
 		</script>
+		<script type="text/x-handlebars" data-template-name='browser-notification'>
+			
+			<img {{bindAttr src="view.imgPath"}}></img>
+			<div>Version {{view.version}}</div>
+			
+		</script>
+		<script type="text/x-handlebars" data-template-name='browser-notification-background'>
+			
+		</script>
 	</head>
 	<body>
-		<script type="text/x-handlebars">
+		<!--script type="text/x-handlebars">
 			{{view App.DesktopClient }}
+		</script-->
+		<script type="text/x-handlebars">
+			{{ view App.RootView }}
 		</script>
 	</body>
 </html>
