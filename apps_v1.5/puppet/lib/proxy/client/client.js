@@ -8,7 +8,6 @@ exports.listen = function() {
 
 	var scriptUrl = getHost();
 
-
 	var em = new EventEmitter(),
 	locEm  = new EventEmitter()
 	client = {
@@ -37,18 +36,6 @@ exports.listen = function() {
 				locEm.apply(em, arguments);
 			}
 		},
-		scrollTo: function(x, y) {
-			window.scrollTo(x, y);
-		},
-		getScrollBounds: function(callback) {
-
-			var doc = document.body;
-
-			callback(null, {
-				width: doc.scrollWidth,
-				height: doc.scrollHeight
-			})
-		},
 		navigator: {
 			appCodeName: navigator.appCodeName,
 			appName: navigator.appName,
@@ -63,21 +50,12 @@ exports.listen = function() {
 		emit: function() {
 			em.emit.apply(em, arguments);
 		}
-	}	
-/*
-	var pos = 0;
-
-	setInterval(function() {
-		window.scrollTo(0, pos += 10);
-	}, 10);
-*/
+	}
 
 	var d = dnode(client);
 	watchLocation(client);
 
-	d.pipe(shoe("http://" + scriptUrl.host + "/dnode", {
-		protocols_whitelist: ['xhr-polling', 'xdr-streaming', 'xhr-streaming', 'iframe-eventsource', 'iframe-htmlfile', 'xdr-polling', 'iframe-xhr-polling', 'jsonp-polling']
-	})).pipe(d);
+	d.pipe(shoe("http://" + scriptUrl.host + "/dnode")).pipe(d);
 
 
 	return client;
@@ -106,5 +84,5 @@ function watchLocation(client) {
 
 
 function location(loc) {
-	return URL.parse(window.location.href, true);
+	return URL.parse(loc || window.location.href, true);
 }

@@ -13,7 +13,6 @@
     "clone": "0.1.x",
     "traverse": "0.6.x",
     "dnode": "1.0.x",
-    "shoe": "0.0.x",
-    "dsync": "0.0.x"
+    "shoe": "0.0.x"
   }
 }

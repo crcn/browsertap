@@ -1,7 +1,5 @@
 var structr = require("structr"),
-Process     = require("./process"),
-outcome = require("outcome"),
-dsync   = require("dsync")
+Process     = require("./process");
 
 module.exports = structr({
 
@@ -31,30 +29,21 @@ module.exports = structr({
 
 		this.collection = options.collection;
 		this.puppet = options.collection.puppet;
-		this._process = new Process(this);
 	},
 
 	/**
 	 */
 
 	"step open": function(url, callback) {
-		var self = this;
-		this._process.open(url, outcome.error(callback).success(function() {
-			callback(null, dsync(self));
-		}));
-	},
-
-	/**
-	 */
-
-	"getClient": function(callback) {
-		this._process.getClient(callback);
+		if(!this._process) this._process = new Process(this);
+		this._process.open(url, callback);
 	},
 
 	/**
 	 */
 
 	"step close": function(callback) {
+		if(!this._process) return callback(null, true);
 		this._process.close(callback);
 	}
 });

@@ -16,10 +16,6 @@ module.exports = structr(EventEmitter, {
 
 
 	"listen": function(client, connection) {
-		var self = this;
-		connection.once("end", function() {
-			self.emit("disconnected");
-		})
 		this.client = client;
 		this.connection = connection;
 		this.emit("connection");

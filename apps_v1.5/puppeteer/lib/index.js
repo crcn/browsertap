@@ -57,20 +57,6 @@ exports.start({
 		cache: {
 			prefix: '~/AppData/Local',
 		},
-		ie: {
-			processNames:["iexplore*"],
-			cache: {
-				directory: '/Microsoft/Internet Explorer'
-			},
-			padding: {
-				7: {
-					top: 86,
-					left: 6,
-					right: 6 + 18, //gutter is always shown
-					bottom: 6
-				}
-			}
-		},
 		firefox: {
 			processNames: ['firefox*'],
 			cache: {

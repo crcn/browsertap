@@ -4,6 +4,7 @@ Url       = require("url");
 
 exports.connect = function(options, callback) {
 
+	console.log(options.host)
 	var stream = shoe(options.host);
 
 	var d = dnode();

@@ -1,19 +1,7 @@
 var Url = require("url");
 module.exports = function() {
-
-	var scripts = document.getElementsByTagName("script");
-
-
-	for(var i = scripts.length; i--;) {
-		var script = scripts[i];
-		if(~script.src.indexOf("?dnodeClient")) {
-			var src = script.src;
-			
-			//IE doesn't like Url.parse
-			var hostname = src.match(/\/\/([^:\/?#]+)/)[1],
-			port = src.match(/\:(\d+)/)[1];
-
-			return { host: hostname + ":" + (port || 80) };
-		}
-	}
+	var script = Array.prototype.slice.call(document.getElementsByTagName("script")).filter(function(script) {
+		return ~script.src.indexOf("?dnodeClient");
+	}).pop().src;
+	return Url.parse(script);
 }

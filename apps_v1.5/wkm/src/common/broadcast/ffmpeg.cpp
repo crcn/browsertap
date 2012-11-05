@@ -298,11 +298,8 @@ namespace Broadcast
 		//_videoCodecCtx->me_subpel_quality = 0;
 
 			
-		/*_videoCodecCtx->me_subpel_quality = 0;
-		_videoCodecCtx->thread_count = 1;
-		_videoCodecCtx = _ctx->qmin;
-		_videoCodecCtx->qmax = _ctx->qmax;
-		_videoCodecCtx->scenechange_threshold = _ctx->scenechange_threshold;*/
+		_videoCodecCtx->me_subpel_quality = 0;
+		_videoCodecCtx->thread_count = 0;
 
 		//_videoCodecCtx->qmin = 1;
 		//_videoCodecCtx->qmax = 10;
@@ -320,7 +317,7 @@ namespace Broadcast
 		//_videoCodecCtx->qmax       = 3; 
 		
 
-#define CTO(prop) if(_ctx->prop > 0){ _videoCodecCtx->prop = _ctx->prop; }
+#define CTO(prop) if(_ctx->prop != -1){ /*printf("%s:%f", #prop, _ctx->prop);*/ _videoCodecCtx->prop = _ctx->prop; }
 		CTO(bit_rate_tolerance)
 			CTO(max_qdiff)
 			CTO(b_quant_factor)
