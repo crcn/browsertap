@@ -10,8 +10,7 @@ var DesktopPlayer = require("./flashPlayer").extend({
 	"init": function() {
 		this._super();
 		this.set("params", Ember.Object.create({
-			host: "http://localhost",
-			debug: true
+			host: "http://localhost"
 		}));
 		this.get("params").addObserver("host", this, "_onRtmpUrlChange");
 	},
@@ -85,16 +84,18 @@ module.exports  = Ember.ContainerView.extend({
 		this._player.set("params.host", puppet.rtmp.host);
 		this._onResize();
 		var self = this;
+		
+			self.get("notifications").hideNotification();
 		puppet.browsers.open(this._query.url || "http://google.com", this._browser(), function(err, browser) {
 
 			self._client = null;
-			browser.getClient(function() {
+			/*browser.getClient(function() {
 				self._onClient.apply(self, arguments);
-			});
+			});*/
 
 			console.log("browser open");
 			self._loading = false;
-			self.get("notifications").hideNotification();
+			//self.get("notifications").hideNotification();
 			self._onResize();
 		});
 	},
@@ -146,6 +147,7 @@ module.exports  = Ember.ContainerView.extend({
 			}, 250)
 		}
 
+		if(false)
 		setInterval(function() {
 			if(self._client)
 			self._client.getScrollBounds(function(err, bounds) {
@@ -193,18 +195,18 @@ module.exports  = Ember.ContainerView.extend({
 			coords = this._prevCoords;
 		}
 
-		if(!this._puppet || this._loading) return;
+		if(!this._puppet) return;
 
 		this._puppet.mouse.sendEvent(code, coords.x, coords.y, data);
 	},
 
 	"_keyboardEvent": function(key, mods, dwFlags) {
-		if(!this._puppet || this._loading) return;
+		if(!this._puppet) return;
 		this._puppet.keyboard.sendEvent(key, mods, dwFlags);
 	},
 
 	"_reset": function() {
-		if(this._loading) return;
+		// if(this._loading) return;
 		this._puppet.desktop.restart(_.extend(this._query, {
 			width: this._width,
 			height: this._height,
