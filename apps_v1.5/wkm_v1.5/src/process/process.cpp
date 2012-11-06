@@ -121,7 +121,7 @@ namespace Process
 	Process* ProcessManager::findProcessById(DWORD pid)
 	{
 		this->update();
-		
+
 		for(int i = this->_processes.size(); i--;)
 		{
 			Process* proc = this->_processes[i];

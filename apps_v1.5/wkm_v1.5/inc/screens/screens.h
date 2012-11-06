@@ -95,7 +95,18 @@ namespace Screens
 		 * moves the window
 		 */
 
+		bool resize(Geometry::Point value);
+
+		/**
+		 * moves the window
+		 */
+
 		bool resize(Geometry::Rectangle value);
+
+		/**
+		 */
+
+		bool move(Geometry::Point value);
 
 		/**
 		 * focuses on the window - like a user click

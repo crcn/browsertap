@@ -68,6 +68,18 @@ namespace Screens
 		return MoveWindow(this->_window, bounds.x, bounds.y, bounds.width, bounds.height, true);
 	}
 
+	bool Screen::resize(Geometry::Point point)
+	{
+		Geometry::Rectangle bounds = this->bounds();
+		return this->resize(Geometry::Rectangle(bounds.x, bounds.y, point.x, point.y));
+	}
+
+	bool Screen::move(Geometry::Point point)
+	{
+		Geometry::Rectangle bounds = this->bounds();
+		return this->resize(Geometry::Rectangle(point.x, point.y, bounds.width, bounds.height));
+	}
+
 	RECT Screen::getRect()
 	{
 		RECT rect;
