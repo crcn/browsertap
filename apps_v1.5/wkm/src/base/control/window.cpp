@@ -18,7 +18,6 @@ namespace Control
 	Geom::Rectangle BaseWindow::bounds()
 	{
 		Geom::Padding pad = this->padding();
-
 		return Geom::Rectangle(pad.left, pad.top, pad.right - pad.left, pad.bottom - pad.top);
 	}
 
@@ -35,7 +34,4 @@ namespace Control
 
 		return this->_graphics;
 	}
-
-
-	
 }

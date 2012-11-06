@@ -63,7 +63,6 @@ module.exports = structr({
 			video.padding = _.defaults(video.padding, { left: 0, right: 0, top: 0, bottom: 0 })
 			var args = [
 				"-o", self._rtmpUrl, 
-<<<<<<< HEAD
 				"-w", self._width(), 
 				"-h", self._height(), 
 				"-pl", video.padding.left,
@@ -75,20 +74,6 @@ module.exports = structr({
 				"-qmin", video.qmin || 1,
 				"-qmax", video.qmax || 11,
 				"-timeout", video.timeout || 1];
-=======
-				"-w", Math.round(self._width()), 
-				"-h", Math.round(self._height()), 
-				"-pl", Math.round(video.padding.left),
-				"-pr", Math.round(video.padding.right),
-				"-pt", Math.round(video.padding.top),
-				"-pb", Math.round(video.padding.bottom),
-				"-gop_size", Math.round(video.gop_size || 250),
-				"-bit_rate", Math.round(video.bit_rate || 64),
-				"-qmin", Math.round(video.qmin || 1),
-				"-qmax", Math.round(video.qmax || 3),
-				"-scenechange_threshold", Math.round(10000),
-				"-timeout", Math.round(video.timeout || 1)];
->>>>>>> parent of 8e375d7... cleanup
 
 			console.log("broadcast %s", args.join(" "));
 
