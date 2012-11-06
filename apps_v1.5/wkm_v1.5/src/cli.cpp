@@ -7,6 +7,7 @@
 #include "psapi.h"
 #include "common/events.h"
 #include "screens/screens.h"
+#include "json/reader.h"
 
 void handleEvent(Events::Event* event)
 {
@@ -24,6 +25,15 @@ void handleEvent(Events::Event* event)
 
 int main(int argc, const char* argv[])
 {
+
+	Json::Value root;
+	Json::Reader reader;
+
+	bool success = reader.parse("{\"age\":5}", root);
+	std::cout << success << std::endl;
+
+	std::cout << root["age"].asInt() << std::endl;
+	return 0;
 
 	Screens::ScreenManager::instance().addEventListener("open", new Events::CbEventListener(&handleEvent));
 
