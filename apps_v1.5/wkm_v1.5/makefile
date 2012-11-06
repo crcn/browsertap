@@ -29,7 +29,7 @@ all: cli
 
 
 cli: $(OBJECTS)
-	$(CC) $(OBJECTS) $(MINGWFLAGS) $(LIBS) -D__STDC_CONSTANT_MACROS -o $(BDIR)/cli
+	$(CC) $(OBJECTS) $(MINGWFLAGS) $(LIBS) -O3 -D__STDC_CONSTANT_MACROS -o $(BDIR)/cli
 
 
 copy: 

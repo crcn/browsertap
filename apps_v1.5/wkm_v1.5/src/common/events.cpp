@@ -45,7 +45,6 @@ namespace Events
 
 	void EventDispatcher::onDisposed(Event* event)
 	{
-
 		std::map<std::string, std::vector<BaseEventListener*>* >::iterator it = this->_eventListeners.begin();
 
 		std::vector<std::string> events;
@@ -61,7 +60,6 @@ namespace Events
 				events.push_back(it->first);
 			}
 		}
-
 
 		for(int i = events.size(); i--;) 
 		{

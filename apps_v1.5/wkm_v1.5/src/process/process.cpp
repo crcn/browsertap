@@ -118,6 +118,22 @@ namespace Process
 		return proc;
 	}
 
+	Process* ProcessManager::findProcessById(DWORD pid)
+	{
+		this->update();
+		
+		for(int i = this->_processes.size(); i--;)
+		{
+			Process* proc = this->_processes[i];
+			if(proc->target() == pid) 
+			{
+				return proc;
+			}
+		}
+
+		return 0;
+	}
+
 	void ProcessManager::removeClosedProcesses(std::vector<Process*>& runningProcesses) 
 	{
 		int nrp = runningProcesses.size();

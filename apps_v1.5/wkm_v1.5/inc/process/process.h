@@ -91,6 +91,12 @@ namespace Process
 		 */
 
 		void update();
+
+		/**
+		 */
+
+		Process* findProcessById(DWORD pid);
+		
 	private:
 
 		/**

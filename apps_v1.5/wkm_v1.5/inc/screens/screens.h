@@ -10,6 +10,16 @@
 namespace Screens
 {
 	class BaseScreenController;
+	class Screen;
+
+	class ScreenEvent : public Events::Event
+	{
+	public:
+		ScreenEvent(std::string type, Screen* screen);
+		Screen* screen();
+	private:
+		Screen* _screen;
+	};
 
 
 
@@ -30,6 +40,11 @@ namespace Screens
 		/**
 		 */
 
+		Process::Process* _process;
+
+		/**
+		 */
+
 		HWND _window;
 
 		/**
@@ -42,7 +57,7 @@ namespace Screens
 		/**
 		 */
 
-		Screen(HWND window);
+		Screen(HWND window, Process::Process* process);
 
 		/**
 		 * closes the window
@@ -70,6 +85,11 @@ namespace Screens
 		 */
 
 		Geometry::Rectangle bounds();
+
+		/**
+		 */
+
+		std::string title();
 
 		/**
 		 * moves the window
@@ -101,6 +121,7 @@ namespace Screens
 		 */
 
 		// const char* title();
+		~Screen();
 	};
 
 	/**
@@ -168,7 +189,6 @@ namespace Screens
 		Screen* _screen;
 
 
-
 	};
 
 
@@ -176,25 +196,8 @@ namespace Screens
 	 * manages all open windows
 	 */
 
-	class ScreenManager
+	class ScreenManager : public Events::EventDispatcher
 	{
-	private:
-
-		/**
-		 */
-
-		static ScreenManager* _instance;
-
-		/**
-		 */
-
-		std::vector<Screen*> _screens;
-
-		/**
-		 * checks if windows are open. If they arent, the window reps get destroyed
-		 */
-
-		void removeClosedWindows();
 
 	public:
 
@@ -208,7 +211,11 @@ namespace Screens
 		 * returns the singleton instance of the WindowManager
 		 */
 
-		static ScreenManager* instance();
+		static ScreenManager& instance()
+		{
+			static ScreenManager instance;
+			return instance;
+		}
 
 		/**
 		 * updates the window manager - this is a next-tick sort of thing
@@ -216,6 +223,41 @@ namespace Screens
 		 */
 
 		void update();
+
+	private:
+
+		/**
+		 */
+
+		std::vector<Screen*> _screens;
+
+
+		/**
+		 * checks if windows are open. If they arent, the window reps get destroyed
+		 */
+
+		void removeClosedWindows();
+
+		/**
+		 */
+
+		static BOOL CALLBACK eachWindow(HWND hWnd, LPARAM lParam);
+
+		/**
+		 */
+
+		static Process::Process* findWindowProcess(HWND hWnd);
+
+		/**
+		 */
+
+		ScreenManager(ScreenManager const&);
+
+		/**
+		 */
+
+		void operator=(ScreenManager const&);
+
 	};
 }
 

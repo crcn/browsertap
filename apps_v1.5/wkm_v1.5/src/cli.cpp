@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include "psapi.h"
 #include "common/events.h"
-#include "process/process.h"
+#include "screens/screens.h"
 
 void handleEvent(Events::Event* event)
 {
@@ -16,15 +16,11 @@ void handleEvent(Events::Event* event)
 int main(int argc, const char* argv[])
 {
 
-	// Process::Process* process =
-	Process::ProcessManager::instance().addEventListener("open", new Events::CbEventListener(&handleEvent));
-	Process::ProcessManager::instance().addEventListener("open", new Events::CbEventListener(&handleEvent));
-	Process::ProcessManager::instance().addEventListener("open", new Events::CbEventListener(&handleEvent));
-	Process::ProcessManager::instance().addEventListener("open", new Events::CbEventListener(&handleEvent));
 	while(1)
 	{
 		// std::cout << "updating processes" << std::endl;
-		Process::ProcessManager::instance().update();
+		// Process::ProcessManager::instance().update();
+		Screens::ScreenManager::instance().update();
 		Sleep(500);
 	}
 
