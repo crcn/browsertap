@@ -163,7 +163,7 @@ namespace Commanders
 		Geometry::Rectangle rect = screen->bounds();
 
 		if(!x.isNull()) rect.x      = x.asInt();
-		if(!y.isNull()) rect.y      = x.asInt();
+		if(!y.isNull()) rect.y      = y.asInt();
 		if(!w.isNull()) rect.width  = w.asInt();
 		if(!h.isNull()) rect.height = h.asInt();
 
