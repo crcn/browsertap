@@ -139,6 +139,29 @@ namespace Commanders
 		this->dispatchResponse(command->value(), getSuccess(Screens::ScreenManager::instance().closeScreen(id)));
 	}
 
+	void JSONCommander::execResizeWindow(JSONCommand* command)
+	{
+		Json::Value data = command->value()["data"];
+		int id = data["id"].asInt();
+		Json::Value x = data["x"], y = data["y"], w = data["w"], h = data["h"];
+
+		Screens::Screen* screen = Screens::ScreenManager::instance().getScreen(id);
+
+		if(screen == 0) return this->dispatchResponse(command->value(), getSuccess(false));
+		
+
+		Geometry::Rectangle rect = screen->bounds();
+
+		if(!x.isNull()) rect.x      = x.asInt();
+		if(!y.isNull()) rect.y      = x.asInt();
+		if(!w.isNull()) rect.width  = w.asInt();
+		if(!h.isNull()) rect.height = h.asInt();
+
+		screen->resize(rect);
+
+		this->dispatchResponse(command->value(), getSuccess(true));
+	}
+
 
 	void JSONCommander::onOpenWindow(Screens::ScreenEvent* event)
 	{

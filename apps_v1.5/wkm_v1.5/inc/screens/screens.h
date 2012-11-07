@@ -261,6 +261,11 @@ namespace Screens
 
 		bool closeScreen(int id);
 
+		/**
+		 */
+
+		Screen* getScreen(int id);
+
 	private:
 
 		/**

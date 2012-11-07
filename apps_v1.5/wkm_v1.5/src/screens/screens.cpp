@@ -172,6 +172,7 @@ namespace Screens
 		for(int i = this->_screens.size(); i--;)
 		{
 			Screen* screen = this->_screens.at(i);
+			
 			if(!screen->exists())
 			{
 				this->update();
@@ -184,19 +185,32 @@ namespace Screens
 
 	bool ScreenManager::closeScreen(int id)
 	{
-		for(int i = this->_screens.size(); i--;)
+		Screen* screen = this->getScreen(id);
+
+		if(screen != 0)
 		{
-			Screen* screen = this->_screens.at(i);
-			if(screen->id() == id) 
-			{
-				bool success = screen->close();
-				this->update();
-				return success;
-			}
+			bool success = screen->close();
+			this->update();
+			return success;
 		}
+
 		return false;
 	}
 
+	Screen* ScreenManager::getScreen(int id)
+	{
+		for(int i = this->_screens.size(); i--;)
+		{
+			Screen* screen = this->_screens.at(i);
+
+			if(screen->id() == id) 
+			{
+				return screen;
+			}
+		}
+
+		return 0;
+	}
 	void ScreenManager::update()
 	{
 		Process::ProcessManager::instance().update();
