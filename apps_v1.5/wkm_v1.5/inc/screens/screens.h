@@ -32,6 +32,11 @@ namespace Screens
 	{
 	private:
 
+
+		static int _count;
+
+		int _id;
+
 		/**
 		 */
 
@@ -59,16 +64,16 @@ namespace Screens
 
 		Screen(HWND window, Process::Process* process);
 
-		/**
-		 * closes the window
-		 */
-
-		bool close();
 
 		/**
 		 */
 
 		HWND target();
+
+		/**
+		 */
+
+		int id();
 	
 		/**
 		 */
@@ -119,6 +124,11 @@ namespace Screens
 		 */
 
 		bool exists();
+
+		/**
+		 */
+
+		bool close();
 
 		/**
 		 */
@@ -234,6 +244,22 @@ namespace Screens
 		 */
 
 		void update();
+
+		/**
+		 */
+
+		std::vector<Screen*> allScreens();
+
+		/**
+		 * does a check against all screens
+		 */
+
+		std::vector<Screen*> allOpenScreens();
+
+		/**
+		 */
+
+		bool closeScreen(int id);
 
 	private:
 

@@ -25,12 +25,12 @@ namespace Screens
 	_process(process),
 	_window(window)
 	{
+		Screen::_count++;
+		this->_id = Screen::_count;
 	}
 
-	bool Screen::close()
-	{
-		return FALSE;
-	}
+	int Screen::_count = 0;
+
 
 	std::string Screen::title()
 	{
@@ -44,6 +44,13 @@ namespace Screens
 		return SetForegroundWindow(this->_window);
 	}
 
+	bool Screen::close()
+	{
+		//does not work - returns unauthorized error - here for reference
+		// DestroyWindow(this->_window);
+		return PostMessage(this->_window, WM_CLOSE, 0, 0);
+	}
+
 	bool Screen::exists()
 	{
 		return IsWindow(this->_window);
@@ -52,6 +59,11 @@ namespace Screens
 	HWND Screen::target()
 	{
 		return this->_window;
+	}
+
+	int Screen::id()
+	{
+		return this->_id;
 	}
 
 	Geometry::Rectangle Screen::bounds()
@@ -150,6 +162,41 @@ namespace Screens
 
 	}
 
+	std::vector<Screen*> ScreenManager::allScreens()
+	{
+		return this->_screens;
+	}
+
+	std::vector<Screen*> ScreenManager::allOpenScreens()
+	{
+		for(int i = this->_screens.size(); i--;)
+		{
+			Screen* screen = this->_screens.at(i);
+			if(!screen->exists())
+			{
+				this->update();
+				return this->allOpenScreens();
+			}
+		}
+
+		return this->_screens;
+	}
+
+	bool ScreenManager::closeScreen(int id)
+	{
+		for(int i = this->_screens.size(); i--;)
+		{
+			Screen* screen = this->_screens.at(i);
+			if(screen->id() == id) 
+			{
+				bool success = screen->close();
+				this->update();
+				return success;
+			}
+		}
+		return false;
+	}
+
 	void ScreenManager::update()
 	{
 		Process::ProcessManager::instance().update();
@@ -188,7 +235,6 @@ namespace Screens
 
 			Screen* screen = new Screen(hWnd, winProc);
 			sm->_screens.push_back(screen);
-			std::cout << "open window " << screen->title() << std::endl;
 			sm->dispatchEvent(new ScreenEvent(Events::Event::OPEN, screen));
 		}
 
@@ -210,10 +256,10 @@ namespace Screens
 			if(!screen->exists())
 			{
 				this->_screens.erase(this->_screens.begin() + i);
-				std::cout << "close window " << screen->title() << std::endl;
-				delete screen;
 				this->dispatchEvent(new ScreenEvent(Events::Event::CLOSE, screen));
+				delete screen;
 			}
 		}
 	}
+
 }

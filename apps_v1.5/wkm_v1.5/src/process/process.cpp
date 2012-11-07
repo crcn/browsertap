@@ -111,8 +111,6 @@ namespace Process
 			}
 		}
 
-		std::cout << "opened proc \"" << name << "\"" << std::endl;
-
 		Process* proc = new Process(pid, name, path);
 		this->dispatchEvent(new ProcessEvent(Events::Event::OPEN, proc));
 		return proc;
@@ -120,8 +118,6 @@ namespace Process
 
 	Process* ProcessManager::findProcessById(DWORD pid)
 	{
-		this->update();
-
 		for(int i = this->_processes.size(); i--;)
 		{
 			Process* proc = this->_processes[i];
@@ -156,7 +152,6 @@ namespace Process
 
 			if(!running)
 			{
-				std::cout << "closed proc \"" << proc->name() << "\"" << std::endl;
 				this->dispatchEvent(new ProcessEvent(Events::Event::CLOSE, proc));
 				delete proc;
 			}

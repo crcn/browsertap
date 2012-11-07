@@ -97,10 +97,10 @@ namespace Events
 	/**
 	 */
 	
-	template <class T>
+	template <class T, class E>
 	class ClassCbEventListener : public BaseEventListener
 	{
-	typedef void (T::*MethodType)(Event* event);
+	typedef void (T::*MethodType)(E* event);
 	public:
 		ClassCbEventListener(T* ptr, MethodType callback):
 		_ptr(ptr),
@@ -110,7 +110,7 @@ namespace Events
 		}
 		void handleEvent(Event* event)
 		{
-			(this->_ptr->*_listener)(event);
+			(this->_ptr->*_listener)((E*)event);
 		}
 
 	private:
