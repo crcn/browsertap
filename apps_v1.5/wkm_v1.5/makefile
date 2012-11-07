@@ -14,7 +14,7 @@ VPATH = control
 BDIR = ../../apps/desktop_controller/bin
 BDIR = ./bin
 
-LIBS = -L./libs -L./vendors/jsoncpp/libs/mingw -ljson_mingw_libmt -lgdi32 -lpsapi 
+LIBS = -L./libs -L./vendors/jsoncpp/libs/mingw -ljson_mingw_libmt -lgdi32 -lpsapi -lavcodec -lavdevice -lavformat -lavutil -lswscale -lavfilter
 
 MINGWFLAGS := -static-libgcc -static-libstdc++
 CFLAGS :=  -I./inc  -I./inc/windows -I./vendors/ffmpeg -I./vendors/jsoncpp/include -I./src $(EFLAGS) -Wall

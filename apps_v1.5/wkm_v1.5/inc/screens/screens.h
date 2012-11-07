@@ -9,8 +9,10 @@
 
 namespace Screens
 {
-	class BaseScreenController;
 	class Screen;
+
+	/**
+	 */
 
 	class ScreenEvent : public Events::Event
 	{
@@ -36,11 +38,6 @@ namespace Screens
 		static int _count;
 
 		int _id;
-
-		/**
-		 */
-
-		BaseScreenController* _controller;
 
 		/**
 		 */
@@ -74,17 +71,6 @@ namespace Screens
 		 */
 
 		int id();
-	
-		/**
-		 */
-
-		BaseScreenController* controller();
-
-		/**
-		 * controls the window via commands
-		 */
-
-		void controller(BaseScreenController* controller);
 
 		/**
 		 */
@@ -144,74 +130,6 @@ namespace Screens
 		// const char* title();
 		~Screen();
 	};
-
-	/**
-	 * controllers the window - records it, moves the mouse, etc. This can be
-	 * a collection controller which is composed of multiple controllers. The controller
-	 * receives commands by listening to events passed from a particular transport. 
-	 * controllers might be: mouse, keyboard, printing, moving, etc.
-	 */
-
-	class BaseScreenController : public Events::BaseEventListener
-	{
-	private:
-
-		/**
-		 */
-
-		Events::EventDispatcher* _commander;
-
-	public:
-
-		/**
-		 * needs to set the screen itself
-		 */
-
-		friend class Screen;
-
-		/**
-		 */
-
-		BaseScreenController();
-
-		
-		/**
-		 * updates the controller - this is a next-tick sort of thing where something
-		 * like broadcasting the window might occur 
-		 */
-
-		void update();
-
-		/**
-		 * the commander fires events which may control this controller
-		 */
-
-		void commander(Events::EventDispatcher* value);
-
-		/**
-		 * the screen THIS controller is controlling
-		 */
-
-		virtual void screen(Screen* value);
-
-
-		/**
-		 * used to attach to the commander
-		 */
-
-		virtual std::vector<std::string> events() = 0;
-
-
-	protected:
-
-		/**
-		 */
-
-		Screen* _screen;
-
-
-	};
-
 
 	/**
 	 * manages all open windows

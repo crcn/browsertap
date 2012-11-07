@@ -39,7 +39,7 @@ namespace Events
 
 	EventDispatcher::EventDispatcher()
 	{
-		this->_disposableListener = new ClassCbEventListener<EventDispatcher>(this, &EventDispatcher::onDisposed);
+		this->_disposableListener = new ClassCbEventListener<EventDispatcher, Events::Event>(this, &EventDispatcher::onDisposed);
 	}
 
 

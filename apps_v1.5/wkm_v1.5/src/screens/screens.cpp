@@ -20,8 +20,7 @@ namespace Screens
 	/**
 	 */
 
-	Screen::Screen(HWND window, Process::Process* process)
-	:_controller(0),
+	Screen::Screen(HWND window, Process::Process* process):
 	_process(process),
 	_window(window)
 	{
@@ -101,17 +100,6 @@ namespace Screens
 		return rect;
 	}
 
-	BaseScreenController* Screen::controller()
-	{
-		return this->_controller;
-	}
-
-	void Screen::controller(BaseScreenController* value)
-	{
-		this->_controller = value;
-		value->screen(this);
-	}
-
 	Process::Process* Screen::process()
 	{
 		return this->_process;
@@ -120,38 +108,6 @@ namespace Screens
 	Screen::~Screen()
 	{
 		this->dispatchEvent(new ScreenEvent(Events::Event::CLOSE, this));
-	}
-
-	/**
-	 */
-
-	BaseScreenController::BaseScreenController() 
-	{
-		this->_screen = NULL;
-	}
-
-	void BaseScreenController::update() 
-	{
-		//do nothing
-	}
-
-	void BaseScreenController::screen(Screen* value) 
-	{
-		this->_screen = value;
-	}
-
-	void BaseScreenController::commander(Events::EventDispatcher* value)
-	{
-		this->_commander = value;
-
-		//fetch the events so we can attach them to the window
-		std::vector<std::string> events = this->events();
-
-		//attach the events to the window here - could be MOUSE_MOVE, 
-		for(int i = events.size(); i--;) 
-		{
-			value->addEventListener(events.at(i), this);
-		}
 	}
 
 	/**
