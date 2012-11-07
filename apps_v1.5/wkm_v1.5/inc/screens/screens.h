@@ -63,6 +63,11 @@ namespace Screens
 		std::string title();
 
 		/**
+		 */
+
+		std::string className();
+
+		/**
 		 * moves the window
 		 */
 
@@ -155,6 +160,11 @@ namespace Screens
 		 */
 
 		Recorder* _recorder;
+
+		/**
+		 */
+
+		void removeChrome();
 	};
 
 	/**

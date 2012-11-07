@@ -122,6 +122,7 @@ namespace Commanders
 		}
 
 		jwin["title"] = screen->title();
+		jwin["className"] = screen->className();
 		jwin["id"] = screen->id();
 		return jwin;
 	}

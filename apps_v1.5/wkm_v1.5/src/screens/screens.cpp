@@ -28,6 +28,8 @@ namespace Screens
 	{
 		Screen::_count++;
 		this->_id = Screen::_count;
+
+		//this->removeChrome();
 	}
 
 	int Screen::_count = 0;
@@ -39,9 +41,24 @@ namespace Screens
 		return title;
 	}
 
+	std::string Screen::className()
+	{
+		char className[1024];
+		GetClassName(this->_window, className, sizeof(className));
+		return className;
+	}
+
 	bool Screen::focus()
 	{
 		return SetForegroundWindow(this->_window);
+	}
+
+	void Screen::removeChrome()
+	{
+		LONG lStyle = GetWindowLong(this->_window, GWL_STYLE);
+		lStyle &= ~(WS_CAPTION | WS_THICKFRAME | WS_MINIMIZE | WS_MAXIMIZE | WS_SYSMENU);
+		SetWindowLong(this->_window, GWL_STYLE, 0);
+		SetWindowPos(this->_window, NULL, 0,0,0,0, SWP_FRAMECHANGED | SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_NOOWNERZORDER);
 	}
 
 
