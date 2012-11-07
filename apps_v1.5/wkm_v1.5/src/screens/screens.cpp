@@ -159,7 +159,8 @@ namespace Screens
 
 	ScreenManager::ScreenManager()
 	{
-
+		//this will ALWAYS be in index 0
+		this->_screens.push_back(new Screen(GetDesktopWindow(), NULL));
 	}
 
 	std::vector<Screen*> ScreenManager::allScreens()
@@ -172,7 +173,7 @@ namespace Screens
 		for(int i = this->_screens.size(); i--;)
 		{
 			Screen* screen = this->_screens.at(i);
-			
+
 			if(!screen->exists())
 			{
 				this->update();

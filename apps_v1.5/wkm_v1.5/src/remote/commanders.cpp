@@ -62,6 +62,8 @@ namespace Commanders
 	
 		regCommand(listWindows, execListWindows)
 		regCommand(closeWindow, execCloseWindow)
+		regCommand(resizeWindow, execResizeWindow)
+		regCommand(focusWindow, execFocusWindow)
 
 		#undef regCommand
 
@@ -99,11 +101,19 @@ namespace Commanders
 	{
 		Json::Value jwin;
 		Json::Value jproc;
-		jproc["path"] = screen->process()->path();
-		jproc["name"] = screen->process()->name();
+
+		Process::Process* proc = screen->process();
+
+		//could be desktop window
+		if(proc != NULL)
+		{
+			jproc["path"] = proc->path();
+			jproc["name"] = proc->name();
+			jwin["process"] = jproc;
+		}
+
 		jwin["title"] = screen->title();
 		jwin["id"] = screen->id();
-		jwin["process"] = jproc;
 		return jwin;
 	}
 
@@ -160,6 +170,18 @@ namespace Commanders
 		screen->resize(rect);
 
 		this->dispatchResponse(command->value(), getSuccess(true));
+	}
+
+	void JSONCommander::execFocusWindow(JSONCommand* command)
+	{
+		Json::Value data = command->value()["data"];
+		int id = data["id"].asInt();
+
+		Screens::Screen* screen = Screens::ScreenManager::instance().getScreen(id);
+
+		if(screen == 0) return this->dispatchResponse(command->value(), getSuccess(false));
+
+		this->dispatchResponse(command->value(), getSuccess(screen->focus()));
 	}
 
 

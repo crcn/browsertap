@@ -56,8 +56,8 @@ namespace Commanders
 		void execUnrecordWindow(JSONCommand* event);
 		void execShowWindowStatus(JSONCommand* event);
 
-		void execListProcesses(JSONCommand* event);
-		void execKillProcess(JSONCommand* event);
+		// void execListProcesses(JSONCommand* event);
+		// void execKillProcess(JSONCommand* event);
 
 		void onOpenWindow(Screens::ScreenEvent* event);
 		void onCloseWindow(Screens::ScreenEvent* event);
