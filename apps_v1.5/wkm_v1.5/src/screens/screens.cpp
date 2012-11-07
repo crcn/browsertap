@@ -1,5 +1,6 @@
 #include "screens/screens.h"
 #include "process/process.h"
+#include "screens/recorder/recorder.h"
 
 namespace Screens 
 {
@@ -22,14 +23,14 @@ namespace Screens
 
 	Screen::Screen(HWND window, Process::Process* process):
 	_process(process),
-	_window(window)
+	_window(window),
+	_recorder(0)
 	{
 		Screen::_count++;
 		this->_id = Screen::_count;
 	}
 
 	int Screen::_count = 0;
-
 
 	std::string Screen::title()
 	{
@@ -41,6 +42,16 @@ namespace Screens
 	bool Screen::focus()
 	{
 		return SetForegroundWindow(this->_window);
+	}
+
+	Recorder* Screen::recorder()
+	{
+		if(this->_recorder == 0)
+		{
+			this->_recorder = new Recorder(this);
+		}
+
+		return this->_recorder;
 	}
 
 	bool Screen::close()
@@ -105,8 +116,17 @@ namespace Screens
 		return this->_process;
 	}
 
+	void Screen::update()
+	{
+		if(this->_recorder != 0)
+		{
+			this->_recorder->update();
+		}
+	}
+
 	Screen::~Screen()
 	{
+		if(this->_recorder != 0) delete this->_recorder;
 		this->dispatchEvent(new ScreenEvent(Events::Event::CLOSE, this));
 	}
 
@@ -168,6 +188,7 @@ namespace Screens
 
 		return 0;
 	}
+
 	void ScreenManager::update()
 	{
 		Process::ProcessManager::instance().update();

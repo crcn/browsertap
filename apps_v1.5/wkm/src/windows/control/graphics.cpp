@@ -172,6 +172,7 @@ namespace Control
         // std::cout << padding.left << " " << padding.right << " " << padding.top << " " << padding.bottom << std::endl;
         // std::cout << resized.x << " " << resized.y << " " << resized.width << " " << resized.height << std::endl;
         // std::cout << rect.x << " " << rect.y << " " << rect.width << " " << rect.height << std::endl;
+ 
 
 
 		const char* buffer = CaptureAnImage(win->target(), resized);

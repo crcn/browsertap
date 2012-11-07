@@ -52,9 +52,10 @@ namespace Commanders
 		void execCloseWindow(JSONCommand* event);
 		void execResizeWindow(JSONCommand* event);
 		void execFocusWindow(JSONCommand* event);
-		void execRecordWindow(JSONCommand* event);
-		void execUnrecordWindow(JSONCommand* event);
+		void execStartRecordingWindow(JSONCommand* event);
+		void execStopRecordingWindow(JSONCommand* event);
 		void execShowWindowStatus(JSONCommand* event);
+		Screens::Screen* getScreen(JSONCommand* event);
 
 		// void execListProcesses(JSONCommand* event);
 		// void execKillProcess(JSONCommand* event);

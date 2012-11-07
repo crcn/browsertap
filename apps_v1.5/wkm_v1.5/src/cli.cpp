@@ -1,5 +1,4 @@
 
-#define WINVER 0x0500
 #include "remote/transports.h"
 #include "remote/commanders.h"
 

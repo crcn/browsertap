@@ -34,6 +34,7 @@ package
 		private var _server: String;
 		private var _debugInfo:TextField;
 		private var _debug:Boolean;
+		private var _channel:String;
 		private var _checkCount:int;
 		
 		[SWF(frameRate='24',backgroundColor='#FFFFFF')]
@@ -44,6 +45,7 @@ package
 		{
 			
 			this._server =  this.root.loaderInfo.parameters.host || "rtmp://192.168.2.3:1935/live";
+			this._channel = this.root.loaderInfo.parameters.channel || "default";
 			this._debug = Boolean(this.root.loaderInfo.parameters.debug);
 			
 			
@@ -114,7 +116,7 @@ package
 		
 		private function openVideo():void
 		{
-			_trace("selecting stream...");
+			_trace("selecting stream " + this._channel);
 
 			if(this._video) {
 				this.removeChild(this._video);
@@ -126,7 +128,7 @@ package
 			video.deblocking = 2;
 			video.smoothing = true;
 			
-			this._stream.play("default");
+			this._stream.play(this._channel);
 			this.addChildAt(this._video, 0);
 			
 			this.onStageResize();

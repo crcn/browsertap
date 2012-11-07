@@ -26,7 +26,9 @@ namespace Transports
 	void CLITransport::handleInput()
 	{
 		std::string command;
-
+		this->_commander->update();
+		// this->_commander->execute("{\"name\":\"startRecordingWindow\", \"data\":{\"id\":5}}");
+		// this->_commander->execute("{\"name\":\"startRecordingWindow\", \"data\":{\"id\":4}}");
 		while(std::getline(std::cin, command))
 		{
 			this->_commander->execute(command);

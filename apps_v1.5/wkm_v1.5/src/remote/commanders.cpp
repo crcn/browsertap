@@ -64,6 +64,8 @@ namespace Commanders
 		regCommand(closeWindow, execCloseWindow)
 		regCommand(resizeWindow, execResizeWindow)
 		regCommand(focusWindow, execFocusWindow)
+		regCommand(startRecordingWindow, execStartRecordingWindow)
+		regCommand(stopRecordingWindow, execStopRecordingWindow)
 
 		#undef regCommand
 
@@ -94,7 +96,14 @@ namespace Commanders
 
 	void JSONCommander::update()
 	{
-		Sleep(1000);
+		std::vector<Screens::Screen*> screens = Screens::ScreenManager::instance().allScreens();
+		for(int i = screens.size(); i--;)
+		{
+			//update's mostly the recorder
+			screens.at(i)->update();
+		}
+		
+		Sleep(40);
 	}
 
 	Json::Value getScreenData(Screens::Screen* screen)
@@ -122,6 +131,11 @@ namespace Commanders
 		Json::Value value;
 		value["success"] = succ;
 		return value;
+	}
+
+	int getDataId(Json::Value value)
+	{
+		return value["data"]["id"].asInt();
 	}
 
 	void JSONCommander::execListWindows(JSONCommand* command)
@@ -174,14 +188,44 @@ namespace Commanders
 
 	void JSONCommander::execFocusWindow(JSONCommand* command)
 	{
-		Json::Value data = command->value()["data"];
-		int id = data["id"].asInt();
+		Screens::Screen* screen = 0;
+
+		if(!(screen = this->getScreen(command))) return;
+
+		this->dispatchResponse(command->value(), getSuccess(screen->focus()));
+	}
+
+	void JSONCommander::execStartRecordingWindow(JSONCommand* command)
+	{
+		Screens::Screen* screen = 0;
+
+		if(!(screen = this->getScreen(command))) return;
+
+		screen->recorder()->start();
+	}
+
+	void JSONCommander::execStopRecordingWindow(JSONCommand* command)
+	{
+		Screens::Screen* screen = 0;
+
+		if(!(screen = this->getScreen(command))) return;
+
+		screen->recorder()->stop();
+	}
+
+	Screens::Screen* JSONCommander::getScreen(JSONCommand* command)
+	{
+		int id = getDataId(command->value());
 
 		Screens::Screen* screen = Screens::ScreenManager::instance().getScreen(id);
 
-		if(screen == 0) return this->dispatchResponse(command->value(), getSuccess(false));
+		if(screen == 0)
+		{
+			this->dispatchResponse(command->value(), getSuccess(false));
+			return 0;
+		} 
 
-		this->dispatchResponse(command->value(), getSuccess(screen->focus()));
+		return screen;
 	}
 
 

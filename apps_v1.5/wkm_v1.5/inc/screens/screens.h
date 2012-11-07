@@ -6,6 +6,7 @@
 #include "common/events.h"
 #include "common/geometry.h"
 #include "process/process.h"
+#include "screens/recorder/recorder.h"
 
 namespace Screens
 {
@@ -32,27 +33,6 @@ namespace Screens
 
 	class Screen : public Events::EventDispatcher
 	{
-	private:
-
-
-		static int _count;
-
-		int _id;
-
-		/**
-		 */
-
-		Process::Process* _process;
-
-		/**
-		 */
-
-		HWND _window;
-
-		/**
-		 */
-
-		RECT getRect();
 
 	public:
 
@@ -121,6 +101,7 @@ namespace Screens
 
 		Process::Process* process();
 
+		//TODO - isMaster
 		// std::vector<Screen*> children();
 		// bool isChild(Screen* parent);
 
@@ -129,6 +110,46 @@ namespace Screens
 
 		// const char* title();
 		~Screen();
+
+		/**
+		 */
+
+		Recorder* recorder();
+
+		/**
+		 */
+
+		void update();
+
+
+	private:
+
+
+		static int _count;
+
+		int _id;
+
+		/**
+		 */
+
+		Process::Process* _process;
+
+		/**
+		 */
+
+		HWND _window;
+
+		/**
+		 */
+
+		RECT getRect();
+
+		
+		/**
+		 * records this window
+		 */
+
+		Recorder* _recorder;
 	};
 
 	/**
@@ -185,6 +206,7 @@ namespace Screens
 		Screen* getScreen(int id);
 
 	private:
+
 
 		/**
 		 */

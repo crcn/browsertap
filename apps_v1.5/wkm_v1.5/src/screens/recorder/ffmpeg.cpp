@@ -25,30 +25,9 @@ AVFrame *alloc_picture(enum PixelFormat pix_fmt, int width, int height)
 	return picture;
 }
 
-/* prepare a dummy image */
-/*static void fill_yuv_image(AVFrame *pict, int frame_index, int width, int height)
-{
-    int x, y, i;
-
-    i = frame_index;
-
-    for (y = 0; y < height; y++) {
-        for (x = 0; x < width; x++) {
-            pict->data[0][y * pict->linesize[0] + x] = x + y + i * 3;
-        }
-    }
-
-    for (y = 0; y < height/2; y++) {
-        for (x = 0; x < width/2; x++) {
-            pict->data[1][y * pict->linesize[1] + x] = 128 + y + i * 2;
-            pict->data[2][y * pict->linesize[2] + x] = 64 + x + i * 5;
-        }
-    }
-}*/
 
 #define ENCODE_PX_FORMAT PIX_FMT_YUV420P
 
-int frame_count = 0;
 
 namespace Screens
 {
@@ -56,10 +35,10 @@ namespace Screens
 
 	FFMPeg::FFMPeg(FFmpegContext* ctx)
 	{
-		//avcodec_init();
 		avcodec_register_all();	
 		avformat_network_init();
 		av_register_all();
+
 
 		_prepared		 = false;
 		_srcPicture      = NULL;
@@ -76,7 +55,6 @@ namespace Screens
 
 		Geometry::Rectangle& bounds = data->bounds();
 
-		//std::cout << bounds.width << " " << bounds.height << std::endl;
 
 
 		avpicture_fill((AVPicture*)_srcPicture, (uint8_t*)data->buffer(), PIX_FMT_BGRA, bounds.width, bounds.height);
@@ -88,10 +66,10 @@ namespace Screens
 			bounds.height, 
 			_dstPicture->data, 
 			_dstPicture->linesize);
+
 		
 
 		int outSize = avcodec_encode_video(_videoCodecCtx, _outputBuffer, _bufferSize, _dstPicture);
-
 
 		int ret = 0;
 		if(outSize > 0)
@@ -102,9 +80,6 @@ namespace Screens
 			if (_videoCodecCtx->coded_frame->pts != AV_NOPTS_VALUE) 
 			{
 				pkt.pts = av_rescale_q(_videoCodecCtx->coded_frame->pts, _videoCodecCtx->time_base, _videoStream->time_base);
-			} else
-			{
-				// std::cout << "G" << std::endl;
 			}
 
 			if(_videoCodecCtx->coded_frame->key_frame)

@@ -4,6 +4,8 @@
 namespace Screens
 {
 	class Screen;
+	class FFMPeg;
+	class FFmpegContext;
 
 	class Recorder
 	{
@@ -11,8 +13,12 @@ namespace Screens
 		Recorder(Screen* screen);
 		void start();
 		void stop();
+		void update();
+		~Recorder();
 	private:
 		Screen* _screen;
+		FFMPeg* _ffmpeg;
+		bool _recording;
 	};
 }
 #endif
