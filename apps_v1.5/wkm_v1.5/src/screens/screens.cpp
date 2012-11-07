@@ -44,6 +44,7 @@ namespace Screens
 		return SetForegroundWindow(this->_window);
 	}
 
+
 	Recorder* Screen::recorder()
 	{
 		if(this->_recorder == 0)
@@ -63,7 +64,9 @@ namespace Screens
 
 	bool Screen::exists()
 	{
-		return IsWindow(this->_window);
+		bool exists = IsWindow(this->_window);
+		if(!exists) this->_process = 0;
+		return exists;
 	}
 
 	HWND Screen::target()

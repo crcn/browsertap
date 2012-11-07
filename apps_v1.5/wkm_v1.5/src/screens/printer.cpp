@@ -32,7 +32,7 @@ char* CaptureAnImage(HWND hWnd, Geometry::Rectangle& rect)
     	
     if(!PrintWindow(hWnd, hdcMemDC, 0))
     {
-    	std::cout << "ERR" << std::endl;
+    	// std::cout << "ERR" << std::endl;
     }
 
     // Get the BITMAP from the HBITMAP

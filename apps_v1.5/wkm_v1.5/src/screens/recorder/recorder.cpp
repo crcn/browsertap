@@ -13,14 +13,12 @@ namespace Screens
 	_recording(false)
 	{
 
+
 		std::stringstream ss;
 
 		ss << "rtmp://10.0.1.30:1935/live/win_" << screen->id();
-		const char* src = ss.str().c_str();
-		int size = strlen(src);
-		const char* copy = (const char*)malloc(sizeof(char) * size);
-		memcpy((void*)copy, (void*)src, size + 1);
-
+		char* copy = new char[1024];
+		strcpy(copy, ss.str().c_str());
 
 		FFmpegContext* ctx = new FFmpegContext(copy);
 		ctx->qmin = 1;
@@ -29,8 +27,10 @@ namespace Screens
 		ctx->gop_size = 300;
 		ctx->scenechange_threshold = 500;
 		ctx->frame_rate = 25;
+		ctx->bit_rate = 64;
 
 		this->_ffmpeg = new FFMPeg(ctx);
+
 	}
 
 	void Recorder::start()
@@ -46,6 +46,11 @@ namespace Screens
 	void Recorder::update()
 	{
 		if(!this->_recording) return;
+		if(!this->_screen->exists())
+		{
+			std::cout << "cannot update recorder since screen doesn't exist" << std::endl;
+			return;
+		}
 		Graphics::Bitmap* bm = Screens::Printer::print(this->_screen);
 		this->_ffmpeg->broadcast(bm);
 		delete bm;
@@ -53,6 +58,6 @@ namespace Screens
 
 	Recorder::~Recorder()
 	{
-
+		delete this->_ffmpeg;
 	}
 }

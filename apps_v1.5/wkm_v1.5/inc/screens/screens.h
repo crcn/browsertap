@@ -121,6 +121,11 @@ namespace Screens
 
 		void update();
 
+		/**
+		 */
+
+		void onProcessKill(Events::Event* event);
+
 
 	private:
 

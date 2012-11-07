@@ -134,6 +134,7 @@ namespace Process
 	{
 		int nrp = runningProcesses.size();
 		int np  = this->_processes.size();
+		std::vector<Process*> closed;
 
 		for(int i = np; i--;)
 		{
@@ -152,11 +153,17 @@ namespace Process
 
 			if(!running)
 			{
-				this->dispatchEvent(new ProcessEvent(Events::Event::CLOSE, proc));
-				delete proc;
+				closed.push_back(proc);
 			}
 		}
 
 		this->_processes = runningProcesses;
+
+		for(int j = closed.size(); j--;)
+		{
+			Process* proc = closed[j];
+			this->dispatchEvent(new ProcessEvent(Events::Event::CLOSE, proc));
+			delete proc;
+		}
 	}
 }

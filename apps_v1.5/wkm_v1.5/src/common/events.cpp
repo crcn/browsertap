@@ -143,6 +143,15 @@ namespace Events
 	BaseEventDispatcher::~BaseEventDispatcher()
 	{
 		this->dispatchEvent(new Event(Event::DISPOSE));
+
+		std::map<std::string, std::vector<BaseEventListener*>* >::iterator it = this->_eventListeners.begin();
+
+		for(; it != this->_eventListeners.end(); it++) 
+		{
+			std::vector<BaseEventListener*>* listeners = it->second;
+			delete listeners;
+			it->second = 0;
+		}
 	}
 
 	EventDispatcher::~EventDispatcher()

@@ -155,7 +155,7 @@ namespace Screens
 
 		av_dump_format(_formatCtx, 0, _ctx->output, 1);
 
-		printf("Opening RTMP connection");
+		printf("Opening RTMP connection\n");
 
 		//open the file
 		if (!(_outputFmt->flags & AVFMT_NOFILE)) 
@@ -170,10 +170,10 @@ namespace Screens
 		}
 
 		
-		printf("Opening Video Stream");
+		printf("Opening Video Stream\n");
 		openVideoStream();
 		avformat_write_header(_formatCtx, NULL);
-		printf("Connected to RTMP server");
+		printf("Connected to RTMP server\n");
 
 	}
 

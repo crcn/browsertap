@@ -114,7 +114,7 @@ namespace Commanders
 		Process::Process* proc = screen->process();
 
 		//could be desktop window
-		if(proc != NULL)
+		if(proc != 0)
 		{
 			jproc["path"] = proc->path();
 			jproc["name"] = proc->name();
