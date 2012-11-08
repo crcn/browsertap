@@ -1,6 +1,8 @@
 #ifndef SCREENS_RECORDER_H_
 #define SCREENS_RECORDER_H_
 
+#include <string>
+
 namespace Screens
 {
 	class Screen;
@@ -11,7 +13,7 @@ namespace Screens
 	{
 	public:
 		Recorder(Screen* screen);
-		void start();
+		void start(std::string output);
 		void stop();
 		void update();
 		~Recorder();

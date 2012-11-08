@@ -77,7 +77,7 @@ module.exports = structr({
 
 			console.log("broadcast %s", args.join(" "));
 
-			self._proc = spawn(__dirname + "/../../../wkm/bin/cli.exe", args);
+			self._proc = spawn(__dirname + "/bin/cli.exe", args);
 
 			self._proc.stdout.on('data', function(data) {
 				process.stdout.write(String(data));

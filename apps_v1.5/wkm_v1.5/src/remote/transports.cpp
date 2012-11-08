@@ -27,7 +27,6 @@ namespace Transports
 	{
 		CLITransport* transport = (CLITransport*)param;
 		std::string command;
-		transport->_commander->update();
 		// this->_commander->execute("{\"name\":\"startRecordingWindow\", \"data\":{\"id\":5}}");
 		// this->_commander->execute("{\"name\":\"startRecordingWindow\", \"data\":{\"id\":4}}");
 		while(std::getline(std::cin, command))
@@ -41,7 +40,7 @@ namespace Transports
 	void CLITransport::onCommanderCommand(Commanders::Command* command)
 	{
 		//add a boundary so this shit can be parsed
-		std::cout << "<<<<<" << command->value() << ">>>>>";
+		std::cout << ">>>>>" << command->value() << std::endl;
 	}
 
 	void CLITransport::handleOutput()

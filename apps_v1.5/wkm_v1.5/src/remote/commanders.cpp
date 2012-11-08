@@ -42,21 +42,8 @@ namespace Commanders
 	/**
 	 */
 
-	DWORD WINAPI updateWindow(LPVOID param)
-	{
-		while(1)
-		{
-			Screens::ScreenManager::instance().update();
-			Sleep(1000);
-		}
-
-		return 0;
-	}
-
-	/**
-	 */
-
 	JSONCommander::JSONCommander():
+	_tick(0),
 	_commands(new Events::EventDispatcher()) {
 		#define regCommand(name, method) this->_commands->addEventListener(#name, new Events::ClassCbEventListener<JSONCommander, JSONCommand>(this, &JSONCommander::method));
 	
@@ -69,13 +56,9 @@ namespace Commanders
 
 		#undef regCommand
 
+		Screens::ScreenManager::instance().update();
 		Screens::ScreenManager::instance().addEventListener(Events::Event::OPEN, new Events::ClassCbEventListener<JSONCommander, Screens::ScreenEvent>(this, &JSONCommander::onOpenWindow));
 		Screens::ScreenManager::instance().addEventListener(Events::Event::CLOSE, new Events::ClassCbEventListener<JSONCommander, Screens::ScreenEvent>(this, &JSONCommander::onCloseWindow));
-
-
-		//stick this on a timer
-		DWORD threadId;
-		CreateThread(NULL, 0, &updateWindow, this, 0, &threadId);
 	}
 
 	bool JSONCommander::execute(std::string command) 
@@ -96,6 +79,18 @@ namespace Commanders
 
 	void JSONCommander::update()
 	{
+		if(_tick == 0) Screens::ScreenManager::instance().update();
+		int fps = 25; 
+		int ms  = (1/(double)fps)*1000;
+
+		_tick++;
+
+		//every second, refresh the screen manager. Don't over-do it.
+		if(_tick % fps == 0) 
+		{
+			_tick = 0;
+		}
+
 		std::vector<Screens::Screen*> screens = Screens::ScreenManager::instance().allScreens();
 		for(int i = screens.size(); i--;)
 		{
@@ -103,7 +98,7 @@ namespace Commanders
 			screens.at(i)->update();
 		}
 		
-		Sleep(40);
+		Sleep(ms);
 	}
 
 	Json::Value getScreenData(Screens::Screen* screen)
@@ -200,9 +195,12 @@ namespace Commanders
 	{
 		Screens::Screen* screen = 0;
 
+		Json::Value out = command->value()["data"]["output"];
+
+		if(out.isNull()) return this->dispatchResponse(command->value(), getSuccess(false));
 		if(!(screen = this->getScreen(command))) return;
 
-		screen->recorder()->start();
+		screen->recorder()->start(out.asString());
 	}
 
 	void JSONCommander::execStopRecordingWindow(JSONCommand* command)

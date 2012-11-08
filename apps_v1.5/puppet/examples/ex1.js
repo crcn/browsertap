@@ -4,7 +4,7 @@ var puppet = require("../").create({
 	puppeteer: {
 		port: 8000
 	},
-	rtmp: Url.parse("rtmp://127.0.0.1:1935/live/default"),
+	rtmp: Url.parse("rtmp://10.1.1.30:1935/live"),
 	browsers: {
 		directory: "~/Desktop/browsers",
 		cache: {

@@ -44,6 +44,7 @@ namespace Commanders
 		void update();
 
 	private:
+		int _tick;
 		Events::EventDispatcher* _commands;
 
 		// void execTimeout(JSONCommand* event);

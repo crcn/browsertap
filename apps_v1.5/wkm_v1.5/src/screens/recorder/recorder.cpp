@@ -3,7 +3,6 @@
 #include "screens/recorder/ffmpeg.h"
 #include "screens/recorder/ffmpeg_context.h"
 #include "screens/printer.h"
-#include <sstream>
 
 namespace Screens
 {
@@ -14,29 +13,26 @@ namespace Screens
 	{
 
 
-		std::stringstream ss;
-
-		ss << "rtmp://10.0.1.30:1935/live/win_" << screen->id();
-		char* copy = new char[1024];
-		strcpy(copy, ss.str().c_str());
-
-		FFmpegContext* ctx = new FFmpegContext(copy);
+		FFmpegContext* ctx = new FFmpegContext(NULL);
 		ctx->qmin = 1;
-		ctx->qmax = 11;
+		ctx->qmax = 3;
 		ctx->me_subpel_quality = 0;
 		ctx->gop_size = 300;
 		ctx->scenechange_threshold = 500;
 		ctx->frame_rate = 25;
 		ctx->bit_rate = 64;
-
 		this->_ctx = ctx;
 
 		this->_ffmpeg = new FFMPeg(ctx);
 
 	}
 
-	void Recorder::start()
+	void Recorder::start(std::string output)
 	{
+		char* copy = new char[1024];
+		strcpy(copy, output.c_str());
+		this->_ctx->output = copy;
+
 		this->_recording = true;
 	}
 
