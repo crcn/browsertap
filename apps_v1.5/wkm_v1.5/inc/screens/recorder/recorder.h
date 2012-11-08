@@ -19,6 +19,7 @@ namespace Screens
 		Screen* _screen;
 		FFMPeg* _ffmpeg;
 		bool _recording;
+		FFmpegContext* _ctx;
 	};
 }
 #endif

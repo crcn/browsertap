@@ -21,7 +21,7 @@ AVFrame *alloc_picture(enum PixelFormat pix_fmt, int width, int height)
 		return NULL;
 	}
 
-	avpicture_fill((AVPicture*)picture,picture_buf,pix_fmt,width,height);
+	avpicture_fill((AVPicture*)picture, picture_buf, pix_fmt, width, height);
 	return picture;
 }
 
@@ -55,10 +55,7 @@ namespace Screens
 
 		Geometry::Rectangle& bounds = data->bounds();
 
-
-
 		avpicture_fill((AVPicture*)_srcPicture, (uint8_t*)data->buffer(), PIX_FMT_BGRA, bounds.width, bounds.height);
-		//fill_yuv_image((AVFrame*)_dstPicture, frame_count++, bounds.width, bounds.height);
 		sws_scale(_convertCtx, 
 			_srcPicture->data, 
 			_srcPicture->linesize, 
@@ -67,7 +64,6 @@ namespace Screens
 			_dstPicture->data, 
 			_dstPicture->linesize);
 
-		
 
 		int outSize = avcodec_encode_video(_videoCodecCtx, _outputBuffer, _bufferSize, _dstPicture);
 
@@ -274,7 +270,7 @@ namespace Screens
 
 			
 		_videoCodecCtx->me_subpel_quality = 0;
-		_videoCodecCtx->thread_count = 0;
+		_videoCodecCtx->thread_count = 1;
 
 		//_videoCodecCtx->qmin = 1;
 		//_videoCodecCtx->qmax = 10;
@@ -403,9 +399,9 @@ namespace Screens
 			exit(1);
 		}
 
-
 		_bufferSize = avpicture_get_size(_videoCodecCtx->pix_fmt, _videoCodecCtx->width, _videoCodecCtx->height);
 		_outputBuffer = (uint8_t *)av_malloc(_bufferSize);
+
 		_dstPicture = alloc_picture(_videoCodecCtx->pix_fmt, _videoCodecCtx->width, _videoCodecCtx->height);
 		_srcPicture = alloc_picture(PIX_FMT_YUV420P, _videoCodecCtx->width, _videoCodecCtx->height);
 
@@ -438,31 +434,17 @@ namespace Screens
 	void FFMPeg::cleanup()
 	{
 
-		/*AVFormatContext *_formatCtx;
-		AVOutputFormat *_outputFmt;
-		AVStream *_videoStream;
-		AVCodecContext *_videoCodecCtx;
-		AVCodec *_videoCodec;
-		AVFrame* _srcPicture;
-		AVFrame* _dstPicture;
-		SwsContext* _convertCtx;
-
-		uint8_t *_outputBuffer;*/
-
-
 		if(!_prepared) return;
 
 		av_write_trailer(_formatCtx);
 
-
 		avcodec_close(_videoCodecCtx);
-
 		//causes mem issues
-		//av_free(_dstPicture->data[0]);
 		av_free(_dstPicture);
-		//av_free(_srcPicture->data[0]);
 		av_free(_srcPicture);
 		av_free(_outputBuffer);
+		av_free(_convertCtx); //not needed?
+		av_free(_videoStream); //not needed?
 
 
 		for(int i = 0; i < _formatCtx->nb_streams; i++)
@@ -475,6 +457,8 @@ namespace Screens
 		{
 			avio_close(_formatCtx->pb);
 		}
+
+		av_free(_outputFmt);
 
 		av_free(_formatCtx);
 	}

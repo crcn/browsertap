@@ -28,8 +28,7 @@ namespace Screens
 	{
 		Screen::_count++;
 		this->_id = Screen::_count;
-
-		//this->removeChrome();
+		// this->removeChrome();
 	}
 
 	int Screen::_count = 0;
@@ -55,10 +54,28 @@ namespace Screens
 
 	void Screen::removeChrome()
 	{
-		LONG lStyle = GetWindowLong(this->_window, GWL_STYLE);
+		/*LONG lStyle = GetWindowLong(this->_window, GWL_STYLE);
 		lStyle &= ~(WS_CAPTION | WS_THICKFRAME | WS_MINIMIZE | WS_MAXIMIZE | WS_SYSMENU);
 		SetWindowLong(this->_window, GWL_STYLE, 0);
-		SetWindowPos(this->_window, NULL, 0,0,0,0, SWP_FRAMECHANGED | SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_NOOWNERZORDER);
+		SetWindowPos(this->_window, NULL, 0,0,0,0, SWP_FRAMECHANGED | SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_NOOWNERZORDER);*/
+		// This will make a hole you can see through for the MainToon window.
+
+		// HRGN rgnOriginalWnd;
+		// HRGN rgnTheHole;
+		HRGN rgnNewWnd;
+
+		Geometry::Rectangle bounds = this->bounds();
+
+		// rgnOriginalWnd = CreateRectRgn(0, 0, bounds.width, bounds.height);
+		// rgnTheHole = CreateRectRgn(10, 200, 350, 450);
+		rgnNewWnd = CreateRectRgn(3, 25, bounds.width - 6, bounds.height - 6);
+
+		// CombineRgn(rgnNewWnd, rgnOriginalWnd, rgnTheHole, RGN_DIFF);
+      	SetWindowRgn(this->_window, rgnNewWnd, TRUE);
+
+		// DeleteObject(rgnOriginalWnd);
+		// DeleteObject(rgnTheHole);
+		DeleteObject(rgnNewWnd);
 	}
 
 

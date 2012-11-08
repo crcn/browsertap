@@ -29,6 +29,8 @@ namespace Screens
 		ctx->frame_rate = 25;
 		ctx->bit_rate = 64;
 
+		this->_ctx = ctx;
+
 		this->_ffmpeg = new FFMPeg(ctx);
 
 	}
@@ -59,5 +61,6 @@ namespace Screens
 	Recorder::~Recorder()
 	{
 		delete this->_ffmpeg;
+		delete this->_ctx;
 	}
 }
