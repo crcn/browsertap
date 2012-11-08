@@ -433,7 +433,6 @@ namespace Screens
 
 	void FFMPeg::cleanup()
 	{
-
 		if(!_prepared) return;
 
 		av_write_trailer(_formatCtx);
@@ -459,10 +458,6 @@ namespace Screens
 		}
 
 		av_free(_outputFmt);
-
 		av_free(_formatCtx);
 	}
-
-
-
 }

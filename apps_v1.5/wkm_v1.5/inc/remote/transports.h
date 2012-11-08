@@ -26,8 +26,8 @@ namespace Transports
 		void onCommanderCommand(Commanders::Command* command);
 
 	private:
-		void handleInput();
-		static DWORD WINAPI handleOutput(LPVOID param);
+		void handleOutput();
+		static DWORD WINAPI handleInput(LPVOID param);
 	};
 }
 

@@ -19,20 +19,23 @@ namespace Transports
 	void CLITransport::open()
 	{
 		DWORD handleThreadId;
-		CreateThread(NULL, 0, CLITransport::handleOutput, this, 0, &handleThreadId);
-		this->handleInput();
+		CreateThread(NULL, 0, CLITransport::handleInput, this, 0, &handleThreadId);
+		this->handleOutput();
 	}
 
-	void CLITransport::handleInput()
+	DWORD WINAPI CLITransport::handleInput(LPVOID param)
 	{
+		CLITransport* transport = (CLITransport*)param;
 		std::string command;
-		this->_commander->update();
+		transport->_commander->update();
 		// this->_commander->execute("{\"name\":\"startRecordingWindow\", \"data\":{\"id\":5}}");
 		// this->_commander->execute("{\"name\":\"startRecordingWindow\", \"data\":{\"id\":4}}");
 		while(std::getline(std::cin, command))
 		{
-			this->_commander->execute(command);
+			transport->_commander->execute(command);
 		}
+
+		return 0;
 	}
 
 	void CLITransport::onCommanderCommand(Commanders::Command* command)
@@ -40,14 +43,11 @@ namespace Transports
 		std::cout << command->value();
 	}
 
-	DWORD WINAPI CLITransport::handleOutput(LPVOID param)
+	void CLITransport::handleOutput()
 	{
-		CLITransport* transport = (CLITransport*)param;
-		Commanders::BaseCommander* commander = transport->_commander;
+		Commanders::BaseCommander* commander = this->_commander;
 
 		//timeouts go on in the commander
 		while(1) commander->update();
-
-		return 0;
 	}
 }
