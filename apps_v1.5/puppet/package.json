@@ -24,6 +24,7 @@
     "browserify": "1.16.x",
     "dnode": "1.0.x",
     "shoe": "0.0.x",
-    "express": "*"
+    "express": "*",
+    "cashew": "0.0.x"
   }
 }
