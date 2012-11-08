@@ -1,37 +1,16 @@
 var puppet = require("../../puppet"),
 dnode      = require("dnode"),
-net        = require("net"),
-shoe       = require("shoe"),
 Url = require("url"),
-wrapPuppet = require("./wrapPuppet");
-
-
-
-
+dsync = require("dsync");
 
 
 
 exports.createServer = function(puppet, config) {
 
 	var st,
-	wrap = wrapPuppet(puppet);
+	wrap = dsync(puppet);
 
-			var key = Date.now() + "_" + Math.round(Math.random() * 99999);
 	dnode({
-		/*initialize: function(maestro, callback) {
-
-			if(key) {
-				return callback(new Error("cannot re-initi"))
-			}
-
-			callback(null, {
-				key: key,
-				connect: function(options, callback) {
-					if(options.key != key) return callback(new Error("incorrect key"));
-					callback(null, wrap);
-				}
-			});
-		},*/
 		rtmp: {
 			host: "rtmp://" + config.rtmp.host + "/live"
 		},

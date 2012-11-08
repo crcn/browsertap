@@ -28,6 +28,7 @@ namespace Screens
 	{
 		Screen::_count++;
 		this->_id = Screen::_count;
+		this->_style = GetWindowLong(this->_window, GWL_STYLE);
 		// this->removeChrome();
 	}
 
@@ -111,6 +112,11 @@ namespace Screens
 	int Screen::id()
 	{
 		return this->_id;
+	}
+
+	long Screen::style()
+	{
+		return this->_style;
 	}
 
 	Geometry::Rectangle Screen::bounds()

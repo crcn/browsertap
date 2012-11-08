@@ -18,10 +18,17 @@ exports.create = function(options) {
 	_.extend(puppet, {
 		wkm      : client,
 		server   : proxyServer.listen(options.port || 8090),
-		mouse    : new Mouse(client),
-		desktop  : new Desktop(puppet, client),
-		keyboard : new Keyboard(client),
-		browsers : new Browsers(puppet, options.browsers)
+		// mouse    : new Mouse(client),
+		// desktop  : new Desktop(puppet, client),
+		// keyboard : new Keyboard(client),
+		browsers : new Browsers(puppet, options.browsers),
+
+		toPublic: function() {
+			return {
+				client: puppet.wkm,
+				browsers: puppet.browsers
+			};
+		}
 	});
 
 	return puppet;

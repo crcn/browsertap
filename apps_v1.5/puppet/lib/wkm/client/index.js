@@ -7,6 +7,11 @@ module.exports = structr({
 	/**
 	 */
 
+	"publicKeys": ["windows"],
+
+	/**
+	 */
+
 	"__construct": function(options) {
 
 		this._con = new Connection();

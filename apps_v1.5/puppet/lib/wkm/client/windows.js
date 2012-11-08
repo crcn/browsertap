@@ -8,6 +8,11 @@ module.exports = structr(EventEmitter, {
 
 	/**
 	 */
+	 
+	"publicKeys": ["getWindows"],
+
+	/**
+	 */
 
 	"__construct": function(con, options) {
 		this._options = options;
@@ -16,6 +21,13 @@ module.exports = structr(EventEmitter, {
 		this._windows = [];
 		this._con.on("openWindow", this.getMethod("_onOpenWindow"));
 		this._con.on("closeWindow", this.getMethod("_onCloseWindow"));
+	},
+
+	/**
+	 */
+
+	"getWindows": function(callback) {
+		callback(null, this._windows);
 	},
 
 	/**

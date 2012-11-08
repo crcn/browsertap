@@ -55,6 +55,11 @@ namespace Screens
 		/**
 		 */
 
+		long style();
+
+		/**
+		 */
+
 		Geometry::Rectangle bounds();
 
 		/**
@@ -138,6 +143,7 @@ namespace Screens
 		static int _count;
 
 		int _id;
+		long _style;
 
 		/**
 		 */

@@ -12,6 +12,11 @@ module.exports = structr({
 	/**
 	 */
 
+	"publicKeys": ["open", "getAll", "killAll"],
+
+	/**
+	 */
+
 	"__construct": function(puppet, options) {
 		this.puppet     = puppet;
 		this._options   = options;

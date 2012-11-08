@@ -114,10 +114,11 @@ namespace Commanders
 			jproc["path"] = proc->path();
 			jproc["name"] = proc->name();
 			jwin["process"] = jproc;
-		}
+		}	
 
 		jwin["title"] = screen->title();
 		jwin["className"] = screen->className();
+		jwin["style"] = (double) screen->style();
 		jwin["id"] = screen->id();
 		return jwin;
 	}

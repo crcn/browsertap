@@ -9,16 +9,24 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
+	"publicKeys": ["close", "move", "resize", "startRecording", "stopRecording"],
+
+	/**
+	 */
+
 	"__construct": function(window, windows) {
 
-		this.id = window.id;
+		this.id        = window.id;
 		this.className = window.className;
-		this.title = window.title;
-		this.process = window.process;
+		this.title     = window.title;
+		this.process   = window.process;
+		this.style     = window.style;
 
 		this._windows = windows;
 		this._con = windows._con;
 		this._rtmp = windows._options.rtmp;
+
+		//TODO - mouse
 	},
 
 	/**
