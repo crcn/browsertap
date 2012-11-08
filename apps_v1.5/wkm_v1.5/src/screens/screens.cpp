@@ -22,6 +22,7 @@ namespace Screens
 	 */
 
 	Screen::Screen(HWND window, Process::Process* process):
+	_parent(0),
 	_process(process),
 	_window(window),
 	_recorder(0)
@@ -29,7 +30,6 @@ namespace Screens
 		Screen::_count++;
 		this->_id = Screen::_count;
 		this->_style = GetWindowLong(this->_window, GWL_STYLE);
-		// this->removeChrome();
 	}
 
 	int Screen::_count = 0;
@@ -114,6 +114,11 @@ namespace Screens
 		return this->_id;
 	}
 
+	int Screen::parent()
+	{
+		return this->_parent;
+	}
+
 	long Screen::style()
 	{
 		return this->_style;
@@ -166,6 +171,7 @@ namespace Screens
 			this->_recorder->update();
 		}
 	}
+
 
 	Screen::~Screen()
 	{
@@ -237,6 +243,8 @@ namespace Screens
 		Process::ProcessManager::instance().update();
 		this->removeClosedWindows();
 		EnumWindows(eachWindow, (LPARAM)this);
+		this->updateRelationships();
+		this->dispatchNewScreens();
 	}
 
 	BOOL CALLBACK ScreenManager::eachWindow(HWND hWnd, LPARAM lParam)
@@ -270,7 +278,7 @@ namespace Screens
 
 			Screen* screen = new Screen(hWnd, winProc);
 			sm->_screens.push_back(screen);
-			sm->dispatchEvent(new ScreenEvent(Events::Event::OPEN, screen));
+			sm->_newScreens.push_back(screen);
 		}
 
 		return TRUE;
@@ -295,6 +303,38 @@ namespace Screens
 				delete screen;
 			}
 		}
+	}
+
+	void ScreenManager::updateRelationships()
+	{
+		int n = this->_screens.size();
+
+		for(int i = n; i--;)
+		{
+			Screen* child = this->_screens.at(i);
+			int pid = (int)GetParent(child->_window);
+
+			for(int j = n; j--;)
+			{
+				Screen* parent = this->_screens.at(j);
+
+				if((int)(parent->_window) == pid) {
+					child->_parent = parent->id();
+					break;
+				}
+			}
+		}
+	}
+
+
+	void ScreenManager::dispatchNewScreens()
+	{
+		for(int i = this->_newScreens.size(); i--;)
+		{
+			this->dispatchEvent(new ScreenEvent(Events::Event::OPEN, this->_newScreens.at(i)));
+		}
+
+		this->_newScreens.clear();
 	}
 
 }

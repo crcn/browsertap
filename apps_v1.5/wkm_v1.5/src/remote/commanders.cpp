@@ -120,6 +120,7 @@ namespace Commanders
 		jwin["className"] = screen->className();
 		jwin["style"] = (double) screen->style();
 		jwin["id"] = screen->id();
+		jwin["parent"] = screen->parent();
 		return jwin;
 	}
 

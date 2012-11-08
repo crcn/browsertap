@@ -33,6 +33,7 @@ namespace Screens
 
 	class Screen : public Events::EventDispatcher
 	{
+	friend class ScreenManager;
 
 	public:
 
@@ -51,6 +52,11 @@ namespace Screens
 		 */
 
 		int id();
+
+		/**
+		 */
+
+		int parent();
 
 		/**
 		 */
@@ -137,12 +143,14 @@ namespace Screens
 		void onProcessKill(Events::Event* event);
 
 
+
 	private:
 
 
 		static int _count;
 
 		int _id;
+		int _parent;
 		long _style;
 
 		/**
@@ -233,6 +241,7 @@ namespace Screens
 		 */
 
 		std::vector<Screen*> _screens;
+		std::vector<Screen*> _newScreens;
 
 
 		/**
@@ -240,6 +249,16 @@ namespace Screens
 		 */
 
 		void removeClosedWindows();
+
+		/**
+		 */
+
+		void updateRelationships();
+
+		/**
+		 */
+
+		void dispatchNewScreens();
 
 		/**
 		 */
