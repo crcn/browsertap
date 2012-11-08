@@ -40,7 +40,8 @@ namespace Transports
 
 	void CLITransport::onCommanderCommand(Commanders::Command* command)
 	{
-		std::cout << command->value();
+		//add a boundary so this shit can be parsed
+		std::cout << "<<<<<" << command->value() << ">>>>>";
 	}
 
 	void CLITransport::handleOutput()
