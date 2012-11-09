@@ -27,10 +27,8 @@ module.exports = structr(EventEmitter, {
 				return item.length > 0;
 			});
 
-
 			var cmd;
-			for(var i = commands.length; i--;)
-			{
+			for(var i = commands.length; i--;) {
 				var cmdstr = commands[i], cmd;
 				try {
 					cmd = JSON.parse(cmdstr);
@@ -58,7 +56,6 @@ module.exports = structr(EventEmitter, {
 
 	/**
 	 */
-
 
 	"execute": function(name, data, callback) {
 

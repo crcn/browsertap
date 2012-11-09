@@ -69,7 +69,7 @@ module.exports = structr(EventEmitter, {
 	"_addWindow": function(window) {
 		var win = new Window(window, this);
 		this._windows.push(win);
-		this.emit("close", win);
+		this.emit("open", win);
 		console.log("open window class=%s, title=%s ", win.className, win.title);
 		return win;
 	}

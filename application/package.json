@@ -1,0 +1,34 @@
+{
+  "name": "client",
+  "version": "0.0.0",
+  "description": "ERROR: No README.md file found!",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD",
+  "dependencies": {
+    "sprintf": "0.1.x",
+    "less-middleware": "0.1.x",
+    "winston": "0.6.x",
+    "browserify": "1.16.x",
+    "express": "3.0.x",
+    "mongoose": "3.3.x",
+    "plugin": "0.2.x",
+    "browserify-files": "0.0.x",
+    "async": "0.1.x",
+    "dref": "0.0.x",
+    "traverse": "0.6.x",
+    "underscore": "1.4.x",
+    "structr": "0.2.x",
+    "crema": "0.1.x",
+    "dnode-plugin": "0.1.x",
+    "dolce": "0.0.x",
+    "dsync": "0.0.x",
+    "beanpoll": "0.2.x",
+    "dnode": "1.0.x",
+    "shoe": "0.0.x"
+  }
+}

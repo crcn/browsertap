@@ -1,23 +1,71 @@
 var puppet = require("../../puppet"),
 dnode      = require("dnode"),
-Url = require("url"),
-dsync = require("dsync");
+Url        = require("url"),
+dsync      = require("dsync"),
+shoe       = require("shoe"),
+http       = require("http"),
+outcome    = require("outcome"),
+guid       = require("guid"),
+EventEmitter = require("events").EventEmitter,
+pievent      = require("pievent");
 
 
 
 exports.createServer = function(puppet, config) {
 
 	var st,
-	wrap = dsync(puppet);
+	wrap = dsync(puppet),
+	busy = false,
+	maestro,
+	events = new EventEmitter();
 
-	dnode({
-		rtmp: {
-			host: "rtmp://" + config.rtmp.host + "/live"
-		},
-		connect: function(options, callback) {
-			callback(null, wrap);
+	pievent(events, puppet, {
+		"wkm.windows": ["open->openWindow", "close->closeWindow"]
+	});
+
+
+	wrap.events = dsync(events);
+
+	
+
+	var d = dnode({
+		connectMaestro: function(options, callback) {
+			maestro = options.maestro;
+			callback(null, {
+				guid: guid.create().value,
+				isBusy: function(callback) {
+					callback(null, busy);
+				}
+			});
 		}
-	}).listen(config.puppeteer.port);
+	});
+
+
+	d.listen(config.puppeteer.port);
+
+	var s = http.createServer();
+
+	s.listen(config.puppeteer.port + 1);
+
+	shoe(function(stream) {
+
+
+		var d = dnode({
+			connectClient: function(options, callback) {
+				busy = true;
+				maestro.authToken(options.token, outcome.error(callback).success(function() {
+					callback(null, wrap);
+				}));
+			}
+		});
+
+		d.pipe(stream).pipe(d);
+
+		d.on("end", function() {
+			busy = false;
+			events._events = {};
+		})
+	}).install(s, "/dnode");
 }
 
 

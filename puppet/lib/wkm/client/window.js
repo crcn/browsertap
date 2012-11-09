@@ -9,7 +9,7 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"publicKeys": ["close", "move", "resize", "startRecording", "stopRecording"],
+	"publicKeys": ["close", "move", "resize", "startRecording", "stopRecording", "style", "id", "className", "title", "process"],
 
 	/**
 	 */

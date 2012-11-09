@@ -1,0 +1,1 @@
+<a {{ action "doHome" }}>fds</a>

@@ -13,6 +13,11 @@
     "clone": "0.1.x",
     "traverse": "0.6.x",
     "dnode": "1.0.x",
-    "shoe": "0.0.x"
+    "shoe": "0.0.x",
+    "guid": "0.0.x",
+    "outcome": "0.0.x",
+    "dsync": "0.0.x",
+    "dref": "0.0.x",
+    "pievent": "0.0.x"
   }
 }
