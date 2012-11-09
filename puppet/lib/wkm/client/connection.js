@@ -17,7 +17,7 @@ module.exports = structr(EventEmitter, {
 
 	"open": function() {
 
-		this._proc = spawn(path.normalize(__dirname + "\\..\\..\\..\\..\\wkm_v1.5\\bin\\cli.exe"), []);
+		this._proc = spawn(path.normalize(__dirname + "\\..\\..\\..\\..\\wkm\\bin\\cli.exe"), []);
 		var self = this;
 
 		this._proc.stdout.on('data', function(data) {
