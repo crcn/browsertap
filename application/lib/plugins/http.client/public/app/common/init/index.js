@@ -1,6 +1,7 @@
-var _ = require("underscore")
+var _ = require("underscore");
 
 exports.require = ["router", "app.controller"];
+exports.name = "init";
 exports.plugin = function(router, controller, loader) {
 
 	console.log(router.root)
@@ -12,11 +13,9 @@ exports.plugin = function(router, controller, loader) {
 		Router: router.initialize()
 	});
 
-	loader.modules("app.part.*").forEach(function(module) {
+	loader.modules(".*?.part.*").forEach(function(module) {
 		_.extend(window.App, module.views || {});
 	});
-
-
 
 	$(document).ready(function() {
 		window.App.initialize();

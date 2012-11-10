@@ -1,1 +1,1 @@
-<a {{ action "doHome" }}>fds</a>
+<a {{ action "doHome" }}>{{app}}</a>

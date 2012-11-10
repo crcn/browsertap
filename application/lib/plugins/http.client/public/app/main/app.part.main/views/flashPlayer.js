@@ -22,8 +22,6 @@ module.exports = Ember.View.extend({
 	 */
 
 	"render": function() {
-		// this._super.apply(this, arguments);
-
 		var self = this;
 
 		setTimeout(function() {

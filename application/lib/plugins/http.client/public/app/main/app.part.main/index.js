@@ -15,10 +15,14 @@ exports.plugin = function(router, loader) {
 
 			var i = 0;
 
-			var interval = setInterval(function() {
+			/*var interval = setInterval(function() {
 				if(i > 100) clearInterval(interval);
 				window.move(i++, i);
-			}, 10);
+			}, 10);*/
+
+			/*window.startRecording(function() {
+				console.log(arguments)
+			})*/
 
 		})
 		connection.client.windows.getWindows(function(err, windows) {

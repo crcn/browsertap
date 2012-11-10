@@ -1,10 +1,12 @@
 var browserify  = require("browserify"),
 browserifyFiles = require("browserify-files"),
 lessMiddleware  = require("less-middleware"),
-express         = require("express");
+express         = require("express"),
+cons            = require("consolidate"),
+dust            = require("dustjs-linkedin");
 
 
-exports.require = ["http.server"];
+exports.require = ["http.server", "./routes"];
 
 exports.plugin = function(server, loader) {
 
@@ -12,13 +14,23 @@ exports.plugin = function(server, loader) {
 		src: __dirname + "/public",
 		compress: true
 	}));
-	
-	var b = browserify({ mount:'/app.js', cache: true, watch: true });
-	browserifyFiles.register(["hb"], handlebarsTemplate, b);
-	b.addEntry(__dirname + "/public/app/index.js");
-	server.use(b);
+
+	server.engine("dust", cons.dust);
+	server.set("views", __dirname + "/views");
+	server.set("view engine", "dust");
+
+	includeScript("/js/screen.js", __dirname + "/public/app/screen.js", server);
+
 	server.use(express.static(__dirname + "/public"));
 	server.use(express.errorHandler());
+}
+
+
+function includeScript(mount, path, server) {
+	var b = browserify({ mount:mount, cache: true, watch: true });
+	browserifyFiles.register(["hb"], handlebarsTemplate, b);
+	b.addEntry(path);
+	server.use(b);
 }
 
 function handlebarsTemplate() {

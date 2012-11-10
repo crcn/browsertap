@@ -21,6 +21,25 @@ module.exports = structr(EventEmitter, {
 		this._windows = [];
 		this._con.on("openWindow", this.getMethod("_onOpenWindow"));
 		this._con.on("closeWindow", this.getMethod("_onCloseWindow"));
+
+		this._blackListSifter = sift({
+			$or: [
+				{
+					className: {
+						$in: [
+							"Button", 
+							"ConsoleWindowClass",
+							"Progman",
+							"Desktop User Picture",
+							"DV2ControlHost"
+						]
+					}
+				},
+				{
+					process: null
+				}
+			]
+		})
 	},
 
 	/**
@@ -58,7 +77,7 @@ module.exports = structr(EventEmitter, {
 
 		if(!win) return;
 		console.log("close window class=%s, title=%s ", win.className, win.title);
-
+		this._windows.splice(this._windows.indexOf(win), 1);
 		win.emit("close");
 		this.emit("close", win);
 	},
@@ -67,6 +86,13 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_addWindow": function(window) {
+
+		if(this._blackListSifter.test(window)) {
+			console.log("black listed class=%s, title=%s", window.className, window.title);
+			return;
+		}
+
+
 		var win = new Window(window, this);
 		this._windows.push(win);
 		this.emit("open", win);

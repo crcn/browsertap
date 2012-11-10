@@ -9,7 +9,19 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"publicKeys": ["close", "move", "resize", "startRecording", "stopRecording", "style", "id", "className", "title", "process"],
+	"publicKeys": ["close", 
+	"move", 
+	"resize", 
+	"startRecording", 
+	"stopRecording", 
+	"style", 
+	"id", 
+	"className", 
+	"title", 
+	"process",
+	"width",
+	"height"
+	],
 
 	/**
 	 */
@@ -21,6 +33,8 @@ module.exports = structr(EventEmitter, {
 		this.title     = window.title;
 		this.process   = window.process;
 		this.style     = window.style;
+		this.width     = window.width;
+		this.height    = window.height;
 
 		this._windows = windows;
 		this._con = windows._con;
@@ -47,21 +61,23 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"resize": function(x, y, width, height) {
-		this._con.execute("resizeWindow", { id: this.id, x: x, y: y, w: width, h: height });
+		if(arguments.length > 2) this.width = Math.min(Math.max(width || this.width, 100), 4000);
+		if(arguments.length > 3) this.height = Math.min(Math.max(height || this.height, 100), 4000);
+		this._con.execute("resizeWindow", { id: this.id, x: x, y: y, w: this.width, h: this.height });
 	},
 
 	/**
 	 */
 
 	"startRecording": function(callback) {
-
-		var output = "rtmp://" + this._rtmp.host + this._rtmp.pathname + "/" + videoStreamIdGenerator.uid().toUpperCase();
+		if(this._output) return callback(null, this._output);
+		var output =  "rtmp://" + this._rtmp.host + this._rtmp.pathname + "/" + videoStreamIdGenerator.uid().toUpperCase();
 
 		console.log("recording window to %s", output);
 
 		this._con.execute("startRecordingWindow", { id: this.id, output: output });
 
-		callback(null, {
+		callback(null, this._output = {
 			url: output
 		});
 	},
@@ -70,6 +86,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"stopRecording": function(callback) {
+		this._output = null;
 		this._con.execute("stopRecordingWindow", { id: this.id });
 	}
 });

@@ -7,9 +7,10 @@ module.exports = require("./flashPlayer").extend({
 			host: "http://localhost",
 			debug: true
 		}));
-		this.get("params").addObserver("host", this, "_onRtmpUrlChange");
 	},
 	"_onRtmpUrlChange": function() {
+		console.log("G")
 		this.render();
-	}
+	}.observes("params.host")
 });
+

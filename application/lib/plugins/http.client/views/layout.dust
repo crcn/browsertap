@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>{+title}Browser Tap{/title}</title>
+
+		{+styles}
+			<link rel="stylesheet" href="/css/main.css" type="text/css">    
+		{/styles}
+
+		<script type="text/javascript" src="/vendors/js/head.js"></script>
+		<script type="text/javascript">
+			head.js(
+				"/vendors/js/es5-shim.js",
+				"/vendors/js/jquery.js",
+				"/vendors/js/handlebars.js",
+				"/vendors/js/transit.js",
+				"/vendors/js/ember.js"
+			);
+		</script>
+
+		{+scripts}
+		{/scripts}
+	</head>
+	<body>
+		{+content}
+		{/content}
+	</body>
+</html>

@@ -116,9 +116,13 @@ namespace Commanders
 			jwin["process"] = jproc;
 		}	
 
+		Geometry::Rectangle bounds = screen->bounds();
+
 		jwin["title"] = screen->title();
 		jwin["className"] = screen->className();
 		jwin["style"] = (double) screen->style();
+		jwin["width"] = bounds.width;
+		jwin["height"] = bounds.height;
 		jwin["id"] = screen->id();
 		jwin["parent"] = screen->parent();
 		return jwin;

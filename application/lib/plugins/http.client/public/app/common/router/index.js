@@ -1,7 +1,10 @@
 var dolce = require("dolce"),
 crema     = require("crema"),
 traverse  = require("traverse"),
-dref      = require("dref");
+dref      = require("dref"),
+_         = require("underscore"),
+async     = require("async"),
+seq       = require("seq");
 
 exports.name = "router";
 exports.plugin = function() {
@@ -12,13 +15,27 @@ exports.plugin = function() {
 	var collection = dolce.collection();
 
 	function registerRoute(route, target) {
-		var cr = target;//,
-		// connectOutlets = typeof target == "function" ? target : target.connectOutlets;
 
-		cr.route = route.path.value;
-		// cr.connectOutlets = connectOutlets;
 
-		dref.set(routes, route.tags.name, cr);
+		var cr = _.defaults({
+			connectOutlets: function(router, context) {
+
+				var chain = collection.get(route.path).chains[0];
+
+				if(!context) context = {};
+
+				seq(chain).seqEach(function(route) {
+					route.value(router, context, this);
+				})
+			}
+		}, target);
+
+
+		if(route.path) cr.route = route.path.value;
+		if(route.path) collection.add(route, target.connectOutlets);
+
+		if(route.type)
+		dref.set(routes, route.type, cr);
 	}
 
 	router.on = function(route, target) {
@@ -30,7 +47,16 @@ exports.plugin = function() {
 			return;
 		}
 
-		var routes = crema(route);
+		if(route.split(" ").length > 1) {
+			var routes = crema(route);
+		} else {
+			var routes = [
+				{
+					type: route
+				}
+			]
+		}
+
 
 		for(var i = routes.length; i--;) {
 			registerRoute(routes[i], target);
@@ -44,7 +70,7 @@ exports.plugin = function() {
 
 		for(var key in routes) {
 			var prop = routes[key], top = typeof prop;
-			
+
 			if(top != "function" && !/connectOutlets|route/.test(key)) {
 				nr[key] = wrapRoutes(prop);
 			} else {
