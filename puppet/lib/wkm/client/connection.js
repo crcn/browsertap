@@ -51,6 +51,7 @@ module.exports = structr(EventEmitter, {
 
 		this._proc.on("exit", function() {
 			this._proc = null;
+			self.open();
 		});
 	},
 
@@ -69,6 +70,8 @@ module.exports = structr(EventEmitter, {
 		if(callback) {
 			this.once("replyTo-" + callerId, callback);
 		}
+
+		console.log(JSON.stringify({ name: name, id: callerId, data: data }))
 
 		self._proc.stdin.write(JSON.stringify({ name: name, id: callerId, data: data }) + "\r\n");
 	}

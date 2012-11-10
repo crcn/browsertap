@@ -15,3 +15,12 @@ kango.ui.browserButton.addEventListener(kango.ui.browserButton.event.COMMAND, fu
 kango.browser.addEventListener(kango.browser.event.TAB_CHANGED, function(event) {
 	event.target.dispatchMessage("refresh");
 });
+
+
+kango.addMessageListener("openWindow", function(event) {
+	//TODO - check sec
+	kango.browser.windows.create(event.data);
+})
+
+setTimeout(function() {
+}, 500)

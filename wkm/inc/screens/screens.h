@@ -7,6 +7,8 @@
 #include "common/geometry.h"
 #include "process/process.h"
 #include "screens/recorder/recorder.h"
+#include "screens/mouse.h"
+#include "screens/keyboard.h"
 
 namespace Screens
 {
@@ -102,6 +104,16 @@ namespace Screens
 		bool focus();
 
 		/**
+		 */
+
+		Mouse* mouse();
+
+		/**
+		 */
+
+		Keyboard* keyboard();
+
+		/**
 		 * returns TRUE if the window still exists - needed for the window manager
 		 */
 
@@ -174,6 +186,16 @@ namespace Screens
 		 */
 
 		Recorder* _recorder;
+
+		/**
+		 */
+
+		Mouse* _mouse;
+
+		/**
+		 */
+
+		Keyboard* _keyboard;
 
 		/**
 		 */

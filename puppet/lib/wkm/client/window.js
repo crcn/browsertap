@@ -20,7 +20,10 @@ module.exports = structr(EventEmitter, {
 	"title", 
 	"process",
 	"width",
-	"height"
+	"height",
+	"parent",
+	"mouseEvent",
+	"keyboardEvent"
 	],
 
 	/**
@@ -29,6 +32,7 @@ module.exports = structr(EventEmitter, {
 	"__construct": function(window, windows) {
 
 		this.id        = window.id;
+		this.parent    = window.parent;
 		this.className = window.className;
 		this.title     = window.title;
 		this.process   = window.process;
@@ -64,6 +68,20 @@ module.exports = structr(EventEmitter, {
 		if(arguments.length > 2) this.width = Math.min(Math.max(width || this.width, 100), 4000);
 		if(arguments.length > 3) this.height = Math.min(Math.max(height || this.height, 100), 4000);
 		this._con.execute("resizeWindow", { id: this.id, x: x, y: y, w: this.width, h: this.height });
+	},
+
+	/**
+	 */
+
+	"mouseEvent": function(dwFlags, coords, dwData) {
+		this._con.execute("fireWindowMouseEvent", { id: this.id, x: coords.x, y: coords.y, dwFlags: dwFlags, dwData: dwData || 0 });
+	},
+
+	/**
+	 */
+
+	"keybdEvent": function(bvk, bScan, dwFlags) {
+		this._con.execute("fireWindowMKeybdEvent", { id: this.id, bvk: bvk, bScan: bScan, dwFlags: dwFlags });
 	},
 
 	/**

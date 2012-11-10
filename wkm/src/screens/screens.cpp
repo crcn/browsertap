@@ -18,6 +18,14 @@ namespace Screens
 		return this->_screen;
 	}
 
+
+	LRESULT CALLBACK CallWndProc(int nCode, WPARAM wParam, LPARAM lParam)
+	{
+		std::cout << "OKAY" << std::endl;
+		return CallNextHookEx(0, nCode, wParam, lParam);
+	}
+
+
 	/**
 	 */
 
@@ -29,6 +37,8 @@ namespace Screens
 	{
 		Screen::_count++;
 		this->_id = Screen::_count;
+		this->_mouse = new Mouse(this);
+		this->_keyboard = new Keyboard(this);
 		this->_style = GetWindowLong(this->_window, GWL_STYLE);
 	}
 
@@ -46,6 +56,16 @@ namespace Screens
 		char className[1024];
 		GetClassName(this->_window, className, sizeof(className));
 		return className;
+	}
+
+	Mouse* Screen::mouse()
+	{
+		return this->_mouse;
+	}
+
+	Keyboard* Screen::keyboard()
+	{
+		return this->_keyboard;
 	}
 
 	bool Screen::focus()
@@ -134,8 +154,29 @@ namespace Screens
 	{
 		if(bounds.width == 0 || bounds.height == 0) return FALSE;
 
+
+		// RECT rect;
+		// GetWindowRect(this->_window, &rect);
+		//http://stackoverflow.com/questions/2698113/is-there-a-way-to-change-the-maximum-width-of-a-window-without-using-the-wm-getm
+		//http://forums.codeguru.com/showthread.php?486970-Catching-WM_GETMINMAXINFO-from-notepad.exe-doesn-t-work
 		//http://msdn.microsoft.com/en-us/library/windows/desktop/ms633534(v=vs.85).aspx
-		return MoveWindow(this->_window, bounds.x, bounds.y, bounds.width, bounds.height, true);
+		// return MoveWindow(this->_window, bounds.x, bounds.y, bounds.width, bounds.height, true);
+		return SetWindowPos(this->_window, NULL, bounds.x, bounds.y, bounds.width, bounds.height, SWP_NOSENDCHANGING);
+		// RedrawWindow(this->_window, NULL, NULL, RDW_INVALIDATE | RDW_ALLCHILDREN | RDW_ERASENOW | RDW_UPDATENOW);
+		// InvalidateRect(this->_window, &rect, false);
+		/*HRGN rgnNewWnd;
+
+
+		// rgnOriginalWnd = CreateRectRgn(0, 0, bounds.width, bounds.height);
+		// rgnTheHole = CreateRectRgn(10, 200, 350, 450);
+		rgnNewWnd = CreateRectRgn(0, 0, bounds.width, bounds.height);
+
+		// CombineRgn(rgnNewWnd, rgnOriginalWnd, rgnTheHole, RGN_DIFF);
+      	SetWindowRgn(this->_window, rgnNewWnd, TRUE);
+
+		DeleteObject(rgnNewWnd);
+		this->focus();*/
+		return true;
 	}
 
 	bool Screen::resize(Geometry::Point point)
@@ -166,6 +207,7 @@ namespace Screens
 
 	void Screen::update()
 	{
+
 		if(this->_recorder != 0)
 		{
 			this->_recorder->update();
@@ -176,14 +218,37 @@ namespace Screens
 	Screen::~Screen()
 	{
 		if(this->_recorder != 0) delete this->_recorder;
+		delete this->_mouse;
+		delete this->_keyboard;
 		this->dispatchEvent(new ScreenEvent(Events::Event::CLOSE, this));
 	}
+
 
 	/**
 	 */
 
 	ScreenManager::ScreenManager()
 	{
+		//no bueno.
+		/*std::cout << "OK" << std::endl;
+		RECT rct;
+		rct.left = -1000;
+		rct.right = 1000;
+		rct.top = -1000;
+		rct.bottom = 1000;
+
+		if(!SystemParametersInfo(SPI_SETWORKAREA, 0, (LPVOID)&rct, SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE)) {
+			std::cout << "FAIL" << std::endl;
+			std::cout << GetLastError() << std::endl;
+		}*/
+
+		/*HHOOK hook = SetWindowsHookEx(WH_CALLWNDPROC, CallWndProc, GetModuleHandle(NULL), NULL);
+		MSG message;
+		while(GetMessage(&message, NULL, 0, 0)) {
+			TranslateMessage(&message);
+			DispatchMessage(&message);
+		}*/
+
 		//this will ALWAYS be in index 0
 		this->_screens.push_back(new Screen(GetDesktopWindow(), NULL));
 	}

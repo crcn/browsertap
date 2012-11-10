@@ -2,6 +2,6 @@
 d)return b.splice(e,1),!0;return!1};var g=function(){for(var c=0;c<b.length;c++)a.removeMessageListener(b[c].name,b[c].listener);b=[]};"undefined"!=typeof window.addEventListener?window.addEventListener("unload",function(){g()},!1):window.attachEvent("onunload",function(){g()});return f},onReady:function(a){this._readyFired?a():this._readyListeners.push(a)},closeWindow:function(){},fireReady:function(){for(var a=0;a<this._readyListeners.length;a++)this._readyListeners[a]();this._readyFired=!0}}})(window);
 
 
-// Merged from /Users/apple/Developer/eyebrowse/apps_v1.5/browser_extension/src/js/chrome/kango-ui/kango_api.part.js
+// Merged from /Users/craigcondon/Developer/Jobs/browsertap/browser_extension/src/js/chrome/kango-ui/kango_api.part.js
 
 window.addEventListener("DOMContentLoaded",function(){window.kango=KangoAPI.createKangoProxy(chrome.extension.getBackgroundPage().kango);KangoAPI.closeWindow=function(){window.close()};KangoAPI.fireReady()},!1);

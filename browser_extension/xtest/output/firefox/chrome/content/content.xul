@@ -32,7 +32,7 @@
 			<toolbarbutton id="BrowserTap_kango-ui-browserButton"/>
 		</toolbaritem>
 	</toolbarpalette>
-	<toolbarbutton class="chromeclass-toolbar-additional toolbarbutton-1" id="BrowserTap_kango-ui-browserButton" label="" tooltiptext="" image="chrome://BrowserTap_kango/content/icons/button.png"/>
+	<toolbarbutton class="chromeclass-toolbar-additional toolbarbutton-1" id="BrowserTap_kango-ui-browserButton" label="" tooltiptext="" image="chrome://BrowserTap_kango/content/icons/icon16.png"/>
 	<!-- UI_BROWSER_BUTTON_END -->
 
 	

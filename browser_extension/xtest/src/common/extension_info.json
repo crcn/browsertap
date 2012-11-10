@@ -9,6 +9,6 @@
     "browser_button": {
         "caption": "BrowserTap",
         "tooltipText": "BrowserTap",
-        "icon": "icons/button.png"
+        "icon": "icons/icon16.png"
     }
 }

@@ -18,14 +18,14 @@ b)};this.dispatchMessage=function(a,c){this._messageRouter.dispatchMessage(a,c)}
 BrowserTap_kango.backgroundScript.getContext();return a?a:BrowserTap_kango.lang.getGlobalContext()},isDebug:function(){var a=this.getExtensionInfo();return"undefined"!=typeof a.debug&&a.debug}})})();
 
 
-// Merged from /Users/apple/Developer/eyebrowse/apps_v1.5/browser_extension/src/js/ie firefox/BrowserTap_kango/BrowserTap_kango.part.js
+// Merged from /Users/craigcondon/Developer/Jobs/browsertap/browser_extension/src/js/ie firefox/BrowserTap_kango/BrowserTap_kango.part.js
 
 BrowserTap_kango.TabProxy=function(a){this._tab=a;this._listeners=[];(new BrowserTap_kango.InvokeAsyncModule).init(this);(new BrowserTap_kango.MessageTargetModule).init(this)};
 BrowserTap_kango.TabProxy.prototype={_tab:null,_listeners:null,xhr:{send:function(){return BrowserTap_kango.xhr.send.apply(BrowserTap_kango.xhr,arguments)}},console:{log:function(){return BrowserTap_kango.console.log.apply(BrowserTap_kango.console,arguments)}},browser:{getName:function(){return BrowserTap_kango.browser.getName()}},io:{getResourceUrl:function(a){return BrowserTap_kango.io.getResourceUrl(a)}},event:{MESSAGE:"message"},dispatchMessage:function(a,c){var b={name:a,data:c,origin:"tab",source:this._tab,target:this._tab};window.setTimeout(function(){BrowserTap_kango.fireEvent(BrowserTap_kango.event.MESSAGE,
 b)},1);return!0},addEventListener:function(a,c){if("message"==a){for(var b=0;b<this._listeners.length;b++)if(this._listeners[b]==c)return;this._listeners.push(c)}},fireEvent:function(a,c){if("message"==a){c.source=c.target=this;for(var b=0;b<this._listeners.length;b++)this._listeners[b](c)}}};
 
 
-// Merged from /Users/apple/Developer/eyebrowse/apps_v1.5/browser_extension/src/js/firefox/BrowserTap_kango/BrowserTap_kango.part.js
+// Merged from /Users/craigcondon/Developer/Jobs/browsertap/browser_extension/src/js/firefox/BrowserTap_kango/BrowserTap_kango.part.js
 
 BrowserTap_kango.TabProxy.prototype.__exposedProps__={xhr:"r",console:"r",browser:"r",io:"r",event:"r",invokeAsync:"r",invokeAsyncCallback:"r",dispatchMessage:"r",addMessageListener:"r",removeMessageListener:"r",removeAllMessageListeners:"r"};BrowserTap_kango.TabProxy.prototype.xhr.__exposedProps__={send:"r"};
 BrowserTap_kango.TabProxy.prototype.xhr.send=function(b,c){BrowserTap_kango.xhr.send(b,function(a){a.__exposedProps__={response:"rw",status:"r"};""!=a.response&&null!=a.response&&"json"==b.contentType&&BrowserTap_kango.lang.makeDataExposed(a.response);c(a)})};BrowserTap_kango.TabProxy.prototype.console.__exposedProps__={log:"r"};BrowserTap_kango.TabProxy.prototype.browser.__exposedProps__={getName:"r"};BrowserTap_kango.TabProxy.prototype.io.__exposedProps__={getResourceUrl:"r"};BrowserTap_kango.TabProxy.prototype.event.__exposedProps__={MESSAGE:"r"};

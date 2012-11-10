@@ -3,6 +3,7 @@
 {<scripts}
 <script type="text/javascript">
 	head.js(
+		"/vendors/js/jquery-mousewheel.js",
 		"/vendors/js/swfobject.js",
 		"/js/screen.js"
 	);

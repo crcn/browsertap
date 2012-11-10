@@ -53,6 +53,8 @@ namespace Commanders
 		regCommand(focusWindow, execFocusWindow)
 		regCommand(startRecordingWindow, execStartRecordingWindow)
 		regCommand(stopRecordingWindow, execStopRecordingWindow)
+		regCommand(fireWindowMouseEvent, execFireWindowMouseEvent)
+		regCommand(fireWindowKeybdEvent, execFireWindowKeybdEvent)
 
 		#undef regCommand
 
@@ -171,6 +173,7 @@ namespace Commanders
 		int id = data["id"].asInt();
 		Json::Value x = data["x"], y = data["y"], w = data["w"], h = data["h"];
 
+
 		Screens::Screen* screen = Screens::ScreenManager::instance().getScreen(id);
 
 		if(screen == 0) return this->dispatchResponse(command->value(), getSuccess(false));
@@ -182,6 +185,7 @@ namespace Commanders
 		if(!y.isNull()) rect.y      = y.asInt();
 		if(!w.isNull()) rect.width  = w.asInt();
 		if(!h.isNull()) rect.height = h.asInt();
+
 
 		screen->resize(rect);
 
@@ -216,6 +220,35 @@ namespace Commanders
 		if(!(screen = this->getScreen(command))) return;
 
 		screen->recorder()->stop();
+	}
+
+	void JSONCommander::execFireWindowMouseEvent(JSONCommand* command)
+	{
+		Screens::Screen* screen = 0;
+
+		if(!(screen = this->getScreen(command))) return;
+
+		Json::Value data = command->value()["data"];
+		int dwFlags = data["dwFlags"].asInt();
+		int x       = data["x"].asInt();
+		int y       = data["y"].asInt();
+		int dwData  = data["dwData"].asInt();
+
+		screen->mouse()->event(dwFlags, x, y, dwData);
+	}
+
+	void JSONCommander::execFireWindowKeybdEvent(JSONCommand* command)
+	{
+		Screens::Screen* screen = 0;
+
+		if(!(screen = this->getScreen(command))) return;
+
+		Json::Value data = command->value()["data"];
+		int bvk     = data["bvk"].asInt();
+		int bScan   = data["bScan"].asInt();
+		int dwFlags = data["dwFlags"].asInt();
+
+		screen->keyboard()->event(bvk, bScan, dwFlags);
 	}
 
 	Screens::Screen* JSONCommander::getScreen(JSONCommand* command)

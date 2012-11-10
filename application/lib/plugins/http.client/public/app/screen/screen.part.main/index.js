@@ -5,9 +5,9 @@ exports.plugin = function(puppeteer, router, loader) {
 
 	return {
 		views: {
-			ScreenView: require("./views/screen"),
-			ScreenController: require("./controllers/screen"),
+			ScreensView: require("./views/screens"),
+			ScreensController: require("./controllers/screens"),
 			ScreenPlayerView: require("./views/screenPlayer")
 		}
-	}
+	};
 }

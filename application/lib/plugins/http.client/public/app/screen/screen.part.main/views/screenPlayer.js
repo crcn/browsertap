@@ -5,7 +5,6 @@ module.exports = require("./flashPlayer").extend({
 		this._super();
 		this.set("params", Ember.Object.create({
 			host: "http://localhost"
-			// debug: true
 		}));
 		console.log(this.get("host"))
 	},

@@ -23,10 +23,7 @@ exports.createServer = function(puppet, config) {
 		"wkm.windows": ["open->openWindow", "close->closeWindow"]
 	});
 
-
 	wrap.events = dsync(events);
-
-	
 
 	var d = dnode({
 		connectMaestro: function(options, callback) {
@@ -39,7 +36,6 @@ exports.createServer = function(puppet, config) {
 			});
 		}
 	});
-
 
 	d.listen(config.puppeteer.port);
 

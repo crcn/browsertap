@@ -10,7 +10,7 @@ kango.IBrowserTab.prototype={getId:function(){throw new kango.NotImplementedExce
 }};
 
 
-// Merged from /Users/apple/Developer/eyebrowse/apps_v1.5/browser_extension/src/js/chrome/kango/browser.part.js
+// Merged from /Users/craigcondon/Developer/Jobs/browsertap/browser_extension/src/js/chrome/kango/browser.part.js
 
 kango.Browser=function(){this.superclass.apply(this,arguments);this._ports={};chrome.tabs.onActiveChanged.addListener(kango.lang.bind(this._onTabChanged,this));chrome.tabs.onCreated.addListener(kango.lang.bind(this._onTabCreated,this));chrome.tabs.onRemoved.addListener(kango.lang.bind(this._onTabRemoved,this));chrome.webNavigation.onBeforeNavigate.addListener(kango.lang.bind(this._onBeforeNavigate,this));chrome.webNavigation.onDOMContentLoaded.addListener(kango.lang.bind(this._onDOMContentLoaded,
 this))};

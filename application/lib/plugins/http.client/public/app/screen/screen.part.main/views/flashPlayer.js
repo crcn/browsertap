@@ -47,7 +47,7 @@ module.exports = Ember.View.extend({
 		"9.0.0",
 		"/swf/expressInstall.swf",
 		JSON.parse(JSON.stringify(this.get("params"))), {
-			bgcolor: "#FFFFFF"
+			bgcolor: "#00000"
 		});	
 	}
 });

@@ -8,6 +8,6 @@ this._getLocaleMessages(this._defaultLocale)))},_getLocaleMessages:function(a){a
 null},getMessage:function(a){var b=this.getMessages();return null!=b&&"undefined"!=typeof b[a]?b[a]:a}};kango.i18n=new kango.Internationalization;
 
 
-// Merged from /Users/apple/Developer/eyebrowse/apps_v1.5/browser_extension/src/js/chrome opera safari firefox/kango/i18n.part.js
+// Merged from /Users/craigcondon/Developer/Jobs/browsertap/browser_extension/src/js/chrome opera safari firefox/kango/i18n.part.js
 
 kango.i18n.init(window.navigator.userLanguage||window.navigator.language||null);

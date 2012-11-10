@@ -1,32 +1,10 @@
-var LoaderView = require("./loader"),
-_ = require("underscore")
-
-module.exports = Ember.ContainerView.extend({
-	"init": function() {
-		this._super();
-		var children = this.get("childViews");
-		children.pushObject(this._loading = LoaderView.create());
-	},
-	"didInsertElement": function() {
-		Ember.Binding.fn(this, "_onLoading", "controller.content.loading");
-
-		this.get("childViews").pushObject(ScreensView.create({ content: this.get("controller.content.windows") }));
-	},
-	"_onLoading": function(loading) {
-		if(loading) {
-			this._loading.showNotification(this.get("controller.content.app"));
-		} else {
-			this._loading.hideNotification();
-		}
-	},
-	"_onLoadingChange": function() {
-		console.log(arguments);
-	}
-});
+var _ = require("underscore"),
+getPadding = require("./getPadding"),
+wkmEvents = require("./events");
 
 var _zIndex = 99;
 
-var ScreenView = Ember.View .extend({
+module.exports = Ember.View .extend({
 	"templateName": "screen",
 	"classNames": ["hud", "hidden"],
 	"init": function() {
@@ -34,27 +12,85 @@ var ScreenView = Ember.View .extend({
 	},
 	"didInsertElement": function() {
 		this._super();
+		var win = this.get("content"),
+		padding = getPadding(win),
+		self = this;
 
-		var win = this.get("content");
+		console.log(padding)
 
-		this.$().css({opacity:0, scale:0.5, width: win.width, height: win.height });
-		var self = this;
-		this.$().transit({opacity:1, scale:1.05 }, 200, "ease-out", function() {
-			self.$().transit({ scale: 1 }, 200, "ease");
-		});
+		var $hud = this.$().find(".hud-body"),
+		$el = this.$();
 
-		this.$().offset({ left: Math.random() * ($(window).width() - win.width),
-			top: Math.max(Math.random() * ($(window).height() - win.height), 0) });
+		console.log(win)
 
+
+		$hud.css({left: -padding.left, top: -padding.top, "position": "fixed"})
+		$el.css({opacity:1, width: "100%", height: "100%" });
+		
+		/*$el.transit({opacity:1, scale:1.05 }, 200, "ease-out", function() {
+			$el.transit({ scale: 1 }, 200, "ease");
+		});*/
+
+		function onResize() {
+			var w = $el.width() + padding.left + padding.right,
+			h = $el.height() + padding.top + padding.bottom;
+			$hud.width(w);
+			$hud.height(h);
+
+
+			//don't resize if nothing's changed
+			if(win.width == w && win.height == h) return;
+
+			win.resize(0, 0, w, h);
+		}
+	
+		$(window).resize(_.debounce(onResize, 200));
+		onResize();
 
 		win.startRecording(function(err, info) {
 			win.set("host", info.url);
 		});
 
-		var header = this.$().find(".hud-header"),
-		drag = false;
+		var header = $el.find(".hud-header"),
+		drag = false,
+		coords = {};
 
-		this.$().mousedown(function() {
+		$el.mousemove(_.throttle(function(e) {
+			win.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_ABSOLUTE | wkmEvents.mouse.MOUSEEVENTF_MOVE, coords = { x: e.offsetX, y: e.offsetY });
+		}, 100));
+
+
+		$el.mousedown(function(e) {
+			win.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTDOWN : wkmEvents.mouse.MOUSEEVENTF_RIGHTDOWN, coords);
+
+			if(e.button === 0) return; //only block right click
+			e.preventDefault();
+			e.stopPropagation();
+		});
+
+		$el.mouseup(function(e) {
+			win.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTUP : wkmEvents.mouse.MOUSEEVENTF_RIGHTUP, coords);
+		});
+
+		$el.keydown(function(e) {
+			console.log(e)
+		});
+
+		/**
+		 *keyDown: function(data) {
+				self._keyboardEvent(data.keyCode, 0, 0);
+			},
+			keyUp: function(data) {
+				self._keyboardEvent(data.keyCode, 0, wkmEvents.keyboard.KEYEVENTF_KEYUP);
+			},*/
+
+
+		$el.bind("mousewheel", function(e, delta) {
+			win.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, coords, delta * 10);
+		})
+
+
+		/*this.$().mousedown(function() {
 			self.$().css({"z-index": _zIndex++ });
 		})
 
@@ -69,12 +105,8 @@ var ScreenView = Ember.View .extend({
 			$(document).mouseup(function() {
 				mouseMove.unbind();
 			})
-		});
+		});*/
 
 
 	}
-});
-
-var ScreensView = Ember.CollectionView.extend({
-	itemViewClass: ScreenView
 });

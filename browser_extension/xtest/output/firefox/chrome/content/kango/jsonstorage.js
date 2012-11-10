@@ -7,7 +7,7 @@ BrowserTap_kango.Storage.prototype=BrowserTap_kango.oop.extend(BrowserTap_kango.
 c=0;c<b.length;c++){var d=b[c];0!=d.indexOf(this.SYSTEM_STORAGE_PREFIX)&&a.push(d)}return a}});BrowserTap_kango.storage=new BrowserTap_kango.Storage;BrowserTap_kango.SystemStorage=function(){this.PREFIX=BrowserTap_kango.storage.SYSTEM_STORAGE_PREFIX};BrowserTap_kango.SystemStorage.prototype={PREFIX:null,getItem:function(a){return BrowserTap_kango.simpleStorage.getItem(this.PREFIX+a)},setItem:function(a,b){return BrowserTap_kango.simpleStorage.setItem(this.PREFIX+a,b)},removeItem:function(a){return BrowserTap_kango.simpleStorage.removeItem(this.PREFIX+a)}};BrowserTap_kango.systemStorage=new BrowserTap_kango.SystemStorage;
 
 
-// Merged from /Users/apple/Developer/eyebrowse/apps_v1.5/browser_extension/src/js/firefox/BrowserTap_kango/jsonstorage.part.js
+// Merged from /Users/craigcondon/Developer/Jobs/browsertap/browser_extension/src/js/firefox/BrowserTap_kango/jsonstorage.part.js
 
 BrowserTap_kango.PrefStorage=function(){this._preferenceBranch=Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch(this.PREFERENCE_BRANCH_NAME)};
 BrowserTap_kango.PrefStorage.prototype={_preferenceBranch:null,PREFERENCE_BRANCH_NAME:"extensions.BrowserTap_kango.storage.",setItem:function(a,b){return this._preferenceBranch.setCharPref(a,JSON.stringify(b))},getItem:function(a){var b=this._preferenceBranch.getPrefType(a),c=null;b==this._preferenceBranch.PREF_STRING?c=this._preferenceBranch.getCharPref(a):b==this._preferenceBranch.PREF_INT?c=this._preferenceBranch.getIntPref(a):b==this._preferenceBranch.PREF_BOOL&&(c=this._preferenceBranch.getBoolPref(a));return"undefined"!=

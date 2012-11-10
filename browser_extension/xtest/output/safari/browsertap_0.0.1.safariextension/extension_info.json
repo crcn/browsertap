@@ -14,7 +14,7 @@
   "id": "com.kangoextensions.jquerydemo", 
   "browser_button": {
     "caption": "BrowserTap", 
-    "icon": "icons/button.png", 
+    "icon": "icons/icon16.png", 
     "tooltipText": "BrowserTap"
   }
 }

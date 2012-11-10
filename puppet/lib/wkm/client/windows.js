@@ -31,7 +31,8 @@ module.exports = structr(EventEmitter, {
 							"ConsoleWindowClass",
 							"Progman",
 							"Desktop User Picture",
-							"DV2ControlHost"
+							"DV2ControlHost",
+							"CabinetWClass"
 						]
 					}
 				},
@@ -40,6 +41,15 @@ module.exports = structr(EventEmitter, {
 				}
 			]
 		})
+	},
+
+	/**
+	 */
+
+	"getWindow": function(search, callbck) {
+		var window = sift(search, this._windows).pop();
+		if(window) return callback(null, window);
+		callback(new Error("window doesn't exist"));
 	},
 
 	/**

@@ -8,6 +8,6 @@ kango.ui.ButtonBase.prototype={_details:null,event:{Command:"command",COMMAND:"c
 kango.ui.NotificationBase.prototype={_impl:null,event:{Click:"Click",Close:"Close",Show:"Show"},id:"",getId:function(){return this._id},show:function(){throw new kango.NotImplementedException;},close:function(){throw new kango.NotImplementedException;}};kango.ui.NotificationsBase=function(){};kango.ui.NotificationsBase.prototype={createNotification:function(){throw new kango.NotImplementedException;}};
 
 
-// Merged from /Users/apple/Developer/eyebrowse/apps_v1.5/browser_extension/src/js/chrome opera safari/kango-ui/ui.part.js
+// Merged from /Users/craigcondon/Developer/Jobs/browsertap/browser_extension/src/js/chrome opera safari/kango-ui/ui.part.js
 
 kango.ui._init=function(){var a=kango.getExtensionInfo().browser_button;kango.lang.isObject(a)&&(kango.ui.browserButton=new kango.ui.BrowserButton(a));return this.fireEvent(this.event.READY)};

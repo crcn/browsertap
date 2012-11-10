@@ -6,7 +6,7 @@ var kango={event:{MESSAGE:"message"},lang:{evalInSandbox:function(b,d,c){for(var
 JSON.parse(a.response)}catch(g){a.response=null}else if("xml"==c)try{var e=null,e="undefined"!=typeof DOMParser?DOMParser:window.DOMParser,f=new e;a.response=f.parseFromString(a.response,"text/xml")}catch(h){a.response=null}b.contentType=c;d(a)})}},_init:function(b){"undefined"==typeof kango.dispatchMessage&&this._initMessaging();(new kango.UserscriptEngineClient).run(window,b,window==window.top)}};
 
 
-// Merged from /Users/apple/Developer/eyebrowse/apps_v1.5/browser_extension/src/js/safari/includes/content_kango.part.js
+// Merged from /Users/craigcondon/Developer/Jobs/browsertap/browser_extension/src/js/safari/includes/content_kango.part.js
 
 kango.browser.getName=function(){return"safari"};kango.io.getResourceUrl=function(c){return safari.extension.baseURI+c};
 kango._initMessaging=function(){var c=[];safari.self.addEventListener("message",function(a){for(var a={name:a.name,data:a.message,origin:"background",source:kango,target:kango},b=0;b<c.length;b++)c[b](a)});kango.dispatchMessage=function(a,b){safari.self.tab.dispatchMessage(a,b);return!0};kango.addEventListener=function(a,b){if("message"==a){for(var d=0;d<c.length;d++)if(c[d]==b)return;c.push(b)}};(new kango.InvokeAsyncModule).init(kango);(new kango.MessageTargetModule).init(kango)};

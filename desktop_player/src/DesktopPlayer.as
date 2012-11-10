@@ -37,7 +37,7 @@ package
 		private var _channel:String;
 		private var _checkCount:int;
 		
-		[SWF(frameRate='24',backgroundColor='#FFFFFF')]
+		[SWF(frameRate='24',backgroundColor='#000000')]
 		
 		
 		
@@ -46,7 +46,7 @@ package
 			
 			this._server =  this.root.loaderInfo.parameters.host || "rtmp://192.168.2.3:1935/live";
 			this._channel = this.root.loaderInfo.parameters.channel || "default";
-			this._debug = Boolean(this.root.loaderInfo.parameters.debug);
+			this._debug =   Boolean(this.root.loaderInfo.parameters.debug);
 			
 			
 			this._debugInfo = new TextField();

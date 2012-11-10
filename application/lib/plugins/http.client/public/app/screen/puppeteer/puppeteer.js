@@ -8,8 +8,9 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"__construct": function(maestro) {
+	"__construct": function(maestro, hostInfo) {
 		this._maestro = maestro;
+		this._hostInfo = hostInfo;
 	},
 
 	/**
@@ -22,6 +23,10 @@ module.exports = structr(EventEmitter, {
 		if(this._connecting) return;
 
 		this.emit("status", "loading puppeteer");
+
+		if(this._hostInfo && this._hostInfo.host) {
+			return this._attach(this._hostInfo);
+		}
 
 		//TODO - authorize this client 
 		var self = this;

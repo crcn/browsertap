@@ -14,7 +14,7 @@
   "id": "{132E47BF-0E8A-4AAA-8D1E-B2C3EEA895C3}", 
   "browser_button": {
     "caption": "BrowserTap", 
-    "icon": "icons/button.png", 
+    "icon": "icons/icon16.png", 
     "tooltipText": "BrowserTap"
   }
 }
