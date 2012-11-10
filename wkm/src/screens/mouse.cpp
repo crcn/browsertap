@@ -6,15 +6,24 @@ namespace Screens
 	Mouse::Mouse(Screen* screen):
 	_screen(screen)
 	{
-
 	}
 
 	bool Mouse::event(int dwFlags, int x, int y, int dwData)
 	{
 		Geometry::Rectangle bounds = this->_screen->bounds();
 
-		int x2 = ((bounds.x + x) * 65535/GetSystemMetrics(SM_CXSCREEN));
-		int y2 = ((bounds.y + y) * 65535/GetSystemMetrics(SM_CYSCREEN));
+		int realX = bounds.x + x;
+		int realY = bounds.y + y;
+		int mouseX = 100;
+		int mouseY = 100;
+
+		realX = x - mouseX;
+		realY = y - mouseY;
+
+		int x2 = (mouseX * 65535/GetSystemMetrics(SM_CXSCREEN));
+		int y2 = (mouseY * 65535/GetSystemMetrics(SM_CYSCREEN));
+
+		// std::cout << x2 << " " << y2 << " " << GetSystemMetrics(SM_CXSCREEN) << std::endl;
 
 		this->_screen->focus();
 
@@ -53,7 +62,13 @@ namespace Screens
 		std::cout << msg << " " << wparam << " " << lparam << std::endl;
 
 		PostMessage(target, msg, wparam, lparam);*/
+
 		mouse_event(dwFlags, x2, y2, dwData, 0);
+		// SetCursorPos(x, y);
+		// std::cout << realX << " " << realY << std::endl;
+
+		//move the WINDOW instead of the mouse to bypass mouse bounds
+		this->_screen->move(Geometry::Point(-realX, -realY));
 
 		return true;
 	}
