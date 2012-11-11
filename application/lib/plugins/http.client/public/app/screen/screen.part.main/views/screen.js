@@ -2,7 +2,6 @@ var _ = require("underscore"),
 getPadding = require("./getPadding"),
 wkmEvents = require("./events");
 
-var _zIndex = 99;
 
 module.exports = Ember.View .extend({
 	"templateName": "screen",
@@ -83,36 +82,11 @@ module.exports = Ember.View .extend({
 			}
 		}
 
-		/**
-		 *keyDown: function(data) {
-				self._keyboardEvent(data.keyCode, 0, 0);
-			},
-			keyUp: function(data) {
-				self._keyboardEvent(data.keyCode, 0, wkmEvents.keyboard.KEYEVENTF_KEYUP);
-			},*/
-
 
 		$el.bind("mousewheel", function(e, delta) {
 			win.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, coords, delta * 20);
 		})
 
-
-		/*this.$().mousedown(function() {
-			self.$().css({"z-index": _zIndex++ });
-		})
-
-		header.mousedown(function(o) {
-			drag = true;
-
-
-			var mouseMove = $(document).mousemove(_.throttle(function(e) {
-				self.$().css({ left: e.pageX - o.offsetX, top: e.pageY - o.offsetY })
-			}, 1));
-
-			$(document).mouseup(function() {
-				mouseMove.unbind();
-			})
-		});*/
 
 
 	}

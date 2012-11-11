@@ -1,5 +1,6 @@
 var step = require("step"),
-_ = require("underscore");
+_ = require("underscore"),
+windowStyles = require("../utils/windowStyles");
 
 console.log(window.document.body);
 document._test = "abdcd";
@@ -74,19 +75,29 @@ module.exports = Ember.ObjectController.extend({
 
 		var win = Ember.Object.create(w);
 
-
 		//if window doesn't have a parent, AND it's the right class for the launched app, AND
 		//it's not already being recorded, then set it as the main fucking window ;). This is easy for now.
-
 	
 
-		if(!w.parent && !this.get("content.mainWindow")) {
+		for(var style in windowStyles) {
+			console.log("%s: %d", style, w.style & windowStyles[style]);
+		}
+
+		var isMain = 
+		!w.parent &&
+		!this.get("content.mainWindow") &&
+		(w.style & windowStyles.WS_MAXIMIZEBOX) && //maximizable
+		(w.style & windowStyles.WS_SIZEBOX); //resizable
+		//WS_TABSTOP?? - can accept tabs
+
+		if(isMain) {
+			console.log("OKAY")
 			this.set("content.mainWindow", win);
 		} else {
 			this.get("content.commands").emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this._puppeteer.host + "&token=" + this._puppeteer.token + "&screen=" + w.id, width: w.width, height: w.height });
 		}
 
-		// this._windows.pushObject(win);
+		this._windows.pushObject(win);
 	},
 
 	/**
