@@ -6,11 +6,11 @@ module.exports = require("./flashPlayer").extend({
 		this.set("params", Ember.Object.create({
 			host: "http://localhost"
 		}));
-		console.log(this.get("host"))
 	},
 	"_onRtmpUrlChange": function() {
-		var host = this.get("host"),
-		hp = host.split("/"),
+		var host = this.get("host");
+		if(!host) return;
+		var hp = host.split("/"),
 		channel = hp.pop(),
 		url = hp.join("/");
 

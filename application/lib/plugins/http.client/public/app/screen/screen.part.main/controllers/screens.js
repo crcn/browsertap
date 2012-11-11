@@ -20,7 +20,7 @@ module.exports = Ember.ObjectController.extend({
 		var ar
 		this.set("content.windows", ar = this._windows = Ember.ArrayProxy.create({ content: [] }));
 		var self  = this,
-		puppeteer = this.get("content.puppeteer");
+		puppeteer = this._puppeteer = this.get("content.puppeteer");
 
 
 		puppeteer.connect(function() {
@@ -36,6 +36,9 @@ module.exports = Ember.ObjectController.extend({
 	"_onConnection": function(connection) {
 		this._connection = connection;
 
+		//TODO - check if the connection is the first of the given client. 
+		//This is necessary so the app doesn't launch more than one of the same windows
+
 		var self = this,
 		app       = this.get("content.app"),
 		open      = this.get("content.open");
@@ -50,21 +53,40 @@ module.exports = Ember.ObjectController.extend({
 			self._onCloseWindow(window);
 		});
 
-		connection.client.windows.getWindows(function(err, windows) {
-			self._onWindows(windows);
-		})
 
+		connection.browsers.open(open, app, function() {
 
-		/*connection.browsers.open(open, app, function() {
-		});*/
+			//not needed since _openWindow will be called TWICE
+			/*connection.client.windows.getWindows(function(err, windows) {
+				self._onWindows(windows);
+			});*/	
+		});
+
+		
+			
 	},
 
 	/**
 	 */
 
-	"_onOpenWindow": function(window) {
+	"_onOpenWindow": function(w) {
 		this.set("content.loading", false);	
-		this._windows.pushObject(Ember.Object.create(window));
+
+		var win = Ember.Object.create(w);
+
+
+		//if window doesn't have a parent, AND it's the right class for the launched app, AND
+		//it's not already being recorded, then set it as the main fucking window ;). This is easy for now.
+
+	
+
+		if(!w.parent && !this.get("content.mainWindow")) {
+			this.set("content.mainWindow", win);
+		} else {
+			this.get("content.commands").emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this._puppeteer.host + "&token=" + this._puppeteer.token + "&screen=" + w.id, width: w.width, height: w.height });
+		}
+
+		// this._windows.pushObject(win);
 	},
 
 	/**
@@ -75,8 +97,6 @@ module.exports = Ember.ObjectController.extend({
 		var target = _.find(this._windows.get("content"), function(window) {
 			return window.get("id") == closed.id;
 		});
-
-		console.log(target)
 
 		if(!target) return;
 

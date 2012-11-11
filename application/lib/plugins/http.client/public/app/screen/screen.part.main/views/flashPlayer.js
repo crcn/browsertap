@@ -35,13 +35,17 @@ module.exports = Ember.View.extend({
 	 */
 
 	"_render": function() {
+		console.log(this.get("params.host"))
 
-		var id = "flash_" + (_id++);
 
-		this.$().attr("id", id)
+		if(!this._rendered) {	
+			this._rendered = true;
+			var id = "flash_" + (_id++);
+			this.$().attr("id", id);
+		}
 
 		swfobject.embedSWF(this.get("src") || this.get("source"), 
-		id,
+		this.$().attr("id"),
 		"100%",
 		"100%",
 		"9.0.0",

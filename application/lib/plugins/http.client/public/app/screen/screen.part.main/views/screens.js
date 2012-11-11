@@ -1,5 +1,6 @@
 var LoaderView = require("./loader"),
-_ = require("underscore")
+_ = require("underscore"),
+ScreenView = require("./screen");
 
 module.exports = Ember.ContainerView.extend({
 	"init": function() {
@@ -10,7 +11,11 @@ module.exports = Ember.ContainerView.extend({
 	"didInsertElement": function() {
 		Ember.Binding.fn(this, "_onLoading", "controller.content.loading");
 
-		this.get("childViews").pushObject(ScreensView.create({ content: this.get("controller.content.windows") }));
+		this.get("childViews").pushObject(ScreenView.create({
+			"screens": this,
+			"windowBinding": "screens.controller.content.mainWindow"
+		}));
+		
 	},
 	"_onLoading": function(loading) {
 		if(loading) {
@@ -25,6 +30,3 @@ module.exports = Ember.ContainerView.extend({
 });
 
 
-var ScreensView = Ember.CollectionView.extend({
-	itemViewClass: require("./screen")
-});

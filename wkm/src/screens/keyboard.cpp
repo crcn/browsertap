@@ -14,6 +14,7 @@ namespace Screens
 
 		//this->_screen->focus();
 
+
 		keybd_event(bvk, bScan, dwFlags, 0);
 
 		return true;

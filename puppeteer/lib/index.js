@@ -59,7 +59,6 @@ exports.createServer = function(puppet, config) {
 
 		d.on("end", function() {
 			busy = false;
-			events._events = {};
 		})
 	}).install(s, "/dnode");
 }

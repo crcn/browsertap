@@ -23,7 +23,7 @@ module.exports = structr(EventEmitter, {
 	"height",
 	"parent",
 	"mouseEvent",
-	"keyboardEvent"
+	"keybdEvent"
 	],
 
 	/**
@@ -81,7 +81,14 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"keybdEvent": function(bvk, bScan, dwFlags) {
-		this._con.execute("fireWindowMKeybdEvent", { id: this.id, bvk: bvk, bScan: bScan, dwFlags: dwFlags });
+		this._con.execute("fireWindowKeybdEvent", { id: this.id, bvk: bvk, bScan: bScan, dwFlags: dwFlags });
+	},
+
+	/**
+	 */
+
+	"exists": function(callback) {
+		callback(null, !this.disposed);
 	},
 
 	/**

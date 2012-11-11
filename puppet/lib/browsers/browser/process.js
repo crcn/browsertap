@@ -53,7 +53,7 @@ module.exports = structr(EventEmitter, {
 
 				/*self._proc = spawn('winproc.exe', [proc, url], { cwd: __dirname + "/winproc/Debug"});*/
 
-				self._proc = exec('start /MAX /WAIT ' + browser.path + " " + url);
+				self._proc = exec('start /WAIT ' + browser.path + " " + url);
 
 				self.running = true;
 

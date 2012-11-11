@@ -6,7 +6,7 @@ module.exports = function(window) {
 		{
 			test: { className: "Chrome_WidgetWin_0", parent: 0 },
 			padding: {
-				top: 65,
+				top: 78,
 				left: 4,
 				right: 4,
 				bottom: 4

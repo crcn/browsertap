@@ -248,6 +248,7 @@ namespace Commanders
 		int bScan   = data["bScan"].asInt();
 		int dwFlags = data["dwFlags"].asInt();
 
+
 		screen->keyboard()->event(bvk, bScan, dwFlags);
 	}
 

@@ -9,7 +9,7 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 	 
-	"publicKeys": ["getWindows"],
+	"publicKeys": ["getWindows", "getWindow", "hasWindow"],
 
 	/**
 	 */
@@ -46,10 +46,17 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"getWindow": function(search, callbck) {
-		var window = sift(search, this._windows).pop();
+	"getWindow": function(id, callback) {
+		var window = sift({ id: id }, this._windows).pop();
 		if(window) return callback(null, window);
 		callback(new Error("window doesn't exist"));
+	},
+
+	/**
+	 */
+
+	"hasWindow": function(id, callback) {
+		return callback(null, !!sift({ id: id }, this._windows).pop());
 	},
 
 	/**
@@ -86,6 +93,7 @@ module.exports = structr(EventEmitter, {
 		var win = sift({ id: window.id }, this._windows).pop();
 
 		if(!win) return;
+		win.disposed = true;
 		console.log("close window class=%s, title=%s ", win.className, win.title);
 		this._windows.splice(this._windows.indexOf(win), 1);
 		win.emit("close");

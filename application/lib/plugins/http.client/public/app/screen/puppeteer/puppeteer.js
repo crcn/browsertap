@@ -49,6 +49,9 @@ module.exports = structr(EventEmitter, {
 	"_attach": function(options) {
 		var stream = shoe(options.host + "/dnode");
 
+		this.host = options.host;
+		this.token = options.token;
+
 		var d = dnode(), self = this;
 		d.on("remote", function(remote) {
 

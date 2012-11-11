@@ -43,8 +43,10 @@ module.exports = structr({
 		var avail = sift(query, this._browsers).pop();
 		if(!avail) return callback(new Error("browser does not exist"));
 
-		//open the browser
-		avail.open(url, callback);
+		this.killAll(function() {
+			//open the browser
+			avail.open(url, callback);
+		})
 	},
 
 	/**

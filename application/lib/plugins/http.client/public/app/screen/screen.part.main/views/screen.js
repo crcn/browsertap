@@ -9,34 +9,34 @@ module.exports = Ember.View .extend({
 	"classNames": ["hud", "hidden"],
 	"init": function() {
 		this._super();
+		Ember.Binding.fn(this, "_onWindow", "window");
+		Ember.Binding.fn(this, "_onControllerWindow", "controller.content.mainWindow");
+	},
+	"_onControllerWindow": function(win) {
+		if(win) this.set("window", win);
 	},
 	"didInsertElement": function() {
-		this._super();
-		var win = this.get("content"),
-		padding = getPadding(win),
+		this._inserted = true;
+		this._onWindow(this.get("window"));
+	},
+	"_onWindow": function(win) {
+		if(!win || !this._inserted) return;
+		var padding = getPadding(win),
 		self = this;
-
-		console.log(padding)
 
 		var $hud = this.$().find(".hud-body"),
 		$el = this.$();
 
-		console.log(win)
-
 
 		$hud.css({left: -padding.left, top: -padding.top, "position": "fixed"})
 		$el.css({opacity:1, width: "100%", height: "100%" });
-		
-		/*$el.transit({opacity:1, scale:1.05 }, 200, "ease-out", function() {
-			$el.transit({ scale: 1 }, 200, "ease");
-		});*/
+
 
 		function onResize() {
 			var w = $el.width() + padding.left + padding.right,
 			h = $el.height() + padding.top + padding.bottom;
 			$hud.width(w);
 			$hud.height(h);
-
 
 			//don't resize if nothing's changed
 			if(win.width == w && win.height == h) return;
@@ -46,6 +46,7 @@ module.exports = Ember.View .extend({
 	
 		$(window).resize(_.debounce(onResize, 200));
 		onResize();
+		setTimeout(onResize, 1000);
 
 		win.startRecording(function(err, info) {
 			win.set("host", info.url);
@@ -72,9 +73,15 @@ module.exports = Ember.View .extend({
 			win.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTUP : wkmEvents.mouse.MOUSEEVENTF_RIGHTUP, coords);
 		});
 
-		$el.keydown(function(e) {
-			console.log(e)
-		});
+
+		window.desktopEvents = {
+			keyDown: function(data) {
+				win.keybdEvent(data.keyCode, 0,  wkmEvents.keyboard.KEYEVENTF_EXTENDEDKEY | 0);
+			},
+			keyUp: function(data) {
+				win.keybdEvent(data.keyCode, 0,  wkmEvents.keyboard.KEYEVENTF_EXTENDEDKEY | wkmEvents.keyboard.KEYEVENTF_KEYUP);
+			}
+		}
 
 		/**
 		 *keyDown: function(data) {
@@ -86,7 +93,7 @@ module.exports = Ember.View .extend({
 
 
 		$el.bind("mousewheel", function(e, delta) {
-			win.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, coords, delta * 10);
+			win.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, coords, delta * 20);
 		})
 
 
