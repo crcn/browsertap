@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+
+var argv = require("optimist").
+demand(["t"]).
+describe("t", "type: front, maestro").
+argv;
+
+
+argv.t.split("+").forEach(function(server) {
+	require("../")[server]();
+});
+
