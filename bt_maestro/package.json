@@ -7,7 +7,15 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "maestro": "0.0.x"
+    "maestro": "0.0.x",
+    "outcome": "0.0.x",
+    "sprintf": "0.1.x",
+    "step": "0.0.x",
+    "underscore": "1.4.x",
+    "vine": "0.0.x",
+    "winston": "0.6.x",
+    "auth": "0.0.x",
+    "express": "3.0.x"
   },
   "repository": "",
   "author": "",

@@ -1,12 +1,12 @@
 var step = require("step"),
 outcome = require("outcome"),
-_.extend = require("extend");
+_ = require("underscore");
 
 exports.require = ["maestro"];
 exports.plugin = function(maestro) {
-	var Server = maestro.ServerModel;
+	var Server = maestro._ServerModel;
 
-	Server.getUnusedInstance(query, user, function(callback) {
+	Server.getUnusedInstance = function(query, user, callback) {
 
 		var on = outcome.error(callback);
 		step(
@@ -52,5 +52,5 @@ exports.plugin = function(maestro) {
 
 			callback
 		);
-	});
+	};
 }
