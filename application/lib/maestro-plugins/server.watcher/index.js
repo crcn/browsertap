@@ -14,7 +14,6 @@ exports.plugin = function(maestro, loader) {
 		getServers({ busy: {$ne:true}, state: {$in: ["running", "disconnected", "pending"] }, imageName: "remote-desktop", lastUpdatedAt: {$lt: new Date(Date.now() - sleepTimeout) } }).
 		min(loader.params("minRunningDesktops") || 0).
 		exec(function(err, servers) {
-			console.log(servers)
 			if(servers && servers.length)
 			logger.info(sprintf("stopping %d instances", servers.length));
 		}).

@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>{+title}Browser Tap{/title}</title>
+
+		{+styles}
+			<link rel="stylesheet" href="/css/main.css" type="text/css">    
+		{/styles}
+	</head>
+	<body>
+		{+content}
+		{/content}
+	</body>
+</html>

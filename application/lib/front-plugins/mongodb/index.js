@@ -1,3 +1,4 @@
+var mongoose = require("mongoose");
 exports.plugin = function(loader) {
-	//TODO
+	return mongoose.createConnection(loader.params("mongodb"));
 }

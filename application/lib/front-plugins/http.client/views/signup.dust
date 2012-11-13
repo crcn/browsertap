@@ -1,0 +1,10 @@
+{>minimal-layout/}
+
+{<content}
+<h1>Signup:</h1>
+<form method="post" action="/signup">
+	<label>Email: <input type="text" name="email"></input></label> <br />
+	<label>Password: <input type="password" name="password"></input></label> <br />
+	<input type="submit" value="login"></input> <a href="/signup">signup</a>
+</form>
+{/content}
