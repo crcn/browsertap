@@ -99,7 +99,7 @@ namespace Commanders
 			//update's mostly the recorder
 			screens.at(i)->update();
 		}
-		
+
 		Sleep(ms);
 	}
 

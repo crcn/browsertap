@@ -1,5 +1,7 @@
 var structr = require("structr"),
-EventEmitter = require("events").EventEmitter;
+EventEmitter = require("events").EventEmitter,
+wkme = require("./events"),
+_ = require("underscore");
 
 var cashew = require('cashew'),
 videoStreamIdGenerator = cashew.generator('videoStream', true);
@@ -39,10 +41,12 @@ module.exports = structr(EventEmitter, {
 		this.style     = window.style;
 		this.width     = window.width;
 		this.height    = window.height;
+		this.vks       = _.values(wkme.keyboard_vk);
 
 		this._windows = windows;
 		this._con = windows._con;
 		this._rtmp = windows._options.rtmp;
+		this.clean();
 
 		//TODO - mouse
 	},
@@ -51,7 +55,8 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"close": function() {
-		this._con.execute("closeWindow", { id: this.id});
+		this.clean();
+		this._con.execute("closeWindow", { id: this.id });
 	},
 
 	/**
@@ -82,6 +87,21 @@ module.exports = structr(EventEmitter, {
 
 	"keybdEvent": function(bvk, bScan, dwFlags) {
 		this._con.execute("fireWindowKeybdEvent", { id: this.id, bvk: bvk, bScan: bScan, dwFlags: dwFlags });
+
+		
+	},
+
+	/**
+	 */
+
+	"clean": function() {
+		console.log("clean window")
+		var vks = this.vks, self = this;
+
+		//release any modifiers that might have been stuck down.
+		vks.forEach(function(vk) {
+			self.keybdEvent(vk, 0, wkme.keyboard.KEYEVENTF_KEYUP);
+		});
 	},
 
 	/**

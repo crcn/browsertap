@@ -18,6 +18,7 @@
     "outcome": "0.0.x",
     "dsync": "0.0.x",
     "dref": "0.0.x",
-    "pievent": "0.0.x"
+    "pievent": "0.0.x",
+    "maestro": "0.0.x"
   }
 }

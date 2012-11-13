@@ -1,0 +1,15 @@
+{
+  "name": "bt_maestro",
+  "version": "0.0.0",
+  "description": "ERROR: No README.md file found!",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "maestro": "0.0.x"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD"
+}
