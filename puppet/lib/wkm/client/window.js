@@ -86,7 +86,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"keybdEvent": function(bvk, bScan, dwFlags) {
-		this._con.execute("fireWindowKeybdEvent", { id: this.id, bvk: bvk, bScan: bScan, dwFlags: dwFlags });
+		// this._con.execute("fireWindowKeybdEvent", { id: this.id, bvk: bvk, bScan: bScan, dwFlags: dwFlags });
 
 		
 	},

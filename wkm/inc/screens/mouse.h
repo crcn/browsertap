@@ -12,6 +12,8 @@ namespace Screens
 		bool event(int dwFlags, int x, int y, int dwData);
 	private:
 		Screen* _screen;
+		int _freezeX;
+		int _freezeY;
 	};
 }
 

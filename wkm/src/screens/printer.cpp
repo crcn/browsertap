@@ -8,10 +8,12 @@
 #include <iostream>
 
 
-char* CaptureAnImage(HWND hWnd, Geometry::Rectangle& rect)
+char* CaptureAnImage(Screens::Screen* screen, Geometry::Rectangle& rect)
 {
+    HWND hWnd = screen->target();
     HDC hdcWindow;
     HDC hdcMemDC = NULL;
+    HDC hdcDesktop = NULL;
     HBITMAP hbmScreen = NULL;
     BITMAP bmpScreen;
 
@@ -28,12 +30,20 @@ char* CaptureAnImage(HWND hWnd, Geometry::Rectangle& rect)
     
 
     // Select the compatible bitmap into the compatible memory DC.
-    SelectObject(hdcMemDC,hbmScreen);
+    SelectObject(hdcMemDC, hbmScreen);
     	
-    if(!PrintWindow(hWnd, hdcMemDC, 0))
-    {
-    	// std::cout << "ERR" << std::endl;
+    PrintWindow(hWnd, hdcMemDC, 0);
+
+        // std::cout << rect.width << " " << std::endl;
+
+
+    if(screen->rightClickDown) {
+        Geometry::Rectangle b = screen->bounds();
+        hdcDesktop = GetDC(GetDesktopWindow());
+        BitBlt(hdcMemDC, -b.x + 100, -b.y + 100, 600, 400, hdcDesktop, 100, 100, SRCCOPY);
     }
+
+
 
     // Get the BITMAP from the HBITMAP
     GetObject(hbmScreen,sizeof(BITMAP),&bmpScreen);
@@ -59,7 +69,7 @@ char* CaptureAnImage(HWND hWnd, Geometry::Rectangle& rect)
     // call HeapAlloc using a handle to the process's default heap. Therefore, GlobalAlloc and LocalAlloc 
     // have greater overhead than HeapAlloc.
     // HANDLE hDIB = GlobalAlloc(GHND,dwBmpSize); 
-    char *lpbitmap = new char[dwBmpSize];//(char *)GlobalLock(hDIB);    
+    char *lpbitmap = new char[dwBmpSize];
 
 
     // Gets the "bits" from the bitmap and copies them into a buffer 
@@ -71,7 +81,8 @@ char* CaptureAnImage(HWND hWnd, Geometry::Rectangle& rect)
 
     DeleteObject(hbmScreen);
     DeleteObject(hdcMemDC);
-    ReleaseDC(hWnd,hdcWindow);
+    ReleaseDC(hWnd, hdcWindow);
+    if(hdcDesktop) ReleaseDC(GetDesktopWindow(), hdcDesktop);
 
     return lpbitmap;
 }
@@ -90,7 +101,7 @@ namespace Screens
 
 
 		//next, capture the image
-		const char* buffer = CaptureAnImage(screen->target(), realBounds);
+		const char* buffer = CaptureAnImage(screen, realBounds);
 
 
 		//finally return the bitmap which also contains the bounds so the recorder can properly scale & print the image

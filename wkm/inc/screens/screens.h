@@ -154,6 +154,11 @@ namespace Screens
 
 		void onProcessKill(Events::Event* event);
 
+		/**
+		 */
+
+		bool rightClickDown;
+
 
 
 	private:

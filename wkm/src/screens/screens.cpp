@@ -21,7 +21,6 @@ namespace Screens
 
 	LRESULT CALLBACK CallWndProc(int nCode, WPARAM wParam, LPARAM lParam)
 	{
-		std::cout << "OKAY" << std::endl;
 		return CallNextHookEx(0, nCode, wParam, lParam);
 	}
 
@@ -30,6 +29,7 @@ namespace Screens
 	 */
 
 	Screen::Screen(HWND window, Process::Process* process):
+	rightClickDown(false),
 	_parent(0),
 	_process(process),
 	_window(window),
