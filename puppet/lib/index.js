@@ -8,8 +8,6 @@ Browsers     = require("./browsers"),
 proxyServer  = require("./proxy/server"),
 _            = require("underscore");
 
-
-
 exports.create = function(options) {
 
 	var client = new Client(options),

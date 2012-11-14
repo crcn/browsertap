@@ -5,9 +5,9 @@ maestro.
 client().
 params({
 	browsers: {
-		directory: "~/Desktop/browsers",
+		directory: "C:/Users/Administrator/Desktop/browsers",
 		cache: {
-			prefix: '~/AppData/Local',
+			prefix: 'C:/Users/Administrator/AppData/Local',
 		},
 		firefox: {
 			processNames: ['firefox*'],

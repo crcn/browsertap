@@ -31,7 +31,6 @@ module.exports = structr(EventEmitter, {
 			dataType: "json",
 			success: function(resp) {
 				var puppeteer = resp.result;
-				alert(puppeteer.ns)
 				self._attach({ host: "http://" + puppeteer.ns + ":8080" });
 			}
 		});
@@ -55,10 +54,10 @@ module.exports = structr(EventEmitter, {
 
 		var d = dnode(), self = this;
 		d.on("remote", function(remote) {
-
 			//attach the 
 			remote.connectClient({ token: options.token }, function(err, remote) {
-				if(err) return alert(err);
+				
+				if(err) return alert(err.message);
 				self.connection = remote;
 				self._connecting = false;
 				self.emit("connect", null, remote);

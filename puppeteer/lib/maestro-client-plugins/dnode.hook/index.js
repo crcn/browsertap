@@ -1,14 +1,26 @@
+
+
 var dnode = require("dnode"),
 outcome   = require("outcome"),
 shoe = require("shoe"),
 dsync = require("dsync"),
 logger = require("winston").loggers.get("logger"),
-sprintf = require("sprintf").sprintf;
+sprintf = require("sprintf").sprintf,
+EventEmitter = require("events").EventEmitter,
+pievent = require("pievent"),
+ppt = require("../../../../puppet");
 
-exports.require = ["client","puppet.init"];
-exports.plugin = function(client, puppet, loader) {
+
+
+exports.require = ["client", "http.server"];
+exports.plugin = function(client, httpServer, loader) {
 
 	client.ready(function() {
+
+
+		var params = loader.params();
+		params.rtmp = { hostname: client._info.ns, port: 1935 };
+		var puppet = ppt.create(params);
 
 		logger.info("client ready");
 
@@ -21,7 +33,7 @@ exports.plugin = function(client, puppet, loader) {
 			"wkm.windows": ["open->openWindow", "close->closeWindow"]
 		});
 
-		wrap.events = dsync(events);
+		wrappedPuppet.events = dsync(events);
 
 		//set dnode up so clients can connect
 		var sock = shoe(function(stream) {
@@ -39,6 +51,8 @@ exports.plugin = function(client, puppet, loader) {
 						//send the controllable instance
 						callback(null, wrappedPuppet);
 					}));*/
+
+
 
 					callback(null, wrappedPuppet);
 				},
@@ -58,7 +72,7 @@ exports.plugin = function(client, puppet, loader) {
 			function killTimeout() {
 				killTimeoutId = setTimeout(function() {
 					//kill due to inactivity
-					d.close();
+					d.kill();
 				}, 1000 * 60);
 
 				//TODO - countdown from time available. Check every 10 minutes or so.
@@ -73,6 +87,9 @@ exports.plugin = function(client, puppet, loader) {
 				client.update({ tags: {} });
 			});
 		});
+
+
+		sock.install(httpServer.target, "/dnode");
 	})
 	
 
