@@ -11,7 +11,7 @@ exports.plugin = function(maestro, loader) {
 
 	setInterval(function() {
 		maestro.
-		getServers({ busy: {$ne:true}, state: {$in: ["running", "disconnected", "pending"] }, imageName: "remote-desktop", lastUpdatedAt: {$lt: new Date(Date.now() - sleepTimeout) } }).
+		getServers({ "tags.owner": null, state: {$in: ["running", "disconnected", "pending"] }, imageName: "remote-desktop", lastUpdatedAt: {$lt: new Date(Date.now() - sleepTimeout) } }).
 		min(loader.params("minRunningDesktops") || 0).
 		exec(function(err, servers) {
 			if(servers && servers.length)
@@ -23,7 +23,7 @@ exports.plugin = function(maestro, loader) {
 
 	setInterval(function() {
 		maestro.
-		getServers({ busy: {$ne:true}, imageName: "remote-desktop", lastUpdatedAt: {$lt: new Date(Date.now() - destroyTime) } }).
+		getServers({ "tags.owner": null, imageName: "remote-desktop", lastUpdatedAt: {$lt: new Date(Date.now() - destroyTime) } }).
 		min(loader.params("minDesktops") || 1).
 		exec(function(err, servers) {
 			if(servers && servers.length)

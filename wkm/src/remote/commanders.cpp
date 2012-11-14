@@ -82,7 +82,7 @@ namespace Commanders
 	void JSONCommander::update()
 	{
 		if(_tick == 0) Screens::ScreenManager::instance().update();
-		int fps = 25; 
+		int fps = 40; 
 		int ms  = (1/(double)fps)*1000;
 
 		_tick++;

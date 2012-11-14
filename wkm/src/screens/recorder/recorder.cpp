@@ -15,10 +15,10 @@ namespace Screens
 
 		FFmpegContext* ctx = new FFmpegContext(NULL);
 		ctx->qmin = 1;
-		ctx->qmax = 3;
+		ctx->qmax = 11;
 		ctx->me_subpel_quality = 0;
-		ctx->gop_size = 50;
-		ctx->scenechange_threshold = 500;
+		ctx->gop_size = 80;
+		// ctx->scenechange_threshold = 500;
 		ctx->frame_rate = 25;
 		ctx->bit_rate = 64;
 		this->_ctx = ctx;

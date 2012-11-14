@@ -442,8 +442,10 @@ namespace Screens
 		av_free(_dstPicture);
 		av_free(_srcPicture);
 		av_free(_outputBuffer);
-		av_free(_convertCtx); //not needed?
-		av_free(_videoStream); //not needed?
+
+		//causes NULL exception on cleanup
+		//av_free(_convertCtx); //not needed?
+		// av_free(_videoStream); //not needed?
 
 
 		for(int i = 0; i < _formatCtx->nb_streams; i++)

@@ -72,11 +72,12 @@ exports.plugin = function(client, httpServer, loader) {
 			function killTimeout() {
 				killTimeoutId = setTimeout(function() {
 					//kill due to inactivity
-					d.kill();
-				}, 1000 * 60);
+					// d.end();
+				}, 1000 * 60 * 5);
 
 				//TODO - countdown from time available. Check every 10 minutes or so.
 			}
+
 
 
 			killTimeout();
@@ -84,6 +85,7 @@ exports.plugin = function(client, httpServer, loader) {
 
 			//once the client closes, tell the client that we're not busy
 			d.on("end", function() {
+				logger.info("client close");
 				client.update({ tags: {} });
 			});
 		});

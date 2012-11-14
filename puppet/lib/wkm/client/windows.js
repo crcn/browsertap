@@ -16,7 +16,6 @@ module.exports = structr(EventEmitter, {
 
 	"__construct": function(con, options) {
 		this._options = options;
-		console.log(this._options)
 		this._con = con;
 		this._syncScreens();
 		this._windows = [];
