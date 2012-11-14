@@ -20,10 +20,6 @@ exports.plugin = function(client, puppet, loader) {
 
 		wrap.events = dsync(events);
 
-		//since we're just starting up, flag that the client is not busy
-		client.update({ busy: busy });
-
-
 		//set dnode up so clients can connect
 		var sock = shoe(function(stream) {
 
@@ -72,7 +68,7 @@ exports.plugin = function(client, puppet, loader) {
 
 			//once the client closes, tell the client that we're not busy
 			d.on("end", function() {
-				client.update({ busy: busy = false });
+				client.update({ tags: {} });
 			});
 		});
 	})

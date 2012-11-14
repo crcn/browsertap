@@ -6,7 +6,4 @@ describe("t", "type: front, maestro").
 argv;
 
 
-argv.t.split("+").forEach(function(server) {
-	require("../")[server]();
-});
-
+require("../").start(argv.t);

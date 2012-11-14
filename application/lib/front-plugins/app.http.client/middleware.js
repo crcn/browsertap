@@ -6,7 +6,7 @@ cons            = require("consolidate"),
 dust            = require("dustjs-linkedin");
 
 
-exports.require = ["http.server"];
+exports.require = ["app.http.server"];
 exports.plugin = function(server) {
 	
 	server.use(lessMiddleware({

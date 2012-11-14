@@ -2,7 +2,7 @@ var dnode = require("dnode"),
 shoe      = require("shoe"),
 dsync     = require("dsync");
 
-exports.require = ["http.server", "maestro"];
+exports.require = ["app.http.server", "maestro"];
 exports.plugin = function(server, maestro) {
 
 

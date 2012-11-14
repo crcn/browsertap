@@ -8,9 +8,10 @@ var maestroConfig = require("/usr/local/etc/maestro/config.json");
 
 
 
-exports.front = function() {
-	plugin().
-	params(_.extend({
+exports.start = function(type) {
+
+
+	var loader = maestro(_.extend({
 		http: {
 			port: 8080
 		},
@@ -19,15 +20,14 @@ exports.front = function() {
 		]
 	}, maestroConfig)).
 	require(__dirname + "/common-plugins").
-	require(__dirname + "/front-plugins").
-	load(function(err) {
+	require(__dirname + "/front-plugins");
+
+	if(type == "slave")
+	loader.require(__dirname + "/maestro-plugins");
+
+
+	loader.load(function(err) {
 		if(err) console.log(arguments[0].stack)
 	});
 }
 
-exports.maestro = function() {
-	maestro(maestroConfig).
-	require(__dirname + "/common-plugins").
-	require(__dirname + "/maestro-plugins").
-	load();
-}

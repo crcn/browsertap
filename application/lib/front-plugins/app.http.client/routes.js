@@ -1,6 +1,6 @@
 
 
-exports.require = ["http.server", "auth", "http.auth"];
+exports.require = ["app.http.server", "auth", "app.http.auth"];
 exports.plugin = function(server, auth, httpAuth) {
 
 	var Account = auth.Account;
@@ -15,6 +15,15 @@ exports.plugin = function(server, auth, httpAuth) {
 		});
 	});
 
+	server.get("/logout", function(req, res) {
+		delete req.session.token;
+		res.redirect("/login");
+	});
+
+
+	server.get("/remoteDesktop", function(req, res) {
+
+	});
 
 	function getToken(req, res, account, render) {
 		account.getMainToken(function(err, token) {
@@ -46,7 +55,6 @@ exports.plugin = function(server, auth, httpAuth) {
 	server.post("/signup", function(req, res) {
 		var acc = new Account(req.body);
 		acc.save(function(err) {
-			console.log(err)
 			if(err) return res.render("signup", {
 				error: err.message
 			});

@@ -1,5 +1,5 @@
 var vine = require("vine")
-exports.require = ["auth", "http.server"];
+exports.require = ["auth", "app.http.server"];
 var step = require("step");
 exports.plugin = function(auth, server) {
 
@@ -17,7 +17,10 @@ exports.plugin = function(auth, server) {
 			}
 
 			Account.login(q, function(err, account) {
+
 				if(err) {
+
+					if(/\.json$/.test(req.path)) return res.send(vine.error(new Error("unauthorized")));
 					return res.redirect("/login?redirect_to=" +  req.path);
 					// return res.send(vine.error(err));
 				}
