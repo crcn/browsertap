@@ -7,10 +7,9 @@ head.ready(function() {
 	require("./mixins/ember");
 	require("./tpl").registerViews();
 
+
 	plugin().
-	params({ }).
-	use(dnodePlugin.client()).
-	require("dnode://" + window.location.hostname + ":" + window.location.port).
+	params({}).
 	require(require("./screen/extbridge")).
 	require(require("./screen/router")).
 	require(require("./screen/commands")).
@@ -20,6 +19,7 @@ head.ready(function() {
 	load(function(err) {
 		if(err) console.error(err.stack || err); 
 	});
-})
+
+});
 
 

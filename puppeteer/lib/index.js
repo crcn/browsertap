@@ -62,4 +62,5 @@ params({
 		}
 	} 
 }).
+require(__dirname + "/maestro-client-plugins").
 load();

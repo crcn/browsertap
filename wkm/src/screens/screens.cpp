@@ -374,7 +374,7 @@ namespace Screens
 	{
 		int n = this->_screens.size();
 
-		for(int i = n; i--;)
+		/*for(int i = n; i--;)
 		{
 			Screen* child = this->_screens.at(i);
 			int pid = (int)GetParent(child->_window);
@@ -388,7 +388,7 @@ namespace Screens
 					break;
 				}
 			}
-		}
+		}*/
 	}
 
 

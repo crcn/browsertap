@@ -1,13 +1,16 @@
 var dnode = require("dnode"),
-request   = require("request"),
 outcome   = require("outcome"),
 shoe = require("shoe"),
-dsync = require("dsync");
+dsync = require("dsync"),
+logger = require("winston").loggers.get("logger"),
+sprintf = require("sprintf").sprintf;
 
 exports.require = ["client","puppet.init"];
 exports.plugin = function(client, puppet, loader) {
 
 	client.ready(function() {
+
+		logger.info("client ready");
 
 		var busy = false,
 		events = new EventEmitter(),
@@ -30,15 +33,14 @@ exports.plugin = function(client, puppet, loader) {
 				 */
 
 				connectClient: function(credentials, callback) {
-					client.maestroRequest("authenticateUser", credentials, outcome.error(callback).success(function(response, body) {
+					/*client.maestroRequest("authenticateUser", credentials, outcome.error(callback).success(function(response, body) {
 						if(body.errors) return callback(new Error(body.errors[0].message));
-
-						//start the timer NOW
-						client.update({ busy: busy });
 
 						//send the controllable instance
 						callback(null, wrappedPuppet);
-					}));
+					}));*/
+
+					callback(null, wrappedPuppet);
 				},
 
 				/**

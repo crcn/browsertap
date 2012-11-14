@@ -8,9 +8,8 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"__construct": function(maestro, hostInfo) {
-		this._maestro = maestro;
-		this._hostInfo = hostInfo;
+	"__construct": function(host) {
+		this._host = host;
 	},
 
 	/**
@@ -22,17 +21,19 @@ module.exports = structr(EventEmitter, {
 		this.once("connect", callback);
 		if(this._connecting) return;
 
-		this.emit("status", "loading puppeteer");
-
-		if(this._hostInfo && this._hostInfo.host) {
-			return this._attach(this._hostInfo);
-		}
-
 		//TODO - authorize this client 
 		var self = this;
-		this._maestro.getAvailablePuppeteer(function(err, options) {
-			if(err) return alert(err);
-			self._attach(options);
+
+		var serverUrl = [window.location.protocol, "//", window.location.host, "/server.json"].join("");
+
+		$.ajax({
+			url: serverUrl,
+			dataType: "json",
+			success: function(resp) {
+				var puppeteer = resp.result;
+				alert(puppeteer.ns)
+				self._attach({ host: "http://" + puppeteer.ns + ":8080" });
+			}
 		});
 	},
 

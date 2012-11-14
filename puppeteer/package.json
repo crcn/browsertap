@@ -19,6 +19,8 @@
     "dsync": "0.0.x",
     "dref": "0.0.x",
     "pievent": "0.0.x",
-    "maestro": "0.0.x"
+    "maestro": "0.0.x",
+    "sprintf": "0.1.x",
+    "winston": "0.6.x"
   }
 }
