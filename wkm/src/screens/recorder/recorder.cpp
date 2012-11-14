@@ -17,8 +17,8 @@ namespace Screens
 		ctx->qmin = 1;
 		ctx->qmax = 11;
 		ctx->me_subpel_quality = 0;
-		ctx->gop_size = 80;
-		// ctx->scenechange_threshold = 500;
+		ctx->gop_size = 70;
+		// ctx->scenechange_threshold = -10000;
 		ctx->frame_rate = 25;
 		ctx->bit_rate = 64;
 		this->_ctx = ctx;

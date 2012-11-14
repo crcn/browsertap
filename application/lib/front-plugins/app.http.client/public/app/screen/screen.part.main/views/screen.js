@@ -83,9 +83,9 @@ module.exports = Ember.View .extend({
 		}
 
 
-		$el.bind("mousewheel", function(e, delta) {
-			win.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, coords, delta * 20);
-		})
+		$el.bind("mousewheel", _.throttle(function(e, delta) {
+			win.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, coords, delta * 50);
+		}, 50));
 
 
 

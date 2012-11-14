@@ -17,7 +17,7 @@ BDIR = ./bin
 LIBS = -L./libs -L./vendors/jsoncpp/libs/mingw -ljson_mingw_libmt -luser32 -lgdi32 -lpsapi -lavcodec -lavdevice -lavformat -lavutil -lswscale -lavfilter
 
 MINGWFLAGS := -static-libgcc -static-libstdc++
-CFLAGS :=  -I./inc  -I./inc/windows -I./vendors/ffmpeg -I./vendors/jsoncpp/include -I./src $(EFLAGS) -Wall
+CFLAGS :=  -I./inc  -I./inc/windows -I./vendors/ffmpeg -I./vendors/jsoncpp/include -I./src $(EFLAGS) -Wall -O3 -ftree-vectorize
 
 # objects to compile
 SOURCES := $(shell find $(SDIR) -name '*.cpp')
@@ -29,7 +29,7 @@ all: cli
 
 
 cli: $(OBJECTS)
-	$(CC) $(OBJECTS) $(MINGWFLAGS) $(LIBS) -O3 -D__STDC_CONSTANT_MACROS -o $(BDIR)/cli
+	$(CC) $(OBJECTS) $(MINGWFLAGS) $(LIBS) -ftree-vectorize -O3 -D__STDC_CONSTANT_MACROS -o $(BDIR)/cli
 
 
 copy: 
