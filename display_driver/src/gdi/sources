@@ -1,0 +1,12 @@
+TARGETNAME=fakemonitor
+TARGETTYPE=GDI_DRIVER
+
+TARGETLIBS=$(TARGETLIBS) $(SDK_LIB_PATH)\libcntpr.lib 
+
+
+
+SOURCES=entry.c     \
+        functions.c    \
+
+TARGET_DESTINATION=retail
+

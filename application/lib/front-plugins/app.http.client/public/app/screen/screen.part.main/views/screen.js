@@ -32,10 +32,11 @@ module.exports = Ember.View .extend({
 
 
 		function onResize() {
-			var w = $el.width() + padding.left + padding.right,
-			h = $el.height() + padding.top + padding.bottom;
+			var w = $el.width() + (padding.left + padding.right),
+			h = $el.height() + (padding.top + padding.bottom);
 			$hud.width(w);
 			$hud.height(h);
+
 
 			//don't resize if nothing's changed
 			if(win.width == w && win.height == h) return;

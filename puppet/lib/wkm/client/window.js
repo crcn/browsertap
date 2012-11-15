@@ -87,8 +87,6 @@ module.exports = structr(EventEmitter, {
 
 	"keybdEvent": function(bvk, bScan, dwFlags) {
 		// this._con.execute("fireWindowKeybdEvent", { id: this.id, bvk: bvk, bScan: bScan, dwFlags: dwFlags });
-
-		
 	},
 
 	/**
@@ -111,6 +109,7 @@ module.exports = structr(EventEmitter, {
 		callback(null, !this.disposed);
 	},
 
+
 	/**
 	 */
 
@@ -121,7 +120,7 @@ module.exports = structr(EventEmitter, {
 
 		console.log("recording window to %s", output);
 
-		this._con.execute("startRecordingWindow", { id: this.id, output: "rtmp://localhost:1935/live/" + streamId });
+		this._con.execute("startRecordingWindow", { id: this.id, output: "rtmp://10.0.1.30:1935/live/" + streamId });
 
 		callback(null, this._output = {
 			url: output

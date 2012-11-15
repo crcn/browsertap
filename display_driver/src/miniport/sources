@@ -1,0 +1,6 @@
+TARGETNAME=fakemonitor
+TARGETTYPE=DRIVER
+SOURCES=entry.c \
+functions.c
+TARGETLIBS=$(DDK_LIB_PATH)\videoprt.lib
+TARGET_DESTINATION=retail

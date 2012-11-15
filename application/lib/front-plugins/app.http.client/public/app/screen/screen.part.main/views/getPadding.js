@@ -23,6 +23,7 @@ module.exports = function(window) {
 		}
 	];
 
+
 	for(var i = 0, n = padding.length; i < n; i++) {
 		var pd = padding[i];
 		if(sift(pd.test).test(window)) {

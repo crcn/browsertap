@@ -154,10 +154,11 @@ namespace Screens
 
 		void onProcessKill(Events::Event* event);
 
+
 		/**
 		 */
 
-		bool rightClickDown;
+		bool inFocus();
 
 
 
@@ -261,7 +262,19 @@ namespace Screens
 
 		Screen* getScreen(int id);
 
+		/**
+		 */
+
+		Screen* focusedScreen();
+
+		/**
+		 */
+
+		void focusedScreen(Screen* value);
+
 	private:
+
+		Screen* _focusedScreen;
 
 
 		/**

@@ -23,24 +23,36 @@ char* CaptureAnImage(Screens::Screen* screen, Geometry::Rectangle& rect)
 
     // Create a compatible DC which is used in a BitBlt from the window DC
     hdcMemDC = CreateCompatibleDC(hdcWindow); 
-
     
     // Create a compatible bitmap from the Window DC
     hbmScreen = CreateCompatibleBitmap(hdcWindow, rect.width, rect.height);
     
+    // RedrawWindow(hWnd, NULL, NULL, RDW_INVALIDATE | RDW_ALLCHILDREN);
+    // InvalidateRgn(hWnd, NULL, false);
+
+    // Sleep(40);
 
     // Select the compatible bitmap into the compatible memory DC.
     SelectObject(hdcMemDC, hbmScreen);
     	
-    PrintWindow(hWnd, hdcMemDC, 0);
+    // PrintWindow(hWnd, hdcMemDC, 0);
 
         // std::cout << rect.width << " " << std::endl;
+    HRGN rgn;
+        rgn = CreateRectRgn(0, 0, 2000, 2000);
 
+        SetWindowRgn(GetDesktopWindow(), rgn, false);
 
-    if(screen->rightClickDown) {
+    //this is ABSOLUTELY needed for many reasons. If we do print-window the user won't see drop menus
+    //right clicks, etc.
+    if(true || screen->inFocus()) {
         Geometry::Rectangle b = screen->bounds();
         hdcDesktop = GetDC(GetDesktopWindow());
-        BitBlt(hdcMemDC, -b.x + 100, -b.y + 100, 600, 400, hdcDesktop, 100, 100, SRCCOPY);
+        // BitBlt(hdcMemDC, -b.x + 100, -b.y + 100, 600, 400, hdcDesktop, 100, 100, SRCCOPY);
+        BitBlt(hdcMemDC, 0, 0, rect.width, rect.height, hdcWindow, rect.x, rect.y, SRCCOPY);
+        // PatBlt(hdcMemDC, 0, 0, rect.width, rect.height, PATCOPY);
+    } else {
+        PrintWindow(hWnd, hdcMemDC, 0);
     }
 
 
@@ -48,7 +60,6 @@ char* CaptureAnImage(Screens::Screen* screen, Geometry::Rectangle& rect)
     // Get the BITMAP from the HBITMAP
     GetObject(hbmScreen,sizeof(BITMAP),&bmpScreen);
      
-    BITMAPFILEHEADER   bmfHeader;    
     BITMAPINFOHEADER   bi;
      
     bi.biSize = sizeof(BITMAPINFOHEADER);    
@@ -94,18 +105,19 @@ namespace Screens
 		if(bounds.width < 10 || bounds.height < 10) return 0;
 
 		//scale the bounds given with the padding. Padding is extra useful for doing stuff such as getting rid of window chrome
-		Geometry::Rectangle realBounds = Geometry::Rectangle(padding.left,
+		/*Geometry::Rectangle realBounds = Geometry::Rectangle(padding.left,
 															 padding.top,
 															 bounds.width - padding.left - padding.right,
-															 bounds.height - padding.top - padding.bottom);
+															 bounds.height - padding.top - padding.bottom);*/
 
 
+        Geometry::Rectangle rect = screen->bounds();
 		//next, capture the image
-		const char* buffer = CaptureAnImage(screen, realBounds);
+		const char* buffer = CaptureAnImage(screen, rect);
 
 
 		//finally return the bitmap which also contains the bounds so the recorder can properly scale & print the image
-		return new Graphics::Bitmap(buffer, realBounds);
+		return new Graphics::Bitmap(buffer, bounds);
 	}
 
 	Graphics::Bitmap* Printer::print(Screen* screen, Geometry::Padding padding)

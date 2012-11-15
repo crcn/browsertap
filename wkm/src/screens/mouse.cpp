@@ -28,6 +28,8 @@ namespace Screens
 		// std::cout << x2 << " " << y2 << " " << GetSystemMetrics(SM_CXSCREEN) << std::endl;
 
 		this->_screen->focus();
+		// this->inFocus = true;
+
 
 		/*DWORD dw = MAKEWORD(x2, y2);
 		HWND target = this->_screen->target();
@@ -72,7 +74,7 @@ namespace Screens
 
 		bool moveWindow = false;
 
-		if(this->_screen->rightClickDown && (dwFlags & MOUSEEVENTF_LEFTDOWN)) {
+		/*if(this->_screen->rightClickDown && (dwFlags & MOUSEEVENTF_LEFTDOWN)) {
 			this->_screen->rightClickDown = false;
 			this->_freezeX = 0;
 			this->_freezeY = 0;
@@ -82,7 +84,7 @@ namespace Screens
 			this->_freezeX = x;
 			this->_freezeY = y;
 			moveWindow = true;
-		}
+		}*/
 
 		if(this->_freezeX > 0) {
 			rmx = x - this->_freezeX + mouseX;
@@ -92,16 +94,19 @@ namespace Screens
 			rmy = mouseY;
 		}
 
+		rmx = x;
+		rmy = y;
+
 		x2 = (rmx * 65535/GetSystemMetrics(SM_CXSCREEN));
 		y2 = (rmy * 65535/GetSystemMetrics(SM_CYSCREEN));
 
-		realX = x - rmx;
-		realY = y - rmy;
+		// realX = x - rmx;
+		// realY = y - rmy;
 
 
-		if(!this->_screen->rightClickDown || moveWindow) {
-			this->_screen->move(Geometry::Point(-realX, -realY));
-		}
+		/*if(!this->_screen->rightClickDown || moveWindow) {
+			// this->_screen->move(Geometry::Point(0, 0));
+		}*/
 
 		mouse_event(dwFlags, x2, y2, dwData, 0);
 

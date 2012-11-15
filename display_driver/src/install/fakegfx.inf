@@ -1,0 +1,82 @@
+
+[Version]
+Signature="$Windows NT$"
+Provider=%BrowserTap%
+ClassGUID={4D36E968-E325-11CE-BFC1-08002BE10318}
+Class=Display
+DriverVer=10/31/2010,1.1.13.0
+; CatalogFile=ZoneScreenMirror.cat
+
+; [file-list-section=dirid[,subdir]]
+[DestinationDirs]
+tapscreen.Miniport  = 12  ; \system32\drivers
+tapscreen.Display   = 11  ; \system32
+
+; manufacturer-identifier
+[Manufacturer]
+%BrowserTap% = BrowserTap.Mfg, ntAMD64
+
+; per-Manufacturer Models section
+[BrowserTap.Mfg.ntAMD64]
+%tapscreen% = tapscreen, ROOT\DISPLAY\BrowserTap_TapScreen
+
+; Models
+[tapscreen]
+CopyFiles=tapscreen.Miniport, tapscreen.Display
+
+; Files
+[tapscreen.Miniport]
+fakemonitor.sys
+
+[tapscreen.Display]
+fakemonitor.dll
+
+; AddService=ServiceName,[flags],service-install-section[,
+; event-log-install-section[,[EventLogType][,EventName]]]
+[tapscreen.Services]
+AddService = tapscreen, 0x00000002, TapScreenServiceInst, TapScreenEventLogInst
+
+; Installing service
+[TapScreenServiceInst]
+ServiceType    = 1        ; SERVICE_KERNEL_DRIVER
+StartType      = 1        ; SERVICE_SYSTEM_START
+ErrorControl   = 1        ; SERVICE_ERROR_NORMAL
+LoadOrderGroup = Video
+ServiceBinary  = %12%\fakemonitor.sys
+
+; Event-logging services
+[TapScreenEventLogInst]
+AddReg = TapScreenEventLogAddReg
+
+[TapScreenEventLogAddReg]
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%SystemRoot%\System32\IoLogMsg.dll;%SystemRoot%\System32\drivers\fakemonitor.sys"
+HKR,,TypesSupported,%REG_DWORD%,7
+
+; Software installation
+[tapscreen.SoftwareSettings]
+AddReg = TapScreenSoftwareDeviceSettings
+
+[TapScreenSoftwareDeviceSettings]
+HKR,, InstalledDisplayDrivers,     %REG_MULTI_SZ%, tapscreen
+HKR,, VgaCompatible,               %REG_DWORD%,    0
+HKR,, Attach.ToDesktop,            %REG_DWORD%,    1
+
+; diskid = disk-description[,[tag-or-cab-file],[unused,path][,flags]]
+[SourceDisksNames]
+1 = %TapScreenDisk%
+
+; filename = diskid[,[ subdir][, size]]
+[SourceDisksFiles.AMD64]
+fakemonitor.sys = 1
+fakemonitor.dll = 1
+
+; Strings
+[Strings]
+REG_SZ         = 0x00000000
+REG_MULTI_SZ   = 0x00010000
+REG_EXPAND_SZ  = 0x00020000
+REG_BINARY     = 0x00000001
+REG_DWORD      = 0x00010001
+BrowserTap = "BrowserTap"
+TapScreenDisk = "BrowserTap TapScreen Installation Disk"
+TapScreen = "BrowserTap Virtual Display Driver"
