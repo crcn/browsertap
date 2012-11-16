@@ -2,7 +2,7 @@ var express = require("express"),
 outcome = require("outcome"),
 vine = require("vine");
 
-exports.require = ["auth"];
+exports.require = ["auth.init"];
 exports.plugin = function(auth) {
 	var Account = auth.account;
 

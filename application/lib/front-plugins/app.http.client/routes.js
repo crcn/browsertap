@@ -1,6 +1,6 @@
 
 
-exports.require = ["app.http.server", "auth", "app.http.auth"];
+exports.require = ["app.http.server", "auth.init", "app.http.auth"];
 exports.plugin = function(server, auth, httpAuth) {
 
 	var Account = auth.Account;

@@ -1,5 +1,5 @@
 var vine = require("vine")
-exports.require = ["auth", "app.http.server"];
+exports.require = ["auth.init", "app.http.server"];
 var step = require("step");
 exports.plugin = function(auth, server) {
 
