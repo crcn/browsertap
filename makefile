@@ -1,14 +1,14 @@
 all:
 
 install-application:
-	cd application; npm i; 
+	cd application; rm -rf node_modules; npm i; 
 
 install-application-superconf:
 	ln -s /srv/browsertap/application/supervisord.conf /etc/supervisor/conf.d/browsertap.conf; supervisord reread; supervisord update;
 
 install-puppeteer:
-	cd puppet; npm i
-	cd puppeteer; npm i
+	cd puppet; rm -rf node_moduls; npm i
+	cd puppeteer; rm -rf node_modules; npm i
 
 browser-ext:
 	cd browser_extension/xtest; ./build.sh
