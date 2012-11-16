@@ -120,7 +120,7 @@ module.exports = structr(EventEmitter, {
 
 		console.log("recording window to %s", output);
 
-		this._con.execute("startRecordingWindow", { id: this.id, output: "rtmp://10.0.1.30:1935/live/" + streamId });
+		this._con.execute("startRecordingWindow", { id: this.id, output: "rtmp://localhost:1935/live/" + streamId });
 
 		callback(null, this._output = {
 			url: output
