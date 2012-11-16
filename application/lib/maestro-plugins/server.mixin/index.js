@@ -65,8 +65,9 @@ exports.plugin = function(maestro) {
 			 */
 
 			function(err, server) {
-				if(err) console.log(err.stack)
+				if(err) console.log(err.stack);
 				if(server) {
+					logger.info(sprintf("account %s using server id=%s, ns=%s", account._id, server._id, server.ns));
 					server.tags = _.extend({}, server.tags, { owner: account._id });
 					return server.save(this);
 				}
