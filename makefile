@@ -1,7 +1,7 @@
 all:
 
 install-application:
-	cd application; npm i
+	cd application; npm i; ln -s /srv/browsertap/application/supervisord.conf /etc/supervisor/conf.d/browsertap.conf
 
 install-puppeteer:
 	cd puppet; npm i
