@@ -14,7 +14,6 @@ kango.addMessageListener("refresh", function() {
 window.__test = "hello";
 var commands = {
 	openWindow: function(options) {
-		console.log("DISP")
 		options.type = "popup";
 		if(!options.width) options.width = 500;
 		if(!options.height) options.height = 400;

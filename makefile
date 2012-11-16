@@ -1,37 +1,24 @@
-#---------------------------------------------------
+all:
 
-PROJ_DIR = projects
-SRC_DIR = projects/src
-APPS_DIR = projects/apps
+install-application:
+	cd application
+	npm i
 
-#---------------------------------------------------
+install-puppeteer:
+	cd puppet
+	npm i
+	cd ..
+	cd puppeteer
+	npm i
 
+browser-ext:
+	cd browser_extension/xtest; ./build.sh
 
+desktop-player:
+	cd desktop_player
+	make
 
-all: desktop_player web_debug sprite desktop_controller 
-all_release: 
+wkm:
+	cd wkm
+	make
 
-
-desktop_player:
-	make -C $(SRC_DIR)/desktop_player all;
-
-sprite:
-
-
-web_debug:
-	cd $(PROJ_DIR); mesh site:make:debug
-
-
-web_release:
-	cd $(PROJ_DIR); mesh site:make:release
-
-
-web_run:
-	cd $(PROJ_DIR); mesh site:run
-
-
-desktop_controller:
-	make -C $(SRC_DIR)/desktop_controller all;
-
-clean:
-	rm -rf $(APPS_DIR);
