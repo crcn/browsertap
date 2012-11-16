@@ -19,7 +19,6 @@ exports.plugin = function(client, httpServer, loader) {
 
 
 		var params = loader.params();
-		params.rtmp = { hostname: client._info.ns, port: 1935 };
 		var puppet = ppt.create(params);
 
 		logger.info("client ready");
