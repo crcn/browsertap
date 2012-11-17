@@ -9,7 +9,8 @@ namespace Screens
 	Recorder::Recorder(Screen* screen):
 	_screen(screen),
 	_ffmpeg(0),
-	_recording(false)
+	_recording(false),
+	_ctx(NULL)
 	{
 
 
@@ -39,6 +40,7 @@ namespace Screens
 	FFmpegContext* Recorder::context()
 	{
 		return this->_ctx;
+		// return NULL;
 	}
 
 	void Recorder::stop()

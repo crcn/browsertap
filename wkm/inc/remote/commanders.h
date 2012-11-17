@@ -45,6 +45,7 @@ namespace Commanders
 
 	private:
 		int _tick;
+		int _frameRate;
 		Events::EventDispatcher* _commands;
 
 		// void execTimeout(JSONCommand* event);
@@ -59,6 +60,7 @@ namespace Commanders
 		void execFireWindowMouseEvent(JSONCommand* event);
 		void execFireWindowKeybdEvent(JSONCommand* event);
 		void changeWindowRecordingQual(JSONCommand* event);
+		void changeCommanderQaul(JSONCommand* event);
 		Screens::Screen* getScreen(JSONCommand* event);
 
 		// void execListProcesses(JSONCommand* event);

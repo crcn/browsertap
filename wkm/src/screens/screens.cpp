@@ -1,6 +1,7 @@
 #include "screens/screens.h"
 #include "process/process.h"
 #include "screens/recorder/recorder.h"
+#include <math.h>
 
 namespace Screens 
 {
@@ -159,6 +160,11 @@ namespace Screens
 	bool Screen::resize(Geometry::Rectangle bounds)
 	{
 		if(bounds.width == 0 || bounds.height == 0) return FALSE;
+
+
+		//fixes issue where ffmpeg breaks when the dimensions aren't aligned. E.g: 889x660 busts it.
+		bounds.width = floor(bounds.width/2) * 2;
+		bounds.height = floor(bounds.height/2) * 2;
 
 
 		// RECT rect;

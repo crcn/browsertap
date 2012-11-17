@@ -44,6 +44,7 @@ namespace Commanders
 
 	JSONCommander::JSONCommander():
 	_tick(0),
+	_frameRate(24),
 	_commands(new Events::EventDispatcher()) {
 		#define regCommand(name, method) this->_commands->addEventListener(#name, new Events::ClassCbEventListener<JSONCommander, JSONCommand>(this, &JSONCommander::method));
 	
@@ -84,7 +85,7 @@ namespace Commanders
 	void JSONCommander::update()
 	{
 		if(_tick == 0) Screens::ScreenManager::instance().update();
-		int fps = 40; 
+		int fps = this->_frameRate; 
 		int ms  = (1/(double)fps)*1000;
 
 		_tick++;
@@ -221,6 +222,7 @@ namespace Commanders
 		ATTACH_CTX(gop_size, asInt)
 		ATTACH_CTX(qmin, asInt)
 		ATTACH_CTX(qmax, asInt)
+		this->changeCommanderQaul(command);
 
 		screen->recorder()->start(out.asString());
 	}
@@ -236,6 +238,17 @@ namespace Commanders
 		ATTACH_CTX(gop_size, asInt)
 		ATTACH_CTX(qmin, asInt)
 		ATTACH_CTX(qmax, asInt)
+		this->changeCommanderQaul(command);
+	}
+
+	void JSONCommander::changeCommanderQaul(JSONCommand* command) 
+	{
+		Json::Value val = command->value()["data"]["frame_rate"];
+
+		if(!val.isNull()) 
+		{
+			this->_frameRate = val.asInt();
+		}
 	}
 
 

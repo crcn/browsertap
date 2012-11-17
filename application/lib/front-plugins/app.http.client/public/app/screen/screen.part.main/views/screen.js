@@ -102,14 +102,29 @@ module.exports = Ember.View .extend({
 			win.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTUP : wkmEvents.mouse.MOUSEEVENTF_RIGHTUP, coords);
 		});
 
+		var modifiers = [17, 16, 18];
+		/*var replModifiers = { 91: };
+
+		$el.keydown(function(e) {
+			if(~modifiers.indexOf(e.keyCode)) return;
+
+			win.keybdEvent({
+				keyCode: e.keyCode,
+				altKey: e.altKey,
+				ctrlKey: e.ctrlKey,
+				shiftKey: e.shiftKey
+			});
+		})*/
+
 
 		window.desktopEvents = {
 			keyDown: function(data) {
-				win.keybdEvent(data.keyCode, 0,  wkmEvents.keyboard.KEYEVENTF_EXTENDEDKEY | 0);
-			},
+				if(~modifiers.indexOf(data.keyCode)) return;
+				win.keybdEvent(data);
+			}/*,
 			keyUp: function(data) {
 				win.keybdEvent(data.keyCode, 0,  wkmEvents.keyboard.KEYEVENTF_EXTENDEDKEY | wkmEvents.keyboard.KEYEVENTF_KEYUP);
-			}
+			}*/
 		}
 
 

@@ -56,6 +56,8 @@ namespace Screens
 		Geometry::Rectangle& bounds = data->bounds();
 
 		avpicture_fill((AVPicture*)_srcPicture, (uint8_t*)data->buffer(), PIX_FMT_BGRA, bounds.width, bounds.height);
+
+
 		sws_scale(_convertCtx, 
 			_srcPicture->data, 
 			_srcPicture->linesize, 
@@ -410,7 +412,6 @@ namespace Screens
 			fprintf(stderr, "Unable to allocate pictures\n");
 			exit(1);
 		}
-
 
 		_convertCtx = sws_getContext(_videoCodecCtx->width,
 			_videoCodecCtx->height, 

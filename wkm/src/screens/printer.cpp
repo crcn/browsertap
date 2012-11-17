@@ -33,7 +33,6 @@ char* CaptureAnImage(Screens::Screen* screen, Geometry::Rectangle& rect)
     //this is ABSOLUTELY needed for many reasons. If we do print-window the user won't see drop menus
     //right clicks, etc.
     if(screen->inFocus()) {
-        Geometry::Rectangle b = screen->bounds();
         hdcDesktop = GetDC(GetDesktopWindow());
         // BitBlt(hdcMemDC, -b.x + 100, -b.y + 100, 600, 400, hdcDesktop, 100, 100, SRCCOPY);
         BitBlt(hdcMemDC, 0, 0, rect.width, rect.height, hdcWindow, rect.x, rect.y, SRCCOPY);

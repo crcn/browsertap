@@ -88,21 +88,47 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"keybdEvent": function(bvk, bScan, dwFlags) {
-		// this._con.execute("fireWindowKeybdEvent", { id: this.id, bvk: bvk, bScan: bScan, dwFlags: dwFlags });
+	"keybdEvent": function(options) {
+
+		console.log(options)
+
+		if(!options.keyCode) return;
+
+		var self = this;
+
+		function keyDown(code) {
+			console.log("DOWN %d", code);
+			self._con.execute("fireWindowKeybdEvent", { id: 1, bvk: code, bScan: 0, dwFlags: wkme.keyboard.KEYEVENTF_EXTENDEDKEY | 0 });
+		}
+
+		function keyUp(code) {
+			console.log("UP %d", code);
+			self._con.execute("fireWindowKeybdEvent", { id: 1, bvk: code, bScan: 0, dwFlags: wkme.keyboard.KEYEVENTF_EXTENDEDKEY | wkme.keyboard.KEYEVENTF_KEYUP });
+		}
+
+		if(options.shiftKey) keyDown(16);
+		if(options.ctrlKey) keyDown(17);
+		if(options.altKey) keyDown(18);
+
+		keyDown(options.keyCode);
+		keyUp(options.keyCode);
+
+		if(options.altKey) keyUp(18);
+		if(options.ctrlKey) keyUp(17);
+		if(options.shiftKey) keyUp(16);
 	},
 
 	/**
 	 */
 
 	"clean": function() {
-		console.log("clean window")
+		/*console.log("clean window")
 		var vks = this.vks, self = this;
 
 		//release any modifiers that might have been stuck down.
 		vks.forEach(function(vk) {
 			self.keybdEvent(vk, 0, wkme.keyboard.KEYEVENTF_KEYUP);
-		});
+		});*/
 	},
 
 	/**
