@@ -46,6 +46,7 @@ module.exports = Ember.ObjectController.extend({
 	 */
 
 	"_onOpenWindow": function(win) {
+		this._connection.bindWindow(win.id)
 		this.set("content.mainWindow", Ember.Object.create(win));
 
 		var self = this;
@@ -58,6 +59,8 @@ module.exports = Ember.ObjectController.extend({
 				if(closed.id == win.id) window.close();
 			});
 		}
+
+
 
 		checkExists();
 	},

@@ -38,6 +38,13 @@ exports.plugin = function(client, httpServer, loader) {
 		//set dnode up so clients can connect
 		var sock = shoe(function(stream) {
 
+			var wp = dsync(wrappedPuppet),
+			_closeWindows = [];
+			
+			wp.bindWindow = function(id) {
+				_closeWindows.push(id);
+			}
+
 			var d = dnode({
 
 				/**
@@ -54,7 +61,7 @@ exports.plugin = function(client, httpServer, loader) {
 
 
 
-					callback(null, wrappedPuppet);
+					callback(null, wp);
 				},
 
 				/**
@@ -87,6 +94,13 @@ exports.plugin = function(client, httpServer, loader) {
 			d.on("end", function() {
 				logger.info("client close");
 				client.update({ tags: {} });
+				for(var i = _closeWindows.length; i--;) {
+					console.log("closing %s", _closeWindows[i])
+					puppet.wkm.windows.getWindow(_closeWindows[i], function(err, window) {
+						if(err) return;
+						window.close();
+					});
+				}
 			});
 		});
 

@@ -62,9 +62,6 @@ module.exports = Ember.ObjectController.extend({
 				self._onWindows(windows);
 			});*/	
 		});
-
-		
-			
 	},
 
 	/**
@@ -92,12 +89,9 @@ module.exports = Ember.ObjectController.extend({
 		//WS_TABSTOP?? - can accept tabs
 
 
-
-		// console.log(w.extStyle, windowStyles.WS_EX_TOPMOST, w.extStyle & windowStyles.WS_EX_TOPMOST)
-
-
 		if(isMain) {
 			this.set("content.mainWindow", win);
+			this._connection.bindWindow(win.id); //bind for closing
 		} else
 
 		//top most? must be a popup

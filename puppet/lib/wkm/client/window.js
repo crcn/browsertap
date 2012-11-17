@@ -85,6 +85,7 @@ module.exports = structr(EventEmitter, {
 		this._con.execute("fireWindowMouseEvent", { id: this.id, x: coords.x, y: coords.y, dwFlags: dwFlags, dwData: dwData || 0 });
 	},
 
+
 	/**
 	 */
 
