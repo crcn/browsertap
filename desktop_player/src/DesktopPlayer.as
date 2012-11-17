@@ -24,6 +24,7 @@ package
 	
 	import org.osmf.net.NetConnectionCodes;
 	import org.osmf.net.NetStreamCodes;
+		[SWF(frameRate='24',backgroundColor='#000000')]
 	
 	public class DesktopPlayer extends Sprite
 	{
@@ -37,7 +38,6 @@ package
 		private var _channel:String;
 		private var _checkCount:int;
 		
-		[SWF(frameRate='24',backgroundColor='#000000')]
 		
 		
 		
@@ -147,7 +147,7 @@ package
 		private function openStream():void
 		{
 
-			_trace("Connecting to " + this._server);
+			//_trace("Connecting to " + this._server);
 
 
 			
@@ -179,10 +179,12 @@ package
 		private function onStageResize(event:Event = null):void
 		{
 			if(!this._video) return;
+				
+			this._video.x = this.stage.stageWidth / 2 - this._video.width / 2;
+			this._video.y = this.stage.stageHeight / 2 - this._video.height / 2;
 			
-			
-			this._video.width = this.stage.stageWidth;
-			this._video.height = this.stage.stageHeight;
+			//this._video.width = this.stage.stageWidth;
+			//this._video.height = this.stage.stageHeight;
 
 			ExternalInterface.call('desktopEvents.resize', { width: this._video.width, height: this._video.height });
 			this._debugInfo.y = this.stage.stageHeight - 200;
@@ -199,12 +201,20 @@ package
 				this._stream.addEventListener(IOErrorEvent.IO_ERROR, onError, false, 0, true);
 				this._stream.addEventListener(StatusEvent.STATUS, onStatus, false, 0, true);
 				this._stream.addEventListener(NetStatusEvent.NET_STATUS, onNetStatus, false, 0, true);
-				this._stream.client={onMetaData:function(obj:Object):void{} }
+				this._stream.client= this;
 				//this._stream.receiveVideoFPS(60);
 				this._stream.bufferTime = 0; //we're running live.
 				//this._stream.bufferTimeMax = 0;
 				this.openVideo();
 			}
+		}
+
+		public function onMetaData(obj:Object):void 
+		{
+			_trace(obj.width + " " + obj.height);
+			this._video.width = obj.width;
+			this._video.height = obj.height;
+			onStageResize();
 		}
 		
 		private function onError(event:*):void
@@ -216,11 +226,6 @@ package
 		{
 			_trace("SEC ERROR");
 		}
-		
-		private function onMetaData(obj:Object):void
-		{
-		
-		}
 
 		private function _checkFramerate():void 
 		{
@@ -231,7 +236,7 @@ package
 
 			return;
 			if(fps == 0 && this._checkCount++ >= 2) {
-				_trace("resetting");
+			//	_trace("resetting");
 				this.openStream();
 				this._checkCount = 0;
 			}
