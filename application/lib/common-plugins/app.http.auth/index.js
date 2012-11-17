@@ -21,7 +21,8 @@ exports.plugin = function(auth, server) {
 				if(err) {
 
 					if(/\.json$/.test(req.path)) return res.send(vine.error(new Error("unauthorized")));
-					return res.redirect("/login?redirect_to=" +  req.path);
+				
+					return res.redirect("/login?redirect_to=" +  req.originalUrl);
 					// return res.send(vine.error(err));
 				}
 				req.account = account;
