@@ -17,6 +17,7 @@ module.exports = structr(EventEmitter, {
 	"startRecording", 
 	"stopRecording", 
 	"style", 
+	"extStyle",
 	"id", 
 	"className", 
 	"title", 
@@ -39,6 +40,7 @@ module.exports = structr(EventEmitter, {
 		this.title     = window.title;
 		this.process   = window.process;
 		this.style     = window.style;
+		this.extStyle     = window.extStyle;
 		this.width     = window.width;
 		this.height    = window.height;
 		this.vks       = _.values(wkme.keyboard_vk);

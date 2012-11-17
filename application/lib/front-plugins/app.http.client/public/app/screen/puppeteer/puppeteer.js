@@ -48,6 +48,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_attach": function(options) {
+		console.log("attaching %s", options.host);
 		var stream = shoe(options.host + "/dnode");
 
 		this.host = options.host;

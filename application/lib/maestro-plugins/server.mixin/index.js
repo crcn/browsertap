@@ -43,6 +43,7 @@ exports.plugin = function(maestro) {
 			 */
 
 			function(err, server) {
+				console.log(err)
 				if(err && server) {
 					logger.info(sprintf("error connecting server, restarting"));
 					server.restart();

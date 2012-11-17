@@ -68,6 +68,11 @@ namespace Screens
 		/**
 		 */
 
+		long extStyle();
+
+		/**
+		 */
+
 		Geometry::Rectangle bounds();
 
 		/**
@@ -170,6 +175,7 @@ namespace Screens
 		int _id;
 		int _parent;
 		long _style;
+		long _extStyle;
 
 		/**
 		 */

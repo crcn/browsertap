@@ -39,6 +39,7 @@ namespace Screens
 		this->_mouse = new Mouse(this);
 		this->_keyboard = new Keyboard(this);
 		this->_style = GetWindowLong(this->_window, GWL_STYLE);
+		this->_extStyle = GetWindowLong(this->_window, GWL_EXSTYLE);
 	}
 
 	int Screen::_count = 0;
@@ -142,6 +143,11 @@ namespace Screens
 	long Screen::style()
 	{
 		return this->_style;
+	}
+
+	long Screen::extStyle()
+	{
+		return this->_extStyle;
 	}
 
 	Geometry::Rectangle Screen::bounds()

@@ -123,6 +123,7 @@ namespace Commanders
 		jwin["title"] = screen->title();
 		jwin["className"] = screen->className();
 		jwin["style"] = (double) screen->style();
+		jwin["extStyle"] = (double) screen->extStyle();
 		jwin["width"] = bounds.width;
 		jwin["height"] = bounds.height;
 		jwin["id"] = screen->id();

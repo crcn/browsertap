@@ -80,8 +80,9 @@ module.exports = Ember.ObjectController.extend({
 	
 
 		for(var style in windowStyles) {
-			console.log("%s: %d", style, w.style & windowStyles[style]);
+			console.log("%s: %d", style, w.style & windowStyles[style] || w.extStyle & windowStyles[style]);
 		}
+
 
 		var isMain = 
 		!w.parent &&
@@ -90,11 +91,20 @@ module.exports = Ember.ObjectController.extend({
 		(w.style & windowStyles.WS_SIZEBOX); //resizable
 		//WS_TABSTOP?? - can accept tabs
 
+
+
+		// console.log(w.extStyle, windowStyles.WS_EX_TOPMOST, w.extStyle & windowStyles.WS_EX_TOPMOST)
+
+
 		if(isMain) {
-			console.log("OKAY")
 			this.set("content.mainWindow", win);
-		} else {
+		} else
+
+		//top most? must be a popup
+		if(!(w.extStyle & windowStyles.WS_EX_TOPMOST) && !(w.style & windowStyles.WS_POPUP)) {
 			this.get("content.commands").emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this._puppeteer.host + "&token=" + this._puppeteer.token + "&screen=" + w.id, width: w.width, height: w.height });
+		} else {
+			// console.log("UNABLE TO POPUP");
 		}
 
 		this._windows.pushObject(win);
