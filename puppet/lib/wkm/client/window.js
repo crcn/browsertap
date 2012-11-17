@@ -26,7 +26,8 @@ module.exports = structr(EventEmitter, {
 	"height",
 	"parent",
 	"mouseEvent",
-	"keybdEvent"
+	"keybdEvent",
+	"changeRecordingQuality"
 	],
 
 	/**
@@ -114,18 +115,29 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"startRecording": function(callback) {
+	"startRecording": function(options, callback) {
+		if(typeof options == "function") {
+			callback = options;
+			options = {};
+		}
 		if(this._output) return callback(null, this._output);
 		var streamId = videoStreamIdGenerator.uid().toUpperCase();
 		var output =  "rtmp://" + this._rtmp.hostname + ":1935/live/" + streamId;
 
 		console.log("recording window to %s", output);
 
-		this._con.execute("startRecordingWindow", { id: this.id, output: "rtmp://"+this._rtmp.hostname+":1935/live/" + streamId });
+		this._con.execute("startRecordingWindow", _.extend(options, { id: this.id, output: "rtmp://"+this._rtmp.hostname+":1935/live/" + streamId }));
 
 		callback(null, this._output = {
 			url: output
 		});
+	},
+
+	/**
+	 */
+
+	"changeRecordingQuality": function(options, callback) {
+		this._con.execute("changeWindowRecordingQuality", _.extend(options, { id: this.id }));
 	},
 
 	/**

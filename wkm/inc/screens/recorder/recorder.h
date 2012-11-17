@@ -2,18 +2,19 @@
 #define SCREENS_RECORDER_H_
 
 #include <string>
+#include "screens/recorder/ffmpeg_context.h"
 
 namespace Screens
 {
 	class Screen;
 	class FFMPeg;
-	class FFmpegContext;
 
 	class Recorder
 	{
 	public:
 		Recorder(Screen* screen);
 		void start(std::string output);
+		FFmpegContext* context();
 		void stop();
 		void update();
 		~Recorder();

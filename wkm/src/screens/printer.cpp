@@ -26,23 +26,10 @@ char* CaptureAnImage(Screens::Screen* screen, Geometry::Rectangle& rect)
     
     // Create a compatible bitmap from the Window DC
     hbmScreen = CreateCompatibleBitmap(hdcWindow, rect.width, rect.height);
-    
-    // RedrawWindow(hWnd, NULL, NULL, RDW_INVALIDATE | RDW_ALLCHILDREN);
-    // InvalidateRgn(hWnd, NULL, false);
-
-    // Sleep(40);
 
     // Select the compatible bitmap into the compatible memory DC.
     SelectObject(hdcMemDC, hbmScreen);
     	
-    // PrintWindow(hWnd, hdcMemDC, 0);
-
-        // std::cout << rect.width << " " << std::endl;
-    HRGN rgn;
-        rgn = CreateRectRgn(0, 0, 2000, 2000);
-
-        SetWindowRgn(GetDesktopWindow(), rgn, false);
-
     //this is ABSOLUTELY needed for many reasons. If we do print-window the user won't see drop menus
     //right clicks, etc.
     if(screen->inFocus()) {
@@ -54,7 +41,6 @@ char* CaptureAnImage(Screens::Screen* screen, Geometry::Rectangle& rect)
     } else {
         PrintWindow(hWnd, hdcMemDC, 0);
     }
-
 
 
     // Get the BITMAP from the HBITMAP

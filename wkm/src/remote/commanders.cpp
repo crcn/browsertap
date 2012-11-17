@@ -55,6 +55,8 @@ namespace Commanders
 		regCommand(stopRecordingWindow, execStopRecordingWindow)
 		regCommand(fireWindowMouseEvent, execFireWindowMouseEvent)
 		regCommand(fireWindowKeybdEvent, execFireWindowKeybdEvent)
+		regCommand(changeWindowRecordingQuality, changeWindowRecordingQual)
+
 
 		#undef regCommand
 
@@ -156,8 +158,6 @@ namespace Commanders
 			jwindows[i] = getScreenData(screens[i]);
 		}
 
-		Json::StyledWriter writer;
-
 		this->dispatchResponse(command->value(), jwindows);
 	}
 
@@ -202,6 +202,11 @@ namespace Commanders
 		this->dispatchResponse(command->value(), getSuccess(screen->focus()));
 	}
 
+	#define ATTACH_CTX(name, method) \
+		val = command->value()["data"][#name]; \
+		if(!val.isNull()) \
+		screen->recorder()->context()->name = val.method();
+
 	void JSONCommander::execStartRecordingWindow(JSONCommand* command)
 	{
 		Screens::Screen* screen = 0;
@@ -211,8 +216,28 @@ namespace Commanders
 		if(out.isNull()) return this->dispatchResponse(command->value(), getSuccess(false));
 		if(!(screen = this->getScreen(command))) return;
 
+		Json::Value val;
+
+		ATTACH_CTX(gop_size, asInt)
+		ATTACH_CTX(qmin, asInt)
+		ATTACH_CTX(qmax, asInt)
+
 		screen->recorder()->start(out.asString());
 	}
+
+	void JSONCommander::changeWindowRecordingQual(JSONCommand* command)
+	{
+		Screens::Screen* screen = 0;
+
+		if(!(screen = this->getScreen(command))) return;
+
+		Json::Value val;
+
+		ATTACH_CTX(gop_size, asInt)
+		ATTACH_CTX(qmin, asInt)
+		ATTACH_CTX(qmax, asInt)
+	}
+
 
 	void JSONCommander::execStopRecordingWindow(JSONCommand* command)
 	{

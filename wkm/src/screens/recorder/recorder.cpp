@@ -36,6 +36,11 @@ namespace Screens
 		this->_recording = true;
 	}
 
+	FFmpegContext* Recorder::context()
+	{
+		return this->_ctx;
+	}
+
 	void Recorder::stop()
 	{
 		this->_recording = false;

@@ -61,13 +61,15 @@ module.exports = Ember.View .extend({
 		onResize();
 		setTimeout(onResize, 1000);
 
-		win.startRecording(function(err, info) {
+		win.startRecording({ qmin: 1, qmax: 11, gop_size: 200 }, function(err, info) {
 			win.set("host", info.url);
+			// win.changeRecordingQuality({ qmin: 30, qmax: 41, gop_size: 200 });
 		});
 
 		var header = $el.find(".hud-header"),
 		drag = false,
 		coords = {};
+
 
 		$el.mousemove(_.throttle(function(e) {
 			win.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_ABSOLUTE | wkmEvents.mouse.MOUSEEVENTF_MOVE, coords = { x: e.offsetX, y: e.offsetY });
