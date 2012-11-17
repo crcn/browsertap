@@ -26,14 +26,27 @@ module.exports = Ember.View .extend({
 		var $hud = this.$().find(".hud-body"),
 		$el = this.$();
 
-
-		$hud.css({left: -padding.left, top: -padding.top, "position": "fixed"})
-		$el.css({opacity:1, width: "100%", height: "100%" });
+		//TODO
+		/*setTimeout(function() {
+			padding = {left:0,right:0,top:18,bottom:0};
+			// $hud.transit({ left: 0, right: $(document).width(), top: 0, height: $(document).height() }, 500, "ease", onResize);
+			onResize();
+		}, 5000);*/
 
 
 		function onResize() {
-			var w = $el.width() + (padding.left + padding.right),
-			h = $el.height() + (padding.top + padding.bottom);
+
+			$el.css({
+				opacity: 1,
+				width: $(document).width() + padding.left + padding.right,
+				height: $(document).height() + padding.top + padding.bottom,
+				left: -padding.left,
+				top: -padding.top,
+				position: "fixed"
+			})
+
+			var w = $el.width(),
+			h = $el.height();
 			$hud.width(w);
 			$hud.height(h);
 
