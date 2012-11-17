@@ -21,7 +21,17 @@ module.exports = Ember.View .extend({
 	"_onWindow": function(win) {
 		if(!win || !this._inserted) return;
 		var padding = getPadding(win),
-		self = this;
+		self = this,
+		baseQual = {
+			qmin: 1,
+			qmax: 11,
+			gop_size: 10
+		},
+		minQual = {
+			qmin: 10,
+			qmax: 51,
+			gop_size: 300
+		}
 
 		var $hud = this.$().find(".hud-body"),
 		$el = this.$();
@@ -55,6 +65,10 @@ module.exports = Ember.View .extend({
 			if(win.width == w && win.height == h) return;
 
 			win.resize(0, 0, w, h);
+		}
+
+		function scaleQuality() {
+			//TODO
 		}
 	
 		$(window).resize(_.debounce(onResize, 200));
