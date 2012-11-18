@@ -11,7 +11,7 @@ module.exports = structr(EventEmitter, {
 	"__construct": function(puppeteer) {
 		this.puppeteer = puppeteer;
 		this.connect();
-		this.options = { app: "chrome 19" };
+		this.options = { app: "chrome 19", open: "http://google.com" };
 	},
 
 	/**
@@ -41,10 +41,11 @@ module.exports = structr(EventEmitter, {
 
 	"step load": function(options, next) {
 		_.extend(this.options, options);
-		if(this.options.open) {
-			this._connectApp();
-		} else {
+
+		if(this.options.screen) {
 			this._connectWindow();
+		} else {
+			this._connectApp();
 		}
 		next();
 	},

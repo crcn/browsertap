@@ -56,9 +56,12 @@ module.exports = structr(EventEmitter, {
 
 		var d = dnode(), self = this;
 		d.on("remote", function(remote) {
+
+			console.log("on remote");
 			//attach the 
 			remote.connectClient({ token: options.token }, function(err, remote) {
 				
+				console.log("on client")
 				if(err) return alert(err.message);
 				self.connection = remote;
 				self._connecting = false;
