@@ -18,7 +18,7 @@ exports.plugin = function(router, mainPlugin, puppeteer) {
 
 
 	loader.on("locationChange", function(location) {
-		router.redirect("/live", { open: location.href, app: loader.app }, false);
+		router.redirect("/live", { open: location.href, app: loader._app }, false);
 	});
 
 }
