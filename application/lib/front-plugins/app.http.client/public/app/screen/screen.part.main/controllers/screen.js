@@ -38,7 +38,10 @@ module.exports = Ember.ObjectController.extend({
 			self._onOpenWindow(window);
 		});
 
-
+		//keep it alive!
+		setInterval(function() {
+			connection.keepAlive();
+		}, 10000);
 
 	},
 
@@ -46,7 +49,7 @@ module.exports = Ember.ObjectController.extend({
 	 */
 
 	"_onOpenWindow": function(win) {
-		this._connection.bindWindow(win.id)
+		this._connection.bindWindow(win.id);
 		this.set("content.mainWindow", Ember.Object.create(win));
 
 		var self = this;

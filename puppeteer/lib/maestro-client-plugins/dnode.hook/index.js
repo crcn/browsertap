@@ -27,7 +27,8 @@ exports.plugin = function(client, httpServer, loader) {
 		var busy = false,
 		events = new EventEmitter(),
 		wrappedPuppet = dsync(puppet),
-		killTimeoutId;
+		killTimeoutId,
+		numConnections = 0;
 
 		pievent(events, puppet, {
 			"wkm.windows": ["open->openWindow", "close->closeWindow"]
@@ -38,9 +39,11 @@ exports.plugin = function(client, httpServer, loader) {
 		//set dnode up so clients can connect
 		var sock = shoe(function(stream) {
 
+			numConnections++;
+
 			var wp = dsync(wrappedPuppet),
 			_closeWindows = [];
-			
+
 			wp.bindWindow = function(id) {
 				_closeWindows.push(id);
 			}
@@ -68,7 +71,7 @@ exports.plugin = function(client, httpServer, loader) {
 				 * ping the machine to keep it alive.
 				 */
 
-				ping: function() {
+				keepAlive: function() {
 					clearTimeout(killTimeout);
 					killTimeout();
 				}
@@ -79,7 +82,7 @@ exports.plugin = function(client, httpServer, loader) {
 			function killTimeout() {
 				killTimeoutId = setTimeout(function() {
 					//kill due to inactivity
-					// d.end();
+					d.end();
 				}, 1000 * 60 * 5);
 
 				//TODO - countdown from time available. Check every 10 minutes or so.
@@ -93,7 +96,7 @@ exports.plugin = function(client, httpServer, loader) {
 			//once the client closes, tell the client that we're not busy
 			d.on("end", function() {
 				logger.info("client close");
-				client.update({ tags: {} });
+				if(!(--numConnections)) client.update({ tags: { } });
 				for(var i = _closeWindows.length; i--;) {
 					console.log("closing %s", _closeWindows[i])
 					puppet.wkm.windows.getWindow(_closeWindows[i], function(err, window) {

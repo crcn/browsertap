@@ -2,7 +2,8 @@ var step = require("step"),
 outcome = require("outcome"),
 _ = require("underscore"),
 logger = require("winston").loggers.get("server.mixin"),
-sprintf = require("sprintf").sprintf;
+sprintf = require("sprintf").sprintf,
+seq = require("seq");
 
 exports.require = ["maestro"];
 exports.plugin = function(maestro) {
@@ -22,58 +23,66 @@ exports.plugin = function(maestro) {
 
 				logger.info("fetching servers");
 				//find the server the account is currently using, or spin up a new one
-				maestro.getServer(_.extend({$or: [{ "tags.owner": account._id }, { "tags.owner": null }]}, query)).exec(this);
+				maestro.getServers(_.extend({$or: [{ "tags.owner": account._id }, { "tags.owner": null }]}, query)).max(5).exec(this);
 			},
 
 			/**
 			 * 
 			 */
 
-			on.success(function(server) {
-				if(server) {
-					logger.info(sprintf("server exists, trying to use it"));
-					server.use(this);
-				} else {
-					this()
-				}
+			on.success(function(servers) {
+
+				var foundServer, next = this;
+
+				logger.info(sprintf("trying to use %d servers", servers.length));
+
+				seq(servers).seqEach(function(server) {
+					if(foundServer && (foundServer.tags.owner || !servers.tags.owner)) return this();
+					var next = this;
+					logger.info(sprintf("trying to use server id=%s", server._id));
+
+					server.use(function(err) {
+						if(err) {
+							logger.warn(sprintf("Unable to use: %s", err.message));
+						} else {
+							foundServer = server;
+						}
+						next();
+					})
+				}).seq(function() {
+					next(null, foundServer);
+				});
 			}),
 
 
 			/**
 			 */
 
-			function(err, server) {
-				console.log(err)
-				if(err && server) {
-					logger.info(sprintf("error connecting server, restarting"));
-					server.restart();
-					this(null, server);
-				} else 
+			on.success(function(server) {
+				var next = this;
 				if(!server) {
-					logger.info(sprintf("no available servers exist, creating one"));
-					var next = this;
+					logger.info(sprintf("creating a new server"));
 					maestro.getServer(query).exec(outcome.error(callback).success(function(server) {
 						if(!server) return callback(new Error("unable to fetch servers"));
-						server.clone(next);
-					}))
+						server.clone(outcome.error(next).success(function(clone) {
+							clone.use(next);
+						}));
+					}));
 				} else {
-					logger.info(sprintf("successfully pinged server, returning"));
-					this(null, server)
+					next(null, server);
 				}
-			},
+			}),
 
 			/**
 			 */
 
-			function(err, server) {
-				if(err) console.log(err.stack);
-				if(server) {
-					logger.info(sprintf("account %s using server id=%s, ns=%s", account._id, server._id, server.ns));
-					server.tags = _.extend({}, server.tags, { owner: account._id });
-					return server.save(this);
-				}
+			on.success(function(server) {
+				logger.info(sprintf("account %s using server id=%s, ns=%s", account._id, server._id, server.ns));
+				server.tags = _.extend({}, server.tags, { owner: account._id });
+				return server.save(this);
+				
 				this(err, server)
-			},
+			}),
 
 			/**
 			 */

@@ -9,7 +9,7 @@ exports.plugin = function(maestro, server, httpAuth, loader) {
 
 		maestro._ServerModel.getUnusedInstance({ imageName: "remote-desktop" }, req.account, function(err, server) {
 			if(err) {
-				console.log("ERR")
+				console.error(err)
 				return res.send(vine.error(err));
 			}
 			res.send(vine.result(server));

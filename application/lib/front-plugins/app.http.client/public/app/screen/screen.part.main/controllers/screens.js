@@ -62,6 +62,12 @@ module.exports = Ember.ObjectController.extend({
 				self._onWindows(windows);
 			});*/	
 		});
+
+		
+		//keep it alive!
+		setInterval(function() {
+			connection.keepAlive();
+		}, 10000);
 	},
 
 	/**

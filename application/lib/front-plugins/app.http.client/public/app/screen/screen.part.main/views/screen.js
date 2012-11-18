@@ -75,7 +75,7 @@ module.exports = Ember.View .extend({
 		onResize();
 		setTimeout(onResize, 1000);
 
-		win.startRecording({ qmin: 1, qmax: 11, gop_size: 200, frame_rate: 25 }, function(err, info) {
+		win.startRecording({ qmin: 1, qmax: 11, gop_size: 60, frame_rate: 15 }, function(err, info) {
 			win.set("host", info.url);
 		});
 
