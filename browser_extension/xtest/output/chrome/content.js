@@ -4,7 +4,7 @@ kango.addMessageListener("openVM", function() {
 	// script.src = "http://maestro.browsertap.com:8080/extension.js"
 	// script.type = "text/javascript";
 	// document.getElementsByTagName("head")[0].appendChild(script);
-	window.location = "http://maestro.browsertap.com:8080/live?url=" + encodeURIComponent(window.location);
+	window.location = "http://maestro.browsertap.com:8080/live?open=" + encodeURIComponent(window.location) + "&app=chrome 19";
 });
 
 kango.addMessageListener("refresh", function() {

@@ -206,8 +206,14 @@ package
 				this._stream.bufferTime = 0; //we're running live.
 				//this._stream.bufferTimeMax = 0;
 				this.openVideo();
+			} else
+			if(event.info.code == "NetStream.Play.StreamNotFound")
+			{
+				flash.utils.setTimeout(this.openStream, 1000);
 			}
 		}
+
+
 
 		public function onMetaData(obj:Object):void 
 		{
