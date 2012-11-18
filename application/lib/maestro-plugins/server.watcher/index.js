@@ -24,7 +24,7 @@ exports.plugin = function(maestro, loader) {
 
 	function destroyServers() {
 		maestro.
-		getServers({ "tags.owner": null, imageName: "remote-desktop", lastUpdatedAt: {$lt: new Date(Date.now() - destroyTime) } }).
+		getServers({ "tags.owner": null, imageName: "remote-desktop", lastUsedAt: {$lt: new Date(Date.now() - destroyTime) } }).
 		min(loader.params("minDesktops") || 1).
 		exec(function(err, servers) {
 			if(servers && servers.length)
