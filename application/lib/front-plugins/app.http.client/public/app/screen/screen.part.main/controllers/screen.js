@@ -38,10 +38,6 @@ module.exports = Ember.ObjectController.extend({
 			self._onOpenWindow(window);
 		});
 
-		//keep it alive!
-		setInterval(function() {
-			connection.keepAlive();
-		}, 10000);
 
 	},
 

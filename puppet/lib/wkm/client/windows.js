@@ -62,6 +62,17 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
+	"findWindowByTitle": function(title, callback) {
+		var self = this;
+		this._con.execute("findWindowByTitle", title, function(err, window) {
+			if(window) return callback(null, sift({ id: window.id }, self._windows).pop());
+			return callback(new Error("window not found"));
+		});
+	},
+
+	/**
+	 */
+
 	"getWindows": function(callback) {
 		callback(null, this._windows);
 	},

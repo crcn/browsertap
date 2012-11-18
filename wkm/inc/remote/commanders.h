@@ -61,6 +61,7 @@ namespace Commanders
 		void execFireWindowKeybdEvent(JSONCommand* event);
 		void changeWindowRecordingQual(JSONCommand* event);
 		void changeCommanderQaul(JSONCommand* event);
+		void execFindWindowByTitle(JSONCommand* event);
 		Screens::Screen* getScreen(JSONCommand* event);
 
 		// void execListProcesses(JSONCommand* event);

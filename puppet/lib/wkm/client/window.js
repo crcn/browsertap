@@ -27,7 +27,8 @@ module.exports = structr(EventEmitter, {
 	"parent",
 	"mouseEvent",
 	"keybdEvent",
-	"changeRecordingQuality"
+	"changeRecordingQuality",
+	"bindProxy"
 	],
 
 	/**
@@ -85,6 +86,29 @@ module.exports = structr(EventEmitter, {
 		this._con.execute("fireWindowMouseEvent", { id: this.id, x: coords.x, y: coords.y, dwFlags: dwFlags, dwData: dwData || 0 });
 	},
 
+
+	/**
+	 */
+
+	"setProxy": function(proxy) {
+		this.emit("proxy", this._proxy = proxy);
+	},
+
+	/**
+	 */
+
+	"getProxy": function(callback) {
+		if(this._proxy) return callback(this._proxy);
+		this.once("proxy", callback);
+	},
+
+	/**
+	 */
+
+	"bindProxy": function(callback) {
+		if(this._proxy) callback(this._proxy);
+		this.on("proxy", callback);
+	},
 
 	/**
 	 */

@@ -1,0 +1,918 @@
+info it worked if it ends with ok
+verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
+verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+verbose cli   'i',
+verbose cli   'middlefiddle',
+verbose cli   '-g' ]
+info using npm@1.1.9
+info using node@v0.8.14
+verbose C:\Program Files\nodejs\\node.exe node symlink
+verbose config file C:\Users\Administrator\.npmrc
+verbose config file C:\Program Files\nodejs\etc\npmrc
+verbose config file C:\Program Files\nodejs\node_modules\npm\npmrc
+verbose mkdir done: C:\Program Files\nodejs 755
+verbose cache add [ 'middlefiddle', null ]
+silly cache add: name, spec, args [ undefined, 'middlefiddle', [ 'middlefiddle', null ] ]
+verbose parsed url { pathname: 'middlefiddle',
+verbose parsed url   path: 'middlefiddle',
+verbose parsed url   href: 'middlefiddle' }
+verbose addNamed [ 'middlefiddle', '' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'middlefiddle', '', false ]
+verbose raw, before any munging middlefiddle
+verbose url resolving [ 'https://registry.npmjs.org/', './middlefiddle' ]
+verbose url resolved https://registry.npmjs.org/middlefiddle
+http GET https://registry.npmjs.org/middlefiddle
+http 200 https://registry.npmjs.org/middlefiddle
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"5QQUDF3A7SFOJ5F5O8G72FA30"',
+silly get cb     date: 'Sun, 18 Nov 2012 05:08:12 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '34877' } ]
+verbose mkdir (expected) error ENOENT, stat 'C:\Users\Administrator\AppData\Roaming\npm-cache\middlefiddle'
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\middlefiddle 755
+silly name, range, hasData 2 [ 'middlefiddle', '', true ]
+silly versions [ 'middlefiddle', [ '0.3.0', '0.3.1', '0.3.2', '0.3.3' ] ]
+verbose bin dist [ '0.8-ares1.7.5-DEV-evundefined-openssl1.0.0f-v83.11.10.25-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '333a263591d69546b789177fde39f0366a226b13',
+verbose bin dist     tarball: 'http://registry.npmjs.org/middlefiddle/-/middlefiddle-0.3.3.tgz' } ]
+verbose addRemoteTarball [ 'https://registry.npmjs.org/middlefiddle/-/middlefiddle-0.3.3.tgz',
+verbose addRemoteTarball   '333a263591d69546b789177fde39f0366a226b13' ]
+verbose mkdir (expected) error ENOENT, stat 'C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681'
+verbose mkdir (expected) error ENOENT, stat 'C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215319681-0.926926123443991'
+verbose mkdir done: C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215319681-0.926926123443991 755
+verbose fetch to C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215319681-0.926926123443991\tmp.tgz
+verbose mkdir done: C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215319681-0.926926123443991 755
+http GET https://registry.npmjs.org/middlefiddle/-/middlefiddle-0.3.3.tgz
+http 200 https://registry.npmjs.org/middlefiddle/-/middlefiddle-0.3.3.tgz
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 2023
+info shasum 333a263591d69546b789177fde39f0366a226b13
+info shasum C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215319681-0.926926123443991\tmp.tgz
+verbose mkdir (expected) error ENOENT, stat 'C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215319681-0.926926123443991\package'
+verbose mkdir done: C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215319681-0.926926123443991\package 755
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215319681-0.926926123443991\package
+silly gunzTarPerm modes [ '755', '644' ]
+verbose gunzed C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215319681-0.926926123443991\package
+verbose caching C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215319681-0.926926123443991\package\package.json
+verbose loadDefaults middlefiddle@0.3.3
+verbose tarball contents [ 'package', 'tmp.tgz' ]
+verbose from cache C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215319681-0.926926123443991\package\package.json
+verbose pack C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215319681-0.926926123443991\package
+verbose pack C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215319681-0.926926123443991\package C:\Users\Administrator\AppData\Roaming\npm-cache\middlefiddle\0.3.3\package.tgz
+silly makeList C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215319681-0.926926123443991\package
+silly dir, dirLen [ 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\npm-1353215319681\\1353215319681-0.926926123443991\\package',
+silly dir, dirLen   95 ]
+verbose tarball C:\Users\Administrator\AppData\Roaming\npm-cache\middlefiddle\0.3.3\package.tgz
+verbose parent C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215319681-0.926926123443991\package
+verbose mkdir (expected) error ENOENT, stat 'C:\Users\Administrator\AppData\Roaming\npm-cache\middlefiddle\0.3.3\package'
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\middlefiddle\0.3.3\package 755
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget C:\Users\Administrator\AppData\Roaming\npm-cache\middlefiddle\0.3.3\package
+silly gunzTarPerm modes [ '755', '644' ]
+silly modified mode [ '.gitmodules', 438, 420 ]
+silly modified mode [ '.middlefiddle/', 438, 493 ]
+silly modified mode [ '.middlefiddle/config.json', 438, 420 ]
+silly modified mode [ '.middlefiddle/fiddles/', 438, 493 ]
+silly modified mode [ '.middlefiddle/fiddles/add_csp.coffee', 438, 420 ]
+silly modified mode [ '.middlefiddle/sites/', 438, 493 ]
+silly modified mode [ '.middlefiddle/sites/default.coffee', 438, 420 ]
+silly modified mode [ '.middlefiddle/sites/ft.com.coffee', 438, 420 ]
+silly modified mode [ '.middlefiddle/sites/github.com.coffee', 438, 420 ]
+silly modified mode [ '.middlefiddle/sites/google.com.coffee', 438, 420 ]
+silly modified mode [ '.middlefiddle/sites/httpbin.org.coffee', 438, 420 ]
+silly modified mode [ '.middlefiddle/sites/snip.it.coffee', 438, 420 ]
+silly modified mode [ '.middlefiddle/sites/soundcloud.com.coffee', 438, 420 ]
+silly modified mode [ '.npmignore', 438, 420 ]
+silly modified mode [ 'bin/', 438, 493 ]
+silly modified mode [ 'bin/certgen.sh', 438, 420 ]
+silly modified mode [ 'bin/middlefiddle', 438, 420 ]
+silly modified mode [ 'docs/', 438, 493 ]
+silly modified mode [ 'docs/.nojekyll', 438, 420 ]
+silly modified mode [ 'docs/images/', 438, 493 ]
+silly modified mode [ 'docs/images/RequestDetails.jpg', 438, 420 ]
+silly modified mode [ 'docs/images/RequestLogger.jpg', 438, 420 ]
+silly modified mode [ 'LICENSE', 438, 420 ]
+silly modified mode [ 'package.json', 438, 420 ]
+silly modified mode [ 'README.md', 438, 420 ]
+silly modified mode [ 'setup.js', 438, 420 ]
+silly modified mode [ 'src/', 438, 493 ]
+silly modified mode [ 'src/cert_generator.coffee', 438, 420 ]
+silly modified mode [ 'src/command.coffee', 438, 420 ]
+silly modified mode [ 'src/config.coffee', 438, 420 ]
+silly modified mode [ 'src/fiddles/', 438, 493 ]
+silly modified mode [ 'src/fiddles/logger.coffee', 438, 420 ]
+silly modified mode [ 'src/fiddles/sites.coffee', 438, 420 ]
+silly modified mode [ 'src/fiddles/tor.coffee', 438, 420 ]
+silly modified mode [ 'src/fiddles/user_agent.coffee', 438, 420 ]
+silly modified mode [ 'src/http_proxy.coffee', 438, 420 ]
+silly modified mode [ 'src/index.coffee', 438, 420 ]
+silly modified mode [ 'src/logger.coffee', 438, 420 ]
+silly modified mode [ 'src/middleware/', 438, 493 ]
+silly modified mode [ 'src/middleware/console_logger.coffee', 438, 420 ]
+silly modified mode [ 'src/middleware/live_logger/', 438, 493 ]
+silly modified mode [ 'src/middleware/live_logger/index.html', 438, 420 ]
+silly modified mode [ 'src/middleware/live_logger/public/', 438, 493 ]
+silly modified mode [ 'src/middleware/live_logger/public/app.js', 438, 420 ]
+silly modified mode [ 'src/middleware/live_logger/public/backbone-min.js', 438, 420 ]
+silly modified mode [ 'src/middleware/live_logger/public/images/', 438, 493 ]
+silly modified mode [ 'src/middleware/live_logger/public/images/background.png',
+silly modified mode   438,
+silly modified mode   420 ]
+silly modified mode [ 'src/middleware/live_logger/public/jquery.min.js', 438, 420 ]
+silly modified mode [ 'src/middleware/live_logger/public/jquery.mustache.js',
+silly modified mode   438,
+silly modified mode   420 ]
+silly modified mode [ 'src/middleware/live_logger/public/json2.js', 438, 420 ]
+silly modified mode [ 'src/middleware/live_logger/public/stylesheets/', 438, 493 ]
+silly modified mode [ 'src/middleware/live_logger/public/stylesheets/default.css',
+silly modified mode   438,
+silly modified mode   420 ]
+silly modified mode [ 'src/middleware/live_logger/public/stylesheets/reset.css',
+silly modified mode   438,
+silly modified mode   420 ]
+silly modified mode [ 'src/middleware/live_logger/public/underscore-min.js',
+silly modified mode   438,
+silly modified mode   420 ]
+silly modified mode [ 'src/middleware/live_logger.coffee', 438, 420 ]
+silly modified mode [ 'src/middleware/replace.coffee', 438, 420 ]
+silly modified mode [ 'src/middleware/user_agent.coffee', 438, 420 ]
+silly modified mode [ 'src/proxy.coffee', 438, 420 ]
+silly modified mode [ 'src/session_filter.coffee', 438, 420 ]
+silly modified mode [ 'src/utils/', 438, 493 ]
+silly modified mode [ 'src/utils/ringbuffer.coffee', 438, 420 ]
+silly modified mode [ 'test/', 438, 493 ]
+silly modified mode [ 'test/helpers/', 438, 493 ]
+silly modified mode [ 'test/helpers/fake_server.coffee', 438, 420 ]
+silly modified mode [ 'test/helpers/mock_request.coffee', 438, 420 ]
+silly modified mode [ 'test/helpers/public/', 438, 493 ]
+silly modified mode [ 'test/helpers/public/index.html', 438, 420 ]
+silly modified mode [ 'test/http_proxy_test.coffee', 438, 420 ]
+silly modified mode [ 'test/session_filter_test.coffee', 438, 420 ]
+silly modified mode [ 'test/test_project.coffee', 438, 420 ]
+verbose gunzed C:\Users\Administrator\AppData\Roaming\npm-cache\middlefiddle\0.3.3\package
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\middlefiddle\0.3.3\package\package.json
+verbose loadDefaults middlefiddle@0.3.3
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 1756
+info shasum dba59ffead7c25680dbe0c32137bb33e75e71a2e
+info shasum C:\Users\Administrator\AppData\Roaming\npm-cache\middlefiddle\0.3.3\package.tgz
+verbose from cache C:\Users\Administrator\AppData\Roaming\npm-cache\middlefiddle\0.3.3\package\package.json
+verbose chmod C:\Users\Administrator\AppData\Roaming\npm-cache\middlefiddle\0.3.3\package.tgz 644
+silly skipping chown for windows C:\Users\Administrator\AppData\Roaming\npm-cache\middlefiddle\0.3.3\package.tgz
+silly resolved [ { name: 'middlefiddle',
+silly resolved     version: '0.3.3',
+silly resolved     description: 'Middleware as a proxy for HTTP/HTTPS traffic',
+silly resolved     keywords: [ 'proxy', 'middleware', 'connect' ],
+silly resolved     repository: { type: 'git', url: 'git://github.com/mdp/middlefiddle.git' },
+silly resolved     author: 
+silly resolved      { name: 'Mark Percival',
+silly resolved        email: 'mark@markpercival.us',
+silly resolved        url: 'http://markpercival.us' },
+silly resolved     dependencies: 
+silly resolved      { connect: '~>1.8.7',
+silly resolved        'coffee-script': '>=1.3.0',
+silly resolved        underscore: '>=1.2.2',
+silly resolved        colors: '>=0.5.1',
+silly resolved        'chain-gang': '1.0.0-beta4',
+silly resolved        express: '>=2.5.1',
+silly resolved        optimist: '>=0.3.0',
+silly resolved        'socket.io': '>=0.8.7',
+silly resolved        mkdirp: '>=0.0.0' },
+silly resolved     scripts: 
+silly resolved      { postinstall: 'node setup.js postinstall',
+silly resolved        test: 'node setup.js test' },
+silly resolved     devDependencies: { mocha: '>=0.0.0' },
+silly resolved     bin: { middlefiddle: './bin/middlefiddle' },
+silly resolved     main: './src/index.coffee',
+silly resolved     engines: { node: '>= 0.6.0' },
+silly resolved     _id: 'middlefiddle@0.3.3',
+silly resolved     optionalDependencies: {},
+silly resolved     _engineSupported: true,
+silly resolved     _npmVersion: '1.1.9',
+silly resolved     _nodeVersion: 'v0.8.14',
+silly resolved     _defaultsLoaded: true,
+silly resolved     dist: { shasum: 'dba59ffead7c25680dbe0c32137bb33e75e71a2e' },
+silly resolved     _from: 'middlefiddle' } ]
+info into C:\Program Files\nodejs middlefiddle@0.3.3
+info installOne middlefiddle@0.3.3
+verbose from cache C:\Users\Administrator\AppData\Roaming\npm-cache\middlefiddle\0.3.3\package\package.json
+info unbuild C:\Program Files\nodejs\node_modules\middlefiddle
+verbose mkdir (expected) error ENOENT, stat 'C:\Program Files\nodejs\node_modules\middlefiddle'
+verbose mkdir done: C:\Program Files\nodejs\node_modules\middlefiddle 755
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget C:\Program Files\nodejs\node_modules\middlefiddle
+silly gunzTarPerm modes [ '755', '644' ]
+silly modified mode [ '.gitmodules', 438, 420 ]
+silly modified mode [ '.middlefiddle/', 438, 493 ]
+silly modified mode [ '.middlefiddle/config.json', 438, 420 ]
+silly modified mode [ '.middlefiddle/fiddles/', 438, 493 ]
+silly modified mode [ '.middlefiddle/fiddles/add_csp.coffee', 438, 420 ]
+silly modified mode [ '.middlefiddle/sites/', 438, 493 ]
+silly modified mode [ '.middlefiddle/sites/default.coffee', 438, 420 ]
+silly modified mode [ '.middlefiddle/sites/ft.com.coffee', 438, 420 ]
+silly modified mode [ '.middlefiddle/sites/github.com.coffee', 438, 420 ]
+silly modified mode [ '.middlefiddle/sites/google.com.coffee', 438, 420 ]
+silly modified mode [ '.middlefiddle/sites/httpbin.org.coffee', 438, 420 ]
+silly modified mode [ '.middlefiddle/sites/snip.it.coffee', 438, 420 ]
+silly modified mode [ '.middlefiddle/sites/soundcloud.com.coffee', 438, 420 ]
+silly modified mode [ '.npmignore', 438, 420 ]
+silly modified mode [ 'bin/', 438, 493 ]
+silly modified mode [ 'bin/certgen.sh', 438, 420 ]
+silly modified mode [ 'bin/middlefiddle', 438, 420 ]
+silly modified mode [ 'docs/', 438, 493 ]
+silly modified mode [ 'docs/.nojekyll', 438, 420 ]
+silly modified mode [ 'docs/images/', 438, 493 ]
+silly modified mode [ 'docs/images/RequestDetails.jpg', 438, 420 ]
+silly modified mode [ 'docs/images/RequestLogger.jpg', 438, 420 ]
+silly modified mode [ 'LICENSE', 438, 420 ]
+silly modified mode [ 'package.json', 438, 420 ]
+silly modified mode [ 'README.md', 438, 420 ]
+silly modified mode [ 'setup.js', 438, 420 ]
+silly modified mode [ 'src/', 438, 493 ]
+silly modified mode [ 'src/cert_generator.coffee', 438, 420 ]
+silly modified mode [ 'src/command.coffee', 438, 420 ]
+silly modified mode [ 'src/config.coffee', 438, 420 ]
+silly modified mode [ 'src/fiddles/', 438, 493 ]
+silly modified mode [ 'src/fiddles/logger.coffee', 438, 420 ]
+silly modified mode [ 'src/fiddles/sites.coffee', 438, 420 ]
+silly modified mode [ 'src/fiddles/tor.coffee', 438, 420 ]
+silly modified mode [ 'src/fiddles/user_agent.coffee', 438, 420 ]
+silly modified mode [ 'src/http_proxy.coffee', 438, 420 ]
+silly modified mode [ 'src/index.coffee', 438, 420 ]
+silly modified mode [ 'src/logger.coffee', 438, 420 ]
+silly modified mode [ 'src/middleware/', 438, 493 ]
+silly modified mode [ 'src/middleware/console_logger.coffee', 438, 420 ]
+silly modified mode [ 'src/middleware/live_logger/', 438, 493 ]
+silly modified mode [ 'src/middleware/live_logger/index.html', 438, 420 ]
+silly modified mode [ 'src/middleware/live_logger/public/', 438, 493 ]
+silly modified mode [ 'src/middleware/live_logger/public/app.js', 438, 420 ]
+silly modified mode [ 'src/middleware/live_logger/public/backbone-min.js', 438, 420 ]
+silly modified mode [ 'src/middleware/live_logger/public/images/', 438, 493 ]
+silly modified mode [ 'src/middleware/live_logger/public/images/background.png',
+silly modified mode   438,
+silly modified mode   420 ]
+silly modified mode [ 'src/middleware/live_logger/public/jquery.min.js', 438, 420 ]
+silly modified mode [ 'src/middleware/live_logger/public/jquery.mustache.js',
+silly modified mode   438,
+silly modified mode   420 ]
+silly modified mode [ 'src/middleware/live_logger/public/json2.js', 438, 420 ]
+silly modified mode [ 'src/middleware/live_logger/public/stylesheets/', 438, 493 ]
+silly modified mode [ 'src/middleware/live_logger/public/stylesheets/default.css',
+silly modified mode   438,
+silly modified mode   420 ]
+silly modified mode [ 'src/middleware/live_logger/public/stylesheets/reset.css',
+silly modified mode   438,
+silly modified mode   420 ]
+silly modified mode [ 'src/middleware/live_logger/public/underscore-min.js',
+silly modified mode   438,
+silly modified mode   420 ]
+silly modified mode [ 'src/middleware/live_logger.coffee', 438, 420 ]
+silly modified mode [ 'src/middleware/replace.coffee', 438, 420 ]
+silly modified mode [ 'src/middleware/user_agent.coffee', 438, 420 ]
+silly modified mode [ 'src/proxy.coffee', 438, 420 ]
+silly modified mode [ 'src/session_filter.coffee', 438, 420 ]
+silly modified mode [ 'src/utils/', 438, 493 ]
+silly modified mode [ 'src/utils/ringbuffer.coffee', 438, 420 ]
+silly modified mode [ 'test/', 438, 493 ]
+silly modified mode [ 'test/helpers/', 438, 493 ]
+silly modified mode [ 'test/helpers/fake_server.coffee', 438, 420 ]
+silly modified mode [ 'test/helpers/mock_request.coffee', 438, 420 ]
+silly modified mode [ 'test/helpers/public/', 438, 493 ]
+silly modified mode [ 'test/helpers/public/index.html', 438, 420 ]
+silly modified mode [ 'test/http_proxy_test.coffee', 438, 420 ]
+silly modified mode [ 'test/session_filter_test.coffee', 438, 420 ]
+silly modified mode [ 'test/test_project.coffee', 438, 420 ]
+verbose gunzed C:\Program Files\nodejs\node_modules\middlefiddle
+verbose caching C:\Program Files\nodejs\node_modules\middlefiddle\package.json
+verbose loadDefaults middlefiddle@0.3.3
+info preinstall middlefiddle@0.3.3
+verbose from cache C:\Program Files\nodejs\node_modules\middlefiddle\package.json
+verbose readDependencies: using package.json deps
+verbose from cache C:\Program Files\nodejs\node_modules\middlefiddle\package.json
+verbose readDependencies: using package.json deps
+verbose cache add [ 'connect@~>1.8.7', null ]
+silly cache add: name, spec, args [ undefined, 'connect@~>1.8.7', [ 'connect@~>1.8.7', null ] ]
+verbose parsed url { pathname: 'connect@~%3E1.8.7',
+verbose parsed url   path: 'connect@~%3E1.8.7',
+verbose parsed url   href: 'connect@~%3E1.8.7' }
+silly cache add: name, spec, args [ 'connect', '~>1.8.7', [ 'connect', '~>1.8.7' ] ]
+verbose parsed url { pathname: '~%3E1.8.7', path: '~%3E1.8.7', href: '~%3E1.8.7' }
+verbose addNamed [ 'connect', '~>1.8.7' ]
+verbose addNamed [ null, '>=1.8.7- <1.9.0-' ]
+silly name, range, hasData [ 'connect', '>=1.8.7- <1.9.0-', false ]
+verbose cache add [ 'coffee-script@>=1.3.0', null ]
+silly cache add: name, spec, args [ undefined,
+silly cache add: name, spec, args   'coffee-script@>=1.3.0',
+silly cache add: name, spec, args   [ 'coffee-script@>=1.3.0', null ] ]
+verbose parsed url { pathname: 'coffee-script@%3E=1.3.0',
+verbose parsed url   path: 'coffee-script@%3E=1.3.0',
+verbose parsed url   href: 'coffee-script@%3E=1.3.0' }
+silly cache add: name, spec, args [ 'coffee-script', '>=1.3.0', [ 'coffee-script', '>=1.3.0' ] ]
+verbose parsed url { pathname: '%3E=1.3.0', path: '%3E=1.3.0', href: '%3E=1.3.0' }
+verbose addNamed [ 'coffee-script', '>=1.3.0' ]
+verbose addNamed [ null, '>=1.3.0' ]
+silly name, range, hasData [ 'coffee-script', '>=1.3.0', false ]
+verbose cache add [ 'underscore@>=1.2.2', null ]
+silly cache add: name, spec, args [ undefined,
+silly cache add: name, spec, args   'underscore@>=1.2.2',
+silly cache add: name, spec, args   [ 'underscore@>=1.2.2', null ] ]
+verbose parsed url { pathname: 'underscore@%3E=1.2.2',
+verbose parsed url   path: 'underscore@%3E=1.2.2',
+verbose parsed url   href: 'underscore@%3E=1.2.2' }
+silly cache add: name, spec, args [ 'underscore', '>=1.2.2', [ 'underscore', '>=1.2.2' ] ]
+verbose parsed url { pathname: '%3E=1.2.2', path: '%3E=1.2.2', href: '%3E=1.2.2' }
+verbose addNamed [ 'underscore', '>=1.2.2' ]
+verbose addNamed [ null, '>=1.2.2' ]
+silly name, range, hasData [ 'underscore', '>=1.2.2', false ]
+verbose cache add [ 'colors@>=0.5.1', null ]
+silly cache add: name, spec, args [ undefined, 'colors@>=0.5.1', [ 'colors@>=0.5.1', null ] ]
+verbose parsed url { pathname: 'colors@%3E=0.5.1',
+verbose parsed url   path: 'colors@%3E=0.5.1',
+verbose parsed url   href: 'colors@%3E=0.5.1' }
+silly cache add: name, spec, args [ 'colors', '>=0.5.1', [ 'colors', '>=0.5.1' ] ]
+verbose parsed url { pathname: '%3E=0.5.1', path: '%3E=0.5.1', href: '%3E=0.5.1' }
+verbose addNamed [ 'colors', '>=0.5.1' ]
+verbose addNamed [ null, '>=0.5.1' ]
+silly name, range, hasData [ 'colors', '>=0.5.1', false ]
+verbose cache add [ 'chain-gang@1.0.0-beta4', null ]
+silly cache add: name, spec, args [ undefined,
+silly cache add: name, spec, args   'chain-gang@1.0.0-beta4',
+silly cache add: name, spec, args   [ 'chain-gang@1.0.0-beta4', null ] ]
+verbose parsed url { pathname: 'chain-gang@1.0.0-beta4',
+verbose parsed url   path: 'chain-gang@1.0.0-beta4',
+verbose parsed url   href: 'chain-gang@1.0.0-beta4' }
+silly cache add: name, spec, args [ 'chain-gang', '1.0.0-beta4', [ 'chain-gang', '1.0.0-beta4' ] ]
+verbose parsed url { pathname: '1.0.0-beta4',
+verbose parsed url   path: '1.0.0-beta4',
+verbose parsed url   href: '1.0.0-beta4' }
+verbose addNamed [ 'chain-gang', '1.0.0-beta4' ]
+verbose addNamed [ '1.0.0-beta4', '1.0.0-beta4' ]
+verbose cache add [ 'express@>=2.5.1', null ]
+silly cache add: name, spec, args [ undefined, 'express@>=2.5.1', [ 'express@>=2.5.1', null ] ]
+verbose parsed url { pathname: 'express@%3E=2.5.1',
+verbose parsed url   path: 'express@%3E=2.5.1',
+verbose parsed url   href: 'express@%3E=2.5.1' }
+silly cache add: name, spec, args [ 'express', '>=2.5.1', [ 'express', '>=2.5.1' ] ]
+verbose parsed url { pathname: '%3E=2.5.1', path: '%3E=2.5.1', href: '%3E=2.5.1' }
+verbose addNamed [ 'express', '>=2.5.1' ]
+verbose addNamed [ null, '>=2.5.1' ]
+silly name, range, hasData [ 'express', '>=2.5.1', false ]
+verbose cache add [ 'optimist@>=0.3.0', null ]
+silly cache add: name, spec, args [ undefined, 'optimist@>=0.3.0', [ 'optimist@>=0.3.0', null ] ]
+verbose parsed url { pathname: 'optimist@%3E=0.3.0',
+verbose parsed url   path: 'optimist@%3E=0.3.0',
+verbose parsed url   href: 'optimist@%3E=0.3.0' }
+silly cache add: name, spec, args [ 'optimist', '>=0.3.0', [ 'optimist', '>=0.3.0' ] ]
+verbose parsed url { pathname: '%3E=0.3.0', path: '%3E=0.3.0', href: '%3E=0.3.0' }
+verbose addNamed [ 'optimist', '>=0.3.0' ]
+verbose addNamed [ null, '>=0.3.0' ]
+silly name, range, hasData [ 'optimist', '>=0.3.0', false ]
+verbose cache add [ 'socket.io@>=0.8.7', null ]
+silly cache add: name, spec, args [ undefined, 'socket.io@>=0.8.7', [ 'socket.io@>=0.8.7', null ] ]
+verbose parsed url { pathname: 'socket.io@%3E=0.8.7',
+verbose parsed url   path: 'socket.io@%3E=0.8.7',
+verbose parsed url   href: 'socket.io@%3E=0.8.7' }
+silly cache add: name, spec, args [ 'socket.io', '>=0.8.7', [ 'socket.io', '>=0.8.7' ] ]
+verbose parsed url { pathname: '%3E=0.8.7', path: '%3E=0.8.7', href: '%3E=0.8.7' }
+verbose addNamed [ 'socket.io', '>=0.8.7' ]
+verbose addNamed [ null, '>=0.8.7' ]
+silly name, range, hasData [ 'socket.io', '>=0.8.7', false ]
+verbose cache add [ 'mkdirp@>=0.0.0', null ]
+silly cache add: name, spec, args [ undefined, 'mkdirp@>=0.0.0', [ 'mkdirp@>=0.0.0', null ] ]
+verbose parsed url { pathname: 'mkdirp@%3E=0.0.0',
+verbose parsed url   path: 'mkdirp@%3E=0.0.0',
+verbose parsed url   href: 'mkdirp@%3E=0.0.0' }
+silly cache add: name, spec, args [ 'mkdirp', '>=0.0.0', [ 'mkdirp', '>=0.0.0' ] ]
+verbose parsed url { pathname: '%3E=0.0.0', path: '%3E=0.0.0', href: '%3E=0.0.0' }
+verbose addNamed [ 'mkdirp', '>=0.0.0' ]
+verbose addNamed [ null, '>=0.0.0' ]
+silly name, range, hasData [ 'mkdirp', '>=0.0.0', false ]
+verbose raw, before any munging connect
+verbose url resolving [ 'https://registry.npmjs.org/', './connect' ]
+verbose url resolved https://registry.npmjs.org/connect
+http GET https://registry.npmjs.org/connect
+verbose raw, before any munging chain-gang/1.0.0-beta4
+verbose url resolving [ 'https://registry.npmjs.org/', './chain-gang/1.0.0-beta4' ]
+verbose url resolved https://registry.npmjs.org/chain-gang/1.0.0-beta4
+http GET https://registry.npmjs.org/chain-gang/1.0.0-beta4
+verbose raw, before any munging socket.io
+verbose url resolving [ 'https://registry.npmjs.org/', './socket.io' ]
+verbose url resolved https://registry.npmjs.org/socket.io
+http GET https://registry.npmjs.org/socket.io
+verbose raw, before any munging coffee-script
+verbose url resolving [ 'https://registry.npmjs.org/', './coffee-script' ]
+verbose url resolved https://registry.npmjs.org/coffee-script
+verbose etag "ESZQCOM8YM1Y9HYG857TA69QC"
+http GET https://registry.npmjs.org/coffee-script
+verbose raw, before any munging underscore
+verbose url resolving [ 'https://registry.npmjs.org/', './underscore' ]
+verbose url resolved https://registry.npmjs.org/underscore
+verbose etag "AL6YSVD9CG7JSUCMDDIXI8S2T"
+http GET https://registry.npmjs.org/underscore
+verbose raw, before any munging colors
+verbose url resolving [ 'https://registry.npmjs.org/', './colors' ]
+verbose url resolved https://registry.npmjs.org/colors
+verbose etag "1K6WW6RVIO8OOUJFDXZ68Z25Z"
+http GET https://registry.npmjs.org/colors
+verbose raw, before any munging express
+verbose url resolving [ 'https://registry.npmjs.org/', './express' ]
+verbose url resolved https://registry.npmjs.org/express
+verbose etag "6Y15RTW2DSI1Z4QA4N698IPM9"
+http GET https://registry.npmjs.org/express
+verbose raw, before any munging optimist
+verbose url resolving [ 'https://registry.npmjs.org/', './optimist' ]
+verbose url resolved https://registry.npmjs.org/optimist
+verbose etag "3T2VRAGARMNNMM78O3SHRX2OV"
+http GET https://registry.npmjs.org/optimist
+verbose raw, before any munging mkdirp
+verbose url resolving [ 'https://registry.npmjs.org/', './mkdirp' ]
+verbose url resolved https://registry.npmjs.org/mkdirp
+verbose etag "4VY93YHIIJ11G0NNP12CLD9IC"
+http GET https://registry.npmjs.org/mkdirp
+http 200 https://registry.npmjs.org/chain-gang/1.0.0-beta4
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"6J6OGHWWPAT6K9VW8B1Z2D5ZV"',
+silly get cb     date: 'Sun, 18 Nov 2012 05:08:16 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '669' } ]
+verbose mkdir (expected) error ENOENT, stat 'C:\Users\Administrator\AppData\Roaming\npm-cache\chain-gang'
+verbose mkdir (expected) error ENOENT, stat 'C:\Users\Administrator\AppData\Roaming\npm-cache\chain-gang\1.0.0-beta4'
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\chain-gang\1.0.0-beta4 755
+verbose bin dist [ '0.8-ares1.7.5-DEV-evundefined-openssl1.0.0f-v83.11.10.25-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: 'c7820d47046aa4325059b07258f5009f0436d17c',
+verbose bin dist     tarball: 'http://registry.npmjs.org/chain-gang/-/chain-gang-1.0.0-beta4.tgz' } ]
+verbose addRemoteTarball [ 'https://registry.npmjs.org/chain-gang/-/chain-gang-1.0.0-beta4.tgz',
+verbose addRemoteTarball   'c7820d47046aa4325059b07258f5009f0436d17c' ]
+verbose mkdir (expected) error ENOENT, stat 'C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215323210-0.1036738557741046'
+verbose mkdir done: C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215323210-0.1036738557741046 755
+verbose fetch to C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215323210-0.1036738557741046\tmp.tgz
+verbose mkdir done: C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215323210-0.1036738557741046 755
+http GET https://registry.npmjs.org/chain-gang/-/chain-gang-1.0.0-beta4.tgz
+http 200 https://registry.npmjs.org/coffee-script
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"BSCKRRKR6Y5GYAYRSMRVJKV1C"',
+silly get cb     date: 'Sun, 18 Nov 2012 05:08:16 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '21222' } ]
+http 304 https://registry.npmjs.org/colors
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"1K6WW6RVIO8OOUJFDXZ68Z25Z"',
+silly get cb     date: 'Sun, 18 Nov 2012 05:08:16 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag colors from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\coffee-script 755
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\colors 755
+silly name, range, hasData 2 [ 'coffee-script', '>=1.3.0', true ]
+silly versions [ 'coffee-script',
+silly versions   [ '0.7.0',
+silly versions     '0.7.1',
+silly versions     '0.7.2',
+silly versions     '0.9.0',
+silly versions     '0.9.1',
+silly versions     '0.9.2',
+silly versions     '0.9.3',
+silly versions     '0.9.4',
+silly versions     '0.9.5',
+silly versions     '0.9.6',
+silly versions     '1.0.0',
+silly versions     '1.0.1',
+silly versions     '1.1.0',
+silly versions     '1.1.1',
+silly versions     '1.1.2',
+silly versions     '1.1.3',
+silly versions     '1.2.0',
+silly versions     '1.3.0',
+silly versions     '1.3.1',
+silly versions     '1.3.2',
+silly versions     '1.3.3',
+silly versions     '1.4.0' ] ]
+verbose bin dist [ '0.8-ares1.7.5-DEV-evundefined-openssl1.0.0f-v83.11.10.25-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '5e3bc8aac26c01a8e27bf107722c5655f5ad7d36',
+verbose bin dist     tarball: 'http://registry.npmjs.org/coffee-script/-/coffee-script-1.4.0.tgz' } ]
+silly name, range, hasData 2 [ 'colors', '>=0.5.1', true ]
+silly versions [ 'colors', [ '0.3.0', '0.5.0', '0.5.1', '0.6.0', '0.6.0-1' ] ]
+verbose bin dist [ '0.8-ares1.7.5-DEV-evundefined-openssl1.0.0f-v83.11.10.25-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '6dbb68ceb8bc60f2b313dcc5ce1599f06d19e67a',
+verbose bin dist     tarball: 'http://registry.npmjs.org/colors/-/colors-0.6.0-1.tgz' } ]
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\coffee-script\1.4.0\package\package.json
+verbose loadDefaults coffee-script@1.4.0
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\colors\0.6.0-1\package\package.json
+verbose loadDefaults colors@0.6.0-1
+http 200 https://registry.npmjs.org/underscore
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"2X87RQI1DHE7654UVO0HJG7KI"',
+silly get cb     date: 'Sun, 18 Nov 2012 05:08:16 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '27750' } ]
+http 304 https://registry.npmjs.org/optimist
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"3T2VRAGARMNNMM78O3SHRX2OV"',
+silly get cb     date: 'Sun, 18 Nov 2012 05:08:16 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag optimist from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\underscore 755
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\optimist 755
+silly name, range, hasData 2 [ 'underscore', '>=1.2.2', true ]
+silly versions [ 'underscore',
+silly versions   [ '1.0.3',
+silly versions     '1.0.4',
+silly versions     '1.1.0',
+silly versions     '1.1.1',
+silly versions     '1.1.2',
+silly versions     '1.1.3',
+silly versions     '1.1.4',
+silly versions     '1.1.5',
+silly versions     '1.1.6',
+silly versions     '1.1.7',
+silly versions     '1.2.0',
+silly versions     '1.2.1',
+silly versions     '1.2.2',
+silly versions     '1.2.3',
+silly versions     '1.2.4',
+silly versions     '1.3.0',
+silly versions     '1.3.1',
+silly versions     '1.3.2',
+silly versions     '1.3.3',
+silly versions     '1.4.0',
+silly versions     '1.4.1',
+silly versions     '1.4.2' ] ]
+verbose bin dist [ '0.8-ares1.7.5-DEV-evundefined-openssl1.0.0f-v83.11.10.25-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: 'cb2aae6a7999a89fd55aaee75bce0311698cebfb',
+verbose bin dist     tarball: 'http://registry.npmjs.org/underscore/-/underscore-1.4.2.tgz' } ]
+silly name, range, hasData 2 [ 'optimist', '>=0.3.0', true ]
+silly versions [ 'optimist',
+silly versions   [ '0.0.1',
+silly versions     '0.0.2',
+silly versions     '0.0.4',
+silly versions     '0.0.5',
+silly versions     '0.0.6',
+silly versions     '0.0.7',
+silly versions     '0.1.0',
+silly versions     '0.1.1',
+silly versions     '0.1.2',
+silly versions     '0.1.3',
+silly versions     '0.1.4',
+silly versions     '0.1.5',
+silly versions     '0.1.6',
+silly versions     '0.1.7',
+silly versions     '0.1.8',
+silly versions     '0.1.9',
+silly versions     '0.0.3',
+silly versions     '0.2.0',
+silly versions     '0.2.1',
+silly versions     '0.2.2',
+silly versions     '0.2.3',
+silly versions     '0.2.4',
+silly versions     '0.2.5',
+silly versions     '0.2.6',
+silly versions     '0.2.7',
+silly versions     '0.2.8',
+silly versions     '0.3.0',
+silly versions     '0.3.1',
+silly versions     '0.3.3',
+silly versions     '0.3.4',
+silly versions     '0.3.5' ] ]
+verbose bin dist [ '0.8-ares1.7.5-DEV-evundefined-openssl1.0.0f-v83.11.10.25-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '03654b52417030312d109f39b159825b60309304',
+verbose bin dist     tarball: 'http://registry.npmjs.org/optimist/-/optimist-0.3.5.tgz' } ]
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\underscore\1.4.2\package\package.json
+verbose loadDefaults underscore@1.4.2
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\optimist\0.3.5\package\package.json
+verbose loadDefaults optimist@0.3.5
+http 200 https://registry.npmjs.org/chain-gang/-/chain-gang-1.0.0-beta4.tgz
+http 304 https://registry.npmjs.org/mkdirp
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"4VY93YHIIJ11G0NNP12CLD9IC"',
+silly get cb     date: 'Sun, 18 Nov 2012 05:08:16 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag mkdirp from cache
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\mkdirp 755
+silly name, range, hasData 2 [ 'mkdirp', '>=0.0.0', true ]
+silly versions [ 'mkdirp',
+silly versions   [ '0.0.1',
+silly versions     '0.0.2',
+silly versions     '0.0.3',
+silly versions     '0.0.4',
+silly versions     '0.0.5',
+silly versions     '0.0.6',
+silly versions     '0.0.7',
+silly versions     '0.1.0',
+silly versions     '0.2.0',
+silly versions     '0.2.1',
+silly versions     '0.2.2',
+silly versions     '0.3.0',
+silly versions     '0.3.1',
+silly versions     '0.3.2',
+silly versions     '0.3.3',
+silly versions     '0.3.4' ] ]
+verbose bin dist [ '0.8-ares1.7.5-DEV-evundefined-openssl1.0.0f-v83.11.10.25-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: 'f8c81d213b7299a031f193a57d752a17d2f6c7d8',
+verbose bin dist     tarball: 'http://registry.npmjs.org/mkdirp/-/mkdirp-0.3.4.tgz' } ]
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\mkdirp\0.3.4\package\package.json
+verbose loadDefaults mkdirp@0.3.4
+silly updated sha bytes 4847
+info shasum c7820d47046aa4325059b07258f5009f0436d17c
+info shasum C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215323210-0.1036738557741046\tmp.tgz
+verbose mkdir (expected) error ENOENT, stat 'C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215323210-0.1036738557741046\package'
+verbose mkdir done: C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215323210-0.1036738557741046\package 755
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215323210-0.1036738557741046\package
+silly gunzTarPerm modes [ '755', '644' ]
+verbose gunzed C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215323210-0.1036738557741046\package
+verbose caching C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215323210-0.1036738557741046\package\package.json
+verbose loadDefaults chain-gang@1.0.0-beta4
+verbose tarball contents [ 'package', 'tmp.tgz' ]
+verbose from cache C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215323210-0.1036738557741046\package\package.json
+verbose pack C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215323210-0.1036738557741046\package
+verbose pack C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215323210-0.1036738557741046\package C:\Users\Administrator\AppData\Roaming\npm-cache\chain-gang\1.0.0-beta4\package.tgz
+silly makeList C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215323210-0.1036738557741046\package
+silly dir, dirLen [ 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\npm-1353215319681\\1353215323210-0.1036738557741046\\package',
+silly dir, dirLen   96 ]
+verbose tarball C:\Users\Administrator\AppData\Roaming\npm-cache\chain-gang\1.0.0-beta4\package.tgz
+verbose parent C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215323210-0.1036738557741046\package
+verbose mkdir (expected) error ENOENT, stat 'C:\Users\Administrator\AppData\Roaming\npm-cache\chain-gang\1.0.0-beta4\package'
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\chain-gang\1.0.0-beta4\package 755
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget C:\Users\Administrator\AppData\Roaming\npm-cache\chain-gang\1.0.0-beta4\package
+silly gunzTarPerm modes [ '755', '644' ]
+silly modified mode [ '.npmignore', 438, 420 ]
+silly modified mode [ 'lib/', 438, 493 ]
+silly modified mode [ 'lib/index.js', 438, 420 ]
+silly modified mode [ 'lib/npm-version.js', 438, 420 ]
+silly modified mode [ 'LICENSE', 438, 420 ]
+silly modified mode [ 'Makefile', 438, 420 ]
+silly modified mode [ 'package.json', 438, 420 ]
+silly modified mode [ 'README.md', 438, 420 ]
+silly modified mode [ 'test/', 438, 493 ]
+silly modified mode [ 'test/chain_gang_test.coffee', 438, 420 ]
+silly modified mode [ 'test/error_test.coffee', 438, 420 ]
+silly modified mode [ 'test/timer_test.coffee', 438, 420 ]
+silly modified mode [ 'test/worker_test.coffee', 438, 420 ]
+verbose gunzed C:\Users\Administrator\AppData\Roaming\npm-cache\chain-gang\1.0.0-beta4\package
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\chain-gang\1.0.0-beta4\package\package.json
+verbose loadDefaults chain-gang@1.0.0-beta4
+silly updated sha bytes 4819
+info shasum a2e0e899beffbf4597114db8e0d45a59a9ed851f
+info shasum C:\Users\Administrator\AppData\Roaming\npm-cache\chain-gang\1.0.0-beta4\package.tgz
+verbose from cache C:\Users\Administrator\AppData\Roaming\npm-cache\chain-gang\1.0.0-beta4\package\package.json
+verbose chmod C:\Users\Administrator\AppData\Roaming\npm-cache\chain-gang\1.0.0-beta4\package.tgz 644
+silly skipping chown for windows C:\Users\Administrator\AppData\Roaming\npm-cache\chain-gang\1.0.0-beta4\package.tgz
+http 200 https://registry.npmjs.org/socket.io
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"7YE1HAIQ4K6BF6PKFJ5GUE7KV"',
+silly get cb     date: 'Sun, 18 Nov 2012 05:08:16 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '167076' } ]
+http 200 https://registry.npmjs.org/connect
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"CDYC7Y209AZF1LOXVSLUR2E49"',
+silly get cb     date: 'Sun, 18 Nov 2012 05:08:16 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '138501' } ]
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\connect 755
+silly name, range, hasData 2 [ 'connect', '>=1.8.7- <1.9.0-', true ]
+silly versions [ 'connect',
+silly versions   [ '0.0.1',
+silly versions     '0.0.2',
+silly versions     '0.0.3',
+silly versions     '0.0.4',
+silly versions     '0.0.5',
+silly versions     '0.0.6',
+silly versions     '0.1.0',
+silly versions     '0.2.0',
+silly versions     '0.2.1',
+silly versions     '0.2.2',
+silly versions     '0.2.3',
+silly versions     '0.2.4',
+silly versions     '0.2.5',
+silly versions     '0.2.6',
+silly versions     '0.2.7',
+silly versions     '0.3.0',
+silly versions     '0.4.0',
+silly versions     '0.5.0',
+silly versions     '0.5.1',
+silly versions     '0.5.2',
+silly versions     '0.5.3',
+silly versions     '0.5.4',
+silly versions     '0.5.5',
+silly versions     '0.5.6',
+silly versions     '0.5.7',
+silly versions     '0.5.8',
+silly versions     '0.5.9',
+silly versions     '0.5.10',
+silly versions     '1.0.0',
+silly versions     '1.0.1',
+silly versions     '2.2.2',
+silly versions     '2.3.0',
+silly versions     '2.3.1',
+silly versions     '2.3.2',
+silly versions     '2.3.3',
+silly versions     '1.9.1',
+silly versions     '2.3.4',
+silly versions     '2.3.5',
+silly versions     '2.3.6',
+silly versions     '2.3.7',
+silly versions     '1.9.2',
+silly versions     '2.3.8',
+silly versions     '2.3.9',
+silly versions     '2.4.0',
+silly versions     '2.4.1',
+silly versions     '2.4.2',
+silly versions     '2.4.3',
+silly versions     '2.4.4',
+silly versions     '2.4.5',
+silly versions     '2.4.6',
+silly versions     '2.5.0',
+silly versions     '2.6.0',
+silly versions     '2.6.1',
+silly versions     '2.6.2',
+silly versions     '2.7.0' ] ]
+verbose about to build C:\Program Files\nodejs\node_modules\middlefiddle
+info unbuild C:\Program Files\nodejs\node_modules\middlefiddle
+verbose from cache C:\Program Files\nodejs\node_modules\middlefiddle\package.json
+info preuninstall middlefiddle@0.3.3
+http 200 https://registry.npmjs.org/express
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"E6IN5IUROYKA0XOZ5W5ZSNAJH"',
+silly get cb     date: 'Sun, 18 Nov 2012 05:08:16 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '238509' } ]
+verbose mkdir (expected) error ENOENT, stat 'C:\Users\Administrator\AppData\Roaming\npm-cache\socket.io'
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\express 755
+verbose mkdir done: C:\Users\Administrator\AppData\Roaming\npm-cache\socket.io 755
+info uninstall middlefiddle@0.3.3
+verbose unbuild middlefiddle@0.3.3 [ true,
+verbose unbuild middlefiddle@0.3.3   'C:\\Program Files\\nodejs\\node_modules',
+verbose unbuild middlefiddle@0.3.3   'C:\\Program Files\\nodejs\\node_modules' ]
+verbose binRoot [ 'C:\\Program Files\\nodejs',
+verbose binRoot   { middlefiddle: './bin/middlefiddle' } ]
+info postuninstall middlefiddle@0.3.3
+silly name, range, hasData 2 [ 'express', '>=2.5.1', true ]
+silly versions [ 'express',
+silly versions   [ '0.14.0',
+silly versions     '0.14.1',
+silly versions     '1.0.0beta',
+silly versions     '1.0.0beta2',
+silly versions     '1.0.0rc',
+silly versions     '1.0.0rc2',
+silly versions     '1.0.0rc3',
+silly versions     '1.0.0rc4',
+silly versions     '1.0.0',
+silly versions     '1.0.1',
+silly versions     '1.0.2',
+silly versions     '1.0.3',
+silly versions     '1.0.4',
+silly versions     '1.0.5',
+silly versions     '1.0.6',
+silly versions     '1.0.7',
+silly versions     '3.0.0alpha3',
+silly versions     '3.0.0alpha4',
+silly versions     '3.0.0alpha5',
+silly versions     '3.0.0beta1',
+silly versions     '3.0.0beta2',
+silly versions     '3.0.0beta3',
+silly versions     '2.5.10',
+silly versions     '3.0.0beta4',
+silly versions     '2.5.11',
+silly versions     '3.0.0beta6',
+silly versions     '3.0.0beta7',
+silly versions     '3.0.0rc1',
+silly versions     '3.0.0rc2',
+silly versions     '3.0.0rc3',
+silly versions     '3.0.0rc4',
+silly versions     '3.0.0rc5',
+silly versions     '3.0.0',
+silly versions     '3.0.1',
+silly versions     '3.0.2',
+silly versions     '3.0.3' ] ]
+verbose bin dist [ '0.8-ares1.7.5-DEV-evundefined-openssl1.0.0f-v83.11.10.25-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '007c7590b1ab31219e6d8d71f86ad5086204868c',
+verbose bin dist     tarball: 'http://registry.npmjs.org/express/-/express-3.0.3.tgz' } ]
+silly name, range, hasData 2 [ 'socket.io', '>=0.8.7', true ]
+silly versions [ 'socket.io',
+silly versions   [ '0.3.8',
+silly versions     '0.4.0',
+silly versions     '0.4.1',
+silly versions     '0.5.1',
+silly versions     '0.5.3',
+silly versions     '0.6.0',
+silly versions     '0.6.1',
+silly versions     '0.6.3',
+silly versions     '0.6.4',
+silly versions     '0.6.5',
+silly versions     '0.6.6',
+silly versions     '0.6.7',
+silly versions     '0.6.8',
+silly versions     '0.6.9',
+silly versions     '0.6.10',
+silly versions     '0.6.11',
+silly versions     '0.6.12',
+silly versions     '0.6.14',
+silly versions     '0.6.15',
+silly versions     '0.6.16',
+silly versions     '0.6.17',
+silly versions     '0.6.18',
+silly versions     '0.7.0',
+silly versions     '0.7.1',
+silly versions     '0.7.2',
+silly versions     '0.7.3',
+silly versions     '0.7.4',
+silly versions     '0.7.5',
+silly versions     '0.7.6',
+silly versions     '0.7.7',
+silly versions     '0.7.8',
+silly versions     '0.7.9',
+silly versions     '0.7.10',
+silly versions     '0.7.11',
+silly versions     '0.8.0',
+silly versions     '0.8.1',
+silly versions     '0.8.2',
+silly versions     '0.8.3',
+silly versions     '0.8.4',
+silly versions     '0.8.5',
+silly versions     '0.8.6',
+silly versions     '0.8.7',
+silly versions     '0.9.0',
+silly versions     '0.9.1',
+silly versions     '0.9.1-1',
+silly versions     '0.9.2',
+silly versions     '0.9.3',
+silly versions     '0.9.4',
+silly versions     '0.9.5',
+silly versions     '0.9.6',
+silly versions     '0.9.7',
+silly versions     '0.9.8',
+silly versions     '0.9.9',
+silly versions     '0.9.10',
+silly versions     '0.9.11' ] ]
+verbose bin dist [ '0.8-ares1.7.5-DEV-evundefined-openssl1.0.0f-v83.11.10.25-win32-ia32-6.0.6002',
+verbose bin dist   { shasum: '18957f802cf463945881a0179156168743cf3d35',
+verbose bin dist     tarball: 'http://registry.npmjs.org/socket.io/-/socket.io-0.9.11.tgz' } ]
+verbose addRemoteTarball [ 'https://registry.npmjs.org/socket.io/-/socket.io-0.9.11.tgz',
+verbose addRemoteTarball   '18957f802cf463945881a0179156168743cf3d35' ]
+verbose caching C:\Users\Administrator\AppData\Roaming\npm-cache\express\3.0.3\package\package.json
+verbose loadDefaults express@3.0.3
+verbose mkdir (expected) error ENOENT, stat 'C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215323879-0.5031947700772434'
+verbose mkdir done: C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215323879-0.5031947700772434 755
+verbose fetch to C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215323879-0.5031947700772434\tmp.tgz
+verbose mkdir done: C:\Users\ADMINI~1\AppData\Local\Temp\npm-1353215319681\1353215323879-0.5031947700772434 755
+http GET https://registry.npmjs.org/socket.io/-/socket.io-0.9.11.tgz
+ERR! Error: No compatible version found: connect@'>=1.8.7- <1.9.0-'
+ERR! Valid install targets:
+ERR! ["0.0.1","0.0.2","0.0.3","0.0.4","0.0.5","0.0.6","0.1.0","0.2.0","0.2.1","0.2.2","0.2.3","0.2.4","0.2.5","0.2.6","0.2.7","0.3.0","0.4.0","0.5.0","0.5.1","0.5.2","0.5.3","0.5.4","0.5.5","0.5.6","0.5.7","0.5.8","0.5.9","0.5.10","1.0.0","1.0.1","2.2.2","2.3.0","2.3.1","2.3.2","2.3.3","1.9.1","2.3.4","2.3.5","2.3.6","2.3.7","1.9.2","2.3.8","2.3.9","2.4.0","2.4.1","2.4.2","2.4.3","2.4.4","2.4.5","2.4.6","2.5.0","2.6.0","2.6.1","2.6.2","2.7.0"]
+ERR!     at installTargetsError (C:\Program Files\nodejs\node_modules\npm\lib\cache.js:488:10)
+ERR!     at next_ (C:\Program Files\nodejs\node_modules\npm\lib\cache.js:438:17)
+ERR!     at next (C:\Program Files\nodejs\node_modules\npm\lib\cache.js:415:44)
+ERR!     at C:\Program Files\nodejs\node_modules\npm\lib\cache.js:408:5
+ERR!     at saved (C:\Program Files\nodejs\node_modules\npm\lib\utils\npm-registry-client\get.js:150:7)
+ERR!     at C:\Program Files\nodejs\node_modules\npm\node_modules\graceful-fs\graceful-fs.js:231:7
+ERR!     at Object.oncomplete (fs.js:297:15)
+ERR! You may report this log at:
+ERR!     <http://github.com/isaacs/npm/issues>
+ERR! or email it to:
+ERR!     <npm-@googlegroups.com>
+ERR! 
+ERR! System Windows_NT 6.0.6002
+ERR! command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "i" "middlefiddle" "-g"
+ERR! cwd Z:\craigcondon\Developer\Jobs\browsertap\wkm\bin
+ERR! node -v v0.8.14
+ERR! npm -v 1.1.9
+ERR! message No compatible version found: connect@'>=1.8.7- <1.9.0-'
+ERR! message Valid install targets:
+ERR! message ["0.0.1","0.0.2","0.0.3","0.0.4","0.0.5","0.0.6","0.1.0","0.2.0","0.2.1","0.2.2","0.2.3","0.2.4","0.2.5","0.2.6","0.2.7","0.3.0","0.4.0","0.5.0","0.5.1","0.5.2","0.5.3","0.5.4","0.5.5","0.5.6","0.5.7","0.5.8","0.5.9","0.5.10","1.0.0","1.0.1","2.2.2","2.3.0","2.3.1","2.3.2","2.3.3","1.9.1","2.3.4","2.3.5","2.3.6","2.3.7","1.9.2","2.3.8","2.3.9","2.4.0","2.4.1","2.4.2","2.4.3","2.4.4","2.4.5","2.4.6","2.5.0","2.6.0","2.6.1","2.6.2","2.7.0"]
+verbose exit [ 1, true ]

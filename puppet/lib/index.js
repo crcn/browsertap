@@ -15,7 +15,7 @@ exports.create = function(options) {
 
 	_.extend(puppet, {
 		wkm      : client,
-		server   : proxyServer.listen(options.port || 8090),
+		server   : proxyServer.listen(client, options.port || 8090),
 		// mouse    : new Mouse(client),
 		// desktop  : new Desktop(puppet, client),
 		// keyboard : new Keyboard(client),

@@ -56,6 +56,7 @@ namespace Commanders
 		regCommand(stopRecordingWindow, execStopRecordingWindow)
 		regCommand(fireWindowMouseEvent, execFireWindowMouseEvent)
 		regCommand(fireWindowKeybdEvent, execFireWindowKeybdEvent)
+		regCommand(findWindowByTitle, execFindWindowByTitle)
 		regCommand(changeWindowRecordingQuality, changeWindowRecordingQual)
 
 
@@ -225,6 +226,28 @@ namespace Commanders
 		this->changeCommanderQaul(command);
 
 		screen->recorder()->start(out.asString());
+	}
+
+	void JSONCommander::execFindWindowByTitle(JSONCommand* command) 
+	{
+		std::string title = command->value()["data"].asString();
+
+		std::vector<Screens::Screen*> screens = Screens::ScreenManager::instance().allOpenScreens();
+
+		int n = screens.size();
+		Screens::Screen* screen = NULL;
+
+		for(int i = 0; i < n; i++)
+		{
+			screen = screens[i];
+			if(std::string::npos != screen->title().find(title)) 
+			{
+				this->dispatchResponse(command->value(), getScreenData(screen));
+				return;
+			}
+		}
+
+		return this->dispatchResponse(command->value(), getSuccess(false));
 	}
 
 	void JSONCommander::changeWindowRecordingQual(JSONCommand* command)

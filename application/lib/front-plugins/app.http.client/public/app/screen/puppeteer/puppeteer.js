@@ -64,6 +64,12 @@ module.exports = structr(EventEmitter, {
 				self._connecting = false;
 				self.emit("connect", null, remote);
 			});
+
+			
+			//keep it alive!
+			setInterval(function() {
+				remote.keepAlive();
+			}, 10000);
 		});
 		d.pipe(stream).pipe(d);
 

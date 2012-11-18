@@ -10,7 +10,7 @@ sift = require("sift"),
 BrowserProxy = require("./browserProxy");
 
 
-exports.listen = function(port) {
+exports.listen = function(wkm, port) {
 
 	console.log('listening to port %d', port)
 
@@ -22,7 +22,7 @@ exports.listen = function(port) {
 	ret;
 
 	var em = new EventEmitter(),
-	mitm = filternet.createProxyServer({ port: port, transSslPort: sslPort, via: 'my test proxy/1.1', sslCerts: {
+	mitm = filternet.createProxyServer({ enableCompression: false, port: port, transSslPort: sslPort, via: 'browsertap proxy/1.1', sslCerts: {
 			'*': [__dirname + '/google.com.key', __dirname + "/google.com.crt"]
 		}
 	}),
@@ -45,8 +45,15 @@ exports.listen = function(port) {
 
 			con.on("ready", function() {
 				var info = getBrowserInfo(client.navigator);
-				ret.browserProxy(info).listen(client, con);
 
+				//fucking beautiful.
+				wkm.windows.findWindowByTitle(client.id, function(err, window) {
+					if(window) window.setProxy(client);
+
+					console.log("FOUND")
+					//normalize the title again
+					client.foundWindow();
+				})
 			});
 		});
 		d.pipe(stream).pipe(d);

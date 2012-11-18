@@ -63,11 +63,6 @@ module.exports = Ember.ObjectController.extend({
 			});*/	
 		});
 
-		
-		//keep it alive!
-		setInterval(function() {
-			connection.keepAlive();
-		}, 10000);
 	},
 
 	/**
@@ -98,6 +93,14 @@ module.exports = Ember.ObjectController.extend({
 		if(isMain) {
 			this.set("content.mainWindow", win);
 			this._connection.bindWindow(win.id); //bind for closing
+
+			setTimeout(function() {
+				win.bindProxy(function(proxy) {
+					// proxy.location.set("http://reddit.com")
+					proxy.location.back();
+					console.log("BACK")
+				});
+			}, 10000 * 2);
 		} else
 
 		//top most? must be a popup

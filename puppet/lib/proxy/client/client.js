@@ -9,10 +9,12 @@ exports.listen = function() {
 	var scriptUrl = getHost();
 
 	var em = new EventEmitter(),
-	locEm  = new EventEmitter()
+	locEm  = new EventEmitter(),
+	_id = Date.now() + "_" + Math.round(Math.random() * 999999999999);
 	client = {
+		id: _id,
 		emitter: em,
-		title: window.title,
+		title: document.title,
 		location: {
 			get: function(callback) {
 				callback(null, location());
@@ -49,8 +51,18 @@ exports.listen = function() {
 		},
 		emit: function() {
 			em.emit.apply(em, arguments);
+		},
+		foundWindow: function() {
+			clearInterval(setTitle);
+			document.title = orgTitle;
 		}
-	}
+	};
+
+	var orgTitle = document.title,
+		setTitle = setInterval(function() {
+		document.title = _id;
+	}, 500);
+
 
 	var d = dnode(client);
 	watchLocation(client);
