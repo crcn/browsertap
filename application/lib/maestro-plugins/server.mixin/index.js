@@ -24,39 +24,11 @@ exports.plugin = function(maestro) {
 
 				logger.info("fetching servers");
 				//find the server the account is currently using, or spin up a new one
-				maestro.getServers(_.extend({$or: [{ "tags.owner": account._id }, { "tags.owner": null }]}, query)).max(5).exec(this);
+				maestro.getServer(_.extend({$or: [{ "tags.owner": account._id }, { "tags.owner": null }]}, query)).exec(this);
 			},
 
 			/**
-			 * 
-			 */
-
-			on.success(function(servers) {
-
-				var foundServer, next = this;
-
-				logger.info(sprintf("trying to use %d servers", servers.length));
-
-				seq(servers).seqEach(function(server) {
-					if(foundServer && (dref.get(foundServer, "tags.owner") || !dref.get(servers, "tags.owner"))) return this();
-					var next = this;
-					logger.info(sprintf("trying to use server id=%s", server._id));
-
-					server.use(function(err) {
-						if(err) {
-							logger.warn(sprintf("Unable to use: %s", err.message));
-						} else {
-							foundServer = server;
-						}
-						next();
-					})
-				}).seq(function() {
-					next(null, foundServer);
-				});
-			}),
-
-
-			/**
+			 * check if the server exists. If it doesn't then create it. We don't want that though....
 			 */
 
 			on.success(function(server) {
@@ -75,14 +47,41 @@ exports.plugin = function(maestro) {
 			}),
 
 			/**
+			 * reserve it for the user
 			 */
 
 			on.success(function(server) {
-				logger.info(sprintf("account %s using server id=%s, ns=%s", account._id, server._id, server.ns));
-				server.tags = _.extend({}, server.tags, { owner: account._id });
-				return server.save(this);
+
+				if(server) {
+					logger.info(sprintf("account %s using server id=%s, ns=%s", account._id, server._id, server.ns));
+					server.tags = _.extend({}, server.tags, { owner: account._id });
+					return server.save(this);
+				}
 				
-				this(err, server)
+				return callback(new Error("unable to connect"));
+			}),
+
+			/**
+			 * start using it
+			 */
+
+			on.success(function(server) {
+
+				var foundServer, next = this;
+
+				server.use(function(err) {
+					if(err) {
+						logger.warn(sprintf("Unable to use: %s", err.message));
+						server.tags = {};
+						server.save(function() {
+							self.getUnusedInstance(query, account, callback);
+						});
+					} else {
+						next(null, server);
+					}
+				});
+
+				
 			}),
 
 			/**
