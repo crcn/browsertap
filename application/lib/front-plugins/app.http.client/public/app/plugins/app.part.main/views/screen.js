@@ -92,7 +92,9 @@ module.exports = require("../../../views/base").extend({
 		var q = Url.parse(String(window.location), true).query;
 
 		win.startRecording(_.defaults(q, { qmin: 1, qmax: 11, gop_size: 150, frame_rate: 25 }), function(err, info) {
-			self._desktopPlayer.update({ host: info.url });
+			setTimeout(function() {
+				self._desktopPlayer.update({ host: info.url });
+			}, 2000);
 		});
 
 		var coords = {};
