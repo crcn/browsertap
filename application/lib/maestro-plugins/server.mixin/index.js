@@ -3,7 +3,8 @@ outcome = require("outcome"),
 _ = require("underscore"),
 logger = require("winston").loggers.get("server.mixin"),
 sprintf = require("sprintf").sprintf,
-seq = require("seq");
+seq = require("seq"),
+dref = require("dref");
 
 exports.require = ["maestro"];
 exports.plugin = function(maestro) {
@@ -37,8 +38,7 @@ exports.plugin = function(maestro) {
 				logger.info(sprintf("trying to use %d servers", servers.length));
 
 				seq(servers).seqEach(function(server) {
-					if(!server.tags) server.tags = {};
-					if(foundServer && (foundServer.tags.owner || !servers.tags.owner)) return this();
+					if(foundServer && (dref.get(foundServer, "tags.owner") || !dref.get(servers, "tags.owner"))) return this();
 					var next = this;
 					logger.info(sprintf("trying to use server id=%s", server._id));
 
