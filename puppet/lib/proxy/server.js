@@ -50,7 +50,7 @@ exports.listen = function(wkm, port) {
 				wkm.windows.findWindowByTitle(client.id, function(err, window) {
 					if(window) window.setProxy(client);
 
-					console.log("FOUND")
+					console.log("FOUND WINDOW!")
 					//normalize the title again
 					client.foundWindow();
 				})
