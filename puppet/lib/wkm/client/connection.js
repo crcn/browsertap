@@ -39,8 +39,8 @@ module.exports = structr(EventEmitter, {
 					}
 
 				} catch(e) {
-					process.stderr.write("Unable to parse " + cmdstr);
-					console.error(e.stack)
+					// process.stderr.write("Unable to parse " + cmdstr);
+					console.log(cmdstr);
 				}
 			}
 		});

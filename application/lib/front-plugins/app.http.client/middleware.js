@@ -27,11 +27,11 @@ exports.plugin = function(server) {
 
 function includeScript(mount, path, server) {
 	var b = browserify({ mount:mount, cache: true, watch: true });
-	browserifyFiles.register(["hb"], handlebarsTemplate, b);
+	browserifyFiles.register(["ejs"], handlebarsTemplate, b);
 	b.addEntry(path);
 	server.use(b);
 }
 
 function handlebarsTemplate() {
-	return "Ember.Handlebars.compile(\"{{{body}}}\");"
+	return "_.template(\"{{{body}}}\");";
 }

@@ -28,7 +28,9 @@ module.exports = structr(EventEmitter, {
 	"mouseEvent",
 	"keybdEvent",
 	"changeRecordingQuality",
-	"bindProxy"
+	"bindProxy",
+	"refreshProxy",
+	"getProxy"
 	],
 
 	/**
@@ -92,6 +94,14 @@ module.exports = structr(EventEmitter, {
 
 	"setProxy": function(proxy) {
 		this.emit("proxy", this._proxy = proxy);
+	},
+
+	/**
+	 */
+
+	"refreshProxy": function(callback) {
+		this._proxy = null;
+		this.getProxy(callback);
 	},
 
 	/**

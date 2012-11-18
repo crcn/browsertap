@@ -17,13 +17,13 @@ exports.listen = function() {
 		title: document.title,
 		location: {
 			get: function(callback) {
-				callback(null, location());
+				callback(location());
 			},
 			set: function(value, callback) {
 				if(location().href != location(value).href) {
 					window.location = value;
 				}
-				if(callback) callback(null, location());
+				if(callback) callback(location());
 			},
 			back: function() {
 				history.back();

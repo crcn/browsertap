@@ -1,17 +1,17 @@
 var _ = require("underscore");
 
-exports.require = ["router", "app.controller"];
+exports.require = ["app.controller"];
 exports.name = "init";
-exports.plugin = function(router, controller, loader) {
+exports.plugin = function(controller, loader) {
 
-	console.log(router.root)
 	window.App = Ember.Application.create({
 		ApplicationController: Ember.Controller.extend({}),
 		ApplicationView: Ember.View.extend({
 			"templateName": "app"
 		}),
-		Router: router.initialize()
+		Router: Ember.Router
 	});
+
 
 	loader.modules(".*?.part.*").forEach(function(module) {
 		_.extend(window.App, module.views || {});
@@ -19,5 +19,6 @@ exports.plugin = function(router, controller, loader) {
 
 	$(document).ready(function() {
 		window.App.initialize();
+	console.log(window.App.applicationController)
 	});
 }

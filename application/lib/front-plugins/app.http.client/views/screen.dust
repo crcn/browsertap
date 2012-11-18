@@ -9,3 +9,7 @@
 	);
 </script>
 {/scripts}
+
+{<content}
+<div class="screen hud"></div>
+{/content}

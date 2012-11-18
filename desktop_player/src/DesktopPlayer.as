@@ -24,7 +24,7 @@ package
 	
 	import org.osmf.net.NetConnectionCodes;
 	import org.osmf.net.NetStreamCodes;
-		[SWF(frameRate='24',backgroundColor='#000000')]
+		[SWF(frameRate='24',backgroundColor='#FFFFFF')]
 	
 	public class DesktopPlayer extends Sprite
 	{

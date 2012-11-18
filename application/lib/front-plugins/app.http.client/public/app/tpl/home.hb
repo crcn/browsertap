@@ -1,1 +1,0 @@
-<a {{ action "doHome" }}>{{app}}</a>

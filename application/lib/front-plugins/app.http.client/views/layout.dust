@@ -12,9 +12,11 @@
 			head.js(
 				"/vendors/js/es5-shim.js",
 				"/vendors/js/jquery.js",
-				"/vendors/js/handlebars.js",
 				"/vendors/js/transit.js",
-				"/vendors/js/ember.js"
+				"/vendors/js/underscore.js",
+				"/vendors/js/backbone.js",
+				"/vendors/js/mustache.js",
+				"/vendors/js/history.js"
 			);
 		</script>
 
