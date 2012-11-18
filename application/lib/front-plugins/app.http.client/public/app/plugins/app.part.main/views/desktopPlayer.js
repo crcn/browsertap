@@ -10,7 +10,8 @@ module.exports = FlashPlayer.extend({
 
 		return {
 			channel: hp.pop(),
-			host: hp.join("/")
+			host: hp.join("/"),
+			debug: true
 		};
 	}
 });
