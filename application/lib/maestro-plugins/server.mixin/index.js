@@ -37,6 +37,7 @@ exports.plugin = function(maestro) {
 				logger.info(sprintf("trying to use %d servers", servers.length));
 
 				seq(servers).seqEach(function(server) {
+					if(!server.tags) server.tags = {};
 					if(foundServer && (foundServer.tags.owner || !servers.tags.owner)) return this();
 					var next = this;
 					logger.info(sprintf("trying to use server id=%s", server._id));
