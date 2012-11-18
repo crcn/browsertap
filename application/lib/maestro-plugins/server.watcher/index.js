@@ -11,16 +11,15 @@ exports.plugin = function(maestro, loader) {
 
 
 	function stopServers() {
-		console.log({ "tags.owner": null, state: {$in: ["running", "pending"] }, imageName: "remote-desktop", lastUpdatedAt: {$lt: new Date(Date.now() - sleepTimeout) } })
 		maestro.
-		getServers({ "tags.owner": null, state: {$in: ["running", "pending"] }, imageName: "remote-desktop", lastUpdatedAt: {$lt: new Date(Date.now() - sleepTimeout) } }).
+		getServers({ "tags.owner": null, state: {$in: ["running", "pending"] }, imageName: "remote-desktop", lastUsedAt: {$lt: new Date(Date.now()) } }).
 		min(loader.params("minRunningDesktops") || 0).
 		exec(function(err, servers) {
 			if(servers && servers.length)
 			logger.info(sprintf("stopping %d instances", servers.length));
 			setTimeout(stopServers, sleepTimeout);
-		}).
-		stop();
+		});
+		// stop();
 	}
 
 	function destroyServers() {

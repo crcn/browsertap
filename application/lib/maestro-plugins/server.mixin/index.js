@@ -77,7 +77,7 @@ exports.plugin = function(maestro) {
 							self.getUnusedInstance(query, account, callback);
 						});
 					} else {
-						next(null, server);
+						next(null, server)
 					}
 				});
 
