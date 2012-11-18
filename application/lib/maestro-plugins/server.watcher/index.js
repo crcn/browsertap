@@ -18,8 +18,8 @@ exports.plugin = function(maestro, loader) {
 			if(servers && servers.length)
 			logger.info(sprintf("stopping %d instances", servers.length));
 			setTimeout(stopServers, sleepTimeout);
-		});
-		// stop();
+		}).
+		stop();
 	}
 
 	function destroyServers() {
