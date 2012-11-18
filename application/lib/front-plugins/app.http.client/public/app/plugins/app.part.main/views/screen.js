@@ -1,7 +1,8 @@
 var Loader = require("./loader"),
 DesktopPlayer = require("./desktopPlayer"),
 getPadding = require("./getPadding"),
-wkmEvents = require("./events");
+wkmEvents = require("./events"),
+Url = require("url");
 
 module.exports = require("../../../views/base").extend({
 	"templateName": "screen",
@@ -88,7 +89,9 @@ module.exports = require("../../../views/base").extend({
 		onResize();
 		setTimeout(onResize, 1000);
 
-		win.startRecording({ qmin: 1, qmax: 11, gop_size: 60, frame_rate: 15 }, function(err, info) {
+		var q = Url.parse(String(window.location), true).query;
+
+		win.startRecording(_.defaults(q, { qmin: 1, qmax: 11, gop_size: 150, frame_rate: 25 }), function(err, info) {
 			self._desktopPlayer.update({ host: info.url });
 		});
 
