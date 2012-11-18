@@ -89,9 +89,15 @@ module.exports = require("../../../views/base").extend({
 		onResize();
 		setTimeout(onResize, 1000);
 
-		var q = Url.parse(String(window.location), true).query;
+		var q = Url.parse(String(window.location), true).query,
+		defaults = { qmin: 1, qmax: 11, gop_size: 150, frame_rate: 25 };
 
-		win.startRecording(_.defaults(q, { qmin: 1, qmax: 11, gop_size: 150, frame_rate: 25 }), function(err, info) {
+		for(var key in defaults) {
+			if(q[key]) q[key] = Number(q[key]);
+			else q[key] = defaults[key];
+		}
+
+		win.startRecording(q, function(err, info) {
 			self._desktopPlayer.update({ host: info.url });
 		});
 
