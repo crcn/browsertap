@@ -111,7 +111,7 @@ module.exports = require("../../../views/base").extend({
 
 		$el.mousemove(_.throttle(function(e) {
 			win.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_ABSOLUTE | wkmEvents.mouse.MOUSEEVENTF_MOVE, coords = { x: e.offsetX, y: e.offsetY });
-		}, 100));
+		}, 50));
 
 
 		$el.mousedown(function(e) {
@@ -153,7 +153,7 @@ module.exports = require("../../../views/base").extend({
 
 
 		$el.bind("mousewheel", _.throttle(function(e, delta) {
-			win.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, coords, delta * 50);
-		}, 50));
+			win.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, coords, delta * 100);
+		}, 25));
 	}
 });

@@ -54,10 +54,10 @@ module.exports = structr(EventEmitter, {
 	"_connectApp": function() {
 		console.log("loading app %s", this.options.app);
 		var con = this._connection;
-		this.emit("loading");
 		// con.events.on("closeWindow", _.bind(this._onCloseWindow, this));
 
 		if(this._app != this.options.app) {
+			this.emit("loading");
 			this.window = null;
 			con.browsers.open(this.options.open, this._app = this.options.app, function(){ });
 			return;
