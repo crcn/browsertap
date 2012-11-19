@@ -33,6 +33,9 @@ module.exports = structr(EventEmitter, {
 		this._connection = connection;
 		var self = this;
 
+		this._ignoreClose = true;
+
+
 
 		var filter;
 
@@ -52,8 +55,14 @@ module.exports = structr(EventEmitter, {
 				self._popupWindow(winProps);
 			},
 			close: function() {
-				self.commands.emit("closed");
-				self._setWindow(null);
+
+				if(self._ignoreClose) return;
+
+				//only want to close popups
+				// if(!window.opener) return;
+				//this actually works
+				window.open("","_self","");
+				window.close();
 			}
 		});
 		this.emit("loading");
@@ -83,6 +92,7 @@ module.exports = structr(EventEmitter, {
 		// con.events.on("closeWindow", _.bind(this._onCloseWindow, this));
 
 		if(this._app != this.options.app) {
+			this._ignoreClose = true;
 			con.browsers.open(this.options.open, this._app = this.options.app, function(){ });
 			return;
 		} else 
@@ -219,6 +229,8 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_setWindow": function(window) {
+
+		if(window) this._ignoreClose = false;
 		console.log("set main window");
 		this.emit("window", this.window = window); 
 		if(window) window.bindProxy(_.bind(this._onProxy, this));
