@@ -32,8 +32,29 @@ module.exports = structr(EventEmitter, {
 	"_onConnection": function(connection) {
 		this._connection = connection;
 		var self = this;
-		connection.events.on("openWindow", function(win) {
-			self._onOpenWindow(win);
+
+
+		var filter;
+
+
+		if(this.options.screen) {
+			filter = { query: { id: this.options.screen } };
+		} else {
+			// filter = { query: getAppFilter(this.options.app) }
+		}
+
+		connection.clientWindows.addClientWindow({
+			filter: filter,
+			setNativeWindow: function(window) {
+				self._setWindow(window);
+			},
+			popupWindow: function(winProps) {
+				self._popupWindow(winProps);
+			},
+			close: function() {
+				//PARENT CLOSE
+				window.close();
+			}
 		});
 		this.emit("loading");
 	},
@@ -62,7 +83,6 @@ module.exports = structr(EventEmitter, {
 
 		if(this._app != this.options.app) {
 			this.emit("loading");
-			this.window = null;
 			con.browsers.open(this.options.open, this._app = this.options.app, function(){ });
 			return;
 		} else 
@@ -121,7 +141,7 @@ module.exports = structr(EventEmitter, {
 
 		//top most? must be a popup
 		if(!(w.extStyle & windowStyles.WS_EX_TOPMOST) && !(w.style & windowStyles.WS_POPUP)) {
-			this._popupWindow(w);
+			//POPUP WINDOW
 		} else {
 			// console.log("UNABLE TO POPUP");
 		}
@@ -204,8 +224,7 @@ module.exports = structr(EventEmitter, {
 
 	"_setWindow": function(window) {
 		console.log("set main window");
-		this._connection.bindWindow(window.id); //bind for closing
-		this.emit("window", this.window = window);
+		this.emit("window", this.window = window); 
 		window.bindProxy(_.bind(this._onProxy, this));
 	},
 
@@ -214,7 +233,7 @@ module.exports = structr(EventEmitter, {
 
 	"_onProxy": function(proxy) {
 		this._proxy = proxy;
-		console.log(proxy)
+		console.log(proxy);
 
 		var self = this;
 

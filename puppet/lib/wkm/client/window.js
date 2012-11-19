@@ -93,6 +93,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"setProxy": function(proxy) {
+		console.log("SPROX %s", this.id);
 		this.emit("proxy", this._proxy = proxy);
 	},
 
@@ -116,6 +117,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"bindProxy": function(callback) {
+		console.log("bind proxy")
 		if(this._proxy) callback(this._proxy);
 		this.on("proxy", callback);
 	},
@@ -125,19 +127,16 @@ module.exports = structr(EventEmitter, {
 
 	"keybdEvent": function(options) {
 
-		console.log(options)
 
 		if(!options.keyCode) return;
 
 		var self = this;
 
 		function keyDown(code) {
-			console.log("DOWN %d", code);
 			self._con.execute("fireWindowKeybdEvent", { id: 1, bvk: code, bScan: 0, dwFlags: wkme.keyboard.KEYEVENTF_EXTENDEDKEY | 0 });
 		}
 
 		function keyUp(code) {
-			console.log("UP %d", code);
 			self._con.execute("fireWindowKeybdEvent", { id: 1, bvk: code, bScan: 0, dwFlags: wkme.keyboard.KEYEVENTF_EXTENDEDKEY | wkme.keyboard.KEYEVENTF_KEYUP });
 		}
 

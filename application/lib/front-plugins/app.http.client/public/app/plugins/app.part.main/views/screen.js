@@ -30,7 +30,7 @@ module.exports = require("../../../views/base").extend({
 		];
 	},
 	"_onWindow": function(win) {
-		console.log("on window (screen)")
+		console.log("on window (screen)");
 		var padding = getPadding(win),
 		self = this,
 		baseQual = {

@@ -7,8 +7,8 @@ dsync = require("dsync"),
 logger = require("winston").loggers.get("logger"),
 sprintf = require("sprintf").sprintf,
 EventEmitter = require("events").EventEmitter,
-pievent = require("pievent"),
-ppt = require("../../../../puppet");
+ppt = require("../../../../puppet"),
+NativeWindows = require("./nativeWindows");
 
 
 
@@ -29,25 +29,14 @@ exports.plugin = function(client, httpServer, loader) {
 		events = new EventEmitter(),
 		wrappedPuppet = dsync(puppet),
 		killTimeoutId,
-		numConnections = 0;
-
-		pievent(events, puppet, {
-			"wkm.windows": ["open->openWindow", "close->closeWindow"]
-		});
+		nativeWindows = new NativeWindows(puppet.wkm);
 
 		wrappedPuppet.events = dsync(events);
 
 		//set dnode up so clients can connect
 		var sock = shoe(function(stream) {
 
-			numConnections++;
-
-			var wp = dsync(wrappedPuppet),
-			_closeWindows = [];
-
-			wp.bindWindow = function(id) {
-				_closeWindows.push(id);
-			}
+			var wp = dsync(wrappedPuppet);
 
 			var d = dnode({
 
@@ -78,6 +67,8 @@ exports.plugin = function(client, httpServer, loader) {
 				}
 			});
 
+			wp.clientWindows = dsync(nativeWindows.getClientWindows(d));
+
 			d.pipe(stream).pipe(d);
 
 			function killTimeout() {
@@ -89,22 +80,11 @@ exports.plugin = function(client, httpServer, loader) {
 				//TODO - countdown from time available. Check every 10 minutes or so.
 			}
 
-
-
 			killTimeout();
-
 
 			//once the client closes, tell the client that we're not busy
 			d.on("end", function() {
 				logger.info("client close");
-				if(!(--numConnections)) client.update({ tags: { } });
-				for(var i = _closeWindows.length; i--;) {
-					console.log("closing %s", _closeWindows[i])
-					puppet.wkm.windows.getWindow(_closeWindows[i], function(err, window) {
-						if(err) return;
-						window.close();
-					});
-				}
 			});
 		});
 
