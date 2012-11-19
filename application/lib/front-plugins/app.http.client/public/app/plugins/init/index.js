@@ -14,7 +14,13 @@ exports.plugin = function(router, mainPlugin, puppeteer) {
 	});
 
 	var loader = new ScreenLoader(puppeteer),
-	screen = new mainPlugin.views.Screen({ el: ".screen", loader: loader });
+	screen = new mainPlugin.views.Screen({ el: ".screen", loader: loader }),
+	appSwitcher = new mainPlugin.views.AppSwitcher({ el: ".app-switcher", router: router, loader: loader });
+
+	key("shift+tab", function(e) {
+		appSwitcher.toggleShow();
+	});
+
 
 
 	loader.on("locationChange", function(location) {

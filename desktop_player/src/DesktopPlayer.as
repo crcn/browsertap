@@ -24,7 +24,7 @@ package
 	
 	import org.osmf.net.NetConnectionCodes;
 	import org.osmf.net.NetStreamCodes;
-		[SWF(frameRate='24',backgroundColor='#FFFFFF')]
+		[SWF(backgroundColor='#FFFFFF')]
 	
 	public class DesktopPlayer extends Sprite
 	{
@@ -217,9 +217,11 @@ package
 
 		public function onMetaData(obj:Object):void 
 		{
-			_trace(obj.width + " " + obj.height);
+			_trace(obj.width + " " + obj.height+" "+obj.framerate);
 			this._video.width = obj.width;
 			this._video.height = obj.height;
+
+			this.stage.frameRate = obj.frameRate;
 			onStageResize();
 		}
 		

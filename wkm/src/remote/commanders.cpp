@@ -223,6 +223,7 @@ namespace Commanders
 		ATTACH_CTX(gop_size, asInt)
 		ATTACH_CTX(qmin, asInt)
 		ATTACH_CTX(qmax, asInt)
+		ATTACH_CTX(frame_rate, asInt)
 		this->changeCommanderQaul(command);
 
 		screen->recorder()->start(out.asString());
@@ -261,6 +262,7 @@ namespace Commanders
 		ATTACH_CTX(gop_size, asInt)
 		ATTACH_CTX(qmin, asInt)
 		ATTACH_CTX(qmax, asInt)
+		ATTACH_CTX(frame_rate, asInt)
 		this->changeCommanderQaul(command);
 	}
 

@@ -22,8 +22,7 @@ exports.start = function(type) {
 	require(__dirname + "/common-plugins").
 	require(__dirname + "/front-plugins");
 
-	if(type == "slave")
-	loader.require(__dirname + "/maestro-plugins");
+	if(type == "slave") loader.require(__dirname + "/maestro-plugins");
 
 
 	loader.load(function(err) {

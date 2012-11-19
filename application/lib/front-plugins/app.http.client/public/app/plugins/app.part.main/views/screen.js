@@ -11,19 +11,20 @@ module.exports = require("../../../views/base").extend({
 		this.options.loader.bindWindow(_.bind(this._onWindow, this));
 
 		var loader = this.options.loader,
-		lv = this._loaderView;
+		lv = this._loaderView,
+		self = this;
 		loader.on("loading", function() {
+			$ca = $(self.el).find(".current-app");
+			$ca.transit({opacity:1})
+			$ca.text(loader.options.app.substr(0,1).toUpperCase() + loader.options.app.substr(1));
 			lv.update({ app: loader.options.app });
 			lv.showNotification();
 
 		});
 
 		loader.on("window", function() {
-			lv.hideNotification();
+			// lv.hideNotification();
 		})
-	},
-	"_onConnection": function(connection) {
-		connection
 	},
 	"prepareChildren": function() {
 		return [
@@ -32,6 +33,7 @@ module.exports = require("../../../views/base").extend({
 		];
 	},
 	"_onWindow": function(win) {
+		console.log("on window (screen)")
 		var padding = getPadding(win),
 		self = this,
 		baseQual = {
@@ -59,7 +61,7 @@ module.exports = require("../../../views/base").extend({
 
 		function onResize() {
 
-			$el.css({
+			$hud.css({
 				opacity: 1,
 				width: $(document).width() + padding.left + padding.right,
 				height: $(document).height() + padding.top + padding.bottom,
@@ -68,10 +70,10 @@ module.exports = require("../../../views/base").extend({
 				position: "fixed"
 			});
 
-			var w = $el.width(),
-			h = $el.height();
-			$hud.width(w);
-			$hud.height(h);
+			var w = $hud.width(),
+			h = $hud.height();
+			// $hud.width(w);
+			// $hud.height(h);
 
 
 
@@ -99,6 +101,9 @@ module.exports = require("../../../views/base").extend({
 
 		win.startRecording(q, function(err, info) {
 			self._desktopPlayer.update({ host: info.url });
+			setTimeout(function() {
+				self._loaderView.hideNotification();
+			}, 1000)
 		});
 
 		var coords = {};

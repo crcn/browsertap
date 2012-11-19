@@ -30,10 +30,8 @@ module.exports = structr(EventEmitter, {
 
 	"_onConnection": function(connection) {
 		this._connection = connection;
-
+		connection.events.on("openWindow", _.bind(this._onOpenWindow, this));
 		this.emit("loading");
-
-		
 	},
 
 	/**
@@ -54,12 +52,13 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_connectApp": function() {
-		console.log("loading app");
+		console.log("loading app %s", this.options.app);
 		var con = this._connection;
-		con.events.on("openWindow", _.bind(this._onOpenWindow, this));
+		this.emit("loading");
 		// con.events.on("closeWindow", _.bind(this._onCloseWindow, this));
 
 		if(this._app != this.options.app) {
+			this.window = null;
 			con.browsers.open(this.options.open, this._app = this.options.app, function(){ });
 			return;
 		} else 

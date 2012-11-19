@@ -2,6 +2,7 @@ var sift = require("sift");
 
 module.exports = function(window) {
 
+
 	var padding = [
 		{
 			test: { className: "Chrome_WidgetWin_0", parent: 0 },
@@ -15,7 +16,7 @@ module.exports = function(window) {
 		{
 			test: { className: {$ne:null}},
 			padding: {
-				top: 24,
+				top: 0,
 				left: 4,
 				right: 4,
 				bottom: 4

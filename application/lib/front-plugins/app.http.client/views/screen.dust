@@ -5,6 +5,7 @@
 	head.js(
 		"/vendors/js/jquery-mousewheel.js",
 		"/vendors/js/swfobject.js",
+		"/vendors/js/keymaster.js",
 		"/js/screen.js"
 	);
 </script>
@@ -12,4 +13,6 @@
 
 {<content}
 <div class="screen hud"></div>
+<div class="app-switcher">
+</div>
 {/content}
