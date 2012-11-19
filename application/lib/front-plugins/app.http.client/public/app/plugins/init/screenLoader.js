@@ -8,7 +8,8 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"__construct": function(puppeteer) {
+	"__construct": function(puppeteer, commands) {
+		this.commands = commands;
 		this.puppeteer = puppeteer;
 		this.connect();
 		this.options = { app: "chrome 19", open: "http://google.com" };
@@ -30,7 +31,10 @@ module.exports = structr(EventEmitter, {
 
 	"_onConnection": function(connection) {
 		this._connection = connection;
-		connection.events.on("openWindow", _.bind(this._onOpenWindow, this));
+		var self = this;
+		connection.events.on("openWindow", function(win) {
+			self._onOpenWindow(win);
+		});
 		this.emit("loading");
 	},
 
@@ -76,7 +80,10 @@ module.exports = structr(EventEmitter, {
 	"_connectWindow": function() {
 		if(this._screenId == this.options.screen) return;
 		console.log("loading window")
-		this._connection.client.windows.getWindow(this._screenId = this.options.screen, _.bind(this._onWindow, this));
+		var self = this;
+		this._connection.client.windows.getWindow(this._screenId = this.options.screen, function(err, window) {
+			self._onWindow(null, window);
+		});
 	},
 
 	/**
@@ -91,7 +98,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_onWindow": function(err, w) {
-		self._setWindow(w);
+		this._setWindow(w);
 	},
 
 	/**
@@ -185,7 +192,11 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_popupWindow": function(w) {
-		this.options.commands.emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this.puppeteer.host + "&token=" + this._puppeteer.token + "&screen=" + w.id, width: w.width, height: w.height });
+		try {
+		this.commands.emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this.puppeteer.host + "&token=" + this.puppeteer.token + "&screen=" + w.id, width: w.width, height: w.height });
+		}catch(e) {
+			console.log(e.stack)
+		}
 	},
 
 	/**

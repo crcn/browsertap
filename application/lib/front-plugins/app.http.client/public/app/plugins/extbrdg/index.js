@@ -1,14 +1,9 @@
 var step = require("step");
 
 exports.require = ["commands"];
-
-
-
-
+exports.name = "extbrdg";
 exports.plugin = function(commands) {
-
 	var bridge = prepare();
-	
 	commands.on("popup", function(options) {
 		step(
 			function() {

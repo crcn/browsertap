@@ -1,8 +1,8 @@
 var ScreenLoader = require("./screenLoader"),
 qs = require("querystring");
 
-exports.require = ["router", "app.part.main", "puppeteer"];
-exports.plugin = function(router, mainPlugin, puppeteer) {
+exports.require = ["router", "app.part.main", "puppeteer", "commands"];
+exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 
 	// var query = qs.parse(String(window.location).split("")
 
@@ -13,7 +13,7 @@ exports.plugin = function(router, mainPlugin, puppeteer) {
 		}
 	});
 
-	var loader = new ScreenLoader(puppeteer),
+	var loader = new ScreenLoader(puppeteer, commands),
 	screen = new mainPlugin.views.Screen({ el: ".screen", loader: loader }),
 	appSwitcher = new mainPlugin.views.AppSwitcher({ el: ".app-switcher", router: router, loader: loader });
 
