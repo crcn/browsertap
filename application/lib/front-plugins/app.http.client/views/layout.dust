@@ -5,6 +5,8 @@
 
 		{+styles}
 			<link rel="stylesheet" href="/css/main.css" type="text/css">    
+			<link rel="stylesheet" href="/css/smoke/smoke.css" type="text/css">    
+			<link rel="stylesheet" href="/css/smoke/dark.css" type="text/css">    
 		{/styles}
 
 		<script type="text/javascript" src="/vendors/js/head.js"></script>
@@ -16,7 +18,8 @@
 				"/vendors/js/underscore.js",
 				"/vendors/js/backbone.js",
 				"/vendors/js/mustache.js",
-				"/vendors/js/history.js"
+				"/vendors/js/history.js",
+				"/vendors/js/smoke.js"
 			);
 		</script>
 

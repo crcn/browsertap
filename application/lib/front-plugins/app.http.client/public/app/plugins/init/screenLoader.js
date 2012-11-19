@@ -52,8 +52,8 @@ module.exports = structr(EventEmitter, {
 				self._popupWindow(winProps);
 			},
 			close: function() {
-				//PARENT CLOSE
-				window.close();
+				self.commands.emit("closed");
+				self._setWindow(null);
 			}
 		});
 		this.emit("loading");
@@ -65,6 +65,7 @@ module.exports = structr(EventEmitter, {
 	"step load": function(options, next) {
 		_.extend(this.options, options);
 
+		this.emit("loading");
 		if(this.options.screen) {
 			this._connectWindow();
 		} else {
@@ -82,7 +83,6 @@ module.exports = structr(EventEmitter, {
 		// con.events.on("closeWindow", _.bind(this._onCloseWindow, this));
 
 		if(this._app != this.options.app) {
-			this.emit("loading");
 			con.browsers.open(this.options.open, this._app = this.options.app, function(){ });
 			return;
 		} else 
@@ -212,11 +212,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_popupWindow": function(w) {
-		try {
-		this.commands.emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this.puppeteer.host + "&token=" + this.puppeteer.token + "&screen=" + w.id, width: w.width, height: w.height });
-		}catch(e) {
-			console.log(e.stack)
-		}
+		this.commands.emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this.puppeteer.host + "&token=" + this.puppeteer.token + "&screen=" + w.id + "&app=" + encodeURIComponent(this.options.app), width: w.width, height: w.height });
 	},
 
 	/**
@@ -225,7 +221,7 @@ module.exports = structr(EventEmitter, {
 	"_setWindow": function(window) {
 		console.log("set main window");
 		this.emit("window", this.window = window); 
-		window.bindProxy(_.bind(this._onProxy, this));
+		if(window) window.bindProxy(_.bind(this._onProxy, this));
 	},
 
 	/**

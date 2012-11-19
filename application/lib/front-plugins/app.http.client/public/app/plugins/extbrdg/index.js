@@ -13,6 +13,12 @@ exports.plugin = function(commands) {
 			}
 		);
 	});
+
+	/*commands.on("closed", function(options) {
+		if(confirm("This window has been disconnected. Close?")) {
+			window.close();
+		}
+	})*/
 }
 
 
