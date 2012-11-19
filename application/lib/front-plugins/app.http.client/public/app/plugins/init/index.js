@@ -17,9 +17,23 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 	screen = new mainPlugin.views.Screen({ el: ".screen", loader: loader }),
 	appSwitcher = new mainPlugin.views.AppSwitcher({ el: ".app-switcher", router: router, loader: loader });
 
-	key("shift+tab", function(e) {
-		appSwitcher.toggleShow();
+	key("shift+right, shift+tab", function(e) {
+		appSwitcher.shift("right");
 	});
+
+	key("shift+left", function(e) {
+		appSwitcher.shift("left");
+	});
+
+	key("shift+up", function(e) {
+		appSwitcher.shift("up");
+	});
+
+	key("shift+down", function(e) {
+		appSwitcher.shift("down");
+	});
+
+
 
 
 

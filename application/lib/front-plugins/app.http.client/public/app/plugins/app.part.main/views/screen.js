@@ -14,9 +14,6 @@ module.exports = require("../../../views/base").extend({
 		lv = this._loaderView,
 		self = this;
 		loader.on("loading", function() {
-			$ca = $(self.el).find(".current-app");
-			$ca.transit({opacity:1})
-			$ca.text(loader.options.app.substr(0,1).toUpperCase() + loader.options.app.substr(1));
 			lv.update({ app: loader.options.app });
 			lv.showNotification();
 

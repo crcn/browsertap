@@ -15,4 +15,6 @@
 <div class="screen hud"></div>
 <div class="app-switcher">
 </div>
+<div class="current-app">
+</div>
 {/content}
