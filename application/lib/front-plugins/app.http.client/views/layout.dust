@@ -29,5 +29,7 @@
 	<body>
 		{+content}
 		{/content}
+
+	<div id="scroller"></div>
 	</body>
 </html>

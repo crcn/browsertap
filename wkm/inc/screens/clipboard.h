@@ -5,10 +5,7 @@ namespace Screens
 	class Clipboard 
 	{
 	public:
-		Clipboard()
-		{
-			_currentData = std::string("");
-		}
+		Clipboard();
 		void setValue(std::string value);
 		std::string getValue();
 		bool hasChanged();

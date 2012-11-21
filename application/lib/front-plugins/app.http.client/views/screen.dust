@@ -17,4 +17,6 @@
 </div>
 <div class="current-app">
 </div>
+
+	<div id="scroller"></div>
 {/content}

@@ -4,7 +4,7 @@ body {
 	padding: 0px;
 	margin: 0px;
 	font-family: "Helvetica", "Helvetica Neue";
-	overflow: hidden;
+	// overflow: hidden;
 }
 
 #desktop-player {
@@ -17,6 +17,14 @@ body {
 
 .hidden {
 	.opac(0);
+}
+
+#scroller {
+	position: absolute;
+	top: 0px;
+	width: 1px;
+	z-index:9999999;
+	//background-color:#FF6600;
 }
 
 @import "app-notification.less";

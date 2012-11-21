@@ -53,7 +53,9 @@ module.exports = require("../../../views/base").extend({
 			qmin: 10,
 			qmax: 51,
 			gop_size: 300
-		}
+		};
+
+		padding.right += 17; //remove the scrollbar
 
 		var $hud = $(this.el).find(".hud-body"),
 		$el = $(this.el);
@@ -71,8 +73,8 @@ module.exports = require("../../../views/base").extend({
 
 			$hud.css({
 				opacity: 1,
-				width: $(document).width() + padding.left + padding.right,
-				height: $(document).height() + padding.top + padding.bottom,
+				width: $(window).width() + padding.left + padding.right,
+				height: $(window).height() + padding.top + padding.bottom,
 				left: -padding.left,
 				top: -padding.top,
 				position: "fixed"
@@ -114,7 +116,28 @@ module.exports = require("../../../views/base").extend({
 			}, 1000)
 		});
 
-		var coords = {};
+		var coords = {}, proxy;
+
+		win.bindProxy(function(p) {
+			proxy = p;
+			setInterval(function() {
+				p.scrollbar.getPosition(function(x, y) {
+					// $("#scroller").width(x);
+					$("#scroller").height(y);
+					onResize();
+				});
+			}, 2000);
+		});
+
+
+		$(document).scroll(_.throttle(function() {
+			// console.log($(document).scrollTop());
+			// console.log($(document).scrollLeft());
+
+			if(proxy) {
+				proxy.scrollbar.to($(document).scrollLeft(), $(document).scrollTop());
+			}
+		}, 30));
 
 
 		$el.mousemove(_.throttle(function(e) {
@@ -163,8 +186,8 @@ module.exports = require("../../../views/base").extend({
 		}
 
 
-		$el.bind("mousewheel", _.throttle(function(e, delta) {
+		/*$el.bind("mousewheel", _.throttle(function(e, delta) {
 			win.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, coords, delta * 100);
-		}, 25));
+		}, 25));*/
 	}
 });

@@ -224,6 +224,13 @@ namespace Screens
 		{
 			this->_recorder->update();
 		}
+/*
+		int min = 0, max = 0, pos = 0;
+
+		GetScrollRange(this->target(), SB_VERT, &min, &max);
+		pos = GetScrollPos(this->target(), SB_VERT);
+
+		std::cout << min << " " << max << " " << pos << std::endl;*/
 	}
 
 	bool Screen::inFocus() 
@@ -407,7 +414,7 @@ namespace Screens
 
 	void ScreenManager::updateRelationships()
 	{
-		int n = this->_screens.size();
+		//int n = this->_screens.size();
 
 		/*for(int i = n; i--;)
 		{

@@ -37,7 +37,9 @@ exports.listen = function(wkm, port) {
 	});
 
 
-	assetServer.use(browserify({ entry: __dirname + "/client/index.js", mount:'/client.js' }));
+
+	assetServer.use(browserify({ entry: __dirname + "/client/index.js", mount:'/client.js', watch: true }));
+	assetServer.use(express.static(__dirname + "/client"));
 	
 
 	var sock = shoe(function(stream) {
@@ -75,7 +77,7 @@ exports.listen = function(wkm, port) {
 	mitm.on("interceptResponseContent", function (buffer, responseObject, isSsl, charset, callback) {
 
 		var content = buffer.toString("utf8");
-		var script  = wrapScript("client.js?dnodeClient", httpPort);
+		var script  = wrapScript("client.js?dnodeClient", httpPort) + wrapCss("/css-fix.css", httpPort);
 
 		callback(content.replace(/<\/head>/i, script + "</head>"))
 	});
@@ -112,5 +114,11 @@ exports.listen = function(wkm, port) {
 function wrapScript(path, port) {
 
 	return "<script src=\"http://localhost:"+port+"/"+path+"\" type=\"text/javascript\"></script>"
+
+}
+
+function wrapCss(path, port) {
+
+	return "<link rel=\"stylesheet\" type=\"text/css\" href=\"http://localhost:"+port+"/"+path+"\" type=\"text/javascript\"></script>"
 
 }

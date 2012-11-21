@@ -1,5 +1,5 @@
 var domReady = require("domready"),
-client = require("./client")
+client = require("./clnt")
 
 
 if(window.top == window.self) {

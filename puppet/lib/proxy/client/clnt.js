@@ -52,6 +52,15 @@ exports.listen = function() {
 		emit: function() {
 			em.emit.apply(em, arguments);
 		},
+		scrollbar: {
+			to: function(x, y) {
+				window.scrollTo(x, y);
+			},
+			getPosition: function(callback) {
+				callback(document.body.scrollWidth, document.body.scrollHeight);
+				// callback(window.innerWidth, window.innerHeight);
+			}
+		},
 		foundWindow: function() {
 			clearInterval(setTitle);
 			document.title = orgTitle;
@@ -62,6 +71,10 @@ exports.listen = function() {
 		setTitle = setInterval(function() {
 		document.title = _id;
 	}, 500);
+
+		/*setInterval(function() {
+			console.log(document.body.clientWidth+" "+document.body.clientHeight)
+		}, 500)*/
 
 
 	var d = dnode(client);

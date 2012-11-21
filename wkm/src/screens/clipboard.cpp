@@ -5,6 +5,11 @@
 namespace Screens 
 {
 
+	Clipboard::Clipboard()
+	{
+		this->hasChanged();
+	}
+
 	std::string Clipboard::getValue()
 	{
 		return this->_currentData;
@@ -13,7 +18,7 @@ namespace Screens
 	void Clipboard::setValue(std::string value)
 	{
 		this->_currentData = value;
-
+ 
 		if(OpenClipboard(NULL)) 
 		{
 			EmptyClipboard();
@@ -35,10 +40,12 @@ namespace Screens
 
 		if(OpenClipboard(NULL)) 
 		{
-
 			HANDLE hData = GetClipboardData( CF_TEXT );
 			buffer = (char*)GlobalLock( hData );
-			hasChanged = this->_currentData.compare(buffer) != 0;
+			if(buffer != 0) 
+			{
+				hasChanged = this->_currentData.compare(buffer) != 0;
+			}
 			GlobalUnlock( hData );
 			CloseClipboard();
 		}
