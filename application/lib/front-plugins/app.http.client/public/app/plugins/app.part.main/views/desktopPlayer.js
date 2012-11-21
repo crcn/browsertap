@@ -11,7 +11,7 @@ module.exports = FlashPlayer.extend({
 		return {
 			channel: hp.pop(),
 			host: hp.join("/"),
-			debug: true
+			debug: ~String(window.location).indexOf("debugMode")
 		};
 	}
 });
