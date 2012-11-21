@@ -16,6 +16,7 @@ module.exports = structr({
 
 		wkm.windows.on("open", this.getMethod("_onOpenWindow"));
 		wkm.windows.on("close", this.getMethod("_onCloseWindow"));
+		wkm.windows.on("setClipboard", this.getMethod("_setClipboard"));
 	},
 
 	/**
@@ -90,4 +91,10 @@ module.exports = structr({
 		if(~i) this._queuedNativeWindows.splice(i, 1);
 	},
 
+	"_setClipboard": function(data) {
+		if(this._connections.length) {
+			console.log("sending clipboard to client");
+			this._connections[0].setClipboard(data);
+		}
+	}
 });

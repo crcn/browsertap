@@ -61,8 +61,12 @@ module.exports = structr(EventEmitter, {
 				//only want to close popups
 				// if(!window.opener) return;
 				//this actually works
-				window.open("","_self","");
-				window.close();
+				// window.open("","_self","");
+				// window.close();
+			},
+			setClipboard: function(data) {
+				console.log("set clipboard: %s", data);
+				self.emit("setClipboard", data);
 			}
 		});
 		this.emit("loading");

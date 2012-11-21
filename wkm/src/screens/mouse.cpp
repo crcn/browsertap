@@ -12,10 +12,6 @@ namespace Screens
 
 	bool Mouse::event(int dwFlags, int x, int y, int dwData)
 	{
-		Geometry::Rectangle bounds = this->_screen->bounds();
-
-		int realX = bounds.x + x;
-		int realY = bounds.y + y;
 		int mouseX = 100;
 		int mouseY = 100;
 		int rmx = 100;
@@ -71,8 +67,6 @@ namespace Screens
 		PostMessage(target, msg, wparam, lparam);*/
 
 		
-
-		bool moveWindow = false;
 
 		/*if(this->_screen->rightClickDown && (dwFlags & MOUSEEVENTF_LEFTDOWN)) {
 			this->_screen->rightClickDown = false;

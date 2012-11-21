@@ -3,6 +3,7 @@
 #include <iostream>
 #include <windows.h>
 #include "json/writer.h"
+#include "screens/clipboard.h"
 
 namespace Commanders
 {
@@ -58,6 +59,7 @@ namespace Commanders
 		regCommand(fireWindowKeybdEvent, execFireWindowKeybdEvent)
 		regCommand(findWindowByTitle, execFindWindowByTitle)
 		regCommand(changeWindowRecordingQuality, changeWindowRecordingQual)
+		regCommand(setClipboard, execSetClipboard)
 
 
 		#undef regCommand
@@ -85,7 +87,15 @@ namespace Commanders
 
 	void JSONCommander::update()
 	{
-		if(_tick == 0) Screens::ScreenManager::instance().update();
+		if(_tick == 0) 
+		{
+			Screens::ScreenManager::instance().update();
+			if(Screens::Clipboard::instance().hasChanged()) 
+			{
+				this->dispatchCommand("setClipboard", Json::Value(Screens::Clipboard::instance().getValue()));
+			}
+		}
+
 		int fps = this->_frameRate; 
 		int ms  = (1/(double)fps)*1000;
 
@@ -168,6 +178,13 @@ namespace Commanders
 		int id = command->value()["data"]["id"].asInt();
 		
 		this->dispatchResponse(command->value(), getSuccess(Screens::ScreenManager::instance().closeScreen(id)));
+	}
+
+	void JSONCommander::execSetClipboard(JSONCommand* command) 
+	{
+		std::cout << "set clipboard to: " << command->value()["data"].asString() << std::endl;
+		Screens::Clipboard::instance().setValue(command->value()["data"].asString());
+		this->dispatchResponse(command->value(), getSuccess(true));
 	}
 
 	void JSONCommander::execResizeWindow(JSONCommand* command)

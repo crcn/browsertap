@@ -30,7 +30,8 @@ module.exports = structr(EventEmitter, {
 	"changeRecordingQuality",
 	"bindProxy",
 	"refreshProxy",
-	"getProxy"
+	"getProxy",
+	"setClipboard"
 	],
 
 	/**
@@ -120,6 +121,13 @@ module.exports = structr(EventEmitter, {
 		console.log("bind proxy")
 		if(this._proxy) callback(this._proxy);
 		this.on("proxy", callback);
+	},
+
+	/**
+	 */
+
+	"setClipboard": function(text) {
+		this._con.execute("setClipboard", text);
 	},
 
 	/**

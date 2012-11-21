@@ -21,6 +21,12 @@ module.exports = require("../../../views/base").extend({
 
 		loader.on("window", function() {
 			// lv.hideNotification();
+		});
+
+
+		loader.on("setClipboard", function(text) {
+			// alert(text);
+			$(".hud-body").find("object")[0].setClipboard(text);
 		})
 	},
 	"prepareChildren": function() {
@@ -144,6 +150,9 @@ module.exports = require("../../../views/base").extend({
 
 
 		window.desktopEvents = {
+			setClipboard: function(text) {
+				win.setClipboard("CCC"+text);
+			},
 			keyDown: function(data) {
 				if(~modifiers.indexOf(data.keyCode)) return;
 				win.keybdEvent(data);

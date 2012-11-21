@@ -59,6 +59,7 @@ namespace Commanders
 		void execShowWindowStatus(JSONCommand* event);
 		void execFireWindowMouseEvent(JSONCommand* event);
 		void execFireWindowKeybdEvent(JSONCommand* event);
+		void execSetClipboard(JSONCommand* event);
 		void changeWindowRecordingQual(JSONCommand* event);
 		void changeCommanderQaul(JSONCommand* event);
 		void execFindWindowByTitle(JSONCommand* event);

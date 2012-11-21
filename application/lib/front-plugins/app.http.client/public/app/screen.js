@@ -10,7 +10,7 @@ head.ready(function() {
 
 
 	plugin().
-	params({}).
+	params({ }).
 	require(require("./plugins/router")).
 	require(require("./plugins/puppeteer")).
 	require(require("./plugins/commands")).

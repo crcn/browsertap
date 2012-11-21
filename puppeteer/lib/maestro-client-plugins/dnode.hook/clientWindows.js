@@ -42,6 +42,15 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
+	"setClipboard": function(data) {
+		if(!this._clientWindows.length) return false;
+		this._clientWindows[0].setClipboard(data);
+		return true;
+	},
+
+	/**
+	 */
+
 	"bindNativeWindow": function(window) {
 		for(var i = this._clientWindows.length; i--;) {
 			var wb = this._clientWindows[i];
@@ -102,6 +111,9 @@ var WindowBridge = structr(EventEmitter, {
 		this._clientWindow.setNativeWindow(window);
 
 		return true;
+	},
+	"setClipboard": function(data) {
+		this._clientWindow.setClipboard(data);
 	},
 	"popup": function(winProps) {
 		this._clientWindow.popupWindow(winProps);

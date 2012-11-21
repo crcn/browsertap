@@ -17,13 +17,13 @@ package
 	import flash.net.NetStream;
 	import flash.net.ObjectEncoding;
 	import flash.text.TextField;
+	import flash.text.TextFieldType;
 	import flash.ui.Keyboard;
 	import flash.utils.*;
+	import flash.system.System;
+	import flash.desktop.*;
 
 	
-	
-	import org.osmf.net.NetConnectionCodes;
-	import org.osmf.net.NetStreamCodes;
 		[SWF(backgroundColor='#FFFFFF')]
 	
 	public class DesktopPlayer extends Sprite
@@ -37,6 +37,10 @@ package
 		private var _debug:Boolean;
 		private var _channel:String;
 		private var _checkCount:int;
+		private var _end:Boolean = true;
+		private var _clipboard:String;
+		private var _setClipboard:String;
+		private var _copyPaste:TextField;
 		
 		
 		
@@ -47,7 +51,14 @@ package
 			this._server =  this.root.loaderInfo.parameters.host || "rtmp://192.168.2.3:1935/live";
 			this._channel = this.root.loaderInfo.parameters.channel || "default";
 			this._debug =   Boolean(this.root.loaderInfo.parameters.debug);
+			//this._setClipboard = String(this.root.loaderInfo.parameters.clipboard);
 			
+			this._copyPaste = new TextField();
+			this._copyPaste.width = 0;
+			this._copyPaste.height = 0;
+			this._copyPaste.type = TextFieldType.INPUT;
+			this._copyPaste.x = 500;
+			this.addChild(this._copyPaste);
 			
 			this._debugInfo = new TextField();
 			this._debugInfo.text = "connecting to " + this._server;
@@ -58,10 +69,12 @@ package
 			this._debugInfo.backgroundColor = 0xFFFFFF;
 			this._debugInfo.alpha = 0.5;
 			if(this._debug) this.addChild(this._debugInfo);
+			this.addChild(this._copyPaste);
 			
 			
 			this.stage.align = StageAlign.TOP_LEFT;
 			this.stage.scaleMode = StageScaleMode.NO_SCALE;
+			this._copyPaste.addEventListener(Event.PASTE, onPaste);
 			
 			this.openStream();
 			
@@ -87,7 +100,7 @@ package
 			{
 				this.stage.addEventListener(mouseEvent, onMouseEvent);
 			}
-			
+
 			
 			for each(var keyboardEvent:String in keyboardEvents)
 			{
@@ -95,23 +108,78 @@ package
 			}
 
 			setInterval(this._checkFramerate, 500);
+
+			ExternalInterface.addCallback("setClipboard", setClipboard);
+			ExternalInterface.addCallback("getClipboard", getClipboard);
+			this.stage.focus = this._copyPaste;
 		}
 		
 		private function onMouseEvent(event:MouseEvent):void
 		{
-			//_trace(event.type);
+			if(event.type == MouseEvent.MOUSE_DOWN && this._setClipboard) 
+			{
+				_trace("set clipboard data to " + this._setClipboard);
+				try 
+				{
+					Clipboard.generalClipboard.clear();
+					//Clipboard.generalClipboard.setData(ClipboardFormats.TEXT_FORMAT, this._clipboard = this._setClipboard);
+					System.setClipboard(this._clipboard = this._setClipboard);
+				} catch(e:Error) {
+					_trace(e.message);
+				}
+				this._setClipboard = null;
+			}
 			
 			ExternalInterface.call('desktopEvents.' + event.type, { x: event.stageX, y: event.stageY, delta: event.delta, ctrlKey: event.ctrlKey, shiftKey: event.shiftKey });
 		}
 		
 		private function onKeyboardEvent(event:KeyboardEvent):void
-		{     
-			//if(event.keyCode == Keyboard.SHIFT || event.keyCode == Keyboard.CONTROL) return;
+		{   
+			clearCopyPaste();
 
-			//_trace(event.type);
-			
+			if(this._setClipboard) 
+			{
+				this._copyPaste.text = this._clipboard = this._setClipboard;
+				this._copyPaste.setSelection(0, this._setClipboard.length)
+			} 
+
+
+			this.stage.focus = this._copyPaste;
+			setTimeout(onKeyEventDelayed, 1, event);
+		}
+
+		private function onKeyEventDelayed(event:KeyboardEvent): void 
+		{
+			if(event.ctrlKey) 
+			{
+				var newClipboardText:String = this._copyPaste.text;
+				if(event.charCode == "v".charCodeAt(0) && newClipboardText != this._clipboard) 
+				{
+					_trace("set external clipboard to " + newClipboardText);
+					this._clipboard = newClipboardText;
+					ExternalInterface.call("desktopEvents.setClipboard", this._clipboard);
+				} else
+				if(event.charCode == "c".charCodeAt(0) && this._setClipboard) 
+				{
+					_trace("set clipboard to " + this._setClipboard);
+					this._setClipboard = null;
+				}	
+			}
+
 			ExternalInterface.call('desktopEvents.' + event.type, { keyCode: event.keyCode, altKey: event.altKey, shiftKey: event.shiftKey, ctrlKey: event.ctrlKey });
 		}
+
+
+		private function clearCopyPaste():void 
+		{
+			this._copyPaste.text = "";
+		}
+
+		private function onPaste(e:Event):void 
+		{
+			_trace("PASTE")
+		}
+
 		
 		
 		private function openVideo():void
@@ -223,6 +291,17 @@ package
 
 			this.stage.frameRate = obj.frameRate;
 			onStageResize();
+		}
+
+
+		private function getClipboard():String
+		{
+			return this._clipboard;
+		}
+
+		private function setClipboard(value:String):void
+		{
+			this._setClipboard = value;
 		}
 		
 		private function onError(event:*):void

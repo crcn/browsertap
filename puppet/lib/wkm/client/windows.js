@@ -21,6 +21,7 @@ module.exports = structr(EventEmitter, {
 		this._windows = [];
 		this._con.on("openWindow", this.getMethod("_onOpenWindow"));
 		this._con.on("closeWindow", this.getMethod("_onCloseWindow"));
+		this._con.on("setClipboard", this.getMethod("_onSetClipboard"));
 
 		this._blackListSifter = sift({
 			$or: [
@@ -127,5 +128,13 @@ module.exports = structr(EventEmitter, {
 		this.emit("open", win);
 		console.log("open window class=%s, title=%s ", win.className, win.title);
 		return win;
+	},
+
+	/**
+	 */
+
+	"_onSetClipboard": function(data) {
+		console.log("set clipboard: %s", data);
+		this.emit("setClipboard", data);
 	}
 })
