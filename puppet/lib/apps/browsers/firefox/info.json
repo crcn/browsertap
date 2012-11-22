@@ -7,7 +7,9 @@
 					"cache.directory": "C:/Users/Administrator/AppData/Local/Mozilla",
 					"process.names": ["firefox*"],
 					"process.cannotRunWith": ["firefox"],
-					"window.classes": [""]
+					"window.classes": [""],
+					"window.searchMethod": "title",
+					"type": "browser"
 				}
 			},
 			{

@@ -7,7 +7,9 @@
 					"cache.directory": "C:/Users/Administrator/AppData/Local/Apple Computer",
 					"process.names": ["safari*"],
 					"process.cannotRunWith": ["safari"],
-					"window.classes": [""]
+					"window.classes": [""],
+					"window.searchMethod": "title",
+					"type": "browser"
 				}
 			},
 			{
