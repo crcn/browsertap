@@ -1,0 +1,24 @@
+{
+	"check": {
+		"if": { "name": "opera" },
+		"thenRun": [
+			{
+				"set": {
+					"cache.directory": "C:/Users/Administrator/AppData/Local/Opera",
+					"process.names": ["opera*"],
+					"window.classes": [""]
+				}
+			},
+			{
+				"check": {
+					"if": { "version": {"$lte":12}},
+					"thenRun": {
+						"set": {
+							"padding.top": 80
+						}
+					}
+				}
+			}
+		]
+	}
+}

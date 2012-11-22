@@ -1,0 +1,35 @@
+{
+	"check": {
+		"if": { "name": "chrome" },
+		"thenRun": [
+			{
+				"set": {
+					"cache.directory": "C:/Users/Administrator/AppData/Local/Google/Chrome/User Data",
+					"process.names": ["chrome*"],
+					"window.classes": [""],
+					"cannotRunWith": ["chrome"]
+				}
+			},
+			{
+				"check": {
+					"if": { "version": {"$lte":19}},
+					"thenRun": {
+						"set": {
+							"padding.top": 61
+						}
+					}
+				}
+			},
+			{
+				"check": {
+					"if": { "version": {"$lt":5}},
+					"thenRun": {
+						"set": {
+							"padding.top": 63
+						}
+					}
+				}
+			}
+		]
+	}
+}

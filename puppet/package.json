@@ -25,6 +25,10 @@
     "dnode": "1.0.x",
     "shoe": "0.0.x",
     "express": "*",
-    "cashew": "0.0.x"
+    "cashew": "0.0.x",
+    "colors": "0.6.x.-1",
+    "sprintf": "0.1.x",
+    "seq": "0.3.x",
+    "capirona": "0.1.x"
   }
 }

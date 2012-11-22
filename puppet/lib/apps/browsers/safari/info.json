@@ -1,0 +1,24 @@
+{
+	"check": {
+		"if": { "name": "safari" },
+		"thenRun": [
+			{
+				"set": {
+					"cache.directory": "C:/Users/Administrator/AppData/Local/Apple Computer",
+					"process.names": ["safari*"],
+					"window.classes": [""]
+				}
+			},
+			{
+				"check": {
+					"if": { "version": {"$lte":6}},
+					"thenRun": {
+						"set": {
+							"padding.top": 80
+						}
+					}
+				}
+			}
+		]
+	}
+}

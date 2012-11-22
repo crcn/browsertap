@@ -6,12 +6,16 @@ Mouse        = require("./wkm/mouse"),
 Desktop      = require("./wkm/desktop"),
 Browsers     = require("./browsers"),
 proxyServer  = require("./proxy/server"),
-_            = require("underscore");
+_            = require("underscore"),
+Apps         = require("./apps");
 
 exports.create = function(options) {
 
 	var client = new Client(options),
 	puppet     = { };
+
+	var apps = new Apps("C:\\users\\administrator\\apps", client);
+	apps.load();
 
 	_.extend(puppet, {
 		wkm      : client,
