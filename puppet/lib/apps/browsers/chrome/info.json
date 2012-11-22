@@ -6,8 +6,8 @@
 				"set": {
 					"cache.directory": "C:/Users/Administrator/AppData/Local/Google/Chrome/User Data",
 					"process.names": ["chrome*"],
-					"window.classes": [""],
-					"cannotRunWith": ["chrome"]
+					"process.cannotRunWith": ["chrome"],
+					"window.classes": [""]
 				}
 			},
 			{

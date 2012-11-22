@@ -6,8 +6,8 @@
 				"set": {
 					"cache.directory": "C:/Users/Administrator/AppData/Local/Mozilla",
 					"process.names": ["firefox*"],
+					"process.cannotRunWith": ["firefox"],
 					"window.classes": [""],
-					"cannotRunWith": ["firefox"]
 				}
 			},
 			{
