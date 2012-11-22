@@ -6,7 +6,8 @@
 				"set": {
 					"cache.directory": "C:/Users/Administrator/AppData/Local/Opera",
 					"process.names": ["opera*"],
-					"window.classes": [""]
+					"window.classes": [""],
+					"cannotRunWith": ["opera"]
 				}
 			},
 			{
