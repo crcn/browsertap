@@ -42,7 +42,7 @@ namespace Screens
 		this->_throttler = new Speed::Throttle(10);
 		this->_style = GetWindowLong(this->_window, GWL_STYLE);
 		this->_extStyle = GetWindowLong(this->_window, GWL_EXSTYLE);
-		//this->removeChrome();
+		// this->removeChrome();
 	}
 
 	int Screen::_count = 0;
@@ -101,10 +101,10 @@ namespace Screens
 
 	void Screen::removeChrome()
 	{
-		/*LONG lStyle = GetWindowLong(this->_window, GWL_STYLE);
-		lStyle &= ~(WS_CAPTION | WS_THICKFRAME |  WS_SYSMENU);
+		LONG lStyle = GetWindowLong(this->_window, GWL_STYLE);
+		lStyle &= ~(WS_CAPTION | WS_THICKFRAME | WS_SYSMENU);
 		SetWindowLong(this->_window, GWL_STYLE, lStyle);
-		SetWindowPos(this->_window, NULL, 0,0,0,0, SWP_FRAMECHANGED | SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_NOOWNERZORDER);*/
+		//SetWindowPos(this->_window, NULL, 0,0,0,0, SWP_FRAMECHANGED | SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_NOOWNERZORDER);
 		// This will make a hole you can see through for the MainToon window.
 
 		return;
