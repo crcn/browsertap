@@ -12,10 +12,10 @@ module.exports = structr({
 	/**
 	 */
 
-	"__construct": function(options) {
+	"__construct": function(options, apps) {
 
 		this._con = new Connection();
 		this._con.open();
-		this.windows = new Windows(this._con, options);
+		this.windows = new Windows(this._con, apps, options);
 	}
 });

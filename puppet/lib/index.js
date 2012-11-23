@@ -11,21 +11,16 @@ Apps         = require("./apps");
 
 exports.create = function(options) {
 
-	var client = new Client(options),
-	puppet     = { };
-
-	var apps = new Apps("C:\\users\\administrator\\apps", client);
-	apps.load();
+	var apps = new Apps(options.apps.directory),
+	client   = new Client(options, apps),
+	puppet   = { };
 
 	_.extend(puppet, {
 		wkm      : client,
 		server   : proxyServer.listen(client, options.port || 8090),
-		// mouse    : new Mouse(client),
-		// desktop  : new Desktop(puppet, client),
-		// keyboard : new Keyboard(client),
-		browsers : new Browsers(puppet, options.browsers),
-
-		toPublic: function() {
+		apps     : apps,
+		// browsers : new Browsers(puppet, options.browsers),
+		toPublic : function() {
 			return {
 				client: puppet.wkm,
 				browsers: puppet.browsers
@@ -35,3 +30,15 @@ exports.create = function(options) {
 
 	return puppet;
 }
+
+
+var apps = exports.create({
+	apps: {
+		directory: "C:/Users/Administrator/Desktop/browsers"
+	}
+}).
+apps.
+open({ name: "safari", version: 4, arg: "http://reddit.com" });
+
+
+

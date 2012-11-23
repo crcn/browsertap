@@ -6,7 +6,9 @@ async = require("async"),
 App = require("./app"),
 _ = require("underscore"),
 capirona = require("capirona"),
-walkr = require("walkr");
+walkr = require("walkr"),
+logger = require("winston").loggers.get("apps.load"),
+sprintf = require("sprintf").sprintf;
 
 
 
@@ -22,6 +24,7 @@ module.exports = function(directory, callback) {
 		 */
 
 		function() {
+			logger.info(sprintf("reading apps from %s", directory));
 			fs.readdir(directory, this);
 		},
 
@@ -59,7 +62,7 @@ module.exports = function(directory, callback) {
 		/**
 		 */
 
-		on.success(function(apps) {
+		on.success(function() {
 
 			//does it have set right off the bat? then it's
 			//a default info item
@@ -67,11 +70,11 @@ module.exports = function(directory, callback) {
 				return a.set ? -1 : 1;
 			});
 
-			var modifiers = this.modifiers;
+			var modifiers = this.modifiers, next = this;
 
 			async.forEach(this.apps, function(app, next) {
 				cap.run(modifiers, app, next);
-			}, this);
+			}, next);
 		}),
 
 		/**
@@ -79,9 +82,10 @@ module.exports = function(directory, callback) {
 
 		on.success(function() {
 
+			logger.info("wrapping apps");
+
 			var apps = this.apps.map(function(app) {
-				// return new App(app); TODO
-				return app;
+				return new App(app);
 			});
 
 			this(null, apps);
@@ -136,6 +140,9 @@ function mapAppVersions(fullPath, next) {
 	name      = path.basename(directory); //firefox
 
 
+	// logger.info(sprintf("adding available app: %s %s", name, version));
+
+
 	return {
 		name: name,
 		version: version,
@@ -155,7 +162,3 @@ function fixPaths(parent, paths) {
 		return path.normalize(parent + "/" + dir);
 	});
 }
-
-module.exports(__dirname + "/browsers", function(err, apps) {
-	console.log(apps)
-})

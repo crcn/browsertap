@@ -4,6 +4,9 @@ var maestro = require("maestro");
 maestro.
 client().
 params({
+	apps: {
+		directory: "C:/Users/Administrator/Desktop/browsers"
+	},
 	browsers: {
 		directory: "C:/Users/Administrator/Desktop/browsers",
 		cache: {

@@ -1,8 +1,8 @@
 var sift = require("sift");
-
 module.exports = {
 	"def check": {
 		"run": function(context, next) {
+
 
 			var condition = this.get("if"),
 			thenRun       = this.get("thenRun"),

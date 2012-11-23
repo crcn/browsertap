@@ -26,9 +26,11 @@
     "shoe": "0.0.x",
     "express": "*",
     "cashew": "0.0.x",
-    "colors": "0.6.x.-1",
+    "colors": "*",
     "sprintf": "0.1.x",
     "seq": "0.3.x",
-    "capirona": "0.1.x"
+    "capirona": "0.2.x",
+    "winston": "0.6.x",
+    "walkr": "0.0.x"
   }
 }

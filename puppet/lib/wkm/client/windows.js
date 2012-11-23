@@ -2,7 +2,8 @@ var structr = require("structr"),
 _ = require("underscore"),
 sift = require("sift"),
 EventEmitter = require("events").EventEmitter,
-Window = require("./window");
+Window = require("./window"),
+outcome = require("outcome");
 
 module.exports = structr(EventEmitter, {
 
@@ -14,8 +15,9 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"__construct": function(con, options) {
+	"__construct": function(con, apps, options) {
 		this._options = options;
+		this._apps = apps;
 		this._con = con;
 		this._syncScreens();
 		this._windows = [];
@@ -123,11 +125,31 @@ module.exports = structr(EventEmitter, {
 		}
 
 
-		var win = new Window(window, this);
-		this._windows.push(win);
-		this.emit("open", win);
-		console.log("open window class=%s, title=%s ", win.className, win.title);
+		var win = new Window(window, this),
+		self = this;
+
+		this._setApp(win, function(err) {
+			if(err) console.error(err);
+			self._windows.push(win);
+			self.emit("open", win);
+			console.log("open window class=%s, title=%s ", win.className, win.title);
+		});
+
 		return win;
+	},
+
+	/**
+	 */
+
+	"_setApp": function(win, callback) {
+		var pn = win.process.name.split(/[\s\.]+/g).shift().toLowerCase(),
+		self = this;
+
+		console.log("trying to find app %s", pn);
+		self._apps.findApp({ name: new RegExp(pn) }, outcome.error(callback).success(function(app) {
+			win.app = app;
+			console.log("attach app %s to window %s", app.name, win.title);
+		}));
 	},
 
 	/**
