@@ -14,7 +14,7 @@ module.exports = structr({
 	/**
 	 */
 
-	"publicKeys": ["open"],
+	"publicKeys": ["open", "getApps"],
 
 	/**
 	 */
@@ -56,11 +56,26 @@ module.exports = structr({
 		callback(null, app);
 	},
 
+
+	/**
+	 * public info
+	 */
+
+	"step getApps": function(callback) {
+		callback(null, this._apps.map(function(app) {
+			return {
+				name: app.name,
+				version: app.version,
+				window: app.window
+			};
+		}))
+	},
+
 	/**
 	 */
 
 	"step open": function(options, next) {
-		if(!options || !options.name || !options.version) return callback(new Error("onot enough options"));
+		if(!options || !options.name || !options.version) return next(new Error("onot enough options"));
 
 		var arg      = options.arg,
 		on = outcome.error(next),

@@ -29,7 +29,8 @@ exports.plugin = function(client, httpServer, loader) {
 		events = new EventEmitter(),
 		wrappedPuppet = dsync(puppet),
 		killTimeoutId,
-		nativeWindows = new NativeWindows(puppet.wkm);
+		nativeWindows = new NativeWindows(puppet.wkm),
+		numConnections = 0;
 
 		wrappedPuppet.events = dsync(events);
 
@@ -37,6 +38,8 @@ exports.plugin = function(client, httpServer, loader) {
 		var sock = shoe(function(stream) {
 
 			var wp = dsync(wrappedPuppet);
+
+			numConnections++;
 
 			var d = dnode({
 
@@ -85,6 +88,19 @@ exports.plugin = function(client, httpServer, loader) {
 			//once the client closes, tell the client that we're not busy
 			d.on("end", function() {
 				logger.info("client close");
+
+				//no more connections? do the cleanup
+				if(!(--numConnections)) {
+
+					logger.info("no more connections, cleaning up");
+
+					//detach the owner of this VM
+					client.update({ tags: {} });
+
+					//close all apps, and remove all settings
+					puppet.apps.closeAllApps();
+				}
+
 			});
 		});
 

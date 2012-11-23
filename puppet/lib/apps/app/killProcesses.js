@@ -9,7 +9,6 @@ module.exports = function(processes, next) {
 		//need to give the app time to kill. some processes like opera (ugh >.>) stay
 		//open for a bt after taskkill
 		exec('taskkill /F /IM ' + pn, function() {
-			console.log("KILLED")
 			next();
 		});
 

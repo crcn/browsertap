@@ -12,7 +12,7 @@ module.exports = structr(EventEmitter, {
 		this.commands = commands;
 		this.puppeteer = puppeteer;
 		this.connect();
-		this.options = { app: "chrome 19", open: "http://google.com" };
+		this.options = { app: "chrome", version: 19, open: "http://google.com" };
 	},
 
 	/**
@@ -95,9 +95,9 @@ module.exports = structr(EventEmitter, {
 		var con = this._connection;
 		// con.events.on("closeWindow", _.bind(this._onCloseWindow, this));
 
-		if(this._app != this.options.app) {
+		if(this._appName != this.options.app || this._appVersion != this.options.version) {
 			this._ignoreClose = true;
-			con.browsers.open(this.options.open, this._app = this.options.app, function(){ });
+			con.apps.open({ name: this._appName = this.options.app, version: this._appVersion = this.options.version, arg: this.options.open }, function(){ });
 			return;
 		} else 
 		if(this._proxy) {

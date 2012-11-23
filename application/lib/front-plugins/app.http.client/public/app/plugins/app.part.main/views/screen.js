@@ -14,7 +14,7 @@ module.exports = require("../../../views/base").extend({
 		lv = this._loaderView,
 		self = this;
 		loader.on("loading", function() {
-			lv.update({ app: loader.options.app });
+			lv.update({ app: loader.options.app, version: loader.options.version });
 			lv.showNotification();
 
 		});

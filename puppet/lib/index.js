@@ -23,7 +23,7 @@ exports.create = function(options) {
 		toPublic : function() {
 			return {
 				client: puppet.wkm,
-				browsers: puppet.browsers
+				apps: puppet.apps
 			};
 		}
 	});
@@ -32,13 +32,13 @@ exports.create = function(options) {
 }
 
 
-var apps = exports.create({
+/*var apps = exports.create({
 	apps: {
 		directory: "C:/Users/Administrator/Desktop/browsers"
 	}
 }).
 apps.
-open({ name: "safari", version: 4, arg: "http://reddit.com" });
+open({ name: "safari", version: 4, arg: "http://reddit.com" });*/
 
 
 

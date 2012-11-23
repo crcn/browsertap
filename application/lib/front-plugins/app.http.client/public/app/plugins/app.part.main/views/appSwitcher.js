@@ -12,9 +12,8 @@ module.exports = require("../../../views/base").extend({
 		var self = this;
 
 		function onApp() {
-			var ap = self.options.loader.options.app.split(" ");
-			self._app = ap.shift();
-			self.currentVersionIndex = self.apps[self._app].indexOf(ap.pop());
+			self._app = self.options.loader.options.app;
+			self.currentVersionIndex = self.apps[self._app].indexOf(String(self.options.loader.options.version));
 			self._setCA();
 		}
 		this.options.loader.on("loading", onApp);
@@ -114,13 +113,12 @@ module.exports = require("../../../views/base").extend({
 	},
 	"_findSelected": function(app) {
 		var selected = app ? this._app = app : this._app;
-		console.log(selected)
 		this._selectItem($(this.el).find("[data-app=\""+selected+"\"]"));
 	},
 	"_selectedApp": function() {
 		return this._selected.attr("data-app");
 	},
 	"_setSelectedItem": function() {
-		this.options.router.redirect("/live", { app: this._getApp() });
+		this.options.router.redirect("/live", { app: this._app, version: this.apps[this._app][this.currentVersionIndex] });
 	}
 });
