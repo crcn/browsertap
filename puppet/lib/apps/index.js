@@ -127,7 +127,8 @@ module.exports = structr({
 
 	"_closeApps": function(search, next) {
 		async.forEach(search ? sift(search, this._apps) : this._apps, function(app, next) {
-			app.close(next);
+			// app.close(next);
+			next();
 		}, next);
 	}
 });

@@ -4,6 +4,7 @@
 #include "common/events.h"
 #include "screens/screens.h"
 #include "json/reader.h"
+#include "common/throttle.h"
 
 namespace Commanders
 {
@@ -46,6 +47,7 @@ namespace Commanders
 	private:
 		int _tick;
 		int _frameRate;
+		Speed::Throttle* _throttler;
 		Events::EventDispatcher* _commands;
 
 		// void execTimeout(JSONCommand* event);

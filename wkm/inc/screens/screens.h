@@ -9,6 +9,7 @@
 #include "screens/recorder/recorder.h"
 #include "screens/mouse.h"
 #include "screens/keyboard.h"
+#include "common/throttle.h"
 
 namespace Screens
 {
@@ -181,6 +182,7 @@ namespace Screens
 		 */
 
 		Process::Process* _process;
+		Speed::Throttle* _throttler;
 
 		/**
 		 */

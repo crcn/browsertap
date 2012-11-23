@@ -31,7 +31,8 @@ module.exports = structr(EventEmitter, {
 	"bindProxy",
 	"refreshProxy",
 	"getProxy",
-	"setClipboard"
+	"setClipboard",
+	"openNewWindow"
 	],
 
 	/**
@@ -49,13 +50,13 @@ module.exports = structr(EventEmitter, {
 		this.width     = window.width;
 		this.height    = window.height;
 		this.vks       = _.values(wkme.keyboard_vk);
+		this._apps     = windows._apps;
 
 		this._windows = windows;
 		this._con = windows._con;
 		this._rtmp = windows._options.rtmp;
 		this.clean();
 
-		//TODO - mouse
 	},
 
 	/**
@@ -89,6 +90,20 @@ module.exports = structr(EventEmitter, {
 		this._con.execute("fireWindowMouseEvent", { id: this.id, x: coords.x, y: coords.y, dwFlags: dwFlags, dwData: dwData || 0 });
 	},
 
+	/**
+	 */
+
+	"openNewWindow": function() {
+		this.focus();
+		this.keybdEvent({ keyCode: "n".charCodeAt(0), ctrlKey: true });
+	},
+
+	/**
+	 */
+
+	"focus": function() {
+		this._con.execute("focusWindow", { id: this.id });
+	},
 
 	/**
 	 */

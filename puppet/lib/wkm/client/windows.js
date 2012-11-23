@@ -146,8 +146,9 @@ module.exports = structr(EventEmitter, {
 		self = this;
 
 		console.log("trying to find app %s", pn);
-		self._apps.findApp({ name: new RegExp(pn) }, outcome.error(callback).success(function(app) {
+		self._apps.findApp({ name: new RegExp(pn), running: true }, outcome.error(callback).success(function(app) {
 			win.app = app;
+			app.addWindow(win);
 			console.log("attach app %s to window %s", app.name, win.title);
 			callback();
 		}));
