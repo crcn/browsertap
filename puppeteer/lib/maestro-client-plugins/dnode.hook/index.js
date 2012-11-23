@@ -8,7 +8,7 @@ logger = require("winston").loggers.get("logger"),
 sprintf = require("sprintf").sprintf,
 EventEmitter = require("events").EventEmitter,
 ppt = require("../../../../puppet"),
-NativeWindows = require("./nativeWindows");
+PuppetClient = require("./puppetClient");
 
 
 
@@ -27,17 +27,12 @@ exports.plugin = function(client, httpServer, loader) {
 
 		var busy = false,
 		events = new EventEmitter(),
-		wrappedPuppet = dsync(puppet),
+		pclient = new PuppetClient(puppet),
 		killTimeoutId,
-		nativeWindows = new NativeWindows(puppet.wkm),
 		numConnections = 0;
-
-		wrappedPuppet.events = dsync(events);
 
 		//set dnode up so clients can connect
 		var sock = shoe(function(stream) {
-
-			var wp = dsync(wrappedPuppet);
 
 			numConnections++;
 
@@ -48,6 +43,8 @@ exports.plugin = function(client, httpServer, loader) {
 				 */
 
 				connectClient: function(credentials, callback) {
+
+					//TODO
 					/*client.maestroRequest("authenticateUser", credentials, outcome.error(callback).success(function(response, body) {
 						if(body.errors) return callback(new Error(body.errors[0].message));
 
@@ -57,7 +54,7 @@ exports.plugin = function(client, httpServer, loader) {
 
 
 
-					callback(null, wp);
+					callback(null, dsync(pclient.createClient(d)));
 				},
 
 				/**
@@ -69,8 +66,6 @@ exports.plugin = function(client, httpServer, loader) {
 					killTimeout();
 				}
 			});
-
-			wp.clientWindows = dsync(nativeWindows.getClientWindows(d));
 
 			d.pipe(stream).pipe(d);
 

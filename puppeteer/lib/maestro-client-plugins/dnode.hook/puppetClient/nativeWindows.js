@@ -1,5 +1,5 @@
 var structr = require("structr"),
-ClientWindows = require("./clientWindows"),
+Client = require("./client"),
 logger = require("winston").loggers.get("nativeWindows"),
 sprintf = require("sprintf").sprintf;
 
@@ -9,10 +9,11 @@ module.exports = structr({
 	/**
 	 */
 
-	"__construct": function(wkm) {
-		this._connections = [];
+	"__construct": function(controller, wkm) {
 		this._queuedNativeWindows = [];
 		this._toPopUp = [];
+		this.wkm = wkm;
+		this.controller = controller;
 
 		wkm.windows.on("open", this.getMethod("_onOpenWindow"));
 		wkm.windows.on("close", this.getMethod("_onCloseWindow"));
@@ -25,9 +26,9 @@ module.exports = structr({
 	"addNativeWindow": function(win) {
 		logger.info(sprintf("add native window %s", win.id));
 
-		for(var i = this._connections.length; i--;) {
-			var cw = this._connections[i];
-			if(cw.bindNativeWindow(win)) {
+		for(var i = this.controller.clients.length; i--;) {
+			var cw = this.controller.clients[i];
+			if(cw.windows.bindNativeWindow(win)) {
 				return true;
 			}
  		}
@@ -37,25 +38,9 @@ module.exports = structr({
 		
  		logger.info("failed to bind to client, popping up")
 
-		for(i = this._connections.length; i--;) {
-			if(this._connections[i].popupWindow(win)) return;
+		for(i = this.this.controller.clients.length; i--;) {
+			if(this.controller.clients[1].windows.popupWindow(win)) return;
 		}
-
-
-
-	},
-
-	/**
-	 */
-
-	"getClientWindows": function(con) {
-		var client = new ClientWindows(this, con),
-		self = this;
-		client.once("close", function() {
-			self._connections.splice(self._connections.indexOf(client), 1);
-		});
-		this._connections.push(client);
-		return client;
 	},
 
 	/**
@@ -92,9 +77,9 @@ module.exports = structr({
 	},
 
 	"_setClipboard": function(data) {
-		if(this._connections.length) {
+		if(this.controller.clients.length) {
 			console.log("sending clipboard to client");
-			this._connections[0].setClipboard(data);
+			this.controller.clients[0].windows.setClipboard(data);
 		}
 	}
 });

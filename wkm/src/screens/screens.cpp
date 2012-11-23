@@ -42,6 +42,7 @@ namespace Screens
 		this->_throttler = new Speed::Throttle(10);
 		this->_style = GetWindowLong(this->_window, GWL_STYLE);
 		this->_extStyle = GetWindowLong(this->_window, GWL_EXSTYLE);
+		//this->removeChrome();
 	}
 
 	int Screen::_count = 0;
@@ -73,16 +74,40 @@ namespace Screens
 	bool Screen::focus()
 	{
 		ScreenManager::instance().focusedScreen(this);
+		SetWindowPos(this->_window, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOSENDCHANGING);
+
+
 		return SetForegroundWindow(this->_window);
+	}
+
+	bool Screen::unfocus()
+	{
+		if(this->_window != 0) {
+			/*LONG lstyle = GetWindowLong(this->_window, GWL_EXSTYLE);
+
+			if(lstyle & WS_EX_TOPMOST) {
+				lstyle &= ~(WS_EX_TOPMOST);
+				SetWindowLong(this->_window, GWL_EXSTYLE, lstyle);
+			}*/
+			SetWindowPos(this->_window, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOSENDCHANGING);
+		}
+
+		if(this->inFocus()) {
+			ScreenManager::instance().focusedScreen(0);
+		}
+
+		return true;
 	}
 
 	void Screen::removeChrome()
 	{
 		/*LONG lStyle = GetWindowLong(this->_window, GWL_STYLE);
-		lStyle &= ~(WS_CAPTION | WS_THICKFRAME | WS_MINIMIZE | WS_MAXIMIZE | WS_SYSMENU);
-		SetWindowLong(this->_window, GWL_STYLE, 0);
+		lStyle &= ~(WS_CAPTION | WS_THICKFRAME |  WS_SYSMENU);
+		SetWindowLong(this->_window, GWL_STYLE, lStyle);
 		SetWindowPos(this->_window, NULL, 0,0,0,0, SWP_FRAMECHANGED | SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_NOOWNERZORDER);*/
 		// This will make a hole you can see through for the MainToon window.
+
+		return;
 
 		// HRGN rgnOriginalWnd;
 		// HRGN rgnTheHole;
@@ -161,7 +186,6 @@ namespace Screens
 	bool Screen::resize(Geometry::Rectangle bounds)
 	{
 		if(bounds.width == 0 || bounds.height == 0) return FALSE;
-
 
 		//fixes issue where ffmpeg breaks when the dimensions aren't aligned. E.g: 889x660 busts it.
 		bounds.width = floor(bounds.width/2) * 2;
@@ -246,6 +270,8 @@ namespace Screens
 	Screen::~Screen()
 	{
 		if(this->_recorder != 0) delete this->_recorder;
+		this->_window = 0;
+		this->unfocus();
 		delete this->_mouse;
 		delete this->_keyboard;
 		delete this->_throttler;
@@ -297,7 +323,15 @@ namespace Screens
 
 	void ScreenManager::focusedScreen(Screen* screen)
 	{
+		Screens::Screen* oldScreen = this->_focusedScreen;
+
 		this->_focusedScreen = screen;
+
+
+		if(oldScreen != screen && oldScreen != 0) {
+			oldScreen->unfocus();
+		}
+
 	}
 
 	std::vector<Screen*> ScreenManager::allScreens()

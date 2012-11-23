@@ -1,27 +1,27 @@
 var structr = require("structr"),
 EventEmitter = require("events").EventEmitter,
 logger = require("winston").loggers.get("clientWindows"),
-sprintf = require("sprintf").sprintf;
+sprintf = require("sprintf").sprintf,
+sift = require("sift");
 
 module.exports = structr(EventEmitter, {
 
 	/**
 	 */
 
-	"publicKeys": ["addClientWindow"],
+	"publicKeys": ["add"],
 
 	/**
 	 */
 
-	"__construct": function(nativeWindows, con) {
+	"__construct": function(client, con) {
 		var self = this;
-		this.nativeWindows = nativeWindows;
+		this.nativeWindows = client.controller.nativeWindows;
 		this._clientWindows = [];
 		con.on("end", function() {
 			logger.info("client window closed, removing native");
 			console.log(self._clientWindows.length)
 			self._closeAllNativeWindows();
-			self.emit("close");
 		});
 	},
 
@@ -29,13 +29,9 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"popupWindow": function(window) {
-
 		console.log("popup window %s", window)
-
 		if(!this._clientWindows.length) return false;
-
 		this._clientWindows[0].popup(window);
-
 		return true;
 	},
 
@@ -62,7 +58,7 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"addClientWindow": function(window) {
+	"add": function(window) {
 		logger.info("add client window");
 		var wb = new WindowBridge(this, window);
 		this._clientWindows.push(wb);
@@ -88,7 +84,8 @@ var WindowBridge = structr(EventEmitter, {
 		this._clientWindow = clientWindow;
 	},
 	"testNativeWindow": function(window) {
-		return !this._nativeWindow;
+		console.log("test native window");
+		return !this._nativeWindow && (!this._clientWindow.search || sift(this._clientWindow.search).test(window));
 	},
 	"bindNativeWindow": function(window) {
 
@@ -102,11 +99,9 @@ var WindowBridge = structr(EventEmitter, {
 		var self = this;
 		window.once("close", function() {
 			self._nativeWindow = null;
-			console.log("native window close");
-			self._clientWindow.close();
+			console.log("native window close, closing client");
+			if(self._clientWindow.close) self._clientWindow.close();
 		});
-
-		console.log(this._clientWindow.setNativeWindow)
 
 		this._clientWindow.setNativeWindow(window);
 
@@ -120,7 +115,6 @@ var WindowBridge = structr(EventEmitter, {
 	},
 	"close": function() {
 		console.log("closing client window");
-		console.log(this._nativeWindow)
 		if(this._nativeWindow) this._nativeWindow.close();
 	}
 })

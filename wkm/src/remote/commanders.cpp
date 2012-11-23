@@ -48,7 +48,6 @@ namespace Commanders
 	_frameRate(24),
 	_commands(new Events::EventDispatcher()) {
 		this->_throttler = new Speed::Throttle(24);
-		std::cout << "RN" << std::endl;
 		#define regCommand(name, method) this->_commands->addEventListener(#name, new Events::ClassCbEventListener<JSONCommander, JSONCommand>(this, &JSONCommander::method));
 	
 		regCommand(listWindows, execListWindows)

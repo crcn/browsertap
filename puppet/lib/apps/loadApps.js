@@ -34,7 +34,7 @@ module.exports = function(directory, callback) {
 		on.success(function(dirs) {
 
 			var noInfo = dirs.filter(function(name) {
-				return name != "info.json";
+				return name != "info.js";
 			});
 			async.map(fixPaths(directory, noInfo), loadApp, this);
 		}),
@@ -50,7 +50,7 @@ module.exports = function(directory, callback) {
 
 			walkr(directory).
 			filterFile(function(options, next) {
-				if(options.source.match(/info.json$/)) {
+				if(options.source.match(/info.js$/)) {
 					req.push(require(options.source));
 				}
 				next();
@@ -118,7 +118,7 @@ function loadApp(directory, callback) {
 		on.success(function(executables) {
 
 			var fixedPaths = fixPaths(directory, executables.filter(function(name) {
-				return name != "info.json";
+				return name != "info.js";
 			})).
 			map(mapAppVersions);
 

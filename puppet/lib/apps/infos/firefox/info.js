@@ -1,4 +1,4 @@
-{
+module.exports = {
 	"check": {
 		"if": { "name": "firefox" },
 		"thenRun": [
@@ -10,7 +10,11 @@
 					"window.classes": [""],
 					"window.allowMultiple": true,
 					"window.searchMethod": "title",
-					"type": "browser"
+					"type": "browser",
+					"window.openNew": "-new-window %s",
+					"window.getAppName": function(win) {
+						return win.process.path.match(/\\Mozilla\s+([^\\]+)/)[1];
+					}
 				}
 			},
 			{

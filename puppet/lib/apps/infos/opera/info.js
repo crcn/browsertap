@@ -1,4 +1,4 @@
-{
+module.exports = {
 	"check": {
 		"if": { "name": "opera" },
 		"thenRun": [
@@ -10,7 +10,8 @@
 					"window.classes": [""],
 					"window.allowMultiple": true,
 					"window.searchMethod": "title",
-					"type": "browser"
+					"type": "browser",
+					"window.openNew": "-newWindow %s",
 				}
 			},
 			{

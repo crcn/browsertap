@@ -46,7 +46,7 @@ module.exports = structr(EventEmitter, {
 			// filter = { query: getAppFilter(this.options.app) }
 		}
 
-		connection.clientWindows.addClientWindow({
+		/*connection.clientWindows.addClientWindow({
 			filter: filter,
 			setNativeWindow: function(window) {
 				self._setWindow(window);
@@ -68,7 +68,8 @@ module.exports = structr(EventEmitter, {
 				console.log("set clipboard: %s", data);
 				self.emit("setClipboard", data);
 			}
-		});
+		});*/
+
 		this.emit("loading");
 	},
 
@@ -92,12 +93,14 @@ module.exports = structr(EventEmitter, {
 
 	"_connectApp": function() {
 		console.log("loading app %s", this.options.app);
-		var con = this._connection;
+		var con = this._connection, self = this;
 		// con.events.on("closeWindow", _.bind(this._onCloseWindow, this));
 
 		if(this._appName != this.options.app || this._appVersion != this.options.version) {
 			this._ignoreClose = true;
-			con.apps.open({ name: this._appName = this.options.app, version: this._appVersion = this.options.version, arg: this.options.open }, function(){ });
+			con.open({ name: this._appName = this.options.app, version: this._appVersion = this.options.version, arg: this.options.open }, function(err, client) { 
+				client.addWindow(self._getClient(null, false));
+			});
 			return;
 		} else 
 		if(this._proxy) {
@@ -106,6 +109,35 @@ module.exports = structr(EventEmitter, {
 		}
 
 
+	},
+
+	/**
+	 */
+
+	"_getClient": function(search, closeable) {
+		var self = this;
+		return {
+			search: search,
+			setNativeWindow: function(window) {
+				console.log("set native window");
+				self._setWindow(window);
+			},
+			popupWindow: function(winProps) {
+				self._popupWindow(winProps);
+			},
+			close: function() {
+
+				if(self._ignoreClose && closeable !== false) return;
+
+				//this actually works
+				window.open("","_self","");
+				window.close();
+			},
+			setClipboard: function(data) {
+				console.log("set clipboard: %s", data);
+				self.emit("setClipboard", data);
+			}
+		};
 	},
 
 	/**

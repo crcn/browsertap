@@ -24,6 +24,7 @@ module.exports = structr(EventEmitter, {
 
 	"addWindow": function(win) {
 		var self = this;
+		console.log("app %s added window %s", this.name, win.title);
 		this._windows.push(win);
 		win.once("close", function() {
 			var i = self._windows.indexOf(win);
@@ -41,12 +42,22 @@ module.exports = structr(EventEmitter, {
 		callback(null, this._windows);
 	},
 
+	/**
+	 */
+
+	"windows": function() {
+		return this._windows;
+	},
+
 
 	/**
 	 */
 
 	"step open": function(args, callback) {
-		this._proc().open(args, callback);
+		var self = this;
+		this._proc().open(args, function() {
+			callback(null, self);
+		});
 		this.running = true;
 	},
 
@@ -58,8 +69,11 @@ module.exports = structr(EventEmitter, {
 			callback = force;
 			force = true;
 		}
-		if(!this._process && force !== true) return callback();
-		this._proc().close(callback);
+		if(!this._process && force !== true) return callback(null, this);
+		var self = this;
+		this._proc().close(function() {
+			callback(null, self);
+		});
 		this.running = false;
 	},
 

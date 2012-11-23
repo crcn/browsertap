@@ -1,7 +1,10 @@
 var structr = require("structr"),
 EventEmitter = require("events").EventEmitter,
 wkme = require("./events"),
-_ = require("underscore");
+_ = require("underscore"),
+windowStyles = require("./windowStyles"),
+exec = require("child_process").exec,
+sprintf = require("sprintf").sprintf;
 
 var cashew = require('cashew'),
 videoStreamIdGenerator = cashew.generator('videoStream', true);
@@ -45,12 +48,18 @@ module.exports = structr(EventEmitter, {
 		this.className = window.className;
 		this.title     = window.title;
 		this.process   = window.process;
-		this.style     = window.style;
-		this.extStyle     = window.extStyle;
+		// this.style     = window.style;
+		// this.extStyle  = window.extStyle;
 		this.width     = window.width;
 		this.height    = window.height;
 		this.vks       = _.values(wkme.keyboard_vk);
 		this._apps     = windows._apps;
+
+
+		this.style     = {
+			maximized: !!(window.style & windowStyles.WS_MAXIMIZE)
+		};
+
 
 		this._windows = windows;
 		this._con = windows._con;
@@ -93,7 +102,15 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"openNewWindow": function() {
+	"openNewWindow": function(arg) {
+
+		if(this.app && this.app.window.openNew) {
+			console.log(this.app.path, sprintf(this.app.window.openNew, arg));
+			return exec("\"" + this.app.path + "\" " + sprintf(this.app.window.openNew, arg), function(err) {
+				if(err) console.error(err)
+			});
+		}
+
 		this.focus();
 		this.keybdEvent({ keyCode: "n".charCodeAt(0), ctrlKey: true });
 	},

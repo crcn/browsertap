@@ -22,6 +22,9 @@
     "maestro": "0.0.x",
     "sprintf": "0.1.x",
     "winston": "0.6.x",
-    "structr": "0.2.x"
+    "structr": "0.2.x",
+    "disposable": "0.0.x",
+    "step": "0.0.x",
+    "sift": "0.0.x"
   }
 }

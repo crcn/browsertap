@@ -112,6 +112,11 @@ namespace Screens
 		/**
 		 */
 
+		bool unfocus();
+
+		/**
+		 */
+
 		Mouse* mouse();
 
 		/**

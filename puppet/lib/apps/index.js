@@ -107,6 +107,27 @@ module.exports = structr({
 	/**
 	 */
 
+	"addWindow": function(win, callback) {
+		var app = _.find(this._apps, function(app) {
+			if(!app.window.getAppName) return null;
+
+			var name = app.window.getAppName(win).toLowerCase(),
+			nameParts = name.split(" ");
+
+			return app.name == nameParts[0] && app.version == nameParts[1];
+		});
+
+
+		if(!app) return callback(new Error("app not found"));
+		win.app = app;
+		app.addWindow(win);
+
+		callback(null, app);
+	},
+
+	/**
+	 */
+
 	"_closeOtherVersions": function(app, next) {
 		this._closeApps({ name: app.name, version: { $ne: app.version }}, next);
 	},

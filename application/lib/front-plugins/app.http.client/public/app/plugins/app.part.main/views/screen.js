@@ -55,7 +55,9 @@ module.exports = require("../../../views/base").extend({
 			gop_size: 300
 		};
 
-		padding.right += 17; //remove the scrollbar
+		padding = { left: 0, right: 0, top: 0, bottom: 0 };
+
+		//padding.right += 17; //remove the scrollbar
 
 		var $hud = $(this.el).find(".hud-body"),
 		$el = $(this.el);
