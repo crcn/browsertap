@@ -27,7 +27,8 @@ module.exports = Backbone.View.extend({
 		return this.options.data || this.options || this;
 	},
 	"dispose": function() {
-		this.remove();
+		// this.remove(); //don't want to remvoe the element - it will be overwritten
+		this.$el.find("*").unbind();
 		for(var i = this._children.length; i--;) {
 			this._children[i].dispose();
 		}

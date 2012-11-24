@@ -61,7 +61,7 @@ module.exports = structr({
 	 * public info
 	 */
 
-	"step getApps": function(callback) {
+	"step getAvailableApps": function(callback) {
 		callback(null, this._apps.map(function(app) {
 			return {
 				name: app.name,

@@ -69,7 +69,7 @@ module.exports = structr(EventEmitter, {
 				self.emit("setClipboard", data);
 			}
 		});*/
-
+		this.emit("connection", connection);
 		this.emit("loading");
 	},
 
@@ -94,10 +94,10 @@ module.exports = structr(EventEmitter, {
 	"_connectApp": function() {
 		console.log("loading app %s", this.options.app);
 		var con = this._connection, self = this;
-		// con.events.on("closeWindow", _.bind(this._onCloseWindow, this));
 
 		if(this._appName != this.options.app || this._appVersion != this.options.version) {
 			this._ignoreClose = true;
+			if(this.window) this.window.close();
 			con.open({ name: this._appName = this.options.app, version: this._appVersion = this.options.version, arg: this.options.open }, function(err, client) { 
 				client.addWindow(self._getClient(null, false));
 			});

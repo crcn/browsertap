@@ -14,10 +14,8 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 		}
 	});
 
-	var loader = new ScreenLoader(puppeteer, commands), screen,
-	loadingView = new mainPlugin.views.Loader({ el: ".loader" }),
-	// screen = new mainPlugin.views.Screen({ el: ".screen", loader: loader }),
-	appSwitcher = new mainPlugin.views.AppSwitcher({ el: ".app-switcher", router: router, loader: loader });
+	var loader = new ScreenLoader(puppeteer, commands), screen, appSwitcher,
+	loadingView = new mainPlugin.views.Loader({ el: ".loader" });
 
 	key("shift+right, shift+tab", function(e) {
 		appSwitcher.shift("right");
@@ -36,15 +34,22 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 	});
 
 	loader.on("loading", function() {
+		if(screen) screen.dispose();
 		loadingView.update({ app: loader.options.app, version: loader.options.version });
 		loadingView.showNotification();
+	});
+
+	loader.on("connection", function(con) {
+		con.getAvailableApps(function(err, apps) {
+			appSwitcher = new mainPlugin.views.AppSwitcher({ el: ".app-switcher", router: router, loader: loader, apps: apps });
+		})
 	})
 
 	loader.on("window", function(window) {
 		if(screen) screen.dispose();
 
 		var q = Url.parse(String(window.location), true).query,
-		defaults = { qmin: 1, qmax: 11, gop_size: 150, frame_rate: 40 };
+		defaults = { qmin: 1, qmax: 5, gop_size: 70, frame_rate: 40 };
 
 		for(var key in defaults) {
 			if(q[key]) q[key] = Number(q[key]);

@@ -15,8 +15,12 @@ module.exports = require("../../../views/base").extend({
 		this.$hud = this.$el.find(".hud-body");
 		this.$window = $(window);
 		this.$document = $(document);
+		this.$body = $(document.body);
 		this.coords = {};
 		this.windowDims = {};
+
+
+		this.$body.css({ "overflow": "hidden" });
 
 		disp.add(
 			loader.on("setClipboard", function(text) {

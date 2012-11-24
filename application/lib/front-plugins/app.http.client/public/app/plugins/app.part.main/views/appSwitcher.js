@@ -1,15 +1,28 @@
 module.exports = require("../../../views/base").extend({
 	"templateName": "app-switcher",
-	"apps": {
-		"opera": ["10", "11.1","11.5","11.6","11"],
-		"safari": ["4","5.0.5","5.1"],
-		"firefox": ["3.5","3.6","3","4","5","6","7","8","9","10","11","12"],
-		"chrome": ["3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19"]
-	},
 	"currentVersionIndex": 0,
 	"initialize": function() {
 		this._hidden = true;
-		var self = this;
+		var self = this,
+		apps = this.options.apps;
+
+		var abv = {};
+
+		for(var i = apps.length; i--;) {
+			var app = apps[i];
+
+			if(!abv[app.name]) abv[app.name] = [];
+			abv[app.name].push(app.version);
+		}
+
+		for(var k in abv) {
+			abv[k] = abv[k].sort(function(a, b) {
+				console.log(String(a).split(".").slice(0, 2).join("."))
+				return Number(String(a).split(".").slice(0, 2).join(".")) > Number(String(b).split(".").slice(0, 2).join(".")) ? 1 : -1;
+			});
+		}
+		
+		this.apps = abv;
 
 		function onApp() {
 			self._app = self.options.loader.options.app;
