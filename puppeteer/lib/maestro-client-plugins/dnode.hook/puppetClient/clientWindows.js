@@ -85,7 +85,7 @@ var WindowBridge = structr(EventEmitter, {
 	},
 	"testNativeWindow": function(window) {
 		console.log("test native window");
-		return !this._nativeWindow && !!window.app && (!this._clientWindow.search || sift(this._clientWindow.search).test(window));
+		return !this._nativeWindow && (!this._clientWindow.search || sift(this._clientWindow.search).test(window));
 	},
 	"bindNativeWindow": function(window) {
 

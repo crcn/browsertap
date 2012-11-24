@@ -17,7 +17,6 @@ module.exports = require("../../../views/base").extend({
 
 		for(var k in abv) {
 			abv[k] = abv[k].sort(function(a, b) {
-				console.log(String(a).split(".").slice(0, 2).join("."))
 				return Number(String(a).split(".").slice(0, 2).join(".")) > Number(String(b).split(".").slice(0, 2).join(".")) ? 1 : -1;
 			});
 		}

@@ -38,8 +38,8 @@ module.exports = structr({
 		
  		logger.info("failed to bind to client, popping up")
 
-		for(i = this.this.controller.clients.length; i--;) {
-			if(this.controller.clients[1].windows.popupWindow(win)) return;
+		for(i = this.controller.clients.length; i--;) {
+			if(this.controller.clients[i].windows.popupWindow(win)) return;
 		}
 	},
 
@@ -65,6 +65,9 @@ module.exports = structr({
 	 */
 
 	"_onOpenWindow": function(win) {
+		if(!win.app) {
+			return console.warn("cannot add \"%s\" - no app found", win.title);
+		}
 		this.addNativeWindow(win);
 	},
 

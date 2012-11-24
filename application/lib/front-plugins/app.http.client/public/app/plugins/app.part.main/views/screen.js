@@ -87,8 +87,8 @@ module.exports = require("../../../views/base").extend({
 
 		this.$hud.css({
 			opacity: 1,
-			width: this.$window.width() + padding.left + padding.right,
-			height: this.$window.height() + padding.top + padding.bottom,
+			width: this.$window.width() + (padding.left || 0) + (padding.right || 0),
+			height: this.$window.height() + (padding.top || 0) + (padding.bottom || 0),
 			left: -padding.left,
 			top: -padding.top,
 			position: "fixed"

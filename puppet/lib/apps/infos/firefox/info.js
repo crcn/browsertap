@@ -22,7 +22,7 @@ module.exports = {
 					"if": { "version": {"$lte":12}},
 					"thenRun": {
 						"set": {
-							"padding.top": 91
+							"padding.top": 110 //91 w/o bookmark
 						}
 					}
 				}
@@ -32,7 +32,8 @@ module.exports = {
 					"if": { "version": {"$lte":3.6}},
 					"thenRun": {
 						"set": {
-							"padding.top": 139
+							"padding.top": 139,
+							"padding.bottom":23 + 4
 						}
 					}
 				}

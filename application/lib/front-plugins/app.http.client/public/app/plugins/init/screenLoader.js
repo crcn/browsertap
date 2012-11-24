@@ -147,9 +147,11 @@ module.exports = structr(EventEmitter, {
 		if(this._screenId == this.options.screen) return;
 		console.log("loading window")
 		var self = this;
-		this._connection.client.windows.getWindow(this._screenId = this.options.screen, function(err, window) {
+		this._connection.windows.add(this._getClient());
+
+		/*this._connection.client.windows.getWindow(this._screenId = this.options.screen, function(err, window) {
 			self._onWindow(null, window);
-		});
+		});*/
 	},
 
 	/**
