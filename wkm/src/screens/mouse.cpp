@@ -22,8 +22,8 @@ namespace Screens
 
 
 		// std::cout << x2 << " " << y2 << " " << GetSystemMetrics(SM_CXSCREEN) << std::endl;
-
-		this->_screen->focus();
+		if(!this->_screen->inFocus())
+			this->_screen->focus();
 		// this->inFocus = true;
 
 

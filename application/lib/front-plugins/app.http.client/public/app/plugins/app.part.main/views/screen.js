@@ -124,7 +124,7 @@ module.exports = require("../../../views/base").extend({
 	"onMouseUp": function(e) {
 		this._window.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTUP : wkmEvents.mouse.MOUSEEVENTF_RIGHTUP, this.coords);
 	},
-	"onKeyDown": function(e) {
+	"onKeyDown": function(data) {
 		if(~[17, 16, 18].indexOf(data.keyCode)) return;
 		this._window.keybdEvent(data);
 	},
