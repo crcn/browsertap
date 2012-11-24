@@ -53,7 +53,8 @@ module.exports = require("../../../views/base").extend({
 			qmin: 10,
 			qmax: 51,
 			gop_size: 300
-		};
+		},
+		windowDims = {};
 
 		padding = { left: 0, right: 0, top: 0, bottom: 0 };
 
@@ -143,7 +144,16 @@ module.exports = require("../../../views/base").extend({
 
 
 		$el.mousemove(_.throttle(function(e) {
-			win.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_ABSOLUTE | wkmEvents.mouse.MOUSEEVENTF_MOVE, coords = { x: e.offsetX, y: e.offsetY });
+
+			coords = { x: e.offsetX, y: e.offsetY };
+
+			if(windowDims.width && windowDims.height) {
+				coords.x = coords.x - ($hud.width()/2 - windowDims.width/2);
+				coords.y = coords.y - ($hud.height()/2 - windowDims.height/2);
+			}
+
+
+			win.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_ABSOLUTE | wkmEvents.mouse.MOUSEEVENTF_MOVE, coords);
 		}, 50));
 
 
@@ -181,7 +191,11 @@ module.exports = require("../../../views/base").extend({
 			keyDown: function(data) {
 				if(~modifiers.indexOf(data.keyCode)) return;
 				win.keybdEvent(data);
-			}/*,
+			},
+			resize: function(data) {
+				windowDims = data;
+			}
+			/*,
 			keyUp: function(data) {
 				win.keybdEvent(data.keyCode, 0,  wkmEvents.keyboard.KEYEVENTF_EXTENDEDKEY | wkmEvents.keyboard.KEYEVENTF_KEYUP);
 			}*/

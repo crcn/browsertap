@@ -12,6 +12,9 @@ module.exports = {
 					"window.searchMethod": "title",
 					"type": "browser",
 					"window.openNew": "-newWindow %s",
+					"window.getAppName": function(win) {
+						return win.process.path.match(/(Opera\s[^\\]+)/)[1];
+					}
 				}
 			},
 			{

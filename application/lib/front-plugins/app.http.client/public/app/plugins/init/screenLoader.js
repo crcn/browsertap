@@ -126,12 +126,12 @@ module.exports = structr(EventEmitter, {
 				self._popupWindow(winProps);
 			},
 			close: function() {
-
-				if(self._ignoreClose && closeable !== false) return;
+				
+				if(self._ignoreClose || closeable === false) return;
 
 				//this actually works
-				window.open("","_self","");
-				window.close();
+				// window.open("","_self","");
+				// window.close();
 			},
 			setClipboard: function(data) {
 				console.log("set clipboard: %s", data);

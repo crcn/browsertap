@@ -109,10 +109,15 @@ module.exports = structr({
 
 	"addWindow": function(win, callback) {
 		var app = _.find(this._apps, function(app) {
+
 			if(!app.window.getAppName) return null;
 
-			var name = app.window.getAppName(win).toLowerCase(),
-			nameParts = name.split(" ");
+			try {
+				var name = app.window.getAppName(win).toLowerCase(),
+				nameParts = name.split(" ");
+			}catch(e) {
+				return false;
+			}
 
 			return app.name == nameParts[0] && app.version == nameParts[1];
 		});

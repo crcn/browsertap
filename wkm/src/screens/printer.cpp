@@ -36,16 +36,9 @@ char* CaptureAnImage(Screens::Screen* screen, Geometry::Rectangle& rect)
         hdcDesktop = GetDC(GetDesktopWindow());
         // BitBlt(hdcMemDC, -b.x + 100, -b.y + 100, 600, 400, hdcDesktop, 100, 100, SRCCOPY);
 
-        int x;
-        int y;
-
-        if((GetWindowLong(screen->target(), GWL_STYLE) & WS_MAXIMIZE) != 0) {
-            x = 4;
-            y = 4;
-        }
 
         //need to subtract the borders since we're windowless.
-        BitBlt(hdcMemDC, x, y, rect.width, rect.height, hdcWindow, rect.x, rect.y, SRCCOPY);
+        BitBlt(hdcMemDC, 0, 0, rect.width, rect.height, hdcDesktop, rect.x, rect.y, SRCCOPY);
         // PatBlt(hdcMemDC, 0, 0, rect.width, rect.height, PATCOPY);
     } else {
         PrintWindow(hWnd, hdcMemDC, 0);

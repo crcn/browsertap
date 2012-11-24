@@ -105,7 +105,7 @@ module.exports = structr(EventEmitter, {
 	"openNewWindow": function(arg) {
 
 		if(this.app && this.app.window.openNew) {
-			console.log(this.app.path, sprintf(this.app.window.openNew, arg));
+			// console.log(this.app.path, sprintf(this.app.window.openNew, arg));
 			return exec("\"" + this.app.path + "\" " + sprintf(this.app.window.openNew, arg), function(err) {
 				if(err) console.error(err)
 			});

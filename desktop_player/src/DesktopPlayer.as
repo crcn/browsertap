@@ -116,6 +116,7 @@ package
 		
 		private function onMouseEvent(event:MouseEvent):void
 		{
+
 			if(event.type == MouseEvent.MOUSE_DOWN && this._setClipboard) 
 			{
 				_trace("set clipboard data to " + this._setClipboard);

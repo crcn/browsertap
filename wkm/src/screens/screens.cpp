@@ -198,7 +198,7 @@ namespace Screens
 		//http://forums.codeguru.com/showthread.php?486970-Catching-WM_GETMINMAXINFO-from-notepad.exe-doesn-t-work
 		//http://msdn.microsoft.com/en-us/library/windows/desktop/ms633534(v=vs.85).aspx
 		// return MoveWindow(this->_window, bounds.x, bounds.y, bounds.width, bounds.height, true);
-		SetWindowPos(this->_window, NULL, 0, 0, bounds.width, bounds.height, /*SWP_NOMOVE |*/ SWP_NOSENDCHANGING);
+		SetWindowPos(this->_window, NULL, 0, 0, bounds.width, bounds.height, 0 /*SWP_NOMOVE |*/ /*SWP_NOSENDCHANGING*/);
 		// RedrawWindow(this->_window, NULL, NULL, RDW_INVALIDATE | RDW_ALLCHILDREN | RDW_ERASENOW | RDW_UPDATENOW);
 		// InvalidateRect(this->_window, &rect, false);
 		/*HRGN rgnNewWnd; 
@@ -224,7 +224,7 @@ namespace Screens
 
 	bool Screen::move(Geometry::Point point)
 	{
-		SetWindowPos(this->_window, NULL, point.x, point.y, 200, 200, SWP_NOSIZE | SWP_NOSENDCHANGING);
+		SetWindowPos(this->_window, NULL, point.x, point.y, 0, 0, SWP_NOSIZE | SWP_NOSENDCHANGING);
 		return true;
 	}
 
