@@ -17,5 +17,12 @@ module.exports = structr({
 		this._con = new Connection();
 		this._con.open();
 		this.windows = new Windows(this._con, apps, options);
+	},
+
+	/**
+	 */
+
+	"reopen": function() {
+		this._con.reopen();
 	}
 });

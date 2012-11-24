@@ -94,6 +94,8 @@ exports.plugin = function(client, httpServer, loader) {
 
 					//close all apps, and remove all settings
 					puppet.apps.closeAllApps();
+					
+					puppet.wkm.reopen();
 				}
 
 			});

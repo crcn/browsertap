@@ -15,6 +15,17 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
+	"reopen": function() {
+		//will automatically re-open
+		if(this._proc) {
+			this._proc.kill();
+			this._proc = null;
+		}
+	},
+
+	/**
+	 */
+
 	"open": function() {
 
 		this._proc = spawn(path.normalize(__dirname + "\\..\\..\\..\\..\\wkm\\bin\\cli.exe"), []);
@@ -50,9 +61,7 @@ module.exports = structr(EventEmitter, {
 		});
 
 		this._proc.on("exit", function() {
-			this._proc = null;
-			console.log("EXIT")
-			console.log(arguments)
+			self._proc = null;
 			self.open();
 		});
 	},
@@ -61,6 +70,8 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"execute": function(name, data, callback) {
+
+		if(!this._proc) return;
 
 		if(typeof data == "function") {
 			callback = data;
@@ -71,10 +82,15 @@ module.exports = structr(EventEmitter, {
 
 		if(callback) {
 			this.once("replyTo-" + callerId, callback);
-		}
+		} 
 
 		// console.log(JSON.stringify({ name: name, id: callerId, data: data }))
 
-		self._proc.stdin.write(JSON.stringify({ name: name, id: callerId, data: data }) + "\r\n");
+		//might happen if the process is closing
+		try {
+			self._proc.stdin.write(JSON.stringify({ name: name, id: callerId, data: data }) + "\r\n");
+		} catch(e) {
+			console.error(e);
+		}
 	}
 });
