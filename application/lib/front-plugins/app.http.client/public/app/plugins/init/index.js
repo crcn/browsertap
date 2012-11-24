@@ -13,8 +13,8 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 		}
 	});
 
-	var loader = new ScreenLoader(puppeteer, commands),
-	screen = new mainPlugin.views.Screen({ el: ".screen", loader: loader }),
+	var loader = new ScreenLoader(puppeteer, commands), screen,
+	// screen = new mainPlugin.views.Screen({ el: ".screen", loader: loader }),
 	appSwitcher = new mainPlugin.views.AppSwitcher({ el: ".app-switcher", router: router, loader: loader });
 
 	key("shift+right, shift+tab", function(e) {
@@ -31,6 +31,11 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 
 	key("shift+down", function(e) {
 		appSwitcher.shift("down");
+	});
+
+	loader.on("window", function(window) {
+		if(screen) screen.dispose();
+		screen = new mainPlugin.views.Screen({ el: ".screen", window: window, loader: loader });
 	});
 
 

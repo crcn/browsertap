@@ -1,65 +1,64 @@
 var Loader = require("./loader"),
 DesktopPlayer = require("./desktopPlayer"),
 wkmEvents = require("./events"),
-Url = require("url");
+Url = require("url"),
+disposable = require("disposable");
 
 module.exports = require("../../../views/base").extend({
 	"templateName": "screen",
 	"initialize": function() {
 		module.exports.__super__.initialize.call(this);
-		this.options.loader.bindWindow(_.bind(this._onWindow, this));
 
 		var loader = this.options.loader,
-		lv = this._loaderView,
-		self = this;
-		loader.on("loading", function() {
-			lv.update({ app: loader.options.app, version: loader.options.version });
-			lv.showNotification();
+		disp = this._disposable = disposable.create();
 
+		this._window = this.options.window;
+		this.$hud = this.$el.find(".hud-body");
+		this.$window = $(window);
+		this.$document = $(document);
+		this.coords = {};
+		this.windowDims = {};
+
+		disp.add(
+			loader.on("setClipboard", function(text) {
+				$(".hud-body").find("object")[0].setClipboard(text);
+			})
+		);
+
+		_.each(this._createBindings(), function(binding) {
+			disp.addBinding(binding);
 		});
 
-		loader.on("window", function() {
-			// lv.hideNotification();
-		});
+		this._disposable.addInterval(setInterval(_.bind(this.syncScrollInfo, this)));
+		this._window.bindProxy(_.bind(this.onProxy, this));
 
+		this.onResize();
+		this._listenToWindow();
 
-		loader.on("setClipboard", function(text) {
-			// alert(text);
-			$(".hud-body").find("object")[0].setClipboard(text);
-		})
 	},
 	"prepareChildren": function() {
 		return [
-			this._loaderView = new Loader({ app:"chrome", el: ".loader" }),
 			this._desktopPlayer = new DesktopPlayer({ el: ".desktop-player" })
 		];
 	},
-	"_onWindow": function(win) {
+	/**
+	 */
 
-		if(!win) {
-			return;
-		}
+	"_createBindings": function() {
+		return [
+			this.$window.resize(_.debounce(_.bind(this.onResize, this), 200)),
+			this.$window.bind("mousewheel", _.throttle(_.bind(this.onDocumentScroll, this), 30)),
+			this.$el.mousedown(_.bind(this.onMouseDown, this)),
+			this.$el.mouseup(_.bind(this.onMouseUp, this)),
+			this.$el.mousemove(_.throttle(_.bind(this.onMouseMove, this), 50))
+		];
+	},
+	"_listenToWindow": function() {
 
-		console.log("on window (screen)");
-		var padding = win.app.padding,
-		self = this,
-		baseQual = {
-			qmin: 1,
-			qmax: 11,
-			gop_size: 10
-		},
-		minQual = {
-			qmin: 10,
-			qmax: 51,
-			gop_size: 300
-		},
-		windowDims = {};
+		var self = this,
+		windowDims = {},
+		win = this._window;
 
-
-		//padding.right += 17; //remove the scrollbar
-
-		var $hud = $(this.el).find(".hud-body"),
-		$el = $(this.el);
 
 		//TODO
 		/*setTimeout(function() {
@@ -68,39 +67,6 @@ module.exports = require("../../../views/base").extend({
 			onResize();
 		}, 5000);*/
 
-
-
-		function onResize() {
-
-			$hud.css({
-				opacity: 1,
-				width: $(window).width() + padding.left + padding.right,
-				height: $(window).height() + padding.top + padding.bottom,
-				left: -padding.left,
-				top: -padding.top,
-				position: "fixed"
-			});
-
-			var w = $hud.width(),
-			h = $hud.height();
-			// $hud.width(w);
-			// $hud.height(h);
-
-
-
-			//don't resize if nothing's changed
-			if(win.width == w && win.height == h) return;
-
-			win.resize(0, 0, w, h);
-		}
-
-		function scaleQuality() {
-			//TODO
-		}
-
-		$(window).resize(_.debounce(onResize, 200));
-		onResize();
-		setTimeout(onResize, 1000);
 
 		var q = Url.parse(String(window.location), true).query,
 		defaults = { qmin: 1, qmax: 11, gop_size: 150, frame_rate: 40 };
@@ -112,96 +78,90 @@ module.exports = require("../../../views/base").extend({
 
 		win.startRecording(q, function(err, info) {
 			self._desktopPlayer.update({ host: info.url });
-			setTimeout(function() {
-				self._loaderView.hideNotification();
-			}, 1000)
+			self.onResize();
 		});
-
-		var coords = {}, proxy;
-
-		win.bindProxy(function(p) {
-			proxy = p;
-			setInterval(function() {
-				p.scrollbar.getPosition(function(x, y) {
-					// $("#scroller").width(x);
-					$("#scroller").height(y);
-					onResize();
-				});
-			}, 2000);
-		});
-
-
-		$(document).scroll(_.throttle(function() {
-			// console.log($(document).scrollTop());
-			// console.log($(document).scrollLeft());
-
-			if(proxy) {
-				proxy.scrollbar.to($(document).scrollLeft(), $(document).scrollTop());
-			}
-		}, 30));
-
-
-		$el.mousemove(_.throttle(function(e) {
-
-			coords = { x: e.offsetX, y: e.offsetY };
-
-			if(windowDims.width && windowDims.height) {
-				coords.x = coords.x - ($hud.width()/2 - windowDims.width/2);
-				coords.y = coords.y - ($hud.height()/2 - windowDims.height/2);
-			}
-
-
-			win.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_ABSOLUTE | wkmEvents.mouse.MOUSEEVENTF_MOVE, coords);
-		}, 50));
-
-
-		$el.mousedown(function(e) {
-			win.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTDOWN : wkmEvents.mouse.MOUSEEVENTF_RIGHTDOWN, coords);
-
-			if(e.button === 0) return; //only block right click
-			e.preventDefault();
-			e.stopPropagation();
-		});
-
-		$el.mouseup(function(e) {
-			win.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTUP : wkmEvents.mouse.MOUSEEVENTF_RIGHTUP, coords);
-		});
-
-		var modifiers = [17, 16, 18];
-		/*var replModifiers = { 91: };
-
-		$el.keydown(function(e) {
-			if(~modifiers.indexOf(e.keyCode)) return;
-
-			win.keybdEvent({
-				keyCode: e.keyCode,
-				altKey: e.altKey,
-				ctrlKey: e.ctrlKey,
-				shiftKey: e.shiftKey
-			});
-		})*/
-
 
 		window.desktopEvents = {
-			setClipboard: function(text) {
-				win.setClipboard("CCC"+text);
-			},
-			keyDown: function(data) {
-				if(~modifiers.indexOf(data.keyCode)) return;
-				win.keybdEvent(data);
-			},
-			resize: function(data) {
-				windowDims = data;
-			}
-			/*,
-			keyUp: function(data) {
-				win.keybdEvent(data.keyCode, 0,  wkmEvents.keyboard.KEYEVENTF_EXTENDEDKEY | wkmEvents.keyboard.KEYEVENTF_KEYUP);
-			}*/
+			setClipboard: _.bind(this.setClipboard, this),
+			keyDown: _.bind(this.onKeyDown, this),
+			resize: _.bind(this.onWindowResize, this)
+		};
+	},
+	"dispose": function() {
+		module.exports.__super__.dispose.call(this);
+		this._disposable.dispose();
+	},
+	"onResize": function() {
+		var win = this._window,
+		padding = win.app.padding,
+		self    = this;
+
+		this.$hud.css({
+			opacity: 1,
+			width: this.$window.width() + padding.left + padding.right,
+			height: this.$window.height() + padding.top + padding.bottom,
+			left: -padding.left,
+			top: -padding.top,
+			position: "fixed"
+		});
+
+		var w = this.$hud.width(),
+		h = this.$hud.height();
+
+
+		//don't resize if nothing's changed
+		if(win.width == w && win.height == h) return;
+
+		win.resize(0, 0, w, h);
+	},
+	"onMouseMove": function(e) {
+
+		var coords = { x: e.offsetX, y: e.offsetY };
+
+		if(this.windowDims.width && this.windowDims.height) {
+			coords.x = coords.x - (this.$hud.width()/2 - this.windowDims.width/2);
+			coords.y = coords.y - (this.$hud.height()/2 - this.windowDims.height/2);
 		}
 
+		this._window.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_ABSOLUTE | wkmEvents.mouse.MOUSEEVENTF_MOVE, this.coords = coords);
+	},
+	"onMouseDown": function(e) {
+		this._window.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTDOWN : wkmEvents.mouse.MOUSEEVENTF_RIGHTDOWN, this.coords);
 
-		/*$el.bind("mousewheel", _.throttle(function(e, delta) {
-			win.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, coords, delta * 100);
-		}, 25));*/
+		if(e.button === 0) return; //only block right click
+		e.preventDefault();
+		e.stopPropagation();
+	},
+	"onMouseUp": function(e) {
+		this._window.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTUP : wkmEvents.mouse.MOUSEEVENTF_RIGHTUP, this.coords);
+	},
+	"onKeyDown": function(e) {
+		if(~[17, 16, 18].indexOf(data.keyCode)) return;
+		this._window.keybdEvent(data);
+	},
+	"onWindowResize": function(data) {
+		this.windowDims = data;
+	},
+	"onProxy": function(proxy) {
+		this.proxy = proxy;
+	},
+	"onDocumentScroll": function(e, delta) {
+		if(this.proxy) {
+			this.proxy.scrollbar.to(this.$document.scrollLeft(), this.$document.scrollTop());
+		} else {
+			this._window.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, this.coords, delta * 100);
+		}
+	},
+	"syncScrollInfo": function() {
+		if(!this.proxy) return;
+		var self = this;
+		this.proxy.scrollbar.getPosition(function(x, y) {
+			// $("#scroller").width(x);
+			$("#scroller").height(y);
+			self.onResize();
+		});
+	},
+	"setClipboard": function(text) {
+		this._window.setClipboard(text);
 	}
 });

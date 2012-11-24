@@ -25,5 +25,13 @@ module.exports = Backbone.View.extend({
 	},
 	"data": function() {
 		return this.options.data || this.options || this;
+	},
+	"dispose": function() {
+		this.remove();
+		for(var i = this._children.length; i--;) {
+			this._children[i].dispose();
+		}
+
+		this._children = [];
 	}
 });

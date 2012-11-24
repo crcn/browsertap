@@ -1,6 +1,6 @@
 exports.name = "app.part.main";
-exports.require = ["views"];
-exports.plugin = function(views) {
+exports.require = ["views", "init"];
+exports.plugin = function(views, init) {
 	
 	return {
 		views: {

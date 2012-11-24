@@ -41,6 +41,7 @@
     "vine": "0.0.x",
     "optimist": "0.3.x",
     "maestro": "0.0.x",
-    "structr-step": "0.0.x"
+    "structr-step": "0.0.x",
+    "disposable": "0.0.x"
   }
 }

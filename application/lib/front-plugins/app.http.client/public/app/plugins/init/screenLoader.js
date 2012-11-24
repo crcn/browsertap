@@ -126,7 +126,7 @@ module.exports = structr(EventEmitter, {
 				self._popupWindow(winProps);
 			},
 			close: function() {
-				
+
 				if(self._ignoreClose || closeable === false) return;
 
 				//this actually works
@@ -268,7 +268,11 @@ module.exports = structr(EventEmitter, {
 
 		if(window) this._ignoreClose = false;
 		console.log("set main window");
+		try {
 		this.emit("window", this.window = window); 
+	}catch(e) {
+		console.error(e.stack)
+	}
 		if(window) window.bindProxy(_.bind(this._onProxy, this));
 	},
 
