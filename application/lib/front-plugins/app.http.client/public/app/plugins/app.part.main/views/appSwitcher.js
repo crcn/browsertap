@@ -36,8 +36,9 @@ module.exports = require("../../../views/base").extend({
 		$(document).keyup(function(e) {
 			if(e.keyCode != 16) return; //shift
 			if(self._hidden) return;
-			self.hide();
-			self._setSelectedItem();
+			self.hide(function() {
+				self._setSelectedItem();
+			});
 		});
 
 
@@ -106,12 +107,13 @@ module.exports = require("../../../views/base").extend({
 		var app = this._getApp();
 		$(".current-app").text(app.substr(0,1).toUpperCase() + app.substr(1));
 	},
-	"hide": function() {
+	"hide": function(cb) {
 		this._hidden = true;
 		var $el = this.$el;
 		$(this.el).transit({ opacity: 0 }, 200, function() {
 			$el.css({ visibility: "hidden" });
 			$el.find(".app-switcher-selected").css({ visibility: "hidden" });
+			if(cb) cb();
 		});
 	},
 	"templateData": function() {
