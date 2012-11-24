@@ -72,7 +72,7 @@ module.exports = structr(EventEmitter, {
 		if(!options.arg) options.arg = "";
 		
 		if(/^http/.test(options.arg)) options.arg = "http://" + options.arg.replace(/^.*?:\//g,"");
-		console.log(options.arg);
+		
 		//fix protocol
 		options.arg = options.arg.replace(/:\/+/,"://");
 		step(

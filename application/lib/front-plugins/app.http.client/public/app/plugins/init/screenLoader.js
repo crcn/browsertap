@@ -123,7 +123,7 @@ module.exports = structr(EventEmitter, {
 			},
 			close: function() {
 
-				if(self._ignoreClose) return;
+				if(self._ignoreClose || closeable === false) return;
 
 
 				//this actually works
