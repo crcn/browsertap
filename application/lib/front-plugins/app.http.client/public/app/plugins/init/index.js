@@ -37,6 +37,7 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 		if(screen) {
 			screen.dispose();
 			$(".screen").html(""); //remove html so it's a bit cleaner
+			screen = null;
 		}
 		loadingView.update({ app: loader.options.app, version: loader.options.version });
 		loadingView.showNotification();
