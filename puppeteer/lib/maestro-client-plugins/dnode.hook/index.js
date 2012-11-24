@@ -62,7 +62,7 @@ exports.plugin = function(client, httpServer, loader) {
 				 */
 
 				keepAlive: function() {
-					clearTimeout(killTimeout);
+					clearTimeout(killTimeoutId);
 					killTimeout();
 				}
 			});
@@ -70,6 +70,7 @@ exports.plugin = function(client, httpServer, loader) {
 			d.pipe(stream).pipe(d);
 
 			function killTimeout() {
+				return;
 				killTimeoutId = setTimeout(function() {
 					//kill due to inactivity
 					d.end();
@@ -94,7 +95,7 @@ exports.plugin = function(client, httpServer, loader) {
 
 					//close all apps, and remove all settings
 					puppet.apps.closeAllApps();
-					
+
 					puppet.wkm.reopen();
 				}
 
