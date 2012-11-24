@@ -35,7 +35,8 @@ module.exports = structr(EventEmitter, {
 	"refreshProxy",
 	"getProxy",
 	"setClipboard",
-	"openNewWindow"
+	"openNewWindow",
+	"app"
 	],
 
 	/**

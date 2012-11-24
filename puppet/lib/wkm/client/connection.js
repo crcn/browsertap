@@ -51,7 +51,7 @@ module.exports = structr(EventEmitter, {
 
 				} catch(e) {
 					// process.stderr.write("Unable to parse " + cmdstr);
-					console.log(cmdstr);
+					console.log("wkm: %s", cmdstr.replace(/[\n\r]+/g,""));
 				}
 			}
 		});

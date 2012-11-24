@@ -9,7 +9,7 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"publicKeys": ["getWindows"],
+	"publicKeys": ["getWindows", "padding"],
 
 	/**
 	 */

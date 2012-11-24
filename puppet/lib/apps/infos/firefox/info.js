@@ -22,17 +22,17 @@ module.exports = {
 					"if": { "version": {"$lte":12}},
 					"thenRun": {
 						"set": {
-							"padding.top": 87
+							"padding.top": 91
 						}
 					}
 				}
 			},
 			{
 				"check": {
-					"if": { "version": {"$lt":3.6}},
+					"if": { "version": {"$lte":3.6}},
 					"thenRun": {
 						"set": {
-							"padding.top": 137
+							"padding.top": 139
 						}
 					}
 				}

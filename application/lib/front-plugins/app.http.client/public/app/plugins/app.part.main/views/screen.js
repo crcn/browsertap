@@ -1,6 +1,5 @@
 var Loader = require("./loader"),
 DesktopPlayer = require("./desktopPlayer"),
-getPadding = require("./getPadding"),
 wkmEvents = require("./events"),
 Url = require("url");
 
@@ -42,7 +41,7 @@ module.exports = require("../../../views/base").extend({
 		}
 
 		console.log("on window (screen)");
-		var padding = getPadding(win),
+		var padding = win.app.padding,
 		self = this,
 		baseQual = {
 			qmin: 1,
@@ -56,7 +55,6 @@ module.exports = require("../../../views/base").extend({
 		},
 		windowDims = {};
 
-		padding = { left: 0, right: 0, top: 0, bottom: 0 };
 
 		//padding.right += 17; //remove the scrollbar
 
