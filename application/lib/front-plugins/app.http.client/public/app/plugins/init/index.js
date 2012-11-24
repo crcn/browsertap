@@ -34,7 +34,10 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 	});
 
 	loader.on("loading", function() {
-		if(screen) screen.dispose();
+		if(screen) {
+			screen.dispose();
+			$(".screen").html(""); //remove html so it's a bit cleaner
+		}
 		loadingView.update({ app: loader.options.app, version: loader.options.version });
 		loadingView.showNotification();
 	});
