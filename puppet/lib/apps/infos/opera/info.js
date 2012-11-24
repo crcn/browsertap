@@ -19,7 +19,17 @@ module.exports = {
 			},
 			{
 				"check": {
-					"if": { "version": {"$lte":12}},
+					"if": { "version": {"$lte":13}},
+					"thenRun": {
+						"set": {
+							"padding.top": 85
+						}
+					}
+				}
+			},
+			{
+				"check": {
+					"if": { "version": {"$lte":10}},
 					"thenRun": {
 						"set": {
 							"padding.top": 83

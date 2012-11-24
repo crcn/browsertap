@@ -9,6 +9,7 @@ module.exports = {
 			elseRun       = this.get("elseRun");
 
 
+
 			if(sift(condition).test(context.get())) {
 				if(thenRun) {
 					return this.caller.runChild(thenRun, context, next);
