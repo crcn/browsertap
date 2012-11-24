@@ -57,7 +57,8 @@ module.exports = structr({
 		}
 
 		for(i = this._queuedNativeWindows.length; i--;) {
-			cwin.popup(this._queuedNativeWindows[i]);
+			var nw = this._queuedNativeWindows[i];
+			cwin.popup(nw);
 		}
 	},
 

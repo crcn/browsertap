@@ -17,6 +17,7 @@ module.exports = structr(EventEmitter, {
 	"__construct": function(client, con) {
 		var self = this;
 		this.nativeWindows = client.controller.nativeWindows;
+		this.client = client;
 		this._clientWindows = [];
 		con.on("end", function() {
 			logger.info("client window closed, removing native");
@@ -59,11 +60,30 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"add": function(window) {
+
+
+		//remove any private properties
+		if(window.search)
+		for(var s in window.search) {
+			if(s.substr(0, 1) == "_") delete window.search[s];
+		}
+
+		console.log(window.search)
+
 		logger.info("add client window");
 		var wb = new WindowBridge(this, window);
 		this._clientWindows.push(wb);
 		this.nativeWindows.tryBindingNativeWindow(wb);
 		this.emit("window", window);
+
+		if(window.search && window.search.id) {
+			if(!wb._nativeWindow) {
+				wb.close();
+			}
+			/*this.client.wkm.windows.hasWindow(window.search.screen, function(yes) {
+				if(!yes) wb.close();
+			});*/
+		}
 	},
 
 	/**
@@ -116,5 +136,6 @@ var WindowBridge = structr(EventEmitter, {
 	"close": function() {
 		console.log("closing client window");
 		if(this._nativeWindow) this._nativeWindow.close();
+		if(this._clientWindow.close) this._clientWindow.close();
 	}
 })

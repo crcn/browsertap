@@ -43,6 +43,11 @@ namespace Screens
 		this->_style = GetWindowLong(this->_window, GWL_STYLE);
 		this->_extStyle = GetWindowLong(this->_window, GWL_EXSTYLE);
 		// this->removeChrome();
+
+		//unmaximise
+		LONG lStyle = GetWindowLong(this->_window, GWL_STYLE);
+		lStyle &= ~(WS_MAXIMIZE);
+		SetWindowLong(this->_window, GWL_STYLE, lStyle);
 	}
 
 	int Screen::_count = 0;

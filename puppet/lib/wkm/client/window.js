@@ -55,11 +55,15 @@ module.exports = structr(EventEmitter, {
 		this.height    = window.height;
 		this.vks       = _.values(wkme.keyboard_vk);
 		this._apps     = windows._apps;
+		this.closed = false;
 
 
 		this.style     = {
-			maximized: !!(window.style & windowStyles.WS_MAXIMIZE)
+			maximized: !!(window.style & windowStyles.WS_MAXIMIZE),
+			sizeBox: !!(window.style & windowStyles.WS_SIZEBOX)
 		};
+
+		console.log(this.style)
 
 
 		this._windows = windows;
@@ -74,6 +78,7 @@ module.exports = structr(EventEmitter, {
 
 	"close": function() {
 		this.clean();
+		this.closed = true;
 		this._con.execute("closeWindow", { id: this.id });
 	},
 

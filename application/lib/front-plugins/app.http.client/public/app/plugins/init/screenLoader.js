@@ -40,11 +40,6 @@ module.exports = structr(EventEmitter, {
 		var filter;
 
 
-		if(this.options.screen) {
-			filter = { query: { id: this.options.screen } };
-		} else {
-			// filter = { query: getAppFilter(this.options.app) }
-		}
 
 		/*connection.clientWindows.addClientWindow({
 			filter: filter,
@@ -116,6 +111,7 @@ module.exports = structr(EventEmitter, {
 
 	"_getClient": function(search, closeable) {
 		var self = this;
+		console.log(search)
 		return {
 			search: search,
 			setNativeWindow: function(window) {
@@ -127,11 +123,12 @@ module.exports = structr(EventEmitter, {
 			},
 			close: function() {
 
-				if(self._ignoreClose || closeable === false) return;
+				if(self._ignoreClose) return;
+
 
 				//this actually works
-				// window.open("","_self","");
-				// window.close();
+				window.open("","_self","");
+				window.close();
 			},
 			setClipboard: function(data) {
 				console.log("set clipboard: %s", data);
@@ -147,7 +144,8 @@ module.exports = structr(EventEmitter, {
 		if(this._screenId == this.options.screen) return;
 		console.log("loading window")
 		var self = this;
-		this._connection.windows.add(this._getClient());
+		this._ignoreClose = false;
+		this._connection.windows.add(this._getClient({ id: this._screenId = this.options.screen }));
 
 		/*this._connection.client.windows.getWindow(this._screenId = this.options.screen, function(err, window) {
 			self._onWindow(null, window);
@@ -172,10 +170,7 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"_onOpenWindow": function(w) {
-		/*for(var style in windowStyles) {
-			console.log("%s: %d", style, w.style & windowStyles[style] || w.extStyle & windowStyles[style]);
-		}*/
+	/*"_onOpenWindow": function(w) {
 
 		var isMain = 
 		!w.parent &&
@@ -193,7 +188,7 @@ module.exports = structr(EventEmitter, {
 		} else {
 			// console.log("UNABLE TO POPUP");
 		}
-	},
+	},*/
 
 	/**
 	 * make that if the user spams the back button, they have to wait.

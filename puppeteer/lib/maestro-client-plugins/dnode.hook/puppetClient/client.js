@@ -55,13 +55,14 @@ module.exports = structr(EventEmitter, {
 			on.success(function(app) {
 				callback(null, {
 					addWindow: function(window) {
-						window.search = { "app.name": app.name, "app.version": app.version };
+						window.search = { "app.name": app.name, "app.version": app.version, "style.sizeBox": true };
 						self.windows.add(window);
 					}
 				})
 			})
 		);
 	},
+
 
 	/**
 	 */
