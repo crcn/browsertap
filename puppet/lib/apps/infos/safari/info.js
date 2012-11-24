@@ -14,17 +14,8 @@ module.exports = {
 					"window.openNew": "-new-window %s",
 					"window.getAppName": function(win) {
 						return win.process.path.match(/(Safari\s[^\\]+)/)[1];
-					}
-				}
-			},
-			{
-				"check": {
-					"if": { "version": {"$lte":6}},
-					"thenRun": {
-						"set": {
-							"padding.top": 83
-						}
-					}
+					},
+					"padding.top": 83
 				}
 			}
 		]
