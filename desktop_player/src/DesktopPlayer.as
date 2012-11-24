@@ -24,7 +24,7 @@ package
 	import flash.desktop.*;
 
 	
-		[SWF(backgroundColor='#FFFFFF')]
+		[SWF(frameRate=30,backgroundColor='#FFFFFF')]
 	
 	public class DesktopPlayer extends Sprite
 	{

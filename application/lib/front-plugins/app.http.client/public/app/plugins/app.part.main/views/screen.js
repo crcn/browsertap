@@ -103,7 +103,7 @@ module.exports = require("../../../views/base").extend({
 		setTimeout(onResize, 1000);
 
 		var q = Url.parse(String(window.location), true).query,
-		defaults = { qmin: 1, qmax: 11, gop_size: 150, frame_rate: 25 };
+		defaults = { qmin: 1, qmax: 11, gop_size: 150, frame_rate: 40 };
 
 		for(var key in defaults) {
 			if(q[key]) q[key] = Number(q[key]);
