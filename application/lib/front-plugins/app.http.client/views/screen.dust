@@ -13,10 +13,11 @@
 
 {<content}
 <div class="screen hud"></div>
+<div class="app-notification loader">
+</div>
 <div class="app-switcher">
 </div>
 <div class="current-app">
 </div>
-
 	<div id="scroller"></div>
 {/content}

@@ -1,5 +1,6 @@
 var ScreenLoader = require("./screenLoader"),
-qs = require("querystring");
+qs = require("querystring"),
+Url = require("url");
 
 exports.require = ["router", "app.part.main", "puppeteer", "commands"];
 exports.plugin = function(router, mainPlugin, puppeteer, commands) {
@@ -14,6 +15,7 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 	});
 
 	var loader = new ScreenLoader(puppeteer, commands), screen,
+	loadingView = new mainPlugin.views.Loader({ el: ".loader" }),
 	// screen = new mainPlugin.views.Screen({ el: ".screen", loader: loader }),
 	appSwitcher = new mainPlugin.views.AppSwitcher({ el: ".app-switcher", router: router, loader: loader });
 
@@ -33,9 +35,30 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 		appSwitcher.shift("down");
 	});
 
+	loader.on("loading", function() {
+		loadingView.update({ app: loader.options.app, version: loader.options.version });
+		loadingView.showNotification();
+	})
+
 	loader.on("window", function(window) {
 		if(screen) screen.dispose();
-		screen = new mainPlugin.views.Screen({ el: ".screen", window: window, loader: loader });
+
+		var q = Url.parse(String(window.location), true).query,
+		defaults = { qmin: 1, qmax: 11, gop_size: 150, frame_rate: 40 };
+
+		for(var key in defaults) {
+			if(q[key]) q[key] = Number(q[key]);
+			else q[key] = defaults[key];
+		}
+
+		window.startRecording(q, function(err, info) {
+
+			screen = new mainPlugin.views.Screen({ el: ".screen", window: window, loader: loader, rtmpUrl: info.url });
+
+			setTimeout(function() {
+				loadingView.hideNotification();
+			}, 1000);
+		});
 	});
 
 

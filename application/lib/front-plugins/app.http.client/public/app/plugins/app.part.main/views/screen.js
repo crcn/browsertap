@@ -1,7 +1,6 @@
 var Loader = require("./loader"),
 DesktopPlayer = require("./desktopPlayer"),
 wkmEvents = require("./events"),
-Url = require("url"),
 disposable = require("disposable");
 
 module.exports = require("../../../views/base").extend({
@@ -10,7 +9,7 @@ module.exports = require("../../../views/base").extend({
 		module.exports.__super__.initialize.call(this);
 
 		var loader = this.options.loader,
-		disp = this._disposable = disposable.create();
+		disp = this._disposable = disposable.create(), self = this;
 
 		this._window = this.options.window;
 		this.$hud = this.$el.find(".hud-body");
@@ -35,10 +34,11 @@ module.exports = require("../../../views/base").extend({
 		this.onResize();
 		this._listenToWindow();
 
+
 	},
 	"prepareChildren": function() {
 		return [
-			this._desktopPlayer = new DesktopPlayer({ el: ".desktop-player" })
+			this._desktopPlayer = new DesktopPlayer({ el: ".desktop-player", host: this.options.rtmpUrl })
 		];
 	},
 	/**
@@ -46,7 +46,7 @@ module.exports = require("../../../views/base").extend({
 
 	"_createBindings": function() {
 		return [
-			this.$window.resize(_.debounce(_.bind(this.onResize, this), 200)),
+			this.$window.resize(_.bind(this.onResize, this)),
 			this.$window.bind("mousewheel", _.throttle(_.bind(this.onDocumentScroll, this), 30)),
 			this.$el.mousedown(_.bind(this.onMouseDown, this)),
 			this.$el.mouseup(_.bind(this.onMouseUp, this)),
@@ -55,31 +55,16 @@ module.exports = require("../../../views/base").extend({
 	},
 	"_listenToWindow": function() {
 
-		var self = this,
-		windowDims = {},
-		win = this._window;
+		//TO IMPLEMENT
+		/*var self = this;
+		setTimeout(function() {
 
-
-		//TODO
-		/*setTimeout(function() {
-			padding = {left:0,right:0,top:18,bottom:0};
-			// $hud.transit({ left: 0, right: $(document).width(), top: 0, height: $(document).height() }, 500, "ease", onResize);
-			onResize();
+			//never want the chrome at the top
+			self._window.app.padding.top = 19 + 4;
+			self.onResize();
 		}, 5000);*/
 
 
-		var q = Url.parse(String(window.location), true).query,
-		defaults = { qmin: 1, qmax: 11, gop_size: 150, frame_rate: 40 };
-
-		for(var key in defaults) {
-			if(q[key]) q[key] = Number(q[key]);
-			else q[key] = defaults[key];
-		}
-
-		win.startRecording(q, function(err, info) {
-			self._desktopPlayer.update({ host: info.url });
-			self.onResize();
-		});
 
 		window.desktopEvents = {
 			setClipboard: _.bind(this.setClipboard, this),
@@ -91,7 +76,7 @@ module.exports = require("../../../views/base").extend({
 		module.exports.__super__.dispose.call(this);
 		this._disposable.dispose();
 	},
-	"onResize": function() {
+	"onResize": _.debounce(function() {
 		var win = this._window,
 		padding = win.app.padding,
 		self    = this;
@@ -113,7 +98,7 @@ module.exports = require("../../../views/base").extend({
 		if(win.width == w && win.height == h) return;
 
 		win.resize(0, 0, w, h);
-	},
+	}, 200),
 	"onMouseMove": function(e) {
 
 		var coords = { x: e.offsetX, y: e.offsetY };
@@ -141,6 +126,7 @@ module.exports = require("../../../views/base").extend({
 	},
 	"onWindowResize": function(data) {
 		this.windowDims = data;
+		this.onResize();
 	},
 	"onProxy": function(proxy) {
 		this.proxy = proxy;

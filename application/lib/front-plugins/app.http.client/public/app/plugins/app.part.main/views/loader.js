@@ -15,6 +15,12 @@ module.exports = require("../../../views/base").extend({
 	},
 	"templateData": function() {
 		var data = this.data();
+
+		if(!data.app) return {
+			"imgSrc": "",
+			"app": ""
+		};
+		
 		return {
 			"imgSrc": "/img/apps/"+data.app.toLowerCase()+".png",
 			"app": data.app.substr(0,1).toUpperCase() + data.app.substr(1).toLowerCase() + " " + data.version
