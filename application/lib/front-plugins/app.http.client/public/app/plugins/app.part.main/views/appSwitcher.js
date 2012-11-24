@@ -21,7 +21,6 @@ module.exports = require("../../../views/base").extend({
 				return Number(String(a).split(".").slice(0, 2).join(".")) > Number(String(b).split(".").slice(0, 2).join(".")) ? 1 : -1;
 			});
 		}
-		
 		this.apps = abv;
 
 		function onApp() {
@@ -110,8 +109,10 @@ module.exports = require("../../../views/base").extend({
 	},
 	"hide": function() {
 		this._hidden = true;
+		var $el = this.$el;
 		$(this.el).transit({ opacity: 0 }, 200, function() {
-			$(self.el).css({ visibility: "hidden" });
+			$el.css({ visibility: "hidden" });
+			$el.find(".app-switcher-selected").css({ visibility: "hidden" });
 		});
 	},
 	"templateData": function() {
