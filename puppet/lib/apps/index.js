@@ -134,7 +134,7 @@ module.exports = structr({
 	 */
 
 	"_closeOtherVersions": function(app, next) {
-		this._closeApps({ name: app.name, version: { $ne: app.version }}, next);
+		this.close({ name: app.name, version: { $ne: app.version }}, next);
 	},
 
 	/**
@@ -151,10 +151,9 @@ module.exports = structr({
 	/**
 	 */
 
-	"_closeApps": function(search, next) {
+	"close": function(search, next) {
 		async.forEach(search ? sift(search, this._apps) : this._apps, function(app, next) {
-			// app.close(next);
-			next();
+			app.close(next);
 		}, next);
 	}
 });

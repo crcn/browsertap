@@ -67,9 +67,9 @@ module.exports = structr(EventEmitter, {
 	"step close": function(force, callback) {
 		if(typeof force == "function") {
 			callback = force;
-			force = true;
+			force = false;
 		}
-		if(!this._process && force !== true) return callback(null, this);
+		if(!this.running && force !== true) return callback(null, this);
 		var self = this;
 		this._proc().close(function() {
 			callback(null, self);

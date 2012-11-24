@@ -70,6 +70,11 @@ module.exports = structr(EventEmitter, {
 		var apps = this._apps, on = outcome.error(callback);
 		step(
 			function() {
+
+				//close other versions
+				apps.close({ name: options.name, version: {$ne: options.version}}, this);
+			},
+			function() {
 				apps.findApp({ name: options.name, version: options.version }, this);
 			},
 			on.success(function(app) {
