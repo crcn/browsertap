@@ -85,6 +85,13 @@ module.exports = require("../../../views/base").extend({
 		padding = win.app.padding,
 		self    = this;
 
+		if(this.options.loader.options.screen) {
+			padding.top = 22;
+			padding.left = 4;
+			padding.right = 4;
+			padding.bottom = 4;
+		}
+
 		this.$hud.css({
 			opacity: 1,
 			width: this.$window.width() + (padding.left || 0) + (padding.right || 0),

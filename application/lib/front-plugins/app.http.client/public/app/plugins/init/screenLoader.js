@@ -255,7 +255,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_popupWindow": function(w) {
-		this.commands.emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this.puppeteer.host + "&token=" + this.puppeteer.token + "&screen=" + w.id + "&app=" + encodeURIComponent(this.options.app), width: w.width, height: w.height });
+		this.commands.emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this.puppeteer.host + "&token=" + this.puppeteer.token + "&screen=" + w.id + "&app=" + encodeURIComponent(this.options.app) + "&version=" + this.options.version, width: w.width, height: w.height });
 	},
 
 	/**
