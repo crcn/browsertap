@@ -12,6 +12,8 @@ module.exports = structr(EventEmitter, {
 		this.commands = commands;
 		this.puppeteer = puppeteer;
 		this.connect();
+
+		//default icon
 		this.options = { app: "chrome", version: 19, open: "http://google.com" };
 	},
 
@@ -258,7 +260,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_popupWindow": function(w) {
-		this.commands.emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this.puppeteer.host + "&token=" + this.puppeteer.token + "&screen=" + w.id + "&app=" + encodeURIComponent(this.options.app) + "&version=" + this.options.version, width: w.width, height: w.height });
+		this.commands.emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this.puppeteer.host + "&token=" + this.puppeteer.token + "&screen=" + w.id, width: w.width, height: w.height });
 	},
 
 	/**

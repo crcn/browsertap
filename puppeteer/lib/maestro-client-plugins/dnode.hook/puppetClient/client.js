@@ -71,7 +71,7 @@ module.exports = structr(EventEmitter, {
 		var apps = this._apps, on = outcome.error(callback);
 		if(!options.arg) options.arg = "";
 		
-		if(/^http/.test(options.arg)) options.arg = "http://" + options.arg.replace(/^.*?:\//g,"");
+		if(!/^http/.test(options.arg)) options.arg = "http://" + options.arg.replace(/^.*?:\//g,"");
 		
 		//fix protocol
 		options.arg = options.arg.replace(/:\/+/,"://");
