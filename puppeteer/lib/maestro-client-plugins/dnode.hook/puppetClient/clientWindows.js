@@ -2,7 +2,8 @@ var structr = require("structr"),
 EventEmitter = require("events").EventEmitter,
 logger = require("winston").loggers.get("clientWindows"),
 sprintf = require("sprintf").sprintf,
-sift = require("sift");
+sift = require("sift"),
+disposable = require("disposable");
 
 module.exports = structr(EventEmitter, {
 
@@ -64,13 +65,23 @@ module.exports = structr(EventEmitter, {
 			if(s.substr(0, 1) == "_") delete window.search[s];
 		}
 
+		if(this._clientWindow) {
+			console.log("DISPOSING WINDOW");
+			this._clientWindow.dispose();
+		}
+
 		logger.info("add client window");
-		var wb = this._clientWindow = new WindowBridge(this, window);
+		var wb = this._clientWindow = new WindowBridge(this, window),
+		self = this;
 
 		this.nativeWindows.tryBindingNativeWindow(wb);
 		this.emit("window", window);
 
-		console.log(window.search)
+		wb.once("close", function() {
+			if(wb != self._clientWindow) return;
+			self._clientWindow = null;
+		})
+
 
 		if(window.search && window.search.id) {
 			if(!wb._nativeWindow) {
@@ -96,7 +107,6 @@ var WindowBridge = structr(EventEmitter, {
 	"__construct": function(clientWindows, clientWindow) {
 		this._clientWindows = clientWindows;
 		this._clientWindow = clientWindow;
-		var self = this;
 	},
 	"testNativeWindow": function(window) {
 		console.log("test native window");
@@ -111,19 +121,20 @@ var WindowBridge = structr(EventEmitter, {
 
 		logger.info(sprintf("bound window %s", window.id));
 		this._nativeWindow = window;
-		var self = this, appEm;
+		var self = this;
+
 		window.once("close", function() {
 			self._nativeWindow = null;
+			if(self._disposed) return;
 			console.log("native window close, closing client");
-			if(self._clientWindow.close) self._clientWindow.close();
-			if(appEm) appEm.dispose();
-			self._clientWindows._clientWindow = null;// fuck me what am I doing >.>
-		});
+			self.close();
+		}),
 
-		appEm = window.app.once("close", function() {
+		window.app.once("close", function() {
+			if(self._disposed) return;
 			if(self._clientWindow.forceClosed) self._clientWindow.forceClosed();
-			self._clientWindows._clientWindow = null;// fuck me what am I doing >.>. What the fuck - did you just copy and paste??
-		})
+			self.close();
+		});
 
 		this._clientWindow.setNativeWindow(window);
 
@@ -139,8 +150,13 @@ var WindowBridge = structr(EventEmitter, {
 		this._clientWindow.popupWindow(winProps);
 	},
 	"close": function() {
-		console.log("closing client window");
 		if(this._nativeWindow) this._nativeWindow.close();
 		if(this._clientWindow.close) this._clientWindow.close();
+		this.emit("close");
+		this.dispose();
+	},
+	"dispose": function() {
+		this._events = {};
+		this._disposed = true;
 	}
 })

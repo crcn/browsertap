@@ -25,6 +25,7 @@
     "structr": "0.2.x",
     "disposable": "0.0.x",
     "step": "0.0.x",
-    "sift": "0.0.x"
+    "sift": "0.0.x",
+    "seq": "0.3.x"
   }
 }
