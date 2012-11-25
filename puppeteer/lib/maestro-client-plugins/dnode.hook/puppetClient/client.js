@@ -54,9 +54,9 @@ module.exports = structr(EventEmitter, {
 			},
 			on.success(function(app) {
 				callback(null, {
-					addWindow: function(window) {
+					setWindow: function(window) {
 						window.search = { "app.name": app.name, "app.version": app.version, "style.sizeBox": true };
-						self.windows.add(window);
+						self.windows.set(window);
 					}
 				})
 			})
@@ -67,7 +67,7 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"_open": function(options, callback) {
+	"step _open": function(options, callback) {
 		var apps = this._apps, on = outcome.error(callback);
 		if(!options.arg) options.arg = "";
 		
@@ -77,11 +77,12 @@ module.exports = structr(EventEmitter, {
 		options.arg = options.arg.replace(/:\/+/,"://");
 		step(
 			function() {
-
+				console.log("closing apps other than %s %s", options.name, options.version);
 				//close other versions
 				apps.close({ name: options.name, version: {$ne: options.version }}, this);
 			},
 			function() {
+				console.log("finding app %s %s", options.name, options.version);
 				apps.findApp({ name: options.name, version: options.version }, this);
 			},
 			on.success(function(app) {
@@ -94,6 +95,7 @@ module.exports = structr(EventEmitter, {
 				}
 			}),
 			on.success(function() {
+				console.log("opening %s %s", options.name, options.version);
 				apps.open(options, this);
 			}),
 			on.success(function(app) {

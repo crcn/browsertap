@@ -9,7 +9,7 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"publicKeys": ["add"],
+	"publicKeys": ["set"],
 
 	/**
 	 */
@@ -18,10 +18,9 @@ module.exports = structr(EventEmitter, {
 		var self = this;
 		this.nativeWindows = client.controller.nativeWindows;
 		this.client = client;
-		this._clientWindows = [];
+
 		con.on("end", function() {
 			logger.info("client window closed, removing native");
-			console.log(self._clientWindows.length)
 			self._closeAllNativeWindows();
 		});
 	},
@@ -31,8 +30,8 @@ module.exports = structr(EventEmitter, {
 
 	"popupWindow": function(window) {
 		console.log("popup window %s", window)
-		if(!this._clientWindows.length) return false;
-		this._clientWindows[0].popup(window);
+		if(!this._clientWindow) return false;
+		this._clientWindow.popup(window);
 		return true;
 	},
 
@@ -40,8 +39,8 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"setClipboard": function(data) {
-		if(!this._clientWindows.length) return false;
-		this._clientWindows[0].setClipboard(data);
+		if(!this._clientWindow) return false;
+		this._clientWindow.setClipboard(data);
 		return true;
 	},
 
@@ -49,17 +48,14 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"bindNativeWindow": function(window) {
-		for(var i = this._clientWindows.length; i--;) {
-			var wb = this._clientWindows[i];
-			if(wb.bindNativeWindow(window)) return true;
-		}
-		return false;
+		if(!this._clientWindow) return;
+		return this._clientWindow.bindNativeWindow(window);
 	},
 
 	/**
 	 */
 
-	"add": function(window) {
+	"set": function(window) {
 
 
 		//remove any private properties
@@ -68,13 +64,13 @@ module.exports = structr(EventEmitter, {
 			if(s.substr(0, 1) == "_") delete window.search[s];
 		}
 
-		console.log(window.search)
-
 		logger.info("add client window");
-		var wb = new WindowBridge(this, window);
-		this._clientWindows.push(wb);
+		var wb = this._clientWindow = new WindowBridge(this, window);
+
 		this.nativeWindows.tryBindingNativeWindow(wb);
 		this.emit("window", window);
+
+		console.log(window.search)
 
 		if(window.search && window.search.id) {
 			if(!wb._nativeWindow) {
@@ -90,9 +86,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_closeAllNativeWindows": function() {
-		for(var i = this._clientWindows.length; i--;) {
-			this._clientWindows[i].close();
-		}
+		if(this._clientWindow) this._clientWindow.close();
 	}
 });
 
@@ -100,8 +94,9 @@ module.exports = structr(EventEmitter, {
 
 var WindowBridge = structr(EventEmitter, {
 	"__construct": function(clientWindows, clientWindow) {
-		this._clientWindow = clientWindows;
+		this._clientWindows = clientWindows;
 		this._clientWindow = clientWindow;
+		var self = this;
 	},
 	"testNativeWindow": function(window) {
 		console.log("test native window");
@@ -122,10 +117,12 @@ var WindowBridge = structr(EventEmitter, {
 			console.log("native window close, closing client");
 			if(self._clientWindow.close) self._clientWindow.close();
 			if(appEm) appEm.dispose();
+			self._clientWindows._clientWindow = null;// fuck me what am I doing >.>
 		});
 
 		appEm = window.app.once("close", function() {
 			if(self._clientWindow.forceClosed) self._clientWindow.forceClosed();
+			self._clientWindows._clientWindow = null;// fuck me what am I doing >.>. What the fuck - did you just copy and paste??
 		})
 
 		this._clientWindow.setNativeWindow(window);
@@ -136,6 +133,9 @@ var WindowBridge = structr(EventEmitter, {
 		this._clientWindow.setClipboard(data);
 	},
 	"popup": function(winProps) {
+
+		//TODO - check if the app matches
+		// if(!this.testNativeWindow(winProps, { app: this.}))
 		this._clientWindow.popupWindow(winProps);
 	},
 	"close": function() {

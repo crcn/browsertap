@@ -124,7 +124,7 @@ module.exports = structr(EventEmitter, {
 
 			con.open({ name: this._appName = this.options.app, version: this._appVersion = this.options.version, arg: this.options.open }, function(err, client) { 
 				self._trackBrowser("Browser Open");
-				client.addWindow(self._getClient(null, false));
+				client.setWindow(self._getClient(null, false));
 				self._ignoreForceClose = false;
 			});
 			return;
@@ -202,10 +202,10 @@ module.exports = structr(EventEmitter, {
 
 	"_connectWindow": function() {
 		if(this._screenId == this.options.screen) return;
-		console.log("loading window")
+		console.log("loading window");
 		var self = this;
 		this._ignoreClose = false;
-		this._connection.windows.add(this._getClient({ id: this._screenId = this.options.screen }));
+		this._connection.windows.set(this._getClient({ id: this._screenId = this.options.screen }));
 
 		/*this._connection.client.windows.getWindow(this._screenId = this.options.screen, function(err, window) {
 			self._onWindow(null, window);

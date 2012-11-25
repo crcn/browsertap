@@ -120,6 +120,9 @@ module.exports = structr(EventEmitter, {
 
 		if(!this.app.cache || !this.app.cache.directory) return next();
 		logger.info(sprintf('cleaning up %s cache directory', this.app.name));
-		exec('DEL /S /Q "' + path.normalize(this.app.cache.directory) + '"', next);
+		exec('DEL /S /Q "' + path.normalize(this.app.cache.directory) + '"', function() {
+			console.log("done clearing cache");
+			next();
+		});
 	}
 });

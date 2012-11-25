@@ -36,7 +36,8 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 	loader.on("forceClose", function() {
 		smoke.signal("Click anywhere to resume", 1000 * 60 * 60 * 24);
 		$(document).one("click", function() {
-			loader.reload();
+			// loader.reload();
+			window.location.reload();
 		});
 	});
 

@@ -7,7 +7,8 @@ async = require("async"),
 logger = require("winston").loggers.get("apps"),
 sprintf = require("sprintf").sprintf,
 killProcesses = require("./app/killProcesses"),
-_ = require("underscore");
+_ = require("underscore"),
+seq = require("seq");
 
 module.exports = structr({
 
@@ -152,8 +153,11 @@ module.exports = structr({
 	 */
 
 	"close": function(search, next) {
-		async.forEach(search ? sift(search, this._apps) : this._apps, function(app, next) {
-			app.close(next);
-		}, next);
+		seq(search ? sift(search, this._apps).slice(0) : this._apps).seqEach(function(app) {
+			app.close(this);
+		}).seq(function() {
+			console.log("done closing all apps");
+			next();
+		})
 	}
 });
