@@ -154,6 +154,10 @@ exports.plugin = function(server, auth, httpAuth, models, emailer) {
 		res.send(vine.result(req.account.toObject()).data);
 	});
 
+	server.get("/upgrade", httpAuth.authCheckpoint, function(req, res) {
+		res.render("upgrade");
+	});
+
 
 	function getToken(req, res, account, render) {
 		account.getMainToken(function(err, token) {
@@ -162,14 +166,14 @@ exports.plugin = function(server, auth, httpAuth, models, emailer) {
 			});
 
 			req.session.token = token.key;
-			res.redirect(req.body.redirect_to || "/live");
+			res.redirect(req.query.redirect_to || "/live");
 		});
 	}
 
 	server.post("/login", function(req, res) {
 		Account.login(req.body, function(err, account) {
 
-			if(err) return res.render("login", vine.error(err).data);
+			if(err) return res.render("login", _.extend(req.query, vine.error(err).data));
 
 			getToken(req, res, account, "login");
 		});

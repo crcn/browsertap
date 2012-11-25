@@ -7,6 +7,7 @@
 			<link rel="stylesheet" href="/css/main.css" type="text/css">    
 		{/styles}
 		{>mixpanel/}
+		<script type="text/javascript" src="/vendors/js/head.js"></script>
 		{+scripts}
 		{/scripts}
 	</head>

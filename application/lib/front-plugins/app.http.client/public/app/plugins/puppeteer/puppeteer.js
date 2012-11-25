@@ -25,7 +25,9 @@ module.exports = structr(EventEmitter, {
 		var self = this;
 
 		var serverUrl = [window.location.protocol, "//", window.location.host, "/server.json"].join("");
+		this.startFetchTime = Date.now();
 
+		mixpanel.track("Fetch Desktop");
 
 		$.ajax({
 			url: serverUrl,
@@ -48,6 +50,12 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_attach": function(options) {
+		mixpanel.track("Attach Desktop", {
+			from_date: this.startFetchTime,
+			to_date: Date.now(),
+			duration: Date.now() - this.startFetchTime
+		});
+
 		console.log("attaching %s", options.host);
 		var stream = shoe(options.host + "/dnode");
 
