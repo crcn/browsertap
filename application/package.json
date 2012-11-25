@@ -42,6 +42,9 @@
     "optimist": "0.3.x",
     "maestro": "0.0.x",
     "structr-step": "0.0.x",
-    "disposable": "0.0.x"
+    "disposable": "0.0.x",
+    "mixpanel": "0.0.x",
+    "postmark": "0.1.x",
+    "emailify": "0.0.x"
   }
 }

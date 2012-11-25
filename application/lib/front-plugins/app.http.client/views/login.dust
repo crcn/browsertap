@@ -10,10 +10,16 @@
 
 {<content}
 <h1>Login:</h1>
+{#errors}
+	{message}
+{/errors}
+{#messages}
+	{message}
+{/messages}
 <form method="POST" action="/login">
 			<label>Email: <input type="text" name="email"></input></label> <br />
 			<label>Password: <input type="password" name="password"></input></label> <br />
 			<input type="hidden" name="redirect_to" value="{redirect_to}"></input>
-			<input type="submit" value="login"></input> <a href="/signup">signup</a>
+			<input type="submit" value="login"></input> <a href="/signup">signup</a> &nbsp; <a href="/lost_password">Forget Password?</a>
 		</form>
 {/content}

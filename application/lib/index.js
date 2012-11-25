@@ -15,6 +15,10 @@ exports.start = function(type) {
 		mixpanel: {
 			token: "cc862e943db5ae621b531df52e1bfa86"
 		},
+		postmark: {
+			apiKey: "a8442610-e06b-45a3-af06-a605aca343e8",
+			from: "support@browsertap.com"
+		},
 		http: {
 			port: 8080
 		},
