@@ -18,6 +18,8 @@ module.exports = require("../../../views/base").extend({
 		this.$body = $(document.body);
 		this.coords = {};
 		this.windowDims = {};
+		this._frameRates = 0;
+		this._numFrameRates = 0;
 
 
 		this.$body.css({ "overflow": "hidden" });
@@ -73,7 +75,8 @@ module.exports = require("../../../views/base").extend({
 		window.desktopEvents = {
 			setClipboard: _.bind(this.setClipboard, this),
 			keyDown: _.bind(this.onKeyDown, this),
-			resize: _.bind(this.onWindowResize, this)
+			resize: _.bind(this.onWindowResize, this),
+			framerateChange: _.bind(this.onFrameRateChange, this)
 		};
 	},
 	"dispose": function() {
@@ -167,5 +170,31 @@ module.exports = require("../../../views/base").extend({
 	},
 	"setClipboard": function(text) {
 		this._window.setClipboard(text);
+	},
+	"onFrameRateChange": _.throttle(function(frameRate) {
+		if(frameRate == 0) return;
+
+		if(this._numFrameRates > 15) {
+			this._trackFrameRate();
+			this._frameRates = 0;
+			this._numFrameRates = 0;
+		}
+
+		this._frameRates += frameRate;
+		this._numFrameRates++;
+		this._avgFrameRate = Math.round(this._frameRates / this._numFrameRates);
+
+		console.log("avg frame rate:", this._avgFrameRate);
+	}, 500),
+	"_trackFrameRate": function() {
+		console.log(this.options.loader._trackBrowser)
+		this.options.loader._trackBrowser("Average Frame Rate", { actual_frame_rate: this._avgFrameRate, 
+			qmin: this.options.qmin, 
+			qmax: this.options.qmax,
+			stage_width: this.$el.width(),
+			stage_height: this.$el.height(),
+			gop_size: this.options.gop_size,
+			frame_rate: this.options.frame_rate
+		});
 	}
 });

@@ -322,6 +322,8 @@ package
 			var fps:Number = this._stream.currentFPS;
 			_trace("current framerate: " + fps+" cc: "+this._checkCount);
 
+			ExternalInterface.call('desktopEvents.framerateChange', fps);
+
 			return;
 			if(fps == 0 && this._checkCount++ >= 2) {
 			//	_trace("resetting");

@@ -51,6 +51,8 @@ module.exports = structr(EventEmitter, {
 		console.log("attaching %s", options.host);
 		var stream = shoe(options.host + "/dnode");
 
+		mixpanel.track("Connect To Desktop", { host: options.host });
+
 		this.host = options.host;
 		this.token = options.token;
 
@@ -66,7 +68,6 @@ module.exports = structr(EventEmitter, {
 				},
 			}, function(err, remote) {
 				
-				console.log("on client")
 				if(err) return alert(err.message);
 				self.connection = remote;
 				self._connecting = false;

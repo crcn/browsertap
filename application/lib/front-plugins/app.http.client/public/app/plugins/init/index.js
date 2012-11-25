@@ -62,7 +62,14 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 
 		window.startRecording(q, function(err, info) {
 
-			screen = new mainPlugin.views.Screen({ el: ".screen", window: window, loader: loader, rtmpUrl: info.url });
+			screen = new mainPlugin.views.Screen({ el: ".screen", 
+				window: window, 
+				loader: loader, 
+				rtmpUrl: info.url, 
+				qmin: q.qmin,
+				qmax: q.qmax,
+				gop_size: q.gop_size,
+				frame_rate: q.frame_rate });
 
 			setTimeout(function() {
 				loadingView.hideNotification();
