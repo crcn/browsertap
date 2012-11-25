@@ -41,6 +41,7 @@ package
 		private var _clipboard:String;
 		private var _setClipboard:String;
 		private var _copyPaste:TextField;
+		private var _mask:Sprite;
 		
 		
 		
@@ -58,6 +59,8 @@ package
 			this._copyPaste.height = 0;
 			this._copyPaste.type = TextFieldType.INPUT;
 			this._copyPaste.x = 500;
+			this._mask = new Sprite();
+			this.addChild(this._mask);
 			this.addChild(this._copyPaste);
 			
 			this._debugInfo = new TextField();
@@ -110,6 +113,7 @@ package
 			setInterval(this._checkFramerate, 500);
 
 			ExternalInterface.addCallback("setClipboard", setClipboard);
+			ExternalInterface.addCallback("setPadding", setPadding);
 			ExternalInterface.addCallback("getClipboard", getClipboard);
 			this.stage.focus = this._copyPaste;
 		}
@@ -193,6 +197,7 @@ package
 			
 			var video:Video = this._video = new Video(this.stage.stageWidth, this.stage.stageHeight);
 			video.attachNetStream(this._stream);
+			video.mask = this._mask;
 			
 			video.deblocking = 2;
 			video.smoothing = true;
@@ -251,6 +256,8 @@ package
 				
 			this._video.x = this.stage.stageWidth / 2 - this._video.width / 2;
 			this._video.y = this.stage.stageHeight / 2 - this._video.height / 2;
+			this._mask.x = this._video.x;
+			this._mask.y = this._video.y;
 			
 			//this._video.width = this.stage.stageWidth;
 			//this._video.height = this.stage.stageHeight;
@@ -313,6 +320,17 @@ package
 		private function onSecurityError(event:SecurityErrorEvent):void
 		{
 			_trace("SEC ERROR");
+		}
+
+		private function setPadding(obj:Object):void
+		{
+			with(this._mask.graphics) 
+			{
+				clear();
+				beginFill(0);
+				drawRect(obj.left, obj.top, this._video.width - obj.left - obj.right, this._video.height - obj.top - obj.bottom);
+				endFill();
+			}
 		}
 
 		private function _checkFramerate():void 

@@ -109,6 +109,10 @@ module.exports = require("../../../views/base").extend({
 		h = this.$hud.height();
 
 
+
+		$(".hud-body").find("object")[0].setPadding(padding);
+
+
 		//don't resize if nothing's changed
 		if(win.width == w && win.height == h) return;
 
