@@ -47,7 +47,7 @@ module.exports = require("../../../views/base").extend({
 			this._desktopPlayer = new DesktopPlayer({ el: ".desktop-player", host: this.options.rtmpUrl })
 		];
 	},
-	
+
 	/**
 	 */
 
@@ -173,7 +173,10 @@ module.exports = require("../../../views/base").extend({
 		this._window.setClipboard(text);
 	},
 	"onFrameRateChange": _.throttle(function(frameRate) {
-		if(frameRate == 0) return;
+		if(frameRate == 0) {
+			console.log("framerate is 0");
+			return;
+		}
 
 		if(this._numFrameRates > 15) {
 			this._trackFrameRate();
