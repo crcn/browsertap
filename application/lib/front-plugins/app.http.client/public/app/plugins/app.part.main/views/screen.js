@@ -47,6 +47,7 @@ module.exports = require("../../../views/base").extend({
 			this._desktopPlayer = new DesktopPlayer({ el: ".desktop-player", host: this.options.rtmpUrl })
 		];
 	},
+	
 	/**
 	 */
 
@@ -187,7 +188,6 @@ module.exports = require("../../../views/base").extend({
 		console.log("avg frame rate:", this._avgFrameRate);
 	}, 500),
 	"_trackFrameRate": function() {
-		console.log(this.options.loader._trackBrowser)
 		this.options.loader._trackBrowser("Average Frame Rate", { actual_frame_rate: this._avgFrameRate, 
 			qmin: this.options.qmin, 
 			qmax: this.options.qmax,

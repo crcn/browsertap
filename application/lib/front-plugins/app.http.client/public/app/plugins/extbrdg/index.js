@@ -1,15 +1,25 @@
-var step = require("step");
+var step = require("step"),
+sprintf = require("sprintf").sprintf;
 
 exports.require = ["commands"];
 exports.name = "extbrdg";
 exports.plugin = function(commands) {
 	var bridge = prepare();
+
 	commands.on("popup", function(options) {
 		step(
 			function() {
 				console.log("opening url %s", options.url);
 				if(bridge.exists) return bridge.execute("openWindow", options);	
-				// this();//PROMPT
+
+				//never close
+				smoke.signal("Click anywhere to generate new window", 1000 * 60 * 60);
+
+				//wait for click, then popup
+				$(document).bind("click.newWindow", function() {
+					window.open(options.url, "_blank", sprintf("width=%d,height=%d,status=0,titlebar=0,toolbar=0,menubar=0,resizable=1", options.width, options.height));
+					$(document).unbind("click.newWindow");
+				});
 			}
 		);
 	});
