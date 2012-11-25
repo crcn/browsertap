@@ -254,8 +254,8 @@ package
 		{
 			if(!this._video) return;
 				
-			this._video.x = this.stage.stageWidth / 2 - this._video.width / 2;
-			this._video.y = this.stage.stageHeight / 2 - this._video.height / 2;
+			this._video.x = Math.floor(this.stage.stageWidth / 2 - this._video.width / 2);
+			this._video.y = Math.floor(this.stage.stageHeight / 2 - this._video.height / 2);
 			this._mask.x = this._video.x;
 			this._mask.y = this._video.y;
 			
