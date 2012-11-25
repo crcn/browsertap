@@ -163,12 +163,12 @@ module.exports = structr(EventEmitter, {
 
 	"_trackBrowserUsage": function() {
 		if(!this.startBrowserDate) {
-			this.startBrowserDate = new Date();
+			this.startBrowserDate = Date.now();
 			return;
 		}
 		this._trackBrowser("Browser Usage Time", {
-			startDate: new Date(this.startBrowserDate),
-			endDate: new Date(),
+			startDate: this.startBrowserDate,
+			endDate: Date.now(),
 			duration: Date.now() - this.startBrowserDate
 		});
 	},
@@ -310,8 +310,8 @@ module.exports = structr(EventEmitter, {
 	"_setWindow": function(window) {
 
 		this._trackBrowser("Browser Startup Time", { 
-			startDate: new Date(this.startBrowserDate),
-			endDate: new Date(),
+			startDate: this.startBrowserDate,
+			endDate: Date.now(),
 			duration: Date.now() - this.startBrowserDate 
 		});
 
