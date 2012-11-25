@@ -1,3 +1,0 @@
-content PopupDemo_kango chrome/content/
-overlay chrome://browser/content/browser.xul chrome://PopupDemo_kango/content/content.xul
-resource PopupDemo_kango chrome/content/

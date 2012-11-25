@@ -1,3 +1,0 @@
-content ChristmasTree_kango chrome/content/
-overlay chrome://browser/content/browser.xul chrome://ChristmasTree_kango/content/content.xul
-resource ChristmasTree_kango chrome/content/
