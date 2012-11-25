@@ -76,8 +76,8 @@ module.exports = structr(EventEmitter, {
 
 	"step load": function(options, next) {
 		if(this._lockLoading) return;
+		this._trackBrowserUsage();
 		_.extend(this.options, options);
-
 
 		this.emit("loading");
 		if(this.options.screen) {
@@ -105,8 +105,7 @@ module.exports = structr(EventEmitter, {
 
 			var urlInfo = Url.parse(this.options.open);
 
-			mixpanel.track("Open Browser", { browser_name: this.options.app, 
-				browser_version: this.options.version, 
+			this._trackBrowser("Open Browser", {  
 				urlHost: urlInfo.host,
 				is_local: false,
 				is_secure: urlInfo.protocol == "https://"
@@ -121,16 +120,15 @@ module.exports = structr(EventEmitter, {
 			// this._proxy.location.set(this.options.open);
 			this._setProxyLocation(this.options.open);
 		}
-
-
 	},
 
 	/**
 	 */
 
 	"_getClient": function(search, closeable) {
-		var self = this;
-		console.log(search)
+		var self = this,
+		startTime = Date.now();
+
 		return {
 			search: search,
 			setNativeWindow: function(window) {
@@ -144,6 +142,7 @@ module.exports = structr(EventEmitter, {
 
 				if(self._ignoreClose || closeable === false) return;
 
+				self._trackBrowserUsage();
 
 				//this actually works
 				window.open("","_self","");
@@ -152,8 +151,36 @@ module.exports = structr(EventEmitter, {
 			setClipboard: function(data) {
 				console.log("set clipboard: %s", data);
 				self.emit("setClipboard", data);
+			},
+			updateConnections: function(n) {
+				// mixpanel. TODO
 			}
 		};
+	},
+
+	/**
+	 */
+
+	"_trackBrowserUsage": function() {
+		if(!this.startBrowserDate) {
+			this.startBrowserDate = new Date();
+			return;
+		}
+		this._trackBrowser("Browser Usage Time", {
+			startDate: new Date(this.startBrowserDate),
+			endDate: new Date(),
+			duration: Date.now() - this.startBrowserDate
+		});
+	},
+
+	/**
+	 */
+
+	"_trackBrowser": function(name, options) {
+		mixpanel.track(name, _.extend({
+			browser_name: this.options.app,
+			browser_version: this.options.version
+		}, options));
 	},
 
 	/**
@@ -282,13 +309,15 @@ module.exports = structr(EventEmitter, {
 
 	"_setWindow": function(window) {
 
+		this._trackBrowser("Browser Startup Time", { 
+			startDate: new Date(this.startBrowserDate),
+			endDate: new Date(),
+			duration: Date.now() - this.startBrowserDate 
+		});
+
 		if(window) this._ignoreClose = false;
 		console.log("set main window");
-		try {
 		this.emit("window", this.window = window); 
-	}catch(e) {
-		console.error(e.stack)
-	}
 		if(window) window.bindProxy(_.bind(this._onProxy, this));
 	},
 
