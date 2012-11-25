@@ -169,11 +169,13 @@ module.exports = structr(EventEmitter, {
 				console.log("focus window");
 				self.emit("focus", true);
 				self.focused = true;
+				self._trackBrowser("Focus Window");
 			},
 			unfocus: function() {
 				console.log("unfocus window");
 				self.emit("focus", false);
 				self.focused = false;
+				self._trackBrowser("Unfocus Window");
 			},
 			forceClosed: function() {
 				console.log("IGNORE FORCE", self._ignoreForceClose)

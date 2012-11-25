@@ -27,6 +27,12 @@ module.exports = require("../../../views/base").extend({
 		disp.add(
 			loader.on("setClipboard", function(text) {
 				$(".hud-body").find("object")[0].setClipboard(text);
+			}),
+			loader.on("focus", function() {
+				self._numFrameRates = self._frameRates = 0;
+			}),
+			loader.on("unfocus", function() {
+				self._numFrameRates = self._frameRates = 0;
 			})
 		);
 
@@ -70,6 +76,7 @@ module.exports = require("../../../views/base").extend({
 			self._window.app.padding.top = 19 + 4;
 			self.onResize();
 		}, 5000);*/
+		
 
 
 
