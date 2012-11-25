@@ -76,10 +76,13 @@ module.exports = structr(EventEmitter, {
 
 	"step load": function(options, next) {
 		if(this._lockLoading) return;
-		this._trackBrowserUsage();
+		this._trackStopBrowser();
 		_.extend(this.options, options);
 
 		this.emit("loading");
+		this.startDate = Date.now();
+		this._trackBrowser("Browser Start");
+
 		if(this.options.screen) {
 			this._lockLoading = true;
 			this._connectWindow();
@@ -100,18 +103,15 @@ module.exports = structr(EventEmitter, {
 			this._ignoreClose = true;
 			if(this.window) this.window.close();
 
+
 			//we track the host as well - only the host so we can get an idea of what people are doing with the app. Are they testing an app?
 			//is it local? is it https?
 
 			var urlInfo = Url.parse(this.options.open);
 
-			this._trackBrowser("Open Browser", {  
-				urlHost: urlInfo.host,
-				is_local: false,
-				is_secure: urlInfo.protocol == "https://"
-			});
 
 			con.open({ name: this._appName = this.options.app, version: this._appVersion = this.options.version, arg: this.options.open }, function(err, client) { 
+				self._trackBrowser("Browser Open");
 				client.addWindow(self._getClient(null, false));
 			});
 			return;
@@ -142,7 +142,7 @@ module.exports = structr(EventEmitter, {
 
 				if(self._ignoreClose || closeable === false) return;
 
-				self._trackBrowserUsage();
+				self._trackStopBrowser();
 
 				//this actually works
 				window.open("","_self","");
@@ -151,27 +151,18 @@ module.exports = structr(EventEmitter, {
 			setClipboard: function(data) {
 				console.log("set clipboard: %s", data);
 				self.emit("setClipboard", data);
-			},
-			updateConnections: function(n) {
-				// mixpanel. TODO
 			}
 		};
 	},
 
+
 	/**
 	 */
-
-	"_trackBrowserUsage": function() {
-		if(!this.startBrowserDate) {
-			this.startBrowserDate = Date.now();
-			return;
-		}
-		this._trackBrowser("Browser Usage Time", {
-			startDate: this.startBrowserDate,
-			endDate: Date.now(),
-			duration: Date.now() - this.startBrowserDate
-		});
+	"_trackStopBrowser": function() {
+		if(!this._appName) return;
+		this._trackBrowser("Browser Stop");
 	},
+
 
 	/**
 	 */
@@ -179,7 +170,9 @@ module.exports = structr(EventEmitter, {
 	"_trackBrowser": function(name, options) {
 		mixpanel.track(name, _.extend({
 			browser_name: this.options.app,
-			browser_version: this.options.version
+			browser_version: this.options.version,
+			from_date: this.startDate,
+			duration: Date.now() - this.startDate
 		}, options));
 	},
 
@@ -309,11 +302,7 @@ module.exports = structr(EventEmitter, {
 
 	"_setWindow": function(window) {
 
-		this._trackBrowser("Browser Startup Time", { 
-			startDate: this.startBrowserDate,
-			endDate: Date.now(),
-			duration: Date.now() - this.startBrowserDate 
-		});
+		this._trackBrowser("Browser Window Open");
 
 		if(window) this._ignoreClose = false;
 		console.log("set main window");

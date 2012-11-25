@@ -29,12 +29,22 @@ exports.plugin = function(client, httpServer, loader) {
 		events = new EventEmitter(),
 		pclient = new PuppetClient(puppet),
 		killTimeoutId,
-		numConnections = 0;
+		numConnections = 0,
+		clients = [];
+
+
+		function updateNumConnections() {
+			for(var i = clients.length; i--;) {
+				clients[i].updateNumConnections(clients.length, i == 0);
+			}	
+		}
 
 		//set dnode up so clients can connect
 		var sock = shoe(function(stream) {
 
 			numConnections++;
+
+			var inf;
 
 			var d = dnode({
 
@@ -42,19 +52,20 @@ exports.plugin = function(client, httpServer, loader) {
 				 * connect a client looking to control this desktop
 				 */
 
-				connectClient: function(credentials, callback) {
+				connectClient: function(info, callback) {
 
 					//TODO
-					/*client.maestroRequest("authenticateUser", credentials, outcome.error(callback).success(function(response, body) {
+					/*client.maestroRequest("authenticateUser", { token: info.token }, outcome.error(callback).success(function(response, body) {
 						if(body.errors) return callback(new Error(body.errors[0].message));
 
 						//send the controllable instance
 						callback(null, wrappedPuppet);
 					}));*/
 
-
+					clients.push(inf = info);
 
 					callback(null, dsync(pclient.createClient(d)));
+					updateNumConnections();
 				},
 
 				/**
@@ -83,6 +94,10 @@ exports.plugin = function(client, httpServer, loader) {
 
 			//once the client closes, tell the client that we're not busy
 			d.on("end", function() {
+				var i = clients.indexOf(inf);
+				if(~i) clients.splice(i, 1);
+				updateNumConnections();
+
 				logger.info("client close");
 
 				//no more connections? do the cleanup

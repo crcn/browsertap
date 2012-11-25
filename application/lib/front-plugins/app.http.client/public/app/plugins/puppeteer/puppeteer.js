@@ -59,7 +59,12 @@ module.exports = structr(EventEmitter, {
 
 			console.log("on remote");
 			//attach the 
-			remote.connectClient({ token: options.token }, function(err, remote) {
+			remote.connectClient({ 
+				token: options.token,
+				updateNumConnections: function(n, isMain) {
+					if(isMain) mixpanel.track("Windows Open", { count: n });
+				},
+			}, function(err, remote) {
 				
 				console.log("on client")
 				if(err) return alert(err.message);
