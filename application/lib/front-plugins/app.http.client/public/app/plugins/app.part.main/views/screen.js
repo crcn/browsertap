@@ -120,6 +120,8 @@ module.exports = require("../../../views/base").extend({
 	}, 200),
 	"onMouseMove": function(e) {
 
+		this._lastMouseMoveAt = Date.now();
+
 		var coords = { x: e.offsetX, y: e.offsetY };
 
 		if(this.windowDims.width && this.windowDims.height) {
@@ -195,6 +197,9 @@ module.exports = require("../../../views/base").extend({
 		console.log("avg frame rate:", this._avgFrameRate);
 	}, 500),
 	"_trackFrameRate": function() {
+		if(!this.options.loader.focused) {
+			console.log("window not in focus, not broadcasting fps metrics");
+		}
 		this.options.loader._trackBrowser("Average Frame Rate", { actual_frame_rate: this._avgFrameRate, 
 			qmin: this.options.qmin, 
 			qmax: this.options.qmax,

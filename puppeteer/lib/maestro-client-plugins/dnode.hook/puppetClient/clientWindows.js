@@ -130,6 +130,16 @@ var WindowBridge = structr(EventEmitter, {
 			self.close();
 		}),
 
+		window.on("focus", function() {
+			if(self._disposed) return;
+			self._clientWindow.focus();
+		});
+
+		window.on("unfocus", function() {
+			if(self._disposed) return;
+			self._clientWindow.unfocus();
+		});
+
 		window.app.once("close", function() {
 			if(self._disposed) return;
 			if(self._clientWindow.forceClosed) self._clientWindow.forceClosed();

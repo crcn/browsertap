@@ -80,6 +80,7 @@ module.exports = structr(EventEmitter, {
 		this.clean();
 		this.closed = true;
 		this._con.execute("closeWindow", { id: this.id });
+		this._events = {};
 	},
 
 	/**
@@ -102,6 +103,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"mouseEvent": function(dwFlags, coords, dwData) {
+		this._focus();
 		this._con.execute("fireWindowMouseEvent", { id: this.id, x: coords.x, y: coords.y, dwFlags: dwFlags, dwData: dwData || 0 });
 	},
 
@@ -126,6 +128,13 @@ module.exports = structr(EventEmitter, {
 
 	"focus": function() {
 		this._con.execute("focusWindow", { id: this.id });
+	},
+
+	/**
+	 */
+
+	"_focus": function() {
+		this.emit("setFocus");
 	},
 
 	/**

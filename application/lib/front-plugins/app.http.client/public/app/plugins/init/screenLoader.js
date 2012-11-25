@@ -165,7 +165,16 @@ module.exports = structr(EventEmitter, {
 				console.log("set clipboard: %s", data);
 				self.emit("setClipboard", data);
 			},
-
+			focus: function() {
+				console.log("focus window");
+				self.emit("focus", true);
+				self.focused = true;
+			},
+			unfocus: function() {
+				console.log("unfocus window");
+				self.emit("focus", false);
+				self.focused = false;
+			},
 			forceClosed: function() {
 				console.log("IGNORE FORCE", self._ignoreForceClose)
 				if(self._ignoreForceClose) return;

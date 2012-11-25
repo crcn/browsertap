@@ -124,9 +124,19 @@ module.exports = structr(EventEmitter, {
 			return;
 		}
 
-
 		var win = new Window(window, this),
 		self = this;
+
+		win.on("setFocus", function() {
+			
+			if(self._focusedWindow) {
+				if(self._focusedWindow == win) return;
+				self._focusedWindow.emit("unfocus");
+			}
+
+			self._focusedWindow = win;
+			self._focusedWindow.emit("focus");
+		});
 
 		this._setApp(win, function(err) {
 			if(err) console.error(err);

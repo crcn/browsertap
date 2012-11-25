@@ -25,7 +25,7 @@ module.exports = structr(EventEmitter, {
 		var self = this;
 		connection.on("end", function() {
 			self.emit("close");
-		})
+		});
 	},
 
 	/**
