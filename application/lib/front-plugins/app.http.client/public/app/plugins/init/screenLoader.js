@@ -1,7 +1,8 @@
 var structr = require("structr"),
 EventEmitter = require("events").EventEmitter,
 windowStyles = require("./windowStyles"),
-step = require("step");
+step = require("step"),
+Url = require("url");
 
 module.exports = structr(EventEmitter, {
 
@@ -98,6 +99,19 @@ module.exports = structr(EventEmitter, {
 		if(this._appName != this.options.app || this._appVersion != this.options.version) {
 			this._ignoreClose = true;
 			if(this.window) this.window.close();
+
+			//we track the host as well - only the host so we can get an idea of what people are doing with the app. Are they testing an app?
+			//is it local? is it https?
+
+			var urlInfo = Url.parse(this.options.open);
+
+			mixpanel.track("Open Browser", { browser_name: this.options.app, 
+				browser_version: this.options.version, 
+				urlHost: urlInfo.host,
+				is_local: false,
+				is_secure: urlInfo.protocol == "https://"
+			});
+
 			con.open({ name: this._appName = this.options.app, version: this._appVersion = this.options.version, arg: this.options.open }, function(err, client) { 
 				client.addWindow(self._getClient(null, false));
 			});

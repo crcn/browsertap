@@ -12,6 +12,9 @@ exports.start = function(type) {
 
 
 	var loader = maestro(_.extend({
+		mixpanel: {
+			token: "cc862e943db5ae621b531df52e1bfa86"
+		},
 		http: {
 			port: 8080
 		},

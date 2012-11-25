@@ -17,9 +17,6 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 	var loader = new ScreenLoader(puppeteer, commands), screen, appSwitcher,
 	loadingView = new mainPlugin.views.Loader({ el: ".loader" });
 
-	key("shift+right, shift+tab", function(e) {
-		appSwitcher.shift("right");
-	});
 
 	key("shift+left", function(e) {
 		appSwitcher.shift("left");
@@ -71,6 +68,16 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 	});
 
 
+	$.getJSON("/account.json", function(data) {
+		if(!data.result) return;
+
+		mixpanel.people.identify(data.result._id);
+		mixpanel.people.set({
+			"$email": data.result.email,
+			"$created": data.result.createdAt,
+			"$last_login": new Date()
+		});
+	})
 
 
 

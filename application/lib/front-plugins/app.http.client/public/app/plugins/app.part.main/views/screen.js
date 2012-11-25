@@ -124,9 +124,16 @@ module.exports = require("../../../views/base").extend({
 	"onMouseDown": function(e) {
 		this._window.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTDOWN : wkmEvents.mouse.MOUSEEVENTF_RIGHTDOWN, this.coords);
 
+		/*if(e.button == 0) {
+			mixpanel.track("Right Click");
+		} else {
+			mixpanel.track("Left Click");
+		}*/
+
 		if(e.button === 0) return; //only block right click
 		e.preventDefault();
 		e.stopPropagation();
+
 	},
 	"onMouseUp": function(e) {
 		this._window.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTUP : wkmEvents.mouse.MOUSEEVENTF_RIGHTUP, this.coords);
