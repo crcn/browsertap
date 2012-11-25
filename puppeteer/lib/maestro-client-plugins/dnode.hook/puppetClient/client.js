@@ -79,7 +79,7 @@ module.exports = structr(EventEmitter, {
 			function() {
 
 				//close other versions
-				apps.close({ name: options.name, version: {$ne: options.version}}, this);
+				apps.close({ name: options.name, version: {$ne: options.version }}, this);
 			},
 			function() {
 				apps.findApp({ name: options.name, version: options.version }, this);

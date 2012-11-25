@@ -16,9 +16,8 @@ exports.plugin = function(commands) {
 				smoke.signal("Click anywhere to generate new window", 1000 * 60 * 60);
 
 				//wait for click, then popup
-				$(document).bind("click.newWindow", function() {
+				$(document).one("click", function() {
 					window.open(options.url, "_blank", sprintf("width=%d,height=%d,status=0,titlebar=0,toolbar=0,menubar=0,resizable=1", options.width, options.height));
-					$(document).unbind("click.newWindow");
 				});
 			}
 		);

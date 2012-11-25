@@ -33,6 +33,13 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 		appSwitcher.shift("down");
 	});
 
+	loader.on("forceClose", function() {
+		smoke.signal("Click anywhere to resume", 1000 * 60 * 60 * 24);
+		$(document).one("click", function() {
+			loader.reload();
+		});
+	});
+
 	loader.on("loading", function() {
 		if(screen) {
 			screen.dispose();

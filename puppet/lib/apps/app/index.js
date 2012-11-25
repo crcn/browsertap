@@ -75,6 +75,7 @@ module.exports = structr(EventEmitter, {
 			callback(null, self);
 		});
 		this.running = false;
+		this.emit("close");
 	},
 
 	/**

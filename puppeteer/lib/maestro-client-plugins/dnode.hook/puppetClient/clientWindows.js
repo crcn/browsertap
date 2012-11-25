@@ -116,12 +116,17 @@ var WindowBridge = structr(EventEmitter, {
 
 		logger.info(sprintf("bound window %s", window.id));
 		this._nativeWindow = window;
-		var self = this;
+		var self = this, appEm;
 		window.once("close", function() {
 			self._nativeWindow = null;
 			console.log("native window close, closing client");
 			if(self._clientWindow.close) self._clientWindow.close();
+			if(appEm) appEm.dispose();
 		});
+
+		appEm = window.app.once("close", function() {
+			if(self._clientWindow.forceClosed) self._clientWindow.forceClosed();
+		})
 
 		this._clientWindow.setNativeWindow(window);
 

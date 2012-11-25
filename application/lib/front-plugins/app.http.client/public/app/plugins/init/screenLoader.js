@@ -95,6 +95,16 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
+	"step reload": function(next) {
+		this._appName = null;
+		this._appVersion = null;
+		this.load(this.options, next);
+	},
+
+
+	/**
+	 */
+
 	"_connectApp": function() {
 		console.log("loading app %s", this.options.app);
 		var con = this._connection, self = this;
@@ -109,10 +119,13 @@ module.exports = structr(EventEmitter, {
 
 			var urlInfo = Url.parse(this.options.open);
 
+			this._ignoreForceClose = true;
+
 
 			con.open({ name: this._appName = this.options.app, version: this._appVersion = this.options.version, arg: this.options.open }, function(err, client) { 
 				self._trackBrowser("Browser Open");
 				client.addWindow(self._getClient(null, false));
+				self._ignoreForceClose = false;
 			});
 			return;
 		} else 
@@ -151,6 +164,14 @@ module.exports = structr(EventEmitter, {
 			setClipboard: function(data) {
 				console.log("set clipboard: %s", data);
 				self.emit("setClipboard", data);
+			},
+
+			forceClosed: function() {
+				console.log("IGNORE FORCE", self._ignoreForceClose)
+				if(self._ignoreForceClose) return;
+
+				self._trackStopBrowser("Browser Force Stop");
+				self.emit("forceClose");
 			}
 		};
 	},
@@ -158,9 +179,9 @@ module.exports = structr(EventEmitter, {
 
 	/**
 	 */
-	"_trackStopBrowser": function() {
+	"_trackStopBrowser": function(name) {
 		if(!this._appName) return;
-		this._trackBrowser("Browser Stop");
+		this._trackBrowser(name || "Browser Stop");
 	},
 
 
