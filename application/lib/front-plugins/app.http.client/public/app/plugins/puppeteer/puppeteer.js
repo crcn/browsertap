@@ -64,7 +64,7 @@ module.exports = structr(EventEmitter, {
 			remote.connectClient({ 
 				token: options.token,
 				updateNumConnections: function(n, isMain) {
-					if(isMain) mixpanel.track("Windows Open", { count: n });
+					if(isMain) mixpanel.track("Sum Windows Open", { count: n });
 				},
 			}, function(err, remote) {
 				
