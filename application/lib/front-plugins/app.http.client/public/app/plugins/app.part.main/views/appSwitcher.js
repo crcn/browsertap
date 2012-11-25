@@ -56,6 +56,7 @@ module.exports = require("../../../views/base").extend({
 
 	},
 	"shift": function(position) {
+		if(this.options.loader._lockLoading) return;
 		this._findSelected();
 
 		if(this._hidden) {

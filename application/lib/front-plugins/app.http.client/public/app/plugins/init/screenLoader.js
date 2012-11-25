@@ -72,10 +72,13 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"step load": function(options, next) {
+		if(this._lockLoading) return;
 		_.extend(this.options, options);
+
 
 		this.emit("loading");
 		if(this.options.screen) {
+			this._lockLoading = true;
 			this._connectWindow();
 		} else {
 			this._connectApp();
