@@ -142,8 +142,11 @@ module.exports = structr(EventEmitter, {
 		var self = this,
 		startTime = Date.now();
 
+
 		return {
 			search: search,
+			app: this.options.app,
+			version: this.options.version,
 			setNativeWindow: function(window) {
 				console.log("set native window");
 				self._setWindow(window);
@@ -326,7 +329,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_popupWindow": function(w) {
-		this.commands.emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this.puppeteer.host + "&token=" + this.puppeteer.token + "&screen=" + w.id, width: w.width, height: w.height });
+		this.commands.emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this.puppeteer.host + "&token=" + this.puppeteer.token + "&screen=" + w.id+"&app="+this.options.app+"&version="+this.options.version, width: w.width, height: w.height });
 	},
 
 	/**

@@ -32,8 +32,7 @@ module.exports = structr(EventEmitter, {
 	"popupWindow": function(window) {
 		console.log("popup window %s", window)
 		if(!this._clientWindow) return false;
-		this._clientWindow.popup(window);
-		return true;
+		return this._clientWindow.popup(window);
 	},
 
 	/**
@@ -155,9 +154,17 @@ var WindowBridge = structr(EventEmitter, {
 	},
 	"popup": function(winProps) {
 
+		console.log("trying to popup");
+		console.log(winProps.app.name, this._clientWindow.app, winProps.app.version, this._clientWindow.version);
+
+		console.log(this._clientWindow);
+
+		if(winProps.app.name != this._clientWindow.app || winProps.app.version != this._clientWindow.version) return false;
+
 		//TODO - check if the app matches
 		// if(!this.testNativeWindow(winProps, { app: this.}))
 		this._clientWindow.popupWindow(winProps);
+		return true;
 	},
 	"close": function() {
 		if(this._nativeWindow) this._nativeWindow.close();
