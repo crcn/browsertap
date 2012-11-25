@@ -6,6 +6,9 @@
 		{+styles}
 			<link rel="stylesheet" href="/css/main.css" type="text/css">    
 		{/styles}
+		{>mixpanel/}
+		{+scripts}
+		{/scripts}
 	</head>
 	<body>
 		{+content}

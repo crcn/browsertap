@@ -1,5 +1,12 @@
 
+
 {>minimal-layout/}
+
+{<scripts}
+<script type="text/javascript">
+	mixpanel.track("Login Page Visit")
+</script>
+{/scripts}
 
 {<content}
 <h1>Login:</h1>

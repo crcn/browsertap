@@ -8,7 +8,9 @@
 		"/vendors/js/keymaster.js",
 		"/js/screen.js"
 	);
+	mixpanel.track("Live View Page Visit");
 </script>
+
 {/scripts}
 
 {<content}

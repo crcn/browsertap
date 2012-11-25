@@ -1,4 +1,4 @@
-
+var vine = require("vine");
 
 exports.require = ["app.http.server", "auth.init", "app.http.auth"];
 exports.plugin = function(server, auth, httpAuth) {
@@ -21,9 +21,10 @@ exports.plugin = function(server, auth, httpAuth) {
 	});
 
 
-	server.get("/remoteDesktop", function(req, res) {
-
+	server.get("/account.json", httpAuth.authCheckpoint, function(req, res) {
+		res.send(vine.result(req.account.toObject()).data);
 	});
+
 
 	function getToken(req, res, account, render) {
 		account.getMainToken(function(err, token) {

@@ -23,6 +23,8 @@
 			);
 		</script>
 
+		{>mixpanel/}
+
 		{+scripts}
 		{/scripts}
 	</head>
