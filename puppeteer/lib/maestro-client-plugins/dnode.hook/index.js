@@ -12,7 +12,7 @@ PuppetClient = require("./puppetClient");
 
 
 
-exports.require = ["client", "http.server"];
+exports.require = ["client", "plugin-express"];
 exports.plugin = function(client, httpServer, loader) {
 
 
@@ -118,7 +118,7 @@ exports.plugin = function(client, httpServer, loader) {
 		});
 
 
-		sock.install(httpServer.target, "/dnode");
+		sock.install(httpServer.connection, "/dnode");
 	})
 	
 

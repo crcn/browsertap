@@ -66,4 +66,6 @@ params({
 	} 
 }).
 require(__dirname + "/maestro-client-plugins").
-load();
+load(function(err) {
+	if(err) console.error(err.stack);
+});
