@@ -17,6 +17,7 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 	var loader = new ScreenLoader(puppeteer, commands), screen, appSwitcher,
 	loadingView = new mainPlugin.views.Loader({ el: ".loader" });
 
+
 	key("shift+right", function(e) {
 		appSwitcher.shift("right");
 	});
@@ -50,6 +51,7 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 		loadingView.update({ app: loader.options.app, version: loader.options.version });
 		loadingView.showNotification();
 	});
+
 
 	loader.on("connection", function(con) {
 		con.getAvailableApps(function(err, apps) {
