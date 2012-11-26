@@ -10,7 +10,7 @@ BrowserTap_kango.IBrowserTab.prototype={getId:function(){throw new BrowserTap_ka
 }};
 
 
-// Merged from /Users/craigcondon/Developer/Jobs/browsertap/browser_extension/src/js/firefox/BrowserTap_kango/browser.part.js
+// Merged from /Users/craig/Developer/Jobs/browsertap/browser_extension/src/js/firefox/BrowserTap_kango/browser.part.js
 
 BrowserTap_kango.WebProgressListener=function(a){this._callback=a};
 BrowserTap_kango.WebProgressListener.prototype={_callback:null,QueryInterface:function(a){if(a.equals(Components.interfaces.nsIWebProgressListener)||a.equals(Components.interfaces.nsISupportsWeakReference)||a.equals(Components.interfaces.nsISupports))return this;throw Components.results.NS_NOINTERFACE;},onProgressChange:function(){},onStatusChange:function(){},onSecurityChange:function(){},onLocationChange:function(){},onStateChange:function(a,b,c){var d=Components.interfaces.nsIWebProgressListener;c&d.STATE_START&&

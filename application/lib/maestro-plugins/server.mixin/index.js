@@ -23,6 +23,8 @@ exports.plugin = function(maestro) {
 			function() {
 
 				logger.info("fetching servers");
+
+
 				//find the server the account is currently using, or spin up a new one
 				maestro.getServer(_.extend({$or: [{ "tags.owner": account._id }, { "tags.owner": null }]}, query)).exec(this);
 			},
@@ -33,6 +35,9 @@ exports.plugin = function(maestro) {
 
 			on.success(function(server) {
 				var next = this;
+
+				//note that if we have to resort to this, it's NOT a good thing. Creating instances on the fly takes quite a while.
+				//We want people using instances immediately.
 				if(!server) {
 					logger.info(sprintf("creating a new server"));
 					maestro.getServer(query).exec(outcome.error(callback).success(function(server) {

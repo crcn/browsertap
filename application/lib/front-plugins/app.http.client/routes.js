@@ -17,4 +17,9 @@ exports.plugin = function(server, auth) {
 		res.render("screen");
 	});
 
+
+	server.get("/tools", function(req, res) {
+		res.render("tools");
+	})
+
 }
