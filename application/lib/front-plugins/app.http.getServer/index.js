@@ -3,7 +3,7 @@ vine = require("vine");
 
 exports.require = ["maestro", "plugin-express", "emailer","auth"];
 exports.plugin = function(maestro, server, emailer, auth, loader) {
-	console.log(emailer)
+
 	server.get("/server.json", auth.middleware.authCheckpoint, function(req, res) {
 		var imageName = "remote-desktop";
 

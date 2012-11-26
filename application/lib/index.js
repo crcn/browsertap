@@ -28,6 +28,7 @@ exports.start = function(type) {
 	require("plugin-express.middleware.dust").
 	require("emailer").
 	require("auth").
+	require("starch").
 	require(__dirname + "/front-plugins");
 
 	if(type == "slave") loader.require(__dirname + "/maestro-plugins");
