@@ -6,7 +6,7 @@ cons            = require("consolidate"),
 dust            = require("dustjs-linkedin");
 
 
-exports.require = ["app.http.server"];
+exports.require = ["plugin-express"];
 exports.plugin = function(server) {
 	
 	server.use(lessMiddleware({
@@ -14,9 +14,7 @@ exports.plugin = function(server) {
 		compress: true
 	}));
 
-	server.engine("dust", cons.dust);
 	server.set("views", __dirname + "/views");
-	server.set("view engine", "dust");
 
 	includeScript("/js/screen.js", __dirname + "/public/app/screen.js", server);
 

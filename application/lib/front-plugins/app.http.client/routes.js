@@ -10,7 +10,7 @@ _ = require("underscore");
 
 // console.log(eval(dust.compile(fs.readFileSync(__dirname + "/views/email/lost_password.dust", "utf8"))).toString());
 
-exports.require = ["app.http.server", "auth.init", "app.http.auth", "./models", "email.postmark"];
+exports.require = ["plugin-express", "auth", "app.http.auth", "./models", "emailer"];
 exports.plugin = function(server, auth, httpAuth, models, emailer) {
 
 	eval(dust.compile(fs.readFileSync(__dirname + "/views/email/lost_password.dust", "utf8"), "lostPasswordEmailTpl"));
@@ -18,6 +18,8 @@ exports.plugin = function(server, auth, httpAuth, models, emailer) {
 
 	var Account = auth.Account,
 	LostPassword = models.LostPassword;
+
+	return;
 
 	server.get("/live", httpAuth.authCheckpoint, function(req, res) {
 		res.render("screen");

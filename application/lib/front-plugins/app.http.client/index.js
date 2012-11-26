@@ -1,6 +1,4 @@
 
-exports.require = ["app.http.server", "./middleware", "./routes"];
+exports.require = [ "./middleware", "./routes"];
 
-exports.plugin = function(server, loader) {
-
-}
+exports.plugin = function() { }
