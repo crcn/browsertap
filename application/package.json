@@ -49,7 +49,6 @@
     "plugin-express": "0.0.x",
     "plugin-mongodb": "0.0.x",
     "plugin-express.middleware.dust": "0.0.x",
-    "emailer": "0.0.x",
-    "starch": "0.0.x"
+    "emailer": "0.0.x"
   }
 }
