@@ -17,7 +17,6 @@
 				"/vendors/js/transit.js",
 				"/vendors/js/underscore.js",
 				"/vendors/js/backbone.js",
-				"/vendors/js/mustache.js",
 				"/vendors/js/history.js",
 				"/vendors/js/smoke.js"
 			);

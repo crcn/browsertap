@@ -17,4 +17,7 @@ exports.plugin = function(server, auth) {
 		res.render("screen");
 	});
 
+	server.get("/payment", auth.middleware.authCheckpoint, function(req, res) {
+		res.render("payment");
+	});
 }
