@@ -9,7 +9,7 @@ exports.plugin = function(maestro, loader) {
 	var sleepTimeout = 1000 * 60,
 	destroyTime = 1000 * 60 * 60;
 
-
+	return;
 	function stopServers() {
 		maestro.
 		getServers({ "tags.owner": null, state: {$in: ["running", "pending"] }, imageName: "remote-desktop", lastUsedAt: {$lt: new Date(Date.now()) } }).

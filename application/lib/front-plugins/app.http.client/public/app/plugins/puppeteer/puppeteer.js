@@ -1,7 +1,10 @@
 var structr = require("structr"),
 EventEmitter = require("events").EventEmitter,
 shoe = require("shoe"),
-dnode = require("dnode");
+dnode = require("dnode"),
+auth = require("auth").connect(),
+_ = require("underscore");
+
 
 module.exports = structr(EventEmitter, {
 
@@ -22,12 +25,24 @@ module.exports = structr(EventEmitter, {
 		if(this._connecting) return;
 
 		//TODO - authorize this client 
-		var self = this;
-
-		var serverUrl = [window.location.protocol, "//", window.location.host, "/server.json"].join("");
 		this.startFetchTime = Date.now();
 
-		mixpanel.track("Fetch Desktop");
+		mixpanel.track("Fetching Desktop");
+
+
+		auth.Account.login(_.bind(this.onAccount, this));
+
+		
+	},
+
+	/**
+	 */
+
+	"onAccount": function(err, account) {
+		this.account = account;
+
+		var serverUrl = [window.location.protocol, "//", window.location.host, "/server.json"].join(""),
+		self = this;
 
 		$.ajax({
 			url: serverUrl,
@@ -37,6 +52,7 @@ module.exports = structr(EventEmitter, {
 				self._attach({ host: "http://" + puppeteer.ns + ":8080" });
 			}
 		});
+		
 	},
 
 	/**
@@ -50,6 +66,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_attach": function(options) {
+
 		mixpanel.track("Attach Desktop", {
 			from_date: this.startFetchTime,
 			to_date: Date.now(),
@@ -70,7 +87,7 @@ module.exports = structr(EventEmitter, {
 			console.log("on remote");
 			//attach the 
 			remote.connectClient({ 
-				token: options.token,
+				token: self.account.token.key,
 				updateNumConnections: function(n, isMain) {
 					if(isMain) mixpanel.track("Sum Windows Open", { count: n });
 				},

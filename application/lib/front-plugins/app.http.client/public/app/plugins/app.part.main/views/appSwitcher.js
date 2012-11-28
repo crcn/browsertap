@@ -27,11 +27,9 @@ module.exports = require("../../../views/base").extend({
 			self.currentVersionIndex = self.apps[self._app].indexOf(String(self.options.loader.options.version));
 			self._setCA();
 		}
+		
 		this.options.loader.on("loading", onApp);
 		onApp();
-
-
-
 
 		$(document).keyup(function(e) {
 			if(e.keyCode != 16) return; //shift

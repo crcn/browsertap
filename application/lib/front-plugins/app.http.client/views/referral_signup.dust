@@ -1,0 +1,19 @@
+{>minimal-layout/}
+
+
+{<scripts}
+<script type="text/javascript">
+	mixpanel.track("Signup Page Visit")
+</script>
+{/scripts}
+
+{<content}
+<h1>Referral Signup:</h1>
+<form method="post" action="/referrals/{referralId}">
+	<label>Email: <input type="text" name="email"></input></label> <br />
+	<label>Password: <input type="password" name="password"></input></label> <br />
+	<input type="hidden" name="referral" value="{referralId}"></input> 
+	<input type="hidden" name="src" value="{src}"></input> 
+	<input type="submit" value="login"></input> <a href="/signup">signup</a>
+</form>
+{/content}

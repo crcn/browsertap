@@ -15,7 +15,7 @@ PuppetClient = require("./puppetClient");
 exports.require = ["client", "plugin-express"];
 exports.plugin = function(client, httpServer, loader) {
 
-
+	console.log("waiting for maestro");
 	client.ready(function() {
 
 
@@ -30,7 +30,8 @@ exports.plugin = function(client, httpServer, loader) {
 		pclient = new PuppetClient(puppet),
 		killTimeoutId,
 		numConnections = 0,
-		clients = [];
+		clients = [],
+		startTime;
 
 
 		function updateNumConnections() {
@@ -39,12 +40,58 @@ exports.plugin = function(client, httpServer, loader) {
 			}	
 		}
 
+		
+
+
+
 		//set dnode up so clients can connect
 		var sock = shoe(function(stream) {
 
 			numConnections++;
 
-			var inf;
+			var startTime = Date.now(), inf, token, killByCreditBalanceTimeout;
+
+			function updateCreditBalance() {
+
+				//need to make sure any session less than 1 minute gets accounted for.
+				var usedCredits = Math.ceil((Date.now() - startTime) / 1000 / 60);
+
+				console.log("used credits %d", usedCredits);
+
+
+				client.maestroRequest("post", "/creditBalance.json", { token: token, usedCredits: usedCredits  }, outcome.error(function() {
+
+					//disconnect the client.
+					d.end();
+				}).success(function() {
+					updateCreditBalance();
+				}));
+			}
+
+			function syncCreditBalance(cb) {
+
+				client.maestroRequest("get", "/creditBalance.json", { token: token }, outcome.error(cb).success(function(creditBalance) {
+
+					console.log("credit balance is %d - setting kill timeout", creditBalance);
+
+					clearTimeout(killByCreditBalanceTimeout);
+					killByCreditBalanceTimeout = setTimeout(killByCreditBalance, creditBalance * 1000 * 60);
+					cb();
+				}));
+			}
+
+			function killByCreditBalance() {
+				console.log("user was kicked out because they didn't have enough credits :(");
+				clearTimeout(killByCreditBalanceTimeout);
+				d.end();
+			}
+
+			/*function syncCreditBalance2() {
+				syncCreditBalance(function(err) {
+					if(err) d.end();
+				});
+			}*/
+
 
 			var d = dnode({
 
@@ -54,18 +101,14 @@ exports.plugin = function(client, httpServer, loader) {
 
 				connectClient: function(info, callback) {
 
-					//TODO
-					/*client.maestroRequest("authenticateUser", { token: info.token }, outcome.error(callback).success(function(response, body) {
-						if(body.errors) return callback(new Error(body.errors[0].message));
+					token = info.token;
 
-						//send the controllable instance
-						callback(null, wrappedPuppet);
-					}));*/
+					syncCreditBalance(outcome.error(callback).success(function() {
+						clients.push(inf = info);
+						callback(null, dsync(pclient.createClient(d)));
+						updateNumConnections();
+					}));
 
-					clients.push(inf = info);
-
-					callback(null, dsync(pclient.createClient(d)));
-					updateNumConnections();
 				},
 
 				/**
@@ -102,6 +145,12 @@ exports.plugin = function(client, httpServer, loader) {
 
 				//no more connections? do the cleanup
 				if(!(--numConnections)) {
+
+
+					clearTimeout(killByCreditBalanceTimeout);
+					updateCreditBalance();
+
+					token = null;
 
 					logger.info("no more connections, cleaning up");
 

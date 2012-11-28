@@ -12,6 +12,9 @@ exports.start = function(type) {
 
 
 	var loader = maestro(_.extend({
+		privateMode: true,
+		serviceName: "Browsertap",
+		domain: "browsertap.com",
 		emailer: {
 			postmark: {
 				apiKey: "a8442610-e06b-45a3-af06-a605aca343e8",
@@ -21,11 +24,25 @@ exports.start = function(type) {
 		http: {
 			port: 8080,
 			loginRedirect: "/live",
+			inviteEmailTpl: __dirname + "/front-plugins/app.http.client/views/email/inviteEmailTpl.dust",
 			lostPasswordEmailTpl: __dirname + "/front-plugins/app.http.client/views/email/lost_password.dust",
 			validateEmailTpl: __dirname + "/front-plugins/app.http.client/views/email/validate_signup.dust"
 		},
 		referralRedirect: "/signup",
 		starch: {
+			rewards: {
+				signup: {
+					max: 20,
+					credits: 30
+				},
+				earlyBird: [
+					{
+						threshold: 1000,
+						description: "Early adopter!",
+						credits: 30 * 2
+					}
+				]
+			},
 			referrals: {
 				signup: {
 					max: 20,
