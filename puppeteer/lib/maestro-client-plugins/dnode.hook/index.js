@@ -41,6 +41,11 @@ exports.plugin = function(client, httpServer, loader) {
 		}
 
 		
+		function disconnectAllClients() {
+			for(var i = clients.length; i--;) {
+				clients[i].d.end();
+			}	
+		}
 
 
 
@@ -83,14 +88,8 @@ exports.plugin = function(client, httpServer, loader) {
 			function killByCreditBalance() {
 				console.log("user was kicked out because they didn't have enough credits :(");
 				clearTimeout(killByCreditBalanceTimeout);
-				d.end();
+				disconnectAllClients();
 			}
-
-			/*function syncCreditBalance2() {
-				syncCreditBalance(function(err) {
-					if(err) d.end();
-				});
-			}*/
 
 
 			var d = dnode({
@@ -104,6 +103,7 @@ exports.plugin = function(client, httpServer, loader) {
 					token = info.token;
 
 					syncCreditBalance(outcome.error(callback).success(function() {
+						info.d = d;
 						clients.push(inf = info);
 						callback(null, dsync(pclient.createClient(d)));
 						updateNumConnections();

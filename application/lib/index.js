@@ -81,6 +81,9 @@ exports.start = function(type) {
 					credits: 1800
 				}
 			}
+		},
+		simplecache: {
+			type: "mongodb"
 		}
 	}, maestroConfig)).
 	paths(__dirname + "/../node_modules").
@@ -88,6 +91,7 @@ exports.start = function(type) {
 	require("emailer").
 	require("auth").
 	require("starch").
+	require("simplecache").
 	require(__dirname + "/front-plugins");
 
 	if(type == "slave") loader.require(__dirname + "/maestro-plugins");
