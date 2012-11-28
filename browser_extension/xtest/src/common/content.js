@@ -1,10 +1,9 @@
 
 kango.addMessageListener("openVM", function() {
 	var script = document.createElement("script");
-	// script.src = "http://maestro.browsertap.com:8080/extension.js"
-	// script.type = "text/javascript";
-	// document.getElementsByTagName("head")[0].appendChild(script);
-	window.location = "http://maestro.browsertap.com:8080/live?open=" + encodeURIComponent(window.location) + "&app=chrome 19";
+	script.src = "http://maestro.browsertap.com:8080/js/extension.js"
+	script.type = "text/javascript";
+	document.getElementsByTagName("head")[0].appendChild(script);
 });
 
 kango.addMessageListener("refresh", function() {
@@ -12,7 +11,6 @@ kango.addMessageListener("refresh", function() {
 });
 
 
-window.__test = "hello";
 var commands = {
 	openWindow: function(options) {
 		options.type = "popup";

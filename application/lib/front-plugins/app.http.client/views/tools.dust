@@ -1,0 +1,37 @@
+{>layout/}
+
+
+
+
+{<scripts}
+<script type="text/javascript">
+	mixpanel.track("Tools Page Visit");
+
+	var bookmarklet = function() {
+		var script = document.createElement("script");
+		script.src = "http://maestro.browsertap.com:8080/js/extension.js";
+		script.type = "text/javascript";
+		document.getElementsByTagName("head")[0].appendChild(script);
+	};
+
+	head.ready(function() {
+		$(document).ready(function() {
+			$("#bookmarklet-link").attr("href","javascript:(" + encodeURIComponent(bookmarklet) + ")();");
+		});
+	});
+	
+
+</script>
+{/scripts}
+
+{<content}
+<a href="#">Install Chrome Extension</a><br />
+<a href="#">Install Firefox Extension</a><br />
+<a href="#">Install Safari Extension</a><br />
+<a href="#">Install Opera Extension</a><br />
+
+
+<br />
+<br />
+<a href="#" id="bookmarklet-link">Bookmarklet (drag me)</a><br />
+{/content}

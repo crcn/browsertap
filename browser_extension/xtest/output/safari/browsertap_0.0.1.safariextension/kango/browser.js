@@ -10,7 +10,7 @@ kango.IBrowserTab.prototype={getId:function(){throw new kango.NotImplementedExce
 }};
 
 
-// Merged from /Users/craigcondon/Developer/Jobs/browsertap/browser_extension/src/js/safari/kango/browser.part.js
+// Merged from /Users/craig/Developer/Jobs/browsertap/browser_extension/src/js/safari/kango/browser.part.js
 
 kango.Browser=function(){this.superclass.apply(this,arguments);this._lastTabId=0;this._tabs={};safari.application.addEventListener("beforeNavigate",kango.lang.bind(this._onBeforeNavigate,this),!0);safari.application.addEventListener("navigate",kango.lang.bind(this._onNavigate,this),!0);safari.application.addEventListener("activate",kango.lang.bind(this._onActivate,this),!0);safari.application.addEventListener("open",kango.lang.bind(this._onOpen,this),!0);safari.application.addEventListener("close",
 kango.lang.bind(this._onClose,this),!0)};

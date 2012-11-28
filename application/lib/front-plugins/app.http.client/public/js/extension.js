@@ -1,0 +1,1 @@
+window.location = "http://maestro.browsertap.com:8080/live?open=" + encodeURIComponent(window.location) + "&app=chrome 19";
