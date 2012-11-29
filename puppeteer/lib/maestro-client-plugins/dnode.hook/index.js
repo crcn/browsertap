@@ -69,7 +69,7 @@ exports.plugin = function(client, httpServer, loader) {
 					//disconnect the client.
 					d.end();
 				}).success(function() {
-					updateCreditBalance();
+					// updateCreditBalance();
 				}));
 			}
 

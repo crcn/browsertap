@@ -49,6 +49,7 @@ module.exports = structr(EventEmitter, {
 			dataType: "json",
 			success: function(resp) {
 				var puppeteer = resp.result;
+				console.log(resp)
 				self._attach({ host: "http://" + puppeteer.ns + ":8080" });
 			}
 		});
