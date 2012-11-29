@@ -21,6 +21,9 @@ exports.start = function(type) {
 				from: "support@browsertap.com"
 			}
 		},
+		imageNames: {
+			remoteDesktop: "remote-desktop"
+		},
 		http: {
 			port: 8080,
 			loginRedirect: "/live",

@@ -5,7 +5,7 @@ exports.require = ["maestro", "plugin-express", "simplecache", "emailer","starch
 exports.plugin = function(maestro, server, simplecache, emailer, starch, loader) {
 
 	server.get("/server.json", starch.middleware.premiumCheckpoint({creditBalance:{$gt:0}}), function(req, res) {
-		var imageName = "remote-desktop";
+		var imageName = loader.params("imageNames.remoteDesktop");
 
 
 		//cache the current request from the particular account so the server doesn't try and allocate more instances than necessary.
@@ -13,7 +13,7 @@ exports.plugin = function(maestro, server, simplecache, emailer, starch, loader)
 		simplecache.bucket("requests").get("fetch-server-" + req.account._id, function(onLoad) {
 
 			//fetch an unused instance specifically for the given user
-			maestro._ServerModel.getUnusedInstance({ imageName: "remote-desktop" }, req.account, onLoad);	
+			maestro._ServerModel.getUnusedInstance({ imageName: imageName }, req.account, onLoad);	
 
 		}, function(err, server) {
 
