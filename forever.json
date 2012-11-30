@@ -1,0 +1,7 @@
+{
+	"process": {
+		"puppeteer": {
+			"command": "/puppeteer"
+		}
+	}
+}

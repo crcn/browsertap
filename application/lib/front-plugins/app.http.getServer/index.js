@@ -13,7 +13,7 @@ exports.plugin = function(maestro, server, simplecache, emailer, starch, loader)
 		simplecache.bucket("requests").get("fetch-server-" + req.account._id, function(onLoad) {
 
 			//fetch an unused instance specifically for the given user
-			maestro._ServerModel.getUnusedInstance({ imageName: imageName }, req.account, onLoad);	
+			maestro.getUnusedInstance({ imageName: imageName }, req.account, onLoad);	
 
 		}, function(err, server) {
 

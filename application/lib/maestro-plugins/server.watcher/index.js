@@ -4,10 +4,15 @@ sprintf = require("sprintf").sprintf;
 exports.require = ["maestro"];
 exports.plugin = function(maestro, loader) {
 
-	maestro.startSync();
-
 	var sleepTimeout = 1000 * 60,
 	destroyTime = 1000 * 60 * 60;
+
+	maestro.getAllServers().watch("stateChange").on("stateChange", function(server) {
+		console.log("state changed!");
+	});
+
+
+	maestro.getServers({ "image.name": "rd4" }).exec().stop();
 
 	return;
 	function stopServers() {

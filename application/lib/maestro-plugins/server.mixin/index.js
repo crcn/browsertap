@@ -8,10 +8,8 @@ dref = require("dref");
 
 exports.require = ["maestro"];
 exports.plugin = function(maestro) {
-	var Server = maestro._ServerModel;
-
-
-	Server.getUnusedInstance = function(query, account, callback) {
+	
+	maestro.getUnusedInstance = function(query, account, callback) {
 
 		var on = outcome.error(callback);
 		step(
