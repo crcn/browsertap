@@ -1,8 +1,8 @@
 var step = require("step"),
 vine = require("vine");
 
-exports.require = ["plugin-express", "auth", "customer"];
-exports.plugin = function(httpServer, auth, Customer) {
+exports.require = ["plugin-express", "auth", "customer", "maestro"];
+exports.plugin = function(httpServer, auth, Customer, maestro) {
 
 
 	function retCreditBalance(customer, res) {
@@ -47,6 +47,32 @@ exports.plugin = function(httpServer, auth, Customer) {
 				retCreditBalance(customer, res);
 			}
 		);
+	});
 
-	})
+	function findServer(req, res, next) {
+		maestro.getServer({ _id: req.body._id }).exec(function(err, server) {
+			if(!server) return res.send(vine.error("server doesn't exist"));
+
+			req.server = server;
+
+			next();
+		});
+	}
+
+
+	httpServer.post("/keepServerAlive.json", findServer, function(req, res) {
+
+		req.server._logAction("keepAlive");
+		req.server.set("lastUsedAt", new Date());
+
+		res.send(vine.result(true));
+	});
+
+	httpServer.post("/serverComplete.json", findServer, function(req, res) {
+
+		req.server._logAction("serverDone");
+		req.server.set("owner", null);
+
+		res.send(vine.result(true));
+	});
 }
