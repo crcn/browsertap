@@ -32,7 +32,10 @@ exports.start = function(type) {
 		loginRedirect: "/live",
 		inviteEmailTpl: __dirname + "/front-plugins/app.http.client/views/email/inviteEmailTpl.dust",
 		lostPasswordEmailTpl: __dirname + "/front-plugins/app.http.client/views/email/lost_password.dust",
-		validateEmailTpl: __dirname + "/front-plugins/app.http.client/views/email/validate_signup.dust"
+		validateEmailTpl: __dirname + "/front-plugins/app.http.client/views/email/validate_signup.dust",
+		compress: true,
+		cookies: true,
+		xhr: false
 	},
 	referralRedirect: "/signup",
 	starch: {

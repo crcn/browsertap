@@ -12,9 +12,8 @@ exports.plugin = function(maestro, loader) {
 	});
 
 
-	maestro.getServers({ "image.name": "rd4" }).exec().stop();
-
 	return;
+	
 	function stopServers() {
 		maestro.
 		getServers({ "tags.owner": null, state: {$in: ["running", "pending"] }, imageName: "remote-desktop", lastUsedAt: {$lt: new Date(Date.now()) } }).

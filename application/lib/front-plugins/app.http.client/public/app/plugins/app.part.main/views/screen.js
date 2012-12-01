@@ -116,8 +116,11 @@ module.exports = require("../../../views/base").extend({
 		h = this.$hud.height();
 
 
-
-		$(".hud-body").find("object")[0].setPadding(padding);
+		try {
+			$(".hud-body").find("object")[0].setPadding(padding);
+		} catch(e) {
+			
+		}
 
 
 		//don't resize if nothing's changed

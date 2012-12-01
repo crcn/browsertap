@@ -1,6 +1,6 @@
 var FlashPlayer = require("./flashPlayer");
 module.exports = FlashPlayer.extend({
-	"source": "./swf/DesktopPlayer.swf",
+	"source": "/swf/DesktopPlayer.swf",
 	"host": "http://localhost:1935/live/default",
 	"params": function() {
 
@@ -11,7 +11,7 @@ module.exports = FlashPlayer.extend({
 		return {
 			channel: hp.pop(),
 			host: hp.join("/"),
-			// debug: true,//~String(window.location).indexOf("debugMode")
+			debug: true,//~String(window.location).indexOf("debugMode")
 		};
 	}
 });

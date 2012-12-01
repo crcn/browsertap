@@ -49,10 +49,11 @@ module.exports = structr(EventEmitter, {
 			dataType: "json",
 			success: function(resp) {
 				var puppeteer = resp.result;
-				console.log(resp)
-				self._attach({ host: "http://" + puppeteer.ns + ":8080" });
+				self._attach({ host: "http://" + puppeteer.ns + ":8080/browsertap.puppeteer" });
 			}
 		});
+
+
 		
 	},
 
@@ -75,7 +76,7 @@ module.exports = structr(EventEmitter, {
 		});
 
 		console.log("attaching %s", options.host);
-		var stream = shoe(options.host + "/dnode");
+		var stream = shoe(options.host + "/dnode", {});
 
 		mixpanel.track("Connect To Desktop", { host: options.host });
 

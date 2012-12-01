@@ -24,7 +24,7 @@ exports.plugin = function(maestro) {
 
 
 				//find the server the account is currently using, or spin up a new one
-				maestro.getServer(_.extend({$or: [{ "tags.owner": account._id }, { "tags.owner": null }]}, query)).exec(this);
+				maestro.getServer(_.extend({$or: [{ "owner": String(account._id) }, { "owner": null }]}, query)).exec(this);
 			},
 
 			/**
@@ -55,20 +55,23 @@ exports.plugin = function(maestro) {
 
 			on.success(function(server) {
 
-				if(server) {
-					logger.info(sprintf("account %s using server id=%s, ns=%s", account._id, server._id, server.ns));
-					server.tags = _.extend({}, server.tags, { owner: account._id });
-					return server.save(this);
-				}
+				if(!server) return callback(new Error("unable to connect"));
+
 				
-				return callback(new Error("unable to connect"));
+				logger.info(sprintf("account %s using server id=%s, ns=%s", account._id, server._id, server.ns));
+				server.set("owner", String(account._id));
+
+				var next = this;
+				server.ping(function() {
+					next(null, server);
+				});
 			}),
 
 			/**
 			 * start using it
 			 */
 
-			on.success(function(server) {
+			/*on.success(function(server) {
 
 				var foundServer, next = this;
 
@@ -85,7 +88,7 @@ exports.plugin = function(maestro) {
 				});
 
 				
-			}),
+			}),*/
 
 			/**
 			 */
