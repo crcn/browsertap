@@ -104,7 +104,7 @@ exports.start = function(type) {
 	require("plugin-express").
 	require(__dirname + "/front-plugins");
 
-	if(type == "slave") loader.require(__dirname + "/maestro-plugins");
+	loader.require(__dirname + "/maestro-plugins");
 
 
 	loader.load(function(err) {

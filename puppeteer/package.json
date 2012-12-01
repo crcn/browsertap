@@ -28,6 +28,7 @@
     "sift": "0.0.x",
     "seq": "0.3.x",
     "plugin": "0.2.x",
-    "plugin-express": "0.0.x"
+    "plugin-express": "0.0.x",
+    "request": "2.12.x"
   }
 }

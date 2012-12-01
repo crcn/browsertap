@@ -76,7 +76,7 @@ module.exports = structr(EventEmitter, {
 		});
 
 		console.log("attaching %s", options.host);
-		var stream = shoe(options.host + "/dnode", {});
+		var stream = shoe(options.host + "/dnode", { protocols_whitelist: ["websockets"] });
 
 		mixpanel.track("Connect To Desktop", { host: options.host });
 

@@ -1,8 +1,8 @@
 var step = require("step"),
 vine = require("vine");
 
-exports.require = ["plugin-express", "auth", "http.private", "customer"];
-exports.plugin = function(httpServer, auth, authAccount, Customer) {
+exports.require = ["plugin-express", "auth", "customer"];
+exports.plugin = function(httpServer, auth, Customer) {
 
 
 	function retCreditBalance(customer, res) {
@@ -13,7 +13,7 @@ exports.plugin = function(httpServer, auth, authAccount, Customer) {
 		}
 	}
 
-	httpServer.get("/creditBalance.json", authAccount, auth.middleware.authCheckpoint, function(req, res) {
+	httpServer.get("/creditBalance.json", auth.middleware.authCheckpoint, function(req, res) {
 		
 		console.log("returning credit balance")
 
@@ -28,7 +28,7 @@ exports.plugin = function(httpServer, auth, authAccount, Customer) {
 
 	})
 
-	httpServer.post("/creditBalance.json", authAccount, auth.middleware.authCheckpoint, function(req, res) {
+	httpServer.post("/creditBalance.json", auth.middleware.authCheckpoint, function(req, res) {
 		
 		console.log("removing %d credits", req.body.usedCredits);
 
