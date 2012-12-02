@@ -13,7 +13,7 @@ exports.plugin = function(maestro, server, simplecache, emailer, starch, loader)
 		simplecache.bucket("requests").get("fetch-server-" + req.account._id, function(onLoad) {
 
 			//fetch an unused instance specifically for the given user
-			maestro.getUnusedInstance({ imageName: imageName }, req.account, onLoad);	
+			maestro.getUnusedInstance({ "image.name": imageName }, req.account, onLoad);	
 
 		}, function(err, server) {
 
@@ -23,7 +23,7 @@ exports.plugin = function(maestro, server, simplecache, emailer, starch, loader)
 				return res.send(vine.error(err));
 			}
 
-			var result = server.toObject();
+			var result = server.get();
 
 			//attach the credit balance so the client has something to countdown from
 			result.creditBalance = req.customer.creditBalance;

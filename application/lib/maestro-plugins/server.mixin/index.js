@@ -24,7 +24,7 @@ exports.plugin = function(maestro) {
 
 
 				//find the server the account is currently using, or spin up a new one
-				maestro.getServer(_.extend({$or: [{ "tags.owner": account._id }, { "tags.owner": null }]}, query)).exec(this);
+				maestro.getServer(_.extend({$or: [{ "owner": String(account._id) }, { "owner": null }]}, query)).exec(this);
 			},
 
 			/**
@@ -41,7 +41,8 @@ exports.plugin = function(maestro) {
 					maestro.getServer(query).exec(outcome.error(callback).success(function(server) {
 						if(!server) return callback(new Error("unable to fetch servers"));
 						server.clone(outcome.error(next).success(function(clone) {
-							clone.use(next);
+							// clone.use(next);
+							next(null, clone);
 						}));
 					}));
 				} else {
@@ -55,20 +56,24 @@ exports.plugin = function(maestro) {
 
 			on.success(function(server) {
 
-				if(server) {
-					logger.info(sprintf("account %s using server id=%s, ns=%s", account._id, server._id, server.ns));
-					server.tags = _.extend({}, server.tags, { owner: account._id });
-					return server.save(this);
-				}
-				
-				return callback(new Error("unable to connect"));
+				if(!server) return callback(new Error("unable to connect"));
+
+				logger.info(sprintf("account %s using server id=%s, ns=%s", account._id, server._id, server.ns));
+				server.set("owner", String(account._id));
+				server.set("hadOwner", true);
+				server.changed("used");
+
+				var next = this;
+				server.ping(function() {
+					next(null, server);
+				});
 			}),
 
 			/**
 			 * start using it
 			 */
 
-			on.success(function(server) {
+			/*on.success(function(server) {
 
 				var foundServer, next = this;
 
@@ -85,7 +90,7 @@ exports.plugin = function(maestro) {
 				});
 
 				
-			}),
+			}),*/
 
 			/**
 			 */

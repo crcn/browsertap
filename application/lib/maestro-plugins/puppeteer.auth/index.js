@@ -1,8 +1,8 @@
 var step = require("step"),
 vine = require("vine");
 
-exports.require = ["plugin-express", "auth", "http.private", "customer"];
-exports.plugin = function(httpServer, auth, authAccount, Customer) {
+exports.require = ["plugin-express", "auth", "customer", "maestro"];
+exports.plugin = function(httpServer, auth, Customer, maestro) {
 
 
 	function retCreditBalance(customer, res) {
@@ -13,7 +13,7 @@ exports.plugin = function(httpServer, auth, authAccount, Customer) {
 		}
 	}
 
-	httpServer.get("/creditBalance.json", authAccount, auth.middleware.authCheckpoint, function(req, res) {
+	httpServer.get("/creditBalance.json", auth.middleware.authCheckpoint, function(req, res) {
 		
 		console.log("returning credit balance")
 
@@ -28,7 +28,7 @@ exports.plugin = function(httpServer, auth, authAccount, Customer) {
 
 	})
 
-	httpServer.post("/creditBalance.json", authAccount, auth.middleware.authCheckpoint, function(req, res) {
+	httpServer.post("/creditBalance.json", auth.middleware.authCheckpoint, function(req, res) {
 		
 		console.log("removing %d credits", req.body.usedCredits);
 
@@ -47,6 +47,34 @@ exports.plugin = function(httpServer, auth, authAccount, Customer) {
 				retCreditBalance(customer, res);
 			}
 		);
+	});
 
-	})
+	function findServer(req, res, next) {
+		maestro.getServer({ _id: req.body._id }).exec(function(err, server) {
+			if(!server) return res.send(vine.error("server doesn't exist"));
+
+			req.server = server;
+
+			next();
+		});
+	}
+
+
+	httpServer.post("/keepServerAlive.json", findServer, function(req, res) {
+
+		req.server._logAction("keepAlive");
+		req.server.set("lastUsedAt", new Date());
+		req.server.set("hadOwner", true);
+
+		res.send(vine.result(true));
+	});
+
+	httpServer.post("/serverComplete.json", findServer, function(req, res) {
+
+		req.server._logAction("serverDone");
+		req.server.set("owner", null);
+		req.server.set("hadOwner", true);
+
+		res.send(vine.result(true));
+	});
 }
