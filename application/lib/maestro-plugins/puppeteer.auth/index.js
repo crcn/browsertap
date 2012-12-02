@@ -76,6 +76,7 @@ exports.plugin = function(httpServer, auth, Customer, maestro) {
 		// req.server.set("hadOwner", true);
 
 		//put it through the SHREDDERRRR
+		//VRRRRRRRRRRRRRRRRRRRRRRRRRRRRRREEEEEEEEEEEEEEEEEEEEEEEEEEEeeeeeeeeeeeeeeeeeeeeee.......!!@!#)#(!#)#(#!)#! 
 		req.server.terminate();
 
 		res.send(vine.result(true));
