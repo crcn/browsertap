@@ -41,7 +41,7 @@ exports.plugin = function(maestro) {
 			on.success(function(server) {
 				var next = this;
 
-				console.log(maestro.collection.find(_.extend({ owner: String(account._id) }, query)).sync())
+				// console.log(maestro.collection.find(_.extend({ owner: String(account._id) }, query)).sync())
 
 				//note that if we have to resort to this, it's NOT a good thing. Creating instances on the fly takes quite a while.
 				//We want people using instances immediately.

@@ -92,13 +92,13 @@ exports.plugin = function(client, httpServer, master, loader) {
 		}
 
 		function syncCreditBalance(cb) {
-			
+
 			master.request("get", "/creditBalance.json", { token: token }, outcome.error(cb).success(function(creditBalance) {
 
 				console.log("credit balance is %d - setting kill timeout", creditBalance);
 
 				clearTimeout(killByCreditBalanceTimeout);
-				killByCreditBalanceTimeout = setTimeout(killByCreditBalance, creditBalance * 1000 * 60);
+				killByCreditBalanceTimeout = setTimeout(killByCreditBalance, Math.min(2147483647, creditBalance * 1000 * 60));
 				cb();
 			}));
 		}

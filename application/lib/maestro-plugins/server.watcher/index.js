@@ -4,7 +4,7 @@ sprintf = require("sprintf").sprintf;
 exports.require = ["maestro"];
 exports.plugin = function(maestro, loader) {
 
-	var destroyTime = 1000 * 60 * 5, //5 minutes
+	var destroyTime = 1000 * 60 * 3, //5 minutes
 	imageName = loader.params("imageNames.remoteDesktop");
 
 
