@@ -51,7 +51,7 @@ exports.plugin = function(maestro, loader) {
 				}
 			});
 
-			setTimeout(destroyServers, destroyTime);
+			setTimeout(destroyServers, 1000 * 30);
 		})
 	}
 
