@@ -19,7 +19,7 @@ exports.plugin = function(maestro, loader) {
 		//if a server is used, then clone it so there's always a live one.
 		used: function(server) {
 
-
+			console.log(maestro.collection.count({ owner: null }).sync())
 			if(maestro.collection.count({ owner: null }).sync() == 0) {
 				server.clone();
 			}
