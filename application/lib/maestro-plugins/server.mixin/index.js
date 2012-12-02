@@ -23,7 +23,15 @@ exports.plugin = function(maestro) {
 				logger.info("fetching servers");
 
 				//find the server the account is currently using, or spin up a new one
-				maestro.getServer(_.extend({$or: [{ "owner": String(account._id) }, { "owner": null }]}, query)).exec(this);
+
+				//fuck this is bugged right now. I don't want to deal with this...
+				// maestro.getServer(_.extend({$or: [{ "owner": String(account._id) }, { "owner": null }]}, query)).exec(this);
+
+				var owned = maestro.collection.findOne(_.extend({ owner: String(account._id) }, query)).sync();
+
+				if(!owned) owned = maestro.collection.findOne(_.extend({ owner: null }, query)).sync();
+
+				this(null, owned);
 			},
 
 			/**

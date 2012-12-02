@@ -25,7 +25,7 @@ exports.plugin = function(maestro, loader) {
 				server.clone();
 			}
 		}
-	})
+	});
 
 	function destroyServers() {
 		// console.log("terminating old servers");
@@ -58,6 +58,8 @@ exports.plugin = function(maestro, loader) {
 	maestro.
 	getAllServers().
 	exec(function(err, servers) {
+			console.log(maestro.collection.find({ owner: null, "image.name": imageName }).sync().length)
+			console.log(maestro.collection.count({ owner: null, "image.name": imageName }).sync())
 
 		//for now, prevent all servers from being destroyed INCASE there has been a server crash
 		servers.forEach(function(server) {
