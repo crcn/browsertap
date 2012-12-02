@@ -19,7 +19,6 @@ exports.plugin = function(maestro, loader) {
 		//if a server is used, then clone it so there's always a live one.
 		used: function(server) {
 
-			console.log(imageName);
 			console.log(maestro.collection.find({ owner: null, "image.name": imageName }).sync().length)
 			if(maestro.collection.find({ owner: null, "image.name": imageName }).sync().length == 0) {
 				server.clone();
@@ -38,7 +37,7 @@ exports.plugin = function(maestro, loader) {
 		exec(function(err, servers) {
 			var saved;
 
-			console.log(maestro.collection.findOne({ owner: null, "image.name": imageName }).sync())
+			// console.log(maestro.collection.findOne({ owner: null, "image.name": imageName }).sync())
 			try {
 				servers.forEach(function(server) {
 					if(server.get("hadOwner")) {
