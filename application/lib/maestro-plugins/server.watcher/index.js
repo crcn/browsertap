@@ -39,17 +39,20 @@ exports.plugin = function(maestro, loader) {
 			var saved;
 
 			console.log(servers.length)
-
-			servers.forEach(function(server) {
-				if(server.get("hadOwner")) {
-					server.terminate();
-				} else 
-				if(!saved) {
-					saved = server;
-				} else {
-					server.terminate();
-				}
-			});
+			try {
+				servers.forEach(function(server) {
+					if(server.get("hadOwner")) {
+						server.terminate();
+					} else 
+					if(!saved) {
+						saved = server;
+					} else {
+						server.terminate();
+					}
+				});
+			} catch(e) {
+				console.error(e.stack);
+			}
 
 			setTimeout(destroyServers, 1000 * 30);
 		})
