@@ -22,7 +22,6 @@ exports.plugin = function(maestro) {
 
 				logger.info("fetching servers");
 
-
 				//find the server the account is currently using, or spin up a new one
 				maestro.getServer(_.extend({$or: [{ "owner": String(account._id) }, { "owner": null }]}, query)).exec(this);
 			},

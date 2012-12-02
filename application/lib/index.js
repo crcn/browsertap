@@ -24,7 +24,7 @@ exports.start = function(type) {
 		}
 	},
 	imageNames: {
-		remoteDesktop: "remote-desktop"
+		remoteDesktop: maestroConfig.remoteDesktop || "rd4"
 	},
 	mongodb: "mongodb://maestro-root:m4estr0d32@alex.mongohq.com:10081/maestro-dev",
 	http: {
