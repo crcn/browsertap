@@ -65,7 +65,7 @@ exports.plugin = function(maestro) {
 				server.changed("used");
 
 				var next = this;
-				return next(null, server);
+				// return next(null, server);
 				server.ping(function() {
 					next(null, server);
 				});
