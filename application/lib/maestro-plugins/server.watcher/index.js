@@ -34,11 +34,11 @@ exports.plugin = function(maestro, loader) {
 		//note that we don't have to limit the number of servers to destroy, since any used servers should
 		//be destroyed automatically. Also, if a server never had a previous owner, then it WON'T get deleted. 
 		maestro.
-		getServers({ "image.name": {$ne:null}, lastUsedAt: {$lt: new Date(Date.now() - destroyTime) } }).
+		getServers({ "image.name": imageName, lastUsedAt: {$lt: new Date(Date.now() - destroyTime) } }).
 		exec(function(err, servers) {
 			var saved;
 
-			console.log(servers.length)
+			console.log(maestro.collection.findOne({ owner: null, "image.name": imageName }).sync())
 			try {
 				servers.forEach(function(server) {
 					if(server.get("hadOwner")) {
