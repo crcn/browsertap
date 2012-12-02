@@ -20,6 +20,7 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 	loadingView = new mainPlugin.views.Loader({ el: ".loader" });
 
 
+
 	key("shift+right", function(e) {
 		appSwitcher.shift("right");
 	});
@@ -59,7 +60,8 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 		con.getAvailableApps(function(err, apps) {
 			appSwitcher = new mainPlugin.views.AppSwitcher({ el: ".app-switcher", router: router, loader: loader, apps: apps });
 		})
-	})
+	});
+
 
 	loader.on("window", function(window) {
 		if(screen) screen.dispose();
@@ -71,6 +73,8 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 			if(q[key]) q[key] = Number(q[key]);
 			else q[key] = defaults[key];
 		}
+
+		console.log(q)
 
 		window.startRecording(q, function(err, info) {
 
