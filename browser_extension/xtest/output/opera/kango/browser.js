@@ -10,7 +10,7 @@ kango.IBrowserTab.prototype={getId:function(){throw new kango.NotImplementedExce
 }};
 
 
-// Merged from /Users/craig/Developer/Jobs/browsertap/browser_extension/src/js/opera/kango/browser.part.js
+// Merged from /Users/craigcondon/Developer/Jobs/browsertap/browser_extension/src/js/opera/kango/browser.part.js
 
 kango.Browser=function(){this.superclass.apply(this,arguments);opera.extension.tabs.addEventListener("focus",kango.lang.bind(this._onTabFocus,this),!1);opera.extension.tabs.addEventListener("close",kango.lang.bind(this._onTabClose,this),!1);opera.extension.tabs.addEventListener("create",kango.lang.bind(this._onTabCreate,this),!1);var a=this;kango.addEventListener(kango.event.READY,function(){kango.addMessageListener("KangoBrowser_DOMContentLoaded",function(b){a._onDOMContentLoaded(b.target,b.data)});
 kango.addMessageListener("KangoBrowser_BeforeNavigate",function(b){a._onBeforeNavigate(b.target,b.data)})})};

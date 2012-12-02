@@ -6,7 +6,7 @@ var kango={event:{MESSAGE:"message"},lang:{evalInSandbox:function(b,d,c){for(var
 JSON.parse(a.response)}catch(g){a.response=null}else if("xml"==c)try{var e=null,e="undefined"!=typeof DOMParser?DOMParser:window.DOMParser,f=new e;a.response=f.parseFromString(a.response,"text/xml")}catch(h){a.response=null}b.contentType=c;d(a)})}},_init:function(b){"undefined"==typeof kango.dispatchMessage&&this._initMessaging();(new kango.UserscriptEngineClient).run(window,b,window==window.top)}};
 
 
-// Merged from /Users/craig/Developer/Jobs/browsertap/browser_extension/src/js/opera/includes/content_kango.part.js
+// Merged from /Users/craigcondon/Developer/Jobs/browsertap/browser_extension/src/js/opera/includes/content_kango.part.js
 
 kango.browser.getName=function(){return"opera"};kango.FireDOMContentLoadedEvent=function(){window==window.top&&kango.dispatchMessage("KangoBrowser_DOMContentLoaded",{url:document.location.href,title:document.title})};kango.FireBeforeNavigateEvent=function(){window==window.top&&kango.dispatchMessage("KangoBrowser_BeforeNavigate",{url:document.location.href})};kango.BrowserHelper=function(){};
 kango.BrowserHelper.prototype={init:function(){var a=this;kango.addMessageListener("KangoBrowser_navigate",function(c){a.navigate(c.data)});kango.FireBeforeNavigateEvent()},navigate:function(a){document.location.href=a}};

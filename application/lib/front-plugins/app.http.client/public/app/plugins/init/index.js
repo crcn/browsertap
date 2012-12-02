@@ -7,6 +7,8 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 
 	// var query = qs.parse(String(window.location).split("")
 
+
+
 	router.on({
 		"pull -http live": function(req, res) {
 			loader.load(req.query);

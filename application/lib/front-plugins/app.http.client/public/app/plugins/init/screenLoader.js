@@ -16,6 +16,11 @@ module.exports = structr(EventEmitter, {
 
 		//default icon
 		this.options = { app: "chrome", version: 19, open: "http://google.com" };
+
+		var self = this;
+		commands.on("focus", function() {
+			self._focus();
+		})
 	},
 
 	/**
@@ -133,6 +138,13 @@ module.exports = structr(EventEmitter, {
 			// this._proxy.location.set(this.options.open);
 			this._setProxyLocation(this.options.open);
 		}
+	},
+
+	/**
+	 */
+
+	"_focus": function() {
+		if(this.window) this.window.focus();
 	},
 
 	/**

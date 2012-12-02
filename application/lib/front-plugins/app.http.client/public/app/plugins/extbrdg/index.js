@@ -28,6 +28,18 @@ exports.plugin = function(commands) {
 			window.close();
 		}
 	})*/
+
+
+	var commands2 = {
+		tabFocus: function() {
+			commands.emit("focus");
+		}
+	}
+
+	document.addEventListener("btcommand2", function(event) {
+		var command = JSON.parse(decodeURIComponent(event.target.getAttribute("command")));
+		commands2[command.name](command.data);
+	});
 }
 
 
@@ -46,4 +58,6 @@ function prepare() {
 			el.dispatchEvent(ev);
 		}
 	};
+
+
 }
