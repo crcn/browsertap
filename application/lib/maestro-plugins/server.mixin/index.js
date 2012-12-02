@@ -57,12 +57,13 @@ exports.plugin = function(maestro) {
 
 				if(!server) return callback(new Error("unable to connect"));
 
-				logger.info(sprintf("account %s using server id=%s, ns=%s", account._id, server._id, server.ns));
+				logger.info(sprintf("account %s using server id=%s, ns=%s", account._id, server.get("_id"), server.get("ns")));
 				server.set("owner", String(account._id));
 				server.set("hadOwner", true);
 				server.changed("used");
 
 				var next = this;
+				return next(null, server);
 				server.ping(function() {
 					next(null, server);
 				});
