@@ -31,9 +31,17 @@ exports.plugin = function(maestro, loader) {
 		maestro.
 		getServers({ "image.name": imageName, lastUsedAt: {$lt: new Date(Date.now() - destroyTime) } }).
 		exec(function(err, servers) {
+			var saved;
 
 			servers.forEach(function(server) {
-				if(server.get("hadOwner")) server.terminate();
+				if(server.get("hadOwner")) {
+					server.terminate();
+				} else 
+				if(!saved) {
+					saved = server;
+				} else {
+					server.terminate();
+				}
 			});
 
 			setTimeout(destroyServers, destroyTime);
