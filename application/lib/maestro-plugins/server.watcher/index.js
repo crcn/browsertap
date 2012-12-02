@@ -21,7 +21,7 @@ exports.plugin = function(maestro, loader) {
 
 			console.log(imageName);
 			console.log(maestro.collection.find({ owner: null, "image.name": imageName }).sync().length)
-			if(maestro.collection.count({ owner: null, "image.name": imageName }).sync() == 0) {
+			if(maestro.collection.find({ owner: null, "image.name": imageName }).sync().length == 0) {
 				server.clone();
 			}
 		}
