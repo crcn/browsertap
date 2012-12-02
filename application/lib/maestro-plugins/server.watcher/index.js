@@ -4,20 +4,25 @@ sprintf = require("sprintf").sprintf;
 exports.require = ["maestro"];
 exports.plugin = function(maestro, loader) {
 
-	var destroyTime = 1000, //5 minutes
+	var destroyTime = 1000 * 60, //5 minutes
 	imageName = loader.params("imageNames.remoteDesktop");
+
+
+	/*function createServer() {
+		maestro.servers.getService("ec2").createServer({ image: imageName, type: "c1.medium" }, function(){});
+	}*/
 
 
 	maestro.collection.watch({_id:{$ne:null}}, {
 
 		//if a server is used, then clone it so there's always a live one.
-		use: function(server) {
+		used: function(server) {
 			server.clone();
 		}
 	})
 
 	function destroyServers() {
-		console.log("terminating old servers");
+		// console.log("terminating old servers");
 
 
 		//note that we don't have to limit the number of servers to destroy, since any used servers should
@@ -37,6 +42,8 @@ exports.plugin = function(maestro, loader) {
 	maestro.
 	getAllServers().
 	exec(function(err, servers) {
+
+
 
 		//for now, prevent all servers from being destroyed INCASE there has been a server crash
 		servers.forEach(function(server) {
