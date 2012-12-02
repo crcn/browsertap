@@ -41,7 +41,8 @@ exports.plugin = function(maestro) {
 					maestro.getServer(query).exec(outcome.error(callback).success(function(server) {
 						if(!server) return callback(new Error("unable to fetch servers"));
 						server.clone(outcome.error(next).success(function(clone) {
-							clone.use(next);
+							// clone.use(next);
+							next(null, clone);
 						}));
 					}));
 				} else {
@@ -57,9 +58,10 @@ exports.plugin = function(maestro) {
 
 				if(!server) return callback(new Error("unable to connect"));
 
-				
 				logger.info(sprintf("account %s using server id=%s, ns=%s", account._id, server._id, server.ns));
 				server.set("owner", String(account._id));
+				server.set("hadOwner", true);
+				server.changed("used");
 
 				var next = this;
 				server.ping(function() {

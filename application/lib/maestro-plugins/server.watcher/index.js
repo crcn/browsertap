@@ -4,24 +4,34 @@ sprintf = require("sprintf").sprintf;
 exports.require = ["maestro"];
 exports.plugin = function(maestro, loader) {
 
-	var sleepTimeout = 1000 * 60,
-	destroyTime = 1000 * 60 * 5, //5 minutes
+	var destroyTime = 1000, //5 minutes
 	imageName = loader.params("imageNames.remoteDesktop");
 
-	maestro.getAllServers().watch("stateChange").on("stateChange", function(server) {
-		console.log("state changed!");
-	});
+
+	maestro.collection.watch({_id:{$ne:null}}, {
+
+		//if a server is used, then clone it so there's always a live one.
+		use: function(server) {
+			server.clone();
+		}
+	})
 
 	function destroyServers() {
+		console.log("terminating old servers");
+
+
+		//note that we don't have to limit the number of servers to destroy, since any used servers should
+		//be destroyed automatically. Also, if a server never had a previous owner, then it WON'T get deleted. 
 		maestro.
 		getServers({ "image.name": imageName, lastUsedAt: {$lt: new Date(Date.now() - destroyTime) } }).
-		min(loader.params("minRunningDesktops") || 0).
 		exec(function(err, servers) {
-			if(servers && servers.length)
-			logger.info(sprintf("terminating %d instances", servers.length));
+
+			servers.forEach(function(server) {
+				if(server.get("hadOwner")) server.terminate();
+			});
+
 			setTimeout(destroyServers, destroyTime);
-		}).
-		terminate();
+		})
 	}
 
 	maestro.

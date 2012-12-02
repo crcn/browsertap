@@ -64,6 +64,7 @@ exports.plugin = function(httpServer, auth, Customer, maestro) {
 
 		req.server._logAction("keepAlive");
 		req.server.set("lastUsedAt", new Date());
+		req.server.set("hadOwner", true);
 
 		res.send(vine.result(true));
 	});
@@ -72,6 +73,7 @@ exports.plugin = function(httpServer, auth, Customer, maestro) {
 
 		req.server._logAction("serverDone");
 		req.server.set("owner", null);
+		req.server.set("hadOwner", true);
 
 		res.send(vine.result(true));
 	});
