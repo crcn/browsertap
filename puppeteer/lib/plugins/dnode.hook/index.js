@@ -92,7 +92,7 @@ exports.plugin = function(client, httpServer, master, loader) {
 		}
 
 		function syncCreditBalance(cb) {
-			console.log(master);
+			
 			master.request("get", "/creditBalance.json", { token: token }, outcome.error(cb).success(function(creditBalance) {
 
 				console.log("credit balance is %d - setting kill timeout", creditBalance);

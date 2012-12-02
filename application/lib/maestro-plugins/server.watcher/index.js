@@ -13,6 +13,7 @@ exports.plugin = function(maestro, loader) {
 	}*/
 
 
+
 	maestro.collection.watch({_id:{$ne:null}}, {
 
 		//if a server is used, then clone it so there's always a live one.
@@ -42,8 +43,6 @@ exports.plugin = function(maestro, loader) {
 	maestro.
 	getAllServers().
 	exec(function(err, servers) {
-
-
 
 		//for now, prevent all servers from being destroyed INCASE there has been a server crash
 		servers.forEach(function(server) {

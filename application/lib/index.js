@@ -28,7 +28,7 @@ exports.start = function(type) {
 	},
 	mongodb: "mongodb://maestro-root:m4estr0d32@alex.mongohq.com:10081/maestro-dev",
 	http: {
-		port: 8080,
+		port: 80,
 		loginRedirect: "/live",
 		inviteEmailTpl: __dirname + "/front-plugins/app.http.client/views/email/inviteEmailTpl.dust",
 		lostPasswordEmailTpl: __dirname + "/front-plugins/app.http.client/views/email/lost_password.dust",
@@ -95,13 +95,13 @@ exports.start = function(type) {
 		type: "mongodb"
 	}}).
 	paths(__dirname + "/../node_modules").
+	require("plugin-express").
 	require("plugin-express.middleware.dust").
 	require("emailer").
 	require("auth").
 	require("starch").
 	require("simplecache").
 	require("maestro").
-	require("plugin-express").
 	require(__dirname + "/front-plugins");
 
 	loader.require(__dirname + "/maestro-plugins");
