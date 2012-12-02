@@ -235,13 +235,21 @@ module.exports = structr(EventEmitter, {
 			callback = options;
 			options = {};
 		}
+
 		if(this._output) return callback(null, this._output);
 		var streamId = videoStreamIdGenerator.uid().toUpperCase();
-		var output =  "rtmp://" + this._rtmp.hostname + ":1935/live/" + streamId;
+
+		var rtmpHost = this._rtmp.hostname,
+		localhost    = "localhost";
+
+		//debugging
+		rtmpHost = localhost = "10.0.1.30";
+
+		var output =  "rtmp://" + rtmpHost + ":1935/live/" + streamId;
 
 		console.log("recording window to %s", output);
 
-		this._con.execute("startRecordingWindow", _.extend(options, { id: this.id, output: "rtmp://localhost:1935/live/" + streamId }));
+		this._con.execute("startRecordingWindow", _.extend(options, { id: this.id, output: "rtmp://"+localhost+":1935/live/" + streamId }));
 
 		callback(null, this._output = {
 			url: output

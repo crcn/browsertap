@@ -10,8 +10,8 @@ PuppetClient = require("./puppetClient");
 
 
 
-exports.require = ["client", "plugin-express"];
-exports.plugin = function(client, httpServer, loader) {
+exports.require = ["client", "plugin-express", "master"];
+exports.plugin = function(client, httpServer, master, loader) {
 
 	var params = loader.params();
 	params.rtmp = { hostname: process.env.HOSTNAME };
@@ -33,12 +33,35 @@ exports.plugin = function(client, httpServer, loader) {
 		}	
 	}
 
+
 	
 	function disconnectAllClients() {
 		for(var i = clients.length; i--;) {
 			clients[i].d.end();
 		}	
 	}
+
+	var keepAliveTimeout, noMoreConnectionsTimeout;
+
+	function keepAlive(no) {
+		clearTimeout(keepAliveTimeout);
+
+		if(no === false) return;
+
+		master.request("post", "/keepServerAlive.json", { _id: process.env.SERVER_ID }, function(){});
+
+		keepAliveTimeout = setTimeout(keepAlive, 10000)
+	}
+
+	function noMoreConnections() {
+		clearTimeout(noMoreConnectionsTimeout);
+
+		//wait for a little bit incase the user refreshes
+		noMoreConnectionsTimeout = setTimeout(function() {
+			master.request("post", "/serverComplete.json", { _id: process.env.SERVER_ID }, function(){});
+		}, 1000 * 10);
+	}
+
 
 
 
@@ -49,6 +72,9 @@ exports.plugin = function(client, httpServer, loader) {
 
 		var startTime = Date.now(), inf, token, killByCreditBalanceTimeout;
 
+		clearTimeout(noMoreConnectionsTimeout);
+		keepAlive();
+
 		function updateCreditBalance() {
 
 			//need to make sure any session less than 1 minute gets accounted for.
@@ -56,8 +82,7 @@ exports.plugin = function(client, httpServer, loader) {
 
 			console.log("used credits %d", usedCredits);
 
-
-			client.maestroRequest("post", "/creditBalance.json", { token: token, usedCredits: usedCredits  }, outcome.error(function() {
+			master.request("post", "/creditBalance.json", { token: token, usedCredits: usedCredits  }, outcome.error(function() {
 
 				//disconnect the client.
 				d.end();
@@ -67,8 +92,8 @@ exports.plugin = function(client, httpServer, loader) {
 		}
 
 		function syncCreditBalance(cb) {
-
-			client.maestroRequest("get", "/creditBalance.json", { token: token }, outcome.error(cb).success(function(creditBalance) {
+			console.log(master);
+			master.request("get", "/creditBalance.json", { token: token }, outcome.error(cb).success(function(creditBalance) {
 
 				console.log("credit balance is %d - setting kill timeout", creditBalance);
 
@@ -139,9 +164,13 @@ exports.plugin = function(client, httpServer, loader) {
 			//no more connections? do the cleanup
 			if(!(--numConnections)) {
 
+				//no more use for this server unless another connection is made
+				keepAlive(false);
+
 
 				clearTimeout(killByCreditBalanceTimeout);
 				updateCreditBalance();
+				noMoreConnections();
 
 				token = null;
 
@@ -149,7 +178,6 @@ exports.plugin = function(client, httpServer, loader) {
 
 				//close all apps, and remove all settings
 				puppet.apps.closeAllApps();
-
 				puppet.wkm.reopen();
 			}
 
