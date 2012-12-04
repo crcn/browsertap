@@ -106,19 +106,17 @@ module.exports = structr(EventEmitter, {
 
 			console.log("on remote");
 			//attach the 
-			self._remote = remove;
+			self._remote = remote;
 			remote.connectClient({ 
 				token: self.account.token.key,
 				updateNumConnections: function(n, isMain) {
 					if(isMain) mixpanel.track("Sum Windows Open", { count: n });
 				}
-			}, function(err, remote) {
-				
-				if(err) return alert(err.message);
+			}, outcome.success(function(remote) {
 				self.connection = remote;
 				self._connecting = false;
 				self.emit("connect", null, remote);
-			});
+			}));
 		});
 		d.pipe(stream).pipe(d);
 

@@ -22,6 +22,9 @@ module.exports = require("../../../views/base").extend({
 		this._numFrameRates = 0;
 
 
+		var self = this;
+
+
 		this.$body.css({ "overflow": "hidden" });
 
 		disp.add(
@@ -40,7 +43,8 @@ module.exports = require("../../../views/base").extend({
 			disp.addBinding(binding);
 		});
 
-		this._disposable.addInterval(setInterval(_.bind(this.syncScrollInfo, this)));
+		this._disposable.addInterval(setInterval(_.bind(this.syncScrollInfo, this), 2000));
+		this._disposable.addInterval(setInterval(_.bind(this._changeVideoQuality, this), 200));
 		this._window.bindProxy(_.bind(this.onProxy, this));
 
 		this.onResize();
@@ -130,6 +134,9 @@ module.exports = require("../../../views/base").extend({
 	}, 200),
 	"onMouseMove": function(e) {
 
+
+		this._prevMousePosition = Math
+
 		this._lastMouseMoveAt = Date.now();
 
 		var coords = { x: e.offsetX, y: e.offsetY };
@@ -139,9 +146,14 @@ module.exports = require("../../../views/base").extend({
 			coords.y = coords.y - (this.$hud.height()/2 - this.windowDims.height/2);
 		}
 
+		if(this.coords) {
+			this._mouseMoveDelta = Math.round(Math.sqrt(Math.pow(this.coords.x - coords.x, 2) + Math.pow(this.coords.y - coords.y, 2)))
+		}
+
 		this._window.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_ABSOLUTE | wkmEvents.mouse.MOUSEEVENTF_MOVE, this.coords = coords);
 	},
 	"onMouseDown": function(e) {
+		this._mouseDown = true;
 		this._window.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTDOWN : wkmEvents.mouse.MOUSEEVENTF_RIGHTDOWN, this.coords);
 
 		/*if(e.button == 0) {
@@ -156,6 +168,7 @@ module.exports = require("../../../views/base").extend({
 
 	},
 	"onMouseUp": function(e) {
+		this._mouseDown = false;
 		this._window.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTUP : wkmEvents.mouse.MOUSEEVENTF_RIGHTUP, this.coords);
 	},
 	"onKeyDown": function(data) {
@@ -170,11 +183,15 @@ module.exports = require("../../../views/base").extend({
 		this.proxy = proxy;
 	},
 	"onDocumentScroll": function(e, delta) {
+		this._scrollDelta = delta;
 		if(this.proxy) {
 			this.proxy.scrollbar.to(this.$document.scrollLeft(), this.$document.scrollTop());
 		} else {
 			this._window.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, this.coords, delta * 100);
 		}
+
+
+		this._changeVideoQuality();
 	},
 	"syncScrollInfo": function() {
 		if(!this.proxy) return;
@@ -218,5 +235,41 @@ module.exports = require("../../../views/base").extend({
 			gop_size: this.options.gop_size,
 			frame_rate: this.options.frame_rate
 		});
+	},
+	"_changeVideoQuality": function() {
+
+		var mouseMoveDelta = this._mouseDown ? this._mouseMoveDelta || 0 : 0;
+
+		var biggest = Math.round(Math.max(mouseMoveDelta, Math.abs(this._scrollDelta || 0) * 200));
+
+
+		var qmin, qmax, gop_size;
+
+		if(biggest > 1) {
+			qmin = 40;
+			qmax = 70;
+			gop_size = 300;
+		} else {
+			qmin = 1;
+			qmax = 2;
+			gop_size = 5;
+		}
+
+		this._mouseMoveDelta = 0;
+		this._scrollDelta = 0;
+
+		if(this.qmin == qmin && this.qmax == qmax) return;
+
+		this.qmin = qmin;
+		this.qmax = qmax;
+
+		console.log("scale %d %d", qmin, qmax);
+
+		// var qmax = Math.min(biggest, 70),
+		// qmin = 1;//Math.max(qmax - 20, 1);
+
+		// console.log(qmin, qmax)
+
+		this._window.changeRecordingQuality({ qmin: qmin, qmax: qmax, gop_size: gop_size })
 	}
 });
