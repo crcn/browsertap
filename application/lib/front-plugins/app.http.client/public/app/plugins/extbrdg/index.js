@@ -20,13 +20,6 @@ exports.plugin = function(bark, commands) {
 		);
 	});
 
-	/*commands.on("closed", function(options) {
-		if(confirm("This window has been disconnected. Close?")) {
-			window.close();
-		}
-	})*/
-
-
 	var commands2 = {
 		tabFocus: function() {
 			commands.emit("focus");
