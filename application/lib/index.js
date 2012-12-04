@@ -102,6 +102,7 @@ exports.start = function(type) {
 	require("starch").
 	require("simplecache").
 	require("maestro").
+	require(__dirname + "/common-plugins").
 	require(__dirname + "/front-plugins");
 
 	loader.require(__dirname + "/maestro-plugins");

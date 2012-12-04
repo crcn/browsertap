@@ -5,20 +5,21 @@
 
 		{+styles}
 			<link rel="stylesheet" href="/css/main.css" type="text/css">    
-			<link rel="stylesheet" href="/css/smoke/smoke.css" type="text/css">    
-			<link rel="stylesheet" href="/css/smoke/dark.css" type="text/css">    
 		{/styles}
+
+		<!--[if IE]>
+			<script type="text/javascript" src="/vendors/js/json2.js"></script>   
+			<script type="text/javascript" src="/vendors/js/es5-shim.js"></script>   
+		<![endif]-->
 
 		<script type="text/javascript" src="/vendors/js/head.js"></script>
 		<script type="text/javascript">
 			head.js(
-				"/vendors/js/es5-shim.js",
 				"/vendors/js/jquery.js",
 				"/vendors/js/transit.js",
 				"/vendors/js/underscore.js",
 				"/vendors/js/backbone.js",
-				"/vendors/js/history.js",
-				"/vendors/js/smoke.js"
+				"/vendors/js/history.js"
 			);
 		</script>
 

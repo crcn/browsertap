@@ -2,11 +2,10 @@ var ScreenLoader = require("./screenLoader"),
 qs = require("querystring"),
 Url = require("url");
 
-exports.require = ["router", "app.part.main", "puppeteer", "commands"];
-exports.plugin = function(router, mainPlugin, puppeteer, commands) {
+exports.require = ["router", "bark", "app.part.main", "puppeteer", "commands"];
+exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader) {
 
 	// var query = qs.parse(String(window.location).split("")
-
 
 
 	router.on({
@@ -38,9 +37,7 @@ exports.plugin = function(router, mainPlugin, puppeteer, commands) {
 	});
 
 	loader.on("forceClose", function() {
-		smoke.signal("Click anywhere to resume", 1000 * 60 * 60 * 24);
-		$(document).one("click", function() {
-			// loader.reload();
+		bark.clickToClose("Click anywhere to resume", function() {
 			window.location.reload();
 		});
 	});

@@ -6,7 +6,7 @@
 		"/vendors/js/jquery-mousewheel.js",
 		"/vendors/js/swfobject.js",
 		"/vendors/js/keymaster.js",
-		"/js/screen.js"
+		"/js/screen.js?" + Date.now()
 	);
 	mixpanel.track("Live View Page Visit");
 </script>

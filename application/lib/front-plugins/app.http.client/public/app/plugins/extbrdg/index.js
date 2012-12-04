@@ -1,9 +1,9 @@
 var step = require("step"),
 sprintf = require("sprintf").sprintf;
 
-exports.require = ["commands"];
+exports.require = ["bark", "commands"];
 exports.name = "extbrdg";
-exports.plugin = function(commands) {
+exports.plugin = function(bark, commands) {
 	var bridge = prepare();
 
 	commands.on("popup", function(options) {
@@ -13,10 +13,7 @@ exports.plugin = function(commands) {
 				if(bridge.exists) return bridge.execute("openWindow", options);	
 
 				//never close
-				smoke.signal("Click anywhere to generate new window", 1000 * 60 * 60);
-
-				//wait for click, then popup
-				$(document).one("click", function() {
+				bark.clickToClose("Click anywhere to generate new window", function() {
 					window.open(options.url, "_blank", sprintf("width=%d,height=%d,status=0,titlebar=0,toolbar=0,menubar=0,resizable=1", options.width, options.height));
 				});
 			}

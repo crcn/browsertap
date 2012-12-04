@@ -15,3 +15,8 @@ body{padding:0px;margin:0px;font-family:"Helvetica","Helvetica Neue";overflow:hi
 .app-switcher-item{float:left;width:100px;height:120px;padding-left:6px;cursor:pointer;}
 .app-switcher-selected{visibility:hidden;border:2px solid white;position:absolute;top:0px;background-color:#222;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;-khtml-border-radius:10px;filter:alpha(opacity=0);-moz-opacity:0.95;-khtml-opacity:0.95;opacity:0.95;width:100px;height:102px;margin-top:8px;}
 .current-app{position:fixed;left:0;background-color:#000;color:#FFF;z-index:999;padding:5px;bottom:0px;border-top-left-radius:0px;-moz-border-radius-topleft:0px;border-top-right-radius:5px;-moz-border-radius-topright:5px;border-bottom-left-radius:0px;-moz-border-radius-bottomleft:0px;border-bottom-right-radius:0px;-moz-border-radius-bottomright:0px;}
+.bark-notification{-webkit-perspective:600px;-moz-perspective:600px;-o-perspective:600px;perspective:600px;}
+.alert-modal{background-color:rgba(0, 0, 0, 0.3);}
+.alert-container,.click-to-resume-container{color:#FFF;text-align:center;background-color:rgba(0, 0, 0, 0.7);padding:20px;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;-khtml-border-radius:5px;border:2px solid rgba(255, 255, 255, 0.7);}
+.alert-container>div{color:#FFF;clear:both;font-size:24px;margin-bottom:8px;padding:5px;}
+.alert-container>a{text-decoration:none;color:#000;font-size:13px;font-weight:700;background-color:#FFF;padding:8px;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;-khtml-border-radius:5px;}

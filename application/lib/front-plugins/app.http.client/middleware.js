@@ -24,7 +24,7 @@ exports.plugin = function(server) {
 
 
 function includeScript(mount, path, server) {
-	var b = browserify({ mount:mount, cache: true, watch: true });
+	var b = browserify({ mount:mount, cache: false, watch: true });
 	browserifyFiles.register(["ejs"], handlebarsTemplate, b);
 	b.addEntry(path);
 	server.use(b);

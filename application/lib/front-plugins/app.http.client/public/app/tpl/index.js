@@ -7,4 +7,6 @@ exports.registerViews = function() {
 	bTemplates["home"] = require("./home.ejs");
 	bTemplates["app-loader"] = require("./app-loader.ejs");
 	bTemplates["screen"] = require("./screen.ejs");
+	bTemplates["alert-notification"] = require("./notifications/alert.ejs");
+	bTemplates["click-to-close-notification"] = require("./notifications/click-to-close.ejs");
 }

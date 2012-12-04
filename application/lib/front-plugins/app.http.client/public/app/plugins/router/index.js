@@ -35,35 +35,6 @@ exports.plugin = function() {
 		headers({ subdomain: subdomain, stream: true, url: parts.href }).
 		success(function(stream)
 		{
-
-			/*console.log('dumping stream data');
-
-			var buffer = '', response = {};
-
-			stream.dump({
-				error: function(err) {
-					console.log(err);
-				},
-				headers: function(res)
-				{
-					response = res;
-
-					if(res.redirect)
-					{
-						console.log('redirect')
-						router.push('redirect', res.redirect);
-					}
-				},
-				data: function(chunk) {
-					buffer += chunk
-				},
-				end: function() {
-					console.log("http ended")
-					if(response.redirect || response.dontPrint) return;
-
-					document.body.innerHTML = buffer;
-				}
-			})*/
 		}).pull();
 	}
 

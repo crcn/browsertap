@@ -11,8 +11,9 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"__construct": function(host) {
+	"__construct": function(host, commands) {
 		this._host = host;
+		this._commands = commands;
 	},
 
 	/**
@@ -44,11 +45,17 @@ module.exports = structr(EventEmitter, {
 		var serverUrl = [window.location.protocol, "//", window.location.host, "/server.json"].join(""),
 		self = this;
 
+
 		$.ajax({
 			url: serverUrl,
 			dataType: "json",
 			success: function(resp) {
 				var puppeteer = resp.result;
+				if(resp.errors) {
+					// return self.emit("error", resp.errors);
+					return self._commands.emit("error", resp.errors);
+				}
+
 				self._attach({ host: "http://" + puppeteer.ns + ":8080/browsertap.puppeteer" });
 			}
 		});
@@ -92,7 +99,7 @@ module.exports = structr(EventEmitter, {
 				token: self.account.token.key,
 				updateNumConnections: function(n, isMain) {
 					if(isMain) mixpanel.track("Sum Windows Open", { count: n });
-				},
+				}
 			}, function(err, remote) {
 				
 				if(err) return alert(err.message);
