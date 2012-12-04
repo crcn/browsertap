@@ -51,6 +51,9 @@
     "plugin-express.middleware.dust": "0.0.x",
     "emailer": "0.0.x",
     "starch": "0.0.x",
-    "simplecache": "0.1.x"
+    "simplecache": "0.1.x",
+    "comerr": "0.0.x",
+    "verify": "0.0.x",
+    "bark-notifications": "0.0.x"
   }
 }
