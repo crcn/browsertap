@@ -3,7 +3,9 @@ EventEmitter = require("events").EventEmitter,
 shoe = require("shoe"),
 dnode = require("dnode"),
 auth = require("auth").connect(),
-_ = require("underscore");
+_ = require("underscore"),
+comerr = require("comerr"),
+outcome = require("outcome");
 
 
 module.exports = structr(EventEmitter, {
@@ -30,38 +32,37 @@ module.exports = structr(EventEmitter, {
 
 		mixpanel.track("Fetching Desktop");
 
-
 		auth.Account.login(_.bind(this.onAccount, this));
-
-		
 	},
 
 	/**
 	 */
 
 	"onAccount": function(err, account) {
+
+		if(err) return self._commands.emit("error", resp.errors);
+
 		this.account = account;
+
+		this.reloadServer();
+		this.keepAlive();
+	},
+
+	/**
+	 */
+
+	"reloadServer": function() {
 
 		var serverUrl = [window.location.protocol, "//", window.location.host, "/server.json"].join(""),
 		self = this;
 
-
 		$.ajax({
 			url: serverUrl,
 			dataType: "json",
-			success: function(resp) {
-				var puppeteer = resp.result;
-				if(resp.errors) {
-					// return self.emit("error", resp.errors);
-					return self._commands.emit("error", resp.errors);
-				}
-
+			success: outcome.vine().success(function(puppeteer) {
 				self._attach({ host: "http://" + puppeteer.ns + ":8080/browsertap.puppeteer" });
-			}
-		});
-
-
-		
+			})
+		});	
 	},
 
 	/**
@@ -69,6 +70,16 @@ module.exports = structr(EventEmitter, {
 
 	"disconnect": function() {
 		//TODO
+	},
+
+	/**
+	 * prevents the app from timing out. TODO - this should be tied to activity (mouse)
+	 */
+
+	"keepAlive": function() {
+		setInterval(function(self) {
+			if(self._remote) self._remote.keepAlive();
+		}, 10000, this);
 	},
 
 	/**
@@ -95,6 +106,7 @@ module.exports = structr(EventEmitter, {
 
 			console.log("on remote");
 			//attach the 
+			self._remote = remove;
 			remote.connectClient({ 
 				token: self.account.token.key,
 				updateNumConnections: function(n, isMain) {
@@ -107,25 +119,19 @@ module.exports = structr(EventEmitter, {
 				self._connecting = false;
 				self.emit("connect", null, remote);
 			});
-
-			
-			//keep it alive!
-			setInterval(function() {
-				remote.keepAlive();
-			}, 10000);
 		});
 		d.pipe(stream).pipe(d);
 
 		d.on("end", function() {
 			self._connecting = false;
 			self.connection = null;
-			self.emit("close");
+			self.reloadServer();
 		});
 
 		d.on("error", function() {
 			self._connecting = false;
 			self.connection = null;
-			self.emit("connect", new Error("unable to connect"));
+			self._commands.emit("error", new comerr.UnableToConnect("Unable to connect to a remote desktop"));
 		})
 	}
 });

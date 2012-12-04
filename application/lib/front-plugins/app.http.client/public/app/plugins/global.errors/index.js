@@ -1,8 +1,10 @@
-var comerr = require("comerr");
+var comerr = require("comerr"),
+outcome = require("outcome");
 
 exports.require = ["bark","commands"];
 exports.name = "global.errors";
 exports.plugin = function(bark, commands) {
+
 
 
 	var errorHandlers = {
@@ -30,6 +32,10 @@ exports.plugin = function(bark, commands) {
 			});
 	}
 
+	errorHandlers[comerr.codes.UnableToConnect] = function(err) {
+		bark.alert(err.message);
+	}
+
 
 	function onError(error) {
 
@@ -44,6 +50,7 @@ exports.plugin = function(bark, commands) {
 	}
 
 	commands.on("error", onError);
+	outcome.on("unhandledError", onError);
 
 
 	return {
