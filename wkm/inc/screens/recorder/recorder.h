@@ -17,6 +17,7 @@ namespace Screens
 		FFmpegContext* context();
 		void stop();
 		void update();
+		void updateQuality();
 		~Recorder();
 	private:
 		Screen* _screen;

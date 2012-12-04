@@ -35,6 +35,7 @@ namespace Screens
 		this->_ctx->output = copy;
 
 		this->_recording = true;
+		//this->_screen->focus();
 	}
 
 	FFmpegContext* Recorder::context()
@@ -60,6 +61,12 @@ namespace Screens
 		this->_ffmpeg->broadcast(bm);
 		delete bm;
 	}
+
+	void Recorder::updateQuality()
+	{
+		this->_ffmpeg->updateQuality();
+	}
+
 
 	Recorder::~Recorder()
 	{

@@ -70,6 +70,7 @@ namespace Screens
 		 */
 
 		FFmpegContext* context();
+		void updateQuality();
 
 		/**
 		*/
@@ -87,6 +88,7 @@ namespace Screens
 
 		Geometry::Rectangle _bounds;
 		int _bufferSize;
+		int _prevOutputSize;
 		//int _width, _height, _bitRate, _frameRate, _bufferSize, _gopSize, _qmin, _qmax;
 		 
 		FFmpegContext* _ctx;
@@ -138,6 +140,11 @@ namespace Screens
 		/**
 		 */
 
+		void scaleQuality(int outSize);
+
+		/**
+		 */
+
 		void refresh()
 		{
 			refresh(false);
@@ -165,6 +172,7 @@ namespace Screens
 		*/
 
 		void cleanup();
+
 	};
 
 }

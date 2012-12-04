@@ -1,5 +1,6 @@
 #include "screens/recorder/ffmpeg.h"
 #include <iostream>
+#include <algorithm>
 
 
 
@@ -44,6 +45,7 @@ namespace Screens
 		_srcPicture      = NULL;
 		_dstPicture      = NULL;
 		_needsRefreshing = true;
+		_prevOutputSize  = 0;
 
 		this->_ctx = ctx;
 	}
@@ -52,6 +54,7 @@ namespace Screens
 	{
 		resize(&data->bounds());
 		refresh(true);
+
 
 		Geometry::Rectangle& bounds = data->bounds();
 
@@ -69,6 +72,8 @@ namespace Screens
 
 		int outSize = avcodec_encode_video(_videoCodecCtx, _outputBuffer, _bufferSize, _dstPicture);
 
+		
+		
 		int ret = 0;
 		if(outSize > 0)
 		{       
@@ -83,6 +88,9 @@ namespace Screens
 			if(_videoCodecCtx->coded_frame->key_frame)
 			{
 				pkt.flags |= AV_PKT_FLAG_KEY;
+			} else {
+				//this->scaleQuality(outSize);
+				_prevOutputSize = outSize;
 			}
 
 			pkt.stream_index = _videoStream->index;
@@ -104,6 +112,28 @@ namespace Screens
 		}
 
 		
+	}
+
+	void FFMPeg::scaleQuality(int outSize)
+	{
+		if(_prevOutputSize == 0) return;
+		int diff = std::abs(_prevOutputSize - outSize);
+		int mult = 1;
+			
+
+		for(int i = 0; i < _prevOutputSize; i += 500) {
+			mult++;
+		}
+
+		int qmax = std::min(mult, 70);
+		int qmin = std::max(1, qmax - 30);
+
+		//if(std::abs(_videoCodecCtx.qmin - qmin) < 5 && std::ab)
+
+		std::cout  << qmin << " " << qmax << " " << diff << " " << outSize << std::endl;
+
+		_videoCodecCtx->qmin = qmin;
+		_videoCodecCtx->qmax = qmax;
 	}
 
 
@@ -204,6 +234,32 @@ namespace Screens
 		avcodec_get_context_defaults3(_videoCodecCtx, _videoCodec);
 		_videoCodecCtx->codec_id = _outputFmt->video_codec;
 
+		this->updateQuality();
+
+
+		if (_videoCodecCtx->codec_id == CODEC_ID_MPEG2VIDEO) 
+		{
+			// just for testing, we also add B frames
+			_videoCodecCtx->max_b_frames = 2;
+		}
+
+		if (_videoCodecCtx->codec_id == CODEC_ID_MPEG1VIDEO)
+		{
+			// Needed to avoid using macroblocks in which some coeffs overflow.
+			// This does not happen with normal video, it just happens here as
+			// the motion of the chroma plane does not match the luma plane. 
+			_videoCodecCtx->mb_decision=2;
+		}
+
+		// some formats want stream headers to be separate
+		if (_formatCtx->oformat->flags & AVFMT_GLOBALHEADER)
+			_videoCodecCtx->flags |= CODEC_FLAG_GLOBAL_HEADER;
+
+
+	}
+
+	void FFMPeg::updateQuality()
+	{
 		int br = _ctx->bit_rate * 1000;
 		
 		
@@ -369,27 +425,6 @@ namespace Screens
 			//CTO(psyd_rd)
 			//CTO(psy_trellis)
 #undef CTO
-
-
-		if (_videoCodecCtx->codec_id == CODEC_ID_MPEG2VIDEO) 
-		{
-			// just for testing, we also add B frames
-			_videoCodecCtx->max_b_frames = 2;
-		}
-
-		if (_videoCodecCtx->codec_id == CODEC_ID_MPEG1VIDEO)
-		{
-			// Needed to avoid using macroblocks in which some coeffs overflow.
-			// This does not happen with normal video, it just happens here as
-			// the motion of the chroma plane does not match the luma plane. 
-			_videoCodecCtx->mb_decision=2;
-		}
-
-		// some formats want stream headers to be separate
-		if (_formatCtx->oformat->flags & AVFMT_GLOBALHEADER)
-			_videoCodecCtx->flags |= CODEC_FLAG_GLOBAL_HEADER;
-
-
 	}
 
 	void FFMPeg::openVideoStream()

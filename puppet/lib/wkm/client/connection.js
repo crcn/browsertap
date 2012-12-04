@@ -84,7 +84,7 @@ module.exports = structr(EventEmitter, {
 			this.once("replyTo-" + callerId, callback);
 		} 
 
-		// console.log(JSON.stringify({ name: name, id: callerId, data: data }))
+		//console.log(JSON.stringify({ name: name, id: callerId, data: data }))
 
 		//might happen if the process is closing
 		try {

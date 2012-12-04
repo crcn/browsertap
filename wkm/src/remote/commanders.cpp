@@ -269,7 +269,9 @@ namespace Commanders
 	{
 		Screens::Screen* screen = 0;
 
+
 		if(!(screen = this->getScreen(command))) return;
+
 
 		Json::Value val;
 
@@ -277,7 +279,9 @@ namespace Commanders
 		ATTACH_CTX(qmin, asInt)
 		ATTACH_CTX(qmax, asInt)
 		ATTACH_CTX(frame_rate, asInt)
+
 		this->changeCommanderQaul(command);
+		screen->recorder()->updateQuality();
 	}
 
 	void JSONCommander::changeCommanderQaul(JSONCommand* command) 

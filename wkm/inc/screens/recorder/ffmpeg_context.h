@@ -137,7 +137,8 @@ namespace Screens
 		*/
 
 
-#define WTO(prop) if(this->prop != to->prop) { /*printf("%s has changed", #prop);*/ different = true; to->prop = this->prop; }
+#define WTO(prop) if(this->prop != to->prop) { /*printf("%s has changed", #prop);*/  to->prop = this->prop; }
+#define WTOR(prop) if(this->prop != to->prop) { /*printf("%s has changed", #prop);*/ different = true; to->prop = this->prop; }
 
 		bool copy(FFmpegContext* to)
 		{
@@ -148,8 +149,8 @@ namespace Screens
 			WTO(bit_rate)
 			WTO(gop_size)
 			WTO(frame_rate)
-			WTO(width)
-			WTO(height)
+			WTOR(width)
+			WTOR(height)
 			WTO(height)WTO(bit_rate_tolerance)
 			WTO(max_qdiff)
 			WTO(b_quant_factor)
@@ -234,6 +235,7 @@ namespace Screens
 		}
 
 #undef WTO
+#undef WTOR
 
 	private:
 
