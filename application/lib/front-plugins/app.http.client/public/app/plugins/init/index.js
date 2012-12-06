@@ -66,12 +66,14 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 		var q = Url.parse(String(window.location), true).query,
 		defaults = { qmin: 1, qmax: 5, gop_size: 70, frame_rate: 40 };
 
-		
-		console.log(q)
 
+		console.log(JSON.stringify(q));
 		for(var key in defaults) {
-			if(q[key]) q[key] = Number(q[key]);
-			else q[key] = defaults[key];
+			if(q[key]) {
+				q[key] = Number(q[key]);
+			} else  {
+				q[key] = defaults[key];
+			}
 		}
 
 		console.log(q)
