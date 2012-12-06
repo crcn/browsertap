@@ -2,11 +2,11 @@ var ScreenLoader = require("./screenLoader"),
 qs = require("querystring"),
 Url = require("url");
 
+
 exports.require = ["router", "bark", "app.part.main", "puppeteer", "commands"];
 exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader) {
 
 	// var query = qs.parse(String(window.location).split("")
-
 
 	router.on({
 		"pull -http live": function(req, res) {
