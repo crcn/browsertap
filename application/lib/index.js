@@ -23,8 +23,8 @@ exports.start = function(type) {
 			from: "support@browsertap.com"
 		}
 	},
-	imageNames: {
-		remoteDesktop: maestroConfig.remoteDesktop || "rd5"
+	imageIds: {
+		remoteDesktop: maestroConfig.remoteDesktop || "ami-67aa2a0e"
 	},
 	mongodb: "mongodb://maestro-root:m4estr0d32@alex.mongohq.com:10081/maestro-dev",
 	http: {

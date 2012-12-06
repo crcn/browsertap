@@ -40,7 +40,7 @@
     "step": "0.0.x",
     "vine": "0.0.x",
     "optimist": "0.3.x",
-    "maestro": "0.1.x",
+    "maestro": "0.2.x",
     "structr-step": "0.0.x",
     "disposable": "0.0.x",
     "mixpanel": "0.0.x",

@@ -227,7 +227,8 @@ module.exports = require("../../../views/base").extend({
 		if(!this.options.loader.focused) {
 			console.log("window not in focus, not broadcasting fps metrics");
 		}
-		this.options.loader._trackBrowser("Average Frame Rate", { actual_frame_rate: this._avgFrameRate, 
+		this.options.loader._trackBrowser("Average Frame Rate", { 
+			actual_frame_rate: this._avgFrameRate, 
 			qmin: this.options.qmin, 
 			qmax: this.options.qmax,
 			stage_width: this.$el.width(),

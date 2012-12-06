@@ -6,12 +6,12 @@ sprintf = require("sprintf").sprintf,
 seq = require("seq"),
 dref = require("dref");
 
-exports.require = ["maestro"];
-exports.plugin = function(maestro) {
+exports.require = ["maestro", "createDesktopServer"];
+exports.plugin = function(maestro, createDesktopServer) {
 	
 	maestro.getUnusedInstance = function(query, account, callback) {
 
-		var on = outcome.error(callback);
+		var on = outcome.e(callback);
 		step(
 
 			/**
@@ -31,6 +31,9 @@ exports.plugin = function(maestro) {
 
 				if(!owned) owned = maestro.collection.findOne(_.extend({ owner: null }, query)).sync();
 
+				console.log(!!owned);
+				console.log(query);
+				
 				this(null, owned);
 			},
 
@@ -38,7 +41,7 @@ exports.plugin = function(maestro) {
 			 * check if the server exists. If it doesn't then create it. We don't want that though....
 			 */
 
-			on.success(function(server) {
+			on.s(function(server) {
 				var next = this;
 
 				// console.log(maestro.collection.find(_.extend({ owner: String(account._id) }, query)).sync())
@@ -47,13 +50,11 @@ exports.plugin = function(maestro) {
 				//We want people using instances immediately.
 				if(!server) {
 					logger.info(sprintf("creating a new server"));
-					maestro.getServer(query).exec(outcome.error(callback).success(function(server) {
-						if(!server) return callback(new Error("unable to fetch servers"));
-						server.clone(outcome.error(next).success(function(clone) {
-							// clone.use(next);
-							next(null, clone);
-						}));
+
+					createDesktopServer(outcome.e(this).s(function(server) {
+						next(null, server);
 					}));
+
 				} else {
 					next(null, server);
 				}
@@ -63,14 +64,17 @@ exports.plugin = function(maestro) {
 			 * reserve it for the user
 			 */
 
-			on.success(function(server) {
+			on.s(function(server) {
 
 				if(!server) return callback(new Error("unable to connect"));
 
 				logger.info(sprintf("account %s using server id=%s, ns=%s", account._id, server.get("_id"), server.get("ns")));
-				server.set("owner", String(account._id));
-				server.set("hadOwner", true);
-				server.changed("used");
+
+				if(server.get("owner") != String(account._id)) {
+					server.set("owner", String(account._id));
+					server.set("hadOwner", true);
+					server.changed("used");
+				}
 
 				var next = this;
 				// return next(null, server);
