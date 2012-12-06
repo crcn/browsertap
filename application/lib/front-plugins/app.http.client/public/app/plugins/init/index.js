@@ -63,6 +63,7 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 	loader.on("window", function(window) {
 		if(screen) screen.dispose();
 
+		console.log(String(window.location))
 		var q = Url.parse(String(window.location), true).query,
 		defaults = { qmin: 1, qmax: 5, gop_size: 70, frame_rate: 40 };
 
