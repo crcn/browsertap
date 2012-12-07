@@ -190,8 +190,6 @@ module.exports = require("../../../views/base").extend({
 			this._window.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, this.coords, delta * 100);
 		}
 
-
-		this._changeVideoQuality();
 	},
 	"syncScrollInfo": function() {
 		if(!this.proxy) return;
