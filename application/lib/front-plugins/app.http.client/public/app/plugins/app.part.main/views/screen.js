@@ -241,7 +241,7 @@ module.exports = require("../../../views/base").extend({
 
 		var mouseMoveDelta = this._mouseDown ? this._mouseMoveDelta || 0 : 0;
 
-		var biggest = Math.round(Math.max(mouseMoveDelta, Math.abs(this._scrollDelta || 0) * 200));
+		var biggest = Math.ceil(Math.max(mouseMoveDelta, Math.abs(this._scrollDelta || 0) * 200));
 
 
 		var qmin, qmax, gop_size;
