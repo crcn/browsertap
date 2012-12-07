@@ -259,6 +259,8 @@ module.exports = require("../../../views/base").extend({
 		this._mouseMoveDelta = 0;
 		this._scrollDelta = 0;
 
+		console.log("G")
+
 		if(this.qmin == qmin && this.qmax == qmax) return;
 
 		this.qmin = qmin;
