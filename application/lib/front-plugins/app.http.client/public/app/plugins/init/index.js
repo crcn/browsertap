@@ -60,15 +60,13 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 	});
 
 
-	loader.on("window", function(window) {
+	loader.on("window", function(win) {
 		if(screen) screen.dispose();
 
-		console.log(String(window.location))
 		var q = Url.parse(String(window.location), true).query,
 		defaults = { qmin: 1, qmax: 5, gop_size: 70, frame_rate: 40 };
 
 
-		console.log(JSON.stringify(q));
 		for(var key in defaults) {
 			if(q[key]) {
 				q[key] = Number(q[key]);
@@ -77,12 +75,11 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 			}
 		}
 
-		console.log(q)
 
-		window.startRecording(q, function(err, info) {
+		win.startRecording(q, function(err, info) {
 
 			screen = new mainPlugin.views.Screen({ el: ".screen", 
-				window: window, 
+				window: win, 
 				loader: loader, 
 				rtmpUrl: info.url, 
 				qmin: q.qmin,
