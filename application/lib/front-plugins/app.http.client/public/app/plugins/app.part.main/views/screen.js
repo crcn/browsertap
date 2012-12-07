@@ -44,7 +44,7 @@ module.exports = require("../../../views/base").extend({
 		});
 
 		this._disposable.addInterval(setInterval(_.bind(this.syncScrollInfo, this), 2000));
-		this._disposable.addInterval(setInterval(_.bind(this._changeVideoQuality, this), 200));
+		// this._disposable.addInterval(setInterval(_.bind(this._changeVideoQuality, this), 200));
 		this._window.bindProxy(_.bind(this.onProxy, this));
 
 		this.onResize();
@@ -135,7 +135,6 @@ module.exports = require("../../../views/base").extend({
 	"onMouseMove": function(e) {
 
 
-		this._prevMousePosition = Math
 
 		this._lastMouseMoveAt = Date.now();
 
@@ -148,6 +147,10 @@ module.exports = require("../../../views/base").extend({
 
 		if(this.coords) {
 			this._mouseMoveDelta = Math.round(Math.sqrt(Math.pow(this.coords.x - coords.x, 2) + Math.pow(this.coords.y - coords.y, 2)))
+		}
+
+		if(this._mouseDown) {
+			this._changeVideoQuality();
 		}
 
 		this._window.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_ABSOLUTE | wkmEvents.mouse.MOUSEEVENTF_MOVE, this.coords = coords);
@@ -190,6 +193,8 @@ module.exports = require("../../../views/base").extend({
 			this._window.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, this.coords, delta * 100);
 		}
 
+
+		this._changeVideoQuality();
 	},
 	"syncScrollInfo": function() {
 		if(!this.proxy) return;
