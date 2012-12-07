@@ -8,7 +8,7 @@ var maestroConfig = require("/usr/local/etc/maestro/config.json");
 
 
 
-exports.start = function(type) {
+exports.start = function(options) {
 
 
 	var loader = plugin().
@@ -24,7 +24,7 @@ exports.start = function(type) {
 		}
 	},
 	imageIds: {
-		remoteDesktop: maestroConfig.remoteDesktop || "ami-67aa2a0e"
+		remoteDesktop: options.desktopImageId || maestroConfig.desktopImageId
 	},
 	mongodb: "mongodb://maestro-root:m4estr0d32@alex.mongohq.com:10081/maestro-dev",
 	http: {

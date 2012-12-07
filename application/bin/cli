@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
 var argv = require("optimist").
-demand(["t"]).
-describe("t", "type: front, maestro").
 argv;
 
-
-require("../").start(argv.t);
+//ami-67aa2a0e
+require("../").start({
+});
