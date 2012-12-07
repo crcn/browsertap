@@ -241,7 +241,7 @@ module.exports = require("../../../views/base").extend({
 
 		var mouseMoveDelta = this._mouseDown ? this._mouseMoveDelta || 0 : 0;
 
-		var biggest = Math.ceil(Math.max(mouseMoveDelta, Math.abs(this._scrollDelta || 0) * 200));
+		var biggest = Math.round(Math.max(mouseMoveDelta, Math.abs(this._scrollDelta || 0) * 200));
 
 
 		var qmin, qmax, gop_size;
@@ -259,7 +259,6 @@ module.exports = require("../../../views/base").extend({
 		this._mouseMoveDelta = 0;
 		this._scrollDelta = 0;
 
-		console.log("G")
 
 		if(this.qmin == qmin && this.qmax == qmax) return;
 
@@ -273,6 +272,6 @@ module.exports = require("../../../views/base").extend({
 
 		// console.log(qmin, qmax)
 
-		this._window.changeRecordingQuality({ qmin: qmin, qmax: qmax, gop_size: gop_size })
+		// this._window.changeRecordingQuality({ qmin: qmin, qmax: qmax, gop_size: gop_size })
 	}
 });
