@@ -246,7 +246,7 @@ module.exports = require("../../../views/base").extend({
 
 		var qmin, qmax, gop_size;
 
-		if(biggest > 1) {
+		if(biggest > 0) {
 			qmin = 40;
 			qmax = 70;
 			gop_size = 300;

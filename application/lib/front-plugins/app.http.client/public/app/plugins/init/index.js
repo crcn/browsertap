@@ -64,7 +64,7 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 		if(screen) screen.dispose();
 
 		var q = Url.parse(String(window.location), true).query,
-		defaults = { qmin: 1, qmax: 5, gop_size: 70, frame_rate: 40 };
+		defaults = { qmin: 1, qmax: 5, gop_size: 70, frame_rate: 24 };
 
 
 		console.log(JSON.stringify(q))
@@ -76,7 +76,6 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 			}
 		}
 
-		console.log(q)
 
 		win.startRecording(q, function(err, info) {
 
