@@ -69,7 +69,6 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 		defaults = { qmin: 1, qmax: 5, gop_size: 70, frame_rate: 24 };
 
 
-		console.log(JSON.stringify(q))
 		for(var key in defaults) {
 			if(q[key]) {
 				q[key] = Number(q[key]);

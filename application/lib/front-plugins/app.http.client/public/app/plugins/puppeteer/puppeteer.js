@@ -129,7 +129,7 @@ module.exports = structr(EventEmitter, {
 
 			//setting a timeout helps incase the server is not ready
 			setTimeout(function() {
-				self._attach(options);
+				self.reloadServer();
 			}, 1000);
 		});
 
