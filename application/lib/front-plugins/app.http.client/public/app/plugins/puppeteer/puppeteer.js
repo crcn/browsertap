@@ -114,6 +114,7 @@ module.exports = structr(EventEmitter, {
 					if(isMain) mixpanel.track("Sum Windows Open", { count: n });
 				}
 			}, outcome.s(function(remote) {
+				console.log("connected client");
 				self.connection = remote;
 				self._connecting = false;
 				self.emit("connect", null, remote);
