@@ -52,7 +52,7 @@ module.exports = structr({
 				//yes? return
 				if(owned) {
 					console.log("server already being used, returning");
-					return cb(null, owned);
+					return this(null, owned);
 				}
 
 				//no? find a free server
@@ -94,7 +94,7 @@ module.exports = structr({
 		if(this._maestro.collection.count({ imageId: this._imageId, owner: null }).sync() >= 1) return;
 
 		console.log("no more free servers, creating new one for the next user");
-		this._createServer();
+		// this._createServer();
 	},
 
 	/**

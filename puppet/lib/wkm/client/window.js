@@ -211,19 +211,6 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"clean": function() {
-		/*console.log("clean window")
-		var vks = this.vks, self = this;
-
-		//release any modifiers that might have been stuck down.
-		vks.forEach(function(vk) {
-			self.keybdEvent(vk, 0, wkme.keyboard.KEYEVENTF_KEYUP);
-		});*/
-	},
-
-	/**
-	 */
-
 	"exists": function(callback) {
 		callback(null, !this.disposed);
 	},
@@ -243,14 +230,14 @@ module.exports = structr(EventEmitter, {
 		var rtmpHost = this._rtmp.hostname,
 		localhost    = "localhost";
 
-		//debugging
+		//debugging - TODO - fucking FIX red5 on the local machine. This is fucking stupid code.
 	    // rtmpHost = localhost = "10.0.1.30";
 
 		var output =  "rtmp://" + rtmpHost + ":1935/live/" + streamId;
 
 		console.log("recording window to %s", output);
 
-		this._con.execute("startRecordingWindow", _.extend(options, { id: this.id, output: "rtmp://"+localhost+":1935/live/" + streamId }));
+		this._con.execute("startRecordingWindow", _.extend(options, { id: this.id, output: "rtmp://" + localhost + ":1935/live/" + streamId }));
 
 		callback(null, this._output = {
 			url: output

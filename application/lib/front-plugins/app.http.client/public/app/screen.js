@@ -4,7 +4,7 @@ Url = require("url");
 
 require("structr").mixin(require("structr-step"));
 
-head.ready(function() {
+function ready() {
 
 	require("./tpl").registerViews();
 
@@ -23,6 +23,8 @@ head.ready(function() {
 		if(err) console.error(err.stack || err); 
 	});
 
-});
+};
+
+ready();
 
 

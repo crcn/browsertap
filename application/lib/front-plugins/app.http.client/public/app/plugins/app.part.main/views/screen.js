@@ -16,16 +16,33 @@ module.exports = require("../../../views/base").extend({
 		this.$window = $(window);
 		this.$document = $(document);
 		this.$body = $(document.body);
+		this.$cover = this.$el.find(".screen-cover");
 		this.coords = {};
 		this.windowDims = {};
 		this._frameRates = 0;
 		this._numFrameRates = 0;
+		this._locked = true;
 
 
 		var self = this;
 
 
 		this.$body.css({ "overflow": "hidden" });
+
+		var agent = String(window.navigator.userAgent).toLowerCase();
+
+		this._scrollMultiplier = 1;
+
+		//firefox allows for right-click disable on element, but NEEDS a cover to 
+		//listen for mouse events
+		if(!~agent.indexOf("firefox")) {
+			$(".screen-cover").remove();
+		}
+
+		//chrome's scroll delta is way the fuck off from everything else
+		if(~agent.indexOf("chrome")) {
+			this._scrollMultiplier = 100;
+		}
 
 		disp.add(
 			loader.on("setClipboard", function(text) {
@@ -47,10 +64,10 @@ module.exports = require("../../../views/base").extend({
 		this._disposable.addInterval(setInterval(_.bind(this._changeVideoQuality, this), 200));
 		this._window.bindProxy(_.bind(this.onProxy, this));
 
-		this.onResize();
+		//do NOT resize before the first framerate arrives. This causes a delay
+		// this.onResize();
 		this._listenToWindow();
-
-
+		this._keysDown = [];
 	},
 	"prepareChildren": function() {
 		return [
@@ -62,43 +79,63 @@ module.exports = require("../../../views/base").extend({
 	 */
 
 	"_createBindings": function() {
+
 		return [
 			this.$window.resize(_.bind(this.onResize, this)),
 			this.$window.bind("mousewheel", _.throttle(_.bind(this.onDocumentScroll, this), 30)),
-			this.$el.mousedown(_.bind(this.onMouseDown, this)),
-			this.$el.mouseup(_.bind(this.onMouseUp, this)),
-			this.$el.mousemove(_.throttle(_.bind(this.onMouseMove, this), 50))
+			this.$window.mousedown(_.bind(this.onMouseDown, this)),
+			this.$window.mouseup(_.bind(this.onMouseUp, this)),
+			this.$window.mousemove(_.throttle(_.bind(this.onMouseMove, this), 50)),
+			this.$window.keydown(_.bind(this.onWindowKeyDown, this)),
+			this.$window.keyup(_.bind(this.onWindowKeyUp, this))
 		];
 	},
 	"_listenToWindow": function() {
 
-		//TO IMPLEMENT
-		/*var self = this;
-		setTimeout(function() {
-
-			//never want the chrome at the top
-			self._window.app.padding.top = 19 + 4;
-			self.onResize();
-		}, 5000);*/
-		
-
-
 
 		window.desktopEvents = {
 			setClipboard: _.bind(this.setClipboard, this),
-			keyDown: _.bind(this.onKeyDown, this),
-			resize: _.bind(this.onWindowResize, this),
+			//keyDown: _.bind(this.onKeyDown, this),
+			//resize: _.bind(this.onWindowResize, this),
 			framerateChange: _.bind(this.onFrameRateChange, this)
 		};
+	},
+	"onWindowKeyDown": function(e) {
+
+		console.log("KEY DOWN")
+
+		e.preventDefault();
+		e.stopPropagation();
+
+		this._keysDown[e.keyCode] = true;
+
+		if(~[17, 16, 18, 91].indexOf(e.keyCode)) return;
+
+
+		this._window.keybdEvent({
+			keyCode: e.keyCode,
+			altKey: e.altKey,
+
+			//windows or mac
+			ctrlKey: e.ctrlKey || !!this._keysDown[91],
+			shiftKey: e.shiftKey
+		});
+
+	},
+	"onWindowKeyUp": function(e) {
+
+		delete this._keysDown[e.keyCode];
 	},
 	"dispose": function() {
 		module.exports.__super__.dispose.call(this);
 		this._disposable.dispose();
 	},
-	"onResize": _.debounce(function() {
+	"onResize": _.debounce(function(force) {
 		var win = this._window,
 		padding = win.app.padding,
 		self    = this;
+
+		this._locked = false;
 
 		if(this.options.loader.options.screen) {
 			padding.top = 22;
@@ -122,24 +159,25 @@ module.exports = require("../../../views/base").extend({
 
 		try {
 			$(".hud-body").find("object")[0].setPadding(padding);
+			// $(".hud-body").find("object").refresh();
 		} catch(e) {
 			
 		}
 
 
+
 		//don't resize if nothing's changed
-		if(win.width == w && win.height == h) return;
+		if(!force && win.width == w && win.height == h) return;
+
 
 		win.resize(0, 0, w, h);
-	}, 200),
+	}, 500),
 	"onMouseMove": function(e) {
-
-
-		this._prevMousePosition = Math
 
 		this._lastMouseMoveAt = Date.now();
 
-		var coords = { x: e.offsetX, y: e.offsetY };
+
+		var coords = { x: e.pageX + this._window.app.padding.left || 0, y: e.pageY + this._window.app.padding.top || 0 };
 
 		if(this.windowDims.width && this.windowDims.height) {
 			coords.x = coords.x - (this.$hud.width()/2 - this.windowDims.width/2);
@@ -153,6 +191,7 @@ module.exports = require("../../../views/base").extend({
 		this._window.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_ABSOLUTE | wkmEvents.mouse.MOUSEEVENTF_MOVE, this.coords = coords);
 	},
 	"onMouseDown": function(e) {
+
 		this._mouseDown = true;
 		this._window.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTDOWN : wkmEvents.mouse.MOUSEEVENTF_RIGHTDOWN, this.coords);
 
@@ -165,7 +204,7 @@ module.exports = require("../../../views/base").extend({
 		if(e.button === 0) return; //only block right click
 		e.preventDefault();
 		e.stopPropagation();
-
+		return false;
 	},
 	"onMouseUp": function(e) {
 		this._mouseDown = false;
@@ -184,14 +223,12 @@ module.exports = require("../../../views/base").extend({
 	},
 	"onDocumentScroll": function(e, delta) {
 		this._scrollDelta = delta;
+
 		if(this.proxy) {
 			this.proxy.scrollbar.to(this.$document.scrollLeft(), this.$document.scrollTop());
 		} else {
-			this._window.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, this.coords, delta * 100);
+			this._window.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, this.coords, delta * this._scrollMultiplier);
 		}
-
-
-		// this._changeVideoQuality();
 	},
 	"syncScrollInfo": function() {
 		if(!this.proxy) return;
@@ -206,12 +243,21 @@ module.exports = require("../../../views/base").extend({
 		this._window.setClipboard(text);
 	},
 	"onFrameRateChange": _.throttle(function(frameRate) {
+
+		//first framerate? sweet. the remote desktop is sending
+		//an image. Now, hard refresh this shit to bypass the gop_size issue ~
+		//the screen won't be usable until the user resizes the window, or waits for N seconds
+		if(!this._refreshedHard) {
+			this._refreshedHard = true;
+			this.onResize(true);
+		}
+
 		if(frameRate == 0) {
 			console.log("framerate is 0");
 			return;
 		}
 
-		if(this._numFrameRates > 15) {
+		if(this._numFrameRates > 10) {
 			this._trackFrameRate();
 			this._frameRates = 0;
 			this._numFrameRates = 0;
@@ -222,7 +268,7 @@ module.exports = require("../../../views/base").extend({
 		this._avgFrameRate = Math.round(this._frameRates / this._numFrameRates);
 
 		console.log("avg frame rate:", this._avgFrameRate);
-	}, 500),
+	}, 1000 * 3),
 	"_trackFrameRate": function() {
 		if(!this.options.loader.focused) {
 			console.log("window not in focus, not broadcasting fps metrics");
@@ -239,6 +285,8 @@ module.exports = require("../../../views/base").extend({
 	},
 	"_changeVideoQuality": function() {
 
+		if(this._locked) return;
+
 		var mouseMoveDelta = this._mouseDown ? this._mouseMoveDelta || 0 : 0;
 
 		var biggest = Math.round(Math.max(mouseMoveDelta, Math.abs(this._scrollDelta || 0) * 200));
@@ -247,8 +295,8 @@ module.exports = require("../../../views/base").extend({
 		var qmin, qmax, gop_size;
 
 		if(biggest > 0) {
-			qmin = 40;
-			qmax = 70;
+			qmin = 20;
+			qmax = 60;
 			gop_size = 300;
 		} else {
 			qmin = 1;
@@ -265,7 +313,6 @@ module.exports = require("../../../views/base").extend({
 		this.qmin = qmin;
 		this.qmax = qmax;
 
-		console.log("scale %d %d", qmin, qmax);
 
 		// var qmax = Math.min(biggest, 70),
 		// qmin = 1;//Math.max(qmax - 20, 1);

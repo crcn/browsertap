@@ -42,12 +42,14 @@ package
 		private var _setClipboard:String;
 		private var _copyPaste:TextField;
 		private var _mask:Sprite;
+		private var _padding:Object;
 		
 		
 		
 		
 		public function DesktopPlayer()
 		{
+
 			
 			this._server =  this.root.loaderInfo.parameters.host || "rtmp://192.168.2.3:1935/live";
 			this._channel = this.root.loaderInfo.parameters.channel || "default";
@@ -60,6 +62,7 @@ package
 			this._copyPaste.type = TextFieldType.INPUT;
 			this._copyPaste.x = 500;
 			this._mask = new Sprite();
+			this._padding = { top: 0, right: 0, left: 0, bottom: 0};
 			this.addChild(this._mask);
 			this.addChild(this._copyPaste);
 			
@@ -114,6 +117,7 @@ package
 
 			ExternalInterface.addCallback("setClipboard", setClipboard);
 			ExternalInterface.addCallback("setPadding", setPadding);
+			//ExternalInterface.addCallback("setSize", setSize);
 			ExternalInterface.addCallback("getClipboard", getClipboard);
 			this.stage.focus = this._copyPaste;
 		}
@@ -254,21 +258,21 @@ package
 		{
 			if(!this._video) return;
 				
-			this._video.x = Math.floor(this.stage.stageWidth / 2 - this._video.width / 2);
-			this._video.y = Math.floor(this.stage.stageHeight / 2 - this._video.height / 2);
+			this._video.x = 0;//-this._padding.left;//Math.floor(this.stage.stageWidth / 2 - this._video.width / 2);
+			this._video.y = 0;//-this._padding.top;//Math.floor(this.stage.stageHeight / 2 - this._video.height / 2);
 			this._mask.x = this._video.x;
 			this._mask.y = this._video.y;
 			
 			//this._video.width = this.stage.stageWidth;
 			//this._video.height = this.stage.stageHeight;
 
-			ExternalInterface.call('desktopEvents.resize', { width: this._video.width, height: this._video.height });
+		//	ExternalInterface.call('desktopEvents.resize', { width: this._video.width, height: this._video.height });
 			this._debugInfo.y = this.stage.stageHeight - 200;
 		}
 		
 		private function onNetStatus(event:NetStatusEvent):void
 		{
-			_trace(event.info.code);
+		//	_trace(event.info.code);
 			if(event.info.code == "NetConnection.Connect.Success")
 			{
 
@@ -296,6 +300,7 @@ package
 			_trace(obj.width + " " + obj.height+" "+obj.framerate);
 			this._video.width = obj.width;
 			this._video.height = obj.height;
+			if(this._padding) this.setPadding(this._padding);
 
 			this.stage.frameRate = obj.frameRate;
 			onStageResize();
@@ -322,8 +327,11 @@ package
 			_trace("SEC ERROR");
 		}
 
+
 		private function setPadding(obj:Object):void
 		{
+			this._padding = obj;
+
 			with(this._mask.graphics) 
 			{
 				clear();
@@ -338,7 +346,7 @@ package
 
 			if(!this._stream) return;
 			var fps:Number = this._stream.currentFPS;
-			_trace("current framerate: " + fps+" cc: "+this._checkCount);
+			//_trace("current framerate: " + fps+" cc: "+this._checkCount);
 
 			ExternalInterface.call('desktopEvents.framerateChange', fps);
 

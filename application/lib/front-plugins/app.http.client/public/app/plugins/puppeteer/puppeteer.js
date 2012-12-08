@@ -53,6 +53,7 @@ module.exports = structr(EventEmitter, {
 
 	"reloadServer": function() {
 
+
 		var serverUrl = [window.location.protocol, "//", window.location.host, "/server.json"].join(""),
 		self = this;
 
@@ -112,7 +113,7 @@ module.exports = structr(EventEmitter, {
 				updateNumConnections: function(n, isMain) {
 					if(isMain) mixpanel.track("Sum Windows Open", { count: n });
 				}
-			}, outcome.success(function(remote) {
+			}, outcome.s(function(remote) {
 				self.connection = remote;
 				self._connecting = false;
 				self.emit("connect", null, remote);
@@ -123,7 +124,12 @@ module.exports = structr(EventEmitter, {
 		d.on("end", function() {
 			self._connecting = false;
 			self.connection = null;
-			self.reloadServer();
+
+
+			//setting a timeout helps incase the server is not ready
+			setTimeout(function() {
+				self._attach(options);
+			}, 1000);
 		});
 
 		d.on("error", function() {

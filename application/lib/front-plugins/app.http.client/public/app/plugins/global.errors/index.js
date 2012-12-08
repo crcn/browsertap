@@ -8,7 +8,8 @@ exports.plugin = function(bark, commands) {
 
 
 	var errorHandlers = {
-		unknown: function() {
+		unknown: function(err) {
+			console.error(err)
 			bark.alert("An unknown error has occured. Please refresh this page.", function() {
 				// window.location.refresh();
 			});

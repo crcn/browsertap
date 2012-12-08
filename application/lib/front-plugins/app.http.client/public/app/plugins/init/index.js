@@ -64,6 +64,8 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 		if(screen) screen.dispose();
 
 		var q = Url.parse(String(window.location), true).query,
+
+		//low GOP initially so there's no delay when interacting with the page
 		defaults = { qmin: 1, qmax: 5, gop_size: 70, frame_rate: 24 };
 
 
