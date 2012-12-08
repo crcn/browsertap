@@ -128,6 +128,7 @@ module.exports = structr(EventEmitter, {
 
 
 			con.open({ name: this._appName = this.options.app, version: this._appVersion = this.options.version, arg: this.options.open }, function(err, client) { 
+				console.log("loaded app");
 				self._trackBrowser("Browser Open");
 				client.setWindow(self._getClient(null, false));
 				self._ignoreForceClose = false;
