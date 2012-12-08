@@ -36,7 +36,7 @@ module.exports = require("../../../views/base").extend({
 		//firefox allows for right-click disable on element, but NEEDS a cover to 
 		//listen for mouse events
 		if(!~agent.indexOf("firefox")) {
-			// $(".screen-cover").remove();
+			$(".screen-cover").remove();
 		}
 
 		//chrome's scroll delta is way the fuck off from everything else
