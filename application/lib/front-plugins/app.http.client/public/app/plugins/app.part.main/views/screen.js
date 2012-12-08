@@ -31,17 +31,18 @@ module.exports = require("../../../views/base").extend({
 
 		var agent = String(window.navigator.userAgent).toLowerCase();
 
-		this._scrollMultiplier = 1;
+		this._scrollMultiplier = 100;
 
 		//firefox allows for right-click disable on element, but NEEDS a cover to 
 		//listen for mouse events
 		if(!~agent.indexOf("firefox")) {
 			$(".screen-cover").remove();
+			this._scrollMultiplier = 20;
 		}
 
 		//chrome's scroll delta is way the fuck off from everything else
-		if(~agent.indexOf("chrome")) {
-			this._scrollMultiplier = 100;
+		if(~agent.indexOf("safari")) {
+			this._scrollMultiplier = 1;
 		}
 
 		disp.add(
