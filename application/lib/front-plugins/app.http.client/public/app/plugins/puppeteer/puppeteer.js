@@ -133,9 +133,10 @@ module.exports = structr(EventEmitter, {
 			}, 1000);
 		});
 
-		d.on("error", function() {
+		d.on("error", function(err) {
 			self._connecting = false;
 			self.connection = null;
+			console.error(err.stack);
 			self._commands.emit("error", new comerr.UnableToConnect("Unable to connect to a remote desktop"));
 		})
 	}

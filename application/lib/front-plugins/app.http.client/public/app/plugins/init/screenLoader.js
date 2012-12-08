@@ -2,7 +2,8 @@ var structr = require("structr"),
 EventEmitter = require("events").EventEmitter,
 windowStyles = require("./windowStyles"),
 step = require("step"),
-Url = require("url");
+Url = require("url"),
+outcome = require("outcome");
 
 module.exports = structr(EventEmitter, {
 
@@ -126,12 +127,12 @@ module.exports = structr(EventEmitter, {
 			this._ignoreForceClose = true;
 
 
-			con.open({ name: this._appName = this.options.app, version: this._appVersion = this.options.version, arg: this.options.open }, function(err, client) { 
+			con.open({ name: this._appName = this.options.app, version: this._appVersion = this.options.version, arg: this.options.open }, outcome.s(function(client) { 
 				console.log("loaded app");
 				self._trackBrowser("Browser Open");
 				client.setWindow(self._getClient(null, false));
 				self._ignoreForceClose = false;
-			});
+			}));
 			return;
 		} else 
 		if(this._proxy) {
