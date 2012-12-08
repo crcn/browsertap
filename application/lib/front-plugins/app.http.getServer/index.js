@@ -1,8 +1,8 @@
 var step = require("step"),
 vine = require("vine");
 
-exports.require = ["maestro", "plugin-express", "serverManager"];
-exports.plugin = function(maestro, server, serverManager, loader) {
+exports.require = ["maestro", "plugin-express", "serverManager", "starch"];
+exports.plugin = function(maestro, server, serverManager, starch, loader) {
 
 	server.get("/server.json", starch.middleware.premiumCheckpoint({creditBalance:{$gt:0}}), function(req, res) {
 

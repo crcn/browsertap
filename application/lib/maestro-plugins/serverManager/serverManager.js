@@ -38,8 +38,7 @@ module.exports = structr({
 
 		var maestro = this._maestro,
 		self = this,
-		on = outcome.e(cb),
-		accountId = String(account._id);
+		on = outcome.e(cb);
 
 		console.log("get free server for %s", accountId);
 
@@ -48,7 +47,7 @@ module.exports = structr({
 			function() {
 
 				//first check if the user is already registered to a server
-				var owned = maestro.getServer({ owner: accountId, imageId: self._imageId }).sync();
+				var owned = maestro.collection.findOne(self._query({ owner: accountId })).sync();
 
 				//yes? return
 				if(owned) {
@@ -57,7 +56,8 @@ module.exports = structr({
 				}
 
 				//no? find a free server
-				owned = maestro.getServer({ owner: null, imageId: self._imageId }).sync();
+				owned = maestro.collection.findOne(self._query({ owner: null })).sync();
+
 
 				if(owned) {
 					console.log("returning free server");
@@ -68,13 +68,21 @@ module.exports = structr({
 				self._createServer(this);
 			},
 			on.s(function(server) {
-				server.set("owner", accounId);
+				server.set("owner", accountId);
 
 				console.log("user using server %s", server.get("_id"));
 
 				//after a server has been created, make a new one so 
 				self._tryMakingServer();
-			})
+
+				var next = this;
+
+				//needs to happen so the server can be retreive info
+				server.ping(function() {
+					next(null, server);
+				});
+			}),
+			cb
 		);
 	},
 
@@ -83,7 +91,7 @@ module.exports = structr({
 	 */
 
 	"_tryMakingServer": function() {
-		if(this._maestro.count({ imageId: self._imageId, owner: null }).sync() >= 1) return;
+		if(this._maestro.collection.count({ imageId: this._imageId, owner: null }).sync() >= 1) return;
 
 		console.log("no more free servers, creating new one for the next user");
 		this._createServer();
@@ -98,10 +106,12 @@ module.exports = structr({
 
 		console.log("creating new server");
 
+		var maestro = this._maestro;
+
 		this._maestro.
 		services.
 		getService("amazon").
-		createServer({ flavor: "c1.medium", image: this._imageId() }, 
+		createServer({ flavor: "c1.medium", image: this._imageId }, 
 			outcome.e(cb).s(function(server) {
 				server._id = server.id;
 				cb(null, maestro.collection.insert(server).sync().pop());
@@ -127,21 +137,26 @@ module.exports = structr({
 		exec(function(err, servers) {
 			var saved;
 
-			try {
-				servers.forEach(function(server) {
-					if(server.get("hadOwner")) {
-						server.terminate();
-					} else 
-					if(!saved) {
-						saved = server;
-					} else {
-						server.terminate();
-					}
-				});
-			} catch(e) {
-				console.error(e.stack);
-			}
+			servers.forEach(function(server) {
+				if(server.get("hadOwner")) {
+					server.terminate();
+				} else 
+				if(!saved) {
+					saved = server;
+				} else {
+					server.terminate();
+				}
+			});
 		})
+	},
+
+	/**
+	 */
+
+	"_query": function(q) {
+		q.$or = [{ service: "local"}, { imageId: this._imageId}];
+
+		return q;
 	}
 
 });

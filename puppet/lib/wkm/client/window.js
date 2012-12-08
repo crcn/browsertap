@@ -244,7 +244,7 @@ module.exports = structr(EventEmitter, {
 		localhost    = "localhost";
 
 		//debugging
-	    rtmpHost = localhost = "10.0.1.30";
+	    // rtmpHost = localhost = "10.0.1.30";
 
 		var output =  "rtmp://" + rtmpHost + ":1935/live/" + streamId;
 

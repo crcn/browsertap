@@ -272,6 +272,6 @@ module.exports = require("../../../views/base").extend({
 
 		// console.log(qmin, qmax)
 
-		// this._window.changeRecordingQuality({ qmin: qmin, qmax: qmax, gop_size: gop_size })
+		this._window.changeRecordingQuality({ qmin: qmin, qmax: qmax, gop_size: gop_size })
 	}
 });
