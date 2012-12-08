@@ -130,7 +130,7 @@ module.exports = structr(EventEmitter, {
 			//setting a timeout helps incase the server is not ready
 			setTimeout(function() {
 				self.reloadServer();
-			}, 1000);
+			}, 1000 * 3);
 		});
 
 		d.on("error", function(err) {
