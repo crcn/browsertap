@@ -65,7 +65,6 @@ module.exports = structr(EventEmitter, {
 		}
 
 		if(this._clientWindow) {
-			console.log("DISPOSING WINDOW");
 			this._clientWindow.dispose();
 		}
 
