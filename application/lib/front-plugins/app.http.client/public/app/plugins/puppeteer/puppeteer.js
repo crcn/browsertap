@@ -57,6 +57,8 @@ module.exports = structr(EventEmitter, {
 		var serverUrl = [window.location.protocol, "//", window.location.host, "/server.json"].join(""),
 		self = this;
 
+		console.log("fetching server");
+		
 		$.ajax({
 			url: serverUrl,
 			dataType: "json",
