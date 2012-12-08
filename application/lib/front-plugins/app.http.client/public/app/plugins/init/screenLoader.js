@@ -83,7 +83,6 @@ module.exports = structr(EventEmitter, {
 		if(this._lockLoading) return;
 		this._trackStopBrowser();
 		_.extend(this.options, options);
-
 		this.emit("loading");
 		this.startDate = Date.now();
 		this._trackBrowser("Browser Start");

@@ -20,6 +20,7 @@ module.exports = require("../../../views/base").extend({
 			"imgSrc": "",
 			"app": ""
 		};
+
 		
 		return {
 			"imgSrc": "/img/apps/"+data.app.toLowerCase()+".png",

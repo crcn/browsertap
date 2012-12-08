@@ -25,6 +25,6 @@ function ready() {
 
 };
 
-ready();
+$(document).ready(ready);
 
 
