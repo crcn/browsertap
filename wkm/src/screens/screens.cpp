@@ -193,8 +193,10 @@ namespace Screens
 		if(bounds.width == 0 || bounds.height == 0) return FALSE;
 
 		//fixes issue where ffmpeg breaks when the dimensions aren't aligned. E.g: 889x660 busts it.
-		bounds.width = floor(bounds.width/2) * 2;
-		bounds.height = floor(bounds.height/2) * 2;
+
+		//this *actually* doesn't work in certain situations unfortunately
+		//bounds.width = floor(bounds.width/2) * 2;
+		//bounds.height = floor(bounds.height/2) * 2;
 
 
 		// RECT rect;

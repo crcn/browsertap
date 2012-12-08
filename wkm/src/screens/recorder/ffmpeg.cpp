@@ -46,6 +46,7 @@ namespace Screens
 		_dstPicture      = NULL;
 		_needsRefreshing = true;
 		_prevOutputSize  = 0;
+		_videoCodecCtx = 0;
 
 		this->_ctx = ctx;
 	}
@@ -58,8 +59,9 @@ namespace Screens
 
 		Geometry::Rectangle& bounds = data->bounds();
 
-		avpicture_fill((AVPicture*)_srcPicture, (uint8_t*)data->buffer(), PIX_FMT_BGRA, bounds.width, bounds.height);
+		avpicture_fill((AVPicture*)_srcPicture, (uint8_t*)data->buffer(), PIX_FMT_BGR32, bounds.width, bounds.height);
 
+		//std::cout << bounds.width << " " << bounds.height << " " << _videoCodecCtx->width << " " << _videoCodecCtx->height << std::endl;
 
 		sws_scale(_convertCtx, 
 			_srcPicture->data, 
@@ -69,6 +71,7 @@ namespace Screens
 			_dstPicture->data, 
 			_dstPicture->linesize);
 
+		//std::cout << "SCALE" << std::endl;
 
 		int outSize = avcodec_encode_video(_videoCodecCtx, _outputBuffer, _bufferSize, _dstPicture);
 
@@ -260,7 +263,11 @@ namespace Screens
 
 	void FFMPeg::updateQuality()
 	{
+
+		if(_videoCodecCtx == 0) return;
+		
 		int br = _ctx->bit_rate * 1000;
+
 		
 		
 		//_videoCodecCtx->flags |= CODEC_FLAG_GRAY;
@@ -454,7 +461,8 @@ namespace Screens
 			_videoCodecCtx->width,
 			_videoCodecCtx->height, 
 			_videoCodecCtx->pix_fmt,
-			SWS_FAST_BILINEAR,
+			SWS_FAST_BILINEAR | SWS_ACCURATE_RND,
+			//SWS_BICUBIC,
 			NULL, 
 			NULL, 	
 			NULL);

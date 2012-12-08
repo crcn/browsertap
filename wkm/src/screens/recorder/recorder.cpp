@@ -64,6 +64,7 @@ namespace Screens
 
 	void Recorder::updateQuality()
 	{
+		if(!this->_recording) return;
 		this->_ffmpeg->updateQuality();
 	}
 
