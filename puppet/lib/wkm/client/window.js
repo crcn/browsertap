@@ -70,7 +70,6 @@ module.exports = structr(EventEmitter, {
 		this._windows = windows;
 		this._con = windows._con;
 		this._rtmp = windows._options.rtmp;
-		this.clean();
 
 	},
 
@@ -78,7 +77,6 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"close": function() {
-		this.clean();
 		this.closed = true;
 		this._con.execute("closeWindow", { id: this.id });
 		this._events = {};
