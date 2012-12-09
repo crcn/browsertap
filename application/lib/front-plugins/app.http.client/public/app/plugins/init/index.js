@@ -18,6 +18,7 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 	var loader = new ScreenLoader(puppeteer, commands), screen, appSwitcher,
 	loadingView = new mainPlugin.views.Loader({ el: ".loader" });
 
+	bark.alert("an alert")
 
 
 	key("shift+right", function(e) {
