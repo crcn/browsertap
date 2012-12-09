@@ -2,10 +2,10 @@
 
 {>form_layout/}
 
-{<page}Signup{/page}
+{<page}Sign up{/page}
 
 {<form_content}
 <input type="text" name="email" placeholder="Email"></input></label>
 			<input type="password" name="password" placeholder="Password"></input></label>
-			<input type="submit" class="form-button" value="signup"></input>
+			<input type="submit" class="form-button" value="Sign up"></input>
 {/form_content}

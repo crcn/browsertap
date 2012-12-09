@@ -1,7 +1,7 @@
 
 
 {>form_layout/}
-{<page}Login{/page}
+{<page}Log in{/page}
 
 {<form_content}
 
@@ -14,7 +14,7 @@
 	<a id="forget-password" href="/lost_password">Forgot Password?</a>
 </div>
 <div id="form-footer">
-	<input type="submit" class="form-button" value="login"></input>
+	<input type="submit" class="form-button" value="Log in"></input>
 	<span>Don't have an account? <a href="/signup">Sign up!</a></span>
 </div>
 {/form_content}
