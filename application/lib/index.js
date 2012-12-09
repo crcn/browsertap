@@ -30,6 +30,7 @@ exports.start = function(options) {
 	http: {
 		port: 80,
 		loginRedirect: "/live",
+		signupRedirect: "/tools",
 		inviteEmailTpl: __dirname + "/front-plugins/app.http.client/views/email/inviteEmailTpl.dust",
 		lostPasswordEmailTpl: __dirname + "/front-plugins/app.http.client/views/email/lost_password.dust",
 		validateEmailTpl: __dirname + "/front-plugins/app.http.client/views/email/validate_signup.dust",

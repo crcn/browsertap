@@ -9,29 +9,33 @@
 
 	var bookmarklet = function() {
 		var script = document.createElement("script");
-		script.src = "http://maestro.browsertap.com:8080/js/extension.js?" + Date.now();
+		script.src = "[PROTOCOL]//[HOST]/js/extension.js?" + Date.now();
 		script.type = "text/javascript";
 		document.getElementsByTagName("head")[0].appendChild(script);
-	};
+	}.toString().
+	replace("[HOST]", window.location.host).
+	replace("[PROTOCOL]", window.location.protocol);
 
-	head.ready(function() {
-		$(document).ready(function() {
-			$("#bookmarklet-link").attr("href","javascript:(" + encodeURIComponent(bookmarklet) + ")();");
-		});
+
+	$(document).ready(function() {
+		$("#bookmarklet").attr("href","javascript:(" + encodeURIComponent(bookmarklet) + ")();");
 	});
 	
 
 </script>
+<link rel="stylesheet" href="/css/tools.css" type="text/css">  
 {/scripts}
 
 {<content}
-<a href="#">Install Chrome Extension</a><br />
+<!--a href="#">Install Chrome Extension</a><br />
 <a href="#">Install Firefox Extension</a><br />
 <a href="#">Install Safari Extension</a><br />
 <a href="#">Install Opera Extension</a><br />
 
 
 <br />
-<br />
-<a href="#" id="bookmarklet-link">Bookmarklet (drag me)</a><br />
+<br /-->
+<div id="tools-container">
+	<a href="#" id="bookmarklet">Test It<a/><span>&larr; Drag this button to your Bookmarks Bar</span>
+</div>
 {/content}
