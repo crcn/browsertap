@@ -127,7 +127,7 @@ module.exports = structr({
 
 	"_startSanityCheck": function() {
 		setInterval(_.bind(this._stopStaleServers, this), 1000 * 30);
-		setInterval(_.bind(this._terminateSuperOldServers, this), 1000 * 60 * 60);
+		setInterval(_.bind(this._terminateSuperOldServers, this), 1000 * 60 * 60 * 24);
 	},
 
 	/**
@@ -135,9 +135,10 @@ module.exports = structr({
 
 	"_stopStaleServers": function() {
 		this._maestro.
-		getServers({ imageId: this._imageId, state: "running", lastUsedAt: {$lt: new Date(Date.now() - this._stopTime) } }).
+		getServers({ imageId: this._imageId, state: "running", $or: [{ lastUsedAt: undefined }, { lastUsedAt: {$lt: new Date(Date.now() - this._stopTime) }}] }).
 		exec(function(err, servers) {
 			var saved;
+
 
 			if(!servers.length) return;
 
@@ -152,11 +153,11 @@ module.exports = structr({
 
 	"_terminateSuperOldServers": function() {
 		this._maestro.
-		getServers({ imageId: this._imageId, state: "stopped", lastUsedAt: {$lt: new Date(Date.now() - this._terminateTime) } }).
+		getServers({ imageId: this._imageId, state: "stopped", $or: [{ lastUsedAt: undefined }, { lastUsedAt: {$lt: new Date(Date.now() - this._terminateTime) }}] }).
 		exec(function(err, servers) {
 			var saved;
 
-			if(!servers.length) return;
+			if(!servers.length || servers.length < 3) return;
 
 			//one at a time
 			servers[0].terminate();
@@ -167,7 +168,7 @@ module.exports = structr({
 	 */
 
 	"_query": function(q) {
-		q.$or = [{ service: "local"}, { imageId: this._imageId}];
+		q.$or = [{ service: "local"}, { imageId: this._imageId, state: "running" }, { imageId: this._imageId, state: "stopped" }];
 
 		return q;
 	}

@@ -72,12 +72,9 @@ exports.plugin = function(httpServer, auth, Customer, maestro) {
 	httpServer.post("/serverComplete.json", findServer, function(req, res) {
 
 		req.server._logAction("serverDone");
-		// req.server.set("owner", null);
-		// req.server.set("hadOwner", true);
+		req.server.set("owner", null);
+		req.server.set("hadOwner", true);
 
-		//put it through the SHREDDERRRR
-		//VRRRRRRRRRRRRRRRRRRRRRRRRRRRRRREEEEEEEEEEEEEEEEEEEEEEEEEEEeeeeeeeeeeeeeeeeeeeeee.......!!@!#)#(!#)#(#!)#! 
-		req.server.terminate();
 
 		res.send(vine.result(true));
 	});
