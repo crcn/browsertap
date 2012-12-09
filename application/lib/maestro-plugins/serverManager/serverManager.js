@@ -15,7 +15,8 @@ module.exports = structr({
 
 		console.log("registering desktop server to id %s", this._imageId);
 
-		this._destroyTime = 1000 * 60;
+		this._stopTime = 1000 * 60;
+		this._terminateTime = 1000 * 60 * 60 * 24;
 
 		this._startSanityCheck();
 	},
@@ -78,7 +79,7 @@ module.exports = structr({
 				var next = this;
 
 				//needs to happen so the server can be retreive info
-				server.ping(function() {
+				server.start(function() {
 					next(null, server);
 				});
 			}),
@@ -125,29 +126,41 @@ module.exports = structr({
 	 */
 
 	"_startSanityCheck": function() {
-		setInterval(_.bind(this._removeStaleServers, this), 1000 * 30);
+		setInterval(_.bind(this._stopStaleServers, this), 1000 * 30);
+		setInterval(_.bind(this._terminateSuperOldServers, this), 1000 * 60 * 60);
 	},
 
 	/**
 	 */
 
-	"_removeStaleServers": function() {
+	"_stopStaleServers": function() {
 		this._maestro.
-		getServers({ imageId: this._imageId, lastUsedAt: {$lt: new Date(Date.now() - this._destroyTime) } }).
+		getServers({ imageId: this._imageId, state: "running", lastUsedAt: {$lt: new Date(Date.now() - this._stopTime) } }).
 		exec(function(err, servers) {
 			var saved;
 
-			servers.forEach(function(server) {
-				if(server.get("hadOwner")) {
-					server.terminate();
-				} else 
-				if(!saved) {
-					saved = server;
-				} else {
-					server.terminate();
-				}
-			});
-		})
+			if(!servers.length) return;
+
+			//one at a time
+			servers[0].stop();
+		});
+	},
+
+
+	/**
+	 */
+
+	"_terminateSuperOldServers": function() {
+		this._maestro.
+		getServers({ imageId: this._imageId, state: "stopped", lastUsedAt: {$lt: new Date(Date.now() - this._terminateTime) } }).
+		exec(function(err, servers) {
+			var saved;
+
+			if(!servers.length) return;
+
+			//one at a time
+			servers[0].terminate();
+		});
 	},
 
 	/**
