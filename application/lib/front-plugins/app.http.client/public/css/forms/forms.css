@@ -1,0 +1,12 @@
+#form-container{top:200px;position:relative;width:300px;margin:0 auto;text-align:center;color:#444;}#form-container input{width:100%;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;}
+#form-container input[type="text"],#form-container input[type="password"]{font-size:19px;padding:19px 8px;}#form-container input[type="text"]:focus,#form-container input[type="password"]:focus{border-color:rgba(199, 20, 0, 0.3);outline:0;outline:thin dotted \9;-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075),0 0 8px rgba(199, 20, 0, 0.3);-moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075),0 0 8px rgba(199, 20, 0, 0.3);box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075),0 0 8px rgba(199, 20, 0, 0.3);}
+#form-container a{color:#c71400;}
+#form-messages{margin-bottom:10px;}
+.form-error{color:red;padding:8px;border:1px solid rgba(199, 20, 0, 0.2);background-color:rgba(199, 20, 0, 0.1);border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;-khtml-border-radius:3px;margin-bottom:5px;}
+#form-header{text-align:left;}#form-header img{float:left;margin-right:6px;}
+#form-header h2{font-weight:normal;color:#999;font-size:24px;position:relative;top:-7px;}
+.form-button{background-color:#c71400;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;display:inline-block;color:#ffffff;font-family:arial;font-size:22px;font-weight:bold;padding:12px 74px;text-decoration:none;border:0px;margin:8px 0px;}
+#forget-password{float:right;color:#888;font-weight:bold;padding:0px;font-size:12px;}
+#login-forget-password-container{margin-bottom:25px;}#login-forget-password-container input{margin-bottom:0px;}
+#form-footer{text-align:left;}#form-footer span{color:#888;}#form-footer span a{font-weight:bold;}
+#lost-password-sent-container{width:700px;margin:0 auto;color:#666;top:300px;position:relative;}#lost-password-sent-container a{color:#c71400;font-weight:bold;}

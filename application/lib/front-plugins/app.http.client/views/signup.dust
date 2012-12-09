@@ -1,17 +1,11 @@
-{>minimal-layout/}
 
 
-{<scripts}
-<script type="text/javascript">
-	mixpanel.track("Signup Page Visit")
-</script>
-{/scripts}
+{>form_layout/}
 
-{<content}
-<h1>Signup:</h1>
-<form method="post" action="/signup">
-	<label>Email: <input type="text" name="email"></input></label> <br />
-	<label>Password: <input type="password" name="password"></input></label> <br />
-	<input type="submit" value="login"></input> <a href="/signup">signup</a>
-</form>
-{/content}
+{<page}Signup{/page}
+
+{<form_content}
+<input type="text" name="email" placeholder="Email"></input></label>
+			<input type="password" name="password" placeholder="Password"></input></label>
+			<input type="submit" class="form-button" value="signup"></input>
+{/form_content}

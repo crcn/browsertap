@@ -12,22 +12,16 @@
 			<script type="text/javascript" src="/vendors/js/es5-shim.js"></script>   
 		<![endif]-->
 
-		<script type="text/javascript" src="/vendors/js/head.js"></script>
-		<!--script type="text/javascript">
-			head.js(
-				"/vendors/js/jquery.js",
-				"/vendors/js/transit.js",
-				"/vendors/js/underscore.js",
-				"/vendors/js/backbone.js",
-				"/vendors/js/history.js"
-			);
-		</script-->
+		<!-- TODO - this should be *one* script e.g: -->
 
+		<!-- [combine] -->
+		<script type="text/javascript" src="/vendors/js/head.js"></script>
 		<script type="text/javascript" src="/vendors/js/jquery.js"></script>
 		<script type="text/javascript" src="/vendors/js/transit.js"></script>
 		<script type="text/javascript" src="/vendors/js/underscore.js"></script>
 		<script type="text/javascript" src="/vendors/js/backbone.js"></script>
 		<script type="text/javascript" src="/vendors/js/history.js"></script>
+		<!-- [endcombine] -->
 
 		{>mixpanel/}
 

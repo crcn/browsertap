@@ -1,24 +1,20 @@
 
 
-{>minimal-layout/}
+{>form_layout/}
+{<page}Login{/page}
 
-{<scripts}
-<script type="text/javascript">
-	mixpanel.track("Login Page Visit")
-</script>
-{/scripts}
+{<form_content}
 
-{<content}
-<h1>Login:</h1>
-{#errors}
-	{message}
-{/errors}
-{#messages}
-	{message}
-{/messages}
-<form method="POST" action="/login?redirect_to={redirect_to}">
-			<label>Email: <input type="text" name="email"></input></label> <br />
-			<label>Password: <input type="password" name="password"></input></label> <br />
-			<input type="submit" value="login"></input> <a href="/signup">signup</a> &nbsp; <a href="/lost_password">Forget Password?</a>
-		</form>
-{/content}
+
+
+<input type="text" name="email" placeholder="Email"></input></label>
+
+<div id="login-forget-password-container">
+	<input type="password" name="password" placeholder="Password"></input></label>
+	<a id="forget-password" href="/lost_password">Forgot Password?</a>
+</div>
+<div id="form-footer">
+	<input type="submit" class="form-button" value="login"></input>
+	<span>Don't have an account? <a href="/signup">Sign up!</a></span>
+</div>
+{/form_content}

@@ -1,0 +1,35 @@
+
+
+{>minimal-layout/}
+
+{<scripts}
+<script type="text/javascript">
+	mixpanel.track("{+page}{/page} Page Visit")
+</script>
+<link rel="stylesheet" href="/css/forms/forms.css" type="text/css">  
+{/scripts}
+
+{<content}
+
+
+
+<div id="form-container">
+	<div id="form-header">
+		<img src="/img/logo-black.png">
+		<h2>{+page}{/page}</h2>
+		<div id="form-messages">	
+			{#errors}
+				<div class="form-error">{message}</div>
+			{/errors}
+			{#messages}
+				<div class="form-message">{message}</div>
+			{/messages}
+		</div>
+	</div>
+	<form method="POST" action="#">
+		{+form_content}
+		{/form_content}
+	</form>
+</div>
+
+{/content}
