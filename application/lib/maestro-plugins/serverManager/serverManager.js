@@ -70,6 +70,7 @@ module.exports = structr({
 			},
 			on.s(function(server) {
 				server.set("owner", accountId);
+				server.set("lastUsedAt", new Date());
 
 				console.log("user using server %s", server.get("_id"));
 
@@ -138,7 +139,6 @@ module.exports = structr({
 		getServers({ imageId: this._imageId, state: "running", $or: [{ lastUsedAt: undefined }, { lastUsedAt: {$lt: new Date(Date.now() - this._stopTime) }}] }).
 		exec(function(err, servers) {
 			var saved;
-
 
 			if(!servers.length) return;
 
