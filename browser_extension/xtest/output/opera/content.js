@@ -1,7 +1,7 @@
 
 kango.addMessageListener("openVM", function() {
 	var script = document.createElement("script");
-	script.src = "http://maestro.browsertap.com/js/extension.js"
+	script.src = "http://maestro.browsertap.com/js/extension.js?" + Date.now();
 	script.type = "text/javascript";
 	document.getElementsByTagName("head")[0].appendChild(script);
 });

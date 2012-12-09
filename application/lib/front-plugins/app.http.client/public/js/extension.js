@@ -1,1 +1,1 @@
-window.location = "http://maestro.browsertap.com/live?open=" + encodeURIComponent(window.location) + "&app=chrome 19";
+window.location = "http://maestro.browsertap.com/live?open=" + encodeURIComponent(window.location);

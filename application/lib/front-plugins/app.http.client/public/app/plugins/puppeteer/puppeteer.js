@@ -58,13 +58,17 @@ module.exports = structr(EventEmitter, {
 		self = this;
 
 		console.log("fetching server");
-		
+
 		$.ajax({
 			url: serverUrl,
 			dataType: "json",
 			success: outcome.vine().success(function(puppeteer) {
 				self._attach({ host: "http://" + puppeteer.address + ":8080/browsertap.puppeteer" });
-			})
+			}),
+			error: function() {
+				console.log(arguments);
+				console.log("ERROR")
+			}
 		});	
 	},
 
@@ -97,7 +101,7 @@ module.exports = structr(EventEmitter, {
 		});
 
 		console.log("attaching %s", options.host);
-		var stream = shoe(options.host + "/dnode", { protocols_whitelist: ["websockets"] });
+		var stream = shoe(options.host + "/dnode", { /*protocols_whitelist: ["websockets"]*/ });
 
 		mixpanel.track("Connect To Desktop", { host: options.host });
 
