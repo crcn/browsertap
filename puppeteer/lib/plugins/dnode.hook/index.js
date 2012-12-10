@@ -64,7 +64,6 @@ exports.plugin = function(client, httpServer, master, loader) {
 
 
 
-
 	//set dnode up so clients can connect
 	var sock = shoe(function(stream) {
 

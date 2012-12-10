@@ -51,7 +51,14 @@ module.exports = structr({
 	/**
 	 */
 
-	"findApp": function(search, callback) {
+	"step findApp": function(search, callback) {
+		this._findApp(search, callback);
+	},
+
+	/**
+	 */
+
+	"_findApp": function(search, callback) {
 		var app = sift(search, this._apps).pop(); 
 		if(!app) return callback(new Error("app does not exist"));
 		callback(null, app);
@@ -77,7 +84,7 @@ module.exports = structr({
 
 	"step open": function(options, next) {
 		if(!options || !options.name || !options.version) return next(new Error("onot enough options"));
-
+	
 		var arg      = options.arg,
 		on = outcome.error(next),
 		self = this;
@@ -85,7 +92,7 @@ module.exports = structr({
 		step(
 			function() {
 				logger.info(sprintf("finding app: %s %s", options.name, options.version));
-				self.findApp({ name: options.name, version: options.version }, this);
+				self._findApp({ name: options.name, version: options.version }, this);
 			},
 			on.success(function(app) {
 				logger.info("closing other app versions app");
@@ -108,7 +115,7 @@ module.exports = structr({
 	/**
 	 */
 
-	"addWindow": function(win, callback) {
+	"step addWindow": function(win, callback) {
 		var app = _.find(this._apps, function(app) {
 
 			if(!app.window.getAppName) return null;
@@ -152,7 +159,7 @@ module.exports = structr({
 	/**
 	 */
 
-	"close": function(search, next) {
+	"step close": function(search, next) {
 		seq(search ? sift(search, this._apps).slice(0) : this._apps).seqEach(function(app) {
 			app.close(this);
 		}).seq(function() {

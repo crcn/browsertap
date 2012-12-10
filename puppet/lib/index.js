@@ -4,7 +4,6 @@ var Keyboard = require("./wkm/keyboard"),
 Client       = require("./wkm/client"),
 Mouse        = require("./wkm/mouse"),
 Desktop      = require("./wkm/desktop"),
-Browsers     = require("./browsers"),
 proxyServer  = require("./proxy/server"),
 _            = require("underscore"),
 Apps         = require("./apps");
