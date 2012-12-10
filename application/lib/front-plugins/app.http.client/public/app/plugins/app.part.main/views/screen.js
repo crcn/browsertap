@@ -14,6 +14,7 @@ module.exports = require("../../../views/base").extend({
 		this._window = this.options.window;
 		this.$hud = this.$el.find(".hud-body");
 		this.$window = $(window);
+		this.$html = $("html");
 		this.$document = $(document);
 		this.$body = $(document.body);
 		this.$cover = this.$el.find(".screen-cover");
@@ -26,8 +27,6 @@ module.exports = require("../../../views/base").extend({
 
 		var self = this;
 
-
-		this.$body.css({ "overflow": "hidden" });
 
 		var agent = String(window.navigator.userAgent).toLowerCase();
 
@@ -54,7 +53,13 @@ module.exports = require("../../../views/base").extend({
 			}),
 			loader.on("unfocus", function() {
 				self._numFrameRates = self._frameRates = 0;
-			})
+			})/*,
+			loader.on("locationChange", function() {
+				self._useNativeScroller = false;
+				console.log($("body"))
+				$("body").css({"overflow": "hidden" });
+				self.onResize();
+			})*/
 		);
 
 		_.each(this._createBindings(), function(binding) {
@@ -88,7 +93,8 @@ module.exports = require("../../../views/base").extend({
 			this.$window.mouseup(_.bind(this.onMouseUp, this)),
 			this.$window.mousemove(_.throttle(_.bind(this.onMouseMove, this), 50)),
 			this.$window.keydown(_.bind(this.onWindowKeyDown, this)),
-			this.$window.keyup(_.bind(this.onWindowKeyUp, this))
+			this.$window.keyup(_.bind(this.onWindowKeyUp, this)),
+			this.$window.scroll(_.bind(this.onWindowScroll, this))
 		];
 	},
 	"_listenToWindow": function() {
@@ -130,6 +136,12 @@ module.exports = require("../../../views/base").extend({
 		module.exports.__super__.dispose.call(this);
 		this._disposable.dispose();
 	},
+	"onWindowScroll": _.throttle(function() {
+		this._scrollDelta = 1;
+		if(!this._useNativeScroller) return;
+
+		this.proxy.scrollbar.to(this.$document.scrollLeft(), this.$document.scrollTop());
+	}, 30),
 	"onResize": _.debounce(function(force) {
 		var win = this._window,
 		padding = win.app.padding,
@@ -146,7 +158,7 @@ module.exports = require("../../../views/base").extend({
 
 		this.$hud.css({
 			opacity: 1,
-			width: this.$window.width() + (padding.left || 0) + (padding.right || 0),
+			width: this.$window.width() + (padding.left || 0) + (padding.right || 0) + (this._useNativeScroller ? 17 : 0),
 			height: this.$window.height() + (padding.top || 0) + (padding.bottom || 0),
 			left: -padding.left,
 			top: -padding.top,
@@ -177,7 +189,7 @@ module.exports = require("../../../views/base").extend({
 		this._lastMouseMoveAt = Date.now();
 
 
-		var coords = { x: e.pageX + this._window.app.padding.left || 0, y: e.pageY + this._window.app.padding.top || 0 };
+		var coords = { x: e.pageX + (this._window.app.padding.left || 0) - this.$document.scrollLeft(), y: e.pageY + (this._window.app.padding.top || 0)  - this.$document.scrollTop() };
 
 		if(this.windowDims.width && this.windowDims.height) {
 			coords.x = coords.x - (this.$hud.width()/2 - this.windowDims.width/2);
@@ -192,7 +204,16 @@ module.exports = require("../../../views/base").extend({
 	},
 	"onMouseDown": function(e) {
 
+		//is scrollbar
+		if(e.toElement == this.$html[0]) return;
 		this._mouseDown = true;
+
+		/*console.log("DOWN");
+		console.log(e.target);
+		console.log(e);
+		console.log(e.toElement == this.$html[0])
+		console.log(this.$html)*/
+
 		this._window.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTDOWN : wkmEvents.mouse.MOUSEEVENTF_RIGHTDOWN, this.coords);
 
 		/*if(e.button == 0) {
@@ -207,6 +228,7 @@ module.exports = require("../../../views/base").extend({
 		return false;
 	},
 	"onMouseUp": function(e) {
+		if(e.toElement == this.$html[0]) return;
 		this._mouseDown = false;
 		this._window.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTUP : wkmEvents.mouse.MOUSEEVENTF_RIGHTUP, this.coords);
 	},
@@ -224,18 +246,20 @@ module.exports = require("../../../views/base").extend({
 	"onDocumentScroll": function(e, delta) {
 		this._scrollDelta = delta;
 
-		if(this.proxy) {
-			this.proxy.scrollbar.to(this.$document.scrollLeft(), this.$document.scrollTop());
-		} else {
-			this._window.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, this.coords, delta * this._scrollMultiplier);
-		}
+		if(this._useNativeScroller) return;
+
+		this._window.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, this.coords, delta * this._scrollMultiplier);
 	},
 	"syncScrollInfo": function() {
-		if(!this.proxy) return;
+		if(!this.proxy || true) return;
 		var self = this;
 		this.proxy.scrollbar.getPosition(function(x, y) {
 			// $("#scroller").width(x);
+
+
 			$("#scroller").height(y);
+			$("body").css({ "overflow": "auto" });
+			self._useNativeScroller = true;
 			self.onResize();
 		});
 	},
@@ -287,7 +311,7 @@ module.exports = require("../../../views/base").extend({
 
 		if(this._locked) return;
 
-		var mouseMoveDelta = this._mouseDown ? this._mouseMoveDelta || 0 : 0;
+		var mouseMoveDelta = this._mouseDown ? this._mouseMoveDelta || 1 : 0;
 
 		var biggest = Math.round(Math.max(mouseMoveDelta, Math.abs(this._scrollDelta || 0) * 200));
 

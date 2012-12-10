@@ -74,7 +74,7 @@ module.exports = structr(EventEmitter, {
 			}
 		});*/
 		this.emit("connection", connection);
-		this.emit("loading");
+		// this.emit("loading");
 	},
 
 	/**
@@ -84,7 +84,6 @@ module.exports = structr(EventEmitter, {
 		if(this._lockLoading) return;
 		this._trackStopBrowser();
 		_.extend(this.options, options);
-		this.emit("loading");
 		this.startDate = Date.now();
 		this._trackBrowser("Browser Start");
 
@@ -111,10 +110,11 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_connectApp": function() {
-		console.log("loading app %s", this.options.app);
+		console.log("loading app %s %s", this.options.app, this.options.version);
 		var con = this._connection, self = this;
 
 		if(this._appName != this.options.app || this._appVersion != this.options.version) {
+			this.emit("loading");
 			this._ignoreClose = true;
 			if(this.window) this.window.close();
 
@@ -136,6 +136,7 @@ module.exports = structr(EventEmitter, {
 			return;
 		} else 
 		if(this._proxy) {
+			console.log("set proxy location")
 			// this._proxy.location.set(this.options.open);
 			this._setProxyLocation(this.options.open);
 		}
@@ -229,6 +230,7 @@ module.exports = structr(EventEmitter, {
 
 	"_connectWindow": function() {
 		if(this._screenId == this.options.screen) return;
+		this.emit("loading");
 		console.log("loading window");
 		var self = this;
 		this._ignoreClose = false;
@@ -284,6 +286,7 @@ module.exports = structr(EventEmitter, {
 	"step _setProxyLocation": function(open, callback) {
 		if(this._refreshing) return this.on("refreshProxy", callback);
 		this._proxy = null;
+		this._ignoreLocation = true;
 
 		var self = this;
 		step(
@@ -310,6 +313,7 @@ module.exports = structr(EventEmitter, {
 
 			function(proxy) {
 				if(!proxy) return callback(new Error("Unable to set proxy"));
+				console.log("set proxy location to %s", open);
 				proxy.location.set(open);
 				window.refreshProxy(this);
 			},
@@ -362,12 +366,31 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_onProxy": function(proxy) {
+
+		console.log("on proxy");
+
+
+		//dispose
+		if(this._proxy) {
+			this._proxy._events = {};
+		}
+
+
 		this._proxy = proxy;
-		console.log(proxy);
 
 		var self = this;
 
 		function onLocationChange(location) {
+
+			console.log("location change: %s", location.href);
+
+
+			//TODO - compare path, and query data
+			if(self._ignoreLocation) {
+				self._ignoreLocation = false;
+				console.log("ingore location")
+				return;
+			}
 			self.emit("locationChange", location);
 		}
 
