@@ -10,7 +10,7 @@
 {<content}
 <div class="screen hud"></div>
 <div class="pre-launch-notification">
-	<h3>Launching new instance. This could take 1-60 seconds.</h3>
+	<h3>Launching a new server. This could take up to a minute.</h3>
 </div>
 <div class="screen-cover"></div>
 <div class="app-notification loader">
