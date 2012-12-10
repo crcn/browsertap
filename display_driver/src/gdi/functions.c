@@ -395,7 +395,7 @@ void GdiExample_DrvDisableSurface(DHPDEV  dhpdev)
  *********************************************************************/
 void GdiExample_DrvMovePointer(SURFOBJ  *pso, LONG  x, LONG  y, RECTL  *prcl)
 {
-    ENGDEBUGPRINT(0, "GdiExample_DrvMovePointer\r\n", NULL);
+    //ENGDEBUGPRINT(0, "GdiExample_DrvMovePointer\r\n", NULL);
 
     if(pso)
     {
@@ -412,7 +412,7 @@ void GdiExample_DrvMovePointer(SURFOBJ  *pso, LONG  x, LONG  y, RECTL  *prcl)
  *********************************************************************/
 ULONG GdiExample_DrvSetPointerShape(SURFOBJ  *pso, SURFOBJ  *psoMask, SURFOBJ  *psoColor, XLATEOBJ  *pxlo, LONG  xHot, LONG  yHot, LONG  x, LONG  y, RECTL  *prcl, FLONG  fl)
 {
-    ENGDEBUGPRINT(0, "GdiExample_DrvSetPointerShape\r\n", NULL);
+    //ENGDEBUGPRINT(0, "GdiExample_DrvSetPointerShape\r\n", NULL);
 
     return SPS_ACCEPT_NOEXCLUDE;
 }
@@ -426,7 +426,7 @@ ULONG GdiExample_DrvSetPointerShape(SURFOBJ  *pso, SURFOBJ  *psoMask, SURFOBJ  *
  *********************************************************************/
 void GdiExample_DrvNotify(SURFOBJ  *pso, ULONG  iType, PVOID  pvData)
 {
-    ENGDEBUGPRINT(0, "GdiExample_DrvNotify\r\n", NULL);
+  //  ENGDEBUGPRINT(0, "GdiExample_DrvNotify\r\n", NULL);
      /* Do Nothing */
 }
 
@@ -438,7 +438,7 @@ void GdiExample_DrvNotify(SURFOBJ  *pso, ULONG  iType, PVOID  pvData)
  *********************************************************************/
 BOOL GdiExample_DrvRealizeBrush(BRUSHOBJ  *pbo, SURFOBJ  *psoTarget, SURFOBJ  *psoPattern, SURFOBJ  *psoMask, XLATEOBJ  *pxlo, ULONG  iHatch)
 {
-    ENGDEBUGPRINT(0, "GdiExample_DrvRealizeBrush\r\n", NULL);
+   // ENGDEBUGPRINT(0, "GdiExample_DrvRealizeBrush\r\n", NULL);
     
     return TRUE;
 }
@@ -451,7 +451,7 @@ BOOL GdiExample_DrvRealizeBrush(BRUSHOBJ  *pbo, SURFOBJ  *psoTarget, SURFOBJ  *p
  *********************************************************************/
 BOOL GdiExample_DrvSetPalette(DHPDEV  dhpdev, PALOBJ  *ppalo, FLONG  fl, ULONG  iStart, ULONG  cColors)
 {
-    ENGDEBUGPRINT(0, "GdiExample_DrvSetPalette\r\n", NULL);
+   // ENGDEBUGPRINT(0, "GdiExample_DrvSetPalette\r\n", NULL);
     return FALSE;
 }
             
@@ -464,7 +464,7 @@ BOOL GdiExample_DrvSetPalette(DHPDEV  dhpdev, PALOBJ  *ppalo, FLONG  fl, ULONG  
  *********************************************************************/       
 BOOL GdiExample_DrvStretchBlt(SURFOBJ  *psoDest, SURFOBJ  *psoSrc, SURFOBJ  *psoMask, CLIPOBJ  *pco, XLATEOBJ  *pxlo, COLORADJUSTMENT  *pca, POINTL  *pptlHTOrg, RECTL  *prclDest, RECTL  *prclSrc, POINTL  *pptlMask, ULONG  iMode)
 {
-    ENGDEBUGPRINT(0, "GdiExample_DrvStretchBlt\r\n", NULL);
+   // ENGDEBUGPRINT(0, "GdiExample_DrvStretchBlt\r\n", NULL);
     return EngStretchBlt(psoDest, psoSrc, psoMask, pco, pxlo, pca, pptlHTOrg, prclDest, prclSrc, pptlMask, iMode);
 }
 
@@ -478,7 +478,7 @@ BOOL GdiExample_DrvStretchBlt(SURFOBJ  *psoDest, SURFOBJ  *psoSrc, SURFOBJ  *pso
  *********************************************************************/ 
 void GdiExample_DrvSynchronizeSurface(SURFOBJ  *pso, RECTL  *prcl, FLONG  fl)
 {
-    ENGDEBUGPRINT(0, "GdiExample_DrvSynchronizeSurface\r\n", NULL);
+   // ENGDEBUGPRINT(0, "GdiExample_DrvSynchronizeSurface\r\n", NULL);
     /* Do Nothing */
 }
     
@@ -491,7 +491,7 @@ void GdiExample_DrvSynchronizeSurface(SURFOBJ  *pso, RECTL  *prcl, FLONG  fl)
  *********************************************************************/
 BOOL GdiExample_DrvAlphaBlend(SURFOBJ  *psoDest, SURFOBJ  *psoSrc, CLIPOBJ  *pco, XLATEOBJ  *pxlo, RECTL  *prclDest, RECTL  *prclSrc, BLENDOBJ  *pBlendObj)
 {
-    ENGDEBUGPRINT(0, "GdiExample_DrvAlphaBlend\r\n", NULL);
+    //ENGDEBUGPRINT(0, "GdiExample_DrvAlphaBlend\r\n", NULL);
 
     return EngAlphaBlend(psoDest, psoSrc, pco, pxlo, prclDest, prclSrc, pBlendObj);
 }
@@ -506,7 +506,7 @@ BOOL GdiExample_DrvAlphaBlend(SURFOBJ  *psoDest, SURFOBJ  *psoSrc, CLIPOBJ  *pco
  *********************************************************************/
 ULONG_PTR GdiExample_DrvSaveScreenBits(SURFOBJ  *pso, ULONG  iMode, ULONG_PTR  ident, RECTL  *prcl)
 {
-    ENGDEBUGPRINT(0, "GdiExample_DrvSaveScreenBits\r\n", NULL);
+  //  ENGDEBUGPRINT(0, "GdiExample_DrvSaveScreenBits\r\n", NULL);
 
     return 0;
 }
@@ -519,7 +519,7 @@ ULONG_PTR GdiExample_DrvSaveScreenBits(SURFOBJ  *pso, ULONG  iMode, ULONG_PTR  i
  *********************************************************************/
 BOOL GdiExample_DrvBitBlt(SURFOBJ  *psoTrg, SURFOBJ  *psoSrc, SURFOBJ  *psoMask, CLIPOBJ  *pco, XLATEOBJ  *pxlo, RECTL  *prclTrg, POINTL  *pptlSrc, POINTL  *pptlMask, BRUSHOBJ  *pbo, POINTL  *pptlBrush, ROP4  rop4)
 {
-    ENGDEBUGPRINT(0, "GdiExample_DrvBitBlt\r\n", NULL);
+    //ENGDEBUGPRINT(0, "GdiExample_DrvBitBlt\r\n", NULL);
 
     return EngBitBlt(psoTrg, psoSrc, psoMask, pco, pxlo, prclTrg, pptlSrc, pptlMask, pbo, pptlBrush, rop4);
 }
@@ -533,7 +533,7 @@ BOOL GdiExample_DrvBitBlt(SURFOBJ  *psoTrg, SURFOBJ  *psoSrc, SURFOBJ  *psoMask,
  *********************************************************************/
 BOOL GdiExample_DrvCopyBits(SURFOBJ  *psoDest, SURFOBJ  *psoSrc, CLIPOBJ  *pco, XLATEOBJ  *pxlo, RECTL  *prclDest, POINTL  *pptlSrc)
 {
-    ENGDEBUGPRINT(0, "GdiExample_DrvCopyBits\r\n", NULL);
+    //ENGDEBUGPRINT(0, "GdiExample_DrvCopyBits\r\n", NULL);
 
    // return EngCopyBits(psoDest, psoSrc, pco, pxlo, prclDest, pptlSrc);
     return GdiExample_DrvBitBlt(psoDest, psoSrc, NULL, pco, pxlo, prclDest, pptlSrc, NULL, NULL, NULL, ROP4_SRCCOPY);
@@ -548,7 +548,7 @@ BOOL GdiExample_DrvCopyBits(SURFOBJ  *psoDest, SURFOBJ  *psoSrc, CLIPOBJ  *pco, 
 
 BOOL GdiExample_DrvFillPath(SURFOBJ  *pso, PATHOBJ  *ppo, CLIPOBJ  *pco, BRUSHOBJ  *pbo, POINTL  *pptlBrushOrg, MIX  mix, FLONG  flOptions)
 {
-    ENGDEBUGPRINT(0, "GdiExample_DrvFillPath\r\n", NULL);
+    //ENGDEBUGPRINT(0, "GdiExample_DrvFillPath\r\n", NULL);
 
     return EngFillPath(pso, ppo,pco, pbo, pptlBrushOrg, mix, flOptions);
 }
@@ -561,7 +561,7 @@ BOOL GdiExample_DrvFillPath(SURFOBJ  *pso, PATHOBJ  *ppo, CLIPOBJ  *pco, BRUSHOB
  *********************************************************************/
 BOOL GdiExample_DrvGradientFill(SURFOBJ  *psoDest, CLIPOBJ  *pco, XLATEOBJ  *pxlo, TRIVERTEX  *pVertex, ULONG  nVertex, PVOID  pMesh, ULONG  nMesh, RECTL  *prclExtents, POINTL  *pptlDitherOrg, ULONG  ulMode)          
 {
-    ENGDEBUGPRINT(0, "GdiExample_DrvGradientFill\r\n", NULL);
+   // ENGDEBUGPRINT(0, "GdiExample_DrvGradientFill\r\n", NULL);
     return EngGradientFill(psoDest, pco, pxlo, pVertex, nVertex, pMesh, nMesh, prclExtents, pptlDitherOrg, ulMode);
 }
 
@@ -574,7 +574,7 @@ BOOL GdiExample_DrvGradientFill(SURFOBJ  *psoDest, CLIPOBJ  *pco, XLATEOBJ  *pxl
  *********************************************************************/
 BOOL GdiExample_DrvLineTo(SURFOBJ  *pso, CLIPOBJ  *pco, BRUSHOBJ  *pbo, LONG  x1, LONG  y1, LONG  x2, LONG  y2, RECTL  *prclBounds, MIX  mix)
 {
-    ENGDEBUGPRINT(0, "GdiExample_DrvLineTo\r\n", NULL);
+   // ENGDEBUGPRINT(0, "GdiExample_DrvLineTo\r\n", NULL);
     return EngLineTo(pso, pco, pbo, x1, y1, x2, y2, prclBounds, mix);
 }
 
@@ -586,7 +586,7 @@ BOOL GdiExample_DrvLineTo(SURFOBJ  *pso, CLIPOBJ  *pco, BRUSHOBJ  *pbo, LONG  x1
  *********************************************************************/
 BOOL GdiExample_DrvStrokePath(SURFOBJ  *pso, PATHOBJ  *ppo, CLIPOBJ  *pco, XFORMOBJ  *pxo, BRUSHOBJ  *pbo, POINTL  *pptlBrushOrg, LINEATTRS  *plineattrs, MIX  mix)            
 {
-    ENGDEBUGPRINT(0, "GdiExample_DrvStrokePath\r\n", NULL);
+   // ENGDEBUGPRINT(0, "GdiExample_DrvStrokePath\r\n", NULL);
 
     return EngStrokePath(pso, ppo, pco, pxo, pbo, pptlBrushOrg, plineattrs, mix);
 }
@@ -599,7 +599,7 @@ BOOL GdiExample_DrvStrokePath(SURFOBJ  *pso, PATHOBJ  *ppo, CLIPOBJ  *pco, XFORM
  *********************************************************************/
 BOOL GdiExample_DrvTextOut(SURFOBJ  *pso, STROBJ  *pstro, FONTOBJ  *pfo, CLIPOBJ  *pco, RECTL  *prclExtra, RECTL  *prclOpaque, BRUSHOBJ  *pboFore, BRUSHOBJ  *pboOpaque, POINTL  *pptlOrg, MIX  mix)
 {
-    ENGDEBUGPRINT(0, "GdiExample_DrvTextOut\r\n", NULL);
+   // ENGDEBUGPRINT(0, "GdiExample_DrvTextOut\r\n", NULL);
 
     return EngTextOut(pso, pstro, pfo, pco, prclExtra, prclOpaque, pboFore, pboOpaque, pptlOrg, mix);
 }
@@ -613,7 +613,7 @@ BOOL GdiExample_DrvTextOut(SURFOBJ  *pso, STROBJ  *pstro, FONTOBJ  *pfo, CLIPOBJ
  *********************************************************************/
 BOOL GdiExample_DrvTransparentBlt(SURFOBJ  *psoDst, SURFOBJ  *psoSrc, CLIPOBJ  *pco, XLATEOBJ  *pxlo, RECTL  *prclDst, RECTL  *prclSrc, ULONG  iTransColor, ULONG  ulReserved)
 {
-    ENGDEBUGPRINT(0, "GdiExample_DrvTransparentBlt\r\n", NULL);
+   // ENGDEBUGPRINT(0, "GdiExample_DrvTransparentBlt\r\n", NULL);
     return EngTransparentBlt(psoDst, psoSrc, pco, pxlo, prclDst, prclSrc, iTransColor, ulReserved);
 }
 
@@ -627,7 +627,7 @@ BOOL GdiExample_DrvTransparentBlt(SURFOBJ  *psoDst, SURFOBJ  *psoSrc, CLIPOBJ  *
 
 HBITMAP GdiExample_DrvCreateDeviceBitmap(DHPDEV  dhpdev, SIZEL  sizl, ULONG  iFormat) 
 {
-    ENGDEBUGPRINT(0, "GdiExample_DrvCreateDeviceBitmap\r\n", NULL);
+   // ENGDEBUGPRINT(0, "GdiExample_DrvCreateDeviceBitmap\r\n", NULL);
 
     return NULL;
 }
@@ -640,7 +640,7 @@ HBITMAP GdiExample_DrvCreateDeviceBitmap(DHPDEV  dhpdev, SIZEL  sizl, ULONG  iFo
  *********************************************************************/
 void GdiExample_DrvDeleteDeviceBitmap(DHSURF  dhsurf)   
 {
-    ENGDEBUGPRINT(0, "GdiExample_DrvDeleteDeviceBitmap\r\n", NULL);
+    //ENGDEBUGPRINT(0, "GdiExample_DrvDeleteDeviceBitmap\r\n", NULL);
 
 }
 
@@ -653,7 +653,7 @@ void GdiExample_DrvDeleteDeviceBitmap(DHSURF  dhsurf)
  *********************************************************************/
 void GdiExample_DrvDestroyFont(FONTOBJ  *pfo)
 {
-    ENGDEBUGPRINT(0, "GdiExample_DrvDestroyFont\r\n", NULL);
+    //ENGDEBUGPRINT(0, "GdiExample_DrvDestroyFont\r\n", NULL);
 
 }
 

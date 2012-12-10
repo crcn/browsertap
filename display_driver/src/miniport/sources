@@ -1,6 +1,7 @@
 TARGETNAME=fakemonitor
 TARGETTYPE=DRIVER
 SOURCES=entry.c \
-functions.c
+functions.c \
+fakemonminiport.rc
 TARGETLIBS=$(DDK_LIB_PATH)\videoprt.lib
 TARGET_DESTINATION=retail

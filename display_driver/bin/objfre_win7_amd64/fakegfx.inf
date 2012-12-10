@@ -4,7 +4,7 @@ Provider=%BrowserTap%
 
 ClassGUID={4D36E968-E325-11CE-BFC1-08002BE10318}
 Class=Display
-DriverVer=07/01/1999,5.00.2075
+DriverVer=07/01/1999,5.00.2076
 
 [DestinationDirs]
 tapscreen.Miniport  = 12  ; drivers
@@ -32,7 +32,7 @@ AddService = tapscreen, 0x00000002, tapscreen_Service_Inst, tapscreen_EventLog_I
 [tapscreen_Service_Inst]
 ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
 StartType      = 1                  ; SERVICE_SYSTEM_START
-ErrorControl   = 0                  ; SERVICE_ERROR_IGNORE
+ErrorControl   = 1                  ; SERVICE_ERROR_IGNORE
 LoadOrderGroup = Video
 ServiceBinary  = %12%\fakemonitor.sys
 

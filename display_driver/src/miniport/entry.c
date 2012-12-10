@@ -20,9 +20,9 @@
 
 #include "fakegfxcard.h"
       
-ULONG DriverEntry(PVOID pContext1, PVOID pContext2);
+//ULONG DriverEntry(PVOID pContext1, PVOID pContext2);
 
-#pragma alloc_text(INIT, DriverEntry)
+//#pragma alloc_text(INIT, DriverEntry)
 
 
 /**********************************************************************

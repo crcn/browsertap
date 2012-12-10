@@ -1,0 +1,6 @@
+TARGETNAME = hello
+TARGETPATH = obj
+TARGETTYPE = DRIVER
+INCLUDES   = %BUILD%\inc
+LIBS       = %BUILD%\lib
+SOURCES    = hello.c
