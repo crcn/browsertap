@@ -4,13 +4,15 @@ URL	         = require("url"),
 shoe         = require("shoe"),
 getHost      = require("./getHost");
 
+
+var em = new EventEmitter(),
+locEm  = new EventEmitter();
+
 exports.listen = function() {
 
 	var scriptUrl = getHost();
 
-	var em = new EventEmitter(),
-	locEm  = new EventEmitter(),
-	_id = Date.now() + "_" + Math.round(Math.random() * 999999999999);
+	var _id = Date.now() + "_" + Math.round(Math.random() * 999999999999);
 	client = {
 		id: _id,
 		emitter: em,
@@ -101,6 +103,7 @@ function watchLocation(client) {
 		if(currentHRef == newLoc) {
 			return;
 		}
+		console.log("location change")
 		currentHRef = newLoc;
 		em.emit("locationChange", location());
 		client.location.emit()
