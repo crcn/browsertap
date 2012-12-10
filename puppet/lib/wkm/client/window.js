@@ -242,7 +242,6 @@ module.exports = structr(EventEmitter, {
 
 	/**
 	 */
-http://teamdigest.com/#
 	"changeRecordingQuality": function(options, callback) {
 		this._con.execute("changeWindowRecordingQuality", _.extend(options, { id: this.id }));
 	},
