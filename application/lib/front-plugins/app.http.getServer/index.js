@@ -9,7 +9,7 @@ exports.plugin = function(maestro, server, serverManager, starch, loader) {
 		serverManager.getFreeServer(req.account, function(err, server) {
 			//error?
 			if(err) {
-				console.error(err);
+				console.error(err.stack);
 				return res.send(vine.error(err));
 			}
 

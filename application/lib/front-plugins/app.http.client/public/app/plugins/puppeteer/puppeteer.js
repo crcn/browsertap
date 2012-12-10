@@ -63,7 +63,6 @@ module.exports = structr(EventEmitter, {
 			dataType: "json",
 			success: outcome.vine().success(function(puppeteer) {
 				self._attach({ host: "http://" + puppeteer.address + ":8080/browsertap.puppeteer" });
-				notification.close();
 			}),
 			error: function() {
 				console.log(arguments);

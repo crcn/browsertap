@@ -48,7 +48,8 @@ module.exports = structr({
 			function() {
 
 				//first check if the user is already registered to a server
-				var owned = maestro.collection.findOne(self._query({ owner: accountId })).sync();
+				var owned = maestro.collection.findOne({ owner: accountId }).sync();
+
 
 				//yes? return
 				if(owned) {
@@ -110,6 +111,11 @@ module.exports = structr({
 
 		var maestro = this._maestro;
 
+		if(!maestro.services.getService("amazon")) {
+			console.error("amazon service not registered - can't create instance");
+			return;
+		}
+
 		this._maestro.
 		services.
 		getService("amazon").
@@ -168,7 +174,7 @@ module.exports = structr({
 	 */
 
 	"_query": function(q) {
-		q.$or = [{ service: "local"}, { imageId: this._imageId, state: "running" }, { imageId: this._imageId, state: "stopped" }];
+		q.$or = [{ service: "local"}, { imageId: this._imageId, state: {$in: ["running", "stopped"] } }];
 
 		return q;
 	}
