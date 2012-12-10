@@ -227,7 +227,7 @@ module.exports = structr(EventEmitter, {
 		localhost    = "localhost";
 
 		//debugging - TODO - fucking FIX red5 on the local machine. This is fucking stupid code.
-	    rtmpHost = localhost = "10.0.1.30";
+	    //rtmpHost = localhost = "10.0.1.30";
 
 		var output =  "rtmp://" + rtmpHost + ":1935/live/" + streamId;
 
@@ -242,7 +242,7 @@ module.exports = structr(EventEmitter, {
 
 	/**
 	 */
-
+http://teamdigest.com/#
 	"changeRecordingQuality": function(options, callback) {
 		this._con.execute("changeWindowRecordingQuality", _.extend(options, { id: this.id }));
 	},
