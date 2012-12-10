@@ -94,13 +94,13 @@ BOOL DrvEnableDriver(ULONG ulEngineVersion, ULONG ulDataSize, DRVENABLEDATA *pDr
      * We only want to support versions > NT 4
      *
      */
-    if(HIWORD(ulEngineVersion) >= 0x3 && ulDataSize >= sizeof(DRVENABLEDATA))
-    {
+    /*if(HIWORD(ulEngineVersion) >= 0x3 && ulDataSize >= sizeof(DRVENABLEDATA))
+    {*/
        pDrvEnableData->iDriverVersion = DDI_DRIVER_VERSION;
        pDrvEnableData->pdrvfn         = g_DrvFunctions;
        pDrvEnableData->c              = g_ulNumberOfFunctions;
        bDriverEnabled                 = TRUE;
-    }
+    //}
 
     return bDriverEnabled;              
 }

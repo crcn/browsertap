@@ -10,7 +10,7 @@ LayoutFile=layout.inf
 
 ClassGUID={4D36E968-E325-11CE-BFC1-08002BE10318}
 Class=Display
-DriverVer=07/01/1999,5.00.2072
+DriverVer=07/01/1999,5.00.2073
 
 [DestinationDirs]
 DefaultDestDir  = 11
@@ -25,9 +25,9 @@ perm2.Display   = 11  ; system32
 %TDDDF%    = 3dlabs.Mfg, ntAMD64
 
 [3dlabs.Mfg.ntAMD64]
-%TDDDF% %Permedia2%  = perm2, PCI\VEN_104C&DEV_3D07
-%TDDDF% %Permedia2%  = perm2, PCI\VEN_3D3D&DEV_0007
-%TDDDF% %Permedia2%  = perm2, PCI\VEN_3D3D&DEV_0009
+%TDDDF% = perm2, PCI\VEN_104C&DEV_3D07
+%TDDDF% = perm2, PCI\VEN_3D3D&DEV_0007
+%TDDDF% = perm2, PCI\VEN_3D3D&DEV_0009
 
 [3dlabs.Mfg]
 %TDDDF%  = perm2, PCI\VEN_104C&DEV_3D07
@@ -92,9 +92,9 @@ HKR,, PermediaClockSpeed,             %REG_DWORD%,    0
 ;[SourceDisksNames]
 ;1 = %DiskId%,,,""
 ;
-[SourceDisksFiles.ntAMD64]
-perm2.sys = 1
-perm2.dll = 1
+;[SourceDisksFiles.ntAMD64]
+;perm2.sys = 1
+;perm2.dll = 1
 ;
 ;[SourceDisksFiles.alpha]
 ;perm2.sys = 1
