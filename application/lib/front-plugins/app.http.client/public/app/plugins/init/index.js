@@ -47,6 +47,7 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 			$(".screen").html(""); //remove html so it's a bit cleaner
 			screen = null;
 		}
+		$(".pre-launch-notification").remove();
 		loadingView.update({ app: loader.options.app, version: loader.options.version });
 		loadingView.showNotification();
 	});

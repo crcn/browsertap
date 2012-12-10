@@ -13,9 +13,10 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"__construct": function(host, commands) {
+	"__construct": function(host, bark, commands) {
 		this._host = host;
 		this._commands = commands;
+		this._bark = bark;
 	},
 
 	/**
@@ -56,20 +57,21 @@ module.exports = structr(EventEmitter, {
 
 		var serverUrl = [window.location.protocol, "//", window.location.host, "/server.json"].join(""),
 		self = this;
-
-		console.log("fetching server");
-
+		
 		$.ajax({
 			url: serverUrl,
 			dataType: "json",
 			success: outcome.vine().success(function(puppeteer) {
 				self._attach({ host: "http://" + puppeteer.address + ":8080/browsertap.puppeteer" });
+				notification.close();
 			}),
 			error: function() {
 				console.log(arguments);
 				console.log("ERROR")
 			}
 		});	
+
+		
 	},
 
 	/**
