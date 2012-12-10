@@ -110,6 +110,11 @@ module.exports = structr({
 
 		var maestro = this._maestro;
 
+		if(!maestro.services.getService("amazon")) {
+			console.error("amazon service not registered - can't create instance");
+			return;
+		}
+
 		this._maestro.
 		services.
 		getService("amazon").
