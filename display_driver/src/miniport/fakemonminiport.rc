@@ -4,8 +4,8 @@
 #define VER_FILETYPE                VFT_DRV
 #define VER_FILESUBTYPE             VFT2_DRV_DISPLAY
 #define VER_FILEDESCRIPTION_STR     "Browsertap Display Driver"
-#define VER_INTERNALNAME_STR        "fakemonminiport.sys"
-#define VER_ORIGINALFILENAME_STR    "fakemonminiport.sys"
+#define VER_INTERNALNAME_STR        "fakemonitor.sys"
+#define VER_ORIGINALFILENAME_STR    "fakemonitor.sys"
 
 #define VER_LANGNEUTRAL
 #include "common.ver"
