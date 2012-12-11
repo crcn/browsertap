@@ -6,8 +6,8 @@ INCLUDES=$(DDK_INC_PATH)
 
 
 SOURCES=entry.c     \
-        functions.c \
-        fakemonitor.rc
+functions.c \
+fakemonitor.rc
 
 TARGET_DESTINATION=retail
 
