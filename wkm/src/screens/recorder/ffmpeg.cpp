@@ -59,7 +59,7 @@ namespace Screens
 
 		Geometry::Rectangle& bounds = data->bounds();
 
-		avpicture_fill((AVPicture*)_srcPicture, (uint8_t*)data->buffer(), PIX_FMT_BGR32, bounds.width, bounds.height);
+		avpicture_fill((AVPicture*)_srcPicture, (uint8_t*)data->buffer(), PIX_FMT_RGB32, bounds.width, bounds.height);
 
 		//std::cout << bounds.width << " " << bounds.height << " " << _videoCodecCtx->width << " " << _videoCodecCtx->height << std::endl;
 
@@ -335,11 +335,11 @@ namespace Screens
 
 			
 		_videoCodecCtx->me_subpel_quality = 0;
-		//_videoCodecCtx->thread_count = 1;
-
+		//_videoCodecCtx->thread_count = ;
+ 
 		//_videoCodecCtx->qmin = 1;
 		//_videoCodecCtx->qmax = 10;
-		_videoCodecCtx->me_method = ME_EPZS;
+		_videoCodecCtx->me_method = ME_ZERO;
 
 
 		//_videoCodecCtx->max_qdiff = 3;
@@ -457,7 +457,7 @@ namespace Screens
 
 		_convertCtx = sws_getContext(_videoCodecCtx->width,
 			_videoCodecCtx->height, 
-			PIX_FMT_BGRA, 
+			PIX_FMT_RGB32, 
 			_videoCodecCtx->width,
 			_videoCodecCtx->height, 
 			_videoCodecCtx->pix_fmt,
