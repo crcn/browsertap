@@ -47,6 +47,7 @@ namespace Screens
 		_needsRefreshing = true;
 		_prevOutputSize  = 0;
 		_videoCodecCtx = 0;
+		_nPackets = 0;
 
 		this->_ctx = ctx;
 	}
@@ -92,8 +93,19 @@ namespace Screens
 			{
 				pkt.flags |= AV_PKT_FLAG_KEY;
 			} else {
+
+				_nPackets++;
 				//this->scaleQuality(outSize);
-				_prevOutputSize = outSize;
+				_prevOutputSize += outSize;
+
+				int size = _prevOutputSize / _nPackets;
+
+				std::cout <<  size << std::endl;
+				if(_nPackets > 100) {
+					_nPackets = 0;
+					_prevOutputSize = 0;
+				}
+
 			}
 
 			pkt.stream_index = _videoStream->index;
@@ -315,10 +327,10 @@ namespace Screens
 		//_videoCodecCtx->qmax = 3;
 		//_videoCodecCtx->rc_qsquish = 1;
 		
-		//_videoCodecCtx->flags2 |= CODEC_FLAG2_FAST|CODEC_FLAG2_STRICT_GOP|CODEC_FLAG2_DROP_FRAME_TIMECODE|CODEC_FLAG2_SKIP_RD;
+		_videoCodecCtx->flags2 |= CODEC_FLAG2_FAST;//|CODEC_FLAG2_STRICT_GOP|CODEC_FLAG2_DROP_FRAME_TIMECODE|CODEC_FLAG2_SKIP_RD;
 		
-		//_videoCodecCtx->flags |= CODEC_FLAG_LOOP_FILTER;//|CODEC_FLAG_GRAY;
-		//_videoCodecCtx->me_cmp |= FF_CMP_CHROMA;
+		//_videoCodecCtx->flags |= CODEC_FLAG_LOOP_FILTER|CODEC_FLAG_GRAY;
+		_videoCodecCtx->me_cmp |= FF_CMP_CHROMA;
 		//_videoCodecCtx->qmin = 10;
 		//_videoCodecCtx->qmax = 51;
 		//_videoCodecCtx->max_qdiff = 4;
@@ -333,6 +345,10 @@ namespace Screens
 		//_videoCodecCtx->me_range = 16;
 		//_videoCodecCtx->me_subpel_quality = 0;
 
+		//makes no difference in quality.
+		//av_opt_set(_videoCodecCtx->priv_data, "crf", "100", 0);
+		//av_opt_set(_videoCodecCtx->priv_data, "cqp", "20", 0);
+
 			
 		_videoCodecCtx->me_subpel_quality = 0;
 		//_videoCodecCtx->thread_count = ;
@@ -340,6 +356,7 @@ namespace Screens
 		//_videoCodecCtx->qmin = 1;
 		//_videoCodecCtx->qmax = 10;
 		_videoCodecCtx->me_method = ME_ZERO;
+		//_videoCodecCtx->me_method = ME_EPZS;
 
 
 		//_videoCodecCtx->max_qdiff = 3;
