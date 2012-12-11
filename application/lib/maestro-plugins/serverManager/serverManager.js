@@ -174,7 +174,7 @@ module.exports = structr({
 	 */
 
 	"_query": function(q) {
-		q.$or = [{ service: "local"}, { imageId: this._imageId, state: "running" }, { imageId: this._imageId, state: "stopped" } }];
+		q.$or = [{ service: "local"}, { imageId: this._imageId, state: "running" }, { imageId: this._imageId, state: "stopped" } ];
 
 		return q;
 	}
