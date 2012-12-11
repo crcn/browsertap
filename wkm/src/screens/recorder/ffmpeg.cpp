@@ -329,7 +329,7 @@ namespace Screens
 		_videoCodecCtx->flags2 |= CODEC_FLAG2_FAST;//|CODEC_FLAG2_STRICT_GOP|CODEC_FLAG2_DROP_FRAME_TIMECODE|CODEC_FLAG2_SKIP_RD;
 		
 		//_videoCodecCtx->flags |= CODEC_FLAG_LOOP_FILTER|CODEC_FLAG_GRAY;
-		_videoCodecCtx->me_cmp |= FF_CMP_CHROMA;
+		//_videoCodecCtx->me_cmp |= FF_CMP_CHROMA;
 		//_videoCodecCtx->qmin = 10;
 		//_videoCodecCtx->qmax = 51;
 		//_videoCodecCtx->max_qdiff = 4;
@@ -350,7 +350,7 @@ namespace Screens
 
 			
 		_videoCodecCtx->me_subpel_quality = 0;
-		//_videoCodecCtx->thread_count = ;
+		_videoCodecCtx->thread_count = 0;
  
 		//_videoCodecCtx->qmin = 1;
 		//_videoCodecCtx->qmax = 10;
