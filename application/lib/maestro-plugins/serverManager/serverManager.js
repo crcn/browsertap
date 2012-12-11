@@ -119,7 +119,7 @@ module.exports = structr({
 		this._maestro.
 		services.
 		getService("amazon").
-		createServer({ flavor: "c1.medium", image: this._imageId }, 
+		createServer({ flavor: "m1.medium", image: this._imageId }, 
 			outcome.e(cb).s(function(server) {
 				server._id = server.id;
 				cb(null, maestro.collection.insert(server).sync().pop());
@@ -142,7 +142,7 @@ module.exports = structr({
 
 	"_stopStaleServers": function() {
 		this._maestro.
-		getServers({ imageId: this._imageId, state: "running", $or: [{ lastUsedAt: undefined }, { lastUsedAt: {$lt: new Date(Date.now() - this._stopTime) }}] }).
+		getServers({ imageId: this._imageId, spotInstanceId: null, state: "running", $or: [{ lastUsedAt: undefined }, { lastUsedAt: {$lt: new Date(Date.now() - this._stopTime) }}] }).
 		exec(function(err, servers) {
 			var saved;
 
@@ -174,7 +174,7 @@ module.exports = structr({
 	 */
 
 	"_query": function(q) {
-		q.$or = [{ service: "local"}, { imageId: this._imageId, state: {$in: ["running", "stopped"] } }];
+		q.$or = [{ service: "local"}, { imageId: this._imageId, state: "running" }, { imageId: this._imageId, state: "stopped" } }];
 
 		return q;
 	}
