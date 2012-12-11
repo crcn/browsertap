@@ -4,7 +4,7 @@ Provider=%BrowserTap%
 
 ClassGUID={4D36E968-E325-11CE-BFC1-08002BE10318}
 Class=Display
-DriverVer=07/01/1999,5.00.2076
+DriverVer=07/01/1999,5.00.2078
 
 [DestinationDirs]
 tapscreen.Miniport  = 12  ; drivers
@@ -14,6 +14,10 @@ tapscreen.Display   = 11  ; system32
 %BrowserTap%    = BrowserTap.Mfg, ntAMD64
 
 [BrowserTap.Mfg.ntAMD64]
+%TapScreen% = tapscreen, ROOT\DISPLAY\BrowserTap_TapScreen
+
+
+[BrowserTap.Mfg]
 %TapScreen% = tapscreen, ROOT\DISPLAY\BrowserTap_TapScreen
 
 [tapscreen]
@@ -53,12 +57,12 @@ HKR,, ExportSingleBufferedModes,      %REG_DWORD%,    0
 HKR,, PermediaClockSpeed,             %REG_DWORD%,    0
 
 
-[SourceDisksNames]
-1 = %BrowserTapDisk%
+;[SourceDisksNames]
+;1 = %BrowserTapDisk%
 
-[SourceDisksFiles.ntAMD64]
-fakemonitor.sys = 1
-fakemonitor.dll = 1
+;[SourceDisksFiles.ntAMD64]
+;fakemonitor.sys = 1
+;fakemonitor.dll = 1
 
 [Strings]
 
