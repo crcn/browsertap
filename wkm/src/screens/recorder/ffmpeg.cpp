@@ -335,7 +335,7 @@ namespace Screens
 
 			
 		_videoCodecCtx->me_subpel_quality = 0;
-		_videoCodecCtx->thread_count = 1;
+		//_videoCodecCtx->thread_count = 1;
 
 		//_videoCodecCtx->qmin = 1;
 		//_videoCodecCtx->qmax = 10;
