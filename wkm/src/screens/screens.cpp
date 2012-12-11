@@ -39,7 +39,7 @@ namespace Screens
 		this->_id = Screen::_count;
 		this->_mouse = new Mouse(this);
 		this->_keyboard = new Keyboard(this);
-		this->_throttler = new Speed::Throttle(10);
+		this->_throttler = new Speed::Throttle(1000);
 		this->_style = GetWindowLong(this->_window, GWL_STYLE);
 		this->_extStyle = GetWindowLong(this->_window, GWL_EXSTYLE);
 		// this->removeChrome();
@@ -253,7 +253,7 @@ namespace Screens
 	{
 		if(!this->inFocus() && this->_throttler->skip()) return;
 
-		// std::cout << "TICK" << this->_id << std::endl;
+		//std::cout << "TICK" << this->_id << std::endl;
 
 		if(this->_recorder != 0)
 		{

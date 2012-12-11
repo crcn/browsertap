@@ -1,6 +1,8 @@
 #ifndef SPEED_THROTTLE_H_
 #define SPEED_THROTTLE_H_
 
+#include <time.h>
+
 namespace Speed
 {
 	class Throttle
@@ -12,6 +14,8 @@ namespace Speed
 	private:
 		int _ticks;
 		int _currentTick;
+		int _currentTime;
+		clock_t _startTickTime;
 	};
 }
 
