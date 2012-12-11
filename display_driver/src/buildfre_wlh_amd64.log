@@ -1,19 +1,19 @@
 BUILD: Computing Include file dependencies:
-BUILD: Examining c:\btap\display_driver\src directory tree for files to compile.
+BUILD: Examining c:\browsertap\display_driver\src directory tree for files to compile.
 oacr invalidate root:amd64fre /autocleanqueue
-1>Compiling and Linking c:\btap\display_driver\src\miniport *************
+1>Compiling and Linking c:\browsertap\display_driver\src\miniport *************
 1>'nmake.exe /nologo BUILDMSG=Stop. -i BUILD_PASS=PASS2 LINKONLY=1 NOPASS0=1 MAKEDIR_RELATIVE_TO_BASEDIR='
-1> rc.exe -l 409 -DSXS_PROCESSOR_ARCHITECTURE="""AMD64"""  -DSXS_TARGET="""fakemonitor.sys"""   -DSYSTEM_COMPATIBLE_ASSEMBLY_NAME="""Microsoft.Windows.SystemCompatible"""  -DLSYSTEM_COMPATIBLE_ASSEMBLY_NAME=L"""Microsoft.Windows.SystemCompatible"""   -DSXS_ASSEMBLY_VERSION=""""""  /r /fo c:\btap\display_driver\src\miniport\objfre_wlh_amd64\amd64\fakemonminiport.res /D_WIN64 /D_AMD64_ /DAMD64   /DCONDITION_HANDLING=1 /DNT_UP=1  /DNT_INST=0 /DWIN32=100 /D_NT1X_=100 /DWINNT=1 /D_WIN32_WINNT=0x0600 /DWINVER=0x0600 /D_WIN32_IE=0x0700    /DWIN32_LEAN_AND_MEAN=1  /DDEVL=1 /D__BUILDMACHINE__=WinDDK  /DNDEBUG /D_DLL=1 /DNDEBUG  /DNTDDI_VERSION=0x06000100   /Ic:\btap\display_driver\src\miniport\objfre_wlh_amd64\amd64 /IC:\WinDDK\7600.16385.1\inc\api /IC:\WinDDK\7600.16385.1\inc\api /IC:\WinDDK\7600.16385.1\inc\ddk /IC:\WinDDK\7600.16385.1\inc\ddk /IC:\WinDDK\7600.16385.1\inc\crt .\fakemonminiport.rc
+1> rc.exe -l 409 -DSXS_PROCESSOR_ARCHITECTURE="""AMD64"""  -DSXS_TARGET="""fakemonitor.sys"""   -DSYSTEM_COMPATIBLE_ASSEMBLY_NAME="""Microsoft.Windows.SystemCompatible"""  -DLSYSTEM_COMPATIBLE_ASSEMBLY_NAME=L"""Microsoft.Windows.SystemCompatible"""   -DSXS_ASSEMBLY_VERSION=""""""  /r /fo c:\browsertap\display_driver\src\miniport\objfre_wlh_amd64\amd64\fakemonminiport.res /D_WIN64 /D_AMD64_ /DAMD64   /DCONDITION_HANDLING=1 /DNT_UP=1  /DNT_INST=0 /DWIN32=100 /D_NT1X_=100 /DWINNT=1 /D_WIN32_WINNT=0x0600 /DWINVER=0x0600 /D_WIN32_IE=0x0700    /DWIN32_LEAN_AND_MEAN=1  /DDEVL=1 /D__BUILDMACHINE__=WinDDK  /DNDEBUG /D_DLL=1 /DNDEBUG  /DNTDDI_VERSION=0x06000100   /Ic:\browsertap\display_driver\src\miniport\objfre_wlh_amd64\amd64 /IC:\WinDDK\7600.16385.1\inc\api /IC:\WinDDK\7600.16385.1\inc\api /IC:\WinDDK\7600.16385.1\inc\ddk /IC:\WinDDK\7600.16385.1\inc\ddk /IC:\WinDDK\7600.16385.1\inc\crt .\fakemonminiport.rc
 1>Microsoft (R) Windows (R) Resource Compiler Version 6.1.6908.0
 1>Copyright (C) Microsoft Corporation.  All rights reserved.
-1> C:\WinDDK\7600.16385.1\Bin\amd64\oacr\oacrcl @c:\btap\display_driver\src\miniport\objfre_wlh_amd64\amd64\cl.rsp
+1> C:\WinDDK\7600.16385.1\Bin\amd64\oacr\oacrcl @c:\browsertap\display_driver\src\miniport\objfre_wlh_amd64\amd64\cl.rsp
 1>Microsoft (R) C/C++ Optimizing Compiler Version 15.00.30729.207 for x64
 1>Copyright (C) Microsoft Corporation.  All rights reserved.
-1>cl /Fo"c:\btap\display_driver\src\miniport\objfre_wlh_amd64\amd64/"
+1>cl /Fo"c:\browsertap\display_driver\src\miniport\objfre_wlh_amd64\amd64/"
 1> /FC
 1> /Iamd64\
 1> /I.
-1> /Ic:\btap\display_driver\src\miniport\objfre_wlh_amd64\amd64
+1> /Ic:\browsertap\display_driver\src\miniport\objfre_wlh_amd64\amd64
 1> /IC:\WinDDK\7600.16385.1\inc\api
 1> /IC:\WinDDK\7600.16385.1\inc\api
 1> /IC:\WinDDK\7600.16385.1\inc\ddk
@@ -54,7 +54,7 @@ oacr invalidate root:amd64fre /autocleanqueue
 1> /Oxs
 1> /GL
 1> /Zi
-1> /Fdc:\btap\display_driver\src\miniport\objfre_wlh_amd64\amd64\
+1> /Fdc:\browsertap\display_driver\src\miniport\objfre_wlh_amd64\amd64\
 1> /DKMDF_MAJOR_VERSION_STRING=01
 1> /DKMDF_MINOR_VERSION_STRING=009
 1> /typedil-
@@ -64,7 +64,7 @@ oacr invalidate root:amd64fre /autocleanqueue
 1> .\entry.c .\functions.c 
 1>entry.c
 1>functions.c
-1> C:\WinDDK\7600.16385.1\Bin\amd64\oacr\oacrlink /out:c:\btap\display_driver\src\miniport\objfre_wlh_amd64\amd64\fakemonitor.sys /machine:amd64 @c:\btap\display_driver\src\miniport\objfre_wlh_amd64\amd64\lnk.rsp
+1> C:\WinDDK\7600.16385.1\Bin\amd64\oacr\oacrlink /out:c:\browsertap\display_driver\src\miniport\objfre_wlh_amd64\amd64\fakemonitor.sys /machine:amd64 @c:\browsertap\display_driver\src\miniport\objfre_wlh_amd64\amd64\lnk.rsp
 1>Microsoft (R) Incremental Linker Version 9.00.30729.207
 1>Copyright (C) Microsoft Corporation.  All rights reserved.
 1>/MERGE:_PAGE=PAGE 
@@ -89,10 +89,10 @@ oacr invalidate root:amd64fre /autocleanqueue
 1>/base:0x10000 
 1>/subsystem:native,6.00 
 1>/entry:GsDriverEntry 
-1>/out:c:\btap\display_driver\src\miniport\objfre_wlh_amd64\amd64\fakemonitor.sys 
-1>c:\btap\display_driver\src\miniport\objfre_wlh_amd64\amd64\fakemonminiport.res 
-1>c:\btap\display_driver\src\miniport\objfre_wlh_amd64\amd64\entry.obj 
-1>c:\btap\display_driver\src\miniport\objfre_wlh_amd64\amd64\functions.obj 
+1>/out:c:\browsertap\display_driver\src\miniport\objfre_wlh_amd64\amd64\fakemonitor.sys 
+1>c:\browsertap\display_driver\src\miniport\objfre_wlh_amd64\amd64\fakemonminiport.res 
+1>c:\browsertap\display_driver\src\miniport\objfre_wlh_amd64\amd64\entry.obj 
+1>c:\browsertap\display_driver\src\miniport\objfre_wlh_amd64\amd64\functions.obj 
 1>C:\WinDDK\7600.16385.1\lib\wlh\amd64\BufferOverflowK.lib 
 1>C:\WinDDK\7600.16385.1\lib\wlh\amd64\ntoskrnl.lib 
 1>C:\WinDDK\7600.16385.1\lib\wlh\amd64\hal.lib 
@@ -123,10 +123,10 @@ oacr invalidate root:amd64fre /autocleanqueue
 1>/base:0x10000 
 1>/subsystem:native,6.00 
 1>/entry:GsDriverEntry 
-1>/out:c:\btap\display_driver\src\miniport\objfre_wlh_amd64\amd64\fakemonitor.sys 
-1>c:\btap\display_driver\src\miniport\objfre_wlh_amd64\amd64\fakemonminiport.res 
-1>c:\btap\display_driver\src\miniport\objfre_wlh_amd64\amd64\entry.obj 
-1>c:\btap\display_driver\src\miniport\objfre_wlh_amd64\amd64\functions.obj 
+1>/out:c:\browsertap\display_driver\src\miniport\objfre_wlh_amd64\amd64\fakemonitor.sys 
+1>c:\browsertap\display_driver\src\miniport\objfre_wlh_amd64\amd64\fakemonminiport.res 
+1>c:\browsertap\display_driver\src\miniport\objfre_wlh_amd64\amd64\entry.obj 
+1>c:\browsertap\display_driver\src\miniport\objfre_wlh_amd64\amd64\functions.obj 
 1>C:\WinDDK\7600.16385.1\lib\wlh\amd64\BufferOverflowK.lib 
 1>C:\WinDDK\7600.16385.1\lib\wlh\amd64\ntoskrnl.lib 
 1>C:\WinDDK\7600.16385.1\lib\wlh\amd64\hal.lib 
@@ -134,20 +134,20 @@ oacr invalidate root:amd64fre /autocleanqueue
 1>C:\WinDDK\7600.16385.1\lib\wlh\amd64\videoprt.lib 
 1>Generating code
 1>Finished generating code
-1>Compiling and Linking c:\btap\display_driver\src\gdi *************
+1>Compiling and Linking c:\browsertap\display_driver\src\gdi *************
 1>'nmake.exe /nologo BUILDMSG=Stop. -i BUILD_PASS=PASS2 LINKONLY=1 NOPASS0=1 MAKEDIR_RELATIVE_TO_BASEDIR='
-1> rc.exe -l 409 -DSXS_PROCESSOR_ARCHITECTURE="""AMD64"""  -DSXS_TARGET="""fakemonitor.dll"""   -DSYSTEM_COMPATIBLE_ASSEMBLY_NAME="""Microsoft.Windows.SystemCompatible"""  -DLSYSTEM_COMPATIBLE_ASSEMBLY_NAME=L"""Microsoft.Windows.SystemCompatible"""   -DSXS_ASSEMBLY_VERSION=""""""  /r /fo c:\btap\display_driver\src\gdi\objfre_wlh_amd64\amd64\fakemonitor.res /D_WIN64 /D_AMD64_ /DAMD64   /DCONDITION_HANDLING=1 /DNT_UP=1  /DNT_INST=0 /DWIN32=100 /D_NT1X_=100 /DWINNT=1 /D_WIN32_WINNT=0x0600 /DWINVER=0x0600 /D_WIN32_IE=0x0700    /DWIN32_LEAN_AND_MEAN=1  /DDEVL=1 /D__BUILDMACHINE__=WinDDK  /DNDEBUG /DNDEBUG  /DNTDDI_VERSION=0x06000100   /IC:\WinDDK\7600.16385.1\inc\ddk /Ic:\btap\display_driver\src\gdi\objfre_wlh_amd64\amd64 /IC:\WinDDK\7600.16385.1\inc\api /IC:\WinDDK\7600.16385.1\inc\api /IC:\WinDDK\7600.16385.1\inc\crt .\fakemonitor.rc
+1> rc.exe -l 409 -DSXS_PROCESSOR_ARCHITECTURE="""AMD64"""  -DSXS_TARGET="""fakemonitor.dll"""   -DSYSTEM_COMPATIBLE_ASSEMBLY_NAME="""Microsoft.Windows.SystemCompatible"""  -DLSYSTEM_COMPATIBLE_ASSEMBLY_NAME=L"""Microsoft.Windows.SystemCompatible"""   -DSXS_ASSEMBLY_VERSION=""""""  /r /fo c:\browsertap\display_driver\src\gdi\objfre_wlh_amd64\amd64\fakemonitor.res /D_WIN64 /D_AMD64_ /DAMD64   /DCONDITION_HANDLING=1 /DNT_UP=1  /DNT_INST=0 /DWIN32=100 /D_NT1X_=100 /DWINNT=1 /D_WIN32_WINNT=0x0600 /DWINVER=0x0600 /D_WIN32_IE=0x0700    /DWIN32_LEAN_AND_MEAN=1  /DDEVL=1 /D__BUILDMACHINE__=WinDDK  /DNDEBUG /DNDEBUG  /DNTDDI_VERSION=0x06000100   /IC:\WinDDK\7600.16385.1\inc\ddk /Ic:\browsertap\display_driver\src\gdi\objfre_wlh_amd64\amd64 /IC:\WinDDK\7600.16385.1\inc\api /IC:\WinDDK\7600.16385.1\inc\api /IC:\WinDDK\7600.16385.1\inc\crt .\fakemonitor.rc
 1>Microsoft (R) Windows (R) Resource Compiler Version 6.1.6908.0
 1>Copyright (C) Microsoft Corporation.  All rights reserved.
-1> C:\WinDDK\7600.16385.1\Bin\amd64\oacr\oacrcl @c:\btap\display_driver\src\gdi\objfre_wlh_amd64\amd64\cl.rsp
+1> C:\WinDDK\7600.16385.1\Bin\amd64\oacr\oacrcl @c:\browsertap\display_driver\src\gdi\objfre_wlh_amd64\amd64\cl.rsp
 1>Microsoft (R) C/C++ Optimizing Compiler Version 15.00.30729.207 for x64
 1>Copyright (C) Microsoft Corporation.  All rights reserved.
-1>cl /Fo"c:\btap\display_driver\src\gdi\objfre_wlh_amd64\amd64/"
+1>cl /Fo"c:\browsertap\display_driver\src\gdi\objfre_wlh_amd64\amd64/"
 1> /FC
 1> /Iamd64\
 1> /I.
 1> /IC:\WinDDK\7600.16385.1\inc\ddk
-1> /Ic:\btap\display_driver\src\gdi\objfre_wlh_amd64\amd64
+1> /Ic:\browsertap\display_driver\src\gdi\objfre_wlh_amd64\amd64
 1> /IC:\WinDDK\7600.16385.1\inc\api
 1> /IC:\WinDDK\7600.16385.1\inc\api
 1> /IC:\WinDDK\7600.16385.1\inc\crt
@@ -185,7 +185,7 @@ oacr invalidate root:amd64fre /autocleanqueue
 1> /Oxs
 1> /GL
 1> /Zi
-1> /Fdc:\btap\display_driver\src\gdi\objfre_wlh_amd64\amd64\
+1> /Fdc:\browsertap\display_driver\src\gdi\objfre_wlh_amd64\amd64\
 1> /DKMDF_MAJOR_VERSION_STRING=01
 1> /DKMDF_MINOR_VERSION_STRING=009
 1> /typedil-
@@ -195,7 +195,7 @@ oacr invalidate root:amd64fre /autocleanqueue
 1> .\entry.c .\functions.c 
 1>entry.c
 1>functions.c
-1> C:\WinDDK\7600.16385.1\Bin\amd64\oacr\oacrlink /out:c:\btap\display_driver\src\gdi\objfre_wlh_amd64\amd64\fakemonitor.dll /machine:amd64 @c:\btap\display_driver\src\gdi\objfre_wlh_amd64\amd64\lnk.rsp
+1> C:\WinDDK\7600.16385.1\Bin\amd64\oacr\oacrlink /out:c:\browsertap\display_driver\src\gdi\objfre_wlh_amd64\amd64\fakemonitor.dll /machine:amd64 @c:\browsertap\display_driver\src\gdi\objfre_wlh_amd64\amd64\lnk.rsp
 1>Microsoft (R) Incremental Linker Version 9.00.30729.207
 1>Copyright (C) Microsoft Corporation.  All rights reserved.
 1>/MERGE:_PAGE=PAGE 
@@ -221,10 +221,10 @@ oacr invalidate root:amd64fre /autocleanqueue
 1>/subsystem:native,6.00 
 1>/base:0x10000 
 1>/entry:GsDrvEnableDriver 
-1>/out:c:\btap\display_driver\src\gdi\objfre_wlh_amd64\amd64\fakemonitor.dll 
-1>c:\btap\display_driver\src\gdi\objfre_wlh_amd64\amd64\fakemonitor.res 
-1>c:\btap\display_driver\src\gdi\objfre_wlh_amd64\amd64\entry.obj 
-1>c:\btap\display_driver\src\gdi\objfre_wlh_amd64\amd64\functions.obj 
+1>/out:c:\browsertap\display_driver\src\gdi\objfre_wlh_amd64\amd64\fakemonitor.dll 
+1>c:\browsertap\display_driver\src\gdi\objfre_wlh_amd64\amd64\fakemonitor.res 
+1>c:\browsertap\display_driver\src\gdi\objfre_wlh_amd64\amd64\entry.obj 
+1>c:\browsertap\display_driver\src\gdi\objfre_wlh_amd64\amd64\functions.obj 
 1>C:\WinDDK\7600.16385.1\lib\wlh\amd64\BufferOverflowGDI.lib 
 1>C:\WinDDK\7600.16385.1\lib\wlh\amd64\win32k.lib 
 1>C:\WinDDK\7600.16385.1\lib\wlh\amd64\libcntpr.lib 
@@ -254,10 +254,10 @@ oacr invalidate root:amd64fre /autocleanqueue
 1>/subsystem:native,6.00 
 1>/base:0x10000 
 1>/entry:GsDrvEnableDriver 
-1>/out:c:\btap\display_driver\src\gdi\objfre_wlh_amd64\amd64\fakemonitor.dll 
-1>c:\btap\display_driver\src\gdi\objfre_wlh_amd64\amd64\fakemonitor.res 
-1>c:\btap\display_driver\src\gdi\objfre_wlh_amd64\amd64\entry.obj 
-1>c:\btap\display_driver\src\gdi\objfre_wlh_amd64\amd64\functions.obj 
+1>/out:c:\browsertap\display_driver\src\gdi\objfre_wlh_amd64\amd64\fakemonitor.dll 
+1>c:\browsertap\display_driver\src\gdi\objfre_wlh_amd64\amd64\fakemonitor.res 
+1>c:\browsertap\display_driver\src\gdi\objfre_wlh_amd64\amd64\entry.obj 
+1>c:\browsertap\display_driver\src\gdi\objfre_wlh_amd64\amd64\functions.obj 
 1>C:\WinDDK\7600.16385.1\lib\wlh\amd64\BufferOverflowGDI.lib 
 1>C:\WinDDK\7600.16385.1\lib\wlh\amd64\win32k.lib 
 1>C:\WinDDK\7600.16385.1\lib\wlh\amd64\libcntpr.lib 

@@ -47,7 +47,7 @@ namespace Commanders
 	_tick(0),
 	_frameRate(24),
 	_commands(new Events::EventDispatcher()) {
-		this->_throttler = new Speed::Throttle(24);
+		this->_throttler = new Speed::Throttle(1000);
 		#define regCommand(name, method) this->_commands->addEventListener(#name, new Events::ClassCbEventListener<JSONCommander, JSONCommand>(this, &JSONCommander::method));
 	
 		regCommand(listWindows, execListWindows)
@@ -102,7 +102,6 @@ namespace Commanders
 		int fps = this->_frameRate; 
 		int ms  = (1/(double)fps)*1000;
 
-		this->_throttler->ticks(fps);
 
 		std::vector<Screens::Screen*> screens = Screens::ScreenManager::instance().allScreens();
 		for(int i = screens.size(); i--;)

@@ -21,6 +21,7 @@ extern "C"
 #include <libswscale/swscale.h>
 #include <libavfilter/avfilter.h>
 #include <libavutil/fifo.h>
+#include <libavutil/opt.h>
 #include <libavutil/intreadwrite.h>
 #include <libavutil/avstring.h>
 //#include <libavcore/parseutils.h>
@@ -89,6 +90,7 @@ namespace Screens
 		Geometry::Rectangle _bounds;
 		int _bufferSize;
 		int _prevOutputSize;
+		int _nPackets;
 		//int _width, _height, _bitRate, _frameRate, _bufferSize, _gopSize, _qmin, _qmax;
 		 
 		FFmpegContext* _ctx;
