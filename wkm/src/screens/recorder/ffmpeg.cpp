@@ -94,7 +94,7 @@ namespace Screens
 				pkt.flags |= AV_PKT_FLAG_KEY;
 			} else {
 
-				_nPackets++;
+				/*_nPackets++;
 				//this->scaleQuality(outSize);
 				_prevOutputSize += outSize;
 
@@ -104,7 +104,7 @@ namespace Screens
 				if(_nPackets > 100) {
 					_nPackets = 0;
 					_prevOutputSize = 0;
-				}
+				}*/
 
 			}
 
@@ -299,7 +299,6 @@ namespace Screens
 		_videoCodecCtx->time_base.den = _ctx->frame_rate; // HIGH framerate = smooth playback.
 		_videoCodecCtx->time_base.num = 1;
 		_videoCodecCtx->gop_size      = _ctx->gop_size;
-		//_videoCodecCtx->level = 30;Z
 		//_videoCodecCtx->flags		  |= CODEC_FLAG_PSNR;
 		//_videoCodecCtx->partitions		  &= ~(X264_PART_I4X4 | X264_PART_I8X8 | X264_PART_P8X8 | X264_PART_P4X4 | X264_PART_B8X8);
 		//_videoCodecCtx->crf		  = 0.0f;
