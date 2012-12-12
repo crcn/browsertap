@@ -170,7 +170,7 @@ module.exports = structr({
 			// if(servers.length <= 1) return;
 
 			var shutdownable = servers.filter(function(server) {
-				return !server.spotInstanceId;
+				return !server.get("spotInstanceId");
 			});
 
 			if(!shutdownable.length) return;
