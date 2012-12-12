@@ -114,7 +114,6 @@ module.exports = structr({
 
 		console.log("no more free servers, creating new one for the next user");
 
-		if(this._maestro.collection.count({ imageId: this._imageId, owner: null, state: "running" }).sync() >= 1) return;
 		this._createServer();
 	},
 
