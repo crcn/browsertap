@@ -15,7 +15,7 @@ module.exports = structr({
 
 		console.log("registering desktop server to id %s", this._imageId);
 
-		this._stopTime = 1000 * 60 * 10;
+		this._stopTime = 1000 * 30;
 		this._terminateTime = 1000 * 60 * 60 * 24;
 
 		this._startSanityCheck();
