@@ -1,7 +1,8 @@
 var Loader = require("./loader"),
 DesktopPlayer = require("./desktopPlayer"),
 wkmEvents = require("./events"),
-disposable = require("disposable");
+disposable = require("disposable"),
+_ = require("underscore");
 
 module.exports = require("../../../views/base").extend({
 	"templateName": "screen",
@@ -23,6 +24,7 @@ module.exports = require("../../../views/base").extend({
 		this._frameRates = 0;
 		this._numFrameRates = 0;
 		this._locked = true;
+		this._usePadding = false;
 
 
 		var self = this;
@@ -74,6 +76,10 @@ module.exports = require("../../../views/base").extend({
 		// this.onResize();
 		this._listenToWindow();
 		this._keysDown = [];
+	},
+	"usePadding": function(value) {
+		this._usePadding = value;
+		if(!this._locked) this.onResize();
 	},
 	"prepareChildren": function() {
 		return [
@@ -144,12 +150,14 @@ module.exports = require("../../../views/base").extend({
 	}, 30),
 	"onResize": _.debounce(function(force) {
 		var win = this._window,
-		padding = win.app.padding,
+		padding = _.extend({}, win.app.padding),
 		self    = this;
+
+		self._realPadding = padding;
 
 		this._locked = false;
 
-		if(this.options.loader.options.screen) {
+		if(this.options.loader.options.screen || !this._usePadding) {
 			padding.top = 22;
 			padding.left = 4;
 			padding.right = 4;
@@ -178,9 +186,11 @@ module.exports = require("../../../views/base").extend({
 
 
 
+
 		//don't resize if nothing's changed
 		if(!force && win.width == w && win.height == h) return;
 
+		console.log("RESIZE")
 
 		win.resize(0, 0, w, h);
 	}, 500),
@@ -188,8 +198,10 @@ module.exports = require("../../../views/base").extend({
 
 		this._lastMouseMoveAt = Date.now();
 
+		var padding = this._realPadding || this._window.app.padding;
 
-		var coords = { x: e.pageX + (this._window.app.padding.left || 0) - this.$document.scrollLeft(), y: e.pageY + (this._window.app.padding.top || 0)  - this.$document.scrollTop() };
+
+		var coords = { x: e.pageX + (padding.left || 0) - this.$document.scrollLeft(), y: e.pageY + (padding.top || 0)  - this.$document.scrollTop() };
 
 		if(this.windowDims.width && this.windowDims.height) {
 			coords.x = coords.x - (this.$hud.width()/2 - this.windowDims.width/2);

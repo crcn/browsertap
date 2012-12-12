@@ -17,6 +17,8 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 
 	var loader = new ScreenLoader(puppeteer, commands), screen, appSwitcher,
 	loadingView = new mainPlugin.views.Loader({ el: ".loader" });
+	var expc = new mainPlugin.views.ExpandContract({ el: ".expand-contract" }),
+	usePadding = true;
 
 
 	key("shift+right", function(e) {
@@ -41,6 +43,12 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 		});
 	});
 
+
+	expc.onExpandContract = function(exp) {
+		usePadding = exp;
+		if(screen) screen.usePadding(exp);
+	}
+
 	loader.on("loading", function() {
 		if(screen) {
 			screen.dispose();
@@ -56,7 +64,7 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 	loader.on("connection", function(con) {
 		con.getAvailableApps(function(err, apps) {
 			appSwitcher = new mainPlugin.views.AppSwitcher({ el: ".app-switcher", router: router, loader: loader, apps: apps });
-		})
+		});
 	});
 
 
@@ -88,6 +96,8 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 				qmax: q.qmax,
 				gop_size: q.gop_size,
 				frame_rate: q.frame_rate });
+
+			screen.usePadding(usePadding);
 
 			setTimeout(function() {
 				loadingView.hideNotification();

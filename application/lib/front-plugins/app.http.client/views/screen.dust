@@ -18,6 +18,9 @@
 <div class="app-switcher">
 </div>
 <div class="current-app">
+	<span></span>
+	<div class="expand-contract">
+	</div>
 </div>
 <div id="scroller"></div>
 
