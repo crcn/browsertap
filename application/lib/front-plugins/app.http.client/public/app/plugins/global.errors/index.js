@@ -27,7 +27,7 @@ exports.plugin = function(bark, commands) {
 			// closable: false
 			 }, function(event) {
 				if(event.ok) {
-					window.open("http://google.com", "_blank");
+					window.open("mailto:hello@browsertap.com", "_blank");
 				}
 
 
