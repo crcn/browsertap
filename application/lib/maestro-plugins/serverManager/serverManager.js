@@ -165,6 +165,7 @@ module.exports = structr({
 		exec(function(err, servers) {
 			var saved;
 
+
 			if(servers.length <= 1) return;
 
 			// if(servers.length <= 1) return;
@@ -174,6 +175,7 @@ module.exports = structr({
 			});
 
 			if(!shutdownable.length) return;
+
 
 			//one at a time
 			shutdownable[0].stop();
