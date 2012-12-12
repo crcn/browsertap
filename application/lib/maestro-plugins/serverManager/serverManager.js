@@ -161,14 +161,22 @@ module.exports = structr({
 
 	"_stopStaleServers": function() {
 		this._maestro.
-		getServers({ imageId: this._imageId, spotInstanceId: null, state: "running", $or: [{ lastUsedAt: undefined }, { lastUsedAt: {$lt: new Date(Date.now() - this._stopTime) }}] }).
+		getServers({ imageId: this._imageId, state: "running", $or: [{ lastUsedAt: undefined }, { lastUsedAt: {$lt: new Date(Date.now() - this._stopTime) }}] }).
 		exec(function(err, servers) {
 			var saved;
 
-			if(!servers.length) return;
+			if(servers.length <= 1) return;
+
+			// if(servers.length <= 1) return;
+
+			var shutdownable = servers.filter(function(server) {
+				return !server.spotInstanceId;
+			});
+
+			if(!shutdownable.length) return;
 
 			//one at a time
-			servers[0].stop();
+			shutdownable[0].stop();
 		});
 	},
 
