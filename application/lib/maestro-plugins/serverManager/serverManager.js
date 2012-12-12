@@ -94,6 +94,8 @@ module.exports = structr({
 	 */
 
 	"_tryStartingServer": function() {
+		if(this._maestro.collection.count({ imageId: this._imageId, owner: null, state: "running" }).sync() >= 1) return;
+
 		var server = this._maestro.collection.findOne({ imageId: this._imageId, owner: null, state: "stopped" }).sync();
 
 		if(!server) return false;
