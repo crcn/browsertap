@@ -76,7 +76,7 @@ module.exports = structr({
 				console.log("user %s using server %s", accountId, server.get("_id"));
 
 				//after a server has been created, make a new one so 
-				self._tryMakingServer();
+				if(!self._tryStartingServer()) self._tryMakingServer();
 
 				var next = this;
 
@@ -93,11 +93,28 @@ module.exports = structr({
 	 * makes a server if there are none already in the queue
 	 */
 
+	"_tryStartingServer": function() {
+		var server = this._maestro.collection.findOne({ imageId: this._imageId, owner: null, state: "stopped" }).sync();
+
+		if(!server) return false;
+
+		console.log("starting server %s", server.get("_id"));
+
+		server.start();
+		return true;
+	},
+
+	/**
+	 * makes a server if there are none already in the queue
+	 */
+
 	"_tryMakingServer": function() {
 		// console.log(this._maestro.collection.find({ imageId: this._imageId, owner: null }).sync())
-		if(this._maestro.collection.count({ imageId: this._imageId, owner: null, state: "running" }).sync() >= 1) return;
+		if(this._maestro.collection.count({ imageId: this._imageId, owner: null }).sync() >= 1) return;
 
 		console.log("no more free servers, creating new one for the next user");
+
+		if(this._maestro.collection.count({ imageId: this._imageId, owner: null, state: "running" }).sync() >= 1) return;
 		this._createServer();
 	},
 
