@@ -3,7 +3,8 @@ EventEmitter = require("events").EventEmitter,
 windowStyles = require("./windowStyles"),
 step = require("step"),
 Url = require("url"),
-outcome = require("outcome");
+outcome = require("outcome"),
+taptunnel = require("taptunnel");
 
 module.exports = structr(EventEmitter, {
 
@@ -127,13 +128,21 @@ module.exports = structr(EventEmitter, {
 			this._ignoreForceClose = true;
 
 
-			con.open({ name: this._appName = this.options.app, version: this._appVersion = this.options.version, arg: this.options.open }, outcome.s(function(client) { 
-				console.log("loaded app");
-				self._trackBrowser("Browser Open");
-				client.setWindow(self._getClient(null, false));
-				self._ignoreForceClose = false;
-			}));
-			return;
+			//run the file through taptunnel incase it's a file, or localhost
+			return taptunnel.proxy(this.options.open, function(err, open) {
+
+				//taptunnel not setup
+				if(err) {
+					console.error(err);
+				}
+
+				con.open({ name: self._appName = self.options.app, version: self._appVersion = self.options.version, arg: open }, outcome.s(function(client) { 
+					console.log("loaded app");
+					self._trackBrowser("Browser Open");
+					client.setWindow(self._getClient(null, false));
+					self._ignoreForceClose = false;
+				}));	
+			});
 		} else 
 		if(this._proxy) {
 			console.log("set proxy location")
