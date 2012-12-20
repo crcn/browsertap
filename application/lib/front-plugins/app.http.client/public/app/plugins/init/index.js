@@ -22,7 +22,7 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 
 
 	loader.on("tunneling", function(file) {
-		bark.alert("Please grant tunnel access via the taptunnel terminal application.");
+		// bark.alert("Please grant tunnel access via the taptunnel terminal application.");
 	});
 
 

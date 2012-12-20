@@ -55,6 +55,6 @@
     "comerr": "0.0.x",
     "verify": "0.0.x",
     "bark-notifications": "0.0.x",
-    "taptunnel": "0.0.x"
+    "taptunnel": "0.1.x"
   }
 }
