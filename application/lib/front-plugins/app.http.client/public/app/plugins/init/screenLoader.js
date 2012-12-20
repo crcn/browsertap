@@ -129,7 +129,7 @@ module.exports = structr(EventEmitter, {
 
 
 			//run the file through taptunnel incase it's a file, or localhost
-			return taptunnel.proxy(this.options.open, function(err, open) {
+			var isTunnel = taptunnel.proxy(this.options.open, function(err, open) {
 
 				//taptunnel not setup
 				if(err) {
@@ -143,6 +143,13 @@ module.exports = structr(EventEmitter, {
 					self._ignoreForceClose = false;
 				}));	
 			});
+
+
+			if(isTunnel) {
+				this.emit("tunneling", this.options.open);
+			}
+
+			return;
 		} else 
 		if(this._proxy) {
 			console.log("set proxy location")

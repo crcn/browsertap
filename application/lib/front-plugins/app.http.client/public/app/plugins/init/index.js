@@ -21,6 +21,11 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 	usePadding = true;
 
 
+	loader.on("tunneling", function(file) {
+		bark.alert("Please grant browsertap access for "+file+" via the taptunnel terminal window.");
+	});
+
+
 	key("shift+right", function(e) {
 		appSwitcher.shift("right");
 	});
