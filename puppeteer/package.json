@@ -12,7 +12,7 @@
   "dependencies": {
     "clone": "0.1.x",
     "traverse": "0.6.x",
-    "dnode": "1.0.x",
+    "dnode": "git+https://github.com/substack/dnode.git",
     "shoe": "0.0.x",
     "guid": "0.0.x",
     "outcome": "0.0.x",

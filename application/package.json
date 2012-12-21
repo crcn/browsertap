@@ -28,7 +28,7 @@
     "dolce": "0.0.x",
     "dsync": "0.0.x",
     "beanpoll": "0.2.x",
-    "dnode": "1.0.x",
+    "dnode": "git+https://github.com/substack/dnode.git",
     "shoe": "0.0.x",
     "consolidate": "0.5.x",
     "seq": "0.3.x",

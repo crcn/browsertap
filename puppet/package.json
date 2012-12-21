@@ -22,7 +22,7 @@
     "underscore": "1.4.x",
     "filternet": "git+https://github.com/crcn/filternet.git",
     "browserify": "1.16.x",
-    "dnode": "1.0.x",
+    "dnode": "git+https://github.com/substack/dnode.git",
     "shoe": "0.0.x",
     "express": "*",
     "cashew": "0.0.x",

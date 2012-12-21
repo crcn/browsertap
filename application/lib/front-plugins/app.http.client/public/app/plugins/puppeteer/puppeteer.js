@@ -57,7 +57,7 @@ module.exports = structr(EventEmitter, {
 
 		var serverUrl = [window.location.protocol, "//", window.location.host, "/server.json"].join(""),
 		self = this;
-		
+
 		$.ajax({
 			url: serverUrl,
 			dataType: "json",
@@ -123,6 +123,11 @@ module.exports = structr(EventEmitter, {
 			}, outcome.s(function(remote) {
 				console.log("connected client");
 				self.connection = remote;
+				/*var oldSet = remote.windows.set;
+				remote.windows.set = function() {
+					console.log("SETTTTT");
+					oldSet.apply(this, arguments);
+				}*/
 				self._connecting = false;
 				self.emit("connect", null, remote);
 			}));
@@ -143,7 +148,6 @@ module.exports = structr(EventEmitter, {
 		d.on("error", function(err) {
 			self._connecting = false;
 			self.connection = null;
-			console.error(err.stack);
 			self._commands.emit("error", new comerr.UnableToConnect("Unable to connect to a remote desktop"));
 		})
 	}
