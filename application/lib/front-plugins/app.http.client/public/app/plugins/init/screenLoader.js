@@ -172,8 +172,10 @@ module.exports = structr(EventEmitter, {
 		var self = this,
 		startTime = Date.now();
 
+		console.log("FFFFF " + startTime);
 
 		return {
+			test: startTime,
 			search: search,
 			app: this.options.app,
 			version: this.options.version,
@@ -246,7 +248,6 @@ module.exports = structr(EventEmitter, {
 
 	"_connectWindow": function() {
 		if(this._screenId == this.options.screen) return;
-		this._screenId = this.options.screen;
 		this.emit("loading");
 		console.log("loading window");
 		var self = this;

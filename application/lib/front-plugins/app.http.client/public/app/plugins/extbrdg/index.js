@@ -6,11 +6,12 @@ exports.name = "extbrdg";
 exports.plugin = function(bark, commands) {
 	var bridge = prepare();
 
+
 	commands.on("popup", function(options) {
 		step(
 			function() {
 				console.log("opening url %s", options.url);
-				if(bridge.exists) return bridge.execute("openWindow", options);	
+				if(bridge.exists()) return bridge.execute("openWindow", options);	
 
 				//never close
 				bark.clickToClose("Click anywhere to generate new window", function() {
@@ -39,7 +40,9 @@ function prepare() {
 	var el = document.createElement("BrowserTapComLine");
 	document.documentElement.appendChild(el);
 	return {
-		exists: document.getElementsByTagName("hellofrombte").length,
+		exists: function() {
+			return !!document.getElementsByTagName("hellofrombte").length;
+		},
 		execute: function(name, command) {
 
 			el.setAttribute("command", encodeURIComponent(JSON.stringify({ name: name, data: command })));
