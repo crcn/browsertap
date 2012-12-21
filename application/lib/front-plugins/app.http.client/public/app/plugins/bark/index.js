@@ -25,7 +25,7 @@ exports.plugin = function() {
 	on("openNotification", function(notification) {
 		$(document).one("click", function() {
 			notification.transitionOut();
-		})
+		});
 	}); 
 
 
