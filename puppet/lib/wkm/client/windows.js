@@ -3,7 +3,8 @@ _ = require("underscore"),
 sift = require("sift"),
 EventEmitter = require("events").EventEmitter,
 Window = require("./window"),
-outcome = require("outcome");
+outcome = require("outcome"),
+windowStyles = require("./windowStyles");
 
 module.exports = structr(EventEmitter, {
 
@@ -37,6 +38,15 @@ module.exports = structr(EventEmitter, {
 							"DV2ControlHost",
 							"CabinetWClass"
 						]
+					}
+				},
+				{
+					extStyle: function(style) {
+
+						//if the window is topmost, it's most likely a popup. We want to ignore
+						//these since they'll hover over the main window, as well as open a client window.
+						//Kinda breaks the illusion of separate windows :/
+						return style & windowStyles.WS_EX_TOPMOST;
 					}
 				},
 				{

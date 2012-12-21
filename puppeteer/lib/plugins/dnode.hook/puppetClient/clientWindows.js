@@ -57,6 +57,9 @@ module.exports = structr(EventEmitter, {
 
 	"set": function(window) {
 
+		//console.log(window.search);
+		//console.log(new Error().stack)
+
 
 		//remove any private properties
 		if(window.search)
