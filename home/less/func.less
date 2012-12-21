@@ -1,0 +1,96 @@
+.font-helvetica() {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+
+.lrtb(@l:0, @r:0, @t:0, @b:0) {
+	  left: @l;
+	 right: @r;
+	   top: @t;
+	bottom: @b;
+}
+
+.dim(@w,@h) {
+	 width: @w;
+	height: @h;
+}
+
+.rounded(@radius:5px) {
+	        border-radius: @radius;
+	   -moz-border-radius: @radius;
+	-webkit-border-radius: @radius;
+	 -khtml-border-radius: @radius;
+}
+
+.noselect() {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.roundtb(@tl:0px, @tr:0px, @bl:0px, @br:0px) {
+
+	     border-top-left-radius:@tl;
+	-moz-border-radius-topleft: @tl;      
+	
+	     border-top-right-radius:@tr;
+	-moz-border-radius-topright: @tr;
+	
+	
+	     border-bottom-left-radius:@bl;
+	-moz-border-radius-bottomleft: @bl;
+	
+	     border-bottom-right-radius:@br;
+	-moz-border-radius-bottomright: @br;
+}        
+
+.shadow(@left:5px,@top:5px,@blur:5px,@color:#000) {
+ 	   -moz-box-shadow: @left @top @blur @color;   
+	-webkit-box-shadow: @left @top @blur @color;
+	        box-shadow: @left @top @blur @color;      
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=@blur, Direction=90, Color='@color')";    
+	    filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=@blur, Direction=90, Color='@color')";
+}   
+.inner-shadow(@left:5px,@top:5px,@blur:5px,@color:#000) {
+ 	   -moz-box-shadow: inset @left @top @blur @color;   
+	-webkit-box-shadow: inset @left @top @blur @color;
+	        box-shadow: inset @left @top @blur @color;      
+} 
+
+
+.glow(@blur:5px,@color:#000) {
+	.shadow(0px,0px,@blur,@color);
+}
+           
+.centered()
+{   
+	display: block; 
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.opac(@v) {
+	filter: alpha(opacity=@v);
+      -moz-opacity: @v/100;
+  	-khtml-opacity: @v/100;
+  	       opacity: @v/100;
+}
+
+// Transitions
+.transition(@transition) {
+     -webkit-transition: @transition;
+        -moz-transition: @transition;
+         -ms-transition: @transition;
+          -o-transition: @transition;
+             transition: @transition;
+}
+
+// Drop shadows
+.box-shadow(@shadow: 0 1px 3px rgba(0,0,0,.25)) {
+  -webkit-box-shadow: @shadow;
+     -moz-box-shadow: @shadow;
+          box-shadow: @shadow;
+}
