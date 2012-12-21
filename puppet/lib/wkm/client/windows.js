@@ -119,7 +119,8 @@ module.exports = structr(EventEmitter, {
 		if(!win) return;
 		win.disposed = true;
 		console.log("close window class=%s, title=%s ", win.className, win.title);
-		this._windows.splice(this._windows.indexOf(win), 1);
+
+		//close emit will remove from the collection as well.
 		win.emit("close");
 		this.emit("close", win);
 	},
@@ -146,6 +147,10 @@ module.exports = structr(EventEmitter, {
 
 			self._focusedWindow = win;
 			self._focusedWindow.emit("focus");
+		});
+
+		win.once("close", function() {
+			self._windows.splice(self._windows.indexOf(win), 1);
 		});
 
 		this._setApp(win, function(err) {

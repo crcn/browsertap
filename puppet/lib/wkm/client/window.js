@@ -77,6 +77,7 @@ module.exports = structr(EventEmitter, {
 	"close": function() {
 		this.closed = true;
 		this._con.execute("closeWindow", { id: this.id });
+		this.emit("close");
 		this._events = {};
 	},
 

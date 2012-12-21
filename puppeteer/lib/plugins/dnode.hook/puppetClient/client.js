@@ -48,18 +48,16 @@ module.exports = structr(EventEmitter, {
 
 	"open": function(options, callback) {
 		var self = this, on = outcome.error(callback);
+
+
+
 		step(
 			function() {
 				self._open(options, this);
 			},
-			on.success(function(app) {
-				callback(null, {
-					setWindow: function(window) {
-						window.search = { "app.name": app.name, "app.version": app.version, "style.sizeBox": true };
-						self.windows.set(window);
-					}
-				})
-			})
+			function() {
+				callback();
+			}
 		);
 	},
 
@@ -68,7 +66,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"step _open": function(options, callback) {
-		var apps = this._apps, on = outcome.error(callback);
+		var apps = this._apps, self = this, window = options.window, on = outcome.error(callback);
 		if(!options.arg) options.arg = "";
 		
 		if(!/^http/.test(options.arg)) options.arg = "http://" + options.arg.replace(/^.*?:\//g,"");
@@ -79,18 +77,26 @@ module.exports = structr(EventEmitter, {
 			function() {
 				console.log("closing apps other than %s %s", options.name, options.version);
 				//close other versions
-				apps.close({ name: options.name, version: {$ne: options.version }}, this);
+				apps.close({ name: options.name, version: { $ne: options.version }}, this);
 			},
 			function() {
 				console.log("finding app %s %s", options.name, options.version);
 				apps.findApp({ name: options.name, version: options.version }, this);
 			},
 			on.success(function(app) {
+
+				console.log(window)
+				if(window) {
+					window.search = { "app.name": app.name, "app.version": app.version, "style.sizeBox": true };
+					self.windows.set(window);
+				}
+
 				if(app.windows().length) {
 					console.log("app is open, opening new window instead");
 					app.windows()[0].openNewWindow(options.arg);
 					callback(null, app);
 				} else {
+
 					this();
 				}
 			}),

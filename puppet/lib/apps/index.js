@@ -103,7 +103,7 @@ module.exports = structr({
 				logger.info(sprintf("opening app with arg: %s", arg));
 				try {
 
-				this.app.open(arg, this);
+				this.app.reopen(arg, this);
 			}catch(e) {
 				console.error(e)
 			}

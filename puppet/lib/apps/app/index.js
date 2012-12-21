@@ -29,6 +29,7 @@ module.exports = structr(EventEmitter, {
 		win.once("close", function() {
 			var i = self._windows.indexOf(win);
 			if(~i) self._windows.splice(i, 1);
+
 			self.emit("closeWindow", win);
 		});
 
@@ -54,7 +55,13 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"step open": function(args, callback) {
-		var self = this;
+		this._open(args, callback);
+	},
+
+	/**
+	 */
+
+	"_open": function(args, callback) {
 		this._proc().open(args, function() {
 			callback(null, self);
 		});
@@ -64,7 +71,24 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
+	"step reopen": function(args, callback) {
+		var self = this;
+		this._close(true, function() {
+			self._open(args, callback);
+		})
+	},
+
+	/**
+	 */
+
 	"step close": function(force, callback) {
+		this._close(force, callback);
+	},
+
+	/**
+	 */
+
+	"_close": function(force, callback) {
 		if(typeof force == "function") {
 			callback = force;
 			force = false;
