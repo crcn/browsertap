@@ -12,7 +12,7 @@ body {
 h1, h2, h3 {
 	font-family: proxima_nova_alt_rgregular;
 	font-weight: normal;
-	color: #444;
+	color: #333;
 
 	strong {
 		font-family: proxima_nova_alt_rgbold;
@@ -28,9 +28,10 @@ input {
 	font-family: proxima_nova_rgregular;
 }
 
-span {
+span, p {
 	font-family: proxima_nova_ltregular;
 }
+
 
 h1 {
 	font-size: 52px;
@@ -46,8 +47,9 @@ h3 {
 
 a {
 	font-family: "proxima_nova_alt_rgregular";
-	font-weight: bold;
+	font-weight: normal;
 	text-decoration: none;
+	color: #fe6d68;
 
 	&:hover {
 		text-decoration: none;
@@ -77,6 +79,7 @@ a {
 	float: right;
 	text-transform: uppercase;
 	color: #333;
+	font-weight: bold;
 	background-color: #FFF;
 	padding: 6px 10px 5px 10px;
 	.rounded(2px);
@@ -96,7 +99,7 @@ a {
 
 	h3 {
 		font-family: proxima_nova_ltregular;
-		margin-top: -10px;
+		margin-top: -20px;
 		color: #999;
 	}
 }
@@ -143,7 +146,7 @@ a {
 	}
 
 	form {
-		margin-top: 20px;
+		margin-top: 15px;
 	}
 
 	input[type="submit"] {
@@ -203,7 +206,7 @@ a {
 
 	
 	width: 100%;
-	height: 640px;
+	height: 600px;
 	color: #FFF;
 	padding-top: 50px;
 	position: relative;
@@ -230,6 +233,7 @@ a {
 		text-align: left;
 		line-height: 33px;
 		font-size: 18px;
+		font-weight:bold;
 	}
 
 }
@@ -249,6 +253,58 @@ a {
 	height: 337px;
 	position: absolute;
 	bottom: 0px;
+}
+
+#bt-mid-hud {
+	width: 760px;
+	height: 160px;
+	.rounded(10px);
+	background-color: rgba(0, 0, 0, 0.8);
+	margin: 0 auto;
+	position: relative;
+	top: 130px;
+}
+
+@icon-size: 110px;
+
+.bt-mid-icon {
+	float: left;
+	width: 110px;
+	margin: 0 15px 25px 25px;
+	position: absolute;
+	top: 33px;
+	height: @icon-size;
+	text-align: middle;
+	position: relative;
+	.rounded(10px);
+	img {
+		position: absolute;
+		left: @icon-size/2-68/2;
+		top:12px;
+		width: 68px;
+		margin: 0 auto;
+	}
+}
+
+#bt-icon-selector {
+	position: absolute;
+	visibility: hidden;
+	top: 25px;
+	left: 25px;
+	width: 100px;
+	height: 100px;
+	.rounded(10px);
+	border: 5px solid white;
+}
+
+/*.bt-mid-icon-selected {
+	border: 5px solid white;
+}*/
+
+.firefox-icon {
+	img {
+		top: 20px;
+	}
 }
 
 /* features */
@@ -280,6 +336,10 @@ a {
 	width: 275px;
 	text-align: center;
 	margin-bottom: 60px;
+
+	h3 {
+		margin: 10px 0 0 0;
+	}
 }
 
 /* extra features */
@@ -316,6 +376,12 @@ a {
 		font-size: 18px;
 		padding-right: 10px;
 	}
+}
+
+
+#all-features {
+	width: @content-width;
+	height: 100%;	
 }
 
 
@@ -359,6 +425,7 @@ a {
 	text-align: left;
 	a {
 		color: #FFF;
+		font-weight: bold;
 	}
 	img {
 		margin-right: 5px;
@@ -375,8 +442,11 @@ a {
 	}
 }
 
+
 #bt-footer-mixpanel-badge {
 	float: right;
 	position: relative;
 	top: 6px;
 }
+
+
