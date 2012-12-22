@@ -15,26 +15,9 @@
 		<link rel="stylesheet/less" type="text/css" href="less/styles.less">
 		<link rel="stylesheet/less" type="text/css" href="vendors/retina/retina.less">
 
-		<!-- vendorshit -->
+		<!-- necessary so the page doesn't look like utter shit before the other scripts load -->
 		<script src="vendors/js/less.js" type="text/javascript"></script>
-		<script src="vendors/js/jquery.js" type="text/javascript"></script>
-		<script src="vendors/js/transit.js" type="text/javascript"></script>
-		<script src="vendors/js/underscore.js" type="text/javascript"></script>
-		<script src="vendors/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-		<script src="vendors/retina/retina.js" type="text/javascript"></script>
 
-		<!-- my shit here -->
-		<script src="js/main.js" type="text/javascript"></script>
-
-		<!-- This form is in two places. I'm two fucking lazy to copy & paste twice. Javascript time! -->
-		<script type="text/ejs" data-templateName="signup-form">
-			<h2>Join the alpha today.</h2>
-			<span>Completely free to sign up. Limited spots available.</span>
-			<form action="http://spiceapps.us4.list-manage2.com/subscribe/post?u=80d47619c285dca57ae8d9c47&amp;id=d38e1a20a5" name="mc-embedded-subscribe-form" method="post">
-				<input name="EMAIL" type="text" placeholder="Email Address"></input>
-				<input type="submit" name="subscribe" value="Send"></input>
-			</form>
-		</script>
 		
 	</head>
 	<body>
@@ -50,8 +33,8 @@
 				</div>
 
 				<!-- big obnoxious header that should scare anyone away from the product -->
-				<h1>Fast and Interactive <strong>cross-browser testing.</strong></h1>
-				<h3>Use your favorite browser with any rendering engine, no installs, no fuss.</h3>
+				<h1>Fast, Interactive <strong>cross-browser testing.</strong></h1>
+				<h3>Instant access to desktop browsers. No installs, no fuss.</h3>
 
 
 				<!-- call to action -->
@@ -202,5 +185,29 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- vendorshit -->
+		<script src="vendors/js/jquery.js" type="text/javascript"></script>
+		<script src="vendors/js/transit.js" type="text/javascript"></script>
+		<script src="vendors/js/underscore.js" type="text/javascript"></script>
+		<script src="vendors/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="vendors/retina/retina.js" type="text/javascript"></script>
+
+		<!-- my shit here -->
+		<script src="js/main.js" type="text/javascript"></script>
+
+		<!-- This form is in two places. I'm two fucking lazy to copy & paste twice. Javascript time! -->
+		<script type="text/ejs" data-templateName="signup-form">
+			<h2>Join the alpha today.</h2>
+			<span>Completely free to sign up. Limited spots available.</span>
+			<form action="http://spiceapps.us4.list-manage2.com/subscribe/post?u=80d47619c285dca57ae8d9c47&amp;id=d38e1a20a5" name="mc-embedded-subscribe-form" method="post">
+				<input name="EMAIL" type="text" placeholder="Email Address"></input>
+				<input type="submit" name="subscribe" value="Send"></input>
+			</form>
+		</script>
+
+		<script type="text/javascript">
+			
+		</script>
 	</body>
 </html>
