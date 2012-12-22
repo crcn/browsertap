@@ -115,6 +115,8 @@ a {
 	bottom: 0px;
 }
 
+
+
 .red-grad() {
 	background: #f63a3b; /* Old browsers */
 	background: -moz-linear-gradient(top, #f63a3b 0%, #fe6d68 100%); /* FF3.6+ */
@@ -124,6 +126,22 @@ a {
 	background: -ms-linear-gradient(top, #f63a3b 0%,#fe6d68 100%); /* IE10+ */
 	background: linear-gradient(to bottom, #f63a3b 0%,#fe6d68 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f63a3b', endColorstr='#fe6d68',GradientType=0 ); /* IE6-9 */
+}
+
+.play-button {
+	.red-grad();
+	top: 135px;
+	position: relative;
+	margin: 0 auto;
+	.rounded(5px);
+	padding: 30px 40px;
+
+	text-align: center;
+
+	img {
+		position: relative;
+		top: 10px;
+	}
 }
 
 
