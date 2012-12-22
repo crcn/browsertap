@@ -1,6 +1,8 @@
 @import "func.less";
 @import "fonts.less";
 
+@content-width: 960px;
+
 body {
 	font-family: "proxima_nova_rgregular";
 	margin: 0px;
@@ -8,16 +10,30 @@ body {
 }
 
 h1, h2, h3 {
-	font-family: proxima_nova_rgregular;
+	font-family: proxima_nova_alt_rgregular;
 	font-weight: normal;
+	color: #444;
+
+	strong {
+		font-family: proxima_nova_alt_rgbold;
+		font-weight: normal;
+	}
+}
+
+.clear {
+	clear: both;
 }
 
 input {
 	font-family: proxima_nova_rgregular;
 }
 
+span {
+	font-family: proxima_nova_ltregular;
+}
+
 h1 {
-	font-size: 50px;
+	font-size: 52px;
 }
 
 h2 {
@@ -25,12 +41,13 @@ h2 {
 }
 
 h3 {
-	font-size: 24px;
+	font-size: 26px;
 }
 
 a {
 	font-family: "proxima_nova_alt_rgregular";
 	font-weight: bold;
+	text-decoration: none;
 
 	&:hover {
 		text-decoration: none;
@@ -39,9 +56,10 @@ a {
 
 /* all homepage styles */
 
-#bt-content {
+.bt-content {
 	margin: 0 auto;
-	width: 910px;
+	width: @content-width;
+	height: 100%;
 }
 
 /* header styles */
@@ -60,7 +78,7 @@ a {
 	text-transform: uppercase;
 	color: #333;
 	background-color: #FFF;
-	padding: 5px 8px 3px 8px;
+	padding: 6px 10px 5px 10px;
 	.rounded(2px);
 	font-size: 13px;
 	border: 1px solid #EBEBEB;
@@ -70,15 +88,28 @@ a {
 	background-image: url('../img/header photo.jpg');
 	width: 100%;
 	height: 780px;
+	position: relative;
 	background-position: center top;
-	background-size: contain;
+	background-size: cover;
 	background-repeat: no-repeat;
 	text-align: center;
 
 	h3 {
-		margin-top: 26px;
+		font-family: proxima_nova_ltregular;
+		margin-top: -10px;
 		color: #999;
 	}
+}
+
+#bt-screens {
+	background-image: url('../img/screens.png');
+	width: @content-width;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 310px;
+	position: absolute;
+	bottom: 0px;
 }
 
 .red-grad() {
@@ -102,10 +133,13 @@ a {
 	h2 {
 		text-transform: uppercase;
 		font-family: proxima_nova_alt_rgbold;
+		margin-bottom: 15px;
 	}
 
 	span {
 		color: #777;
+		font-size: 14px;
+		font-family: proxima_nova_alt_rgregular;
 	}
 
 	form {
@@ -114,22 +148,27 @@ a {
 
 	input[type="submit"] {
 		text-transform: uppercase;
+		font-family: proxima_nova_alt_rgbold;
 		color: #FFF;
 		.red-grad();
 		font-size: 17px;
 		font-weight: bold;
 		.roundtb(0px, 3px, 0px, 3px);
+		padding-top: 4px;
 		border: 0px;
 		height: 40px;
 		width: 80px;
-		margin: 0px;
+		margin: 2px 0 0 0;
 	}
 
 	input[type="text"] {
 		color: #333;
 		height: 40px;
+		width: 240px;
 		padding: 0 10px 0 10px;
 		border: 0;
+		position: relative;
+		top: -1px;
 		margin: 0 -4px 0 0;
 		font-size: 17px;
 		.roundtb(3px, 0px, 3px, 0px);
@@ -146,4 +185,198 @@ a {
 					box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(199, 20, 0, 0.3);
 		}
 	}
+}
+
+.join-alpha-container-footer {
+	h2 {
+		color: #FFF;
+	}
+	span {
+		color: #FFF;
+	}
+}
+
+
+/* mid */
+
+#bt-mid {
+
+	
+	width: 100%;
+	height: 640px;
+	color: #FFF;
+	padding-top: 50px;
+	position: relative;
+
+	background: #202020; /* Old browsers */
+	background: -moz-linear-gradient(top, #202020 0%, #303030 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#202020), color-stop(100%,#303030)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #202020 0%,#303030 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #202020 0%,#303030 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #202020 0%,#303030 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #202020 0%,#303030 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#202020', endColorstr='#303030',GradientType=0 ); /* IE6-9 */
+
+	h1, h2, h3 {
+		color: #FFF;
+	}
+
+
+	h1 {
+		font-size: 35px;
+	}
+
+	span {
+		text-align: left;
+		line-height: 33px;
+		font-size: 18px;
+	}
+
+}
+
+#bt-mid-header {
+	width: 650px;
+	text-align: center;
+	margin: 0 auto 50px auto;
+}
+
+#bt-mid-demo {
+	background-image: url('../img/browser.png');
+	background-repeat: no-repeat;
+	background-position: bottom;
+	background-size: contain;
+	width: @content-width;
+	height: 337px;
+	position: absolute;
+	bottom: 0px;
+}
+
+/* features */
+
+#bt-features {
+	width: 100%;
+	height: 560px;
+	background-color: #FFF;
+	padding-top: 40px;
+
+	h3 {
+		font-family: proxima_nova_ltregular;
+		color: #000;
+	}
+	span {
+		color: #000;
+		font-size: 14px;
+	}
+}
+
+.bt-feature-header {
+	height: 80px;
+}
+
+
+.bt-main-feature {
+	margin: 20px;
+	float: left;
+	width: 275px;
+	text-align: center;
+	margin-bottom: 60px;
+}
+
+/* extra features */
+
+#bt-extra-features {
+	width: 100%;
+	height: 430px;
+	text-align: center;
+	padding-top: 50px;
+
+	h3 {
+		color: #000;
+		text-transform: uppercase;
+	}
+}
+
+.bt-extra-feature {
+	text-align: left;
+	background-color: #F4F4F4;
+	.rounded(2px);
+	float: left;
+	font-size: 13px;
+	color: #666;
+	padding-top: 4px;
+	padding-bottom: 4px;
+
+
+	width: (@content-width - 135px)/3;
+	margin-left: 40px;
+	margin-top: 10px;
+	padding-left: 4px;
+
+	span {
+		font-size: 18px;
+		padding-right: 10px;
+	}
+}
+
+
+.fextra-1 {
+	color: #5DB000;	
+}
+
+.fextra-0 {
+	color: #FD7067;
+}
+
+/* footer */
+
+#bt-footer {
+	padding-top: 50px;
+	width: 100%;
+	height:420px;
+	text-align: center;
+
+	background: #28323b; /* Old browsers */
+	background: -moz-linear-gradient(top,  #28323b 0%, #2f3c44 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#28323b), color-stop(100%,#2f3c44)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #28323b 0%,#2f3c44 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #28323b 0%,#2f3c44 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #28323b 0%,#2f3c44 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #28323b 0%,#2f3c44 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#28323b', endColorstr='#2f3c44',GradientType=0 ); /* IE6-9 */
+
+}
+
+#bt-content-footer {
+	width: 400px;
+	margin: 0 auto;
+}
+
+#bt-footer-footer {
+	padding-top: 20px;
+	font-size: 14px;
+	width: 428px;
+	color: #FFF;
+	text-align: left;
+	a {
+		color: #FFF;
+	}
+	img {
+		margin-right: 5px;
+		position: relative;
+		top: 3px;
+	}
+
+}
+
+#bt-footer-links {
+	margin-bottom: 10px;
+	span {
+		padding: 0 10px;
+	}
+}
+
+#bt-footer-mixpanel-badge {
+	float: right;
+	position: relative;
+	top: 6px;
 }

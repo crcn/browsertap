@@ -8,8 +8,8 @@
 		<title>Fast & Beautiful Cross Browser Testing</title>
 
 		<!-- csshit -->
-		<link rel="stylesheet" type="text/css" href="vendors/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="vendors/bootstrap/css/bootstrap-responsive.min.css">
+		<!--link rel="stylesheet" type="text/css" href="vendors/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="vendors/bootstrap/css/bootstrap-responsive.min.css"-->
 
 		<!-- Ughhh >.>  lesshit -->
 		<link rel="stylesheet/less" type="text/css" href="less/styles.less">
@@ -29,7 +29,7 @@
 
 		<!-- to pnaiv information with the video -->
 		<div id="bt-top">
-			<div id="bt-content">
+			<div class="bt-content">
 
 				<!-- top nav -->
 				<div id="bt-header">
@@ -39,11 +39,11 @@
 
 				<!-- big obnoxious header that should scare anyone away from the product -->
 				<h1>Fast and beautiful <strong>cross-browser testing.</strong></h1>
-
 				<h3>Use your favorite browser with any rendering engine, no installs, no fuss.</h3>
 
 
-				<div class="join-alpha-container">
+				<!-- call to action -->
+				<div class="join-alpha-container clear">
 					<h2>Join the alpha today.</h2>
 					<span>Completely free to sign up. Limited spots available.</span>
 					<form action="#">
@@ -51,15 +51,161 @@
 						<input type="submit" value="Send"></input>
 					</form>
 				</div>
+
+				<div id="bt-screens">
+				</div>
 			</div>
 		</div>
 
 
 		<!-- middle part displaying the mini-demo -->
+		<div id="bt-mid">
+			<div class="bt-content">
+
+				<div id="bt-mid-header">
+					<h1>The future of cross-browser testing<br /> is in the <strong>browser you're using right now.</strong></h1>
+				</div>
+
+				<span>Forget VMs, screenshot services, or dedicated testing computers. Browsertap works by broadcasting a live RTMP
+				stream of a browser window on a cloud server. Your keyboard and mouse commands are relayed to the server, live, allowing
+				you to test web layouts in realtime.</span>
+
+				<div id="bt-mid-demo">
+				</div>
+			</div>
+		</div>
 
 
 		<!-- feature set -->
+		<div id="bt-features">
+			<div class="bt-content">
+
+				<div class="bt-main-feature">
+					<div class="bt-feature-header">
+						<img src="img/features/Shape 6.png"></img>
+					</div>
+					<h3>Responsive Testing</h3>
+					<span>Now you can test any responsive site, on
+					any browser without leaving your browser of 
+					choice, simply by resizing your window.</span>
+				</div>
+
+				<div class="bt-main-feature">
+					<div class="bt-feature-header">
+						<img src="img/features/Shape 5.png"></img>
+					</div>
+					<h3>Seamless UI</h3>
+					<span>With Browsertap, you'll forget you're inside 
+					of an emulator. Just use your browser as 
+					you normally would.</span>
+				</div>
+
+				<div class="bt-main-feature">
+					<div class="bt-feature-header">
+						<img src="img/features/Shape 4.png"></img>
+					</div>
+					<h3>1-Click Testing</h3>
+					<span>Jump straight into testing with one click
+					from our browser extension or bookmarklet.
+					No need to visit browsertap.com</span>
+				</div>
+
+				<div class="bt-main-feature clear">
+					<div class="bt-feature-header">
+						<img src="img/features/Group 1.png"></img>
+					</div>
+					<h3>Parallel Testing</h3>
+					<span>Test multiple browser at once, with a new
+					window or tab per test, allowing you to 
+					compare rendering engines.</span>
+				</div>
+
+				<div class="bt-main-feature">
+					<div class="bt-feature-header">
+						<img src="img/features/Shape 8.png"></img>
+					</div>
+					<h3>Local Testing</h3>
+					<span>Run a small application that allows
+					Browsertap to connect to your computer,
+					forwarding localhost and file:// for testing.</span>
+				</div>
+
+				<div class="bt-main-feature">
+					<div class="bt-feature-header">
+						<img src="img/features/Shape 9.png"></img>
+					</div>
+					<h3>Developer Tools</h3>
+					<span>Browsertap supports many developer tools
+					and extensions for each browser, letting you
+					see exactly what's going on with your code.</span>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- extra features -->
+		<div id="bt-extra-features">
+			<div class="bt-content">
+				<h3><strong>Features in Alpha:</strong></h3>
+
+				<div class="bt-extra-feature"><span class="fextra-1">&#10004;</span> Test across multiple browsers (30+)</div>
+				<div class="bt-extra-feature"><span class="fextra-1">&#10004;</span> Browser Developer Tools</div>
+				<div class="bt-extra-feature"><span class="fextra-0">&#10007;</span> Automatic Layout Testing</div>
+
+				<div class="bt-extra-feature"><span class="fextra-1">&#10004;</span> Browser extensions & bookmarklet</div>
+				<div class="bt-extra-feature"><span class="fextra-1">&#10004;</span> Localhost Support</div>
+				<div class="bt-extra-feature"><span class="fextra-0">&#10007;</span> Android Testing</div>
+
+				<div class="bt-extra-feature"><span class="fextra-1">&#10004;</span> 1-Click Testing</div>
+				<div class="bt-extra-feature"><span class="fextra-0">&#10007;</span> History Support (back & forward)</div>
+				<div class="bt-extra-feature"><span class="fextra-0">&#10007;</span> iPhone Testing</div>
+
+				<div class="bt-extra-feature"><span class="fextra-1">&#10004;</span> Clipboard Support (copy & paste)</div>
+				<div class="bt-extra-feature"><span class="fextra-0">&#10007;</span> Real IE browsers (not IETester)</div>
+				<div class="bt-extra-feature"><span class="fextra-0">&#10007;</span> Mac Testing (of Mac browsers)</div>
+
+				<div class="bt-extra-feature"><span class="fextra-0">&#10007;</span> Drag & drop file support</div>
+				<div class="bt-extra-feature"><span class="fextra-1">&#10004;</span> Keyboard Shortcuts</div>
+				<div class="bt-extra-feature"><span class="fextra-1">&#10004;</span> PC Testing (of PC browsers)</div>
+
+				<div class="bt-extra-feature"><span class="fextra-0">&#10007;</span> Pixel-perfect Screenshots</div>
+				<div class="bt-extra-feature"><span class="fextra-1">&#10004;</span> Responsive Testing</div>
+				<div class="bt-extra-feature"><span class="fextra-1">&#10004;</span> Parallel Testing</div>
+
+				<div class="bt-extra-feature"><span class="fextra-0">&#10007;</span> Audio Support</div>
+				<div class="bt-extra-feature"><span class="fextra-0">&#10007;</span> Natural Scrolling</div>
+
+			</div>
+		</div>
 
 		<!-- footer - call to action here -->
+		<div id="bt-footer">
+			<div id="bt-content-footer">
+
+				<!-- call to action -->
+				<div class="join-alpha-container join-alpha-container-footer clear">
+					<h2>Join the alpha today.</h2>
+					<span>Completely free to sign up. Limited spots available.</span>
+					<form action="#">
+						<input name="email" type="text" placeholder="Email Address"></input>
+						<input type="submit" value="Send"></input>
+					</form>
+				</div>
+
+
+				<div id="bt-footer-footer">
+					<div id="bt-footer-mixpanel-badge">
+						<a href="https://mixpanel.com/f/partner"><img src="//cdn.mxpnl.com/site_media/images/partner/badge_light.png" alt="Mobile Analytics" /></a>
+					</div>
+					<div id="bt-footer-links">
+						<a href="#">About</a> <span>|</span>
+						<a href="mailto:hello@browsertap.com">Contact</a> <span>|</span>
+						<a href="#">Blog</a> <span>|</span>
+						<a href="http://twitter.com/browsertap" target="_blank"><img src="img/Shape 10.png">Twitter</a>
+					</div>
+					<span>Copyright &#169; 2012 Spice Apps. All rights reserved.</span>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
