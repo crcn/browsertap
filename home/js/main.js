@@ -76,7 +76,7 @@ function injectHoverStates() {
 	function select($c) {
 		if($current) $current.removeClass("bt-mid-icon-selected");
 		$current = $c;
-		$selector.css({"visibility":"visible"}).transit({ left: $c.position().left + 25 });
+		$selector.css({"visibility":"visible"}).transit({ left: $c.position().left + 25 }, 200);
 		$c.addClass("bt-mid-icon-selected");
 
 		loadImage($c.attr("data-shot"), function(img) {
@@ -88,7 +88,7 @@ function injectHoverStates() {
 
 	$btMidIcons.hover(_.throttle(function() {
 		select($(this));
-	}, 500));
+	}, 100));
 
 	$("#bt-mid-hud").mouseover(function() {
 		ignoreTimer = true;
