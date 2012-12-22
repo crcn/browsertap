@@ -80,7 +80,7 @@ function injectHoverStates() {
 		$c.addClass("bt-mid-icon-selected");
 
 		loadImage($c.attr("data-shot"), function(img) {
-			$midBg.html("");
+			$midBg.find("img").remove();
 			$midBg.append(img);
 		});
 	}
