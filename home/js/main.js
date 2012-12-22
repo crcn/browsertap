@@ -77,11 +77,10 @@ function injectHoverStates() {
 		$selector.css({"visibility":"visible"}).transit({ left: $c.position().left + 25 });
 		$c.addClass("bt-mid-icon-selected");
 
-		$midBg.transit({ opacity: 0 }, function() {
-			$midBg.css({ "background-image": "url('"+$c.attr("data-shot")+"')" }).transit({ opacity: 1 });
+		loadImage($c.attr("data-shot"), function(img) {
+			$midBg.html("");
+			$midBg.append(img);
 		});
-
-
 	}
 
 
@@ -104,4 +103,10 @@ function injectHoverStates() {
 	}, 3000);
 
 	select($($(".bt-mid-icon")[0]));
+}
+
+function loadImage(url, cb) {
+	$("<img src=\""+url+"\" />").load(function() {
+		cb($(this));
+	})
 }
