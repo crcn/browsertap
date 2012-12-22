@@ -18,6 +18,7 @@ function injectAllFeatures() {
 		"Test across multiple browsers (30+)": true,
 		"Browser Developer Tools": true,
 		"Automated Layout Testing": false,
+		"Automated Interactive Testing": false,
 
 		"No Installation Required": true,
 		"Browser extensions & bookmarklet": true,
@@ -36,7 +37,7 @@ function injectAllFeatures() {
 		"Keyboard Shortcuts": true,
 		"PC Testing (of PC browsers)": true,
 
-		"Pixel-perfect Screenshots": false,
+		"Sceenshot Testing": false,
 		"Responsive Testing": true,
 		"Linux Testing (of Linux browsers)": false,
 		
@@ -45,7 +46,8 @@ function injectAllFeatures() {
 		"Natural Scrolling": false,
 		"Emulator API": false,
 		"Live Browser Reloads": false,
-		"Screensharing & Team Collaboration": false
+		"Screensharing & Team Collaboration": false,
+		"Web Camera Support": false
 	};
 
 	$allFeatures = $("#all-features");
