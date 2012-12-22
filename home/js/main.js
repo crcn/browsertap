@@ -38,8 +38,9 @@ function injectAllFeatures() {
 
 		"Pixel-perfect Screenshots": false,
 		"Responsive Testing": true,
+		"Linux Testing (of Linux browsers)": false,
+		
 		"Parallel Testing": true,
-
 		"Audio Support": false,
 		"Natural Scrolling": false,
 		"Emulator API": false,
@@ -67,13 +68,20 @@ function injectHoverStates() {
 	ignoreTimer, 
 	$btMidIcons = $(".bt-mid-icon"), 
 	n = $btMidIcons.length,
-	$selector = $("#bt-icon-selector");
+	$selector = $("#bt-icon-selector"),
+	$midBg = $("#bt-mid-bg");
 
 	function select($c) {
 		if($current) $current.removeClass("bt-mid-icon-selected");
 		$current = $c;
 		$selector.css({"visibility":"visible"}).transit({ left: $c.position().left + 25 });
 		$c.addClass("bt-mid-icon-selected");
+
+		$midBg.transit({ opacity: 0 }, function() {
+			$midBg.css({ "background-image": "url('"+$c.attr("data-shot")+"')" }).transit({ opacity: 1 });
+		});
+
+
 	}
 
 
@@ -93,7 +101,7 @@ function injectHoverStates() {
 		if(ignoreTimer) return;
 		var ci = ($current.index() + 1) % n;
 		select($($btMidIcons[ci]));
-	}, 2000);
+	}, 3000);
 
 	select($($(".bt-mid-icon")[0]));
 }
