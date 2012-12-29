@@ -119,10 +119,18 @@ module.exports = structr(EventEmitter, {
 	"_cleanupCache": function(next) {
 
 		if(!this.app.cache || !this.app.cache.directory) return next();
+
+		var dirs = this.app.cache.directory instanceof Array ? this.app.cache.directory : [this.app.cache.directory],
+		self = this;
 		logger.info(sprintf('cleaning up %s cache directory', this.app.name));
-		exec('DEL /S /Q "' + path.normalize(this.app.cache.directory) + '"', function() {
-			console.log("done clearing cache");
-			next();
-		});
+
+		async.forEach(dirs, function(dir, next) {
+			console.log(dir)
+			exec('DEL /S /Q "' + path.normalize(dir) + '"', function() {
+				console.log("done clearing cache");
+				next();
+			});	
+		}, next);
+		
 	}
 });

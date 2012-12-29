@@ -19,8 +19,6 @@ var commands = {
 		if(!options.width) options.width = 500;
 		if(!options.height) options.height = 400;
 
-		// options.left = Math.round(screen.width/2 - options.width/2);
-		// options.top = Math.round(screen.height/3 - options.height/2);
 		//kango.dispatchMessage("openWindow", options);
 		var px = window.screenX,
 		py = window.screenY,
@@ -28,7 +26,7 @@ var commands = {
 		ph = window.innerHeight;
 
 		var left = Math.round((pw-options.width)/2+px),
-		top = Math.round((ph-options.height)/3+py);
+		top = Math.round((ph-options.height)/3 +py);
 
 
 		window.open(options.url, "_blank", sprintf("width=%d,height=%d,left=%d,top=%d,status=0,titlebar=0,toolbar=0,menubar=0,resizable=1", options.width, options.height, left, top));
