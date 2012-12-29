@@ -173,8 +173,6 @@ module.exports = structr(EventEmitter, {
 		var self = this,
 		startTime = Date.now();
 
-		console.log("FFFFF " + startTime);
-
 		return {
 			test: startTime,
 			search: search,
@@ -185,6 +183,9 @@ module.exports = structr(EventEmitter, {
 				self._setWindow(window);
 			},
 			popupWindow: function(winProps) {
+
+				//is popup? don't popup.
+				if(!self._screenId)
 				self._popupWindow(winProps);
 			},
 			close: function() {
@@ -365,7 +366,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_popupWindow": function(w) {
-		this.commands.emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this.puppeteer.host + "&token=" + this.puppeteer.token + "&screen=" + w.id+"&app="+this.options.app+"&version="+this.options.version, width: w.width, height: w.height });
+		this.commands.emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this.puppeteer.host + "&token=" + this.puppeteer.token + "&screen=" + w.id+"&app="+this.options.app+"&version="+this.options.version, width: w.width - 8, height: w.height - 26 });
 	},
 
 	/**

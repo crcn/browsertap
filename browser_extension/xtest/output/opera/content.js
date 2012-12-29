@@ -18,9 +18,34 @@ var commands = {
 		options.type = "popup";
 		if(!options.width) options.width = 500;
 		if(!options.height) options.height = 400;
-		kango.dispatchMessage("openWindow", options);
+
+		// options.left = Math.round(screen.width/2 - options.width/2);
+		// options.top = Math.round(screen.height/3 - options.height/2);
+		//kango.dispatchMessage("openWindow", options);
+		var px = window.screenX,
+		py = window.screenY,
+		pw = window.innerWidth,
+		ph = window.innerHeight;
+
+		var left = Math.round((pw-options.width)/2+px),
+		top = Math.round((ph-options.height)/3+py);
+
+
+		window.open(options.url, "_blank", sprintf("width=%d,height=%d,left=%d,top=%d,status=0,titlebar=0,toolbar=0,menubar=0,resizable=1", options.width, options.height, left, top));
 	}
 };
+
+
+function sprintf() {
+	var args = Array.prototype.slice.call(arguments, 0),
+	str = args.shift();
+
+	while(args.length) {
+		str = str.replace(/%\w/, args.shift());
+	}
+
+	return str;
+}
 
 var dispatchEvent = function(){ };
 
