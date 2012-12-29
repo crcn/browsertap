@@ -11,7 +11,7 @@ module.exports = {
 					"window.allowMultiple": true,
 					"window.searchMethod": "title",
 					"type": "browser",
-					"window.openNew": "-new-window %s",
+					"window.openNew": "%s",
 					"window.getAppName": function(win) {
 						return win.process.path.match(/(Safari\s[^\\]+)/)[1];
 					},
