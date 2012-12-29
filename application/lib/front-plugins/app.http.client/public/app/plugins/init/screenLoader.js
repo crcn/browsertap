@@ -136,10 +136,11 @@ module.exports = structr(EventEmitter, {
 					console.error(err);
 				}
 
-				con.open({ name: self._appName = self.options.app, version: self._appVersion = self.options.version, arg: open }, outcome.s(function(client) { 
+
+				con.open({ name: self._appName = self.options.app, version: self._appVersion = self.options.version, arg: open, window: self._getClient(null, false) }, outcome.s(function(client) { 
 					console.log("loaded app");
 					self._trackBrowser("Browser Open");
-					client.setWindow(self._getClient(null, false));
+					// client.setWindow(self._getClient(null, false));
 					self._ignoreForceClose = false;
 				}));	
 			});
