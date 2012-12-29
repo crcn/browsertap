@@ -101,18 +101,14 @@ module.exports = structr({
 			}),
 			on.success(function() {
 				logger.info(sprintf("opening app with arg: %s", arg));
-				try {
-
 				this.app.reopen(arg, this);
-			}catch(e) {
-				console.error(e)
-			}
 			}),
 			next
 		);
 	},
 
 	/**
+	 * adds a native window to a particular application
 	 */
 
 	"step addWindow": function(win, callback) {
