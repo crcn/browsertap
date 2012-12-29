@@ -4,7 +4,7 @@ module.exports = {
 		"thenRun": [
 			{
 				"set": {
-					"cache.directory": "C:/Users/Administrator/AppData/Local/Mozilla",
+					"cache.directory": ["C:/Users/Administrator/AppData/Local/Mozilla","C:/Users/Administrator/AppData/Roaming/Mozilla"],
 					"process.names": ["firefox*"],
 					"process.cannotRunWith": ["firefox"],
 					"window.classes": [""],

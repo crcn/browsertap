@@ -4,7 +4,7 @@ module.exports = {
 		"thenRun": [
 			{
 				"set": {
-					"cache.directory": "C:/Users/Administrator/AppData/Local/Apple Computer",
+					"cache.directory": ["C:/Users/Administrator/AppData/Local/Apple Computer","C:/Users/Administrator/AppData/Roaming/Apple Computer"],
 					"process.names": ["safari*"],
 					"process.cannotRunWith": ["safari"],
 					"window.classes": [""],
