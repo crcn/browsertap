@@ -95,7 +95,6 @@ module.exports = structr(EventEmitter, {
 					app.windows()[0].openNewWindow(options.arg);
 					callback(null, app);
 				} else {
-
 					this();
 				}
 			}),
