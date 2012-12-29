@@ -1,6 +1,7 @@
 var structr = require("structr"),
 Client = require("./client"),
-NativeWindows = require("./nativeWindows");
+NativeWindows = require("./nativeWindows"),
+WindowBinder = require("./windowBinder");
 
 module.exports = structr({
 
@@ -11,6 +12,7 @@ module.exports = structr({
 		this.clients = [];
 		this.puppet = puppet;
 		this.nativeWindows = new NativeWindows(this, puppet.wkm);
+		this._binder = new WindowBinder({ port: 3986 });
 	},
 
 	/**

@@ -57,21 +57,12 @@ module.exports = structr(EventEmitter, {
 
 	"set": function(window) {
 
-		//console.log(window.search);
-		//console.log(new Error().stack)
-
-
-		//remove any private properties
-		if(window.search)
-		for(var s in window.search) {
-			if(s.substr(0, 1) == "_") delete window.search[s];
-		}
-
+		//window already exists? dispose of it.
 		if(this._clientWindow) {
 			this._clientWindow.dispose();
 		}
 
-		logger.info("add client window");
+		logger.info("set main client window");
 		var wb = this._clientWindow = new WindowBridge(this, window),
 		self = this;
 

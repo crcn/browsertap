@@ -56,18 +56,26 @@ module.exports = structr(EventEmitter, {
 		this.height    = window.height;
 		this.vks       = _.values(wkme.keyboard_vk);
 		this._apps     = windows._apps;
-		this.closed = false;
-
-
-		this.style     = {
-			maximized: !!(window.style & windowStyles.WS_MAXIMIZE),
-			sizeBox: !!(window.style & windowStyles.WS_SIZEBOX)
-		};
-
+		this.closed    = false;
 
 		this._windows = windows;
 		this._con = windows._con;
 		this._rtmp = windows._options.rtmp;
+
+
+		this.style    = {};
+		this.extStyle = {};
+
+		for(var key in windowStyles) {
+			if(key.substr(0, 5) === "WS_EX") {
+				this.extStyle[key.substr(6).toLowerCase()] = !!(window.extStyle & windowStyles[key]);
+			} else {
+				this.style[key.substr(3).toLowerCase()] = !!(window.style & windowStyles[key]);
+			}
+		}
+
+		console.log(this.style);
+		console.log(this.extStyle);
 
 	},
 
