@@ -15,7 +15,16 @@ exports.plugin = function(bark, commands) {
 
 				//never close
 				bark.clickToClose("Click anywhere to generate new window", function() {
-					window.open(options.url, "_blank", sprintf("width=%d,height=%d,status=0,titlebar=0,toolbar=0,menubar=0,resizable=1", options.width, options.height));
+
+				var px = window.screenX,
+				py = window.screenY,
+				pw = window.innerWidth,
+				ph = window.innerHeight;
+
+				var left = Math.round((pw-options.width)/2+px),
+				top = Math.round((ph-options.height)/3+py);
+
+					window.open(options.url, "_blank", sprintf("width=%d,height=%d,left=%d,top=%d,status=0,titlebar=0,toolbar=0,menubar=0,resizable=1", options.width, options.height, left, top));
 				});
 			}
 		);

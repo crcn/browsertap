@@ -24,5 +24,7 @@ kango.browser.addEventListener(kango.browser.event.TAB_CHANGED, function(event) 
 
 kango.addMessageListener("openWindow", function(event) {
 	//TODO - check sec
-	kango.browser.windows.create(event.data);
+	event.data.left = 200;
+	event.data.top = 200;
+	var win = kango.browser.windows.create(event.data);
 })

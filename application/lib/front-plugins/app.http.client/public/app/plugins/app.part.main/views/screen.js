@@ -73,7 +73,7 @@ module.exports = require("../../../views/base").extend({
 		this._window.bindProxy(_.bind(this.onProxy, this));
 
 		//do NOT resize before the first framerate arrives. This causes a delay
-		// this.onResize();
+		//this.onResize();
 		this._listenToWindow();
 		this._keysDown = [];
 	},
@@ -91,7 +91,6 @@ module.exports = require("../../../views/base").extend({
 	 */
 
 	"_createBindings": function() {
-
 		return [
 			this.$window.resize(_.bind(this.onResize, this)),
 			this.$window.bind("mousewheel", _.throttle(_.bind(this.onDocumentScroll, this), 30)),
@@ -189,8 +188,6 @@ module.exports = require("../../../views/base").extend({
 
 		//don't resize if nothing's changed
 		if(!force && win.width == w && win.height == h) return;
-
-		console.log("RESIZE")
 
 		win.resize(0, 0, w, h);
 	}, 500),
