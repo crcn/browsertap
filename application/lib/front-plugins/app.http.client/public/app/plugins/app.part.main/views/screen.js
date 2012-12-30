@@ -253,6 +253,7 @@ module.exports = require("../../../views/base").extend({
 	},
 	"onWindowResize": function(data) {
 
+		this.windowDims = data;
 		if(this._hudVisible) return;
 
 		if(this.resizable) {
@@ -270,7 +271,6 @@ module.exports = require("../../../views/base").extend({
 			self.$hud.transit({ opacity: 1 }, 2000);
 		}, 500, this);
 
-		this.windowDims = data;
 	},
 	"onProxy": function(proxy) {
 		this.proxy = proxy;

@@ -22,9 +22,10 @@ package
 	import flash.utils.*;
 	import flash.system.System;
 	import flash.desktop.*;
+	import flash.filters.*;
 
 	
-		[SWF(frameRate=30,backgroundColor='#FFFFFF')]
+		[SWF(frameRate=30,backgroundColor='#CFCFCF')]
 	
 	public class DesktopPlayer extends Sprite
 	{
@@ -43,6 +44,7 @@ package
 		private var _copyPaste:TextField;
 		private var _mask:Sprite;
 		private var _padding:Object;
+		private var _border:Sprite;
 		
 		
 		
@@ -62,7 +64,9 @@ package
 			this._copyPaste.type = TextFieldType.INPUT;
 			this._copyPaste.x = 500;
 			this._mask = new Sprite();
+			this._border = new Sprite();
 			this._padding = { top: 0, right: 0, left: 0, bottom: 0};
+			this.addChild(this._border);
 			this.addChild(this._mask);
 			this.addChild(this._copyPaste);
 			
@@ -208,6 +212,7 @@ package
 			
 			this._stream.play(this._channel);
 			this.addChildAt(this._video, 0);
+			this.addChildAt(this._border, 0);
 			
 			this.onStageResize();
 		}
@@ -258,10 +263,10 @@ package
 		{
 			if(!this._video) return;
 				
-			this._video.x = 0;//-this._padding.left;//Math.floor(this.stage.stageWidth / 2 - this._video.width / 2);
-			this._video.y = 0;//-this._padding.top;//Math.floor(this.stage.stageHeight / 2 - this._video.height / 2);
-			this._mask.x = this._video.x;
-			this._mask.y = this._video.y;
+			this._video.x = Math.floor(this.stage.stageWidth / 2 - this._video.width / 2);
+			this._video.y = Math.floor(this.stage.stageHeight / 2 - this._video.height / 2);
+			this._mask.x = this._border.x = this._video.x;
+			this._mask.y = this._border.y = this._video.y;
 			
 			//this._video.width = this.stage.stageWidth;
 			//this._video.height = this.stage.stageHeight;
@@ -339,6 +344,16 @@ package
 				drawRect(obj.left, obj.top, this._video.width - obj.left - obj.right, this._video.height - obj.top - obj.bottom);
 				endFill();
 			}
+
+			with(this._border.graphics) 
+			{
+				clear();
+				beginFill(0);
+				drawRect(obj.left, obj.top, this._video.width - obj.left - obj.right, this._video.height - obj.top - obj.bottom);
+				endFill();
+			}
+
+			//this._border.filters = [new GlowFilter(0, 1, 6, 6, 2, 1)];
 		}
 
 		private function _checkFramerate():void 
