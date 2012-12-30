@@ -11,8 +11,8 @@ a{color:#c71400;}
 .hud{width:100%;height:100%;position:absolute;top:0px;}
 .hud>object{position:absolute;top:0px;}
 .hud-body{position:absolute;top:0px;}
-.app-switcher{visibility:hidden;z-index:9999;top:200px;position:relative;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;-khtml-border-radius:10px;display:block;margin-left:auto;margin-right:auto;height:120px;}
-.app-switcher-background{z-index:9999;background-color:#000;filter:alpha(opacity=0);-moz-opacity:0.75;-khtml-opacity:0.75;opacity:0.75;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;-khtml-border-radius:10px;width:100%;height:100%;}
+.app-switcher{visibility:hidden;z-index:9999;top:200px;position:absolute;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;-khtml-border-radius:10px;left:50%;height:120px;}
+.app-switcher-background{z-index:9999;background-color:rgba(0, 0, 0, 0.75);border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;-khtml-border-radius:10px;position:relative;left:-50%;width:100%;height:100%;}
 .app-switcher-selectable{width:100px;height:120px;position:absolute;top:0px;background-position:center;background-repeat:no-repeat;}
 .app-switcher-item{float:left;width:100px;height:120px;padding-left:6px;cursor:pointer;}
 .app-switcher-selected{visibility:hidden;border:2px solid white;position:absolute;top:0px;background-color:#222;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;-khtml-border-radius:10px;filter:alpha(opacity=0);-moz-opacity:0.95;-khtml-opacity:0.95;opacity:0.95;width:100px;height:102px;margin-top:8px;}

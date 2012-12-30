@@ -104,9 +104,9 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 
 			screen.usePadding(usePadding);
 
-			setTimeout(function() {
+			screen.onReady = function() {
 				loadingView.hideNotification();
-			}, 1000);
+			}
 		});
 	});
 

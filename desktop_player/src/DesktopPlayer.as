@@ -266,7 +266,6 @@ package
 			//this._video.width = this.stage.stageWidth;
 			//this._video.height = this.stage.stageHeight;
 
-		//	ExternalInterface.call('desktopEvents.resize', { width: this._video.width, height: this._video.height });
 			this._debugInfo.y = this.stage.stageHeight - 200;
 		}
 		
@@ -303,6 +302,7 @@ package
 			if(this._padding) this.setPadding(this._padding);
 
 			this.stage.frameRate = obj.frameRate;
+			ExternalInterface.call('desktopEvents.resize', { width: this._video.width, height: this._video.height });
 			onStageResize();
 		}
 
