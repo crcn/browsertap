@@ -68,6 +68,9 @@ module.exports = require("../../../views/base").extend({
 			disp.addBinding(binding);
 		});
 
+		this.$hud.css({ opacity: 0 });
+
+
 		this._disposable.addInterval(setInterval(_.bind(this.syncScrollInfo, this), 2000));
 		this._disposable.addInterval(setInterval(_.bind(this._changeVideoQuality, this), 200));
 		this._window.bindProxy(_.bind(this.onProxy, this));
@@ -108,7 +111,7 @@ module.exports = require("../../../views/base").extend({
 		window.desktopEvents = {
 			setClipboard: _.bind(this.setClipboard, this),
 			//keyDown: _.bind(this.onKeyDown, this),
-			//resize: _.bind(this.onWindowResize, this),
+			resize: _.bind(this.onWindowResize, this),
 			framerateChange: _.bind(this.onFrameRateChange, this)
 		};
 	},
@@ -164,7 +167,6 @@ module.exports = require("../../../views/base").extend({
 		}
 
 		this.$hud.css({
-			opacity: 1,
 			width: this.$window.width() + (padding.left || 0) + (padding.right || 0) + (this._useNativeScroller ? 17 : 0),
 			height: this.$window.height() + (padding.top || 0) + (padding.bottom || 0),
 			left: -padding.left,
@@ -246,8 +248,23 @@ module.exports = require("../../../views/base").extend({
 		this._window.keybdEvent(data);
 	},
 	"onWindowResize": function(data) {
-		this.windowDims = data;
-		this.onResize();
+
+		if(this._locked || this._hudVisible) return;
+		//this.windowDims = data;
+		//this.onResize();
+
+
+		if(this.$hud.width() > data.width || this.$hud.height() > data.height) return;
+
+		this._hudVisible = true;
+
+		//wait for the rtmp stream to catch up
+		setTimeout(function(self) {
+			self.$hud.css({ opacity: 0 });
+			self.$hud.transit({ opacity: 1 }, 2000);
+		}, 500, this);
+
+		console.log(JSON.stringify(data));
 	},
 	"onProxy": function(proxy) {
 		this.proxy = proxy;
