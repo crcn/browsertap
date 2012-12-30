@@ -25,7 +25,11 @@ module.exports = require("../../../views/base").extend({
 		this._numFrameRates = 0;
 		this._locked = true;
 		this._usePadding = false;
+		this.resizable = !!this._window.style.sizebox;
 
+		console.log(this._window.style);
+		console.log(this._window.extStyle);
+		console.log(this.resizable);
 
 		var self = this;
 
@@ -76,7 +80,7 @@ module.exports = require("../../../views/base").extend({
 		this._window.bindProxy(_.bind(this.onProxy, this));
 
 		//do NOT resize before the first framerate arrives. This causes a delay
-		//this.onResize();
+		this.onResize(false, false);
 		this._listenToWindow();
 		this._keysDown = [];
 	},
@@ -150,7 +154,7 @@ module.exports = require("../../../views/base").extend({
 
 		this.proxy.scrollbar.to(this.$document.scrollLeft(), this.$document.scrollTop());
 	}, 30),
-	"onResize": _.debounce(function(force) {
+	"onResize": _.debounce(function(force, sendToServer) {
 		var win = this._window,
 		padding = _.extend({}, win.app.padding),
 		self    = this;
@@ -158,6 +162,7 @@ module.exports = require("../../../views/base").extend({
 		self._realPadding = padding;
 
 		this._locked = false;
+
 
 		if(this.options.loader.options.screen || !this._usePadding) {
 			padding.top = 22;
@@ -177,7 +182,6 @@ module.exports = require("../../../views/base").extend({
 		var w = this.$hud.width(),
 		h = this.$hud.height();
 
-
 		try {
 			$(".hud-body").find("object")[0].setPadding(padding);
 			// $(".hud-body").find("object").refresh();
@@ -185,11 +189,11 @@ module.exports = require("../../../views/base").extend({
 			
 		}
 
-
-
-
+		if(sendToServer === false) return;
 		//don't resize if nothing's changed
+		if(!this.resizable) return win.resize(0, 0, win.width, win.height);
 		if(!force && win.width == w && win.height == h) return;
+
 
 		win.resize(0, 0, w, h);
 	}, 500),
@@ -249,12 +253,12 @@ module.exports = require("../../../views/base").extend({
 	},
 	"onWindowResize": function(data) {
 
-		if(this._locked || this._hudVisible) return;
-		//this.windowDims = data;
-		//this.onResize();
+		if(this._hudVisible) return;
 
-
-		if(this.$hud.width() > data.width || this.$hud.height() > data.height) return;
+		if(this.resizable) {
+			if(this._locked) return;
+			if(this.$hud.width() > data.width || this.$hud.height() > data.height) return;
+		}
 
 		this._hudVisible = true;
 
@@ -266,7 +270,7 @@ module.exports = require("../../../views/base").extend({
 			self.$hud.transit({ opacity: 1 }, 2000);
 		}, 500, this);
 
-		console.log(JSON.stringify(data));
+		this.windowDims = data;
 	},
 	"onProxy": function(proxy) {
 		this.proxy = proxy;
