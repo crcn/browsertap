@@ -2,17 +2,18 @@
 	visibility: hidden;
 	z-index: 9999;
 	top: 200px;
-	position: relative;
+	position: absolute;
 	.rounded(10px);
-	.centered();
+	left: 50%;
 	height: 120px;
 }
 
 .app-switcher-background {
 	z-index: 9999;
-	background-color: #000;
-	.opac(75);
+	background-color: rgba(0, 0, 0, 0.75);
 	.rounded(10px);
+	position: relative;
+	left: -50%;
 	width: 100%;
 	height: 100%;
 }
