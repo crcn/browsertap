@@ -131,6 +131,10 @@ module.exports = structr(EventEmitter, {
 	"_addWindow": function(window) {
 
 		if(this._blackListSifter.test(window)) {
+			
+			//is popup? move it ON SCREEN - by default popups are moved to the center of the screen.
+			if(window.extStyle & windowStyles.WS_EX_TOPMOST) new Window(window, this).move(200, 200);
+
 			console.log("black listed class=%s, title=%s", window.className, window.title);
 			return;
 		}
