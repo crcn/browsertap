@@ -258,6 +258,8 @@ module.exports = require("../../../views/base").extend({
 
 		this._hudVisible = true;
 
+		if(this.onReady) this.onReady();
+
 		//wait for the rtmp stream to catch up
 		setTimeout(function(self) {
 			self.$hud.css({ opacity: 0 });
