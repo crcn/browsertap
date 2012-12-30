@@ -55,9 +55,9 @@ module.exports = structr(EventEmitter, {
 			function() {
 				self._open(options, this);
 			},
-			function() {
+			on.s(function() {
 				callback();
-			}
+			})
 		);
 	},
 
@@ -83,7 +83,7 @@ module.exports = structr(EventEmitter, {
 				console.log("finding app %s %s", options.name, options.version);
 				apps.findApp({ name: options.name, version: options.version }, this);
 			},
-			on.success(function(app) {
+			on.s(function(app) {
 
 				if(window) {
 					window.search = { "app.name": app.name, "app.version": app.version, "style.minimizebox": true };
@@ -98,11 +98,11 @@ module.exports = structr(EventEmitter, {
 					this();
 				}
 			}),
-			on.success(function() {
+			on.s(function() {
 				console.log("opening %s %s", options.name, options.version);
 				apps.open(options, this);
 			}),
-			on.success(function(app) {
+			on.s(function(app) {
 				callback(null, app);
 			})
 		);
