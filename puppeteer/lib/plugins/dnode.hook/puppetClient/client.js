@@ -86,7 +86,7 @@ module.exports = structr(EventEmitter, {
 			on.success(function(app) {
 
 				if(window) {
-					window.search = { "app.name": app.name, "app.version": app.version, "style.sizebox": true, "style.maximizebox": true };
+					window.search = { "app.name": app.name, "app.version": app.version, "style.minimizebox": true };
 					self.windows.set(window);
 				}
 
