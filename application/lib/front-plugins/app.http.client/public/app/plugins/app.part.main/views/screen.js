@@ -27,10 +27,6 @@ module.exports = require("../../../views/base").extend({
 		this._usePadding = false;
 		this.resizable = !!this._window.style.sizebox;
 
-		console.log(this._window.style);
-		console.log(this._window.extStyle);
-		console.log(this.resizable);
-
 		var self = this;
 
 
