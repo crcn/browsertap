@@ -237,6 +237,7 @@ module.exports = structr(EventEmitter, {
 
 		//debugging - TODO - fucking FIX red5 on the local machine. This is fucking stupid code.
 	    //rtmpHost = localhost = "10.0.1.30";
+	    rtmpHost = lcoalhost = "54.243.206.252";
 
 		var output =  "rtmp://" + rtmpHost + ":1935/live/" + streamId;
 
