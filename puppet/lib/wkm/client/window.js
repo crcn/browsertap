@@ -240,6 +240,8 @@ module.exports = structr(EventEmitter, {
 
 		var output =  "rtmp://" + rtmpHost + ":1935/live/" + streamId;
 
+		//output = output.replace("rtmp", "http").replace(1935, 9999);
+
 		console.log("recording window to %s", output);
 
 		this._con.execute("startRecordingWindow", _.extend(options, { id: this.id, output: "rtmp://" + localhost + ":1935/live/" + streamId }));

@@ -325,6 +325,7 @@ namespace Screens
 		//_videoCodecCtx->qmin = 1;
 		//_videoCodecCtx->qmax = 3;
 		//_videoCodecCtx->rc_qsquish = 1;
+		//_videoCodecCtx->partitions|=X264_PART_I8X8+X264_PART_I4X4+X264_PART_P8X8+X264_PART_B8X8; // partitions=+parti8x8+parti4x4+partp8x8+partb8x8
 		
 		_videoCodecCtx->flags2 |= CODEC_FLAG2_FAST;//|CODEC_FLAG2_STRICT_GOP|CODEC_FLAG2_DROP_FRAME_TIMECODE|CODEC_FLAG2_SKIP_RD;
 		
@@ -347,6 +348,8 @@ namespace Screens
 		//makes no difference in quality.
 		//av_opt_set(_videoCodecCtx->priv_data, "crf", "100", 0);
 		//av_opt_set(_videoCodecCtx->priv_data, "cqp", "20", 0);
+		//av_opt_set(_videoCodecCtx->priv_data, "preset", "ultrafast", 0);
+		//av_opt_set(_videoCodecCtx->priv_data, "tune", "zerolatency", 0);
 
 			
 		_videoCodecCtx->me_subpel_quality = 0;
@@ -355,6 +358,9 @@ namespace Screens
 		//_videoCodecCtx->qmax = 10;
 		//_videoCodecCtx->me_method = ME_ZERO;
 		_videoCodecCtx->me_method = ME_EPZS;
+		//_videoCodecCtx->me_cmp = 1;
+		//_videoCodecCtx->me_range = 16;
+		//_videoCodecCtx->refs = 3;
 
 
 		//_videoCodecCtx->max_qdiff = 3;
@@ -362,6 +368,7 @@ namespace Screens
 		//_videoCodecCtx->b_quant_factor = 1.25;
 		//_videoCodecCtx->b_quant_offset = 1.25;
 		_videoCodecCtx->pix_fmt       = ENCODE_PX_FORMAT;
+		//_videoCodecCtx->thread_count = 1;
 		//_videoCodecCtx->compression_level       = -8; //best, -5 = default
 		//_videoCodecCtx->aq_mode       = 0; //best
 		//_videoCodecCtx->qmin       = 1; 
@@ -462,7 +469,7 @@ namespace Screens
 		_outputBuffer = (uint8_t *)av_malloc(_bufferSize);
 
 		_dstPicture = alloc_picture(_videoCodecCtx->pix_fmt, _videoCodecCtx->width, _videoCodecCtx->height);
-		_srcPicture = alloc_picture(PIX_FMT_YUV420P, _videoCodecCtx->width, _videoCodecCtx->height);
+		_srcPicture = alloc_picture(ENCODE_PX_FORMAT, _videoCodecCtx->width, _videoCodecCtx->height);
 
 		if(_dstPicture == NULL || _srcPicture == NULL)
 		{
