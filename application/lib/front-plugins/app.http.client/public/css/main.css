@@ -22,6 +22,6 @@ a{color:#c71400;}
 .pre-launch-notification{text-align:center;width:100%;position:relative;top:200px;}
 .bark-notification{-webkit-perspective:600px;-moz-perspective:600px;-o-perspective:600px;perspective:600px;}
 .alert-modal{background-color:rgba(0, 0, 0, 0.3);}
-.alert-container,.click-to-resume-container{color:#FFF;text-align:center;background-color:rgba(0, 0, 0, 0.7);padding:20px;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;-khtml-border-radius:5px;border:2px solid rgba(255, 255, 255, 0.7);}
+.alert-container,.click-to-resume-container{color:#FFF;text-align:center;background-color:rgba(0, 0, 0, 0.7);padding:20px;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;-khtml-border-radius:5px;border:2px solid rgba(255, 255, 255, 0.7);line-height:1.3;max-width:600px;}
 .alert-container>div{color:#FFF;clear:both;font-size:24px;margin-bottom:8px;padding:5px;}
 .alert-container>a{text-decoration:none;color:#000;font-size:13px;font-weight:700;background-color:#FFF;padding:8px;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;-khtml-border-radius:5px;}

@@ -100,7 +100,7 @@ module.exports = require("../../../views/base").extend({
 	"_createBindings": function() {
 		return [
 			this.$window.resize(_.bind(this.onResize, this)),
-			this.$window.bind("mousewheel", _.throttle(_.bind(this.onDocumentScroll, this), 30)),
+			this.$window.mousewheel(_.throttle(_.bind(this.onDocumentScroll, this), 30)),
 			this.$window.mousedown(_.bind(this.onMouseDown, this)),
 			this.$window.mouseup(_.bind(this.onMouseUp, this)),
 			this.$window.mousemove(_.throttle(_.bind(this.onMouseMove, this), 50)),
@@ -275,12 +275,21 @@ module.exports = require("../../../views/base").extend({
 	"onProxy": function(proxy) {
 		this.proxy = proxy;
 	},
-	"onDocumentScroll": function(e, delta) {
+	"onDocumentScroll": function(e, delta, deltaX, deltaY) {
 		this._scrollDelta = delta;
+
 
 		if(this._useNativeScroller) return;
 
-		this._window.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, this.coords, delta * this._scrollMultiplier);
+
+		var self = this;
+
+		function scroll(type, delta) {
+			self._window.mouseEvent(type, self.coords, delta * self._scrollMultiplier);
+		}
+
+		if(Math.abs(deltaY) > 0) scroll(wkmEvents.mouse.MOUSEEVENTF_WHEEL, deltaY);
+		if(Math.abs(deltaX) > 0) scroll(wkmEvents.mouse.MOUSEEVENTF_HWHEEL, deltaX);
 	},
 	"syncScrollInfo": function() {
 		if(!this.proxy || true) return;

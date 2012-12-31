@@ -34,6 +34,7 @@ exports.plugin = function(bark, commands) {
 			});
 	}
 
+
 	errorHandlers[comerr.codes.UnableToConnect] = function(err) {
 		bark.alert(err.message);
 	}
