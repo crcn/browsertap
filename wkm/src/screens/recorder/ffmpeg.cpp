@@ -355,7 +355,7 @@ namespace Screens
  
 		//_videoCodecCtx->qmin = 1;
 		//_videoCodecCtx->qmax = 10;
-		_videoCodecCtx->me_method = ME_ZERO;
+		_videoCodecCtx->me_method = ME_EPZS;
 		//_videoCodecCtx->weighted_p_pred = 1;
 		//_videoCodecCtx->me_method = ME_EPZS;
 		//_videoCodecCtx->me_cmp = FF_CMP_ZERO;
