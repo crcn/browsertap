@@ -111,6 +111,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_connectApp": function() {
+
 		console.log("loading app %s %s", this.options.app, this.options.version);
 		var con = this._connection, self = this;
 
@@ -119,6 +120,7 @@ module.exports = structr(EventEmitter, {
 			this._ignoreClose = true;
 			if(this.window) this.window.close();
 
+			this.options.open = this.options.open.replace(/:\/+/,"://");
 
 			//we track the host as well - only the host so we can get an idea of what people are doing with the app. Are they testing an app?
 			//is it local? is it https?
