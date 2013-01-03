@@ -17,15 +17,36 @@ module.exports = require("../../../views/base").extend({
 
 		$(this.el).html('<video source="'+url+'.m3u8" width="1024" height="768"></video>');*/
 
+		$el = $(this.el);
+
+		var self = this;
+
 		swfobject.embedSWF(this.src || this.source, 
-		$(this.el).attr("id"),
+		$el.attr("id"),
 		"100%",
 		"100%",
 		"9.0.0",
 		"/swf/expressInstall.swf",
 		JSON.parse(JSON.stringify(this.params())), {
 			backgroundColor: "#FFFFFF"
+		}, {}, function() {
+
+			//beat the race condition
+			setTimeout(function() {
+
+				//check if clickToFlash is installed on the system. If PercentLoaded can't be called, then it is.
+				try {
+					$("#"+id)[0].PercentLoaded();
+				} catch(e) {
+					console.error("flash blocker detected");
+					if(self.options.onFlashBlockerDetected) {
+						self.options.onFlashBlockerDetected();
+					}
+				}
+			}, 1000);
 		});	
+
+
 	},
 	"params": function() {
 		return {};

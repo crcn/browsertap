@@ -16,6 +16,10 @@ exports.plugin = function(server, auth) {
 	server.get("/live", auth.middleware.authCheckpoint, function(req, res) {
 		res.render("screen");
 	});
+
+	server.get("/live-test", function(req, res) {
+		res.render("screen");
+	});
 	
 	server.get("/payment", auth.middleware.authCheckpoint, function(req, res) {
 		res.render("payment");

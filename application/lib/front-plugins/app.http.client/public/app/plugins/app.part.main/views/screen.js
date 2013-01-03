@@ -86,9 +86,18 @@ module.exports = require("../../../views/base").extend({
 	},
 	"prepareChildren": function() {
 		return [
-			this._desktopPlayer = new DesktopPlayer({ el: ".desktop-player", host: this.options.rtmpUrl })
+			this._desktopPlayer = new DesktopPlayer({ el: ".desktop-player", host: this.options.rtmpUrl, onFlashBlockerDetected: _.bind(this._onFlashBlockerDetected, this) })
 		];
 	},
+
+	/**
+	 */
+
+	"_onFlashBlockerDetected": function() {
+		this.$hud.css({ opacity: 1 });	
+		if(this.onReady) this.onReady();
+	},
+
 
 	/**
 	 */
