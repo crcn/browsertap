@@ -145,7 +145,7 @@ namespace Screens
 
 		//if(std::abs(_videoCodecCtx.qmin - qmin) < 5 && std::ab)
 
-		std::cout  << qmin << " " << qmax << " " << diff << " " << outSize << std::endl;
+		//std::cout  << qmin << " " << qmax << " " << diff << " " << outSize << std::endl;
 
 		_videoCodecCtx->qmin = qmin;
 		_videoCodecCtx->qmax = qmax;
@@ -283,12 +283,11 @@ namespace Screens
 		
 		
 		//_videoCodecCtx->flags |= CODEC_FLAG_GRAY;
-		//_videoCodecCtx->flags |= CODEC_FLAG_LOW_DELAY;
 		//_videoCodecCtx->rc_min_rate      = br;// 64 * 1000; //average bit rate
 		_videoCodecCtx->bit_rate      = br; //average bit rate
 		//_videoCodecCtx->rc_max_rate      = br;// 64 * 1000; //average bit rate
-		_videoCodecCtx->qblur      = 1.0;// 64 * 1000; //average bit rate
-		_videoCodecCtx->qcompress      = 1.0;// 64 * 1000; //average bit rate
+		//_videoCodecCtx->qblur      = 1.0;// 64 * 1000; //average bit rate
+		//_videoCodecCtx->qcompress      = 1.0;// 64 * 1000; //average bit rate
 		//_videoCodecCtx->bit_rate_tolerance      = br * 2;// kb * 1000;
 		//_videoCodecCtx->rc_min_rate   = 0; //max bit rate
 		//_videoCodecCtx->rc_max_rate   = 0; //max bit rate
@@ -317,7 +316,6 @@ namespace Screens
 		//_videoCodecCtx->me_method = ME_ZERO;
 		//_videoCodecCtx->qmin = 1;
 		//_videoCodecCtx->qmax = 10;
-		//_videoCodecCtx->coder_type = FF_CODER_TYPE_VLC;
 		
 		//s_videoCodecCtx->qmin = _ctx->qmin;
 		//_videoCodecCtx->qmax = _ctx->qmax;
@@ -327,7 +325,7 @@ namespace Screens
 		//_videoCodecCtx->rc_qsquish = 1;
 		//_videoCodecCtx->partitions|=X264_PART_I8X8+X264_PART_I4X4+X264_PART_P8X8+X264_PART_B8X8; // partitions=+parti8x8+parti4x4+partp8x8+partb8x8
 		
-		_videoCodecCtx->flags2 |= CODEC_FLAG2_FAST;//|CODEC_FLAG2_STRICT_GOP|CODEC_FLAG2_DROP_FRAME_TIMECODE|CODEC_FLAG2_SKIP_RD;
+		_videoCodecCtx->flags2 |= CODEC_FLAG2_FAST;//|CODEC_FLAG2_STRICT_GOP;//|CODEC_FLAG2_DROP_FRAME_TIMECODE|CODEC_FLAG2_SKIP_RD;
 		
 		//_videoCodecCtx->flags |= CODEC_FLAG_LOOP_FILTER|CODEC_FLAG_GRAY;
 		//_videoCodecCtx->me_cmp |= FF_CMP_CHROMA;
@@ -348,6 +346,7 @@ namespace Screens
 		//makes no difference in quality.
 		//av_opt_set(_videoCodecCtx->priv_data, "crf", "100", 0);
 		//av_opt_set(_videoCodecCtx->priv_data, "cqp", "20", 0);
+		//av_opt_set(_videoCodecCtx->priv_data, "weightp", "2", 0);
 		//av_opt_set(_videoCodecCtx->priv_data, "preset", "ultrafast", 0);
 		//av_opt_set(_videoCodecCtx->priv_data, "tune", "zerolatency", 0);
 
@@ -356,10 +355,12 @@ namespace Screens
  
 		//_videoCodecCtx->qmin = 1;
 		//_videoCodecCtx->qmax = 10;
-		//_videoCodecCtx->me_method = ME_ZERO;
 		_videoCodecCtx->me_method = ME_EPZS;
-		//_videoCodecCtx->me_cmp = 1;
-		//_videoCodecCtx->me_range = 16;
+		//_videoCodecCtx->weighted_p_pred = 1;
+		//_videoCodecCtx->me_method = ME_EPZS;
+		//_videoCodecCtx->me_cmp = FF_CMP_ZERO;
+		//_videoCodecCtx->me_sub_cmp = FF_CMP_ZERO;
+		//_videoCodecCtx->me_range = 2;
 		//_videoCodecCtx->refs = 3;
 
 
