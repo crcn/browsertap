@@ -28,7 +28,7 @@ module.exports = require("../../../views/base").extend({
 	"update": function(data) {
 		if(!data) data = {};
 		var img = data.app ? "/img/apps/"+data.app.toLowerCase()+".png" : null, self = this,
-		$ic = $(self.el).find("#icon-inner-container").css({ "visibility": "hidden" });
+		$ic = $(self.el).find("#icon-inner-container");//.css({ "visibility": "hidden" });
 
 
 		$(this.el).find("img").attr("src", img).one("load", function() {
