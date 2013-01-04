@@ -165,7 +165,7 @@ module.exports = structr(EventEmitter, {
 		d.on("error", function(err) {
 			self._connecting = false;
 			self.connection = null;
-			console.error(err);
+			console.error(err.stack);
 			self._commands.emit("error", new comerr.UnableToConnect("Connection dropped with remote desktop"));
 		})
 	}
