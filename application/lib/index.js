@@ -2,6 +2,8 @@ var plugin = require("plugin"),
 maestro = require("maestro"),
 _ = require("underscore");
 
+require("outcome").logAllErrors();
+
 
 var maestroConfig = require("/usr/local/etc/maestro/config.json");
 

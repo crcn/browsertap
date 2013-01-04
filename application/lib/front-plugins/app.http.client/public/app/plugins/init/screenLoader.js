@@ -11,10 +11,13 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"__construct": function(puppeteer, commands) {
+	"__construct": function(puppeteer, commands, states) {
 		this.commands = commands;
 		this.puppeteer = puppeteer;
+		this.states = states;
 		this.connect();
+
+		// var q = Url.prase()
 
 		//default icon
 		this.options = { app: "chrome", version: 19, open: "http://google.com" };
@@ -81,12 +84,19 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"step load": function(options, next) {
+	"load": function(options, next) {
 		if(this._lockLoading) return;
 		this._trackStopBrowser();
 		_.extend(this.options, options);
 		this.startDate = Date.now();
 		this._trackBrowser("Browser Start");
+		this._load(next);
+	},
+
+	/**
+	 */
+
+	"step _load": function(next) {
 
 		if(this.options.screen) {
 			this._lockLoading = true;
@@ -96,6 +106,7 @@ module.exports = structr(EventEmitter, {
 		}
 		next();
 	},
+
 
 	/**
 	 */
@@ -114,6 +125,7 @@ module.exports = structr(EventEmitter, {
 
 		console.log("loading app %s %s", this.options.app, this.options.version);
 		var con = this._connection, self = this;
+
 
 		if(this._appName != this.options.app || this._appVersion != this.options.version) {
 			this.emit("loading");
@@ -151,14 +163,13 @@ module.exports = structr(EventEmitter, {
 			if(isTunnel) {
 				this.emit("tunneling", this.options.open);
 			}
-
-			return;
 		} else 
 		if(this._proxy) {
 			console.log("set proxy location")
 			// this._proxy.location.set(this.options.open);
 			this._setProxyLocation(this.options.open);
 		}
+		this.states.set("opening_app", "Opening " + this.options.app + " " + this.options.version);
 	},
 
 	/**

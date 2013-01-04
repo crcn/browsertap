@@ -3,8 +3,10 @@ qs = require("querystring"),
 Url = require("url");
 
 
-exports.require = ["router", "bark", "app.part.main", "puppeteer", "commands"];
-exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader) {
+
+
+exports.require = ["router", "bark", "states", "app.part.main", "puppeteer", "commands"];
+exports.plugin = function(router, bark, states, mainPlugin, puppeteer, commands, loader) {
 
 	// var query = qs.parse(String(window.location).split("")
 
@@ -12,14 +14,23 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 		"pull -http live": function(req, res) {
 			loader.load(req.query);
 			res.end();
+			updateLoaderOps();
 		}
 	});
 
 
-	var loader = new ScreenLoader(puppeteer, commands), screen, appSwitcher,
-	loadingView = new mainPlugin.views.Loader({ el: ".loader" });
+	function updateLoaderOps() {
+		loadingView.update({ app: loader.options.app, version: loader.options.version });
+	}
+
+
+	var loader = new ScreenLoader(puppeteer, commands, states), screen, appSwitcher,
+	loadingView = new mainPlugin.views.Loader({ el: ".loader", states: states });
 	var expc = new mainPlugin.views.ExpandContract({ el: ".expand-contract" }),
 	usePadding = true;
+
+
+		loadingView.showNotification();
 
 
 	loader.on("tunneling", function(file) {
@@ -62,8 +73,8 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 			screen = null;
 		}
 		$(".pre-launch-notification").remove();
-		loadingView.update({ app: loader.options.app, version: loader.options.version });
 		loadingView.showNotification();
+		updateLoaderOps();
 	});
 
 
@@ -91,6 +102,7 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 			}
 		}
 
+		states.set("broadcasting_window");
 
 		win.startRecording(q, function(err, info) {
 
@@ -107,6 +119,7 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 
 			screen.onReady = function() {
 				loadingView.hideNotification();
+				states.set("complete", loader.options.app + " " + loader.options.version);
 			}
 		});
 	});

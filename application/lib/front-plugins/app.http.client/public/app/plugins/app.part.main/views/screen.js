@@ -13,7 +13,8 @@ module.exports = require("../../../views/base").extend({
 		disp = this._disposable = disposable.create(), self = this;
 
 		this._window = this.options.window;
-		this.$hud = this.$el.find(".hud-body");
+		this.$hud = this.$el;
+		this.$hudBody = this.$el.find(".hud-body");
 		this.$window = $(window);
 		this.$html = $("html");
 		this.$document = $(document);
@@ -68,7 +69,7 @@ module.exports = require("../../../views/base").extend({
 			disp.addBinding(binding);
 		});
 
-		this.$hud.css({ opacity: 0 });
+		this.$hudBody.css({ opacity: 0 });
 
 
 		this._disposable.addInterval(setInterval(_.bind(this.syncScrollInfo, this), 2000));
@@ -94,7 +95,7 @@ module.exports = require("../../../views/base").extend({
 	 */
 
 	"_onFlashBlockerDetected": function() {
-		this.$hud.css({ opacity: 1 });	
+		this.$hudBody.css({ opacity: 1 });	
 		if(this.onReady) this.onReady();
 	},
 
@@ -176,16 +177,18 @@ module.exports = require("../../../views/base").extend({
 			padding.bottom = 4;
 		}
 
-		this.$hud.css({
+		this.$hudBody.css({
 			width: this.$window.width() + (padding.left || 0) + (padding.right || 0) + (this._useNativeScroller ? 17 : 0),
 			height: this.$window.height() + (padding.top || 0) + (padding.bottom || 0),
 			left: -padding.left,
 			top: -padding.top,
-			position: "fixed"
+			position: "absolute"
 		});
 
-		var w = this.$hud.width(),
-		h = this.$hud.height();
+		this.$hud
+
+		var w = this.$hudBody.width(),
+		h = this.$hudBody.height();
 
 		try {
 			$(".hud-body").find("object")[0].setPadding(padding);
@@ -209,12 +212,14 @@ module.exports = require("../../../views/base").extend({
 		var padding = this._realPadding || this._window.app.padding;
 
 
-		var coords = { x: e.pageX + (padding.left || 0) - this.$document.scrollLeft(), y: e.pageY + (padding.top || 0)  - this.$document.scrollTop() };
+
+		var coords = { x: e.pageX + (padding.left || 0) - this.$document.scrollLeft(), y: e.pageY + (padding.top || 0)  - this.$document.scrollTop() - this.$hud.offset().top };
 
 		if(this.windowDims.width && this.windowDims.height) {
-			coords.x = coords.x - (this.$hud.width()/2 - this.windowDims.width/2);
-			coords.y = coords.y - (this.$hud.height()/2 - this.windowDims.height/2);
+			coords.x = coords.x - (this.$hudBody.width()/2 - this.windowDims.width/2);
+			coords.y = coords.y - (this.$hudBody.height()/2 - this.windowDims.height/2);
 		}
+
 
 		if(this.coords) {
 			this._mouseMoveDelta = Math.round(Math.sqrt(Math.pow(this.coords.x - coords.x, 2) + Math.pow(this.coords.y - coords.y, 2)))
@@ -263,7 +268,7 @@ module.exports = require("../../../views/base").extend({
 
 		if(this.resizable) {
 			if(this._locked) return;
-			if(this.$hud.width() > data.width || this.$hud.height() > data.height) return;
+			if(this.$hudBody.width() > data.width || this.$hudBody.height() > data.height) return;
 		}
 
 		this._hudVisible = true;
@@ -272,8 +277,8 @@ module.exports = require("../../../views/base").extend({
 
 		//wait for the rtmp stream to catch up
 		setTimeout(function(self) {
-			self.$hud.css({ opacity: 0 });
-			self.$hud.transit({ opacity: 1 }, 2000);
+			self.$hudBody.css({ opacity: 0 });
+			self.$hudBody.transit({ opacity: 1 }, 2000);
 		}, 500, this);
 
 	},

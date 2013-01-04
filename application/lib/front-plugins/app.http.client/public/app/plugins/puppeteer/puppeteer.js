@@ -13,10 +13,10 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"__construct": function(host, bark, commands) {
+	"__construct": function(host, states, commands) {
 		this._host = host;
 		this._commands = commands;
-		this._bark = bark;
+		this._states = states;
 	},
 
 	/**
@@ -41,7 +41,7 @@ module.exports = structr(EventEmitter, {
 
 	"onAccount": function(err, account) {
 
-		if(err) return self._commands.emit("error", resp.errors);
+		if(err) return this._commands.emit("error", err);
 
 		this.account = account;
 
@@ -62,15 +62,32 @@ module.exports = structr(EventEmitter, {
 			url: serverUrl,
 			dataType: "json",
 			success: outcome.vine().success(function(puppeteer) {
-				self._attach({ host: "http://" + puppeteer.address + ":8080/browsertap.puppeteer" });
+
+				self.state(puppeteer.state);
+
+				//address exists? it's running
+				if(puppeteer.address && puppeteer.state == "running") {
+					self._attach({ host: "http://" + puppeteer.address + ":8080/browsertap.puppeteer" });
+				} else {
+
+					//otherwise try reloading
+					setTimeout(function() {
+						self.reloadServer();
+					}, 1000 * 2);
+				}
 			}),
 			error: function() {
 				console.log(arguments);
 				console.log("ERROR")
 			}
-		});	
+		});
+	},
 
-		
+	/**
+	 */
+
+	"state": function() {
+		this._states.set.apply(this.states, arguments);
 	},
 
 	/**

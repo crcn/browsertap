@@ -9,9 +9,6 @@
 
 {<content}
 <div class="screen hud"></div>
-<div class="pre-launch-notification">
-	<h3>Launching a new server. This could take up to a minute.</h3>
-</div>
 <div class="screen-cover"></div>
 <div class="app-notification loader">
 </div>
@@ -49,6 +46,11 @@
 				<a>Help</a>
 			</div>
 		</div>
+	</div>
+</div-->
+
+<!--div style="background-color:#CCC; position: absolute; top: 0px; width: 100%;">
+	<div style="background-color:#444; width: 100%; color: #FFF; height: 5px;">
 	</div>
 </div-->
 

@@ -13,6 +13,7 @@ function ready() {
 	params({ }).
 	require(require("./plugins/router")).
 	require(require("./plugins/puppeteer")).
+	require(require("./plugins/states")).
 	require(require("./plugins/commands")).
 	require(require("./plugins/extbrdg")).
 	require(require("./plugins/app.part.main")).

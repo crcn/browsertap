@@ -1,7 +1,8 @@
 var structr = require("structr"),
 step = require("step"),
 outcome = require("outcome"),
-_ = require("underscore");
+_ = require("underscore"),
+request = require("request");
 
 module.exports = structr({
 
@@ -25,11 +26,10 @@ module.exports = structr({
 	 */
 
 	"getFreeServer": function(account, cb) {
-
 		var accountId = String(account._id);
-
 		this._cache.get("fetch-server-" + accountId, _.bind(this._getFreeServer, this, accountId), cb);
 	},
+
 
 	/**
 	 */
@@ -80,10 +80,10 @@ module.exports = structr({
 
 				var next = this;
 
-				//needs to happen so the server can be retreive info
-				server.start(function() {
-					next(null, server);
-				});
+				//start the server - this will be ignored if it's already being started 
+				server.start();
+
+				next(null, server);
 			}),
 			cb
 		);
