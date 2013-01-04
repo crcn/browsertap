@@ -74,6 +74,8 @@ exports.listen = function() {
 		document.title = _id;
 	}, 500);
 
+	document.title = _id;
+
 		/*setInterval(function() {
 			console.log(document.body.clientWidth+" "+document.body.clientHeight)
 		}, 500)*/
