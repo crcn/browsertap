@@ -349,7 +349,7 @@ module.exports = structr(EventEmitter, {
 				if(!proxy) return callback(new Error("Unable to set proxy"));
 				console.log("set proxy location to %s", open);
 				proxy.location.set(open);
-				this.win.refreshProxy(this);
+				// this.win.refreshProxy(this);
 			},
 
 			/**
