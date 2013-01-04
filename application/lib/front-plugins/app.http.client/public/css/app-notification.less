@@ -9,25 +9,33 @@
 	top: 0px;
 }
 #progress-background {
-	background-color: #CCC;
+	background-color: #000;
+}
+
+#icon-container {
+	width: 100%;
+	top: 35px;
+}
+#icon-inner-container {
+	margin: 0 auto;
+	display: inline-block;
 }
 
 #progress {
-	width: 10%;
+	width: 0%;
 	height: 100%;
-	background: #000;
-	position: absolute;
-	top: 0px;
-	.rounded(10px);
+	overflow: hidden;
+	background-repeat: no-repeat;
 }
 
 
 
 .app-notification {
+	clear: none;
 	z-index: 9999;
 	width: 150px;
 	height: 160px;
-	background-color: #222;
+	background-color: #000;
 	position: relative;
 	top: 200px;
 	.rounded(10px);
@@ -35,11 +43,16 @@
 	.opac(0);
 	text-align: center;
 	.centered();
+	img {
+		min-height: 62px;
+		min-width: 62px;
+	}
 }
 
-.app-notification > img {
-	position: relative;
-	top: 35px;
+#prog-bg-img {
+	position: absolute;
+	top: 0px;
+	.opac(25);
 }
 
 .app-notification > div {
