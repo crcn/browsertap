@@ -156,7 +156,7 @@ module.exports = require("../../../views/base").extend({
 	},
 	"onWindowScroll": _.throttle(function() {
 		this._scrollDelta = 1;
-		if(!this._useNativeScroller) return;
+		if(!this._useNativeScroller || true) return;
 
 		this.proxy.scrollbar.to(this.$document.scrollLeft(), this.$document.scrollTop());
 	}, 30),
