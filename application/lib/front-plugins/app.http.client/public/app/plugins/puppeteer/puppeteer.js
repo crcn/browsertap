@@ -165,7 +165,8 @@ module.exports = structr(EventEmitter, {
 		d.on("error", function(err) {
 			self._connecting = false;
 			self.connection = null;
-			self._commands.emit("error", new comerr.UnableToConnect("Unable to connect to a remote desktop"));
+			console.error(err);
+			self._commands.emit("error", new comerr.UnableToConnect("Connection dropped with remote desktop"));
 		})
 	}
 });
