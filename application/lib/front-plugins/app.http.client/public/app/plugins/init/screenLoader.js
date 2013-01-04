@@ -336,8 +336,9 @@ module.exports = structr(EventEmitter, {
 			 * get the CURRENT proxy
 			 */
 
-			function(window) {
-				window.getProxy(this);
+			function(win) {
+				this.win = win;
+				win.getProxy(this);
 			},
 
 			/**
@@ -348,7 +349,7 @@ module.exports = structr(EventEmitter, {
 				if(!proxy) return callback(new Error("Unable to set proxy"));
 				console.log("set proxy location to %s", open);
 				proxy.location.set(open);
-				window.refreshProxy(this);
+				this.win.refreshProxy(this);
 			},
 
 			/**
