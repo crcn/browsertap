@@ -1,6 +1,7 @@
 var plugin = require("plugin"),
 maestro = require("maestro"),
-_ = require("underscore");
+_ = require("underscore"),
+fs = require("fs");
 
 require("outcome").logAllErrors();
 
@@ -11,6 +12,14 @@ var maestroConfig = require("/usr/local/etc/maestro/config.json");
 
 
 exports.start = function(options) {
+
+
+	maestroConfig.http = {
+		sslCerts: {
+			key: fs.readFileSync(__dirname + "/ssl/browsertap_com.key", "utf8"),
+			cert: fs.readFileSync(__dirname + "/ssl/STAR_browsertap_com.crt", "utf8"), 
+			ca: [fs.readFileSync(__dirname + "/ssl/PositiveSSLCA2.crt", "utf8"), fs.readFileSync(__dirname + "/ssl/AddTrustExternalCARoot.crt", "utf8")]		}
+	}
 
 
 	var loader = plugin().
