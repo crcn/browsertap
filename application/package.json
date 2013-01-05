@@ -46,7 +46,7 @@
     "mixpanel": "0.0.x",
     "postmark": "0.1.x",
     "emailify": "0.0.x",
-    "plugin-express": "0.0.x",
+    "plugin-express": "0.1.x",
     "plugin-mongodb": "0.0.x",
     "plugin-express.middleware.dust": "0.0.x",
     "emailer": "0.0.x",

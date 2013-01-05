@@ -14,14 +14,6 @@ var maestroConfig = require("/usr/local/etc/maestro/config.json");
 exports.start = function(options) {
 
 
-	maestroConfig.http = {
-		sslCerts: {
-			key: fs.readFileSync(__dirname + "/ssl/browsertap_com.key", "utf8"),
-			cert: fs.readFileSync(__dirname + "/ssl/STAR_browsertap_com.crt", "utf8"), 
-			ca: [fs.readFileSync(__dirname + "/ssl/PositiveSSLCA2.crt", "utf8"), fs.readFileSync(__dirname + "/ssl/AddTrustExternalCARoot.crt", "utf8")]		}
-	}
-
-
 	var loader = plugin().
 	params({
 	privateMode: true,
@@ -47,7 +39,13 @@ exports.start = function(options) {
 		validateEmailTpl: __dirname + "/front-plugins/app.http.client/views/email/validate_signup.dust",
 		compress: true,
 		cookies: true,
-		xhr: false
+		xhr: false,
+		sslCerts: {
+			key: fs.readFileSync(__dirname + "/ssl/browsertap_com.key", "utf8"),
+			cert: fs.readFileSync(__dirname + "/ssl/STAR_browsertap_com.crt", "utf8"), 
+			ca: [fs.readFileSync(__dirname + "/ssl/PositiveSSLCA2.crt", "utf8"), fs.readFileSync(__dirname + "/ssl/AddTrustExternalCARoot.crt", "utf8")]		
+
+		}
 	},
 	referralRedirect: "/signup",
 	starch: {
