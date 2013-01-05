@@ -116,14 +116,21 @@ module.exports = structr({
 
 			if(!app.window.getAppName) return null;
 
+			var version, appName;
+
 			try {
 				var name = app.window.getAppName(win).toLowerCase(),
 				nameParts = name.split(" ");
+				version = nameParts.pop();
+				appName = nameParts.join(" ");
+
 			}catch(e) {
 				return false;
 			}
 
-			return app.name == nameParts[0] && app.version == nameParts[1];
+			console.log(app.name, appName, app.version, version);
+
+			return app.name == appName && app.version == version;
 		});
 
 

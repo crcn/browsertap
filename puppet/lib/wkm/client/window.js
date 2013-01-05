@@ -73,10 +73,6 @@ module.exports = structr(EventEmitter, {
 				this.style[key.substr(3).toLowerCase()] = !!(window.style & windowStyles[key]);
 			}
 		}
-
-		console.log(this.style);
-		console.log(this.extStyle);
-
 	},
 
 	/**
@@ -147,7 +143,6 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"setProxy": function(proxy) {
-		console.log("SPROX %s", this.id);
 		this.emit("proxy", this._proxy = proxy);
 	},
 

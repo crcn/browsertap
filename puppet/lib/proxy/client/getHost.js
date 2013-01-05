@@ -1,7 +1,14 @@
 var Url = require("url");
 module.exports = function() {
-	var script = Array.prototype.slice.call(document.getElementsByTagName("script")).filter(function(script) {
-		return ~script.src.indexOf("?dnodeClient");
-	}).pop().src;
-	return Url.parse(script);
+	var els = document.getElementsByTagName("script"), script;
+	for(var i = els.length; i--;) {
+		script = els[i];
+		if(~script.src.indexOf("?dnodeClient")) break;
+	}
+	return parseUrl(script.src);
+}
+function parseUrl( url ) {
+    var a = document.createElement('a');
+    a.href = url;
+    return a;
 }

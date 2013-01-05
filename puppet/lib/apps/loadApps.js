@@ -143,7 +143,6 @@ function mapAppVersions(fullPath, next) {
 
 	// logger.info(sprintf("adding available app: %s %s", name, version));
 
-
 	return {
 		name: name,
 		version: version,

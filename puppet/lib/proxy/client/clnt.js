@@ -37,7 +37,7 @@ exports.listen = function() {
 				locEm.on(type, callback);
 			},
 			emit: function() {
-				locEm.apply(em, arguments);
+				locEm.emit.apply(em, arguments);
 			}
 		},
 		navigator: {
@@ -64,6 +64,7 @@ exports.listen = function() {
 			}
 		},
 		foundWindow: function() {
+			console.log("found window")
 			clearInterval(setTitle);
 			document.title = orgTitle;
 		}
@@ -72,7 +73,7 @@ exports.listen = function() {
 	var orgTitle = document.title,
 		setTitle = setInterval(function() {
 		document.title = _id;
-	}, 500);
+	}, 400);
 
 	document.title = _id;
 
@@ -81,10 +82,25 @@ exports.listen = function() {
 		}, 500)*/
 
 
-	var d = dnode(client);
 	watchLocation(client);
 
-	d.pipe(shoe("http://" + scriptUrl.host + "/dnode")).pipe(d);
+	function connect() {
+
+		var d = dnode(client);
+		console.log("connect btap proxy");
+		d.pipe(shoe("http://" + scriptUrl.host + "/dnode")).pipe(d);
+		d.once("end", function() {
+			setTimeout(connect, 2000);
+		});
+		d.once("error", function(err) {
+			console.log("ERR");
+		});
+	}
+	connect();
+
+
+
+
 
 
 	return client;

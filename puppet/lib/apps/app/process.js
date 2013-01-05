@@ -52,9 +52,13 @@ module.exports = structr(EventEmitter, {
 
 				var nx = this;
 
+
+
 				console.log("starting app %s", app.name);
 
-				self._proc = exec('start /WAIT ' + app.path + " " + url);
+				self._proc = exec('start /WAIT "" "' + app.path + '" ' + url);
+
+				console.log(app.path);
 
 				self.running = true;
 
@@ -149,7 +153,6 @@ module.exports = structr(EventEmitter, {
 
 	"_copySettings": function(next) {
 		if(!this.app.settingsDir) return next();
-		console.log(this.app.settingsDir);
 
 		var settingsDir = this.app.settingsDir, self = this;
 
