@@ -1,3 +1,5 @@
+var _s = require("underscore.string");
+
 module.exports = require("../../../views/base").extend({
 	"templateName": "app-loader",
 	"initialize": function() {
@@ -27,7 +29,7 @@ module.exports = require("../../../views/base").extend({
 	},
 	"update": function(data) {
 		if(!data) data = {};
-		var img = data.app ? "/img/apps/"+data.app.toLowerCase()+".png" : null, self = this,
+		var img = data.app ? "/img/apps/"+encodeURIComponent(data.app.toLowerCase())+".png" : null, self = this,
 		$ic = $(self.el).find("#icon-inner-container");//.css({ "visibility": "hidden" });
 
 
@@ -35,8 +37,7 @@ module.exports = require("../../../views/base").extend({
 			$ic.css({ "visibility": "visible" }).width($(this).width()).height($(this).height());
 		})
 		$(this.el).find("#progress").css({ "background-image": "url("+img+")"});
-		$(this.el).find("#progress-text").text(data.app.substr(0, 1).toUpperCase() + data.app.substr(1) +" "+data.version);
-
+		$(this.el).find("#progress-text").text(_s.titleize(data.app) +" "+data.version);
 
 	},
 	"hideNotification": function(callback) {
