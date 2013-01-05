@@ -350,6 +350,7 @@ module.exports = structr(EventEmitter, {
 				console.log("set proxy location to %s", open);
 				proxy.location.set(open);
 				// this.win.refreshProxy(this);
+				this();
 			},
 
 			/**
