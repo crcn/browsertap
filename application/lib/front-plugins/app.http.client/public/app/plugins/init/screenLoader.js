@@ -52,7 +52,7 @@ module.exports = structr(EventEmitter, {
 		if(!this.window) return;
 		var self = this;
 		this.window.getInfo(function(err, info) {
-			document.title = "BrowserTap - " + _s.titleize(self.options.app) + " " + self.options.version + " - " + info.title;
+			document.title = "Browsertap - " + _s.titleize(self.options.app) + " " + self.options.version + " - " + info.title;
 		});
 	},
 
