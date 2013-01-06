@@ -79,10 +79,13 @@ namespace Process
 			HMODULE hmod;
 			DWORD cbn2;
 
+			//an error might be thrown such as 299 - which happens when a 32-bit app
+			//tries to access a 64-bit app. 
 			if(EnumProcessModules(hproc, &hmod, sizeof(hmod), &cbn2))
 			{
 				char path[MAX_PATH];
 				char name[MAX_PATH];
+
 
 				if(GetModuleFileNameEx(hproc, 0, path, MAX_PATH)) 
 				{

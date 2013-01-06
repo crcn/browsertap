@@ -1,1 +1,1 @@
-#define FFMPEG_VERSION "git-2012-12-11-500da81"
+#define FFMPEG_VERSION "git-2013-01-06-d581df9"

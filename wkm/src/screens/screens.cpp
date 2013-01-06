@@ -425,7 +425,9 @@ namespace Screens
 
 			if(winProc == 0) 
 			{
-				std::cerr << "window does NOT have a process - this is a BUG!" << std::endl;
+				//no - this is NOT a bug. The process might not have been added because WKM might
+				//have been compiled as 32 bit when the missing process is 64 bit. That throws error 299
+				//std::cerr << "window does NOT have a process - this is a BUG!" << std::endl;
 				return TRUE;
 			}
 
