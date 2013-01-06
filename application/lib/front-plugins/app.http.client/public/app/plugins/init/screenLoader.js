@@ -59,6 +59,21 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
+	"_syncFavIcon": function() {
+		if(!this._currentLocation) return;
+		var a = document.createElement("a");
+		a.href = this._currentLocation;
+		$("[type='image/x-icon']").remove();
+		var link = document.createElement("link");
+		link.type = "image/x-icon";
+		link.rel = "shortcut icon";
+		link.href = "http://" + a.host + "/favicon.ico";
+		document.getElementsByTagName("head")[0].appendChild(link);
+	},
+
+	/**
+	 */
+
 	"_onConnection": function(connection) {
 		this._connection = connection;
 		var self = this;
@@ -167,6 +182,7 @@ module.exports = structr(EventEmitter, {
 					console.error(err);
 				}
 
+				self._currentLocation = open;
 
 				con.open({ name: self._appName = self.options.app, version: self._appVersion = self.options.version, arg: open, window: self._getClient(null, false) }, outcome.s(function(client) { 
 					console.log("loaded app");
@@ -174,6 +190,8 @@ module.exports = structr(EventEmitter, {
 					// client.setWindow(self._getClient(null, false));
 					self._ignoreForceClose = false;
 				}));	
+
+				self._syncFavIcon();
 			});
 
 
@@ -443,8 +461,10 @@ module.exports = structr(EventEmitter, {
 				console.log("ingore location")
 				return;
 			}
+			self._currentLocation = location.href;
 			self.emit("locationChange", location);
 			self._syncTitle();
+			self._syncFavIcon();
 		}
 
 
