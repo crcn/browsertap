@@ -37,7 +37,8 @@ module.exports = structr(EventEmitter, {
 	"setClipboard",
 	"openNewWindow",
 	"app",
-	"focus"
+	"focus",
+	"getInfo"
 	],
 
 	/**
@@ -99,6 +100,13 @@ module.exports = structr(EventEmitter, {
 		if(arguments.length > 2) this.width = Math.min(Math.max(width || this.width, 100), 4000);
 		if(arguments.length > 3) this.height = Math.min(Math.max(height || this.height, 100), 4000);
 		this._con.execute("resizeWindow", { id: this.id, x: x, y: y, w: this.width, h: this.height });
+	},
+
+	/**
+	 */
+
+	"getInfo": function(callback) {
+		this._con.execute("getWindowData", { id: this.id }, callback);
 	},
 
 	/**
@@ -231,7 +239,7 @@ module.exports = structr(EventEmitter, {
 		localhost    = "localhost";
 
 		//debugging - TODO - fucking FIX red5 on the local machine. This is fucking stupid code.
-	    //rtmpHost = localhost = "10.0.1.30";
+	   // rtmpHost = localhost = "10.0.1.30";
 	    rtmpHost = localhost = "54.243.206.252";
 
 		var output =  "rtmp://" + rtmpHost + ":1935/live/" + streamId;

@@ -13,13 +13,12 @@ exports.plugin = function(loader) {
 				json: data
 			};
 
-			console.log("request: %s", ops.url);
+			//console.log("request: %s", ops.url);
 
 
 			request[method](ops, function(err, response, body){
 
 				if(err) return callback(err);
-				console.log(body)
 
 				if(body.errors) {
 					callback(new Error(body.errors[0].message));

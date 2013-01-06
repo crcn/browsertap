@@ -51,7 +51,7 @@ module.exports = function(directory, callback) {
 
 			walkr(directory).
 			filterFile(function(options, next) {
-				if(options.source.match(/info.js$/i)) {
+				if(path.basename(options.source) == "info.js") {
 					req.push(require(options.source));
 				}
 				next();

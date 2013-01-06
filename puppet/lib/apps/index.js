@@ -128,7 +128,6 @@ module.exports = structr({
 				return false;
 			}
 
-			console.log(app.name, appName, app.version, version);
 
 			return app.name == appName && app.version == version;
 		});

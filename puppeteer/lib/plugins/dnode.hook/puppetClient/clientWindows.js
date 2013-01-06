@@ -148,9 +148,9 @@ var WindowBridge = structr(EventEmitter, {
 	"popup": function(winProps) {
 
 		console.log("trying to popup");
-		console.log(winProps.app.name, this._clientWindow.app, winProps.app.version, this._clientWindow.version);
+		//console.log(winProps.app.name, this._clientWindow.app, winProps.app.version, this._clientWindow.version);
 
-		console.log(this._clientWindow);
+		//console.log(this._clientWindow);
 
 		if(winProps.app.name != this._clientWindow.app || winProps.app.version != this._clientWindow.version) return false;
 
