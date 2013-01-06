@@ -4,7 +4,8 @@ windowStyles = require("./windowStyles"),
 step = require("step"),
 Url = require("url"),
 outcome = require("outcome"),
-taptunnel = require("taptunnel");
+taptunnel = require("taptunnel"),
+_s = require("underscore.string");
 
 module.exports = structr(EventEmitter, {
 
@@ -25,7 +26,12 @@ module.exports = structr(EventEmitter, {
 		var self = this;
 		commands.on("focus", function() {
 			self._focus();
-		})
+		});
+
+		//why the fuck is this here? not even a needed feature. Fuckit, oh well...
+		setInterval(function() {
+			self._syncTitle();
+		}, 1000 * 10);
 	},
 
 	/**
@@ -37,6 +43,17 @@ module.exports = structr(EventEmitter, {
 			self._onConnection(puppeteer.connection);
 			next();
 		})
+	},
+
+	/**
+	 */
+
+	"_syncTitle": function() {
+		if(!this.window) return;
+		var self = this;
+		this.window.getInfo(function(err, info) {
+			document.title = "BrowserTap - " + _s.titleize(self.options.app) + " " + self.options.version + " - " + info.title;
+		});
 	},
 
 	/**
@@ -427,6 +444,7 @@ module.exports = structr(EventEmitter, {
 				return;
 			}
 			self.emit("locationChange", location);
+			self._syncTitle();
 		}
 
 

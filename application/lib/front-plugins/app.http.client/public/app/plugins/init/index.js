@@ -139,7 +139,7 @@ exports.plugin = function(router, bark, states, mainPlugin, puppeteer, commands,
 
 
 	loader.on("locationChange", function(location) {
-		router.redirect("/live", { open: location.href, app: loader._appName, version: loader._appVersion }, false);
+		router.redirect("/live", { open: location.href, app: loader.options.app, version: loader.options.version }, false);
 	});
 
 }
