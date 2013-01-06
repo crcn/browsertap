@@ -45,7 +45,6 @@ exports.listen = function(wkm, port) {
 	var sock = shoe(function(stream) {
 		var d = dnode(function(client, con) {
 
-			console.log("DNODE PRX CON");
 
 			con.on("ready", function() {
 				var info = getBrowserInfo(client.navigator);
@@ -66,9 +65,6 @@ exports.listen = function(wkm, port) {
 				})
 			});
 
-			con.on("end", function() {
-				console.log("END");
-			})
 		});
 		d.pipe(stream).pipe(d);
 	});
@@ -84,8 +80,9 @@ exports.listen = function(wkm, port) {
 
 	mitm.on("interceptResponseContent", function (buffer, responseObject, isSsl, charset, callback) {
 
-		if(/127.0.0.1|localhost/.test(responseObject.socket.address().address)) return callback(buffer.toString("utf8"));
-		console.log(responseObject.socket.address().address);
+		if(responseObject.socket.address())
+		if(/127.0.0.1|localhost/.test(String(responseObject.socket.address().address))) return callback(buffer.toString("utf8"));
+		
 		var content = buffer.toString("utf8");
 		var script  = wrapScript("client.js?dnodeClient", httpPort) + wrapCss("/css-fix.css", httpPort);
 

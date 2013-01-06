@@ -54,6 +54,7 @@ namespace Commanders
 		regCommand(closeWindow, execCloseWindow)
 		regCommand(resizeWindow, execResizeWindow)
 		regCommand(focusWindow, execFocusWindow)
+		regCommand(getWindowData, execGetScreenData)
 		regCommand(startRecordingWindow, execStartRecordingWindow)
 		regCommand(stopRecordingWindow, execStopRecordingWindow)
 		regCommand(fireWindowMouseEvent, execFireWindowMouseEvent)
@@ -151,6 +152,16 @@ namespace Commanders
 	int getDataId(Json::Value value)
 	{
 		return value["data"]["id"].asInt();
+	}
+
+	void JSONCommander::execGetScreenData(JSONCommand* command)
+	{
+		
+		Screens::Screen* screen = 0;
+
+		if(!(screen = this->getScreen(command))) return;
+
+		this->dispatchResponse(command->value(), getScreenData(screen));
 	}
 
 	void JSONCommander::execListWindows(JSONCommand* command)
