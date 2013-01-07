@@ -1,3 +1,5 @@
+var _s = require("underscore.string");
+
 module.exports = require("../../../views/base").extend({
 	"templateName": "app-switcher",
 	"currentVersionIndex": 0,
@@ -107,7 +109,7 @@ module.exports = require("../../../views/base").extend({
 	},
 	"_setCA": function() {
 		var app = this._getApp();
-		$(".current-app").text(app.substr(0,1).toUpperCase() + app.substr(1));
+		$(".current-app span").text(_s.titleize(app));
 	},
 	"hide": function(cb) {
 		this._hidden = true;

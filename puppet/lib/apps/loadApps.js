@@ -34,8 +34,9 @@ module.exports = function(directory, callback) {
 		on.success(function(dirs) {
 
 			var noInfo = dirs.filter(function(name) {
-				return name != "info.js";
+				return name != "info.js" && name.toLowerCase() != "settings";
 			});
+
 			async.map(fixPaths(directory, noInfo), loadApp, this);
 		}),
 
@@ -50,7 +51,7 @@ module.exports = function(directory, callback) {
 
 			walkr(directory).
 			filterFile(function(options, next) {
-				if(options.source.match(/info.js$/)) {
+				if(path.basename(options.source) == "info.js") {
 					req.push(require(options.source));
 				}
 				next();
@@ -118,7 +119,7 @@ function loadApp(directory, callback) {
 		on.success(function(executables) {
 
 			var fixedPaths = fixPaths(directory, executables.filter(function(name) {
-				return name != "info.js";
+				return name != "info.js" && name.toLowerCase() != "settings";
 			})).
 			map(mapAppVersions);
 
@@ -142,13 +143,13 @@ function mapAppVersions(fullPath, next) {
 
 	// logger.info(sprintf("adding available app: %s %s", name, version));
 
-
 	return {
 		name: name,
 		version: version,
 		path: realpath,
 		filename: path.basename(realpath),
 		directory: directory,
+		settingsDir: path.join(directory, "Settings")
 	};
 }
 

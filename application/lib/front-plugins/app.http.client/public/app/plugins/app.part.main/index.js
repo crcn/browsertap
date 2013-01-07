@@ -6,7 +6,8 @@ exports.plugin = function(views, init) {
 		views: {
 			Screen: require("./views/screen"),
 			AppSwitcher: require("./views/appSwitcher"),
-			Loader: require("./views/loader")
+			Loader: require("./views/loader"),
+			ExpandContract: require("./views/maxmin")
 		}
 	}
 }

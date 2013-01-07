@@ -1,7 +1,8 @@
 var structr = require("structr"),
 step = require("step"),
 outcome = require("outcome"),
-_ = require("underscore");
+_ = require("underscore"),
+request = require("request");
 
 module.exports = structr({
 
@@ -25,11 +26,10 @@ module.exports = structr({
 	 */
 
 	"getFreeServer": function(account, cb) {
-
 		var accountId = String(account._id);
-
 		this._cache.get("fetch-server-" + accountId, _.bind(this._getFreeServer, this, accountId), cb);
 	},
+
 
 	/**
 	 */
@@ -73,17 +73,17 @@ module.exports = structr({
 				server.set("owner", accountId);
 				server.set("lastUsedAt", new Date());
 
-				console.log("user using server %s", server.get("_id"));
+				console.log("user %s using server %s", accountId, server.get("_id"));
 
 				//after a server has been created, make a new one so 
-				self._tryMakingServer();
+				if(!self._tryStartingServer()) self._tryMakingServer();
 
 				var next = this;
 
-				//needs to happen so the server can be retreive info
-				server.start(function() {
-					next(null, server);
-				});
+				//start the server - this will be ignored if it's already being started 
+				server.start();
+
+				next(null, server);
 			}),
 			cb
 		);
@@ -93,10 +93,29 @@ module.exports = structr({
 	 * makes a server if there are none already in the queue
 	 */
 
+	"_tryStartingServer": function() {
+		if(this._maestro.collection.count({ imageId: this._imageId, owner: null, state: "running" }).sync() >= 1) return;
+
+		var server = this._maestro.collection.findOne({ imageId: this._imageId, owner: null, state: "stopped" }).sync();
+
+		if(!server) return false;
+
+		console.log("starting server %s", server.get("_id"));
+
+		server.start();
+		return true;
+	},
+
+	/**
+	 * makes a server if there are none already in the queue
+	 */
+
 	"_tryMakingServer": function() {
+		// console.log(this._maestro.collection.find({ imageId: this._imageId, owner: null }).sync())
 		if(this._maestro.collection.count({ imageId: this._imageId, owner: null }).sync() >= 1) return;
 
 		console.log("no more free servers, creating new one for the next user");
+
 		this._createServer();
 	},
 
@@ -119,7 +138,7 @@ module.exports = structr({
 		this._maestro.
 		services.
 		getService("amazon").
-		createServer({ flavor: "c1.medium", image: this._imageId }, 
+		createServer({ flavor: "m1.medium", image: this._imageId }, 
 			outcome.e(cb).s(function(server) {
 				server._id = server.id;
 				cb(null, maestro.collection.insert(server).sync().pop());
@@ -146,10 +165,20 @@ module.exports = structr({
 		exec(function(err, servers) {
 			var saved;
 
-			if(!servers.length) return;
+
+			if(servers.length <= 1) return;
+
+			// if(servers.length <= 1) return;
+
+			var shutdownable = servers.filter(function(server) {
+				return !server.get("spotInstanceId");
+			});
+
+			if(!shutdownable.length) return;
+
 
 			//one at a time
-			servers[0].stop();
+			shutdownable[0].stop();
 		});
 	},
 
@@ -174,7 +203,7 @@ module.exports = structr({
 	 */
 
 	"_query": function(q) {
-		q.$or = [{ service: "local"}, { imageId: this._imageId, state: {$in: ["running", "stopped"] } }];
+		q.$or = [{ service: "local"}, { imageId: this._imageId, state: "running" }, { imageId: this._imageId, state: "stopped" } ];
 
 		return q;
 	}

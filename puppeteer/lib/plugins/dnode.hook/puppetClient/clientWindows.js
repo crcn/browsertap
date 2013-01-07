@@ -57,18 +57,12 @@ module.exports = structr(EventEmitter, {
 
 	"set": function(window) {
 
-
-		//remove any private properties
-		if(window.search)
-		for(var s in window.search) {
-			if(s.substr(0, 1) == "_") delete window.search[s];
-		}
-
+		//window already exists? dispose of it.
 		if(this._clientWindow) {
 			this._clientWindow.dispose();
 		}
 
-		logger.info("add client window");
+		logger.info("set main client window");
 		var wb = this._clientWindow = new WindowBridge(this, window),
 		self = this;
 
@@ -154,9 +148,9 @@ var WindowBridge = structr(EventEmitter, {
 	"popup": function(winProps) {
 
 		console.log("trying to popup");
-		console.log(winProps.app.name, this._clientWindow.app, winProps.app.version, this._clientWindow.version);
+		//console.log(winProps.app.name, this._clientWindow.app, winProps.app.version, this._clientWindow.version);
 
-		console.log(this._clientWindow);
+		//console.log(this._clientWindow);
 
 		if(winProps.app.name != this._clientWindow.app || winProps.app.version != this._clientWindow.version) return false;
 

@@ -37,7 +37,8 @@ module.exports = structr(EventEmitter, {
 	"setClipboard",
 	"openNewWindow",
 	"app",
-	"focus"
+	"focus",
+	"getInfo"
 	],
 
 	/**
@@ -56,19 +57,23 @@ module.exports = structr(EventEmitter, {
 		this.height    = window.height;
 		this.vks       = _.values(wkme.keyboard_vk);
 		this._apps     = windows._apps;
-		this.closed = false;
-
-
-		this.style     = {
-			maximized: !!(window.style & windowStyles.WS_MAXIMIZE),
-			sizeBox: !!(window.style & windowStyles.WS_SIZEBOX)
-		};
-
+		this.closed    = false;
 
 		this._windows = windows;
 		this._con = windows._con;
 		this._rtmp = windows._options.rtmp;
 
+
+		this.style    = {};
+		this.extStyle = {};
+
+		for(var key in windowStyles) {
+			if(key.substr(0, 5) === "WS_EX") {
+				this.extStyle[key.substr(6).toLowerCase()] = !!(window.extStyle & windowStyles[key]);
+			} else {
+				this.style[key.substr(3).toLowerCase()] = !!(window.style & windowStyles[key]);
+			}
+		}
 	},
 
 	/**
@@ -77,6 +82,7 @@ module.exports = structr(EventEmitter, {
 	"close": function() {
 		this.closed = true;
 		this._con.execute("closeWindow", { id: this.id });
+		this.emit("close");
 		this._events = {};
 	},
 
@@ -94,6 +100,13 @@ module.exports = structr(EventEmitter, {
 		if(arguments.length > 2) this.width = Math.min(Math.max(width || this.width, 100), 4000);
 		if(arguments.length > 3) this.height = Math.min(Math.max(height || this.height, 100), 4000);
 		this._con.execute("resizeWindow", { id: this.id, x: x, y: y, w: this.width, h: this.height });
+	},
+
+	/**
+	 */
+
+	"getInfo": function(callback) {
+		this._con.execute("getWindowData", { id: this.id }, callback);
 	},
 
 	/**
@@ -138,7 +151,6 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"setProxy": function(proxy) {
-		console.log("SPROX %s", this.id);
 		this.emit("proxy", this._proxy = proxy);
 	},
 
@@ -227,9 +239,12 @@ module.exports = structr(EventEmitter, {
 		localhost    = "localhost";
 
 		//debugging - TODO - fucking FIX red5 on the local machine. This is fucking stupid code.
-	    //rtmpHost = localhost = "10.0.1.30";
+	   // rtmpHost = localhost = "10.0.1.30";
+	    rtmpHost = localhost = "54.243.206.252";
 
 		var output =  "rtmp://" + rtmpHost + ":1935/live/" + streamId;
+
+		//output = output.replace("rtmp", "http").replace(1935, 9999);
 
 		console.log("recording window to %s", output);
 

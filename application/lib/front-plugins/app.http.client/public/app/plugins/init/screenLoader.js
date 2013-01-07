@@ -3,17 +3,22 @@ EventEmitter = require("events").EventEmitter,
 windowStyles = require("./windowStyles"),
 step = require("step"),
 Url = require("url"),
-outcome = require("outcome");
+outcome = require("outcome"),
+taptunnel = require("taptunnel"),
+_s = require("underscore.string");
 
 module.exports = structr(EventEmitter, {
 
 	/**
 	 */
 
-	"__construct": function(puppeteer, commands) {
+	"__construct": function(puppeteer, commands, states) {
 		this.commands = commands;
 		this.puppeteer = puppeteer;
+		this.states = states;
 		this.connect();
+
+		// var q = Url.prase()
 
 		//default icon
 		this.options = { app: "chrome", version: 19, open: "http://google.com" };
@@ -21,7 +26,12 @@ module.exports = structr(EventEmitter, {
 		var self = this;
 		commands.on("focus", function() {
 			self._focus();
-		})
+		});
+
+		//why the fuck is this here? not even a needed feature. Fuckit, oh well...
+		setInterval(function() {
+			self._syncTitle();
+		}, 1000 * 10);
 	},
 
 	/**
@@ -33,6 +43,32 @@ module.exports = structr(EventEmitter, {
 			self._onConnection(puppeteer.connection);
 			next();
 		})
+	},
+
+	/**
+	 */
+
+	"_syncTitle": function() {
+		if(!this.window) return;
+		var self = this;
+		this.window.getInfo(function(err, info) {
+			document.title = "Browsertap - " + _s.titleize(self.options.app) + " " + self.options.version + " - " + info.title;
+		});
+	},
+
+	/**
+	 */
+
+	"_syncFavIcon": function() {
+		if(!this._currentLocation) return;
+		var a = document.createElement("a");
+		a.href = this._currentLocation;
+		$("[type='image/x-icon']").remove();
+		var link = document.createElement("link");
+		link.type = "image/x-icon";
+		link.rel = "shortcut icon";
+		link.href = "http://" + a.host + "/favicon.ico";
+		document.getElementsByTagName("head")[0].appendChild(link);
 	},
 
 	/**
@@ -80,12 +116,19 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"step load": function(options, next) {
+	"load": function(options, next) {
 		if(this._lockLoading) return;
 		this._trackStopBrowser();
 		_.extend(this.options, options);
 		this.startDate = Date.now();
 		this._trackBrowser("Browser Start");
+		this._load(next);
+	},
+
+	/**
+	 */
+
+	"step _load": function(next) {
 
 		if(this.options.screen) {
 			this._lockLoading = true;
@@ -95,6 +138,7 @@ module.exports = structr(EventEmitter, {
 		}
 		next();
 	},
+
 
 	/**
 	 */
@@ -110,14 +154,17 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_connectApp": function() {
+
 		console.log("loading app %s %s", this.options.app, this.options.version);
 		var con = this._connection, self = this;
+
 
 		if(this._appName != this.options.app || this._appVersion != this.options.version) {
 			this.emit("loading");
 			this._ignoreClose = true;
 			if(this.window) this.window.close();
 
+			this.options.open = this.options.open.replace(/:\/+/,"://");
 
 			//we track the host as well - only the host so we can get an idea of what people are doing with the app. Are they testing an app?
 			//is it local? is it https?
@@ -127,19 +174,37 @@ module.exports = structr(EventEmitter, {
 			this._ignoreForceClose = true;
 
 
-			con.open({ name: this._appName = this.options.app, version: this._appVersion = this.options.version, arg: this.options.open }, outcome.s(function(client) { 
-				console.log("loaded app");
-				self._trackBrowser("Browser Open");
-				client.setWindow(self._getClient(null, false));
-				self._ignoreForceClose = false;
-			}));
-			return;
+			//run the file through taptunnel incase it's a file, or localhost
+			var isTunnel = taptunnel.proxy(this.options.open, function(err, open) {
+
+				//taptunnel not setup
+				if(err) {
+					console.error(err);
+				}
+
+				self._currentLocation = open;
+
+				con.open({ name: self._appName = self.options.app, version: self._appVersion = self.options.version, arg: open, window: self._getClient(null, false) }, outcome.s(function(client) { 
+					console.log("loaded app");
+					self._trackBrowser("Browser Open");
+					// client.setWindow(self._getClient(null, false));
+					self._ignoreForceClose = false;
+				}));	
+
+				self._syncFavIcon();
+			});
+
+
+			if(isTunnel) {
+				this.emit("tunneling", this.options.open);
+			}
 		} else 
 		if(this._proxy) {
 			console.log("set proxy location")
 			// this._proxy.location.set(this.options.open);
 			this._setProxyLocation(this.options.open);
 		}
+		this.states.set("opening_app", "Opening " + this.options.app + " " + this.options.version);
 	},
 
 	/**
@@ -156,8 +221,8 @@ module.exports = structr(EventEmitter, {
 		var self = this,
 		startTime = Date.now();
 
-
 		return {
+			test: startTime,
 			search: search,
 			app: this.options.app,
 			version: this.options.version,
@@ -166,6 +231,9 @@ module.exports = structr(EventEmitter, {
 				self._setWindow(window);
 			},
 			popupWindow: function(winProps) {
+
+				//is popup? don't popup.
+				if(!self._screenId)
 				self._popupWindow(winProps);
 			},
 			close: function() {
@@ -303,8 +371,9 @@ module.exports = structr(EventEmitter, {
 			 * get the CURRENT proxy
 			 */
 
-			function(window) {
-				window.getProxy(this);
+			function(win) {
+				this.win = win;
+				win.getProxy(this);
 			},
 
 			/**
@@ -315,7 +384,8 @@ module.exports = structr(EventEmitter, {
 				if(!proxy) return callback(new Error("Unable to set proxy"));
 				console.log("set proxy location to %s", open);
 				proxy.location.set(open);
-				window.refreshProxy(this);
+				// this.win.refreshProxy(this);
+				this();
 			},
 
 			/**
@@ -346,7 +416,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_popupWindow": function(w) {
-		this.commands.emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this.puppeteer.host + "&token=" + this.puppeteer.token + "&screen=" + w.id+"&app="+this.options.app+"&version="+this.options.version, width: w.width, height: w.height });
+		this.commands.emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this.puppeteer.host + "&token=" + this.puppeteer.token + "&screen=" + w.id+"&app="+this.options.app+"&version="+this.options.version, width: w.width - 8, height: w.height - 26 });
 	},
 
 	/**
@@ -391,7 +461,10 @@ module.exports = structr(EventEmitter, {
 				console.log("ingore location")
 				return;
 			}
+			self._currentLocation = location.href;
 			self.emit("locationChange", location);
+			self._syncTitle();
+			self._syncFavIcon();
 		}
 
 

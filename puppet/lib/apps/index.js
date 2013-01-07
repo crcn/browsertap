@@ -101,18 +101,14 @@ module.exports = structr({
 			}),
 			on.success(function() {
 				logger.info(sprintf("opening app with arg: %s", arg));
-				try {
-
-				this.app.open(arg, this);
-			}catch(e) {
-				console.error(e)
-			}
+				this.app.reopen(arg, this);
 			}),
 			next
 		);
 	},
 
 	/**
+	 * adds a native window to a particular application
 	 */
 
 	"step addWindow": function(win, callback) {
@@ -120,14 +116,20 @@ module.exports = structr({
 
 			if(!app.window.getAppName) return null;
 
+			var version, appName;
+
 			try {
 				var name = app.window.getAppName(win).toLowerCase(),
 				nameParts = name.split(" ");
+				version = nameParts.pop();
+				appName = nameParts.join(" ");
+
 			}catch(e) {
 				return false;
 			}
 
-			return app.name == nameParts[0] && app.version == nameParts[1];
+
+			return app.name == appName && app.version == version;
 		});
 
 

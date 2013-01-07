@@ -45,8 +45,11 @@ exports.listen = function(wkm, port) {
 	var sock = shoe(function(stream) {
 		var d = dnode(function(client, con) {
 
+
 			con.on("ready", function() {
 				var info = getBrowserInfo(client.navigator);
+
+				console.log("browser connection, looking for window with title=%s", client.id);
 
 				//fucking beautiful.
 				wkm.windows.findWindowByTitle(client.id, function(err, window) {
@@ -61,6 +64,7 @@ exports.listen = function(wkm, port) {
 					client.foundWindow();
 				})
 			});
+
 		});
 		d.pipe(stream).pipe(d);
 	});
@@ -76,6 +80,9 @@ exports.listen = function(wkm, port) {
 
 	mitm.on("interceptResponseContent", function (buffer, responseObject, isSsl, charset, callback) {
 
+		if(responseObject.socket.address())
+		if(/127.0.0.1|localhost/.test(String(responseObject.socket.address().address))) return callback(buffer.toString("utf8"));
+		
 		var content = buffer.toString("utf8");
 		var script  = wrapScript("client.js?dnodeClient", httpPort) + wrapCss("/css-fix.css", httpPort);
 
@@ -113,12 +120,12 @@ exports.listen = function(wkm, port) {
 
 function wrapScript(path, port) {
 
-	return "<script src=\"http://localhost:"+port+"/"+path+"\" type=\"text/javascript\"></script>"
+	return "<script src=\"http://127.0.0.1:"+port+"/"+path+"\" type=\"text/javascript\"></script>"
 
 }
 
 function wrapCss(path, port) {
 
-	return "<link rel=\"stylesheet\" type=\"text/css\" href=\"http://localhost:"+port+"/"+path+"\" type=\"text/javascript\"></script>"
+	return "<link rel=\"stylesheet\" type=\"text/css\" href=\"http://127.0.0.1:"+port+"/"+path+"\" type=\"text/javascript\"></script>"
 
 }

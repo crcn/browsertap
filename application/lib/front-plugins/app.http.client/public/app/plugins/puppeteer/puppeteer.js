@@ -13,10 +13,10 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"__construct": function(host, bark, commands) {
+	"__construct": function(host, states, commands) {
 		this._host = host;
 		this._commands = commands;
-		this._bark = bark;
+		this._states = states;
 	},
 
 	/**
@@ -41,7 +41,7 @@ module.exports = structr(EventEmitter, {
 
 	"onAccount": function(err, account) {
 
-		if(err) return self._commands.emit("error", resp.errors);
+		if(err) return this._commands.emit("error", err);
 
 		this.account = account;
 
@@ -57,20 +57,37 @@ module.exports = structr(EventEmitter, {
 
 		var serverUrl = [window.location.protocol, "//", window.location.host, "/server.json"].join(""),
 		self = this;
-		
+
 		$.ajax({
 			url: serverUrl,
 			dataType: "json",
 			success: outcome.vine().success(function(puppeteer) {
-				self._attach({ host: "http://" + puppeteer.address + ":8080/browsertap.puppeteer" });
+
+				self.state(puppeteer.state);
+
+				//address exists? it's running
+				if(puppeteer.address && puppeteer.state == "running") {
+					self._attach({ host: "http://" + puppeteer.address + ":8080/browsertap.puppeteer" });
+				} else {
+
+					//otherwise try reloading
+					setTimeout(function() {
+						self.reloadServer();
+					}, 1000 * 2);
+				}
 			}),
 			error: function() {
 				console.log(arguments);
 				console.log("ERROR")
 			}
-		});	
+		});
+	},
 
-		
+	/**
+	 */
+
+	"state": function() {
+		this._states.set.apply(this.states, arguments);
 	},
 
 	/**
@@ -123,6 +140,11 @@ module.exports = structr(EventEmitter, {
 			}, outcome.s(function(remote) {
 				console.log("connected client");
 				self.connection = remote;
+				/*var oldSet = remote.windows.set;
+				remote.windows.set = function() {
+					console.log("SETTTTT");
+					oldSet.apply(this, arguments);
+				}*/
 				self._connecting = false;
 				self.emit("connect", null, remote);
 			}));
@@ -144,7 +166,7 @@ module.exports = structr(EventEmitter, {
 			self._connecting = false;
 			self.connection = null;
 			console.error(err.stack);
-			self._commands.emit("error", new comerr.UnableToConnect("Unable to connect to a remote desktop"));
+			self._commands.emit("error", new comerr.UnableToConnect("Connection dropped with remote desktop"));
 		})
 	}
 });

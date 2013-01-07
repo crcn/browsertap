@@ -5,7 +5,7 @@
 #define FFMPEG_LICENSE "LGPL version 2.1 or later"
 #define FFMPEG_DATADIR "/usr/local/share/ffmpeg"
 #define AVCONV_DATADIR "/usr/local/share/ffmpeg"
-#define CC_IDENT "gcc 4.6.1 (GCC)"
+#define CC_IDENT "gcc 4.6.2 (GCC)"
 #define av_restrict restrict
 #define EXTERN_PREFIX "_"
 #define EXTERN_ASM _

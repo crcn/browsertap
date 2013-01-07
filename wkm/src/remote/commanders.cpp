@@ -47,13 +47,14 @@ namespace Commanders
 	_tick(0),
 	_frameRate(24),
 	_commands(new Events::EventDispatcher()) {
-		this->_throttler = new Speed::Throttle(24);
+		this->_throttler = new Speed::Throttle(1000);
 		#define regCommand(name, method) this->_commands->addEventListener(#name, new Events::ClassCbEventListener<JSONCommander, JSONCommand>(this, &JSONCommander::method));
 	
 		regCommand(listWindows, execListWindows)
 		regCommand(closeWindow, execCloseWindow)
 		regCommand(resizeWindow, execResizeWindow)
 		regCommand(focusWindow, execFocusWindow)
+		regCommand(getWindowData, execGetScreenData)
 		regCommand(startRecordingWindow, execStartRecordingWindow)
 		regCommand(stopRecordingWindow, execStopRecordingWindow)
 		regCommand(fireWindowMouseEvent, execFireWindowMouseEvent)
@@ -102,7 +103,6 @@ namespace Commanders
 		int fps = this->_frameRate; 
 		int ms  = (1/(double)fps)*1000;
 
-		this->_throttler->ticks(fps);
 
 		std::vector<Screens::Screen*> screens = Screens::ScreenManager::instance().allScreens();
 		for(int i = screens.size(); i--;)
@@ -152,6 +152,16 @@ namespace Commanders
 	int getDataId(Json::Value value)
 	{
 		return value["data"]["id"].asInt();
+	}
+
+	void JSONCommander::execGetScreenData(JSONCommand* command)
+	{
+		
+		Screens::Screen* screen = 0;
+
+		if(!(screen = this->getScreen(command))) return;
+
+		this->dispatchResponse(command->value(), getScreenData(screen));
 	}
 
 	void JSONCommander::execListWindows(JSONCommand* command)

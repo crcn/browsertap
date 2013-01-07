@@ -9,7 +9,9 @@ outcome       = require("outcome"),
 killProcesses = require("./killProcesses"),
 path = require("path"),
 logger = require("winston").loggers.get("process"),
-sprintf = require("sprintf").sprintf;
+sprintf = require("sprintf").sprintf,
+dirmr = require("dirmr"),
+fs = require("fs");
 
 module.exports = structr(EventEmitter, {
 
@@ -31,20 +33,32 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"step open": function(url, next) {
-		var app = this.app, self = this;
+		var app = this.app, self = this, on = outcome.error(next);
 		step(
+
+
+			/**
+			 * copy over the default settings so we don't get shit like "want to set as default browser?" - bleh - fuck that.
+			 */
+
+			function() {
+				self._copySettings(this);
+			},
 
 			/**
 			 */
 
-			function() {
-				if(err) console.error(err);
+			on.s(function() {
 
 				var nx = this;
 
+
+
 				console.log("starting app %s", app.name);
 
-				self._proc = exec('start /WAIT ' + app.path + " " + url);
+				self._proc = exec('start /WAIT "" "' + app.path + '" ' + url);
+
+				console.log(app.path);
 
 				self.running = true;
 
@@ -68,7 +82,7 @@ module.exports = structr(EventEmitter, {
 
 
 				this(null, self);
-			},
+			}),
 
 			/**
 			 */
@@ -92,12 +106,13 @@ module.exports = structr(EventEmitter, {
 			},
 
 			/**
+			 * remove the cache & settings set by the user
 			 */
 
 			function() {
 				self._cleanupCache(this);
 			},
-
+ 
 			/**
 			 */
 
@@ -119,10 +134,45 @@ module.exports = structr(EventEmitter, {
 	"_cleanupCache": function(next) {
 
 		if(!this.app.cache || !this.app.cache.directory) return next();
+
+		var dirs = this.app.cache.directory instanceof Array ? this.app.cache.directory : [this.app.cache.directory],
+		self = this;
 		logger.info(sprintf('cleaning up %s cache directory', this.app.name));
-		exec('DEL /S /Q "' + path.normalize(this.app.cache.directory) + '"', function() {
-			console.log("done clearing cache");
-			next();
-		});
+
+		async.forEach(dirs, function(dir, next) {
+			exec('DEL /S /Q "' + path.normalize(dir) + '"', function() {
+				console.log("done clearing cache");
+				next();
+			});	
+		}, next);
+		
+	},
+
+	/**
+	 */
+
+	"_copySettings": function(next) {
+		if(!this.app.settingsDir) return next();
+
+		var settingsDir = this.app.settingsDir, self = this;
+
+		async.forEach(["Local", "Roaming"], function(type, next) {
+			self._copySettings2(type, function() {
+				next();
+			})
+		}, next);
+	},
+
+
+	/**
+	 */
+
+	"_copySettings2": function(type, next) {
+		var to = "C:/Users/Administrator/AppData/" + type,
+		from = this.app.settingsDir + "/" + type;
+		console.log("copy %s to %s", from, to);
+		console.log(new RegExp("(^|\\s)(common|" + this.app.version+")($|\\s)"));
+		dirmr().readdir(from, new RegExp("(^|\\s)(common|" + this.app.version+")($|\\s)")).join(to).complete(next);
+
 	}
 });

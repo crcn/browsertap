@@ -3,7 +3,8 @@ _ = require("underscore"),
 sift = require("sift"),
 EventEmitter = require("events").EventEmitter,
 Window = require("./window"),
-outcome = require("outcome");
+outcome = require("outcome"),
+windowStyles = require("./windowStyles");
 
 module.exports = structr(EventEmitter, {
 
@@ -37,6 +38,15 @@ module.exports = structr(EventEmitter, {
 							"DV2ControlHost",
 							"CabinetWClass"
 						]
+					}
+				},
+				{
+					extStyle: function(style) {
+
+						//if the window is topmost, it's most likely a popup. We want to ignore
+						//these since they'll hover over the main window, as well as open a client window.
+						//Kinda breaks the illusion of separate windows :/
+						return style & windowStyles.WS_EX_TOPMOST;
 					}
 				},
 				{
@@ -109,7 +119,8 @@ module.exports = structr(EventEmitter, {
 		if(!win) return;
 		win.disposed = true;
 		console.log("close window class=%s, title=%s ", win.className, win.title);
-		this._windows.splice(this._windows.indexOf(win), 1);
+
+		//close emit will remove from the collection as well.
 		win.emit("close");
 		this.emit("close", win);
 	},
@@ -120,6 +131,10 @@ module.exports = structr(EventEmitter, {
 	"_addWindow": function(window) {
 
 		if(this._blackListSifter.test(window)) {
+			
+			//is popup? move it ON SCREEN - by default popups are moved to the center of the screen.
+			if(window.extStyle & windowStyles.WS_EX_TOPMOST) new Window(window, this).move(200, 200);
+
 			console.log("black listed class=%s, title=%s", window.className, window.title);
 			return;
 		}
@@ -136,6 +151,10 @@ module.exports = structr(EventEmitter, {
 
 			self._focusedWindow = win;
 			self._focusedWindow.emit("focus");
+		});
+
+		win.once("close", function() {
+			self._windows.splice(self._windows.indexOf(win), 1);
 		});
 
 		this._setApp(win, function(err) {

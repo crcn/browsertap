@@ -47,6 +47,7 @@ namespace Screens
 		_needsRefreshing = true;
 		_prevOutputSize  = 0;
 		_videoCodecCtx = 0;
+		_nPackets = 0;
 
 		this->_ctx = ctx;
 	}
@@ -59,7 +60,7 @@ namespace Screens
 
 		Geometry::Rectangle& bounds = data->bounds();
 
-		avpicture_fill((AVPicture*)_srcPicture, (uint8_t*)data->buffer(), PIX_FMT_BGR32, bounds.width, bounds.height);
+		avpicture_fill((AVPicture*)_srcPicture, (uint8_t*)data->buffer(), PIX_FMT_RGB32, bounds.width, bounds.height);
 
 		//std::cout << bounds.width << " " << bounds.height << " " << _videoCodecCtx->width << " " << _videoCodecCtx->height << std::endl;
 
@@ -92,8 +93,19 @@ namespace Screens
 			{
 				pkt.flags |= AV_PKT_FLAG_KEY;
 			} else {
+
+				/*_nPackets++;
 				//this->scaleQuality(outSize);
-				_prevOutputSize = outSize;
+				_prevOutputSize += outSize;
+
+				int size = _prevOutputSize / _nPackets;
+
+				std::cout <<  size << std::endl;
+				if(_nPackets > 100) {
+					_nPackets = 0;
+					_prevOutputSize = 0;
+				}*/
+
 			}
 
 			pkt.stream_index = _videoStream->index;
@@ -133,7 +145,7 @@ namespace Screens
 
 		//if(std::abs(_videoCodecCtx.qmin - qmin) < 5 && std::ab)
 
-		std::cout  << qmin << " " << qmax << " " << diff << " " << outSize << std::endl;
+		//std::cout  << qmin << " " << qmax << " " << diff << " " << outSize << std::endl;
 
 		_videoCodecCtx->qmin = qmin;
 		_videoCodecCtx->qmax = qmax;
@@ -271,12 +283,11 @@ namespace Screens
 		
 		
 		//_videoCodecCtx->flags |= CODEC_FLAG_GRAY;
-		//_videoCodecCtx->flags |= CODEC_FLAG_LOW_DELAY;
 		//_videoCodecCtx->rc_min_rate      = br;// 64 * 1000; //average bit rate
 		_videoCodecCtx->bit_rate      = br; //average bit rate
 		//_videoCodecCtx->rc_max_rate      = br;// 64 * 1000; //average bit rate
-		_videoCodecCtx->qblur      = 1.0;// 64 * 1000; //average bit rate
-		_videoCodecCtx->qcompress      = 1.0;// 64 * 1000; //average bit rate
+		//_videoCodecCtx->qblur      = 1.0;// 64 * 1000; //average bit rate
+		//_videoCodecCtx->qcompress      = 1.0;// 64 * 1000; //average bit rate
 		//_videoCodecCtx->bit_rate_tolerance      = br * 2;// kb * 1000;
 		//_videoCodecCtx->rc_min_rate   = 0; //max bit rate
 		//_videoCodecCtx->rc_max_rate   = 0; //max bit rate
@@ -287,7 +298,6 @@ namespace Screens
 		_videoCodecCtx->time_base.den = _ctx->frame_rate; // HIGH framerate = smooth playback.
 		_videoCodecCtx->time_base.num = 1;
 		_videoCodecCtx->gop_size      = _ctx->gop_size;
-		//_videoCodecCtx->level = 30;Z
 		//_videoCodecCtx->flags		  |= CODEC_FLAG_PSNR;
 		//_videoCodecCtx->partitions		  &= ~(X264_PART_I4X4 | X264_PART_I8X8 | X264_PART_P8X8 | X264_PART_P4X4 | X264_PART_B8X8);
 		//_videoCodecCtx->crf		  = 0.0f;
@@ -306,7 +316,6 @@ namespace Screens
 		//_videoCodecCtx->me_method = ME_ZERO;
 		//_videoCodecCtx->qmin = 1;
 		//_videoCodecCtx->qmax = 10;
-		//_videoCodecCtx->coder_type = FF_CODER_TYPE_VLC;
 		
 		//s_videoCodecCtx->qmin = _ctx->qmin;
 		//_videoCodecCtx->qmax = _ctx->qmax;
@@ -314,10 +323,11 @@ namespace Screens
 		//_videoCodecCtx->qmin = 1;
 		//_videoCodecCtx->qmax = 3;
 		//_videoCodecCtx->rc_qsquish = 1;
+		//_videoCodecCtx->partitions|=X264_PART_I8X8+X264_PART_I4X4+X264_PART_P8X8+X264_PART_B8X8; // partitions=+parti8x8+parti4x4+partp8x8+partb8x8
 		
-		//_videoCodecCtx->flags2 |= CODEC_FLAG2_FAST|CODEC_FLAG2_STRICT_GOP|CODEC_FLAG2_DROP_FRAME_TIMECODE|CODEC_FLAG2_SKIP_RD;
+		_videoCodecCtx->flags2 |= CODEC_FLAG2_FAST;//|CODEC_FLAG2_STRICT_GOP;//|CODEC_FLAG2_DROP_FRAME_TIMECODE|CODEC_FLAG2_SKIP_RD;
 		
-		//_videoCodecCtx->flags |= CODEC_FLAG_LOOP_FILTER;//|CODEC_FLAG_GRAY;
+		//_videoCodecCtx->flags |= CODEC_FLAG_LOOP_FILTER|CODEC_FLAG_GRAY;
 		//_videoCodecCtx->me_cmp |= FF_CMP_CHROMA;
 		//_videoCodecCtx->qmin = 10;
 		//_videoCodecCtx->qmax = 51;
@@ -333,13 +343,25 @@ namespace Screens
 		//_videoCodecCtx->me_range = 16;
 		//_videoCodecCtx->me_subpel_quality = 0;
 
+		//makes no difference in quality.
+		//av_opt_set(_videoCodecCtx->priv_data, "crf", "100", 0);
+		//av_opt_set(_videoCodecCtx->priv_data, "cqp", "20", 0);
+		//av_opt_set(_videoCodecCtx->priv_data, "weightp", "2", 0);
+		//av_opt_set(_videoCodecCtx->priv_data, "preset", "ultrafast", 0);
+		//av_opt_set(_videoCodecCtx->priv_data, "tune", "zerolatency", 0);
+
 			
 		_videoCodecCtx->me_subpel_quality = 0;
-		_videoCodecCtx->thread_count = 1;
-
+ 
 		//_videoCodecCtx->qmin = 1;
 		//_videoCodecCtx->qmax = 10;
 		_videoCodecCtx->me_method = ME_EPZS;
+		//_videoCodecCtx->weighted_p_pred = 1;
+		//_videoCodecCtx->me_method = ME_EPZS;
+		//_videoCodecCtx->me_cmp = FF_CMP_ZERO;
+		//_videoCodecCtx->me_sub_cmp = FF_CMP_ZERO;
+		//_videoCodecCtx->me_range = 2;
+		//_videoCodecCtx->refs = 3;
 
 
 		//_videoCodecCtx->max_qdiff = 3;
@@ -347,6 +369,7 @@ namespace Screens
 		//_videoCodecCtx->b_quant_factor = 1.25;
 		//_videoCodecCtx->b_quant_offset = 1.25;
 		_videoCodecCtx->pix_fmt       = ENCODE_PX_FORMAT;
+		//_videoCodecCtx->thread_count = 1;
 		//_videoCodecCtx->compression_level       = -8; //best, -5 = default
 		//_videoCodecCtx->aq_mode       = 0; //best
 		//_videoCodecCtx->qmin       = 1; 
@@ -447,7 +470,7 @@ namespace Screens
 		_outputBuffer = (uint8_t *)av_malloc(_bufferSize);
 
 		_dstPicture = alloc_picture(_videoCodecCtx->pix_fmt, _videoCodecCtx->width, _videoCodecCtx->height);
-		_srcPicture = alloc_picture(PIX_FMT_YUV420P, _videoCodecCtx->width, _videoCodecCtx->height);
+		_srcPicture = alloc_picture(ENCODE_PX_FORMAT, _videoCodecCtx->width, _videoCodecCtx->height);
 
 		if(_dstPicture == NULL || _srcPicture == NULL)
 		{
@@ -457,7 +480,7 @@ namespace Screens
 
 		_convertCtx = sws_getContext(_videoCodecCtx->width,
 			_videoCodecCtx->height, 
-			PIX_FMT_BGRA, 
+			PIX_FMT_RGB32, 
 			_videoCodecCtx->width,
 			_videoCodecCtx->height, 
 			_videoCodecCtx->pix_fmt,

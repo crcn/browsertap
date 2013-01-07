@@ -39,7 +39,7 @@ namespace Screens
 		this->_id = Screen::_count;
 		this->_mouse = new Mouse(this);
 		this->_keyboard = new Keyboard(this);
-		this->_throttler = new Speed::Throttle(10);
+		this->_throttler = new Speed::Throttle(1000);
 		this->_style = GetWindowLong(this->_window, GWL_STYLE);
 		this->_extStyle = GetWindowLong(this->_window, GWL_EXSTYLE);
 		// this->removeChrome();
@@ -205,7 +205,7 @@ namespace Screens
 		//http://forums.codeguru.com/showthread.php?486970-Catching-WM_GETMINMAXINFO-from-notepad.exe-doesn-t-work
 		//http://msdn.microsoft.com/en-us/library/windows/desktop/ms633534(v=vs.85).aspx
 		// return MoveWindow(this->_window, bounds.x, bounds.y, bounds.width, bounds.height, true);
-		SetWindowPos(this->_window, NULL, 0, 0, bounds.width, bounds.height, 0 /*SWP_NOMOVE |*/ /*SWP_NOSENDCHANGING*/);
+		SetWindowPos(this->_window, NULL, bounds.x, bounds.y, bounds.width, bounds.height, 0 /*SWP_NOMOVE |*/ /*SWP_NOSENDCHANGING*/);
 		// RedrawWindow(this->_window, NULL, NULL, RDW_INVALIDATE | RDW_ALLCHILDREN | RDW_ERASENOW | RDW_UPDATENOW);
 		// InvalidateRect(this->_window, &rect, false);
 		/*HRGN rgnNewWnd; 
@@ -253,7 +253,7 @@ namespace Screens
 	{
 		if(!this->inFocus() && this->_throttler->skip()) return;
 
-		// std::cout << "TICK" << this->_id << std::endl;
+		//std::cout << "TICK" << this->_id << std::endl;
 
 		if(this->_recorder != 0)
 		{
@@ -425,7 +425,9 @@ namespace Screens
 
 			if(winProc == 0) 
 			{
-				std::cerr << "window does NOT have a process - this is a BUG!" << std::endl;
+				//no - this is NOT a bug. The process might not have been added because WKM might
+				//have been compiled as 32 bit when the missing process is 64 bit. That throws error 299
+				//std::cerr << "window does NOT have a process - this is a BUG!" << std::endl;
 				return TRUE;
 			}
 

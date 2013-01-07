@@ -10,7 +10,7 @@
 		{/styles}
 		{>mixpanel/}
 		<script type="text/javascript" src="/vendors/js/head.js"></script>
-		<script type="text/javascript" src="/vendors/bootstrap/js/bootstrap.min.js"></script>
+		<!--script type="text/javascript" src="/vendors/bootstrap/js/bootstrap.min.js"></script-->
 		{+scripts}
 		{/scripts}
 	</head>

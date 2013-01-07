@@ -1,1 +1,1 @@
-config:x86:x86_32:generic:mingw32:gcc 4.6.1 (GCC):--enable-shared --disable-static
+config:x86:x86_32:generic:mingw32:gcc 4.6.2 (GCC):--enable-shared --disable-static

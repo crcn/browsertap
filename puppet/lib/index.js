@@ -8,6 +8,8 @@ proxyServer  = require("./proxy/server"),
 _            = require("underscore"),
 Apps         = require("./apps");
 
+require("outcome").logAllErrors(true);
+
 exports.create = function(options) {
 
 	var apps = new Apps(options.apps.directory),

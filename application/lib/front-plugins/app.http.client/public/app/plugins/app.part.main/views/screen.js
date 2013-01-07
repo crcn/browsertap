@@ -1,7 +1,8 @@
 var Loader = require("./loader"),
 DesktopPlayer = require("./desktopPlayer"),
 wkmEvents = require("./events"),
-disposable = require("disposable");
+disposable = require("disposable"),
+_ = require("underscore");
 
 module.exports = require("../../../views/base").extend({
 	"templateName": "screen",
@@ -12,7 +13,8 @@ module.exports = require("../../../views/base").extend({
 		disp = this._disposable = disposable.create(), self = this;
 
 		this._window = this.options.window;
-		this.$hud = this.$el.find(".hud-body");
+		this.$hud = this.$el;
+		this.$hudBody = this.$el.find(".hud-body");
 		this.$window = $(window);
 		this.$html = $("html");
 		this.$document = $(document);
@@ -23,7 +25,8 @@ module.exports = require("../../../views/base").extend({
 		this._frameRates = 0;
 		this._numFrameRates = 0;
 		this._locked = true;
-
+		this._usePadding = false;
+		this.resizable = !!this._window.style.sizebox;
 
 		var self = this;
 
@@ -66,29 +69,44 @@ module.exports = require("../../../views/base").extend({
 			disp.addBinding(binding);
 		});
 
+		this.$hudBody.css({ opacity: 0 });
+
+
 		this._disposable.addInterval(setInterval(_.bind(this.syncScrollInfo, this), 2000));
 		this._disposable.addInterval(setInterval(_.bind(this._changeVideoQuality, this), 200));
 		this._window.bindProxy(_.bind(this.onProxy, this));
 
 		//do NOT resize before the first framerate arrives. This causes a delay
-		// this.onResize();
+		this.onResize(false, false);
 		this._listenToWindow();
 		this._keysDown = [];
 	},
+	"usePadding": function(value) {
+		this._usePadding = value;
+		if(!this._locked) this.onResize();
+	},
 	"prepareChildren": function() {
 		return [
-			this._desktopPlayer = new DesktopPlayer({ el: ".desktop-player", host: this.options.rtmpUrl })
+			this._desktopPlayer = new DesktopPlayer({ el: ".desktop-player", host: this.options.rtmpUrl, onFlashBlockerDetected: _.bind(this._onFlashBlockerDetected, this) })
 		];
 	},
 
 	/**
 	 */
 
-	"_createBindings": function() {
+	"_onFlashBlockerDetected": function() {
+		this.$hudBody.css({ opacity: 1 });	
+		if(this.onReady) this.onReady();
+	},
 
+
+	/**
+	 */
+
+	"_createBindings": function() {
 		return [
 			this.$window.resize(_.bind(this.onResize, this)),
-			this.$window.bind("mousewheel", _.throttle(_.bind(this.onDocumentScroll, this), 30)),
+			this.$window.mousewheel(_.throttle(_.bind(this.onDocumentScroll, this), 30)),
 			this.$window.mousedown(_.bind(this.onMouseDown, this)),
 			this.$window.mouseup(_.bind(this.onMouseUp, this)),
 			this.$window.mousemove(_.throttle(_.bind(this.onMouseMove, this), 50)),
@@ -103,7 +121,7 @@ module.exports = require("../../../views/base").extend({
 		window.desktopEvents = {
 			setClipboard: _.bind(this.setClipboard, this),
 			//keyDown: _.bind(this.onKeyDown, this),
-			//resize: _.bind(this.onWindowResize, this),
+			resize: _.bind(this.onWindowResize, this),
 			framerateChange: _.bind(this.onFrameRateChange, this)
 		};
 	},
@@ -138,36 +156,39 @@ module.exports = require("../../../views/base").extend({
 	},
 	"onWindowScroll": _.throttle(function() {
 		this._scrollDelta = 1;
-		if(!this._useNativeScroller) return;
+		if(!this._useNativeScroller || true) return;
 
 		this.proxy.scrollbar.to(this.$document.scrollLeft(), this.$document.scrollTop());
 	}, 30),
-	"onResize": _.debounce(function(force) {
+	"onResize": _.debounce(function(force, sendToServer) {
 		var win = this._window,
-		padding = win.app.padding,
+		padding = _.extend({}, win.app.padding),
 		self    = this;
+
+		self._realPadding = padding;
 
 		this._locked = false;
 
-		if(this.options.loader.options.screen) {
+
+		if(this.options.loader.options.screen || !this._usePadding) {
 			padding.top = 22;
 			padding.left = 4;
 			padding.right = 4;
 			padding.bottom = 4;
 		}
 
-		this.$hud.css({
-			opacity: 1,
+		this.$hudBody.css({
 			width: this.$window.width() + (padding.left || 0) + (padding.right || 0) + (this._useNativeScroller ? 17 : 0),
 			height: this.$window.height() + (padding.top || 0) + (padding.bottom || 0),
 			left: -padding.left,
 			top: -padding.top,
-			position: "fixed"
+			position: "absolute"
 		});
 
-		var w = this.$hud.width(),
-		h = this.$hud.height();
+		this.$hud
 
+		var w = this.$hudBody.width(),
+		h = this.$hudBody.height();
 
 		try {
 			$(".hud-body").find("object")[0].setPadding(padding);
@@ -176,9 +197,9 @@ module.exports = require("../../../views/base").extend({
 			
 		}
 
-
-
+		if(sendToServer === false) return;
 		//don't resize if nothing's changed
+		if(!this.resizable) return win.resize(0, 0, win.width, win.height);
 		if(!force && win.width == w && win.height == h) return;
 
 
@@ -188,13 +209,17 @@ module.exports = require("../../../views/base").extend({
 
 		this._lastMouseMoveAt = Date.now();
 
+		var padding = this._realPadding || this._window.app.padding;
 
-		var coords = { x: e.pageX + (this._window.app.padding.left || 0) - this.$document.scrollLeft(), y: e.pageY + (this._window.app.padding.top || 0)  - this.$document.scrollTop() };
+
+
+		var coords = { x: e.pageX + (padding.left || 0) - this.$document.scrollLeft(), y: e.pageY + (padding.top || 0)  - this.$document.scrollTop() - this.$hud.offset().top };
 
 		if(this.windowDims.width && this.windowDims.height) {
-			coords.x = coords.x - (this.$hud.width()/2 - this.windowDims.width/2);
-			coords.y = coords.y - (this.$hud.height()/2 - this.windowDims.height/2);
+			coords.x = coords.x - (this.$hudBody.width()/2 - this.windowDims.width/2);
+			coords.y = coords.y - (this.$hudBody.height()/2 - this.windowDims.height/2);
 		}
+
 
 		if(this.coords) {
 			this._mouseMoveDelta = Math.round(Math.sqrt(Math.pow(this.coords.x - coords.x, 2) + Math.pow(this.coords.y - coords.y, 2)))
@@ -237,18 +262,44 @@ module.exports = require("../../../views/base").extend({
 		this._window.keybdEvent(data);
 	},
 	"onWindowResize": function(data) {
+
 		this.windowDims = data;
-		this.onResize();
+		if(this._hudVisible) return;
+
+		if(this.resizable) {
+			if(this._locked) return;
+			if(this.$hudBody.width() > data.width || this.$hudBody.height() > data.height) return;
+		}
+
+		this._hudVisible = true;
+
+		if(this.onReady) this.onReady();
+
+		//wait for the rtmp stream to catch up
+		setTimeout(function(self) {
+			self.$hudBody.css({ opacity: 0 });
+			self.$hudBody.transit({ opacity: 1 }, 2000);
+		}, 500, this);
+
 	},
 	"onProxy": function(proxy) {
 		this.proxy = proxy;
 	},
-	"onDocumentScroll": function(e, delta) {
+	"onDocumentScroll": function(e, delta, deltaX, deltaY) {
 		this._scrollDelta = delta;
+
 
 		if(this._useNativeScroller) return;
 
-		this._window.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_WHEEL, this.coords, delta * this._scrollMultiplier);
+
+		var self = this;
+
+		function scroll(type, delta) {
+			self._window.mouseEvent(type, self.coords, delta * self._scrollMultiplier);
+		}
+
+		if(Math.abs(deltaY) > 0) scroll(wkmEvents.mouse.MOUSEEVENTF_WHEEL, deltaY);
+		if(Math.abs(deltaX) > 0) scroll(wkmEvents.mouse.MOUSEEVENTF_HWHEEL, deltaX);
 	},
 	"syncScrollInfo": function() {
 		if(!this.proxy || true) return;

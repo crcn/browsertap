@@ -4,7 +4,7 @@ module.exports = {
 		"thenRun": [
 			{
 				"set": {
-					"cache.directory": "C:/Users/Administrator/AppData/Local/Opera",
+					"cache.directory": ["C:/Users/Administrator/AppData/Local/Opera","C:/Users/Administrator/AppData/Roaming/Opera"],
 					"process.names": ["opera*"],
 					"process.cannotRunWith": ["opera"],
 					"window.classes": [""],

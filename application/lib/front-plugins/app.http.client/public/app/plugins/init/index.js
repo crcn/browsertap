@@ -3,8 +3,10 @@ qs = require("querystring"),
 Url = require("url");
 
 
-exports.require = ["router", "bark", "app.part.main", "puppeteer", "commands"];
-exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader) {
+
+
+exports.require = ["router", "bark", "states", "app.part.main", "puppeteer", "commands"];
+exports.plugin = function(router, bark, states, mainPlugin, puppeteer, commands, loader) {
 
 	// var query = qs.parse(String(window.location).split("")
 
@@ -12,11 +14,28 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 		"pull -http live": function(req, res) {
 			loader.load(req.query);
 			res.end();
+			updateLoaderOps();
 		}
 	});
 
-	var loader = new ScreenLoader(puppeteer, commands), screen, appSwitcher,
-	loadingView = new mainPlugin.views.Loader({ el: ".loader" });
+
+	function updateLoaderOps() {
+		loadingView.update({ app: loader.options.app, version: loader.options.version });
+	}
+
+
+	var loader = new ScreenLoader(puppeteer, commands, states), screen, appSwitcher,
+	loadingView = new mainPlugin.views.Loader({ el: ".loader", states: states });
+	var expc = new mainPlugin.views.ExpandContract({ el: ".expand-contract" }),
+	usePadding = true;
+
+
+		loadingView.showNotification();
+
+
+	loader.on("tunneling", function(file) {
+		// bark.alert("Please grant tunnel access via the taptunnel terminal application.");
+	});
 
 
 	key("shift+right", function(e) {
@@ -41,6 +60,12 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 		});
 	});
 
+
+	expc.onExpandContract = function(exp) {
+		usePadding = exp;
+		if(screen) screen.usePadding(exp);
+	}
+
 	loader.on("loading", function() {
 		if(screen) {
 			screen.dispose();
@@ -48,15 +73,15 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 			screen = null;
 		}
 		$(".pre-launch-notification").remove();
-		loadingView.update({ app: loader.options.app, version: loader.options.version });
 		loadingView.showNotification();
+		updateLoaderOps();
 	});
 
 
 	loader.on("connection", function(con) {
 		con.getAvailableApps(function(err, apps) {
 			appSwitcher = new mainPlugin.views.AppSwitcher({ el: ".app-switcher", router: router, loader: loader, apps: apps });
-		})
+		});
 	});
 
 
@@ -66,7 +91,7 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 		var q = Url.parse(String(window.location), true).query,
 
 		//low GOP initially so there's no delay when interacting with the page
-		defaults = { qmin: 1, qmax: 5, gop_size: 70, frame_rate: 24 };
+		defaults = { qmin: 1, qmax: 5, gop_size: 70, frame_rate: 18 };
 
 
 		for(var key in defaults) {
@@ -77,6 +102,7 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 			}
 		}
 
+		states.set("broadcasting_window");
 
 		win.startRecording(q, function(err, info) {
 
@@ -89,9 +115,12 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 				gop_size: q.gop_size,
 				frame_rate: q.frame_rate });
 
-			setTimeout(function() {
+			screen.usePadding(usePadding);
+
+			screen.onReady = function() {
 				loadingView.hideNotification();
-			}, 1000);
+				states.set("complete", loader.options.app + " " + loader.options.version);
+			}
 		});
 	});
 
@@ -110,7 +139,7 @@ exports.plugin = function(router, bark, mainPlugin, puppeteer, commands, loader)
 
 
 	loader.on("locationChange", function(location) {
-		router.redirect("/live", { open: location.href, app: loader._appName, version: loader._appVersion }, false);
+		router.redirect("/live", { open: location.href, app: loader.options.app, version: loader.options.version }, false);
 	});
 
 }

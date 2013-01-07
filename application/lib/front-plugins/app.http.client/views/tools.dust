@@ -8,10 +8,11 @@
 	mixpanel.track("Tools Page Visit");
 
 	var bookmarklet = function() {
-		var script = document.createElement("script");
+		/*var script = document.createElement("script");
 		script.src = "[PROTOCOL]//[HOST]/js/extension.js?" + Date.now();
 		script.type = "text/javascript";
-		document.getElementsByTagName("head")[0].appendChild(script);
+		document.getElementsByTagName("head")[0].appendChild(script);*/
+		window.location = "http://browsertap.com/live?open=" + encodeURIComponent(window.location);
 	}.toString().
 	replace("[HOST]", window.location.host).
 	replace("[PROTOCOL]", window.location.protocol);
