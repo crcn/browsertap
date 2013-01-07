@@ -49,7 +49,7 @@ function injectAllFeatures() {
 		"Live Browser Reloads": false,
 		"Screensharing & Team Collaboration": false,
 		"Web Camera Support": false,
-		"Unlimited Testing": false
+		"Unlimited Testing": true
 	};
 
 	$allFeatures = $("#all-features");
