@@ -17,6 +17,10 @@ exports.plugin = function(server, auth) {
 		res.render("screen");
 	});
 
+	server.get("/", function(req, res) {
+		res.render("home");
+	});
+
 	server.get("/live-test", function(req, res) {
 		res.render("screen");
 	});
