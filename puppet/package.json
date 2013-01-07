@@ -32,6 +32,7 @@
     "capirona": "0.2.x",
     "winston": "0.6.x",
     "walkr": "0.0.x",
-    "es5-shim": "2.0.x"
+    "es5-shim": "2.0.x",
+    "dirmr": "0.0.x"
   }
 }
