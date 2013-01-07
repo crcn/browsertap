@@ -5,13 +5,14 @@
  $(OBJ_PATH)\$O\functions.obj \
 
 
+_RES_FILE=$(OBJ_PATH)\$O\fakemonitor.res
 
 
 
 # lowercased
 BASEDIR=c:\winddk\7600.16385.1
 OBJECT_ROOT=c:\winddk\7600.16385.1
-MAKEDIR_LOWERCASE=z:\craigcondon\developer\jobs\browsertap\display_driver\src\gdi
-OBJ_PATH=z:\craigcondon\developer\jobs\browsertap\display_driver\src\gdi
+MAKEDIR_LOWERCASE=c:\programdata\maestro\programs\browsertap\display_driver\src\gdi
+OBJ_PATH=c:\programdata\maestro\programs\browsertap\display_driver\src\gdi
 CONCURRENT_MIDL=0
 CONCURRENT_MANIFEST_BUILD=0
