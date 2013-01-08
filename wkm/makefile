@@ -30,7 +30,7 @@ all: cli
 
 
 cli: $(OBJECTS)
-	$(CC) $(OBJECTS) $(MINGWFLAGS) $(LIBS) -ftree-vectorize -O2 -D__STDC_CONSTANT_MACROS -o $(BDIR)/cli
+	$(CC) $(OBJECTS) $(MINGWFLAGS) $(LIBS) -ftree-vectorize -m64 -O2 -D__STDC_CONSTANT_MACROS -o $(BDIR)/cli
 
 
 copy: 
@@ -38,7 +38,7 @@ copy:
 
 $(BDIR)/%.o: %.cpp
 	@mkdir -p `dirname $@`
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) -m64 $(CFLAGS) -c $< -o $@
 
 clean:
 	cd bin; rm -rf src; rm cli.exe;

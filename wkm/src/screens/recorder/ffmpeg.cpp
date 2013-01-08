@@ -484,7 +484,7 @@ namespace Screens
 			_videoCodecCtx->width,
 			_videoCodecCtx->height, 
 			_videoCodecCtx->pix_fmt,
-			SWS_FAST_BILINEAR | SWS_ACCURATE_RND,
+			SWS_BICUBIC | SWS_ACCURATE_RND,
 			//SWS_BICUBIC,
 			NULL, 
 			NULL, 	

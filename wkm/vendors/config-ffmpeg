@@ -3,13 +3,13 @@ cd ffmpeg
 #./configure --prefix="/mingw" --extra-cflags="-mno-cygwin -mms-bitfields" --extra-ldflags="-Wl,–add-stdcall-alias" --enable-memalign-hack --target-os=mingw32 --arch=x86 --enable-shared --disable-static
 
 # -32-bit
-./configure --enable-shared --disable-static
+#./configure --enable-shared --disable-static
 
 # - 64-bit
-# ./configure --target-os=mingw32 --cross-prefix=x86_64-w64-mingw32- --cc=x86_64-w64-mingw32-gcc --arch=x86_64 --enable-shared --disable-static
+ ./configure --target-os=mingw32 --cross-prefix=x86_64-w64-mingw32- --cc=x86_64-w64-mingw32-gcc --arch=x86_64 --enable-shared --disable-static --enable-gpl
 make
 
-mkdir ../../libs;
+@mkdir ../../libs;
 for FILE in `find . -name "*.dll"`; do cp $FILE ../../libs; done;
 for FILE in `find . -name "*.lib"`; do cp $FILE ../../libs; done;
 

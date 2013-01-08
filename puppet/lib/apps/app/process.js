@@ -171,7 +171,6 @@ module.exports = structr(EventEmitter, {
 		var to = "C:/Users/Administrator/AppData/" + type,
 		from = this.app.settingsDir + "/" + type;
 		console.log("copy %s to %s", from, to);
-		console.log(new RegExp("(^|\\s)(common|" + this.app.version+")($|\\s)"));
 		dirmr().readdir(from, new RegExp("(^|\\s)(common|" + this.app.version+")($|\\s)")).join(to).complete(next);
 
 	}
