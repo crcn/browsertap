@@ -138,7 +138,7 @@ module.exports = structr({
 		this._maestro.
 		services.
 		getService("amazon").
-		createServer({ flavor: "m1.medium", image: this._imageId }, 
+		createServer({ flavor: "c1.medium", image: this._imageId }, 
 			outcome.e(cb).s(function(server) {
 				server._id = server.id;
 				cb(null, maestro.collection.insert(server).sync().pop());
