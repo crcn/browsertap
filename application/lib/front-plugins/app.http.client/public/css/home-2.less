@@ -1,5 +1,5 @@
 @import "func.less";
-@import "fonts-all.less";
+@import "fonts.less";
 @import "retina.less";
 
 
@@ -182,9 +182,6 @@ a img {
 
 	form {
 		margin-top: 15px;
-		margin-left: auto;
-		margin-right: auto;
-		width: 340px;
 	}
 
 	input[type="submit"] {
@@ -195,14 +192,15 @@ a img {
 		font-size: 17px;
 		font-weight: normal;
 		.roundtb(0px, 3px, 0px, 3px);
-		padding-top: 4px;
-		border: 0px;
-		cursor: pointer;
+		padding-top: -2px;
+		padding-bottom: 2px;
+		margin-top: -1px;
+		border: 0;
 		height: 40px;
 		width: 80px;
-		margin: 0;
-		float: right;
 	}
+	
+	
 
 	input[type="text"] {
 		color: #333;
@@ -210,8 +208,11 @@ a img {
 		width: 240px;
 		padding: 0 10px 0 10px;
 		border: 0;
+		position: relative;
+		margin: 0 -4px 0 0;
 		font-size: 17px;
 		.roundtb(3px, 0px, 3px, 0px);
+
 
     	&:focus {
 			border-color: rgba(199, 20, 0, 0.3);
@@ -220,8 +221,8 @@ a img {
 			/* IE6-9 */
 
 			-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(199, 20, 0, 0.3);
-				-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(199, 20, 0, 0.3);
-					box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(199, 20, 0, 0.3);
+			   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(199, 20, 0, 0.3);
+			        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(199, 20, 0, 0.3);
 		}
 	}
 }
