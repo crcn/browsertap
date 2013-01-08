@@ -10,9 +10,9 @@
  *  Copyright (c) 2005, All Rights Reserved  
  **********************************************************************/
 
-#define __NTDDKCOMP__        
-#define _MPPC_
-#define _WIN32_WINNT 0x500
+//#define __NTDDKCOMP__        
+//#define _MPPC_
+//#define _WIN32_WINNT 0x500
 
 
 #include <stddef.h>

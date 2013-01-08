@@ -10,7 +10,7 @@
  *  Copyright (c) 2005, All Rights Reserved  
  **********************************************************************/
  
-#define _X86_
+//#define _X86_
 
 #include <dderror.h>
 #include <devioctl.h>

@@ -10,9 +10,9 @@
  *  Copyright (c) 2005, All Rights Reserved  
  **********************************************************************/
 
-#define __NTDDKCOMP__
-#define _MPPC_
-#define _WIN32_WINNT 0x500
+//#define __NTDDKCOMP__
+//#define _MPPC_
+//#define _WIN32_WINNT 0x500
 
 
 #include <stddef.h>
@@ -26,6 +26,12 @@
 
 
 #include "gdifuncs.h"
+
+ #ifdef USERMODE_DRIVER
+#  define DDI_DRIVER_VERSION DDI_DRIVER_VERSION_NT5   // Probably?
+#else
+#  define DDI_DRIVER_VERSION DDI_DRIVER_VERSION_NT4
+#endif
 
 /*
  * Display Drivers provide a list of function entry points for specific GDI
