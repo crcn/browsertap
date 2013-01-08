@@ -49,7 +49,9 @@ function injectAllFeatures() {
 		"Live Browser Reloads": false,
 		"Screensharing & Team Collaboration": false,
 		"Web Camera Support": false,
-		"Unlimited Testing": true
+		"Unlimited Testing": true,
+		"Synchronized parallel navigation": false,
+		"Synchronized parallel scrolling": false
 	};
 
 	$allFeatures = $("#all-features");
