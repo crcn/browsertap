@@ -1,5 +1,4 @@
 BUILD: Computing Include file dependencies:
-<<<<<<< HEAD
 BUILD: Examining c:\programdata\maestro\programs\browsertap\display_driver\src directory tree for files to compile.
 oacr invalidate root:x86fre /autocleanqueue
 1>Compiling and Linking c:\programdata\maestro\programs\browsertap\display_driver\src\miniport *************
@@ -15,25 +14,6 @@ oacr invalidate root:x86fre /autocleanqueue
 1> /Ii386
 1> /I.
 1> /Ic:\programdata\maestro\programs\browsertap\display_driver\src\miniport\objfre_wlh_x86\i386
-=======
-BUILD: Examining c:\browsertap\display_driver\src directory tree for files to compile.
-oacr invalidate root:x86fre /autocleanqueue
-warnings in directory c:\browsertap\display_driver\src\gdi
-functions.c does not exist
-1>Compiling and Linking c:\browsertap\display_driver\src\miniport *************
-1>'nmake.exe /nologo BUILDMSG=Stop. -i BUILD_PASS=PASS2 LINKONLY=1 NOPASS0=1 MAKEDIR_RELATIVE_TO_BASEDIR='
-1> rc.exe -l 409 -DSXS_PROCESSOR_ARCHITECTURE="""x86"""  -DSXS_TARGET="""fakemonitor.sys"""   -DSYSTEM_COMPATIBLE_ASSEMBLY_NAME="""Microsoft.Windows.SystemCompatible"""  -DLSYSTEM_COMPATIBLE_ASSEMBLY_NAME=L"""Microsoft.Windows.SystemCompatible"""   -DSXS_ASSEMBLY_VERSION=""""""  /r /fo c:\browsertap\display_driver\src\miniport\objfre_wlh_x86\i386\fakemonminiport.res /D_X86_=1 /Di386=1  /DSTD_CALL /DCONDITION_HANDLING=1 /DNT_UP=1  /DNT_INST=0 /DWIN32=100 /D_NT1X_=100 /DWINNT=1 /D_WIN32_WINNT=0x0600 /DWINVER=0x0600 /D_WIN32_IE=0x0700    /DWIN32_LEAN_AND_MEAN=1  /DDEVL=1 /D__BUILDMACHINE__=WinDDK /DFPO=0  /DNDEBUG /D_DLL=1 /DNDEBUG  /DNTDDI_VERSION=0x06000100   /Ic:\browsertap\display_driver\src\miniport\objfre_wlh_x86\i386 /IC:\WinDDK\7600.16385.1\inc\api /IC:\WinDDK\7600.16385.1\inc\api /IC:\WinDDK\7600.16385.1\inc\ddk /IC:\WinDDK\7600.16385.1\inc\ddk /IC:\WinDDK\7600.16385.1\inc\crt .\fakemonminiport.rc
-1>Microsoft (R) Windows (R) Resource Compiler Version 6.1.6908.0
-1>Copyright (C) Microsoft Corporation.  All rights reserved.
-1> C:\WinDDK\7600.16385.1\Bin\x86\oacr\oacrcl @c:\browsertap\display_driver\src\miniport\objfre_wlh_x86\i386\cl.rsp
-1>Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 15.00.30729.207 for 80x86
-1>Copyright (C) Microsoft Corporation.  All rights reserved.
-1>cl /Fo"c:\browsertap\display_driver\src\miniport\objfre_wlh_x86\i386/"
-1> /FC
-1> /Ii386
-1> /I.
-1> /Ic:\browsertap\display_driver\src\miniport\objfre_wlh_x86\i386
->>>>>>> 23ec4914024411715d5d64ab83365f6c1208d290
 1> /IC:\WinDDK\7600.16385.1\inc\api
 1> /IC:\WinDDK\7600.16385.1\inc\api
 1> /IC:\WinDDK\7600.16385.1\inc\ddk
@@ -78,11 +58,7 @@ functions.c does not exist
 1> /Oxs
 1> /Oy-
 1> /Zi
-<<<<<<< HEAD
 1> /Fdc:\programdata\maestro\programs\browsertap\display_driver\src\miniport\objfre_wlh_x86\i386\
-=======
-1> /Fdc:\browsertap\display_driver\src\miniport\objfre_wlh_x86\i386\
->>>>>>> 23ec4914024411715d5d64ab83365f6c1208d290
 1> /DKMDF_MAJOR_VERSION_STRING=01
 1> /DKMDF_MINOR_VERSION_STRING=009
 1> /wd4603
@@ -93,11 +69,7 @@ functions.c does not exist
 1>entry.c
 1>functions.c
 1>Generating Code...
-<<<<<<< HEAD
 1> C:\WinDDK\7600.16385.1\Bin\x86\oacr\oacrlink /out:c:\programdata\maestro\programs\browsertap\display_driver\src\miniport\objfre_wlh_x86\i386\fakemonitor.sys /machine:ix86 @c:\programdata\maestro\programs\browsertap\display_driver\src\miniport\objfre_wlh_x86\i386\lnk.rsp
-=======
-1> C:\WinDDK\7600.16385.1\Bin\x86\oacr\oacrlink /out:c:\browsertap\display_driver\src\miniport\objfre_wlh_x86\i386\fakemonitor.sys /machine:ix86 @c:\browsertap\display_driver\src\miniport\objfre_wlh_x86\i386\lnk.rsp
->>>>>>> 23ec4914024411715d5d64ab83365f6c1208d290
 1>Microsoft (R) Incremental Linker Version 9.00.30729.207
 1>Copyright (C) Microsoft Corporation.  All rights reserved.
 1>/MERGE:_PAGE=PAGE 
@@ -122,23 +94,15 @@ functions.c does not exist
 1>/base:0x10000 
 1>/subsystem:native,6.00 
 1>/entry:GsDriverEntry@8 
-<<<<<<< HEAD
 1>/out:c:\programdata\maestro\programs\browsertap\display_driver\src\miniport\objfre_wlh_x86\i386\fakemonitor.sys 
 1>c:\programdata\maestro\programs\browsertap\display_driver\src\miniport\objfre_wlh_x86\i386\fakemonminiport.res 
 1>c:\programdata\maestro\programs\browsertap\display_driver\src\miniport\objfre_wlh_x86\i386\entry.obj 
 1>c:\programdata\maestro\programs\browsertap\display_driver\src\miniport\objfre_wlh_x86\i386\functions.obj 
-=======
-1>/out:c:\browsertap\display_driver\src\miniport\objfre_wlh_x86\i386\fakemonitor.sys 
-1>c:\browsertap\display_driver\src\miniport\objfre_wlh_x86\i386\fakemonminiport.res 
-1>c:\browsertap\display_driver\src\miniport\objfre_wlh_x86\i386\entry.obj 
-1>c:\browsertap\display_driver\src\miniport\objfre_wlh_x86\i386\functions.obj 
->>>>>>> 23ec4914024411715d5d64ab83365f6c1208d290
 1>C:\WinDDK\7600.16385.1\lib\wlh\i386\BufferOverflowK.lib 
 1>C:\WinDDK\7600.16385.1\lib\wlh\i386\ntoskrnl.lib 
 1>C:\WinDDK\7600.16385.1\lib\wlh\i386\hal.lib 
 1>C:\WinDDK\7600.16385.1\lib\wlh\i386\wmilib.lib 
 1>C:\WinDDK\7600.16385.1\lib\wlh\i386\videoprt.lib 
-<<<<<<< HEAD
 1>Compiling and Linking c:\programdata\maestro\programs\browsertap\display_driver\src\gdi *************
 1>'nmake.exe /nologo BUILDMSG=Stop. -i BUILD_PASS=PASS2 LINKONLY=1 NOPASS0=1 MAKEDIR_RELATIVE_TO_BASEDIR='
 1> rc.exe -l 409 -DSXS_PROCESSOR_ARCHITECTURE="""x86"""  -DSXS_TARGET="""fakemonitor.dll"""   -DSYSTEM_COMPATIBLE_ASSEMBLY_NAME="""Microsoft.Windows.SystemCompatible"""  -DLSYSTEM_COMPATIBLE_ASSEMBLY_NAME=L"""Microsoft.Windows.SystemCompatible"""   -DSXS_ASSEMBLY_VERSION=""""""  /r /fo c:\programdata\maestro\programs\browsertap\display_driver\src\gdi\objfre_wlh_x86\i386\fakemonitor.res /D_X86_=1 /Di386=1  /DSTD_CALL /DCONDITION_HANDLING=1 /DNT_UP=1  /DNT_INST=0 /DWIN32=100 /D_NT1X_=100 /DWINNT=1 /D_WIN32_WINNT=0x0600 /DWINVER=0x0600 /D_WIN32_IE=0x0700    /DWIN32_LEAN_AND_MEAN=1  /DDEVL=1 /D__BUILDMACHINE__=WinDDK /DFPO=0  /DNDEBUG /DNDEBUG  /DNTDDI_VERSION=0x06000100   /IC:\WinDDK\7600.16385.1\inc\ddk /Ic:\programdata\maestro\programs\browsertap\display_driver\src\gdi\objfre_wlh_x86\i386 /IC:\WinDDK\7600.16385.1\inc\api /IC:\WinDDK\7600.16385.1\inc\api /IC:\WinDDK\7600.16385.1\inc\crt .\fakemonitor.rc
@@ -239,18 +203,3 @@ functions.c does not exist
 1>C:\WinDDK\7600.16385.1\lib\wlh\i386\int64.lib 
 1>C:\WinDDK\7600.16385.1\lib\wlh\i386\win32k.lib 
 1>C:\WinDDK\7600.16385.1\lib\wlh\i386\libcntpr.lib 
-=======
-warnings in directory c:\browsertap\display_driver\src\gdi
-functions.c does not exist
-1>Compiling and Linking c:\browsertap\display_driver\src\gdi *************
-1>'nmake.exe /nologo BUILDMSG=Stop. -i BUILD_PASS=PASS2 LINKONLY=1 NOPASS0=1 MAKEDIR_RELATIVE_TO_BASEDIR='
-1> rc.exe -l 409 -DSXS_PROCESSOR_ARCHITECTURE="""x86"""  -DSXS_TARGET="""fakemonitor.dll"""   -DSYSTEM_COMPATIBLE_ASSEMBLY_NAME="""Microsoft.Windows.SystemCompatible"""  -DLSYSTEM_COMPATIBLE_ASSEMBLY_NAME=L"""Microsoft.Windows.SystemCompatible"""   -DSXS_ASSEMBLY_VERSION=""""""  /r /fo c:\browsertap\display_driver\src\gdi\objfre_wlh_x86\i386\fakemonitor.res /D_X86_=1 /Di386=1  /DSTD_CALL /DCONDITION_HANDLING=1 /DNT_UP=1  /DNT_INST=0 /DWIN32=100 /D_NT1X_=100 /DWINNT=1 /D_WIN32_WINNT=0x0600 /DWINVER=0x0600 /D_WIN32_IE=0x0700    /DWIN32_LEAN_AND_MEAN=1  /DDEVL=1 /D__BUILDMACHINE__=WinDDK /DFPO=0  /DNDEBUG /DNDEBUG  /DNTDDI_VERSION=0x06000100   /IC:\WinDDK\7600.16385.1\inc\ddk /Ic:\browsertap\display_driver\src\gdi\objfre_wlh_x86\i386 /IC:\WinDDK\7600.16385.1\inc\api /IC:\WinDDK\7600.16385.1\inc\api /IC:\WinDDK\7600.16385.1\inc\crt .\fakemonitor.rc
-1>Microsoft (R) Windows (R) Resource Compiler Version 6.1.6908.0
-1>Copyright (C) Microsoft Corporation.  All rights reserved.
-1>NMAKE : fatal error U1073: don't know how to make 'c:\browsertap\display_driver\src\gdi\objfre_wlh_x86\i386\functions.obj'
-1>errors in directory c:\browsertap\display_driver\src\gdi
-1>NMAKE : fatal error U1073: don't know how to make 'c:\browsertap\display_driver\src\gdi\objfre_wlh_x86\i386\functions.obj'
-1>Stop.
-1>nmake.exe /nologo BUILDMSG=Stop. -i BUILD_PASS=PASS2 LINKONLY=1 NOPASS0=1 MAKEDIR_RELATIVE_TO_BASEDIR= failed - rc = 2
-
->>>>>>> 23ec4914024411715d5d64ab83365f6c1208d290
