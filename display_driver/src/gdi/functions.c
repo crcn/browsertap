@@ -277,10 +277,6 @@ ULONG GdiExample_DrvGetModes(HANDLE hDriver, ULONG cjSize, DEVMODEW *pdm)
    else
    {
        
-<<<<<<< HEAD
-=======
-
->>>>>>> 23ec4914024411715d5d64ab83365f6c1208d290
        ulBytesWritten = sizeof(DEVMODEW);
 
        memset(pdm, 0, sizeof(DEVMODEW));
@@ -659,7 +655,6 @@ void GdiExample_DrvDestroyFont(FONTOBJ  *pfo)
     //ENGDEBUGPRINT(0, "GdiExample_DrvDestroyFont\r\n", NULL);
 
 }
-
 
 
 
