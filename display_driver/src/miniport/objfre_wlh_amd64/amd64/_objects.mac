@@ -12,7 +12,7 @@ _RES_FILE=$(OBJ_PATH)\$O\fakemonminiport.res
 # lowercased
 BASEDIR=c:\winddk\7600.16385.1
 OBJECT_ROOT=c:\winddk\7600.16385.1
-MAKEDIR_LOWERCASE=c:\browsertap\display_driver\src\miniport
-OBJ_PATH=c:\browsertap\display_driver\src\miniport
+MAKEDIR_LOWERCASE=c:\programdata\maestro\programs\browsertap\display_driver\src\miniport
+OBJ_PATH=c:\programdata\maestro\programs\browsertap\display_driver\src\miniport
 CONCURRENT_MIDL=0
 CONCURRENT_MANIFEST_BUILD=0

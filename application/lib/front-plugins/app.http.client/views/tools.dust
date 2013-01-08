@@ -37,6 +37,6 @@
 <br />
 <br /-->
 <div id="tools-container">
-	<a href="#" id="bookmarklet">Test It<a/><span>&larr; Drag this button to your Bookmarks Bar</span>
+	<a href="#" id="bookmarklet">Test It<a/><span>&larr; Drag this button to your Bookmarks Bar. Click it whenever you want to test a website.</span>
 </div>
 {/content}
