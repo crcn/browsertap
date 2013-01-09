@@ -4,7 +4,7 @@ Provider=%BrowserTap%
 
 ClassGUID={4D36E968-E325-11CE-BFC1-08002BE10318}
 Class=Display
-DriverVer=12/10/2012,5.00.2078
+DriverVer=12/10/2012,5.00.2079
 CatalogFile=browsertap.cat
 
 [DestinationDirs]
