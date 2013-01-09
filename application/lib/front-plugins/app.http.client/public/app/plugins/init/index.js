@@ -91,7 +91,7 @@ exports.plugin = function(router, bark, states, mainPlugin, puppeteer, commands,
 		var q = Url.parse(String(window.location), true).query,
 
 		//low GOP initially so there's no delay when interacting with the page
-		defaults = { qmin: 1, qmax: 5, gop_size: 70, frame_rate: 24 };
+		defaults = { qmin: 1, qmax: 5, gop_size: 70, frame_rate: 70 };
 
 
 		for(var key in defaults) {
