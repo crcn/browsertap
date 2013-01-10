@@ -215,7 +215,9 @@
 			$(document).ready(function() {
 				$(".play-button").fancybox({
 					width: 768,
-					height: 432
+					height: 432,
+					padding: 0,
+					margin: 0
 				});
 			});
 		</script>
