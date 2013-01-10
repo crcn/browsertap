@@ -12,11 +12,13 @@
 		script.src = "[PROTOCOL]//[HOST]/js/extension.js?" + Date.now();
 		script.type = "text/javascript";
 		document.getElementsByTagName("head")[0].appendChild(script);*/
-		window.location = "http://browsertap.com/live?open=" + encodeURIComponent(window.location);
+		window.location = "[PROTOCOL]//browsertap.com/live?open=" + encodeURIComponent(window.location);
 	}.toString().
-	replace("[HOST]", window.location.host).
-	replace("[PROTOCOL]", window.location.protocol);
+	replace(/\[HOST\]/g, window.location.host).
+	replace(/\[PROTOCOL\]/g, window.location.protocol);
 
+
+	alert(bookmarklet);
 
 	$(document).ready(function() {
 		$("#bookmarklet").attr("href","javascript:(" + encodeURIComponent(bookmarklet) + ")();");
