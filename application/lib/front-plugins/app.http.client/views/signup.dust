@@ -1,11 +1,1 @@
-
-
-{>form_layout/}
-
-{<page}Sign up{/page}
-
-{<form_content}
-<input type="text" name="email" placeholder="Email"></input></label>
-			<input type="password" name="password" placeholder="Password"></input></label>
-			<input type="submit" class="form-button" value="Sign up"></input>
-{/form_content}
+You've found the not so super secret signup page. Unfortunately, you won't be able to sign up right now.
