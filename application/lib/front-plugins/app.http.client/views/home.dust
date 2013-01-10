@@ -118,8 +118,8 @@
 						<img src="img/features/Shape 4.png"></img>
 					</div>
 					<h3>1-Click Testing</h3>
-					<p>Jump straight into testing with one click
-					from our browser extension or bookmarklet.
+					<p>Jump straight into testing with one click 
+					from our browser extension or bookmarklet. 
 					No need to visit browsertap.com</p>
 				</div>
 
@@ -128,7 +128,7 @@
 						<img src="img/features/Group 1.png"></img>
 					</div>
 					<h3>Parallel Testing</h3>
-					<p>Test multiple browser at once, with a new
+					<p>Test multiple browser at once, with a new 
 					window or tab per test, allowing you to 
 					compare rendering engines.</p>
 				</div>
@@ -138,8 +138,8 @@
 						<img src="img/features/Shape 8.png"></img>
 					</div>
 					<h3>Local Testing</h3>
-					<p>Run a small application that allows
-					Browsertap to connect to your computer,
+					<p>Run a small application that allows 
+					Browsertap to connect to your computer, 
 					forwarding localhost and file:// for testing.</p>
 				</div>
 
@@ -148,8 +148,8 @@
 						<img src="img/features/Shape 9.png"></img>
 					</div>
 					<h3>Developer Tools</h3>
-					<p>Browsertap supports many developer tools
-					and extensions for each browser, letting you
+					<p>Browsertap supports many developer tools 
+					and extensions for each browser, letting you 
 					see exactly what's going on with your code.</p>
 				</div>
 

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>{+title}Browser Tap{/title}</title>
+		<title>{+title}BrowserTap{/title}</title>
 
 		{+styles}
 			<link rel="stylesheet" href="/vendors/bootstrap/css/bootstrap.min.css" type="text/css">   
