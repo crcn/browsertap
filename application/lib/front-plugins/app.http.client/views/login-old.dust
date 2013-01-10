@@ -15,5 +15,6 @@
 </div>
 <div id="form-footer">
 	<input type="submit" class="form-button" value="Log in"></input>
+	<span>Don't have an account? <a href="/signup">Sign up!</a></span>
 </div>
 {/form_content}
