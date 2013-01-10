@@ -61,7 +61,7 @@
 				<!-- hmmm - the blurb below should be technical, but I shouldn't read it and go "wwhaauut?" -->
 				<!-- Browsertap allows you to test, and interact with 40+ different Android, and Windows based browsers.  -->
 
-				<span>Forget VMs, screenshot services, or dedicated testing computers. Browsertap works by broadcasting a live RTMP stream of a browser window on a cloud server. Your keyboard and mouse commands are relayed to the server, live, allowing you to test web layouts in realtime. </span>
+				<span>Forget VMs, screenshot services, or dedicated testing computers. BrowserTap works by broadcasting a live RTMP stream of a browser window on a cloud server. Your keyboard and mouse commands are relayed to the server, live, allowing you to test web layouts in realtime. </span>
 				<div class="clear" style="height:30px;"></div>
 
 				<div id="bt-mid-demo">
@@ -98,9 +98,7 @@
 						<img src="img/features/Shape 6.png"></img>
 					</div>
 					<h3>Responsive Testing</h3>
-					<p>Now you can test any responsive site, on 
-					any browser without leaving your browser of 
-					choice, simply by resizing your window.</p>
+					<p>Now you can test any responsive site, on any browser without leaving your browser of choice, simply by resizing your window.</p>
 				</div>
 
 				<div class="bt-main-feature">
@@ -108,9 +106,7 @@
 						<img src="img/features/Shape 5.png"></img>
 					</div>
 					<h3>Seamless UI</h3>
-					<p>With Browsertap, you'll forget you're inside 
-					of an emulator. Just use your browser as 
-					you normally would.</p>
+					<p>With BrowserTap, you'll forget you're inside of an emulator. Just use your browser as you normally would.</p>
 				</div>
 
 				<div class="bt-main-feature">
@@ -118,9 +114,7 @@
 						<img src="img/features/Shape 4.png"></img>
 					</div>
 					<h3>1-Click Testing</h3>
-					<p>Jump straight into testing with one click 
-					from our browser extension or bookmarklet. 
-					No need to visit browsertap.com</p>
+					<p>Jump straight into testing with one click from our browser extension or bookmarklet. No need to visit browsertap.com</p>
 				</div>
 
 				<div class="bt-main-feature clear">
@@ -128,9 +122,7 @@
 						<img src="img/features/Group 1.png"></img>
 					</div>
 					<h3>Parallel Testing</h3>
-					<p>Test multiple browser at once, with a new 
-					window or tab per test, allowing you to 
-					compare rendering engines.</p>
+					<p>Test multiple browser at once, with a new window or tab per test, allowing you to compare rendering engines.</p>
 				</div>
 
 				<div class="bt-main-feature">
@@ -138,9 +130,7 @@
 						<img src="img/features/Shape 8.png"></img>
 					</div>
 					<h3>Local Testing</h3>
-					<p>Run a small application that allows 
-					Browsertap to connect to your computer, 
-					forwarding localhost and file:// for testing.</p>
+					<p>Run a small application that allows BrowserTap to connect to your computer, forwarding localhost and file:// for testing.</p>
 				</div>
 
 				<div class="bt-main-feature">
@@ -148,9 +138,7 @@
 						<img src="img/features/Shape 9.png"></img>
 					</div>
 					<h3>Developer Tools</h3>
-					<p>Browsertap supports many developer tools 
-					and extensions for each browser, letting you 
-					see exactly what's going on with your code.</p>
+					<p>BrowserTap supports many developer tools and extensions for each browser, letting you see exactly what's going on with your code.</p>
 				</div>
 
 			</div>
