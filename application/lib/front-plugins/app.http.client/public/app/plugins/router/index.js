@@ -27,7 +27,6 @@ exports.plugin = function() {
 		hostnameParts = hostname.split('.');
 		subdomain     = hostnameParts.length > 2 ? hostnameParts.shift() : undefined;
 
-
 		console.log('navigate to ' + parts.pathname);
 
 		router.request(parts.pathname).
@@ -121,6 +120,13 @@ exports.plugin = function() {
 
 	router.redirect = function(pathname, query, pull) {
 		var newUrl, query;
+
+
+		//there's a bug within qs.stringify which turns numbers into boolean values. To fix that, we
+		//change all values into strings.
+		for(var key in query) {
+			query[key] = String(query[key]);
+		}
 
 
 		var urlParts = parseLocation(pathname, query);  
