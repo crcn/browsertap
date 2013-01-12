@@ -16,7 +16,7 @@
 #include <miniport.h>
 #include <ntddvdeo.h>
 #include <video.h>
-#include "FAKEGFXCARD.h"
+#include "fakegfxcard.h"
 
 /*#pragma alloc_text(PAGE, FakeGfxCard_ResetHW)      */
 /*#pragma alloc_text(PAGE, FakeGfxCard_VidInterrupt) */
@@ -92,6 +92,7 @@ VP_STATUS FakeGfxCard_SetPowerState(PVOID HwDeviceExtension, ULONG HwId, PVIDEO_
  **********************************************************************/
 ULONG FakeGfxCard_GetChildDescriptor (PVOID HwDeviceExtension, PVIDEO_CHILD_ENUM_INFO ChildEnumInfo, PVIDEO_CHILD_TYPE pChildType, PVOID pChildDescriptor, PULONG pUId, PULONG pUnused)
 {
+   VideoDebugPrint((0, "GetChildDescriptor Called.\n"));
    return ERROR_NO_MORE_DEVICES;
 }
 
@@ -105,6 +106,7 @@ ULONG FakeGfxCard_GetChildDescriptor (PVOID HwDeviceExtension, PVIDEO_CHILD_ENUM
  **********************************************************************/
 VP_STATUS FakeGfxCard_FindAdapter(PVOID HwDeviceExtension, PVOID HwContext, PWSTR ArgumentString, PVIDEO_PORT_CONFIG_INFO ConfigInfo, PUCHAR Again)
 {
+   VideoDebugPrint((0, "FindAdapter Called.\n"));
    return NO_ERROR;
 }
 
@@ -117,6 +119,7 @@ VP_STATUS FakeGfxCard_FindAdapter(PVOID HwDeviceExtension, PVOID HwContext, PWST
  **********************************************************************/
 BOOLEAN FakeGfxCard_Initialize(PVOID HwDeviceExtension)
 {
+   VideoDebugPrint((0, "Initialize Called.\n"));
    return TRUE;
 }
 
@@ -134,9 +137,9 @@ BOOLEAN FakeGfxCard_Initialize(PVOID HwDeviceExtension)
  **********************************************************************/
 BOOLEAN FakeGfxCard_StartIO(PVOID HwDeviceExtension,PVIDEO_REQUEST_PACKET RequestPacket)
 {
-   RequestPacket->StatusBlock->Status      = 0;
-   RequestPacket->StatusBlock->Information = 0;
-
+   //RequestPacket->StatusBlock->Status      = 0;
+   //RequestPacket->StatusBlock->Information = 0;
+   VideoDebugPrint((0, "StartIO Called.\n"));
    return TRUE;
 }     
 

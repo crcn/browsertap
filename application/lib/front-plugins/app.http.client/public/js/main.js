@@ -27,7 +27,7 @@ function injectAllFeatures() {
 		"Android Testing": false,
 
 		"1-Click Testing": true,
-		"History Support (back & forward)": true,
+		"History Support (back & forward)": false,
 		"iPhone Testing": false,
 
 		"Clipboard Support (copy & paste)": true,
@@ -50,8 +50,7 @@ function injectAllFeatures() {
 		"Screensharing & Team Collaboration": false,
 		"Web Camera Support": false,
 		"Unlimited Testing": true,
-		"Synchronized parallel navigation": false,
-		"Synchronized parallel scrolling": false
+		"Synchronized parallel testing": false
 	};
 
 	$allFeatures = $("#all-features");

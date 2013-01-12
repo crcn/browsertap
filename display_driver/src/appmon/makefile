@@ -1,5 +1,5 @@
 TARGET = appmonitor
-TARGETDIR = ..\..\bin
+TARGETDIR = ..\..\..\..\..\bin
 
 ASM = ml
 CPP = cl
@@ -8,7 +8,7 @@ F90 = df.exe
 MTL = midl.exe
 REBASE = rebase.exe
 
-OBJDIR = .\obj\amd64
+OBJDIR = .\obj\i386
 
 ASM_PROJ=/coff /c /Fo$(OBJDIR)\\
 
@@ -45,7 +45,7 @@ LIBS = \
 # This is a comment
 $(TARGETDIR)\$(TARGET): $(OBJDIR) $(TARGETDIR) $(OBJS) $(RESFILE)
     $(LIB32) $(LIB32_FLAGS) $(OBJS) $(LIBS) $(RESFILE)
-#    $(REBASE) -b 0x00400000 -x $(TARGETDIR)\SYMBOLS -a $(TARGETDIR)\$(TARGET)
+    $(REBASE) -b 0x00400000 -x $(TARGETDIR)\SYMBOLS -a $(TARGETDIR)\$(TARGET)
 
 {.\}.c{$(OBJDIR)}.obj::
 	$(CPP) $(CPP_PROJ) $<

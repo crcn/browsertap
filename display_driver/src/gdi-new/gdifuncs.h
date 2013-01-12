@@ -33,6 +33,11 @@ typedef struct _DEVICE_DATA_
     HSURF       hsurf;
 
 } DEVICE_DATA, *PDEVICE_DATA;
+
+typedef struct _RESOLUTION_ {
+  int x;
+  int y;
+} RESOLUTION, *PRESOLUTION;
               
 VOID GdiExample_DrvDisableDriver(VOID);
 BOOL GdiExample_DrvAssertMode(DHPDEV  dhpdev,BOOL  bEnable);

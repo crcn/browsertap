@@ -10,7 +10,7 @@
  *  Copyright (c) 2005, All Rights Reserved  
  **********************************************************************/
  
-#define _X86_
+// #define _X86_
 
 #include <dderror.h>
 #include <devioctl.h>
@@ -20,9 +20,9 @@
 
 #include "fakegfxcard.h"
       
-ULONG DriverEntry(PVOID pContext1, PVOID pContext2);
+//ULONG DriverEntry(PVOID pContext1, PVOID pContext2);
 
-#pragma alloc_text(INIT, DriverEntry)
+//#pragma alloc_text(INIT, DriverEntry)
 
 
 /**********************************************************************
@@ -47,7 +47,7 @@ ULONG DriverEntry(PVOID pContext1, PVOID pContext2)
      *
      */
 
-    VideoPortZeroMemory(&hwInitData, sizeof(VIDEO_HW_INITIALIZATION_DATA));
+   VideoPortZeroMemory(&hwInitData, sizeof(VIDEO_HW_INITIALIZATION_DATA));
 
     hwInitData.HwInitDataSize            = sizeof(VIDEO_HW_INITIALIZATION_DATA);
 
