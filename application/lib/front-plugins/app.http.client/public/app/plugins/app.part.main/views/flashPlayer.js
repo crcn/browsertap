@@ -29,7 +29,9 @@ module.exports = require("../../../views/base").extend({
 		"/swf/expressInstall.swf",
 		JSON.parse(JSON.stringify(this.params())), {
 			backgroundColor: "#FFFFFF"
-		}, {}, function() {
+		}, {
+			"wmode": "transparent"
+		}, function() {
 
 			//beat the race condition
 			setTimeout(function() {

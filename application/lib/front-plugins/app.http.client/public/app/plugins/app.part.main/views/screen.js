@@ -127,6 +127,8 @@ module.exports = require("../../../views/base").extend({
 	},
 	"onWindowKeyDown": function(e) {
 
+		console.log("KEY")
+
 
 		e.preventDefault();
 		e.stopPropagation();
