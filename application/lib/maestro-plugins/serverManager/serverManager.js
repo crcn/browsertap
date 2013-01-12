@@ -16,7 +16,7 @@ module.exports = structr({
 
 		console.log("registering desktop server to id %s", this._imageId);
 
-		this._stopTime = 1000 * 60 * 10;
+		this._stopTime = 1000 * 60 * 2; // two minutes - keep it at the time it takes to boot it.
 		this._terminateTime = 1000 * 60 * 60 * 24;
 
 		this._startSanityCheck();
@@ -138,7 +138,7 @@ module.exports = structr({
 		this._maestro.
 		services.
 		getService("amazon").
-		createServer({ flavor: "c1.medium", image: this._imageId }, 
+		createServer({ flavor: "m1.medium", image: this._imageId }, 
 			outcome.e(cb).s(function(server) {
 				server._id = server.id;
 				cb(null, maestro.collection.insert(server).sync().pop());

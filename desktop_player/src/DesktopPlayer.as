@@ -51,7 +51,6 @@ package
 		
 		public function DesktopPlayer()
 		{
-
 			this._server =  this.root.loaderInfo.parameters.host || "rtmp://192.168.2.3:1935/live";
 			this._channel = this.root.loaderInfo.parameters.channel || "default";
 			this._debug =   Boolean(this.root.loaderInfo.parameters.debug);
