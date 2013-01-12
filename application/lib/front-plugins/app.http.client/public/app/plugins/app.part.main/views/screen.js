@@ -127,14 +127,17 @@ module.exports = require("../../../views/base").extend({
 	},
 	"onWindowKeyDown": function(e) {
 
-		console.log("KEY")
-
 
 		e.preventDefault();
 		e.stopPropagation();
 
+
 		this._keysDown[e.keyCode] = true;
 
+		var self = this;
+
+		//this is for sanity. If one of these keys is down, and the window is switched (same focus),
+		//then key up isn't triggered. This will make these keys sticky. This isn't ideal, but it's a better solution
 		if(~[17, 16, 18, 91].indexOf(e.keyCode)) return;
 
 
@@ -142,14 +145,13 @@ module.exports = require("../../../views/base").extend({
 			keyCode: e.keyCode,
 			altKey: e.altKey,
 
-			//windows or mac
+			//windows or mac (91)
 			ctrlKey: e.ctrlKey || !!this._keysDown[91],
 			shiftKey: e.shiftKey
 		});
 
 	},
 	"onWindowKeyUp": function(e) {
-
 		delete this._keysDown[e.keyCode];
 	},
 	"dispose": function() {
@@ -210,6 +212,10 @@ module.exports = require("../../../views/base").extend({
 	"onMouseMove": function(e) {
 
 		this._lastMouseMoveAt = Date.now();
+
+		//you can't use your keyboard & mouse at the same time! This fixes an issue
+		//where we get sticky keys if a tab is switched
+		this._keysDown = {};
 
 		var padding = this._realPadding || this._window.app.padding;
 
