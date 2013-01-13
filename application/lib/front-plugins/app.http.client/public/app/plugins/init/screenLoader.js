@@ -56,6 +56,10 @@ module.exports = structr(EventEmitter, {
 		});
 	},
 
+	/*"_syncTitle": function() {
+		window.title = "BT - " + this.options.version;
+	},*/
+
 	/**
 	 */
 
@@ -69,6 +73,24 @@ module.exports = structr(EventEmitter, {
 		link.rel = "shortcut icon";
 		link.href = "http://" + a.host + "/favicon.ico";
 		document.getElementsByTagName("head")[0].appendChild(link);
+	},
+/*"_syncFavIcon": function() {
+		// var a = document.createElement("a");
+		// a.href = this._currentLocation;
+		$("[type='image/x-icon']").remove();
+		var link = document.createElement("link");
+		link.type = "image/x-icon";
+		link.rel = "shortcut icon";
+		link.href = "/favicons/"+this.options.app+".ico";
+		document.getElementsByTagName("head")[0].appendChild(link);
+	},*/
+
+	/**
+	 */
+
+	"syncTitle": function() {
+		this._syncTitle();
+		this._syncFavIcon();
 	},
 
 	/**
