@@ -169,16 +169,19 @@ module.exports = require("../../../views/base").extend({
 		padding = _.extend({}, win.app.padding),
 		self    = this;
 
+
+
 		self._realPadding = padding;
 
 		this._locked = false;
 
 
 		if(this.options.loader.options.screen || !this._usePadding) {
-			padding.top = 22;
+			/*padding.top = 22;
 			padding.left = 4;
 			padding.right = 4;
-			padding.bottom = 4;
+			padding.bottom = 4;*/
+			padding = win.app.popup.padding;
 		}
 
 		this.$hudBody.css({

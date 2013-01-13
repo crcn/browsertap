@@ -425,7 +425,20 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_popupWindow": function(w) {
-		this.commands.emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this.puppeteer.host + "&token=" + this.puppeteer.token + "&screen=" + w.id+"&app="+this.options.app+"&version="+this.options.version, width: w.width - 8, height: w.height - 26 });
+
+		var padding = {
+			top: 26,
+			left: 4,
+			right: 4,
+			bottom: 4
+		};
+
+		if(this.window) {
+			padding = this.window.app.popup.padding;
+		}
+
+
+		this.commands.emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this.puppeteer.host + "&screen=" + w.id+"&app="+this.options.app+"&version="+this.options.version, width: w.width - padding.left - padding.right, height: w.height - padding.top - padding.bottom });
 	},
 
 	/**
@@ -438,7 +451,17 @@ module.exports = structr(EventEmitter, {
 		if(window) this._ignoreClose = false;
 		console.log("set main window");
 		this.emit("window", this.window = window); 
-		if(window) window.bindProxy(_.bind(this._onProxy, this));
+		if(window) {
+			if(!window.app.popup) window.app.popup = {
+				padding: {
+					top: 22,
+					left: 4,
+					right: 4,
+					bottom: 4
+				}
+			};
+			window.bindProxy(_.bind(this._onProxy, this));
+		}
 	},
 
 	/**
