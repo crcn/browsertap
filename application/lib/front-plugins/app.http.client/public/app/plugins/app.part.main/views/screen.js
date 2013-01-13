@@ -28,6 +28,7 @@ module.exports = require("../../../views/base").extend({
 		this._usePadding = false;
 		this.resizable = !!this._window.style.sizebox;
 
+
 		var self = this;
 
 
@@ -41,6 +42,8 @@ module.exports = require("../../../views/base").extend({
 			$(".screen-cover").remove();
 			// this._scrollMultiplier = 20;
 		}
+
+
 
 		//chrome's scroll delta is way the fuck off from everything else
 		if(~agent.indexOf("safari")) {
@@ -79,7 +82,6 @@ module.exports = require("../../../views/base").extend({
 		//do NOT resize before the first framerate arrives. This causes a delay
 		this.onResize(false, false);
 		this._listenToWindow();
-		this._keysDown = [];
 	},
 	"usePadding": function(value) {
 		this._usePadding = value;
@@ -110,8 +112,6 @@ module.exports = require("../../../views/base").extend({
 			this.$window.mousedown(_.bind(this.onMouseDown, this)),
 			this.$window.mouseup(_.bind(this.onMouseUp, this)),
 			this.$window.mousemove(_.throttle(_.bind(this.onMouseMove, this), 50)),
-			this.$window.keydown(_.bind(this.onWindowKeyDown, this)),
-			this.$window.keyup(_.bind(this.onWindowKeyUp, this)),
 			this.$window.scroll(_.bind(this.onWindowScroll, this))
 		];
 	},
@@ -120,19 +120,25 @@ module.exports = require("../../../views/base").extend({
 
 		window.desktopEvents = {
 			setClipboard: _.bind(this.setClipboard, this),
-			//keyDown: _.bind(this.onKeyDown, this),
+			// keyDown: _.bind(this.onKeyDown, this),
 			resize: _.bind(this.onWindowResize, this),
 			framerateChange: _.bind(this.onFrameRateChange, this)
 		};
 	},
-	"onWindowKeyDown": function(e) {
+	"onKey": function(e, cmd) {
 
 
-		e.preventDefault();
-		e.stopPropagation();
+		if(cmd.length == 1 && !["ALT","CTRL","SHIFT"].indexOf(cmd[0])) return;
 
 
-		this._keysDown[e.keyCode] = true;
+		return this._window.keybdEvent({
+			keyCode: e.keyCode,
+			altKey: ~cmd.indexOf("ALT"),
+			ctrlKey: ~cmd.indexOf("CTRL"),
+			shiftKey: ~cmd.indexOf("SHIFT")
+		});
+
+		/*this._keysDown[e.keyCode] = true;
 
 		var self = this;
 
@@ -140,19 +146,22 @@ module.exports = require("../../../views/base").extend({
 		//then key up isn't triggered. This will make these keys sticky. This isn't ideal, but it's a better solution
 		if(~[17, 16, 18, 91].indexOf(e.keyCode)) return;
 
+		var ctrlKey = e.ctrlKey || !!this._keysDown[91] || !!this._keysDown[224];
+
+		//paste
+		console.log(ctrlKey, e.keyCode)
+		if(ctrlKey && e.keyCode == 86) return;
+
 
 		this._window.keybdEvent({
 			keyCode: e.keyCode,
-			altKey: e.altKey,
+			altKey: cmd.,
 
 			//windows or mac (91)
-			ctrlKey: e.ctrlKey || !!this._keysDown[91],
+			ctrlKey: ctrlKey,
 			shiftKey: e.shiftKey
-		});
+		});*/
 
-	},
-	"onWindowKeyUp": function(e) {
-		delete this._keysDown[e.keyCode];
 	},
 	"dispose": function() {
 		module.exports.__super__.dispose.call(this);
@@ -171,7 +180,6 @@ module.exports = require("../../../views/base").extend({
 
 
 
-		self._realPadding = padding;
 
 		this._locked = false;
 
@@ -183,6 +191,9 @@ module.exports = require("../../../views/base").extend({
 			padding.bottom = 4;*/
 			padding = win.app.popup.padding;
 		}
+
+		
+		self._realPadding = padding;
 
 		this.$hudBody.css({
 			width: this.$window.width() + (padding.left || 0) + (padding.right || 0) + (this._useNativeScroller ? 17 : 0),
@@ -216,9 +227,6 @@ module.exports = require("../../../views/base").extend({
 
 		this._lastMouseMoveAt = Date.now();
 
-		//you can't use your keyboard & mouse at the same time! This fixes an issue
-		//where we get sticky keys if a tab is switched
-		this._keysDown = {};
 
 		var padding = this._realPadding || this._window.app.padding;
 
@@ -239,24 +247,15 @@ module.exports = require("../../../views/base").extend({
 		this._window.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_ABSOLUTE | wkmEvents.mouse.MOUSEEVENTF_MOVE, this.coords = coords);
 	},
 	"onMouseDown": function(e) {
+		// $(".screen-cover").css({display:"none"});
 
 		//is scrollbar
 		if(e.toElement == this.$html[0]) return;
 		this._mouseDown = true;
 
-		/*console.log("DOWN");
-		console.log(e.target);
-		console.log(e);
-		console.log(e.toElement == this.$html[0])
-		console.log(this.$html)*/
 
 		this._window.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTDOWN : wkmEvents.mouse.MOUSEEVENTF_RIGHTDOWN, this.coords);
 
-		/*if(e.button == 0) {
-			mixpanel.track("Right Click");
-		} else {
-			mixpanel.track("Left Click");
-		}*/
 
 		if(e.button === 0) return; //only block right click
 		e.preventDefault();
@@ -264,6 +263,7 @@ module.exports = require("../../../views/base").extend({
 		return false;
 	},
 	"onMouseUp": function(e) {
+		// $(".screen-cover").css({display:"block"});
 		if(e.toElement == this.$html[0]) return;
 		this._mouseDown = false;
 		this._window.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTUP : wkmEvents.mouse.MOUSEEVENTF_RIGHTUP, this.coords);

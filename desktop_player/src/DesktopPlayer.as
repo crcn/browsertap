@@ -335,6 +335,8 @@ package
 		{
 			this._padding = obj;
 
+			if(!this._video) return;
+
 			with(this._mask.graphics) 
 			{
 				clear();

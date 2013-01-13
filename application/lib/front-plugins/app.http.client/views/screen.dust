@@ -3,7 +3,6 @@
 {<scripts}
 <script type="text/javascript" src="/vendors/js/jquery-mousewheel.js"></script>
 <script type="text/javascript" src="/vendors/js/swfobject.js"></script>
-<script type="text/javascript" src="/vendors/js/keymaster.js"></script>
 <script type="text/javascript" src="/js/screen.js"></script>
 {/scripts}
 

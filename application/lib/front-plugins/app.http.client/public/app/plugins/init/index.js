@@ -5,8 +5,8 @@ Url = require("url");
 
 
 
-exports.require = ["router", "bark", "states", "app.part.main", "puppeteer", "commands"];
-exports.plugin = function(router, bark, states, mainPlugin, puppeteer, commands, loader) {
+exports.require = ["router", "keys", "bark", "states", "app.part.main", "puppeteer", "commands"];
+exports.plugin = function(router, keys, bark, states, mainPlugin, puppeteer, commands, loader) {
 
 	// var query = qs.parse(String(window.location).split("")
 
@@ -19,6 +19,7 @@ exports.plugin = function(router, bark, states, mainPlugin, puppeteer, commands,
 	});
 
 
+
 	function updateLoaderOps() {
 		loadingView.update({ app: loader.options.app, version: loader.options.version });
 	}
@@ -29,8 +30,17 @@ exports.plugin = function(router, bark, states, mainPlugin, puppeteer, commands,
 	var expc = new mainPlugin.views.ExpandContract({ el: ".expand-contract" }),
 	usePadding = true;
 
+	insertTextInput(function(text) {
+		if(screen) {
+			screen.setClipboard(text);
+			screen._window.keybdEvent({
+				ctrlKey: true,
+				keyCode: 86
+			});
+		}
+	});
 
-		loadingView.showNotification();
+	loadingView.showNotification();
 
 
 	loader.on("tunneling", function(file) {
@@ -38,20 +48,20 @@ exports.plugin = function(router, bark, states, mainPlugin, puppeteer, commands,
 	});
 
 
-	key("shift+right", function(e) {
+	keys.on("shift+right", function(e) {
 		appSwitcher.shift("right");
 	});
 
-	key("shift+left", function(e) {
+	keys.on("shift+left", function(e) {
 		appSwitcher.shift("left");
 	});
 
-	key("shift+up", function(e) {
-		appSwitcher.shift("up");
+	keys.on("shift+up", function(e) {
+		appSwitcher.shift("down");
 	});
 
-	key("shift+down", function(e) {
-		appSwitcher.shift("down");
+	keys.on("shift+down", function(e) {
+		appSwitcher.shift("up");
 	});
 
 	loader.on("forceClose", function() {
@@ -124,6 +134,13 @@ exports.plugin = function(router, bark, states, mainPlugin, puppeteer, commands,
 		});
 	});
 
+	//ignore
+	keys.on("ctrl+v", function(){});
+
+	keys.key(function(e, cmd) {
+		if(screen) screen.onKey(e, cmd);
+	})
+
 
 	$.getJSON("/account.json", function(data) {
 		if(!data.result) return;
@@ -142,4 +159,27 @@ exports.plugin = function(router, bark, states, mainPlugin, puppeteer, commands,
 		router.redirect("/live", { open: location.href, app: loader.options.app, version: loader.options.version }, false);
 	});
 
+}
+
+
+function insertTextInput(fn) {
+
+	var text = $("body").prepend("<input id=\"cpaste\" type=\"text\"></input>").find("#cpaste").css({"position":"absolute", "top":0,"left":-1000});
+
+
+	text.keyup(function() {
+		text.val("");
+	});
+	
+	text.bind("paste", function(e) {
+		// console.log(e.data);
+		setTimeout(function() {
+			fn(text.val());
+			text.val("");
+		}, 1)
+	});
+
+	setInterval(function() {
+		text.focus();
+	}, 1000);
 }
