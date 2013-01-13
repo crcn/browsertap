@@ -241,6 +241,8 @@ module.exports = structr(EventEmitter, {
 			},
 			popupWindow: function(winProps) {
 
+				console.log("POPUP");
+
 				//is popup? don't popup.
 				if(!self._screenId)
 				self._popupWindow(winProps);
