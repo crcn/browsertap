@@ -4,6 +4,6 @@ client = require("./clnt")
 
 
 if(window.top == window.self) {
-	console.log("waiting for dom ready");
+	//console.log("waiting for dom ready");
 	domReady(client.start);
 }

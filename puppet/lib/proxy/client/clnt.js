@@ -64,7 +64,7 @@ exports.listen = function() {
 			}
 		},
 		foundWindow: function() {
-			console.log("found window")
+			//console.log("found window")
 			clearInterval(setTitle);
 			document.title = orgTitle;
 		}
@@ -87,13 +87,13 @@ exports.listen = function() {
 	function connect() {
 
 		var d = dnode(client);
-		console.log("connect btap proxy");
+		//console.log("connect btap proxy");
 		d.pipe(shoe("http://" + scriptUrl.host + "/dnode")).pipe(d);
 		d.once("end", function() {
 			setTimeout(connect, 2000);
 		});
 		d.once("error", function(err) {
-			console.log("ERR");
+			//console.log("ERR");
 		});
 	}
 	connect();
@@ -121,7 +121,7 @@ function watchLocation(client) {
 		if(currentHRef == newLoc) {
 			return;
 		}
-		console.log("location change")
+		//console.log("location change")
 		currentHRef = newLoc;
 		em.emit("locationChange", location());
 		client.location.emit()
