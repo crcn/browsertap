@@ -38,7 +38,7 @@ module.exports = require("../../../views/base").extend({
 
 		//firefox allows for right-click disable on element, but NEEDS a cover to 
 		//listen for mouse events
-		if(!~agent.indexOf("firefox")) {
+		if(~agent.indexOf("chrome")) {
 			$(".screen-cover").remove();
 			// this._scrollMultiplier = 20;
 		}
@@ -69,7 +69,7 @@ module.exports = require("../../../views/base").extend({
 		);
 
 		_.each(this._createBindings(), function(binding) {
-			disp.addBinding(binding);
+			disp.add(binding);
 		});
 
 		this.$hudBody.css({ opacity: 0 });
@@ -107,13 +107,21 @@ module.exports = require("../../../views/base").extend({
 
 	"_createBindings": function() {
 		return [
-			this.$window.resize(_.bind(this.onResize, this)),
-			this.$window.mousewheel(_.throttle(_.bind(this.onDocumentScroll, this), 30)),
-			this.$window.mousedown(_.bind(this.onMouseDown, this)),
-			this.$window.mouseup(_.bind(this.onMouseUp, this)),
-			this.$window.mousemove(_.throttle(_.bind(this.onMouseMove, this), 50)),
-			this.$window.scroll(_.bind(this.onWindowScroll, this))
+			this._listen(this.$window, "resize",_.bind(this.onResize, this)),
+			this._listen(this.$window, "mousewheel", _.throttle(_.bind(this.onDocumentScroll, this), 30)),
+			this._listen(this.$window, "mousedown", _.bind(this.onMouseDown, this)),
+			this._listen(this.$window,"mouseup", _.bind(this.onMouseUp, this)),
+			this._listen(this.$window,"mousemove", _.throttle(_.bind(this.onMouseMove, this), 50)),
+			this._listen(this.$window, "scroll", _.bind(this.onWindowScroll, this))
 		];
+	},
+	"_listen": function(target, key, cb) {
+		target.bind(key, cb);
+		return {
+			dispose: function() {
+				target.unbind(key, cb);
+			}
+		}
 	},
 	"_listenToWindow": function() {
 
@@ -165,7 +173,11 @@ module.exports = require("../../../views/base").extend({
 	},
 	"dispose": function() {
 		module.exports.__super__.dispose.call(this);
+		try {
 		this._disposable.dispose();
+	}catch(e) {
+		console.error(e)
+	}
 	},
 	"onWindowScroll": _.throttle(function() {
 		this._scrollDelta = 1;
@@ -247,7 +259,7 @@ module.exports = require("../../../views/base").extend({
 		this._window.mouseEvent(wkmEvents.mouse.MOUSEEVENTF_ABSOLUTE | wkmEvents.mouse.MOUSEEVENTF_MOVE, this.coords = coords);
 	},
 	"onMouseDown": function(e) {
-		// $(".screen-cover").css({display:"none"});
+		$(".screen-cover").css({display:"none"});
 
 		//is scrollbar
 		if(e.toElement == this.$html[0]) return;
@@ -263,7 +275,7 @@ module.exports = require("../../../views/base").extend({
 		return false;
 	},
 	"onMouseUp": function(e) {
-		// $(".screen-cover").css({display:"block"});
+		$(".screen-cover").css({display:"block"});
 		if(e.toElement == this.$html[0]) return;
 		this._mouseDown = false;
 		this._window.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTUP : wkmEvents.mouse.MOUSEEVENTF_RIGHTUP, this.coords);

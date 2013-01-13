@@ -135,7 +135,9 @@ exports.plugin = function(router, keys, bark, states, mainPlugin, puppeteer, com
 	});
 
 	//ignore
-	keys.on("ctrl+v", function(){});
+	keys.on("ctrl+v", function(e){
+		// e.stopImmediatePropagation();
+	});
 
 	keys.key(function(e, cmd) {
 		if(screen) screen.onKey(e, cmd);
@@ -155,6 +157,7 @@ exports.plugin = function(router, keys, bark, states, mainPlugin, puppeteer, com
 
 
 
+
 	loader.on("locationChange", function(location) {
 		router.redirect("/live", { open: location.href, app: loader.options.app, version: loader.options.version }, false);
 	});
@@ -166,17 +169,31 @@ function insertTextInput(fn) {
 
 	var text = $("body").prepend("<input id=\"cpaste\" type=\"text\"></input>").find("#cpaste").css({"position":"absolute", "top":0,"left":-1000});
 
+	var pasteText;
+
+	text.keydown(function() {
+		text.val("");
+	});
+
+	function onPaste() {
+		if(pasteText) {
+			fn(text.val());
+			pasteText = false;
+		}
+		text.val("");
+	}
+
 
 	text.keyup(function() {
+		onPaste();
 		text.val("");
 	});
 	
 	text.bind("paste", function(e) {
-		// console.log(e.data);
-		setTimeout(function() {
-			fn(text.val());
-			text.val("");
-		}, 1)
+		// console.log("PASTE")
+		pasteText = true;
+		// onPaste();
+		setTimeout(onPaste, 1);
 	});
 
 	setInterval(function() {

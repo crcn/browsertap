@@ -66,7 +66,7 @@ exports.plugin = function() {
 			evs[i](e, cmd);
 		}
 
-		// console.log("KEY")
+		console.log("KEY")
 
 		e.preventDefault();
 

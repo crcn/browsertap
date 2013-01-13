@@ -28,9 +28,11 @@ module.exports = require("../../../views/base").extend({
 		"9.0.0",
 		"/swf/expressInstall.swf",
 		JSON.parse(JSON.stringify(this.params())), {
-			backgroundColor: "#FFFFFF"
+			backgroundColor: "#FFFFFF",
+			"menu":false
 		}, {
-			"wmode": "transparent"
+			"wmode": "transparent",
+			"menu": false
 		}, function() {
 
 			//beat the race condition
