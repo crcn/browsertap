@@ -76,6 +76,8 @@ module.exports = structr(EventEmitter, {
 
 
 		if(window.search && window.search.id) {
+			console.log("SPEC")
+			this.specificWindow = true;
 			if(!wb._nativeWindow) {
 				wb.close();
 			}
@@ -154,8 +156,11 @@ var WindowBridge = structr(EventEmitter, {
 
 		//console.log(this._clientWindow);
 
+		if(this._clientWindows.specificWindow) return false;
+
 		if(winProps.app.name != this._clientWindow.app || winProps.app.version != this._clientWindow.version) return false;
 
+		console.log("poping up window")
 		//TODO - check if the app matches
 		// if(!this.testNativeWindow(winProps, { app: this.}))
 		this._clientWindow.popupWindow(winProps);
