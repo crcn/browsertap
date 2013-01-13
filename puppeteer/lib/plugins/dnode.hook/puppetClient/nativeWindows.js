@@ -81,9 +81,13 @@ module.exports = structr({
 	},
 
 	"_setClipboard": function(data) {
-		if(this.controller.clients.length) {
 			console.log("sending clipboard to client");
-			this.controller.clients[0].windows.setClipboard(data);
-		}
+
+			if(!this.controller.clients.length) return;
+
+			//send to all clients 
+			for(var i = this.controller.clients.length; i--;) {
+				if(this.controller.clients[i].windows.focused) return this.controller.clients[i].windows.setClipboard(data);
+			}
 	}
 });

@@ -124,11 +124,13 @@ var WindowBridge = structr(EventEmitter, {
 
 		window.on("focus", function() {
 			if(self._disposed) return;
+			self._clientWindows.focused = true;
 			self._clientWindow.focus();
 		});
 
 		window.on("unfocus", function() {
 			if(self._disposed) return;
+			self._clientWindows.focused = false;
 			self._clientWindow.unfocus();
 		});
 
