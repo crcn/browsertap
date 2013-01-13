@@ -3,16 +3,16 @@
  *  Toby Opferman
  *
  *  Example GDI DDI (Device Driver Interface) Driver Entry Point
-
+ *
  *  This example is for educational purposes only.  I license this source
  *  out for use in learning how to write a device driver.
  *
  *  Copyright (c) 2005, All Rights Reserved  
  **********************************************************************/
 
-// #define __NTDDKCOMP__
-// #define _MPPC_
-// #define _WIN32_WINNT 0x500
+//#define __NTDDKCOMP__
+//#define _MPPC_
+//#define _WIN32_WINNT 0x500
 
 
 #include <stddef.h>
@@ -90,26 +90,19 @@ BOOL DrvEnableDriver(ULONG ulEngineVersion, ULONG ulDataSize, DRVENABLEDATA *pDr
 {
     BOOL bDriverEnabled = FALSE;
 
-    EngDebugPrint(0, "DrvEnableDriver \r\n", NULL);
     /*
      * We only want to support versions > NT 4
      *
      */
-    /*if(HIWORD(ulEngineVersion) >= 0x3 && ulDataSize >= sizeof(DRVENABLEDATA))
-    {*/
-
-     if(ulDataSize >= sizeof(ULONG))
-       pDrvEnableData->iDriverVersion = DDI_DRIVER_VERSION_NT4;
-
-     if(ulDataSize >= sizeof(DRVENABLEDATA))
+    if(HIWORD(ulEngineVersion) >= 0x3 && ulDataSize >= sizeof(DRVENABLEDATA))
+    {
+       pDrvEnableData->iDriverVersion = DDI_DRIVER_VERSION;
        pDrvEnableData->pdrvfn         = g_DrvFunctions;
-
-     if(ulDataSize >= (sizeof(ULONG) * 2))
        pDrvEnableData->c              = g_ulNumberOfFunctions;
+       bDriverEnabled                 = TRUE;
+    }
 
-    //}
-
-    return TRUE;              
+    return bDriverEnabled;              
 }
 
 

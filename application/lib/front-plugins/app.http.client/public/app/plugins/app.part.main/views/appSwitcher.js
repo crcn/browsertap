@@ -108,8 +108,22 @@ module.exports = require("../../../views/base").extend({
 		return this._app + " " + this.apps[this._app][this.currentVersionIndex];
 	},
 	"_setCA": function() {
-		var app = this._getApp();
-		$(".current-app span").text(_s.titleize(app));
+		this._syncTitle();
+		this._syncFavIcon();
+	},
+	"_syncTitle": function(app) {
+		document.title = this.apps[this._app][this.currentVersionIndex] + " - BT";
+	},
+
+	"_syncFavIcon": function() {
+		// var a = document.createElement("a");
+		// a.href = this._currentLocation;
+		$("[type='image/x-icon']").remove();
+		var link = document.createElement("link");
+		link.type = "image/x-icon";
+		link.rel = "shortcut icon";
+		link.href = "/img/favicons/browsers/"+this._app+".ico";
+		document.getElementsByTagName("head")[0].appendChild(link);
 	},
 	"hide": function(cb) {
 		this._hidden = true;

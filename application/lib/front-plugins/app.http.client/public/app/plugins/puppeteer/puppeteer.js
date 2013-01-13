@@ -112,22 +112,31 @@ module.exports = structr(EventEmitter, {
 
 	"_attach": function(options) {
 
-		mixpanel.track("Attach Desktop", {
+		/*mixpanel.track("Attach Desktop", {
 			from_date: this.startFetchTime,
 			to_date: Date.now(),
 			duration: Date.now() - this.startFetchTime
-		});
+		});*/
 
 		console.log("attaching %s", options.host);
 		var stream = shoe(options.host + "/dnode", { /*protocols_whitelist: ["websockets"]*/ });
 
-		mixpanel.track("Connect To Desktop", { host: options.host });
 
 		this.host = options.host;
 		this.token = options.token;
 
 		var d = dnode(), self = this;
 		d.on("remote", function(remote) {
+
+
+			mixpanel.track("Connect To Desktop", { 
+				host: options.host,
+				from_date: self.startFetchTime,
+				to_date: Date.now(),
+				duration: Date.now() - self.startFetchTime
+			});
+
+
 
 			console.log("on remote");
 			//attach the 

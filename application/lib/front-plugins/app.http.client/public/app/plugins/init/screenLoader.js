@@ -29,9 +29,9 @@ module.exports = structr(EventEmitter, {
 		});
 
 		//why the fuck is this here? not even a needed feature. Fuckit, oh well...
-		setInterval(function() {
+		/*setInterval(function() {
 			self._syncTitle();
-		}, 1000 * 10);
+		}, 1000 * 10);*/
 	},
 
 	/**
@@ -48,18 +48,19 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"_syncTitle": function() {
+	/*"_syncTitle": function() {
 		if(!this.window) return;
 		var self = this;
 		this.window.getInfo(function(err, info) {
 			document.title = "Browsertap - " + _s.titleize(self.options.app) + " " + self.options.version + " - " + info.title;
 		});
-	},
+	},*/
+
 
 	/**
 	 */
 
-	"_syncFavIcon": function() {
+	/*"_syncFavIcon": function() {
 		if(!this._currentLocation) return;
 		var a = document.createElement("a");
 		a.href = this._currentLocation;
@@ -69,7 +70,15 @@ module.exports = structr(EventEmitter, {
 		link.rel = "shortcut icon";
 		link.href = "http://" + a.host + "/favicon.ico";
 		document.getElementsByTagName("head")[0].appendChild(link);
-	},
+	},*/
+
+	/**
+	 */
+
+	/*"syncTitle": function() {
+		this._syncTitle();
+		this._syncFavIcon();
+	},*/
 
 	/**
 	 */
@@ -191,7 +200,7 @@ module.exports = structr(EventEmitter, {
 					self._ignoreForceClose = false;
 				}));	
 
-				self._syncFavIcon();
+				// self._syncFavIcon();
 			});
 
 
@@ -463,8 +472,8 @@ module.exports = structr(EventEmitter, {
 			}
 			self._currentLocation = location.href;
 			self.emit("locationChange", location);
-			self._syncTitle();
-			self._syncFavIcon();
+			// self._syncTitle();
+			// self._syncFavIcon();
 		}
 
 
