@@ -29,7 +29,7 @@
 
 #include "gdifuncs.h"
 
-#define RESOLUTION_X      1601
+#define RESOLUTION_X      3000
 #define RESOLUTION_Y      1200
 #define COLOR_DEPTH_BYTES 4
 #define COLOR_DEPTH_BITS  32
