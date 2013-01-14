@@ -220,6 +220,8 @@ namespace Screens
 		 */
 
 		void removeChrome();
+
+		void updateNow();
 	};
 
 	/**
