@@ -47,6 +47,7 @@ namespace Screens
 		_needsRefreshing = true;
 		_prevOutputSize  = 0;
 		_videoCodecCtx = 0;
+		_preparing = false;
 		_nPackets = 0;
 
 		this->_ctx = ctx;
@@ -54,6 +55,11 @@ namespace Screens
 
 	void FFMPeg::broadcast(Graphics::Bitmap* data)
 	{
+		if(this->preparing()) {
+			std::cout << "PREP" << std::endl;
+			return;
+		}
+
 		resize(&data->bounds());
 		refresh(true);
 
@@ -164,7 +170,8 @@ namespace Screens
 	void FFMPeg::refresh(bool force)
 	{
 		if(_prepared && (!_needsRefreshing || !force)) return;
-		
+
+
 		prepare();
 	}
 
@@ -176,6 +183,8 @@ namespace Screens
 
 	void FFMPeg::prepare()
 	{
+		_preparing = true;
+
 		printf("Preparing RTMP connection for \n %s \n", _ctx->output);
 
 		cleanup();
@@ -218,6 +227,8 @@ namespace Screens
 		avformat_write_header(_formatCtx, NULL);
 		printf("Connected to RTMP server\n");
 
+		_preparing = false;
+
 	}
 
 	FFmpegContext* FFMPeg::context()
@@ -225,6 +236,10 @@ namespace Screens
 		return _ctx;
 	}
 
+	bool FFMPeg::preparing() 
+	{
+		return this->_preparing;
+	}
 
 	void FFMPeg::addVideoStream()
 	{

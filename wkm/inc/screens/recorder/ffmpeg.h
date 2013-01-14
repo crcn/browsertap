@@ -91,6 +91,7 @@ namespace Screens
 		int _bufferSize;
 		int _prevOutputSize;
 		int _nPackets;
+		bool _preparing;
 		//int _width, _height, _bitRate, _frameRate, _bufferSize, _gopSize, _qmin, _qmax;
 		 
 		FFmpegContext* _ctx;
@@ -138,6 +139,8 @@ namespace Screens
 		*/
 
 		void refresh(bool force);
+
+		bool preparing();
 
 		/**
 		 */

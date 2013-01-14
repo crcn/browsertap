@@ -82,7 +82,9 @@ namespace Screens
 		SetWindowPos(this->_window, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOSENDCHANGING);
 
 
-		return SetForegroundWindow(this->_window);
+		SetForegroundWindow(this->_window);
+
+		return true;
 	}
 
 	bool Screen::unfocus()
@@ -100,6 +102,7 @@ namespace Screens
 		if(this->inFocus()) {
 			ScreenManager::instance().focusedScreen(0);
 		}
+
 
 		return true;
 	}
@@ -255,10 +258,7 @@ namespace Screens
 
 		//std::cout << "TICK" << this->_id << std::endl;
 
-		if(this->_recorder != 0)
-		{
-			this->_recorder->update();
-		}
+		this->updateNow();
 /*
 		int min = 0, max = 0, pos = 0;
 
@@ -266,6 +266,15 @@ namespace Screens
 		pos = GetScrollPos(this->target(), SB_VERT);
 
 		std::cout << min << " " << max << " " << pos << std::endl;*/
+	}
+
+	void Screen::updateNow()
+	{
+
+		if(this->_recorder != 0)
+		{
+			this->_recorder->update();
+		}
 	}
 
 	bool Screen::inFocus() 

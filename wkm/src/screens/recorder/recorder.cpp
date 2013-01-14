@@ -35,7 +35,9 @@ namespace Screens
 		this->_ctx->output = copy;
 
 		this->_recording = true;
-		this->_screen->focus();
+
+		//DO NOT want to focus on this window - could overlap others
+		//this->_screen->focus();
 	}
 
 	FFmpegContext* Recorder::context()
