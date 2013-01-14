@@ -261,15 +261,19 @@ module.exports = require("../../../views/base").extend({
 	"onMouseDown": function(e) {
 		$(".screen-cover").css({display:"none"});
 
+
 		//is scrollbar
 		if(e.toElement == this.$html[0]) return;
 		this._mouseDown = true;
 
+		var rightClick = this._rightClick(e);
 
-		this._window.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTDOWN : wkmEvents.mouse.MOUSEEVENTF_RIGHTDOWN, this.coords);
+		console.log(e.button, rightClick)
+
+		this._window.mouseEvent(rightClick ? wkmEvents.mouse.MOUSEEVENTF_RIGHTDOWN : wkmEvents.mouse.MOUSEEVENTF_LEFTDOWN, this.coords);
 
 
-		if(e.button === 0 && !e.metaKey) return; //only block right click
+		if(!rightClick) return; //only block right click
 		e.preventDefault();
 		e.stopPropagation();
 		return false;
@@ -278,7 +282,14 @@ module.exports = require("../../../views/base").extend({
 		$(".screen-cover").css({display:"block"});
 		if(e.toElement == this.$html[0]) return;
 		this._mouseDown = false;
-		this._window.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTUP : wkmEvents.mouse.MOUSEEVENTF_RIGHTUP, this.coords);
+		this._window.mouseEvent(this._rightClick(e) ? wkmEvents.mouse.MOUSEEVENTF_RIGHTUP : wkmEvents.mouse.MOUSEEVENTF_LEFTUP, this.coords);
+	},
+
+	/**
+	 */
+
+	"_rightClick": function(e) {
+		return e.button == 2 || (e.button == 0 && (e.metaKey || e.ctrlKey));
 	},
 	"onKeyDown": function(data) {
 		if(~[17, 16, 18].indexOf(data.keyCode)) return;
