@@ -1,7 +1,8 @@
 var spawn = require("child_process").spawn,
 structr = require("structr"),
 EventEmitter = require("events").EventEmitter,
-path = require("path")
+path = require("path"),
+exec = require("child_process").exec;
 
 module.exports = structr(EventEmitter, {
 
@@ -18,7 +19,8 @@ module.exports = structr(EventEmitter, {
 	"reopen": function() {
 		//will automatically re-open
 		if(this._proc) {
-			this._proc.kill();
+			//this._proc.kill();
+			exec('taskkill /F /IM cli.exe', function(){});
 			this._proc = null;
 		}
 	},
@@ -62,6 +64,7 @@ module.exports = structr(EventEmitter, {
 
 		this._proc.on("exit", function() {
 			self._proc = null;
+			console.log("EX")
 			self.open();
 		});
 	},
