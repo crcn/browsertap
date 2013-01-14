@@ -269,7 +269,7 @@ module.exports = require("../../../views/base").extend({
 		this._window.mouseEvent(e.button == 0 ? wkmEvents.mouse.MOUSEEVENTF_LEFTDOWN : wkmEvents.mouse.MOUSEEVENTF_RIGHTDOWN, this.coords);
 
 
-		if(e.button === 0) return; //only block right click
+		if(e.button === 0 && !e.metaKey) return; //only block right click
 		e.preventDefault();
 		e.stopPropagation();
 		return false;
