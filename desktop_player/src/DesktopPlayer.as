@@ -65,7 +65,7 @@ package
 			this._border = new Sprite();
 			this._padding = { top: 0, right: 0, left: 0, bottom: 0};
 			this.addChild(this._border);
-			this.addChild(this._mask);
+			//this.addChild(this._mask);
 			this.addChild(this._copyPaste);
 			
 			this._debugInfo = new TextField();
@@ -201,9 +201,9 @@ package
 				this.removeChild(this._video);
 			}
 			
-			var video:Video = this._video = new Video(this.stage.stageWidth, this.stage.stageHeight);
+			var video:Video = this._video = new StageVideoProxy(this.stage.stageWidth, this.stage.stageHeight);
 			video.attachNetStream(this._stream);
-			video.mask = this._mask;
+			//video.mask = this._mask;
 			
 			video.deblocking = 2;
 			video.smoothing = true;
@@ -263,8 +263,8 @@ package
 				
 			this._video.x = Math.floor(this.stage.stageWidth / 2 - this._video.width / 2);
 			this._video.y = Math.floor(this.stage.stageHeight / 2 - this._video.height / 2);
-			this._mask.x = this._border.x = this._video.x;
-			this._mask.y = this._border.y = this._video.y;
+			//this._mask.x = this._border.x = this._video.x;
+			//this._mask.y = this._border.y = this._video.y;
 			
 			//this._video.width = this.stage.stageWidth;
 			//this._video.height = this.stage.stageHeight;
@@ -337,10 +337,10 @@ package
 
 			if(!this._video) return;
 
-			with(this._mask.graphics) 
+			/*with(this._mask.graphics) 
 			{
 				clear();
-				beginFill(0);
+				beginFill(0xFF6600);
 				drawRect(obj.left, obj.top, this._video.width - obj.left - obj.right, this._video.height - obj.top - obj.bottom);
 				endFill();
 			}
@@ -351,7 +351,7 @@ package
 				beginFill(0);
 				drawRect(obj.left, obj.top, this._video.width - obj.left - obj.right, this._video.height - obj.top - obj.bottom);
 				endFill();
-			}
+			}*/
 
 			//this._border.filters = [new GlowFilter(0, 1, 6, 6, 2, 1)];
 		}

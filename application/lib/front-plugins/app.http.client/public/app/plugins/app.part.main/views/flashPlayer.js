@@ -31,7 +31,7 @@ module.exports = require("../../../views/base").extend({
 			backgroundColor: "#FFFFFF",
 			"menu":false
 		}, {
-			"wmode": "transparent",
+			"wmode": "direct",
 			"menu": false
 		}, function() {
 
