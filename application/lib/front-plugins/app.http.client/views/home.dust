@@ -210,8 +210,8 @@
 		<script type="text/ejs" data-templateName="signup-form">
 			<h2>Join the alpha today.</h2>
 			<span>Completely free to sign up. Limited spots available.</span>
-			<form action="http://spiceapps.us4.list-manage2.com/subscribe/post?u=80d47619c285dca57ae8d9c47&amp;id=d38e1a20a5" name="mc-embedded-subscribe-form" method="post">
-				<input name="EMAIL" type="text" placeholder="Email Address"></input>
+			<form action="http://spiceapps.createsend.com/t/j/s/drddky/" name="mc-embedded-subscribe-form" method="post">
+				<input name="cm-drddky-drddky" type="text" placeholder="Email Address"></input>
 				<input type="submit" name="subscribe" value="Send"></input>
 			</form>
 		</script>
