@@ -309,6 +309,11 @@ module.exports = require("../../../views/base").extend({
 
 		if(this.onReady) this.onReady();
 
+		this.options.loader._trackBrowser("Resize Window", {
+			stage_width: this.$el.width(),
+			stage_height: this.$el.height()
+		});
+
 		//wait for the rtmp stream to catch up
 		setTimeout(function(self) {
 			self.$hudBody.css({ opacity: 0 });

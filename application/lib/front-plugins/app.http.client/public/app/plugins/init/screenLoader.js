@@ -436,7 +436,6 @@ module.exports = structr(EventEmitter, {
 
 		this._trackBrowser("Popping Up Window");
 
-
 		this.commands.emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this.puppeteer.host + "&screen=" + w.id+"&app="+this.options.app+"&version="+this.options.version, width: w.width - padding.left - padding.right, height: w.height - padding.top - padding.bottom });
 	},
 

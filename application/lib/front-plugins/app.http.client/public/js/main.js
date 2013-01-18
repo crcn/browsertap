@@ -1,12 +1,46 @@
 $(document).ready(function() {
+	analytics.track("Home Page Visit");
 	injectSignupForms();
 	injectAllFeatures();
 	injectHoverStates();
+	injectAnalytics();
 })
 
 
 function injectSignupForms() {
 	$("#join-alpha-top,#join-alpha-bottom").html($("[data-templateName='signup-form']").html());
+}
+
+function injectAnalytics() {
+	$(".play-button").click(function() {
+		analytics.track("Play BrowserTap Video");
+	});
+
+	// analytics.timeout = 1000;
+
+	var forms = $("[name='mc-embedded-subscribe-form']");
+
+	function bindSubmit(form) {
+		var oldSubmit = form.onsubmit;
+		// console.log($(form).find("[type='submit']"))
+		form.onsubmit = null;
+		$(form).find("[type='submit']").click(function(e) {
+			analytics.track("Sign Up For Alpha");
+			var self = this;
+			e.preventDefault();
+			e.stopPropagation();
+			setTimeout(function() {
+				// oldSubmit.call(self);
+				$(form).submit();
+			}, 250);
+		})
+	}
+
+
+	for(var i = forms.length; i--;) {
+		bindSubmit(forms[i]);
+	}
+
 }
 
 //this is TEMPORARY! 

@@ -42,6 +42,7 @@ module.exports = require("../../../views/base").extend({
 				try {
 					$("#"+id)[0].PercentLoaded();
 				} catch(e) {
+					analytics.track("Flash Blocker Detected");
 					console.error("flash blocker detected");
 					if(self.options.onFlashBlockerDetected) {
 						self.options.onFlashBlockerDetected();
