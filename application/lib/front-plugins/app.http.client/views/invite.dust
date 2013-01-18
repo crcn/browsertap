@@ -3,7 +3,7 @@
 
 {<scripts}
 <script type="text/javascript">
-	mixpanel.track("Invite Page Visit");
+	analytics.track("Invite Page Visit");
 </script>
 {/scripts}
 

@@ -5,7 +5,7 @@
 
 {<scripts}
 <script type="text/javascript">
-	mixpanel.track("Tools Page Visit");
+	analytics.track("Tools Page Visit");
 
 	var bookmarklet = function() {
 		/*var script = document.createElement("script");

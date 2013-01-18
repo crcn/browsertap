@@ -87,13 +87,11 @@ exports.plugin = function(router, keys, bark, states, mainPlugin, puppeteer, com
 		updateLoaderOps();
 	});
 
-
 	loader.on("connection", function(con) {
 		con.getAvailableApps(function(err, apps) {
 			appSwitcher = new mainPlugin.views.AppSwitcher({ el: ".app-switcher", router: router, loader: loader, apps: apps });
 		});
 	});
-
 
 	loader.on("window", function(win) {
 		if(screen) screen.dispose();
@@ -101,7 +99,7 @@ exports.plugin = function(router, keys, bark, states, mainPlugin, puppeteer, com
 		var q = Url.parse(String(window.location), true).query,
 
 		//low GOP initially so there's no delay when interacting with the page
-		defaults = { qmin: 1, qmax: 5, gop_size: 30, frame_rate: 40 };
+		defaults = { qmin: 1, qmax: 5, gop_size: 30, frame_rate: 30 };
 
 
 		for(var key in defaults) {
@@ -114,7 +112,11 @@ exports.plugin = function(router, keys, bark, states, mainPlugin, puppeteer, com
 
 		states.set("broadcasting_window");
 
+		analytics.track("Recording Attached Window");
+
 		win.startRecording(q, function(err, info) {
+
+			analytics.track("RTMP Stream received, Resizing Window");
 
 			screen = new mainPlugin.views.Screen({ el: ".screen", 
 				window: win, 
@@ -128,6 +130,9 @@ exports.plugin = function(router, keys, bark, states, mainPlugin, puppeteer, com
 			screen.usePadding(usePadding);
 
 			screen.onReady = function() {
+
+				analytics.track("Window Resized, Showing Desktop Session");
+
 				loadingView.hideNotification();
 				states.set("complete", loader.options.app + " " + loader.options.version);
 			}
@@ -147,15 +152,12 @@ exports.plugin = function(router, keys, bark, states, mainPlugin, puppeteer, com
 	$.getJSON("/account.json", function(data) {
 		if(!data.result) return;
 
-		mixpanel.people.identify(data.result._id);
-		mixpanel.people.set({
-			"$email": data.result.email,
-			"$created": data.result.createdAt,
-			"$last_login": new Date()
+		analytics.identify(data.result._id, {
+			"email": data.result.email,
+			"created": data.result.createdAt,
+			"lastSeen": new Date()
 		});
-	})
-
-
+	});
 
 
 	loader.on("locationChange", function(location) {

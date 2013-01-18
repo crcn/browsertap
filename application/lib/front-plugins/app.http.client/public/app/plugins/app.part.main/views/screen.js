@@ -400,7 +400,6 @@ module.exports = require("../../../views/base").extend({
 
 		var biggest = Math.round(Math.max(mouseMoveDelta, Math.abs(this._scrollDelta || 0) * 200));
 
-
 		var qmin, qmax, gop_size;
 
 		if(biggest > 0) {
@@ -421,12 +420,6 @@ module.exports = require("../../../views/base").extend({
 
 		this.qmin = qmin;
 		this.qmax = qmax;
-
-
-		// var qmax = Math.min(biggest, 70),
-		// qmin = 1;//Math.max(qmax - 20, 1);
-
-		// console.log(qmin, qmax)
 
 		this._window.changeRecordingQuality({ qmin: qmin, qmax: qmax, gop_size: gop_size })
 	}

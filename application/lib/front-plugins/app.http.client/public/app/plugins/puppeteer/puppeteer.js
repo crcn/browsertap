@@ -28,11 +28,9 @@ module.exports = structr(EventEmitter, {
 		this.once("connect", callback);
 		if(this._connecting) return;
 
-		//TODO - authorize this client 
-		this.startFetchTime = Date.now();
+		analytics.track("Fetching Available Desktop");
 
-		mixpanel.track("Fetching Desktop");
-
+		//first authorize the user - get the info
 		auth.Account.login(_.bind(this.onAccount, this));
 	},
 
@@ -78,7 +76,6 @@ module.exports = structr(EventEmitter, {
 			}),
 			error: function() {
 				console.log(arguments);
-				console.log("ERROR")
 			}
 		});
 	},
@@ -112,15 +109,9 @@ module.exports = structr(EventEmitter, {
 
 	"_attach": function(options) {
 
-		/*mixpanel.track("Attach Desktop", {
-			from_date: this.startFetchTime,
-			to_date: Date.now(),
-			duration: Date.now() - this.startFetchTime
-		});*/
-
 		console.log("attaching %s", options.host);
-		var stream = shoe(options.host + "/dnode", { /*protocols_whitelist: ["websockets"]*/ });
 
+		var stream = shoe(options.host + "/dnode", { /*protocols_whitelist: ["websockets"]*/ });
 
 		this.host = options.host;
 		this.token = options.token;
@@ -128,38 +119,42 @@ module.exports = structr(EventEmitter, {
 		var d = dnode(), self = this;
 		d.on("remote", function(remote) {
 
-
-			mixpanel.track("Connect To Desktop", { 
-				host: options.host,
-				from_date: self.startFetchTime,
-				to_date: Date.now(),
-				duration: Date.now() - self.startFetchTime
+			analytics.track("Connecting To Desktop", { 
+				host: options.host
 			});
 
-
-
-			console.log("on remote");
 			//attach the 
 			self._remote = remote;
 			remote.connectClient({ 
+
+				//hmm - if there isn't an SSL cert - this can be ugh  - a security issue.
 				token: self.account.token.key,
+
+				//this is called when the number of connections has changed. It's important to track the
+				//number of windows open so we can determine if a user is using parallel testing.
 				updateNumConnections: function(n, isMain) {
-					if(isMain) mixpanel.track("Sum Windows Open", { count: n });
+					if(isMain) analytics.track("Num Windows Changed", { count: n });
 				}
-			}, outcome.s(function(remote) {
-				console.log("connected client");
+			}, 
+
+
+			//much success for 
+			outcome.s(function(remote) {
+
+				analytics.track("Successfuly Connected to Desktop");
+
+				console.log("connected to client");
 				self.connection = remote;
-				/*var oldSet = remote.windows.set;
-				remote.windows.set = function() {
-					console.log("SETTTTT");
-					oldSet.apply(this, arguments);
-				}*/
 				self._connecting = false;
 				self.emit("connect", null, remote);
 			}));
 		});
+
 		d.pipe(stream).pipe(d);
 
+
+		//If the connection ends, then we need to try and reload the server - the connection
+		//should NEVER end unless the user has been kicked out.
 		d.on("end", function() {
 			self._connecting = false;
 			self.connection = null;
@@ -171,10 +166,16 @@ module.exports = structr(EventEmitter, {
 			}, 1000 * 3);
 		});
 
+
+		//errors should not happen. In the unlikely chance that they do, we need
+		//to let the user know.
 		d.on("error", function(err) {
 			self._connecting = false;
 			self.connection = null;
+
+			//this should be picked up by any error tracking analytics
 			console.error(err.stack);
+
 			self._commands.emit("error", new comerr.UnableToConnect("Connection dropped with remote desktop"));
 		})
 	}

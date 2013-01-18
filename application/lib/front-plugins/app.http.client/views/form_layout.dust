@@ -4,7 +4,7 @@
 
 {<scripts}
 <script type="text/javascript">
-	mixpanel.track("{+page}{/page} Page Visit")
+	analytics.track("{+page}{/page} Page Visit")
 </script>
 <link rel="stylesheet" href="/css/forms/forms.css" type="text/css">  
 {/scripts}

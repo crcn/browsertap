@@ -2,7 +2,7 @@
 
 {<scripts}
 <script type="text/javascript">
-	mixpanel.track("Upgrade Page Visit");
+	analytics.track("Upgrade Page Visit");
 	head.js("/vendors/js/jquery.js",
         "/vendors/js/transit.js",
         "/vendors/js/underscore.js",

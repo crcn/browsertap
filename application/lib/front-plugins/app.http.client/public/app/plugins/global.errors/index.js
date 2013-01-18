@@ -9,18 +9,17 @@ exports.plugin = function(bark, commands) {
 
 	var errorHandlers = {
 		unknown: function(err) {
-			console.error(err)
-			/*bark.alert("An unknown error has occured. Please refresh this page.", function() {
+
+			//this should be tracked by errorception
+			console.error(err);
+
+			bark.alert("An unknown error has occured. Please refresh this page.", function() {
 				// window.location.refresh();
-			});*/
-			bark.alert(err.message);
+			});
 		}
 	}
 
 	errorHandlers[comerr.codes.PaymentRequired] = function(error) {
-		/*bark.confirm("You're out of time! Would you like a charge?", function(event) {
-			if(event)
-		});*/
 
 		bark.alert({ message: "Thanks for trying out Browsertap! Unfortunately you're out of time. If you have a second, please tell us what you think of the application.",
 			ok: "Sure"
@@ -29,8 +28,6 @@ exports.plugin = function(bark, commands) {
 				if(event.ok) {
 					window.open("mailto:hello@browsertap.com", "_blank");
 				}
-
-
 			});
 	}
 
@@ -49,12 +46,13 @@ exports.plugin = function(bark, commands) {
 			return;
 		}
 
+		analytics.track("Error", { message: error.message });
+
 		(errorHandlers[error.code] || errorHandlers.unknown)(error);
 	}
 
 	commands.on("error", onError);
 	outcome.on("unhandledError", onError);
-
 
 	return {
 		captureRequest: function(cb) {

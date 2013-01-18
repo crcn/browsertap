@@ -2,7 +2,7 @@
 
 {<scripts}
 <script type="text/javascript">
-	mixpanel.track("Validate Account Page Visit")
+	analytics.track("Validate Account Page Visit")
 </script>
 {/scripts}
 

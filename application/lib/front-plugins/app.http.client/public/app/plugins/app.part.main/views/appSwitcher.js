@@ -66,7 +66,7 @@ module.exports = require("../../../views/base").extend({
 			$(this.el).css({ visibility: "visible"});
 			$(this.el).css({ opacity: 0 });
 			$(this.el).transit({ opacity: 0.95 }, 200);
-			mixpanel.track("Show Browser Switcher");
+			analytics.track("Show Browser Switcher");
 		}
 
 		var apps = _.keys(this.apps),

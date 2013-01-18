@@ -129,8 +129,7 @@ module.exports = structr(EventEmitter, {
 		if(this._lockLoading) return;
 		this._trackStopBrowser();
 		_.extend(this.options, options);
-		this.startDate = Date.now();
-		this._trackBrowser("Browser Start");
+		this._trackBrowser("Browser Starting");
 		this._load(next);
 	},
 
@@ -195,7 +194,7 @@ module.exports = structr(EventEmitter, {
 
 				con.open({ name: self._appName = self.options.app, version: self._appVersion = self.options.version, arg: open, window: self._getClient(null, false) }, outcome.s(function(client) { 
 					console.log("loaded app");
-					self._trackBrowser("Browser Open");
+					self._trackBrowser("Browser Has Opened");
 					// client.setWindow(self._getClient(null, false));
 					self._ignoreForceClose = false;
 				}));	
@@ -242,7 +241,7 @@ module.exports = structr(EventEmitter, {
 			popupWindow: function(winProps) {
 
 				//is popup? don't popup.
-				if(!self._screenId)
+				if(!self._screenId) 
 				self._popupWindow(winProps);
 			},
 			close: function() {
@@ -294,11 +293,9 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_trackBrowser": function(name, options) {
-		mixpanel.track(name, _.extend({
+		analytics.track(name, _.extend({
 			browser_name: this.options.app,
-			browser_version: this.options.version,
-			from_date: this.startDate,
-			duration: Date.now() - this.startDate
+			browser_version: this.options.version
 		}, options));
 	},
 
@@ -437,6 +434,8 @@ module.exports = structr(EventEmitter, {
 			padding = this.window.app.popup.padding;
 		}
 
+		this._trackBrowser("Popping Up Window");
+
 
 		this.commands.emit("popup", { url: window.location.protocol + "//" + window.location.host + "/live?host=" + this.puppeteer.host + "&screen=" + w.id+"&app="+this.options.app+"&version="+this.options.version, width: w.width - padding.left - padding.right, height: w.height - padding.top - padding.bottom });
 	},
@@ -446,7 +445,7 @@ module.exports = structr(EventEmitter, {
 
 	"_setWindow": function(window) {
 
-		this._trackBrowser("Browser Window Open");
+		this._trackBrowser("Browser Window Found, Attaching");
 
 		if(window) this._ignoreClose = false;
 		console.log("set main window");

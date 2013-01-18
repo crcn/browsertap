@@ -4,6 +4,9 @@
 <script type="text/javascript" src="/vendors/js/jquery-mousewheel.js"></script>
 <script type="text/javascript" src="/vendors/js/swfobject.js"></script>
 <script type="text/javascript" src="/js/screen.js"></script>
+<script type="text/javascript">
+	analytics.track("Live View Page Visit");
+</script>
 {/scripts}
 
 {<content}
