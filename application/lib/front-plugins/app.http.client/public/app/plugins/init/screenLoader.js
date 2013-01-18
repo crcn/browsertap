@@ -21,7 +21,7 @@ module.exports = structr(EventEmitter, {
 		// var q = Url.prase()
 
 		//default icon
-		this.options = { app: "chrome", version: 19, open: "http://google.com" };
+		this.options = { app: "internet explorer", version: 9, open: "http://google.com" };
 
 		var self = this;
 		commands.on("focus", function() {

@@ -409,8 +409,8 @@ module.exports = require("../../../views/base").extend({
 			gop_size = 300;
 		} else {
 			qmin = 1;
-			qmax = 11;
-			gop_size = 70;
+			qmax = 4;
+			gop_size = 40;
 		}
 
 		this._mouseMoveDelta = 0;
