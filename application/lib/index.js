@@ -39,6 +39,7 @@ exports.start = function(options) {
 		validateEmailTpl: __dirname + "/front-plugins/app.http.client/views/email/validate_signup.dust",
 		compress: true,
 		cookies: true,
+		mongodb: true,
 		xhr: false,
 		sslCerts: {
 			key: fs.readFileSync(__dirname + "/ssl/browsertap_com.key", "utf8"),

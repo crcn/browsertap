@@ -30,7 +30,6 @@ module.exports = structr({
 		this._cache.get("fetch-server-" + accountId, _.bind(this._getFreeServer, this, accountId), cb);
 	},
 
-
 	/**
 	 */
 
