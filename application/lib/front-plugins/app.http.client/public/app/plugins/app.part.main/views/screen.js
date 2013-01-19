@@ -108,7 +108,7 @@ module.exports = require("../../../views/base").extend({
 	"_createBindings": function() {
 		return [
 			this._listen(this.$window, "resize",_.bind(this.onResize, this)),
-			this._listen(this.$window, "mousewheel", _.throttle(_.bind(this.onDocumentScroll, this), 30)),
+			this._listen(this.$window, "mousewheel", _.throttle(_.bind(this.onDocumentScroll, this), 50)),
 			this._listen(this.$window, "mousedown", _.bind(this.onMouseDown, this)),
 			this._listen(this.$window,"mouseup", _.bind(this.onMouseUp, this)),
 			this._listen(this.$window,"mousemove", _.throttle(_.bind(this.onMouseMove, this), 50)),
@@ -334,7 +334,7 @@ module.exports = require("../../../views/base").extend({
 		var self = this;
 
 		function scroll(type, delta) {
-			self._window.mouseEvent(type, self.coords, delta * self._scrollMultiplier);
+			self._window.mouseEvent(type, self.coords, Math.round(delta * self._scrollMultiplier));
 		}
 
 		if(Math.abs(deltaY) > 0) scroll(wkmEvents.mouse.MOUSEEVENTF_WHEEL, deltaY);
