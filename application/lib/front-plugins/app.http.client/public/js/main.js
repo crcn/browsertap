@@ -51,40 +51,40 @@ function injectAllFeatures() {
 
 		"Test across multiple browsers (30+)": true,
 		"Browser Developer Tools": true,
-		"Automated CSS Testing": false,
-		"Automated Interactive Testing": false,
-		"Automated JS Testing": false,
+		// "Automated CSS Testing": false,
+		// "Automated Interactive Testing": false,
+		// "Automated JS Testing": false,
 
 		"No Installation Required": true,
-		"Browser extensions & bookmarklet": true,
+		// "Browser extensions & bookmarklet": true,
 		"Localhost Support": true,
 		"Android Testing": false,
 
 		"1-Click Testing": true,
-		"History Support (back & forward)": false,
+		// "History Support (back & forward)": false,
 		"iPhone Testing": false,
 
 		"Clipboard Support (copy & paste)": true,
 		"Real IE browsers (not IETester)": false,
 		"Mac Testing (of Mac browsers)": false,
 
-		"Drag & drop file support": false,
+		// "Drag & drop file support": false,
 		"Keyboard Shortcuts": true,
 		"PC Testing (of PC browsers)": true,
 
-		"Sceenshot Testing": false,
+		// "Sceenshot Testing": false,
 		"Responsive Testing": true,
 		"Linux Testing (of Linux browsers)": false,
 		
 		"Parallel Testing": true,
-		"Audio Support": false,
-		"Natural Scrolling": false,
-		"Emulator API": false,
-		"Live Browser Reloads": false,
-		"Screensharing & Team Collaboration": false,
-		"Web Camera Support": false,
+		// "Audio Support": false,
+		// "Natural Scrolling": false,
+		// "Emulator API": false,
+		// "Live Browser Reloads": false,
+		// "Screensharing & Team Collaboration": false,
+		// "Web Camera Support": false,
 		"Unlimited Testing": true,
-		"Synchronized parallel testing": false
+		// "Synchronized parallel testing": false
 	};
 
 	$allFeatures = $("#all-features");
