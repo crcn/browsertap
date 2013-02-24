@@ -7,7 +7,7 @@ step        = require("step");
  * TODO - fetch from server the current owner
  */
 
-module.exports = require("../base").extend({
+module.exports = require("../base/model").extend({
 
   /**
    */
@@ -67,10 +67,15 @@ module.exports = require("../base").extend({
 
     var self = this;
 
-    if(this._instance)
-    this._instance.start(function() {
-      self._ping();
-    });
+    if(this._instance) {
+      this._instance.start(function() {
+        self._ping();
+      });
+    } else {
+
+      //otherwise ping immediately
+      this._ping();
+    }
   },
 
   /**
@@ -88,16 +93,22 @@ module.exports = require("../base").extend({
 
     var tries = 50, 
     self = this,
-    address = self._instance.get("dnsName");
+    address = self.get("dnsName") || self.get("address");
 
     function ping() {
 
       //no tries? restart, then try again.
       if(!--tries) {
+        console.log("failed to ping %s", address);
         self.update({ $set: { "error": "unable to ping server" }});
 
         //TODO - check if the server 
-        return self._instance.restart();
+
+        if(self._instance) {
+          self._instance.restart();
+        }
+
+        return;
       }
 
 
@@ -111,7 +122,7 @@ module.exports = require("../base").extend({
 
 
       request.post(data, function(err) {
-        if(err) return ping();
+        if(err) return setTimeout(ping, 2000);
         self.emit("ready");
         self._checkUsage();
       });
@@ -176,7 +187,7 @@ module.exports = require("../base").extend({
     } else {
       return this.get("owner");
     }
-  }
+  },
 
   /**
    * call this if the user is past their alloted time

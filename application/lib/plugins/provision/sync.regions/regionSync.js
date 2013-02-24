@@ -103,7 +103,7 @@ module.exports = structr(EventEmitter, {
         }
 
         this(null, _.values(mostRecent));
-      },
+      }),
 
       /**
        * set the version the the date created at
@@ -135,7 +135,7 @@ module.exports = structr(EventEmitter, {
 
   "_setImageVersions": function(images, callback) {
     async.forEach(images, function(image, next) {
-      image.tags.create({ key: "version", image.get("createdAt") }, next);
+      image.tags.create({ key: "version", value: image.get("createdAt") }, next);
     }, callback);
   },
 
@@ -161,7 +161,7 @@ module.exports = structr(EventEmitter, {
         }, next);
 
       }, callback);
-    });
+    }));
   },
 
   /**

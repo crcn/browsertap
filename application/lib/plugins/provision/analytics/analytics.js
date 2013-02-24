@@ -9,10 +9,5 @@ module.exports = structr({
 
   "tracker": function(data) {
     return new Tracker(data);
-  },
-
-  /**
-   */
-
-  ""
+  }
 });

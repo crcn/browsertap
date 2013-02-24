@@ -1,7 +1,8 @@
 var plugin = require("plugin"),
 _ = require("underscore"),
 fs = require("fs"),
-sift = require("sift");
+sift = require("sift"),
+ectwo = require("ectwo");
 
 require("outcome").logAllErrors();
 
@@ -25,7 +26,7 @@ exports.start = function(options) {
 	runEC2: /staging|production/.test(process.env.NODE_ENV),
 	testingMode: /testing|development/.test(process.env.NODE_ENV),
 	testing: {
-		intances: [
+		instances: [
 			{
 				_id: "local-1",
 				address: "127.0.0.1"
@@ -42,9 +43,9 @@ exports.start = function(options) {
 		port: 80,
 		loginRedirect: "/live",
 		signupRedirect: "/tools",
-		inviteEmailTpl: __dirname + "/front-plugins/app.http.client/views/email/inviteEmailTpl.dust",
-		lostPasswordEmailTpl: __dirname + "/front-plugins/app.http.client/views/email/lost_password.dust",
-		validateEmailTpl: __dirname + "/front-plugins/app.http.client/views/email/validate_signup.dust",
+		inviteEmailTpl: __dirname + "/plugins/front/app.http.client/views/email/inviteEmailTpl.dust",
+		lostPasswordEmailTpl: __dirname + "/plugins/front/app.http.client/views/email/lost_password.dust",
+		validateEmailTpl: __dirname + "/plugins/front/app.http.client/views/email/validate_signup.dust",
 		compress: true,
 		cookies: true,
 		mongodb: true,
@@ -119,14 +120,11 @@ exports.start = function(options) {
 	require("auth").
 	require("starch").
 	require("simplecache").
-	require("maestro").
-	require(__dirname + "/plugins/front");
-
-	loader.require(__dirname + "/provisioner");
-
+	require(__dirname + "/plugins/front").
+	require(__dirname + "/plugins/provision");
 
 	loader.load(function(err) {
-		if(err) console.log(arguments[0].stack)
+		if(err) console.error(arguments[0].stack)
 	});
 }
 

@@ -59,6 +59,7 @@
     "request": "2.12.x",
     "ectwo": "0.0.x",
     "gumbo": "0.4.x",
-    "closest-ec2-region": "0.0.x"
+    "closest-ec2-region": "0.0.x",
+    "hurryup": "0.0.x"
   }
 }

@@ -9,10 +9,6 @@ module.exports = require("../base").extend({
 
   "init": function() {
     this._verify = verify();
-
-    //TODO - synchronize the images
-
-    this._syncRegions();
   },
 
   /**

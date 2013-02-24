@@ -1,5 +1,4 @@
 var structr  = require("structr"),
-Timer        = require("./timer"),
 EventEmitter = require("events").EventEmitter,
 _            = require("underscore");
 

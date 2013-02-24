@@ -1,10 +1,10 @@
-var Machine = require("./machine"),
+var Desktop = require("./desktop"),
 step = require("step"),
 outcome = require("outcome"),
 closestEC2Region = require("closest-ec2-region"),
 comerr = require("comerr"),
 verify = require("verify"),
-_ = require("udnerscore");
+_ = require("underscore");
 
 /** 
  * TODO: 
@@ -41,11 +41,13 @@ module.exports = require("../base").extend({
     if(this._testingMode) {
       var self = this;
       this._options.testingInstances.forEach(function(instance) {
-        
-        _.extend(instance.service, {
+
+        _.extend(instance, {
           service: "local",
           state: "running"
         });
+
+        console.log("adding test instance %s", instance.name || instance.address);
 
         self._source.insert(instance).sync();
       });
@@ -193,7 +195,7 @@ module.exports = require("../base").extend({
    */
 
   "_createModel": function(collection, item) {
-    return new Machine(collection, item);
+    return new Desktop(collection, item);
   },
 
   /**

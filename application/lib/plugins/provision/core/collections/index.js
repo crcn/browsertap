@@ -1,5 +1,7 @@
 var structr = require("structr"),
-Desktops = require("./desktops");
+Desktops = require("./desktops"),
+DesktopImages = require("./desktopImages"),
+Regions = require("./regions");
 
 
 module.exports = structr({

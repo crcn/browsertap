@@ -1,7 +1,8 @@
 var gumbo = require("gumbo"),
-_ = require("underscore");
+_ = require("underscore"),
+structr = require("structr");
 
-module.exports = gumbo.Collection.extend({
+module.exports = structr({
 
   /**
    */
@@ -23,12 +24,6 @@ module.exports = gumbo.Collection.extend({
   },
 
 
-  /**
-   */
-
-  "syncAndFindOne": function() {
-    this._source.
-  },
 
   /**
    */

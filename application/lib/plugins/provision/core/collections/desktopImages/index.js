@@ -13,12 +13,10 @@ module.exports = require("../base").extend({
 
   /**
    */
-
   
   "_createModel": function(collection, item) {
     return new DesktopImage(collection, item);
   },
-
 
   /**
    */
@@ -96,7 +94,7 @@ module.exports = require("../base").extend({
       tags: {
         key: "type",
         value: "desktop"
-      };
+      }
     };
   }
 });
