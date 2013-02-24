@@ -16,6 +16,7 @@ module.exports = structr({
     //this needs to be scaled
     this._minRunning = 1;
     this._flavor = options.flavor;
+    this._stopTime = 1000 * 60 * 5;
   },
 
   /**
@@ -28,6 +29,9 @@ module.exports = structr({
 
     //watch for any new versions
     this._collections.desktopImages.watch({ os: this.os }, { change: _.bind(this._scaleInstances, this) });
+
+
+    setInterval(_.bind(this._downscale, this), 1000 * 60);
   },
 
 
@@ -41,7 +45,7 @@ module.exports = structr({
 
     var self = this, 
     o = outcome.e(next),
-    desktopQuery = { os: image.get("os"), version: image.get("version"), owner: undefined };
+    desktopQuery = this._desktopQuery();
 
     step(
 
@@ -54,7 +58,7 @@ module.exports = structr({
       },
 
       /**
-       * find *all* the desktops with the given version & is
+       * find *all* the desktops with the given version & doesn't have an
        */
 
       o.s(function(image) {
@@ -81,11 +85,11 @@ module.exports = structr({
       }),
 
       /**
-       * find all the desktops that we just created
+       * find all the desktops that we just created, or ones that are stopped
        */
 
       o.s(function() {
-        self._collections.desktops.find(desktopQuery, this)
+        self._collections.desktops.find(desktopQuery).limit(this._minRunning).exec(this);
       }),
 
       /**
@@ -101,11 +105,72 @@ module.exports = structr({
         this();
       }),
 
+      /**
+       */
+
+      next
+    );
+  },
+
+  /**
+   */
+
+  "_desktopQuery": function() {
+    return { os: image.get("os"), version: image.get("version"), owner: undefined };
+  },
+
+
+  /**
+   */
+
+  "step _downscale": function(next) {
+
+    var self = this,
+    desktopQuery = this._desktopQuery(),
+    o = outcome.e(next);
+
+    step(
+
+      /**
+       * find all the runnign instances that haven't been used for a while
+       */
+
+      function() {
+
+        var q = _.extend(desktopQuery, { 
+          state: "running", 
+          lastUsedAt: { $lt: Date.now() -  self._stopTime } 
+        });
+
+        //don't limit - we need to make sure there are enough items
+        self._collections.desktops.find(q, this);
+      },
+
+      /**
+       * stop them
+       */
+
+      o.s(function(desktops) {
+
+        //5, 4
+        //make sure we have a min number of running servrs
+        if(desktops.length <= self._minRunning) return;
+          
+        //only turn off what's needed
+        var toTurnOff = desktops.slice(0, desktops.length - self._numRunning);
+
+        console.log("turning off %d instances", toTurnOff.length);
+        
+        async.forEach(toTurnOff, function(desktop, next) {
+          desktop.stop(next);
+        }, this);
+      }),
 
       /**
        */
 
       next
+
     );
   }
 });

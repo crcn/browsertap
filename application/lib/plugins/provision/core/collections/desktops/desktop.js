@@ -62,6 +62,14 @@ module.exports = require("../base").extend({
   /**
    */
 
+  "stop": function(callback) {
+    console.log("stop instance %s", this.get("_id"));
+    this._instance.stop(callback);
+  },
+
+  /**
+   */
+
   "_ping": function() {
 
     var tries = 50, self = this;
@@ -93,7 +101,7 @@ module.exports = require("../base").extend({
     var self = this;
     this.once("ready", function() {
 
-      
+
     });
   }
 });

@@ -15,13 +15,16 @@ verify = require("verify");
 
 module.exports = require("../base").extend({
 
-
   /**
    */
 
 
   "getFreeDesktop": function(options, callback) {
-    this._findDesktop(options, callback);
+
+    var accountId = options.owner._id,
+    key = "fetch-desktop-" + accountId + "-" + options.platformName + "-" + options.platformVersion;
+
+    this._cache.get(key, _.bind(this._findDesktop, this, options), callback);
   },
 
   /**
@@ -29,11 +32,12 @@ module.exports = require("../base").extend({
 
   "init": function() {
     this._verify = verify();
+    this._analytics = this._options.analytics;
+    this._cache = this._options.cache.bucket("desktops");
 
     this._source.watch({ restart: true }, {
       update: function(desktop) {
         desktop.update({ $set: { restart: false }});
-
       }
     });
   },
@@ -69,11 +73,13 @@ module.exports = require("../base").extend({
 
   "_findDesktop": function(options, callback) {
 
-    var requiredInfo = [];
+    var requiredInfo = [], analytics = this._analytics;
 
     if(!this._verify(options).onError(callback).has("owner", "platformName", "platformVersion", "applicationName", "applicationVersion").success) {
       return;
     }
+
+    var startTracker = analytics.tracker("fetch-desktop");
 
 
     var o = outcome.e(callback), self = this, ownerId = String(options.owner._id);
@@ -154,7 +160,12 @@ module.exports = require("../base").extend({
         //start the desktop
         desktop.start();
 
-        this(null, desktop)
+        //once the desktop is ready, stop the tracker.
+        desktop.ready(function() {
+          startTracker.stop();
+        })
+
+        this(null, desktop);
       }),
 
       /**
@@ -169,7 +180,7 @@ module.exports = require("../base").extend({
    */
 
   "_createModel": function(collection, item) {
-    return new Machine(collection, item);
+    return new Machine(collection, item, this._options.analytics);
   },
 
   /**
