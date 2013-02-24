@@ -5,6 +5,14 @@ closestEC2Region = require("closest-ec2-region"),
 comerr = require("comerr"),
 verify = require("verify");
 
+/** 
+ * TODO: 
+ * 1. fetch browsers
+ * 2. fetch user status every N seconds
+ * 3. push desktop info
+ */
+
+
 module.exports = require("../base").extend({
 
 
@@ -25,7 +33,7 @@ module.exports = require("../base").extend({
     this._source.watch({ restart: true }, {
       update: function(desktop) {
         desktop.update({ $set: { restart: false }});
-        
+
       }
     });
   },

@@ -26,7 +26,11 @@ exports.plugin = function(ectwo, loader) {
     defaultRegion: loader.params("defaultRegion"),
     desktopFlavor: loader.params("desktopFlavor") || "c1.medium"
   }, ectwo);
-  
+
+
+  return {
+    collections: cols
+  }
 }
 
 
