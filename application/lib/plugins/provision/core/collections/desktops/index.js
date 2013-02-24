@@ -3,7 +3,8 @@ step = require("step"),
 outcome = require("outcome"),
 closestEC2Region = require("closest-ec2-region"),
 comerr = require("comerr"),
-verify = require("verify");
+verify = require("verify"),
+_ = require("udnerscore");
 
 /** 
  * TODO: 
@@ -33,12 +34,23 @@ module.exports = require("../base").extend({
   "init": function() {
     this._verify = verify();
     this._cache = this._options.cache.bucket("desktops");
+    this._testingMode = this._options.testingMode;
 
-    this._source.watch({ restart: true }, {
-      update: function(desktop) {
-        desktop.update({ $set: { restart: false }});
-      }
-    });
+
+    //testing mode? insert the test instance!
+    if(this._testingMode) {
+      var self = this;
+      this._options.testingInstances.forEach(function(instance) {
+        
+        _.extend(instance.service, {
+          service: "local",
+          state: "running"
+        });
+
+        self._source.insert(instance).sync();
+      });
+
+    }
   },
 
 
@@ -95,7 +107,8 @@ module.exports = require("../base").extend({
        */
 
       o.s(function(region) {
-        self._source.findOne({ 
+
+        var query = { 
 
           //first check if there's a server assigned to the particular user
           "owner": { $or: [ ownerId, undefined ] },
@@ -125,7 +138,16 @@ module.exports = require("../base").extend({
             //18, 19, 4.0.5
             "version": options.applcationVersion
           }
-        }, this);
+        };
+
+        if(self._testingMode) {
+          query.service = "local";
+
+          //there is no region - it's local.
+          delete query.region;
+        }
+
+        self._source.findOne(query, this);
 
       }),
 

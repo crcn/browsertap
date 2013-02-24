@@ -20,8 +20,4 @@ module.exports = structr({
     //the available regions
     this.regions = new Regions(options, this, ectwo.regions);
   }
-
-
-
-
 });

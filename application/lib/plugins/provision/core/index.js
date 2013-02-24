@@ -26,6 +26,8 @@ exports.plugin = function(ectwo, cache, loader) {
     defaultRegion: loader.params("defaultRegion"),
     desktopFlavor: loader.params("desktopFlavor") || "c1.medium",
     cache: cache,
+    testingMode: loader.params("testingMode"),
+    testingInstances: loader.params("testing.instances") || []
   }, ectwo);
 
 

@@ -16,6 +16,7 @@ module.exports = structr({
     //this needs to be scaled
     this._minRunning = 1;
     this._flavor = options.flavor;
+    this._ectwo = options.ectwo;
     this._stopTime = 1000 * 60 * 5;
   },
 
@@ -28,11 +29,24 @@ module.exports = structr({
     this._collections.desktops.watch({ os: this.os }, { change: _.bind(this._scaleInstances, this) });
 
     //watch for any new versions
-    this._collections.desktopImages.watch({ os: this.os }, { change: _.bind(this._scaleInstances, this) });
+    this._collections.desktopImages.watch({ os: this.os }, { change: _.bind(this._scaleImages, this) });
 
 
-    setInterval(_.bind(this._downscale, this), 1000 * 60);
+    //setInterval(_.bind(this._downscale, this), 1000 * 60);
   },
+
+
+  /**
+   */
+
+  /*"step _scaleImages": function(next) {
+
+    var o = outcome.e(next);
+
+    this._ectwo.spotRequests.findAll(o.s(function(spotRequests) {
+
+    }));
+  },*/
 
 
   /**

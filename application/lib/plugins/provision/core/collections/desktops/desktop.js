@@ -34,7 +34,8 @@ module.exports = require("../base").extend({
     this.set("lastUsedAt", new Date());
 
     //set the owner to EC2 - this is required incase BT crashes
-    this.tags.findOne({ key: "owner" }, function(err, tag) {
+    if(this._instance)
+    this._instance.tags.findOne({ key: "owner" }, function(err, tag) {
 
       //no owner id? destroy the tag 
       if(!ownerid) {
@@ -43,14 +44,15 @@ module.exports = require("../base").extend({
       }
 
       if(!tag) {
-        self.tags.create({ key: "owner", value: ownerid }, function(){});
+        self._instance.tags.create({ key: "owner", value: ownerid }, function(){});
       } else {
         tag.update( { $set: { value: ownerid }});
       }
     });
 
-    if(ownerid)
-    this._checkUsage();
+    if(ownerid) {
+      this._checkUsage();
+    }
   },
 
   /**
@@ -65,6 +67,7 @@ module.exports = require("../base").extend({
 
     var self = this;
 
+    if(this._instance)
     this._instance.start(function() {
       self._ping();
     });
@@ -103,13 +106,14 @@ module.exports = require("../base").extend({
 
       var data = {
         url  : self._address() + "/info",
-        json : self._instance.get()
+        json : self.get()
       };
 
 
       request.post(data, function(err) {
         if(err) return ping();
         self.emit("ready");
+        self._checkUsage();
       });
     }
 
@@ -132,10 +136,11 @@ module.exports = require("../base").extend({
 
   "_checkUsage": function() {
 
-    if(!this.tags.findOne({ key: "owner", value: { $ne: undefined } }).sync()) return;
+    if(!this._getOwner()) return;
 
 
     var self = this;
+
     function checkUsage() {
       setTimeout(function(){
         self._checkUsage();
@@ -163,6 +168,17 @@ module.exports = require("../base").extend({
 
 
   /**
+   */
+
+  "_getOwner": function() {
+    if(this._instance) {
+      return this._instance.tags.findOne({ key: "owner", value: { $ne: undefined } }).sync()
+    } else {
+      return this.get("owner");
+    }
+  }
+
+  /**
    * call this if the user is past their alloted time
    */
 
@@ -176,6 +192,6 @@ module.exports = require("../base").extend({
    */
 
   "_address": function() {
-    return "http://" + this._instance.get("dnsName");
+    return "http://" + this.get("dnsName");
   }
 });

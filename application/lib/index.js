@@ -7,6 +7,8 @@ require("outcome").logAllErrors();
 
 exports.start = function(options) {
 
+	if(!process.env.NODE_ENV) process.env.NODE_ENV = "development";
+
 
 	var loader = plugin().
 	params({
@@ -18,6 +20,17 @@ exports.start = function(options) {
 			apiKey: "a8442610-e06b-45a3-af06-a605aca343e8",
 			from: "support@browsertap.com"
 		}
+	},
+	env: process.env.NODE_ENV,
+	runEC2: /staging|production/.test(process.env.NODE_ENV),
+	testingMode: /testing|development/.test(process.env.NODE_ENV),
+	testing: {
+		intances: [
+			{
+				_id: "local-1",
+				address: "127.0.0.1"
+			}
+		]
 	},
 	aws: {
 		"key": "AKIAJKBGOTIITATBXTIQ",

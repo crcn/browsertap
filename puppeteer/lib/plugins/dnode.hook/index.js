@@ -10,11 +10,11 @@ PuppetClient = require("./puppetClient");
 
 
 
-exports.require = ["client", "plugin-express", "master"];
-exports.plugin = function(client, httpServer, master, loader) {
+exports.require = ["config", "client", "plugin-express", "master"];
+exports.plugin = function(config, client, httpServer, master, loader) {
 
 	var params = loader.params();
-	params.rtmp = { hostname: process.env.HOSTNAME };
+	params.rtmp = { hostname: config.rtmpHost };
 
 	var puppet = ppt.create(params);
 
@@ -48,7 +48,7 @@ exports.plugin = function(client, httpServer, master, loader) {
 
 		if(no === false) return;
 
-		master.request("post", "/keepServerAlive.json", { _id: process.env.SERVER_ID }, function(){});
+		master.request("post", "/keepServerAlive.json", { _id: config.instanceId }, function(){});
 
 		keepAliveTimeout = setTimeout(keepAlive, 10000)
 	}
@@ -58,7 +58,7 @@ exports.plugin = function(client, httpServer, master, loader) {
 
 		//wait for a little bit incase the user refreshes
 		noMoreConnectionsTimeout = setTimeout(function() {
-			master.request("post", "/serverComplete.json", { _id: process.env.SERVER_ID }, function(){});
+			master.request("post", "/serverComplete.json", { _id: config.instanceId }, function(){});
 		}, 1000 * 10);
 	}
 
@@ -184,7 +184,7 @@ exports.plugin = function(client, httpServer, master, loader) {
 	});
 
 
-	sock.install(httpServer.listen(process.env.PU_PORT), "/dnode");
+	sock.install(httpServer.connection, "/dnode");
 	
 	function reconnect() {
 		setTimeout(connect, 3000);

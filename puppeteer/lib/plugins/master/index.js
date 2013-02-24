@@ -1,20 +1,18 @@
 var request = require("request");
 
-exports.plugin = function(loader) {
+exports.require = ["config"];
+exports.plugin = function(config, loader) {
 
-	var host = loader.params("master.host");
+	var host = config.masterHost; //loader.params("master.host");
 
-	console.log(host)
 
 	return {
 		request: function(method, path, data, callback) {
+
 			var ops = {
 				url: ["http://" ,host, path ].join(""),
 				json: data
 			};
-
-			//console.log("request: %s", ops.url);
-
 
 			request[method](ops, function(err, response, body){
 
