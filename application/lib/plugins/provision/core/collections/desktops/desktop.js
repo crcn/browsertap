@@ -94,23 +94,8 @@ module.exports = require("../base/model").extend({
     var tries = 50, 
     self = this,
     address = self.get("dnsName") || self.get("address");
-
-    function ping() {
-
-      //no tries? restart, then try again.
-      if(!--tries) {
-        console.log("failed to ping %s", address);
-        self.update({ $set: { "error": "unable to ping server" }});
-
-        //TODO - check if the server 
-
-        if(self._instance) {
-          self._instance.restart();
-        }
-
-        return;
-      }
-
+    
+    hurryUp(function(next) {
 
       console.log("ping instance %s", self.get("_id"));
 
@@ -121,14 +106,22 @@ module.exports = require("../base/model").extend({
       };
 
 
-      request.post(data, function(err) {
-        if(err) return setTimeout(ping, 2000);
+      request.post(data, outcome.e(next).s(function() {
         self.emit("ready");
         self._checkUsage();
-      });
-    }
+      }));
 
-    ping();
+    }, { timeout: 1000 * 60 * 10, retry: true }).call(this, outcome.e(function() {
+
+      console.log("failed to ping %s, restarting", address);
+
+      if(self._instance) {
+        self._instance.restart();
+      }
+
+    }).s(function() {
+      console.log("successfuly pinged server");
+    }));
   },
 
   /**
