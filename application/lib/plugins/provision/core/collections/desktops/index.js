@@ -32,7 +32,6 @@ module.exports = require("../base").extend({
 
   "init": function() {
     this._verify = verify();
-    this._analytics = this._options.analytics;
     this._cache = this._options.cache.bucket("desktops");
 
     this._source.watch({ restart: true }, {
@@ -73,14 +72,11 @@ module.exports = require("../base").extend({
 
   "_findDesktop": function(options, callback) {
 
-    var requiredInfo = [], analytics = this._analytics;
+    var requiredInfo = [];
 
     if(!this._verify(options).onError(callback).has("owner", "platformName", "platformVersion", "applicationName", "applicationVersion").success) {
       return;
     }
-
-    var startTracker = analytics.tracker("fetch-desktop");
-
 
     var o = outcome.e(callback), self = this, ownerId = String(options.owner._id);
 
@@ -160,11 +156,6 @@ module.exports = require("../base").extend({
         //start the desktop
         desktop.start();
 
-        //once the desktop is ready, stop the tracker.
-        desktop.ready(function() {
-          startTracker.stop();
-        })
-
         this(null, desktop);
       }),
 
@@ -180,7 +171,7 @@ module.exports = require("../base").extend({
    */
 
   "_createModel": function(collection, item) {
-    return new Machine(collection, item, this._options.analytics);
+    return new Machine(collection, item);
   },
 
   /**

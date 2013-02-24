@@ -156,11 +156,13 @@ module.exports = structr({
         //make sure we have a min number of running servrs
         if(desktops.length <= self._minRunning) return;
           
-        //only turn off what's needed
-        var toTurnOff = desktops.slice(0, desktops.length - self._numRunning);
+        //only turn off what's needed - also skip any spot instances
+        var toTurnOff = desktops.filter(function(desktop) {
+          return !!desktop.get("isSpot");
+        }).slice(0, desktops.length - self._numRunning);
 
         console.log("turning off %d instances", toTurnOff.length);
-        
+
         async.forEach(toTurnOff, function(desktop, next) {
           desktop.stop(next);
         }, this);

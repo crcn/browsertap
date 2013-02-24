@@ -19,13 +19,12 @@ ifact.getInstance({
 
 var Collections = require("./collections");
 
-exports.require = ["ectwo", "analytics", "simplecache"];
-exports.plugin = function(ectwo, analytics, cache, loader) {
+exports.require = ["ectwo", "simplecache"];
+exports.plugin = function(ectwo, cache, loader) {
 
   var cols = new Collections({
     defaultRegion: loader.params("defaultRegion"),
     desktopFlavor: loader.params("desktopFlavor") || "c1.medium",
-    analytics: analytics,
     cache: cache,
   }, ectwo);
 
