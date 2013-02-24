@@ -40,7 +40,6 @@
     "step": "0.0.x",
     "vine": "0.0.x",
     "optimist": "0.3.x",
-    "maestro": "0.2.x",
     "structr-step": "0.0.x",
     "disposable": "0.0.x",
     "mixpanel": "0.0.x",
@@ -57,6 +56,9 @@
     "bark-notifications": "0.0.x",
     "taptunnel": "0.1.x",
     "underscore.string": "2.3.x",
-    "request": "2.12.x"
+    "request": "2.12.x",
+    "ectwo": "0.0.x",
+    "gumbo": "0.4.x",
+    "closest-ec2-region": "0.0.x"
   }
 }

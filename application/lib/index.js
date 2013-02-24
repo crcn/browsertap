@@ -1,15 +1,9 @@
 var plugin = require("plugin"),
-maestro = require("maestro"),
 _ = require("underscore"),
-fs = require("fs");
+fs = require("fs"),
+sift = require("sift");
 
 require("outcome").logAllErrors();
-
-
-var maestroConfig = require("/usr/local/etc/maestro/config.json");
-
-
-
 
 exports.start = function(options) {
 
@@ -19,15 +13,16 @@ exports.start = function(options) {
 	privateMode: true,
 	serviceName: "Browsertap",
 	domain: "browsertap.com",
-	maestro: maestroConfig,
 	emailer: {
 		postmark: {
 			apiKey: "a8442610-e06b-45a3-af06-a605aca343e8",
 			from: "support@browsertap.com"
 		}
 	},
-	imageIds: {
-		remoteDesktop: options.desktopImageId || maestroConfig.desktopImageId
+	aws: {
+		"key": "AKIAJKBGOTIITATBXTIQ",
+		"secret": "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", 
+		regions: sift(/us-*/, ectwo.regions) // we only want us regions for now
 	},
 	mongodb: "mongodb://maestro-root:m4estr0d32@alex.mongohq.com:10081/maestro-dev",
 	http: {
@@ -45,7 +40,6 @@ exports.start = function(options) {
 			key: fs.readFileSync(__dirname + "/ssl/browsertap_com.key", "utf8"),
 			cert: fs.readFileSync(__dirname + "/ssl/STAR_browsertap_com.crt", "utf8"), 
 			ca: [fs.readFileSync(__dirname + "/ssl/PositiveSSLCA2.crt", "utf8"), fs.readFileSync(__dirname + "/ssl/AddTrustExternalCARoot.crt", "utf8")]		
-
 		}
 	},
 	referralRedirect: "/signup",
@@ -113,9 +107,9 @@ exports.start = function(options) {
 	require("starch").
 	require("simplecache").
 	require("maestro").
-	require(__dirname + "/front-plugins");
+	require(__dirname + "/plugins/front");
 
-	loader.require(__dirname + "/maestro-plugins");
+	loader.require(__dirname + "/provisioner");
 
 
 	loader.load(function(err) {
