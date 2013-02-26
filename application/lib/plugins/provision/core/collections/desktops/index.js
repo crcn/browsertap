@@ -195,6 +195,8 @@ module.exports = require("../base").extend({
    */
 
   "_createModel": function(collection, item) {
+    item.port = this._options.desktopPort;
+    item.hosts = this._options.hosts;
     return new Desktop(collection, item);
   },
 

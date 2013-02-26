@@ -94,19 +94,19 @@ module.exports = require("../base/model").extend({
     var tries = 50, 
     self = this,
     address = self.get("dnsName") || self.get("address");
-    
+
     hurryUp(function(next) {
 
-      console.log("ping instance %s", self.get("_id"));
-
+      console.log("ping %s", self.get("_id"));
 
       var data = {
-        url  : self._address() + "/info",
+        url  : self._address() + "/config",
         json : self.get()
       };
 
 
-      request.post(data, outcome.e(next).s(function() {
+      request.post(data, outcome.e(next).s(function(req, body) {
+        console.log("ping %s", self.get("_id"))
         self.emit("ready");
         self._checkUsage();
       }));
@@ -196,6 +196,6 @@ module.exports = require("../base/model").extend({
    */
 
   "_address": function() {
-    return "http://" + this.get("dnsName");
+    return "http://" + (this.get("dnsName") || this.get("address")) + ":" + this.get("port");
   }
 });

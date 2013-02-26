@@ -22,6 +22,12 @@ exports.start = function(options) {
 			from: "support@browsertap.com"
 		}
 	},
+	hosts: {
+		rtmp: "rtmp.browsertap.com",
+		provision: "provision.browsertap.com"
+	},
+	desktopFlavor: "c1.medium",
+	desktopPort: 8080,
 	env: process.env.NODE_ENV,
 	runEC2: /staging|production/.test(process.env.NODE_ENV),
 	testingMode: /testing|development/.test(process.env.NODE_ENV),
