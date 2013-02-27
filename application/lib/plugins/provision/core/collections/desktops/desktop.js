@@ -106,7 +106,7 @@ module.exports = require("../base/model").extend({
 
 
       request.post(data, outcome.e(next).s(function(req, body) {
-        console.log("ping %s", self.get("_id"))
+        console.log("pong %s", self.get("_id"))
         self.emit("ready");
         self._checkUsage();
       }));

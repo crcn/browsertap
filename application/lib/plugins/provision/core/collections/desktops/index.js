@@ -51,7 +51,6 @@ module.exports = require("../base").extend({
 
         self._source.insert(instance).sync();
       });
-
     }
   },
 
@@ -86,6 +85,8 @@ module.exports = require("../base").extend({
 
   "_findDesktop": function(options, callback) {
 
+
+
     var requiredInfo = [];
 
     if(!this._verify(options).onError(callback).has("owner", "platformName", "platformVersion", "applicationName", "applicationVersion").success) {
@@ -93,6 +94,8 @@ module.exports = require("../base").extend({
     }
 
     var o = outcome.e(callback), self = this, ownerId = String(options.owner._id);
+
+    console.log("finding desktop for %s", ownerId);
 
     step(
 
@@ -110,6 +113,12 @@ module.exports = require("../base").extend({
 
       o.s(function(region) {
 
+        console.log("searching for desktop(name=%s, version=%s), app(name=%s, version=%s)", 
+        options.platformName,
+        options.platformVersion,
+        options.applicationName,
+        options.applicationVersion);
+
         var query = { 
 
           //first check if there's a server assigned to the particular user
@@ -121,7 +130,9 @@ module.exports = require("../base").extend({
           //servers in THIS region
           "region": region.name,
 
-          //operating system
+          //operating system - do we want this? 
+          //the idea is to fetch the desktop based on the APPLICATION needed, not the target 
+          //OS itself. 
           "os": {
 
             //windows, ubuntu
@@ -143,6 +154,8 @@ module.exports = require("../base").extend({
         };
 
         if(self._testingMode) {
+
+          console.log("running in test mode, so service must be local");
           query.service = "local";
 
           //there is no region - it's local.
@@ -158,8 +171,11 @@ module.exports = require("../base").extend({
        */
 
       o.s(function(desktop) {
+
         if(desktop) return this(null, desktop);
 
+        console.log("desktop does NOT exist, creating one");
+        
         //otherwise, create one
         self._collections.desktopImages.createDesktop({
           platformName: options.platformName,

@@ -10,9 +10,10 @@ exports.start = function(options) {
 
 	if(!process.env.NODE_ENV) process.env.NODE_ENV = "development";
 
+	console.log("running in %s mode", process.env.NODE_ENV);
 
 	var loader = plugin().
-	params({
+	params(_.extend(require("./config")(process.env.NODE_ENV), {
 	privateMode: true,
 	serviceName: "Browsertap",
 	domain: "browsertap.com",
@@ -27,10 +28,6 @@ exports.start = function(options) {
 		provision: "provision.browsertap.com"
 	},
 	desktopFlavor: "c1.medium",
-	desktopPort: 8080,
-	env: process.env.NODE_ENV,
-	runEC2: /staging|production/.test(process.env.NODE_ENV),
-	testingMode: /testing|development/.test(process.env.NODE_ENV),
 	testing: {
 		instances: [
 			{
@@ -44,7 +41,6 @@ exports.start = function(options) {
 		"secret": "N512hcycoZa4BJd6cybC4ZEaFeiyq7in8j4SZ6v4", 
 		regions: sift(/us-*/, ectwo.regions) // we only want us regions for now
 	},
-	mongodb: "mongodb://maestro-root:m4estr0d32@alex.mongohq.com:10081/maestro-dev",
 	http: {
 		port: 80,
 		loginRedirect: "/live",
@@ -118,7 +114,7 @@ exports.start = function(options) {
 	},
 	simplecache: {
 		type: "mongodb"
-	}}).
+	}})).
 	paths(__dirname + "/../node_modules").
 	require("plugin-express").
 	require("plugin-express.middleware.dust").
@@ -130,7 +126,7 @@ exports.start = function(options) {
 	require(__dirname + "/plugins/provision");
 
 	loader.load(function(err) {
-		if(err) console.error(arguments[0].stack)
+		if(err) console.error(arguments[0].stack);
 	});
 }
 

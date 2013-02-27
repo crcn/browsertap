@@ -19,7 +19,7 @@ module.exports = require("../base").extend({
     if(!this._verify.check(options).onError(callback).has("region", "platformName", "platformVersion").success)
       return;
 
-    this._ectwo.regions.findOne()
+    console.log("fetching target EC2 region");
 
     var query = { };
 
@@ -31,7 +31,16 @@ module.exports = require("../base").extend({
     }
 
     this._ectwo.regions.findOne(query, o.s(function(region) {
-      if(!region) return callback(new comerr.NotImplemented("BrowserTap is not yet available in your region!"));
+
+      if(!region) {
+        console.log("region does NOT exist, sending back 'not ready' error.");
+
+        return callback(new comerr.NotImplemented("BrowserTap is not yet available in your region!"));
+      }
+
+
+      console.log("found ec2 region=%s", region.get("name"));
+
       return callback(null, region);
     }));
   },

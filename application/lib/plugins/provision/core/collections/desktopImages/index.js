@@ -26,6 +26,10 @@ module.exports = require("../base").extend({
     if(!this._verify.check(options).onError(callback).has("region", "platformName", "platformVersion").success)
       return;
 
+    console.log("fetching most recent desktop image for os(name=%s, version=%s)", 
+    options.platformName,
+    options.platformVersion);
+
     var o = outcome.e(callback), self = this;
 
     step(
@@ -80,6 +84,8 @@ module.exports = require("../base").extend({
 
     if(!this._verify.check(options).onError(callback).has("region", "platformName", "platformVersion").success)
       return;
+
+    console.log("creating desktop");
 
     this.getMostRecentDesktopImage(outcome.e(callback).s(function(image) {
       image.createDesktop(options, callback);
