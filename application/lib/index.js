@@ -23,10 +23,6 @@ exports.start = function(options) {
 			from: "support@browsertap.com"
 		}
 	},
-	hosts: {
-		rtmp: "rtmp.browsertap.com",
-		provision: "provision.browsertap.com"
-	},
 	desktopFlavor: "c1.medium",
 	testing: {
 		instances: [
