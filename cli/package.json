@@ -1,0 +1,21 @@
+{
+  "name": "browsertap-cli",
+  "version": "0.0.0",
+  "description": "ERROR: No README.md file found!",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD",
+  "bin": {
+    "browsertap": "./bin/cli"
+  },
+  "dependencies": {
+    "async": "0.2.x",
+    "celeri": "0.3.x",
+    "plugin": "0.3.x",
+    "dnode": "1.0.x"
+  }
+}

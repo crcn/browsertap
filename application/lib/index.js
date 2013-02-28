@@ -2,7 +2,9 @@ var plugin = require("plugin"),
 _ = require("underscore"),
 fs = require("fs"),
 sift = require("sift"),
-ectwo = require("ectwo");
+ectwo = require("ectwo"),
+pluginDnode = require("dnode-plugin"),
+auth = require("./utils/auth");
 
 require("outcome").logAllErrors();
 
@@ -12,8 +14,8 @@ exports.start = function(options) {
 
 	console.log("running in %s mode", process.env.NODE_ENV);
 
-	var loader = plugin().
-	params(_.extend(require("./config")(process.env.NODE_ENV), {
+
+	var config = _.extend(require("./config")(process.env.NODE_ENV), {
 	privateMode: true,
 	serviceName: "Browsertap",
 	domain: "browsertap.com",
@@ -110,7 +112,14 @@ exports.start = function(options) {
 	},
 	simplecache: {
 		type: "mongodb"
-	}})).
+	}});
+
+
+	var loader = plugin().
+	use(pluginDnode.server({
+		auth: auth(config.auth)
+	})).
+	params(config).
 	paths(__dirname + "/../node_modules").
 	require("plugin-express").
 	require("plugin-express.middleware.dust").

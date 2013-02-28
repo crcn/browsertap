@@ -5,14 +5,19 @@ module.exports = function(env) {
   var config = {
     default: {
       hosts: {
-        rtmp: "127.0.0.0:1935",
-        provision: "127.0.0.0:8080"
+        rtmp: "127.0.0.1:1935",
+        provision: "127.0.0.1:8080",
+        provisionDnode: "127.0.0.1"
       },
       mongodb: "mongodb://127.0.0.1:27017/browsertap",
       testingMode: /testing|development/.test(env),
       runEC2: /staging|production/.test(env),
       env: env,
-      desktopPort: 8080
+      desktopPort: 8080,
+      auth: {
+        username: "btadmin",
+        password: "btpass"
+      }
     },
     staging: {
       hosts: {
@@ -30,5 +35,7 @@ module.exports = function(env) {
     }
   };
 
-  return deepExtend(config.default, config[env] || {});
+
+  var c = deepExtend(config.default, config[env] || {});
+  return c
 }
