@@ -62,5 +62,8 @@
     "hurryup": "0.0.x",
     "gumbo": "0.4.x",
     "ectwo": "0.0.x"
+  },
+  "devDependencies": {
+    "chai":"1.5.x"
   }
 }

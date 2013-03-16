@@ -9,7 +9,7 @@ module.exports = function(env) {
         provision: "127.0.0.1:8080",
         provisionDnode: "127.0.0.1"
       },
-      mongodb: "mongodb://127.0.0.1:27017/browsertap",
+      mongodb: "mongodb://127.0.0.1:27017/browsertap-dev",
       testingMode: /testing|development/.test(env),
       runEC2: /staging|production/.test(env),
       env: env,

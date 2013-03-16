@@ -30,7 +30,7 @@ exports.start = function(options) {
 		instances: [
 			{
 				_id: "local-1",
-				address: "127.0.0.1"
+				address: "192.168.56.1"
 			}
 		]
 	},
