@@ -1,19 +1,14 @@
-var plugin = require("plugin"),
-config = require("C:\\programData\\browsertap\\config.json"),
-_ = require("underscore");
+var cluster = require("cluster");
 
+if(!cluster.isMaster) {
+	require("./server");
 
-plugin().
-params(_.extend({
-	apps: {
-		directory: "C:/Users/Administrator/Desktop/browsers"
-	},
-  http: {
-    pot: 8080
-  }
-}, config)).
-require(__dirname + "/plugins").
-load(function(e) {
-	if(e) console.error(e.stack);
-});
-
+	setTimeout(function() {
+		process.exit();
+	}, 1000)
+} else {
+	cluster.fork();
+	cluster.on("exit", function() {
+		cluster.fork();
+	});
+}

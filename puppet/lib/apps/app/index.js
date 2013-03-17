@@ -62,6 +62,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"_open": function(args, callback) {
+		var self = this;
 		this._proc().open(args, function() {
 			callback(null, self);
 		});

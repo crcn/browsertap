@@ -20,6 +20,7 @@
     "dnode": "1.0.x",
     "shoe": "0.0.x",
     "outcome": "0.0.x",
-    "clone": "0.1.x"
+    "clone": "0.1.x",
+    "plugin":"0.3.x"
   }
 }

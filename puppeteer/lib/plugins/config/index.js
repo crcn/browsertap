@@ -9,16 +9,13 @@ exports.load = function(server, loader, next) {
 
   var em = new EventEmitter();
 
+  console.log("waiting for server config");
+
   em.once("config", next);
 
   //TODO - security here.
   server.post("/config", function(req, res) {
-    em.emit("config", req.body);
+    em.emit("config", null, req.body);
     res.end("OK");
-  });
-
-
-  server.get("/browsers", function() {
-
   });
 }
