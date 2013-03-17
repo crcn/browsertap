@@ -1,0 +1,20 @@
+{>minimal-layout/}
+
+{<scripts}
+<script type="text/javascript">
+	analytics.track("Upgrade Page Visit");
+	head.js("/vendors/js/jquery.js",
+        "/vendors/js/transit.js",
+        "/vendors/js/underscore.js",
+        "/vendors/js/backbone.js",
+        "/starch.js", function() {
+        $(document).ready(function() {
+          new Starch.PaymentForm({ el: $("#starch-form") });
+        })
+	});
+</script>
+{/scripts}
+
+{<content}
+<div id="starch-form"></div>
+{/content}

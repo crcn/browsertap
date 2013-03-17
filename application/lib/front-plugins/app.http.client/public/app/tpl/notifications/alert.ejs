@@ -1,0 +1,10 @@
+<div class="alert-container">
+	<div><%-message %></div>
+
+
+	<% if(typeof cancel != "undefined") %>
+	<a href="#" class="alert-button" rel="close" data-name="cancel"><%-cancel %></a>
+
+	<% if(typeof ok != "undefined") %>
+	<a href="#" class="alert-button" rel="close" data-name="ok"><%-ok %></a>
+</div>

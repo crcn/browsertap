@@ -1,0 +1,17 @@
+
+
+
+
+<div class="app-switcher-background">
+
+<% _.each(apps, function(app) { %>
+
+<div class="app-switcher-item" data-app="<%-app %>">
+	<div class="app-switcher-selected"> </div>
+	<div class="app-switcher-selectable" style="background-image:url(/img/apps/<%-encodeURIComponent(app) %>.png);">
+	</div>
+</div>
+
+<% }); %>
+
+</div>

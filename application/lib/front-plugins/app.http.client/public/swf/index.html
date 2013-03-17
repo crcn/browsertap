@@ -1,0 +1,15 @@
+<html>
+<head>
+	<script type="text/javascript">
+
+		setTimeout(function() {
+			window.onpaste = document.onpaste = document.body.onpaste = function(e) {
+				alert("PAS")
+				alert(e.clipboardData.getData("Text"));
+			}
+		}, 500);
+
+
+	</script>
+</head>
+</html>

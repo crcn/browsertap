@@ -125,7 +125,7 @@ module.exports = require("../base/model").extend({
         next();
       }));
 
-    }, { timeout: 1000 * 60 * 10, retry: true }).call(this, outcome.e(function() {
+    }, { timeout: 1000 * 60 * 10, retry: true }).call(this, outcome.e(function(err) {
 
       console.log("failed to ping %s, restarting", address);
 
@@ -157,16 +157,12 @@ module.exports = require("../base/model").extend({
 
     var self = this;
 
-    var o = outcome.e(function() {
-      console.log(arguments[0])
-    })
 
     hurryUp(function(next) {
-      request.get({ url: this._address() + "/browsers", json: true }, o.s(function(response, body) {
-        if(body.error) return next(body.error);
+      request.get({ url: self._address() + "/browsers", json: true }, outcome.e(next).s(function(response, body) {        if(body.error) return next(body.error);
         next(null, body.result);
       }));
-    }, { timeout: 1000 * 20, retry: true }).call(this, o.s(function(browsers) {
+    }, { timeout: 1000 * 20, retry: true }).call(this, outcome.s(function(browsers) {
       self.update({ $set: { browsers: browsers }});
     }));
   },

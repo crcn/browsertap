@@ -1,0 +1,17 @@
+{>minimal-layout/}
+
+
+{<scripts}
+<script type="text/javascript">
+	analytics.track("Invite Page Visit");
+</script>
+{/scripts}
+
+{<content}
+<h1>Signup:</h1>
+<form method="post" action="/invite">
+	Emails: <br />
+	<textarea name="emails" rows="10" cols="40"></textarea><br />
+	<input type="submit" value="invite users"></input>
+</form>
+{/content}

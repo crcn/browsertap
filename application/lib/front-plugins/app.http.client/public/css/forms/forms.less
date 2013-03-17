@@ -1,0 +1,93 @@
+@import "../func.less";
+@formWidth: 300px;
+
+#form-container {
+	top: 200px;
+	position: relative;
+	width: @formWidth;
+	margin: 0 auto;
+	text-align: center;
+	color: #444;
+
+	input {
+		width: 100%;
+		box-sizing: border-box;
+    	-webkit-box-sizing:border-box;
+    	-moz-box-sizing: border-box;
+	}
+
+	input[type="text"], input[type="password"] {
+		font-size: 19px;
+    	height: 40px;
+
+    	&:focus {
+			border-color: rgba(199, 20, 0, 0.3);
+			outline: 0;
+			outline: thin dotted \9;
+			/* IE6-9 */
+
+			-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(199, 20, 0, 0.3);
+				-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(199, 20, 0, 0.3);
+					box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(199, 20, 0, 0.3);
+    	}
+	}
+
+
+	a {
+		color: #c71400;
+	}
+}
+
+
+#form-messages {
+	margin-bottom: 10px;
+}
+
+.form-error {
+	color: red;
+	padding: 8px;
+	border: 1px solid rgba(199, 20, 0, 0.2);
+	background-color: rgba(199, 20, 0, 0.1);
+	.rounded(3px);
+	margin-bottom: 5px;
+}
+
+#form-header {
+	text-align: left;
+	img {
+		float: left;
+		margin-right: 6px;
+	}
+	h2 {
+		font-weight: normal;
+		color: #999;
+		font-size: 24px;
+		position: relative;
+		top: -7px;
+	}
+}
+
+
+
+
+.form-button {
+	background-color:#c71400;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+	display:inline-block;
+	color:#ffffff;
+	font-size:20px;
+	// font-weight:bold;
+	padding:12px 0;
+	text-decoration:none;
+	border: 0px;
+	margin: 8px 0px;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+
+@import "login.less";
+@import "lost-password.less";
+@import "signup.less";

@@ -87,11 +87,10 @@ exports.plugin = function(router, keys, bark, states, mainPlugin, puppeteer, com
 		updateLoaderOps();
 	});
 
-	loader.on("connection", function(con) {
-		con.getAvailableApps(function(err, apps) {
-			appSwitcher = new mainPlugin.views.AppSwitcher({ el: ".app-switcher", router: router, loader: loader, apps: apps });
-		});
-	});
+
+	commands.on("browsers", function(browsers) {
+		appSwitcher = new mainPlugin.views.AppSwitcher({ el: ".app-switcher", router: router, loader: loader, apps: browsers });
+	})
 
 	loader.on("window", function(win) {
 		if(screen) screen.dispose();

@@ -22,6 +22,7 @@ module.exports = require("../../../views/base").extend({
 				return Number(String(a).split(".").slice(0, 2).join(".")) > Number(String(b).split(".").slice(0, 2).join(".")) ? 1 : -1;
 			});
 		}
+
 		this.apps = abv;
 
 		function onApp() {
