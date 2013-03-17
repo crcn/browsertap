@@ -6,7 +6,8 @@ Mouse        = require("./wkm/mouse"),
 Desktop      = require("./wkm/desktop"),
 proxyServer  = require("./proxy/server"),
 _            = require("underscore"),
-Apps         = require("./apps");
+Apps         = require("./apps"),
+EventEmitter = require("events").EventEmitter;
 
 require("outcome").logAllErrors(true);
 
@@ -14,7 +15,7 @@ exports.create = function(options) {
 
 	var apps = new Apps(options.apps.directory),
 	client   = new Client(options, apps),
-	puppet   = { };
+	puppet = {};
 
 	_.extend(puppet, {
 		wkm      : client,

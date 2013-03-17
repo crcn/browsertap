@@ -64,7 +64,6 @@ module.exports = structr(EventEmitter, {
 
 		this._proc.on("exit", function() {
 			self._proc = null;
-			console.log("EX")
 			self.open();
 		});
 	},

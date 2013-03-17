@@ -6,7 +6,8 @@ logger = require("winston").loggers.get("logger"),
 sprintf = require("sprintf").sprintf,
 EventEmitter = require("events").EventEmitter,
 ppt = require("../../../../puppet"),
-PuppetClient = require("./puppetClient");
+PuppetClient = require("./puppetClient"),
+vine = require("vine");
 
 
 
@@ -14,7 +15,7 @@ exports.require = ["config", "client", "plugin-express", "master"];
 exports.plugin = function(config, client, httpServer, master, loader) {
 
 	var params = loader.params();
-	params.rtmp = { hostname: config.rtmpHost };
+	params.rtmp = { hostname: config.hosts.rtmp };
 
 	var puppet = ppt.create(params);
 
@@ -25,6 +26,20 @@ exports.plugin = function(config, client, httpServer, master, loader) {
 	numConnections = 0,
 	clients = [],
 	startTime;
+
+
+	httpServer.get("/browsers", function(req, res) {
+		puppet.apps.getAvailableApps(function(err, apps) {
+			if(err) return res.send(vine.error(err));
+			res.send(vine.result(apps.map(function(app) {
+				return {
+					name: app.name,
+					version: app.version,
+					platform: app.platform
+				}
+			})));
+		});
+	});
 
 
 	function updateNumConnections() {
@@ -48,7 +63,8 @@ exports.plugin = function(config, client, httpServer, master, loader) {
 
 		if(no === false) return;
 
-		master.request("post", "/keepServerAlive.json", { _id: config.instanceId }, function(){});
+
+		master.request("post", "/keepServerAlive.json", { _id: config._id }, function(){});
 
 		keepAliveTimeout = setTimeout(keepAlive, 10000)
 	}
@@ -58,7 +74,7 @@ exports.plugin = function(config, client, httpServer, master, loader) {
 
 		//wait for a little bit incase the user refreshes
 		noMoreConnectionsTimeout = setTimeout(function() {
-			master.request("post", "/serverComplete.json", { _id: config.instanceId }, function(){});
+			master.request("post", "/serverComplete.json", { _id: config._id }, function(){});
 		}, 1000 * 10);
 	}
 
@@ -118,6 +134,7 @@ exports.plugin = function(config, client, httpServer, master, loader) {
 			connectClient: function(info, callback) {
 
 				token = info.token;
+				console.log("connecting client");
 
 				syncCreditBalance(outcome.error(callback).success(function() {
 					info.d = d;

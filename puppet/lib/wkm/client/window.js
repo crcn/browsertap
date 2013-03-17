@@ -227,6 +227,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"startRecording": function(options, callback) {
+		
 		if(typeof options == "function") {
 			callback = options;
 			options = {};
@@ -236,11 +237,11 @@ module.exports = structr(EventEmitter, {
 		var streamId = videoStreamIdGenerator.uid().toUpperCase();
 
 		var rtmpHost = this._rtmp.hostname,
-		localhost    = "localhost";
+		localhost    = rtmpHost;
 
 		//debugging - TODO - fucking FIX red5 on the local machine. This is fucking stupid code.
-	   // rtmpHost = localhost = "10.0.1.30";
-	    rtmpHost = localhost = "54.243.206.252";
+	   	//rtmpHost = localhost = "10.0.1.30";
+	    //rtmpHost = localhost = "54.243.206.252";
 
 		var output =  "rtmp://" + rtmpHost + ":1935/live/" + streamId;
 

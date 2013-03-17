@@ -8,9 +8,10 @@ logger = require("winston").loggers.get("apps"),
 sprintf = require("sprintf").sprintf,
 killProcesses = require("./app/killProcesses"),
 _ = require("underscore"),
-seq = require("seq");
+seq = require("seq"),
+EventEmitter = require("events").EventEmitter;
 
-module.exports = structr({
+module.exports = structr(EventEmitter, {
 
 	/**
 	 */
@@ -45,6 +46,7 @@ module.exports = structr({
 				self._allProcessNames[app.process.names[0]] = app;
 			});
 			next();
+			self.emit("complete")
 		}));
 	},
 
@@ -74,6 +76,7 @@ module.exports = structr({
 			return {
 				name: app.name,
 				version: app.version,
+				platform: app.platform,
 				window: app.window
 			};
 		}))
