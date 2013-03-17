@@ -16,10 +16,7 @@ exports.plugin = function(maestro, server, core, starch, loader) {
 
 		var options = {
 			owner: req.account,
-			platformName: "windows",
-			platformVersion: "2008",
-			applicationName: "chrome",
-			applicationVersion: "19",
+			browserId: req.query.browserId,
 			ip: req.ip
 		};
 

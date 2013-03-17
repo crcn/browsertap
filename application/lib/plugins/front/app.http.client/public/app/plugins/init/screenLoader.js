@@ -5,7 +5,8 @@ step = require("step"),
 Url = require("url"),
 outcome = require("outcome"),
 taptunnel = require("taptunnel"),
-_s = require("underscore.string");
+_s = require("underscore.string"),
+_ = require("underscore");
 
 module.exports = structr(EventEmitter, {
 
@@ -16,12 +17,15 @@ module.exports = structr(EventEmitter, {
 		this.commands = commands;
 		this.puppeteer = puppeteer;
 		this.states = states;
-		this.connect();
+
+		puppeteer.on("connect", _.bind(this._onConnection, this));
 
 		// var q = Url.prase()
 
 		//default icon
-		this.options = { app: "internet explorer", version: 9, open: "http://google.com" };
+		//this.options = { app: "internet explorer", version: 9, open: "http://google.com" };
+
+		this.options = {};
 
 		var self = this;
 		commands.on("focus", function() {
@@ -34,16 +38,6 @@ module.exports = structr(EventEmitter, {
 		}, 1000 * 10);*/
 	},
 
-	/**
-	 */
-
-	"step connect": function(next) {
-		var puppeteer = this.puppeteer, self = this;
-		puppeteer.connect(function() {
-			self._onConnection(puppeteer.connection);
-			next();
-		})
-	},
 
 	/**
 	 */
@@ -83,7 +77,7 @@ module.exports = structr(EventEmitter, {
 	/**
 	 */
 
-	"_onConnection": function(connection) {
+	"_onConnection": function(err, connection) {
 		this._connection = connection;
 		var self = this;
 
@@ -138,13 +132,26 @@ module.exports = structr(EventEmitter, {
 
 	"step _load": function(next) {
 
-		if(this.options.screen) {
-			this._lockLoading = true;
-			this._connectWindow();
-		} else {
-			this._connectApp();
+		var self = this;
+
+
+		function onConnection() {
+
+
+			if(self.options.screen) {
+				self._lockLoading = true;
+				self._connectWindow();
+			} else {
+				self._connectApp();
+			}
+			next();
 		}
-		next();
+
+		if(!this._connection) {
+			this.once("connection", onConnection);
+		} else {
+			onConnection();
+		}
 	},
 
 
@@ -163,11 +170,14 @@ module.exports = structr(EventEmitter, {
 
 	"_connectApp": function() {
 
+		console.log(this.options)
+
 		console.log("loading app %s %s", this.options.app, this.options.version);
 		var con = this._connection, self = this;
 
 
 		if(this._appName != this.options.app || this._appVersion != this.options.version) {
+			
 			this.emit("loading");
 			this._ignoreClose = true;
 			if(this.window) this.window.close();

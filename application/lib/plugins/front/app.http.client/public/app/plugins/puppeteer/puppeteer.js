@@ -17,44 +17,60 @@ module.exports = structr(EventEmitter, {
 		this._host = host;
 		this._commands = commands;
 		this._states = states;
+
+
+		//first authorize the user - get the info
+		this._connect();
+		this._keepAlive();
 	},
 
 	/**
 	 */
 
-	"connect": function(callback) {
+	"step _connect": function(callback) {
 		if(!callback) callback = function(){};
-		if(this.connection) return callback();
 		this.once("connect", callback);
 		if(this._connecting) return;
 
 		analytics.track("Fetching Available Desktop");
 
+
+		var self = this;
+
 		//first authorize the user - get the info
-		auth.Account.login(_.bind(this.onAccount, this));
+		auth.Account.login(outcome.e(function(e) {
+			self._commands.emit("error", e);
+			callback(e);
+		}).s(function(account) {
+			self.account = account;
+			callback();
+		}));
 	},
 
 	/**
 	 */
 
-	"onAccount": function(err, account) {
-
-		if(err) return this._commands.emit("error", err);
-
-		this.account = account;
-
+	"connectDesktop": function(browser, callback) {
+		this._browser = browser;
 		this.reloadServer();
-		this.keepAlive();
+
+		this.emit("connect", null, null);
+		this.once("connect", callback || function(){});
 	},
 
 	/**
 	 */
 
-	"reloadServer": function() {
+	"step reloadServer": function(next) {
 
 
-		var serverUrl = [window.location.protocol, "//", window.location.host, "/server.json"].join(""),
+		var serverUrl = [window.location.protocol, "//", window.location.host, "/server.json?browserId=" + this._browser._id].join(""),
 		self = this;
+
+		next();
+
+
+		console.log("reloading server %s", serverUrl);
 
 		$.ajax({
 			url: serverUrl,
@@ -98,7 +114,7 @@ module.exports = structr(EventEmitter, {
 	 * prevents the app from timing out. TODO - this should be tied to activity (mouse)
 	 */
 
-	"keepAlive": function() {
+	"_keepAlive": function() {
 		setInterval(function(self) {
 			if(self._remote) self._remote.keepAlive();
 		}, 10000, this);

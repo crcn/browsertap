@@ -134,7 +134,7 @@ module.exports = require("../base").extend({
 
     var requiredInfo = [];
 
-    if(!this._verify.that(options).onError(callback).has("owner", "platformName", "platformVersion", "applicationName", "applicationVersion").success) {
+    if(!this._verify.that(options).onError(callback).has("owner", "browserId").success) {
       return;
     }
 
@@ -166,11 +166,8 @@ module.exports = require("../base").extend({
 
         this.region = region;
 
-        console.log("searching for desktop(name=%s, version=%s), app(name=%s, version=%s)", 
-        options.platformName,
-        options.platformVersion,
-        options.applicationName,
-        options.applicationVersion);
+        console.log("searching for desktop %s", 
+        options.browserId);
 
         var query = { 
 
@@ -186,17 +183,9 @@ module.exports = require("../base").extend({
           //operating system - do we want this? 
           //the idea is to fetch the desktop based on the APPLICATION needed, not the target 
           "browsers": {
-            "name": options.applicationName,
-            "version": options.applicationVersion,
-            "platform": {
-              "name": options.platformName,
-              "version": options.platformVersion
-            }
+            "_id": options.browserId
           }
         };
-
-        console.log(query)
-
 
         if(self._testingMode) {
 

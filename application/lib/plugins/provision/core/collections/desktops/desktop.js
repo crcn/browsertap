@@ -163,6 +163,11 @@ module.exports = require("../base/model").extend({
         next(null, body.result);
       }));
     }, { timeout: 1000 * 20, retry: true }).call(this, outcome.s(function(browsers) {
+
+      browsers.forEach(function(browser) {
+        browser._id = [browser.platform.name, browser.platform.version, browser.name, browser.version].join("-").replace(/\s+/g, "-")
+      });
+
       self.update({ $set: { browsers: browsers }});
     }));
   },
