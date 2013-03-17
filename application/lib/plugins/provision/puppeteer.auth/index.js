@@ -1,8 +1,8 @@
 var step = require("step"),
 vine = require("vine");
 
-exports.require = ["plugin-express", "auth", "customer", "maestro"];
-exports.plugin = function(httpServer, auth, Customer, maestro) {
+exports.require = ["plugin-express", "auth", "customer", "core"];
+exports.plugin = function(httpServer, auth, Customer, core) {
 
 
 	function retCreditBalance(customer, res) {
@@ -15,7 +15,7 @@ exports.plugin = function(httpServer, auth, Customer, maestro) {
 
 	httpServer.get("/creditBalance.json", auth.middleware.authCheckpoint, function(req, res) {
 		
-		console.log("returning credit balance")
+		console.log("returning credit balance");
 
 		step(
 			function() {
@@ -49,8 +49,10 @@ exports.plugin = function(httpServer, auth, Customer, maestro) {
 		);
 	});
 
+
 	function findServer(req, res, next) {
-		maestro.getServer({ _id: req.body._id }).exec(function(err, server) {
+
+		core.collections.desktops._source.findOne({ _id: req.body._id }).exec(function(err, server) {
 			if(!server) return res.send(vine.error("server doesn't exist"));
 
 			req.server = server;
@@ -62,18 +64,17 @@ exports.plugin = function(httpServer, auth, Customer, maestro) {
 
 	httpServer.post("/keepServerAlive.json", findServer, function(req, res) {
 
-		req.server._logAction("keepAlive");
+		//req.server._logAction("keepAlive");
+		console.log("keep alive %s", req.server.get("_id"))
 		req.server.set("lastUsedAt", new Date());
-		req.server.set("hadOwner", true);
 
 		res.send(vine.result(true));
 	});
 
 	httpServer.post("/serverComplete.json", findServer, function(req, res) {
 
-		req.server._logAction("serverDone");
-		req.server.set("owner", null);
-		req.server.set("hadOwner", true);
+		console.log("desktop done %s", req.server.get("_id"))
+		req.server.setOwner(null);
 
 
 		res.send(vine.result(true));

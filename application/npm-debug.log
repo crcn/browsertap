@@ -1,0 +1,116 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'link',
+1 verbose cli   'node-ectwo' ]
+2 info using npm@1.2.11
+3 info using node@v0.8.22
+4 verbose node symlink /usr/local/bin/node
+5 verbose install where,what [ '/usr/local/lib', [ 'node-ectwo' ] ]
+6 verbose read json /usr/local/lib/package.json
+7 verbose read json /usr/local/lib/node_modules/amdify/package.json
+8 verbose read json /usr/local/lib/node_modules/async/package.json
+9 verbose read json /usr/local/lib/node_modules/browserify/package.json
+10 verbose read json /usr/local/lib/node_modules/capirona/package.json
+11 verbose read json /usr/local/lib/node_modules/celeri/package.json
+12 verbose read json /usr/local/lib/node_modules/closest-ec2-region/package.json
+13 verbose read json /usr/local/lib/node_modules/coffee-script/package.json
+14 verbose read json /usr/local/lib/node_modules/comerr/package.json
+15 verbose read json /usr/local/lib/node_modules/crema/package.json
+16 verbose read json /usr/local/lib/node_modules/cstep/package.json
+17 verbose read json /usr/local/lib/node_modules/cupboard/package.json
+18 verbose read json /usr/local/lib/node_modules/deviceCodes/package.json
+19 verbose read json /usr/local/lib/node_modules/dirmr/package.json
+20 verbose read json /usr/local/lib/node_modules/dnode/package.json
+21 verbose read json /usr/local/lib/node_modules/dnode-plugin/package.json
+22 verbose read json /usr/local/lib/node_modules/dojo-devicecodes/package.json
+23 verbose read json /usr/local/lib/node_modules/dojo-invite/package.json
+24 verbose read json /usr/local/lib/node_modules/dojodatabase/package.json
+25 verbose read json /usr/local/lib/node_modules/dref/package.json
+26 verbose read json /usr/local/lib/node_modules/dsync/package.json
+27 verbose read json /usr/local/lib/node_modules/ectwo/package.json
+28 verbose read json /usr/local/lib/node_modules/ejs/package.json
+29 verbose read json /usr/local/lib/node_modules/emailer/package.json
+30 verbose read json /usr/local/lib/node_modules/emailify/package.json
+31 verbose read json /usr/local/lib/node_modules/express/package.json
+32 verbose read json /usr/local/lib/node_modules/expresso/package.json
+33 verbose read json /usr/local/lib/node_modules/garden/package.json
+34 verbose read json /usr/local/lib/node_modules/gumbo/package.json
+35 verbose read json /usr/local/lib/node_modules/hotfix/package.json
+36 verbose read json /usr/local/lib/node_modules/hurryup/package.json
+37 verbose read json /usr/local/lib/node_modules/jam/package.json
+38 verbose read json /usr/local/lib/node_modules/jamjs/package.json
+39 verbose read json /usr/local/lib/node_modules/maestro/package.json
+40 verbose read json /usr/local/lib/node_modules/mesh/package.json
+41 verbose read json /usr/local/lib/node_modules/mkdirp/package.json
+42 verbose read json /usr/local/lib/node_modules/mocha/package.json
+43 verbose read json /usr/local/lib/node_modules/n/package.json
+44 verbose read json /usr/local/lib/node_modules/nexe/package.json
+45 verbose read json /usr/local/lib/node_modules/node-phantom/package.json
+46 verbose read json /usr/local/lib/node_modules/node-static/package.json
+47 verbose read json /usr/local/lib/node_modules/nojam/package.json
+48 verbose read json /usr/local/lib/node_modules/npm/package.json
+49 verbose read json /usr/local/lib/node_modules/optimist/package.json
+50 verbose read json /usr/local/lib/node_modules/outcome/package.json
+51 verbose read json /usr/local/lib/node_modules/pkgcloud/package.json
+52 verbose read json /usr/local/lib/node_modules/plugin/package.json
+53 verbose read json /usr/local/lib/node_modules/plugin-express/package.json
+54 verbose read json /usr/local/lib/node_modules/pointsprocessor/package.json
+55 verbose read json /usr/local/lib/node_modules/require-analyzer/package.json
+56 verbose read json /usr/local/lib/node_modules/sift/package.json
+57 verbose read json /usr/local/lib/node_modules/simplecache/package.json
+58 verbose read json /usr/local/lib/node_modules/soda/package.json
+59 verbose read json /usr/local/lib/node_modules/starch/package.json
+60 verbose read json /usr/local/lib/node_modules/supervisor/package.json
+61 verbose read json /usr/local/lib/node_modules/taptunnel/package.json
+62 verbose read json /usr/local/lib/node_modules/toarray/package.json
+63 verbose read json /usr/local/lib/node_modules/tq/package.json
+64 verbose read json /usr/local/lib/node_modules/verify/package.json
+65 verbose read json /usr/local/lib/node_modules/volo/package.json
+66 verbose read json /usr/local/lib/node_modules/vows/package.json
+67 verbose read json /usr/local/lib/node_modules/walkr/package.json
+68 verbose read json /usr/local/lib/node_modules/xpgen/package.json
+69 verbose read json /usr/local/lib/package.json
+70 verbose cache add [ 'node-ectwo', null ]
+71 verbose cache add name=undefined spec="node-ectwo" args=["node-ectwo",null]
+72 verbose parsed url { pathname: 'node-ectwo',
+72 verbose parsed url   path: 'node-ectwo',
+72 verbose parsed url   href: 'node-ectwo' }
+73 silly lockFile 2f4a7aea-node-ectwo node-ectwo
+74 verbose lock node-ectwo /Users/craig/.npm/2f4a7aea-node-ectwo.lock
+75 silly lockFile 2f4a7aea-node-ectwo node-ectwo
+76 silly lockFile 2f4a7aea-node-ectwo node-ectwo
+77 warn package.json comerr@0.0.4 No README.md file found!
+78 verbose addNamed [ 'node-ectwo', '' ]
+79 verbose addNamed [ null, '' ]
+80 silly lockFile 67aab1a2-node-ectwo node-ectwo@
+81 verbose lock node-ectwo@ /Users/craig/.npm/67aab1a2-node-ectwo.lock
+82 silly addNameRange { name: 'node-ectwo', range: '', hasData: false }
+83 verbose url raw node-ectwo
+84 verbose url resolving [ 'http://registry.npmjs.org/', './node-ectwo' ]
+85 verbose url resolved http://registry.npmjs.org/node-ectwo
+86 info trying registry request attempt 1 at 13:54:54
+87 http GET http://registry.npmjs.org/node-ectwo
+88 http 404 http://registry.npmjs.org/node-ectwo
+89 silly registry.get cb [ 404,
+89 silly registry.get   { server: 'CouchDB/1.2.1 (Erlang OTP/R15B03)',
+89 silly registry.get     date: 'Sun, 17 Mar 2013 20:54:51 GMT',
+89 silly registry.get     'content-type': 'application/json',
+89 silly registry.get     'content-length': '52',
+89 silly registry.get     'cache-control': 'must-revalidate' } ]
+90 silly lockFile 67aab1a2-node-ectwo node-ectwo@
+91 silly lockFile 67aab1a2-node-ectwo node-ectwo@
+92 error 404 'node-ectwo' is not in the npm registry.
+92 error 404 You should bug the author to publish it
+92 error 404
+92 error 404 Maybe try 'npm search ectwo'
+92 error 404
+92 error 404 Note that you can also install from a
+92 error 404 tarball, folder, or http url, or git url.
+93 error System Darwin 12.2.0
+94 error command "/usr/local/bin/node" "/usr/local/bin/npm" "link" "node-ectwo"
+95 error cwd /Users/craig/Developer/Jobs/browsertap/application
+96 error node -v v0.8.22
+97 error npm -v 1.2.11
+98 error code E404
+99 verbose exit [ 1, true ]

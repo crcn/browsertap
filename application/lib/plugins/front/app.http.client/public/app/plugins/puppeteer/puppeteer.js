@@ -65,7 +65,7 @@ module.exports = structr(EventEmitter, {
 
 				//address exists? it's running
 				if(puppeteer.address && puppeteer.state == "running") {
-					self._attach({ host: "http://" + puppeteer.address + ":8080/browsertap.puppeteer" });
+					self._attach({ host: "http://" + puppeteer.address + ":8080" });
 				} else {
 
 					//otherwise try reloading
