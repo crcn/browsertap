@@ -1,0 +1,62 @@
+@browserIconSize: 65px;
+
+
+.app-notification-background {
+	background-color: #FFF;
+	width: 100%;
+	height: 100%;	position: absolute;
+	top: 0px;
+}
+#progress-background {
+	background-color: #000;
+}
+
+#icon-container {
+	width: 100%;
+	top: 35px;
+	text-align: left;
+}
+#icon-inner-container {
+	margin: 0 auto;
+}
+
+#progress {
+	width: 0%;
+	height: 100%;
+	overflow: hidden;
+	background-repeat: no-repeat;
+}
+
+
+
+.app-notification {
+	clear: none;
+	z-index: 9999;
+	width: 150px;
+	height: 160px;
+	background-color: #000;
+	position: relative;
+	top: 200px;
+	.rounded(10px);
+	color: #FFF;
+	.opac(0);
+	text-align: center;
+	.centered();
+	img {
+		min-height: 62px;
+		min-width: 62px;
+	}
+}
+
+#prog-bg-img {
+	position: absolute;
+	top: 0px;
+	.opac(25);
+}
+
+.app-notification > div {
+	position: relative;
+	font-weight: bold;
+	clear: both;
+	top: 50px;
+}

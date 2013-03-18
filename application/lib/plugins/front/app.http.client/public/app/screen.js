@@ -10,8 +10,11 @@ function ready() {
 
 
 	plugin().
-	params({ }).
+	params({
+		host: [window.location.protocol, "//", window.location.host].join("")
+	}).
 	require(require("./plugins/router")).
+	require(require("./plugins/availablebrowsers")).
 	require(require("./plugins/puppeteer")).
 	require(require("./plugins/states")).
 	require(require("./plugins/commands")).

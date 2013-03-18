@@ -24,7 +24,6 @@ module.exports = structr({
   },
 
 
-
   /**
    */
 

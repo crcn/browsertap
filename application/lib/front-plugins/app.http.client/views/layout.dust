@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>{+title}BrowserTap{/title}</title>
+
+		{+styles}
+			<link rel="stylesheet" href="/vendors/bootstrap/css/bootstrap.min.css" type="text/css">   
+			<link rel="stylesheet" href="/vendors/bootstrap/css/bootstrap-responsive.min.css" type="text/css">   
+			<link rel="stylesheet" href="/css/main.css" type="text/css">    
+		{/styles}
+
+		<!--[if IE]>
+			<script type="text/javascript" src="/vendors/js/json2.js"></script>   
+			<script type="text/javascript" src="/vendors/js/es5-shim.js"></script>   
+		<![endif]-->
+
+		<!-- TODO - this should be *one* script e.g: -->
+
+		<!-- [combine] -->
+		<script type="text/javascript" src="/vendors/js/head.js"></script>
+		<script type="text/javascript" src="/vendors/js/jquery.js"></script>
+		<script type="text/javascript" src="/vendors/js/transit.js"></script>
+		<script type="text/javascript" src="/vendors/js/underscore.js"></script>
+		<script type="text/javascript" src="/vendors/js/backbone.js"></script>
+		<script type="text/javascript" src="/vendors/js/history.js"></script>
+		<!-- [endcombine] -->
+
+		{>mixpanel/}
+
+		{+scripts}
+		{/scripts}
+	</head>
+	<body>
+		{+content}
+		{/content}
+
+	<div id="scroller"></div>
+	</body>
+</html>

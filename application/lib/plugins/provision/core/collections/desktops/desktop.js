@@ -1,6 +1,7 @@
 var hurryUp = require("hurryup"),
 request     = require("request"),
-step        = require("step");
+step        = require("step"),
+outcome = require("outcome");
 
 
 /**
@@ -13,7 +14,8 @@ module.exports = require("../base/model").extend({
    */
 
   "init": function() {
-    this._instance = this._targetModel();
+
+    console.log("initializing instance");
 
     //flag so that this instance isn't fetched before it's ready
     this.update({$set:{ "ready": false }});
@@ -21,11 +23,23 @@ module.exports = require("../base/model").extend({
     this._load();
   },
 
+  /**
+   */
+
+  "original": function(value) {
+    if(!arguments.length) return this._instance;
+    this._instance = value;
+    return this;
+  },
+
 
   /**
    */
 
   "setOwner": function(ownerid) {
+
+
+    console.log("%s set desktop owner to %s", this.get("_id"), ownerid);
 
     //set it immediately so it's locked
     this.set("owner", ownerid);
@@ -60,7 +74,7 @@ module.exports = require("../base/model").extend({
 
   "start": function(callback) {
 
-    if(this._running) return;
+    if(this._running) return this._ping();
     this._running = true;
 
     console.log("start instance %s", this.get("_id"));
@@ -104,14 +118,14 @@ module.exports = require("../base/model").extend({
         json : self.get()
       };
 
-
       request.post(data, outcome.e(next).s(function(req, body) {
         console.log("pong %s", self.get("_id"))
         self.emit("ready");
         self._checkUsage();
+        next();
       }));
 
-    }, { timeout: 1000 * 60 * 10, retry: true }).call(this, outcome.e(function() {
+    }, { timeout: 1000 * 60 * 10, retry: true }).call(this, outcome.e(function(err) {
 
       console.log("failed to ping %s, restarting", address);
 
@@ -121,6 +135,8 @@ module.exports = require("../base/model").extend({
 
     }).s(function() {
       console.log("successfuly pinged server");
+
+      self._fetchBrowsers();
     }));
   },
 
@@ -134,51 +150,79 @@ module.exports = require("../base/model").extend({
     var self = this;
   },
 
-
   /**
    */
 
-  "_checkUsage": function() {
-
-    if(!this._getOwner()) return;
-
+  "_fetchBrowsers": function() {
 
     var self = this;
 
-    function checkUsage() {
-      setTimeout(function(){
-        self._checkUsage();
-      }, 1000 * 10);
-    }
 
-    request.get(this._address() + "/info", function(err, req, body) {
-      if(err) return checkUsage();
-      if(!body.owner) {
+    hurryUp(function(next) {
+      request.get({ url: self._address() + "/browsers", json: true }, outcome.e(next).s(function(response, body) {        if(body.error) return next(body.error);
+        next(null, body.result);
+      }));
+    }, { timeout: 1000 * 20, retry: true }).call(this, outcome.s(function(browsers) {
 
-        //user not assigned for N seconds?
-        if((Date.now() - 1000 * 10) > self.get("lastUsedAt").getTime()) {
+      browsers.forEach(function(browser) {
+        browser._id = [browser.platform.name, browser.platform.version, browser.name, browser.version].join("-").replace(/\s+/g, "-")
+      });
 
-          //remove the owner
-          self.setOwner(undefined);
-        }
-
-      } else {
-
-        //otherwise reset lastUsedAt so this server doesn't get destroyed
-        self.set("lastUsedAt", new Date());
-      }
-    });
+      self.update({ $set: { browsers: browsers }});
+    }));
   },
 
 
   /**
    */
 
-  "_getOwner": function() {
+  "_checkUsage": function() {
+
+    var self = this, on = outcome.e(this);
+
+    step(
+      function() {
+        self._getOwner(this)
+      },
+      on.s(function(owner) {
+        if(!owner) return;
+
+        function checkUsage() {
+          setTimeout(function(){
+            self._checkUsage();
+          }, 1000 * 10);
+        }
+
+        request.get(self._address() + "/info", function(err, req, body) {
+          if(err) return checkUsage();
+          if(!body.owner) {
+
+            //user not assigned for N seconds?
+            if((Date.now() - 1000 * 10) > self.get("lastUsedAt").getTime()) {
+
+              //remove the owner
+              self.setOwner(undefined);
+            }
+
+          } else {
+
+            //otherwise reset lastUsedAt so this server doesn't get destroyed
+            self.set("lastUsedAt", new Date());
+          }
+        });
+      })
+    );
+  },
+
+
+  /**
+   */
+
+  "_getOwner": function(callback) {
     if(this._instance) {
-      return this._instance.tags.findOne({ key: "owner", value: { $ne: undefined } }).sync()
+      this._instance.tags.findOne({ key: "owner", value: { $ne: undefined } }, callback);
     } else {
-      return this.get("owner");
+      return callback(null, this.get("owner"));
     }
   },
 

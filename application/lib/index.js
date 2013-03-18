@@ -6,7 +6,7 @@ ectwo = require("ectwo"),
 pluginDnode = require("dnode-plugin"),
 auth = require("./utils/auth");
 
-require("outcome").logAllErrors();
+require("outcome").logAllErrors(true);
 
 exports.start = function(options) {
 
@@ -30,7 +30,7 @@ exports.start = function(options) {
 		instances: [
 			{
 				_id: "local-1",
-				address: "192.168.56.1"
+				address: "192.168.30.134"
 			}
 		]
 	},

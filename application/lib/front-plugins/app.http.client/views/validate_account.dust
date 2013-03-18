@@ -1,0 +1,14 @@
+{>minimal-layout/}
+
+{<scripts}
+<script type="text/javascript">
+	analytics.track("Validate Account Page Visit")
+</script>
+{/scripts}
+
+{<content}
+{#errors}
+	{message}
+{/errors}
+Thanks for validating your account!
+{/content}

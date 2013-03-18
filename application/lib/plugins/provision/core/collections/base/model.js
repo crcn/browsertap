@@ -8,6 +8,14 @@ module.exports = require("gumbo").BaseModel.extend({
     this.init();
   },
 
+  /**
+   */
+
+  "set": function(key, value) {
+    var set = {};
+    set[key] = value;
+    this.update({ $set: set });
+  },
 
   /**
    */

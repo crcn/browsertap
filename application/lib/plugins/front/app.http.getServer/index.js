@@ -1,12 +1,28 @@
 var step = require("step"),
 vine = require("vine");
 
-exports.require = ["maestro", "plugin-express", "serverManager", "starch"];
-exports.plugin = function(maestro, server, serverManager, starch, loader) {
+exports.require = ["maestro", "plugin-express", "core", "starch"];
+exports.plugin = function(maestro, server, core, starch, loader) {
+
+	server.get("/browsers.json", function(req, res) {
+		core.collections.desktops.getAvailableBrowsers(function(err, result) {
+			if(err) return res.send(vine.error(err));
+			return res.send(vine.result(result));
+		});
+	});
+
 
 	server.get("/server.json", starch.middleware.premiumCheckpoint({creditBalance:{$gt:0}}), function(req, res) {
 
-		serverManager.getFreeServer(req.account, function(err, server) {
+		var options = {
+			owner: req.account,
+			browserId: req.query.browserId,
+			ip: req.ip
+		};
+
+		core.collections.desktops.getFreeDesktop(options, function(err, server) {
+
+
 			//error?
 			if(err) {
 				console.error(err.stack);
@@ -14,6 +30,7 @@ exports.plugin = function(maestro, server, serverManager, starch, loader) {
 			}
 
 			var result = server.get();
+
 
 			//attach the credit balance so the client has something to countdown from
 			result.creditBalance = req.customer.creditBalance;

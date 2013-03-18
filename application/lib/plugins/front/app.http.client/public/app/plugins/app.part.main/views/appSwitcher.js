@@ -8,13 +8,16 @@ module.exports = require("../../../views/base").extend({
 		var self = this,
 		apps = this.options.apps;
 
-		var abv = {};
+
+		var abv = {},
+		_ids = {};
 
 		for(var i = apps.length; i--;) {
 			var app = apps[i];
 
 			if(!abv[app.name]) abv[app.name] = [];
 			abv[app.name].push(app.version);
+			_ids[app.name+app.version] = app._id;
 		}
 
 		for(var k in abv) {
@@ -22,7 +25,9 @@ module.exports = require("../../../views/base").extend({
 				return Number(String(a).split(".").slice(0, 2).join(".")) > Number(String(b).split(".").slice(0, 2).join(".")) ? 1 : -1;
 			});
 		}
+
 		this.apps = abv;
+		this._ids = _ids;
 
 		function onApp() {
 			self._app = self.options.loader.options.app;
@@ -31,7 +36,6 @@ module.exports = require("../../../views/base").extend({
 		}
 		
 		this.options.loader.on("loading", onApp);
-		onApp();
 
 		$(document).keyup(function(e) {
 			if(e.keyCode != 16) return; //shift
@@ -152,6 +156,8 @@ module.exports = require("../../../views/base").extend({
 		return this._selected.attr("data-app");
 	},
 	"_setSelectedItem": function() {
-		this.options.router.redirect("/live", { app: this._app, version: this.apps[this._app][this.currentVersionIndex] });
+		// this.options.router.redirect("/live", { app: this._app, version: this.apps[this._app][this.currentVersionIndex] });
+		this.options.router.redirect("/live", { browser: this._ids[this._app+this.apps[this._app][this.currentVersionIndex]] });
+
 	}
 });

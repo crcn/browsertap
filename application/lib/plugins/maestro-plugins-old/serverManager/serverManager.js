@@ -47,7 +47,10 @@ module.exports = structr({
 			function() {
 
 				//first check if the user is already registered to a server
-				var owned = maestro.collection.findOne({ owner: accountId }).sync();
+				maestro.collection.findOne({ owner: accountId }, this);
+
+			},
+			on.s(function(owned) {
 
 
 				//yes? return
@@ -57,8 +60,10 @@ module.exports = structr({
 				}
 
 				//no? find a free server
-				owned = maestro.collection.findOne(self._query({ owner: null })).sync();
+				owned = maestro.collection.findOne(self._query({ owner: null }), this);
 
+			}),
+			on.s(function(owned) {
 
 				if(owned) {
 					console.log("returning free server");
@@ -67,7 +72,7 @@ module.exports = structr({
 
 				//no free server? create one.
 				self._createServer(this);
-			},
+			}),
 			on.s(function(server) {
 				server.set("owner", accountId);
 				server.set("lastUsedAt", new Date());

@@ -5,9 +5,9 @@ module.exports = function(env) {
   var config = {
     default: {
       hosts: {
-        rtmp: "127.0.0.1:1935",
-        provision: "127.0.0.1:8080",
-        provisionDnode: "127.0.0.1"
+        rtmp: "192.168.13.1",
+        provision: "192.168.13.1",
+        provisionDnode: "192.168.13.1"
       },
       mongodb: "mongodb://127.0.0.1:27017/browsertap-dev",
       testingMode: /testing|development/.test(env),

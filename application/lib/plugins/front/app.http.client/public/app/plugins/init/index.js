@@ -1,6 +1,9 @@
 var ScreenLoader = require("./screenLoader"),
 qs = require("querystring"),
-Url = require("url");
+Url = require("url"),
+sift = require("sift"),
+EventEmitter = require("events").EventEmitter,
+_ = require("underscore");
 
 
 
@@ -9,15 +12,46 @@ exports.require = ["router", "keys", "bark", "states", "app.part.main", "puppete
 exports.plugin = function(router, keys, bark, states, mainPlugin, puppeteer, commands, loader) {
 
 	// var query = qs.parse(String(window.location).split("")
+		var browsers, em = new EventEmitter(), defaults = { app: "chrome", version: "19", open: "http://google.com" }
 
 	router.on({
 		"pull -http live": function(req, res) {
-			loader.load(req.query);
-			res.end();
-			updateLoaderOps();
+
+			var q = _.extend({}, defaults, req.query);
+
+			getBrowsers(function(err, browsers) {
+
+				var browser = sift({$or: [{ _id: q.browser }, { name: q.app, version: q.version }]}, browsers).shift();
+
+				var info = {
+					app: browser.name,
+					version: browser.version,
+					open: q.open
+				}
+
+				_.defaults(info, q);
+
+
+				puppeteer.connectDesktop(browser, function(err, desktop) {
+					loader.load(info);
+					updateLoaderOps();
+				});
+
+				res.end();
+			});
+
 		}
 	});
 
+	function getBrowsers(callback) {
+		if(browsers) return callback(null, browsers);
+		em.once("browsers", callback);
+	}
+
+	commands.on("browsers", function(b) {
+		browsers = b;
+		em.emit("browsers", null, b);
+	})
 
 
 	function updateLoaderOps() {
@@ -41,6 +75,11 @@ exports.plugin = function(router, keys, bark, states, mainPlugin, puppeteer, com
 	});
 
 	loadingView.showNotification();
+
+
+	loader.on("browsers", function(browsers) {
+		router.redirect("/live", { browser: sift({ name: "internet explorer", version: "9" }, browsers)[0] || browsers[0] });
+	});
 
 
 	loader.on("tunneling", function(file) {
@@ -87,11 +126,10 @@ exports.plugin = function(router, keys, bark, states, mainPlugin, puppeteer, com
 		updateLoaderOps();
 	});
 
-	loader.on("connection", function(con) {
-		con.getAvailableApps(function(err, apps) {
-			appSwitcher = new mainPlugin.views.AppSwitcher({ el: ".app-switcher", router: router, loader: loader, apps: apps });
-		});
-	});
+
+	commands.on("browsers", function(browsers) {
+		appSwitcher = new mainPlugin.views.AppSwitcher({ el: ".app-switcher", router: router, loader: loader, apps: browsers });
+	})
 
 	loader.on("window", function(win) {
 		if(screen) screen.dispose();

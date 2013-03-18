@@ -44,14 +44,61 @@ module.exports = require("../base").extend({
 
         _.extend(instance, {
           service: "local",
-          state: "running"
+          state: "running",
+          region: "local"
         });
 
         console.log("adding test instance %s", instance.name || instance.address);
 
-        self._source.insert(instance).sync();
+        self._source.insert(instance).exec();
       });
     }
+
+
+    this._watchForBrowsers();
+  },
+
+  /**
+   */
+
+  "_watchForBrowsers": function() {
+
+    var self = this;
+    this._source.watch({ browsers: {$ne:null}}, {
+      update: function() {
+        self._updateAllBrowsers();
+      }
+    });
+  },
+
+  /**
+   */
+
+  "_updateAllBrowsers": function() {
+
+    var used = {}, browsers = [], self = this;
+
+    this._source.findAll(outcome.s(function(servers) {
+      for(var i =servers.length; i--;) {
+        var server = servers[i], browsers = server.get("browsers");
+        for(var j = browsers.length; j--;) {
+          var browser = browsers[j],
+          key = [browser.name, browser.version].join(".")
+          if(used[key]) continue;
+          used[key] = 1;
+          browsers.push(browser);
+        }
+      }
+
+      self._browsers = browsers;
+    }));
+  },
+
+  /**
+   */
+
+  "getAvailableBrowsers": function(callback) {
+    callback(null, this._browsers || []);
   },
 
 
@@ -61,7 +108,7 @@ module.exports = require("../base").extend({
 
   "_findRegion": function(options, callback) {
 
-    if(!this._verify(options).onError(callback).has("ip").success) {
+    if(!this._verify.that(options).onError(callback).has("ip").success) {
       return;
     }
 
@@ -85,11 +132,9 @@ module.exports = require("../base").extend({
 
   "_findDesktop": function(options, callback) {
 
-
-
     var requiredInfo = [];
 
-    if(!this._verify(options).onError(callback).has("owner", "platformName", "platformVersion", "applicationName", "applicationVersion").success) {
+    if(!this._verify.that(options).onError(callback).has("owner", "browserId").success) {
       return;
     }
 
@@ -104,6 +149,12 @@ module.exports = require("../base").extend({
        */
 
       function() {
+
+        if(self._testingMode) {
+          console.log("testing mode, not selecting closest region");
+          return this();
+        }
+
         self._findRegion(options, this);
       },
 
@@ -113,43 +164,26 @@ module.exports = require("../base").extend({
 
       o.s(function(region) {
 
-        console.log("searching for desktop(name=%s, version=%s), app(name=%s, version=%s)", 
-        options.platformName,
-        options.platformVersion,
-        options.applicationName,
-        options.applicationVersion);
+        this.region = region;
+
+        console.log("searching for desktop %s", 
+        options.browserId);
 
         var query = { 
 
           //first check if there's a server assigned to the particular user
-          "owner": { $or: [ ownerId, undefined ] },
+          "owner": { $in: [ ownerId, undefined ] },
 
           //find a server in running / pending / stopped state
-          "state": { $or: ["running", "pending", "stopped"] },
+          "state": { $in: ["running", "pending", "stopped"] },
 
           //servers in THIS region
-          "region": region.name,
+          "region": region ? region.name : { $ne: undefined },
 
           //operating system - do we want this? 
           //the idea is to fetch the desktop based on the APPLICATION needed, not the target 
-          //OS itself. 
-          "os": {
-
-            //windows, ubuntu
-            "name": options.platformName,
-
-            //2003, 2008
-            "version": options.platformVersion
-          },
-
-          //application
-          "applicaton": {
-
-            //chrome, firefox
-            "name": options.applicationName,
-
-            //18, 19, 4.0.5
-            "version": options.applcationVersion
+          "browsers": {
+            "_id": options.browserId
           }
         };
 
@@ -160,10 +194,11 @@ module.exports = require("../base").extend({
 
           //there is no region - it's local.
           delete query.region;
+          // delete query.browser;
         }
 
-        self._source.findOne(query, this);
 
+        self._source.findOne(query, this);
       }),
 
       /**
@@ -172,15 +207,22 @@ module.exports = require("../base").extend({
 
       o.s(function(desktop) {
 
+
         if(desktop) return this(null, desktop);
 
         console.log("desktop does NOT exist, creating one");
+
+
+        if(self._testingMode) {
+          console.error("cannot create desktops in testing mode!");
+          return this(new Error("cannot create desktops in testing mode"));
+        }
         
         //otherwise, create one
         self._collections.desktopImages.createDesktop({
           platformName: options.platformName,
           platformVersion: options.platformVersion,
-          region: region.name,
+          region: this.region.name,
           flavor: self._options.desktopFlavor,
         }, callback);
       }),
@@ -192,6 +234,9 @@ module.exports = require("../base").extend({
 
         //set the owner - this will be added as a tag
         desktop.setOwner(ownerId);
+
+
+        console.log("starting desktop");
 
         //start the desktop
         desktop.start();

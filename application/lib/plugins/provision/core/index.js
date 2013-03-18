@@ -35,7 +35,7 @@ exports.plugin = function(ectwo, cache, loader) {
 
   return {
     collections: cols
-  }
+  };
 }
 
 
