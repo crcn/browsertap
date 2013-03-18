@@ -1,5 +1,5 @@
 var plugin = require("plugin"),
-config = require("C:\\programData\\browsertap\\config.json"),
+config = {}, //require("C:\\programData\\browsertap\\config.json"),
 _ = require("underscore");
 
 
