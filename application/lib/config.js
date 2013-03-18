@@ -2,12 +2,15 @@ var _ = require("underscore"),
 deepExtend = require("deep-extend");
 
 module.exports = function(env) {
+
+  var localhost = "192.168.0.102";
+  
   var config = {
     default: {
       hosts: {
-        rtmp: "192.168.13.1",
-        provision: "192.168.13.1",
-        provisionDnode: "192.168.13.1"
+        rtmp: localhost,
+        provision: localhost,
+        provisionDnode: localhost
       },
       mongodb: "mongodb://127.0.0.1:27017/browsertap-dev",
       testingMode: /testing|development/.test(env),

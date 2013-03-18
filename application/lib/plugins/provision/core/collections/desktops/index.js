@@ -172,7 +172,7 @@ module.exports = require("../base").extend({
         var query = { 
 
           //first check if there's a server assigned to the particular user
-          "owner": { $in: [ ownerId, undefined ] },
+          "owner": { $in: [ ownerId, undefined, null ] },
 
           //find a server in running / pending / stopped state
           "state": { $in: ["running", "pending", "stopped"] },
