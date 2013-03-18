@@ -63,7 +63,6 @@ exports.plugin = function(config, client, httpServer, master, loader) {
 
 		if(no === false) return;
 
-
 		master.request("post", "/keepServerAlive.json", { _id: config._id }, function(){});
 
 		keepAliveTimeout = setTimeout(keepAlive, 10000)
