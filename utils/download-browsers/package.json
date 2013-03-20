@@ -1,0 +1,22 @@
+{
+  "name": "download-browsers",
+  "version": "0.0.0",
+  "description": "ERROR: No README.md file found!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD",
+  "dependencies": {
+    "async": "0.2.x",
+    "mkdirp": "0.3.x",
+    "rmdir": "1.0.x",
+    "step": "0.0.x",
+    "optimist": "0.3.x",
+    "request": "2.16.x",
+    "unzip": "0.1.x",
+    "progress": "0.1.x"
+  }
+}
