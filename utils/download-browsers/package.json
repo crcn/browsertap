@@ -16,7 +16,7 @@
     "step": "0.0.x",
     "optimist": "0.3.x",
     "request": "2.16.x",
-    "unzip": "0.1.x",
-    "progress": "0.1.x"
+    "progress": "0.1.x",
+    "adm-zip": "0.2.x"
   }
 }

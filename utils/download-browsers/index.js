@@ -10,7 +10,9 @@ path = require("path"),
 request = require("request"),
 unzip = require("unzip"),
 http = require("http"),
-ProgressBar = require("progress");
+ProgressBar = require("progress"),
+zlib = require("zlib"),
+AdmZip = require("adm-zip");
 
 
 var _path = function(path) {
@@ -44,7 +46,7 @@ function showProgress(res) {
   var bar = new ProgressBar('  downloading [:bar] :percent :etas', {
     complete: '=',
     incomplete: ' ',
-    width: 20,
+    width: 30,
     total: len,
   });
 
@@ -86,14 +88,22 @@ function download(pkg, next) {
       var req = request(pkg.url);
 
       req.on("response", showProgress);
-
-      req.pipe(unzip.Extract({ path: pkg.dir }));
       req.pipe(fs.createWriteStream(downloadFile, { flags: "w+" }));
       
       req.on("end", this).on("error", this);
     },
     o.s(function() {
-      console.log("DONE");
+
+      var zip = new AdmZip(downloadFile);
+      var zipEntries = zip.getEntries(); // an array of ZipEntry records
+
+      console.log("extracting %s", downloadFile);
+      /*zipEntries.forEach(function(zipEntry) {
+          console.log("extracting %s", zipEntry.entryName); // outputs zip entries information
+      });*/
+
+
+      zip.extractAllTo(pkg.dir, true);
       this();
     }),
     next
