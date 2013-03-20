@@ -8,7 +8,6 @@ mkdirp = require("mkdirp"),
 rmdir = require("rmdir"),
 path = require("path"),
 request = require("request"),
-unzip = require("unzip"),
 http = require("http"),
 ProgressBar = require("progress"),
 zlib = require("zlib"),
@@ -92,6 +91,10 @@ function download(pkg, next) {
       
       req.on("end", this).on("error", this);
     },
+    o.s(function() {
+      console.log("");
+      setTimeout(this, 2)
+    }),
     o.s(function() {
 
       var zip = new AdmZip(downloadFile);
