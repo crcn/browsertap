@@ -18,22 +18,23 @@ var _path = function(path) {
   return path.replace("~", process.env.HOME);
 }
 
+
 var config = {
   dirs: {
-    downloads: _path(p == "windows" ? "C:\\Users\\Administrator" : "~/Desktop/tmp/downloads")
+    downloads: _path(p == "win32" ? "C:\\Users\\Administrator\\Desktop\\downloads" : "~/Desktop/tmp/downloads")
   },
   downloads: [
     {
       url: "https://s3.amazonaws.com/browsers/browser-apps.zip",
-      dir: _path(p == "windows" ? "C:\\Users\\Administrator\\Desktop\\browsers": "~/Desktop/tmp/browsers")
+      dir: _path(p == "win32" ? "C:\\Users\\Administrator\\Desktop": "~/Desktop/tmp/browsers")
     },
     {
       url: "https://s3.amazonaws.com/browsers/Google.zip",
-      dir: _path(p == "windows" ? "C:\\Users\\Administrator\\AppData\\Local" : "~/Desktop/tmp/chrome")
+      dir: _path(p == "win32" ? "C:\\Users\\Administrator\\AppData\\Local" : "~/Desktop/tmp/chrome")
     },
     {
       url: "https://s3.amazonaws.com/browsers/browsers+2.zip",
-      dir: _path(p == "windows" ? "C:\\Browsers" : "~/Desktop/tmp/browser apps")
+      dir: _path(p == "win32" ? "C:\\" : "~/Desktop/tmp/browser apps")
     }
   ]
 }
@@ -62,18 +63,19 @@ function download(pkg, next) {
 
   var o = outcome,
   downloadFile = path.join(config.dirs.downloads, path.basename(pkg.url))
+  pkgdir = path.join(pkg.dir, path.basename(pkg.url).split(""))
 
   step(
     function() {
       fs.unlink(downloadFile, this);
     },
-    function() {
+    /*function() {
       if(!fs.existsSync(pkg.dir)) return this();
 
       console.log("rm -rf %s", pkg.dir);
 
       rmdir(pkg.dir, this);
-    },
+    },*/
     function() {
       console.log("mkdir -p %s", pkg.dir);
       mkdirp(pkg.dir, this);
