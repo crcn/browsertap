@@ -34,6 +34,13 @@ module.exports = structr({
   /**
    */
 
+  "watch": function() {
+    return this._source.watch.apply(this._source, arguments);
+  },
+
+  /**
+   */
+
   "_createModel": function(collection, item) {
     //OVERRIDE ME
   },

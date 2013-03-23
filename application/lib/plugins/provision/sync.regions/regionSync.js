@@ -18,13 +18,23 @@ module.exports = structr(EventEmitter, {
   /**
    */
 
-  "start": function() {
+  "start": function(callback) {
+
+    if(!callback) callback = function(){};
 
     var self = this;
 
+    return;
+
     self._ectwo.regions.findOne({ name: self._masterRegion }, outcome.s(function(region) {
-      if(!region) return callback(new Error("region doesn't exist"));
+      if(!region) {
+        console.log("cannot start region sync");
+        return callback(new Error("region doesn't exist"));
+      }
+
+      console.log("watching region %s", region.get("name"));
       self._watchRegionImages(region);
+      callback();
     }));
   },
 

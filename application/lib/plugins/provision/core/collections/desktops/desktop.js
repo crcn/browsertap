@@ -111,7 +111,7 @@ module.exports = require("../base/model").extend({
 
     hurryUp(function(next) {
 
-      console.log("ping %s", self.get("_id"));
+      console.log("ping %s %s", self.get("_id"), self._address());
 
       var data = {
         url  : self._address() + "/config",

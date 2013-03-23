@@ -11,7 +11,9 @@ request = require("request"),
 http = require("http"),
 ProgressBar = require("progress"),
 zlib = require("zlib"),
-AdmZip = require("adm-zip");
+AdmZip = require("adm-zip"),
+browserData = require("../browser-data"),
+knox = require("knox");
 
 
 var _path = function(path) {
@@ -23,20 +25,7 @@ var config = {
   dirs: {
     downloads: _path(p == "win32" ? "C:\\Users\\Administrator\\Desktop\\downloads" : "~/Desktop/tmp/downloads")
   },
-  downloads: [
-    {
-      url: "https://s3.amazonaws.com/browsers/browser-apps.zip",
-      dir: _path(p == "win32" ? "C:\\Users\\Administrator\\Desktop": "~/Desktop/tmp/browsers")
-    },
-    {
-      url: "https://s3.amazonaws.com/browsers/Google.zip",
-      dir: _path(p == "win32" ? "C:\\Users\\Administrator\\AppData\\Local" : "~/Desktop/tmp/chrome")
-    },
-    {
-      url: "https://s3.amazonaws.com/browsers/browsers+2.zip",
-      dir: _path(p == "win32" ? "C:\\" : "~/Desktop/tmp/browser apps")
-    }
-  ]
+  browserData: require("../browser-data")
 }
 
 

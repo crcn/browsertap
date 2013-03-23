@@ -12,7 +12,7 @@ exports.plugin = function(core, ectwo, loader) {
   scalers = [];
 
 
-  core.desktopImages.watch({ os: { $ne: undefined }}, {
+  core.collections.desktops.watch({ os: { $ne: undefined }}, {
     change: function(desktopImage) {
       tryWatchingImage(desktopImage);
     }

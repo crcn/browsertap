@@ -1,5 +1,7 @@
 var _ = require("underscore"),
-deepExtend = require("deep-extend");
+deepExtend = require("deep-extend"),
+ectwo = require("ectwo"),
+sift = require("sift");
 
 module.exports = function(env) {
 
@@ -20,21 +22,34 @@ module.exports = function(env) {
       auth: {
         username: "btadmin",
         password: "btpass"
+      },
+      aws: {
+        regions: sift(/us-*/, ectwo.regions) // we only want us regions for now
       }
     },
     staging: {
       hosts: {
-        rtmp: "srtmp.browsertap.com",
-        provision: "sprovision.browsertap.com"
+        // rtmp: "srtmp.browsertap.com",
+        // provision: "sprovision.browsertap.com"
+        rtmp: "54.225.198.26",
+        provision: "crcn.fwd.wf"
       },
-      mongodb: "mongodb://maestro-root:m4estr0d32@alex.mongohq.com:10081/browsertap-staging",
+      mongodb: "mongodb://browsertaper:br0w53474p@linus.mongohq.com:10043/browsertap-staging",
+      aws: {
+        key: "AKIAILTE6WHXUCBDXQHA",
+        secret: "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"
+      }
     },
     production: {
       hosts: {
         rtmp: "rtmp.browsertap.com",
         provision: "provision.browsertap.com"
       },
-      mongodb: "mongodb://maestro-root:m4estr0d32@alex.mongohq.com:10081/browsertap-production"
+      mongodb: "mongodb://maestro-root:m4estr0d32@alex.mongohq.com:10081/browsertap-production",
+      aws: {
+        "key": "AKIAJKBGOTIITATBXTIQ",
+        "secret": "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"
+      },
     }
   };
 

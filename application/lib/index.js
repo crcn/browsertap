@@ -34,11 +34,6 @@ exports.start = function(options) {
 			}
 		]
 	},
-	aws: {
-		"key": "AKIAJKBGOTIITATBXTIQ",
-		"secret": "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", 
-		regions: sift(/us-*/, ectwo.regions) // we only want us regions for now
-	},
 	http: {
 		port: 80,
 		loginRedirect: "/live",
