@@ -62,7 +62,7 @@ namespace Commanders
 		regCommand(findWindowByTitle, execFindWindowByTitle)
 		regCommand(changeWindowRecordingQuality, changeWindowRecordingQual)
 		regCommand(setClipboard, execSetClipboard)
-
+		regCommand(getActiveWindow, execGetActiveWindow)
 
 		#undef regCommand
 
@@ -156,10 +156,20 @@ namespace Commanders
 
 	void JSONCommander::execGetScreenData(JSONCommand* command)
 	{
+
 		
 		Screens::Screen* screen = 0;
 
 		if(!(screen = this->getScreen(command))) return;
+
+		this->dispatchResponse(command->value(), getScreenData(screen));
+	}
+
+	void JSONCommander::execGetActiveWindow(JSONCommand* command)
+	{	
+		Screens::Screen* screen = Screens::ScreenManager::instance().getScreen((HWND)GetForegroundWindow());
+
+		if(screen == 0) return this->dispatchResponse(command->value(), getSuccess(false));
 
 		this->dispatchResponse(command->value(), getScreenData(screen));
 	}

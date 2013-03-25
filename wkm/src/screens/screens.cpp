@@ -79,7 +79,7 @@ namespace Screens
 	bool Screen::focus()
 	{
 		ScreenManager::instance().focusedScreen(this);
-		SetWindowPos(this->_window, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOSENDCHANGING);
+		//SetWindowPos(this->_window, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOSENDCHANGING);
 
 
 		SetForegroundWindow(this->_window);
@@ -96,7 +96,7 @@ namespace Screens
 				lstyle &= ~(WS_EX_TOPMOST);
 				SetWindowLong(this->_window, GWL_EXSTYLE, lstyle);
 			}*/
-			SetWindowPos(this->_window, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOSENDCHANGING);
+			//SetWindowPos(this->_window, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOSENDCHANGING);
 		}
 
 		if(this->inFocus()) {
@@ -106,6 +106,8 @@ namespace Screens
 
 		return true;
 	}
+
+	
 
 	void Screen::removeChrome()
 	{
@@ -400,6 +402,21 @@ namespace Screens
 		return 0;
 	}
 
+	Screen* ScreenManager::getScreen(HWND hWnd)
+	{
+
+		for(int i = this->_screens.size(); i--;) 
+		{
+			Screen* screen = this->_screens.at(i);
+			if(screen->target() == hWnd) 
+			{
+				return screen;
+			}
+		}
+
+		return 0;
+	}
+
 	void ScreenManager::update()
 	{
 		Process::ProcessManager::instance().update();
@@ -417,18 +434,9 @@ namespace Screens
 		int len = GetWindowTextLength(hWnd);
 		if(len == 0) return TRUE;
 
-		bool isNew = true;
+		Screen* existing = sm->getScreen(hWnd);
 
-		for(int i = sm->_screens.size(); i--;) 
-		{
-			Screen* screen = sm->_screens.at(i);
-			if(screen->target() == hWnd) 
-			{
-				isNew = false;
-			}
-		}
-
-		if(isNew) 
+		if(existing == 0) 
 		{
 			Process::Process* winProc = ScreenManager::findWindowProcess(hWnd);
 

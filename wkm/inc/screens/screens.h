@@ -280,6 +280,17 @@ namespace Screens
 		/**
 		 */
 
+		Screen* getScreen(HWND hWnd);
+
+
+		/**
+		 */
+
+		void setWindowStyle(int style);
+
+		/**
+		 */
+
 		Screen* focusedScreen();
 
 		/**

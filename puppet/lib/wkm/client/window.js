@@ -91,6 +91,7 @@ module.exports = structr(EventEmitter, {
 
 	"move": function(x, y) {
 		this._con.execute("resizeWindow", { id: this.id, x: x, y: y });
+		this.focus();
 	},
 
 	/**
@@ -113,6 +114,7 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"mouseEvent": function(dwFlags, coords, dwData) {
+		this.focus();
 		this._focus();
 		this._con.execute("fireWindowMouseEvent", { id: this.id, x: coords.x, y: coords.y, dwFlags: dwFlags, dwData: dwData || 0 });
 	},
@@ -227,7 +229,6 @@ module.exports = structr(EventEmitter, {
 	 */
 
 	"startRecording": function(options, callback) {
-		
 		if(typeof options == "function") {
 			callback = options;
 			options = {};
