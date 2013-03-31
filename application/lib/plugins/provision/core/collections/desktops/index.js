@@ -1,7 +1,7 @@
 var Desktop = require("./desktop"),
 step = require("step"),
 outcome = require("outcome"),
-closestEC2Region = require("closest-ec2-region"),
+closestEC2Region = require("closest-ec2-region")(),
 comerr = require("comerr"),
 verify = require("verify"),
 _ = require("underscore");
@@ -108,13 +108,27 @@ module.exports = require("../base").extend({
 
   "_findRegion": function(options, callback) {
 
+    console.log("finding the closest region");
+
     if(!this._verify.that(options).onError(callback).has("ip").success) {
+      console.error("ip not present, erroring");
       return;
     }
 
     var self = this, o = outcome.e(callback);
 
+    if(options.ip == "127.0.0.1") {
+      return callback(null, { name: "us-east-1" });
+    }
+
     closestEC2Region(options.ip, function(err, regionName) {
+
+      if(!regionName) {
+        console.log("closest region not found for ip %s, picking %s", options.ip, regionName = "us-east-1");
+      }
+
+
+      console.log("closest region is %s", regionName);
       self._getRegisteredRegion(regionName, callback);
     });
   },
@@ -208,7 +222,10 @@ module.exports = require("../base").extend({
       o.s(function(desktop) {
 
 
-        if(desktop) return this(null, desktop);
+        if(desktop) {
+          console.log("found desktop %s, returning", desktop.get("_id"));
+          return this(null, desktop);
+        }
 
         console.log("desktop does NOT exist, creating one");
 

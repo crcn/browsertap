@@ -7,6 +7,9 @@ exports.plugin = function(ectwo, loader) {
     return console.log("running in test mode, not synchronizing images.");
   }
 
+  console.log("not synchronizing regions")
+  return;
+
   var defaultRegion = loader.params("masterRegion") || "us-east-1";
 
   var sync = new RegionSync({ masterRegionName: defaultRegion }, ectwo);

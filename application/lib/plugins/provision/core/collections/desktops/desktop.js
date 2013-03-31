@@ -53,7 +53,7 @@ module.exports = require("../base/model").extend({
 
       //no owner id? destroy the tag 
       if(!ownerid) {
-        if(owner) owner.destroy();
+        if(tag) tag.destroy();
         return;
       }
 
@@ -155,6 +155,8 @@ module.exports = require("../base/model").extend({
 
   "_fetchBrowsers": function() {
 
+    console.log("fetching browsers");
+
     var self = this;
 
 
@@ -198,6 +200,7 @@ module.exports = require("../base/model").extend({
           if(!body.owner) {
 
             //user not assigned for N seconds?
+            if(self.get("lastUsedAt"))
             if((Date.now() - 1000 * 10) > self.get("lastUsedAt").getTime()) {
 
               //remove the owner

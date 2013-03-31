@@ -56,10 +56,14 @@ module.exports = structr(EventEmitter, {
 		var serverUrl = [window.location.protocol, "//", window.location.host, "/server.json"].join(""),
 		self = this;
 
+
+
 		$.ajax({
 			url: serverUrl,
 			dataType: "json",
 			success: outcome.vine().success(function(puppeteer) {
+
+				console.log("SUCC")
 
 				self.state(puppeteer.state);
 

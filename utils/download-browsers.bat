@@ -1,0 +1,1 @@
+s3cp pull ./browsers.json --config ./s3cp.json --validate

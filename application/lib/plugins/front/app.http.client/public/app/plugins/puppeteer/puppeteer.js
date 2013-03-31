@@ -7,6 +7,8 @@ _ = require("underscore"),
 comerr = require("comerr"),
 outcome = require("outcome");
 
+outcome.logAllErrors(true);
+
 
 module.exports = structr(EventEmitter, {
 
@@ -75,21 +77,28 @@ module.exports = structr(EventEmitter, {
 		$.ajax({
 			url: serverUrl,
 			dataType: "json",
-			success: outcome.vine().success(function(puppeteer) {
+			success: function(response) {
+				console.log(arguments)
+				var puppeteer = response.result;
 
+				console.log(puppeteer.state);
 				self.state(puppeteer.state);
+				console.log(puppeteer.state);
 
 				//address exists? it's running
-				if(puppeteer.address && puppeteer.state == "running") {
-					self._attach({ host: "http://" + puppeteer.address + ":8080" });
+				var address = (puppeteer.address || puppeteer.dnsName);
+				if(address && puppeteer.state == "running") {
+					self._attach({ host: "http://" + address + ":8080" });
 				} else {
+
+					console.log("address doesn't exist, or state isn't running, timeout.");
 
 					//otherwise try reloading
 					setTimeout(function() {
 						self.reloadServer();
 					}, 1000 * 2);
 				}
-			}),
+			},
 			error: function() {
 				console.log(arguments);
 			}
@@ -135,6 +144,8 @@ module.exports = structr(EventEmitter, {
 		var d = dnode(), self = this;
 		d.on("remote", function(remote) {
 
+			console.log("remote connection made, connecting to client with key %s", self.account.token.key);
+
 			analytics.track("Connecting To Desktop", { 
 				host: options.host
 			});
@@ -160,6 +171,7 @@ module.exports = structr(EventEmitter, {
 				analytics.track("Successfuly Connected to Desktop");
 
 				console.log("connected to client");
+
 				self.connection = remote;
 				self._connecting = false;
 				self.emit("connect", null, remote);
@@ -175,6 +187,7 @@ module.exports = structr(EventEmitter, {
 			self._connecting = false;
 			self.connection = null;
 
+			console.log("connection ended, restarting");
 
 			//setting a timeout helps incase the server is not ready
 			setTimeout(function() {
