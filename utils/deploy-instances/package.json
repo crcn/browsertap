@@ -1,0 +1,18 @@
+{
+  "name": "deploy-instances",
+  "version": "0.0.0",
+  "description": "ERROR: No README.md file found!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD",
+  "dependencies": {
+    "async": "0.2.x",
+    "outcome": "0.0.x",
+    "step": "0.0.x",
+    "ectwo": "0.0.x"
+  }
+}
