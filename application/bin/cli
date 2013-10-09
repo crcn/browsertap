@@ -1,8 +1,0 @@
-#!/usr/bin/env node
-
-var argv = require("optimist").
-argv;
-
-//ami-67aa2a0e
-require("../").start({
-});

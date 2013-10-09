@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DEFECTS>
-<OACRDEFECTCOUNT>1</OACRDEFECTCOUNT>
-<OACRERRORCOUNT>0</OACRERRORCOUNT>
-<DEFECT _seq="1"><OACRCOMPUNIT>c:\programdata\maestro\programs\browsertap\display_driver\src\gdi\entry.c</OACRCOMPUNIT><SFA><LINE>90</LINE><COLUMN>0</COLUMN><FILENAME>entry.c</FILENAME><FILEPATH>c:\programdata\maestro\programs\browsertap\display_driver\src\gdi\</FILEPATH></SFA><DEFECTCODE>20051</DEFECTCODE><DESCRIPTION>PREfast - Error processing 'entry.c' : error C2373: 'DrvEnableDriver' : redefinition; different type modifiers (try ' oacr log root:amd64fre ' for details)</DESCRIPTION><FUNCTION></FUNCTION><FUNCLINE></FUNCLINE><PATH/></DEFECT>
-</DEFECTS>

@@ -1,1 +1,0 @@
-window.location = "http://maestro.browsertap.com/live?open=" + encodeURIComponent(window.location);
