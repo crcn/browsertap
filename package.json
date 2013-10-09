@@ -1,0 +1,33 @@
+{
+  "name": "browsertap",
+  "version": "0.0.0",
+  "description": "ERROR: No README.md file found!",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/crcn/browsertap.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "gitHead": "f1c4ef94ff37ed4be113e27233e7f915e4cdb73d",
+  "dependencies": {
+    "packages": "0.0.x",
+    "outcome": "0.0.x",
+    "commander": "2.0.x",
+    "paperclip": "0.2.x",
+    "mojojs": "0.6.x",
+    "express": "3.4.x",
+    "ectwo": "0.1.x",
+    "bindable": "0.4.x",
+    "funwrap": "0.0.x",
+    "bindable-call": "0.0.x",
+    "eyebrowse": "0.0.x"
+  },
+  "devDependencies": {
+    "coffee-script": "1.6.x",
+    "cortado": "0.0.x"
+  }
+}
