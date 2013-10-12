@@ -22,5 +22,13 @@ BrowserTap comes with a few parts:
 
 1. Provisioning servers depending on the browsers running on them.
 2. NOT using flash.
-3. 
 
+
+## Installation
+
+1. install node
+2. clone browsertap: `git clone git@github.com:crcn/browsertap.git`
+3. install browsertap: `npm install`
+4. run it - `browsertap [type]`
+  - `browsertap website`
+  - `browsertap client`
