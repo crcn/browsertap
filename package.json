@@ -24,10 +24,25 @@
     "bindable": "0.4.x",
     "funwrap": "0.0.x",
     "bindable-call": "0.0.x",
-    "eyebrowse": "0.0.x"
+    "eyebrowse": "0.0.x",
+    "flatstack": "0.0.x",
+    "passport": "0.1.x",
+    "dnode": "1.0.x",
+    "browserify": "2.34.x",
+    "mongoose": "3.6.x",
+    "underscore": "1.5.x",
+    "async": "0.2.x",
+    "colors": "~0.6.2",
+    "request": "~2.27.0"
   },
   "devDependencies": {
     "coffee-script": "1.6.x",
-    "cortado": "0.0.x"
+    "cortado": "0.0.x",
+    "mesh": "~0.2.5",
+    "jsdev": "~0.1.3",
+    "outcome": "0.0.18",
+    "mkdirp": "~0.3.5",
+    "glob": "~3.2.6",
+    "handlebars": "~1.0.12"
   }
 }
