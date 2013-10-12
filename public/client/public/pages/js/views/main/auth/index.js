@@ -15,8 +15,25 @@ AuthView = (function(_super) {
 
   AuthView.prototype.paper = require("./index.pc");
 
+  AuthView.prototype.sections = {
+    auth: {
+      type: "states",
+      index: 0,
+      views: [
+        {
+          "class": require("./login"),
+          name: "login"
+        }, {
+          "class": require("./signup"),
+          name: "signup"
+        }
+      ]
+    }
+  };
+
   return AuthView;
 
 })(mojo.View);
 
 module.exports = AuthView;
+

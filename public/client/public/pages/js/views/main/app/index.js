@@ -13,10 +13,30 @@ AppView = (function(_super) {
     return _ref;
   }
 
+  /*
+  */
+
+
   AppView.prototype.paper = require("./index.pc");
+
+  /*
+  */
+
+
+  AppView.prototype.sections = {
+    type: "states",
+    index: 0,
+    views: [
+      {
+        "class": require("./screen"),
+        name: "screen"
+      }
+    ]
+  };
 
   return AppView;
 
 })(mojo.View);
 
 module.exports = AppView;
+

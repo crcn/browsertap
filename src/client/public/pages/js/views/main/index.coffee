@@ -13,9 +13,10 @@ class MainView extends mojo.View
   sections: 
     main: 
       type: "states"
+      index: 0
       views: [
-        { class: require("./app")  , name: "app"  }
         { class: require("./auth") , name: "auth" }
+        { class: require("./app")  , name: "app"  }
       ]
 
 

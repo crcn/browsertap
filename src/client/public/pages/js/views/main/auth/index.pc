@@ -1,1 +1,3 @@
 AUTH
+
+{{ html: sections.auth }}

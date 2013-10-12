@@ -26,13 +26,14 @@ MainView = (function(_super) {
   MainView.prototype.sections = {
     main: {
       type: "states",
+      index: 0,
       views: [
         {
-          "class": require("./app"),
-          name: "app"
-        }, {
           "class": require("./auth"),
           name: "auth"
+        }, {
+          "class": require("./app"),
+          name: "app"
         }
       ]
     }
@@ -43,3 +44,4 @@ MainView = (function(_super) {
 })(mojo.View);
 
 module.exports = MainView;
+
