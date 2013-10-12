@@ -1,6 +1,8 @@
 packages = require "packages"
 
 module.exports = (type) ->
+
+  process.env.TYPE = type
   
   console.log "starting #{type}"
   

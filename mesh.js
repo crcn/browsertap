@@ -285,7 +285,6 @@ module.exports = function(mesh, next) {
         context.set("output", output);
 
         var cmd = "rm -f " + output + "; ./node_modules/.bin/paperclip -p -i " + context.get("input") + " -o " + output;
-        cmd += "; ./node_modules/.bin/amdify -e " + output + " -o " + output;
 
         exec(cmd, next);
       }

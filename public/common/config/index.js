@@ -14,11 +14,17 @@ exports.load = function() {
         http: {
           port: 8080
         }
+      },
+      client: {
+        http: {
+          port: 8081
+        }
       }
     }
   };
   env = (_ref = process.env.NODE_ENV) != null ? _ref : "debug";
   return new bindable.Object(_.extend({
-    env: env
+    env: env,
+    type: process.env.TYPE
   }, (_ref1 = config[env]) != null ? _ref1 : {}, config["default"]));
 };

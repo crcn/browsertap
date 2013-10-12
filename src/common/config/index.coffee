@@ -12,6 +12,11 @@ exports.load = () ->
         http: {
           port: 8080
         }
+      },
+      client: {
+        http: {
+          port: 8081
+        }
       }
     }
   }
@@ -19,4 +24,4 @@ exports.load = () ->
 
   env = process.env.NODE_ENV ? "debug"
 
-  new bindable.Object _.extend { env: env }, config[env] ? {}, config.default
+  new bindable.Object _.extend { env: env, type: process.env.TYPE }, config[env] ? {}, config.default
