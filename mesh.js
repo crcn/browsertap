@@ -20,8 +20,8 @@ module.exports = function(mesh, next) {
   var processStylusTimeout,
   processStylusContent = [],
   brokenFiles = {},
-  processStylusOutputDir = __dirname + "/public/css",
-  processStylusOutput = processStylusOutputDir + "/app.less",
+  processStylusOutputDir = __dirname + "/lib/common/public.files/public/css",
+  processStylusOutput = processStylusOutputDir + "/all.less",
   osxNotifierPort = 18499,
   runningNotifier = false,
   buildNum = String(Date.now())
@@ -93,7 +93,13 @@ module.exports = function(mesh, next) {
     fs.writeFileSync(processStylusOutput, buffer.join("\n"));
 
 
+    mkdirp.sync(path.dirname(processStylusOutput));
+
+    console.log (processStylusOutput)
+
+
     exec(cmd = "./node_modules/.bin/lessc " + processStylusOutput + " > " + processStylusOutput.replace(".less", ".css"), { cwd: __dirname }, function(err, stderr, stdout) {
+      console.log(cmd)
       process.stderr.write(stderr);
       process.stdout.write(stdout);
     });
@@ -236,6 +242,8 @@ module.exports = function(mesh, next) {
           //console.log("skip %s".grey, relPath(context.get("input")));
           return onDone();
         }
+
+        mkdirp.sync(path.dirname(context.get("output")));
 
         this.run(cmd = "process_" + input.split(".").pop(), context, function(err) {
           if(err) {

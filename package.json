@@ -49,6 +49,7 @@
     "mkdirp": "~0.3.5",
     "glob": "~3.2.6",
     "handlebars": "~1.0.12",
-    "node-osx-notifier": "~0.1.0"
+    "node-osx-notifier": "~0.1.0",
+    "less": "~1.4.2"
   }
 }
