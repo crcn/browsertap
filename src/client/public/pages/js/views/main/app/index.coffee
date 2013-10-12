@@ -11,10 +11,11 @@ class AppView extends mojo.View
   ###
 
   sections:
-    type: "states"
-    index: 0
-    views: [
-      { class: require("./screen"), name: "screen" }
-    ]
+    app:
+      type: "states"
+      index: 0
+      views: [
+        { class: require("./screen"), name: "screen" }
+      ]
 
 module.exports = AppView
