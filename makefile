@@ -1,8 +1,8 @@
 all:
-	coffee -o lib -c src;
+	mesh build-src;
 
 
 all-watch:
-	coffee -o lib -cw src;
+	mesh build-src --watch --debug;
 
 

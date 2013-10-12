@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "browsertap": "./bin/browsertap"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/crcn/browsertap.git"
@@ -16,9 +19,8 @@
   "dependencies": {
     "packages": "0.0.x",
     "outcome": "0.0.x",
-    "commander": "2.0.x",
     "paperclip": "0.2.x",
-    "mojojs": "0.6.x",
+    "mojojs": "~0.6.42",
     "express": "3.4.x",
     "ectwo": "0.1.x",
     "bindable": "0.4.x",
@@ -33,7 +35,10 @@
     "underscore": "1.5.x",
     "async": "0.2.x",
     "colors": "~0.6.2",
-    "request": "~2.27.0"
+    "request": "~2.27.0",
+    "optimist": "0.6.x",
+    "winston": "~0.7.2",
+    "browserify-middleware": "~1.19.0"
   },
   "devDependencies": {
     "coffee-script": "1.6.x",
@@ -43,6 +48,7 @@
     "outcome": "0.0.18",
     "mkdirp": "~0.3.5",
     "glob": "~3.2.6",
-    "handlebars": "~1.0.12"
+    "handlebars": "~1.0.12",
+    "node-osx-notifier": "~0.1.0"
   }
 }

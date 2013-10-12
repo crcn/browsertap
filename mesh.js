@@ -147,18 +147,18 @@ module.exports = function(mesh, next) {
         },
         {
           "eachFile": {
-            "input": __dirname + "/src/js/**",
-            "inputBaseDir": "/src/js",
-            "outputBaseDir": "/public/js/app",
+            "input": __dirname + "/src/**",
+            "inputBaseDir": "/src",
+            "outputBaseDir": "/lib",
             "parallel": 30,
             "run": ["process_file"]
           }
         },
         {
           "eachFile": {
-            "input": __dirname + "/src/css/**",
+            "input": __dirname + "/css/**",
             "inputBaseDir": "/src/css",
-            "outputBaseDir": "/public/css/tmp",
+            "outputBaseDir": "/src/css/tmp",
             "parallel": 30,
             "run": ["process_file"]
           }
