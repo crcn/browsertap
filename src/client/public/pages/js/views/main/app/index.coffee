@@ -10,6 +10,12 @@ class AppView extends mojo.View
   ###
   ###
 
+  bindings:
+    "models.browser": "browser"
+
+  ###
+  ###
+
   sections:
     app:
       type: "states"
@@ -19,5 +25,6 @@ class AppView extends mojo.View
       ]
     settings: require("./settings")
     menu: require("./menu")
+    loader: require("./loader")
 
 module.exports = AppView

@@ -635,19 +635,6 @@ a img {
 .top {
   z-index: 1024;
 }
-.settings {
-  width: 600px;
-  height: 300px;
-  background-color: rgba(0, 0, 0, 0.5);
-  -webkit-border-radius: 10px;
-  -webkit-background-clip: padding-box;
-  -moz-border-radius: 10px;
-  -moz-background-clip: padding;
-  border-radius: 10px;
-  background-clip: padding-box;
-  top: 100px;
-  position: relative;
-}
 .app-menu {
   background-color: rgba(0, 0, 0, 0.8);
   color: #FFF;
@@ -681,6 +668,32 @@ a img {
 }
 .app-menu-3 span {
   float: left;
+}
+.settings {
+  width: 600px;
+  height: 300px;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-border-radius: 10px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 10px;
+  -moz-background-clip: padding;
+  border-radius: 10px;
+  background-clip: padding-box;
+  top: 100px;
+  position: relative;
+}
+.app-loader {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 200px;
+  height: 200px;
+  position: relative;
+  top: 100px;
+  -webkit-border-radius: 10px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 10px;
+  -moz-background-clip: padding;
+  border-radius: 10px;
+  background-clip: padding-box;
 }
 .screen-switcher {
   color: #FFF;

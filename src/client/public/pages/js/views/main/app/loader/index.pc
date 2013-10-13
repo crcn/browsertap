@@ -1,0 +1,5 @@
+<div class="center-outer" data-bind="{{ show: loading }}">
+  <div class="center-inner app-loader">
+    <img />
+  </div>
+</div>

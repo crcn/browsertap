@@ -865,14 +865,6 @@ a img {
     font-style: normal;
 
 }
-.center-outer {
-  text-align: center;
-}
-
-.center-inner {
-  display: table;
-  margin: 0px auto;
-}
 // retina.less
 // A helper mixin for applying high-resolution background images (http://www.retinajs.com)
 
@@ -884,6 +876,14 @@ a img {
     background-image: url(@at2x_path);
     background-size: @w @h;
   }  
+}
+.center-outer {
+  text-align: center;
+}
+
+.center-inner {
+  display: table;
+  margin: 0px auto;
 }
 //  LESS Hat 1.1.2
 //  LESSHat.com
@@ -3087,14 +3087,6 @@ a img {
 .top {
   z-index: 1024;
 }
-.settings {
-  width: 600px;
-  height: 300px;
-  background-color: rgba(0, 0, 0, 0.5);
-  .border-radius(10px);
-  top: 100px;
-  position: relative;
-}
 .app {
   &-menu {
     background-color: rgba(0, 0, 0, 0.8);
@@ -3135,6 +3127,25 @@ a img {
       float: left;
     }
   }
+}
+.settings {
+  width: 600px;
+  height: 300px;
+  background-color: rgba(0, 0, 0, 0.5);
+  .border-radius(10px);
+  top: 100px;
+  position: relative;
+}
+@size: 200px;
+.app {  
+  &-loader {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: @size;
+    height: @size;
+    position: relative;
+    top: 100px;
+    .border-radius(10px);
+  } 
 }
 .screen-switcher {
 

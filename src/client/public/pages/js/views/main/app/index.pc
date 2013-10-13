@@ -1,3 +1,4 @@
 {{ html: sections.app      }}
 {{ html: sections.menu     }}
+{{ html: sections.loader   }}
 {{ html: sections.settings }}

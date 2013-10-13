@@ -16,6 +16,13 @@ module.exports = function(fragment, block, element, text, parse, modifiers) {
     }), text(" "), block({
         html: {
             fn: function() {
+                return this.ref("sections.loader").value();
+            },
+            refs: [ "sections.loader" ]
+        }
+    }), text(" "), block({
+        html: {
+            fn: function() {
                 return this.ref("sections.settings").value();
             },
             refs: [ "sections.settings" ]
