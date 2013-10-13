@@ -5,9 +5,12 @@ mojo.mediator = funwrap.mediator
 
 
 commands = [
+
   require("./load"), 
   require("./waitForDOM"),
   require("./loadApplicationOptions"),
+  require("./loadSettings"),
+
   require("./initialize"),
   require("./bootstrap"),
   require("./openApplication"),

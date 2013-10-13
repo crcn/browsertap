@@ -15,12 +15,8 @@ routesByName = {}
 # bindings:
 #   "models.states.signup": "signupStates.currentName"
 redirect = (paths) ->
-  for name of paths
-    models.set "states.#{name}", paths[name]
+  models.set "states", paths 
 
-    ###debug
-      console.log("model states %s=%s", name, paths[name])
-    ###
 
 # tie-up crossroads with hasher.js
 onHashChange = (newHash, oldHash) ->

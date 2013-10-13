@@ -16,16 +16,7 @@ models = mojo.models;
 routesByName = {};
 
 redirect = function(paths) {
-  var name, _results;
-  _results = [];
-  for (name in paths) {
-    _results.push(models.set("states." + name, paths[name]));
-    {
-      console.log("model states %s=%s", name, paths[name])
-    }
-
-  }
-  return _results;
+  return models.set("states", paths);
 };
 
 onHashChange = function(newHash, oldHash) {

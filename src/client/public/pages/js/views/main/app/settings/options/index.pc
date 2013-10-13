@@ -1,0 +1,38 @@
+<ul>
+  <li class="settings-options-cell">
+    <a href="#" data-bind="{{ onClick: showHideBrowserChrome() }}">show/hide browser chrome</a>
+  </li>
+  <li class="settings-options-cell">
+    <a href="#" data-bind="{{ onClick: toggleQuality() }}">toggle playback quality</a>
+  </li>
+  <li class="settings-options-cell">
+    <a href="#" data-bind="{{ onClick: toggleSound() }}">toggle sound</a>
+  </li>
+  <li class="settings-options-cell">
+    <a href="#" data-bind="{{ onClick: 'browsers' | redirect() }}">show browser switcher</a>
+  </li>
+  <li class="settings-options-cell">
+    <a href="#" data-bind="{{ onClick: 'extension' | redirect() }}">tools & extensions</a>
+  </li>
+  <li class="settings-options-cell">
+    <a href="#" data-bind="{{ onClick: 'payment' | redirect() }}">payment options</a>
+  </li>
+  <li class="settings-options-cell">
+    <a href="#" data-bind="{{ onClick: 'reportBug' | redirect() }}">report bug</a>
+  </li>
+  <li class="settings-options-cell">
+    <a href="#" data-bind="{{ onClick: 'help' | redirect() }}">help & documentation</a>
+  </li>
+  <li class="settings-options-cell">
+    <a href="mailto:support@browsertap.com">contact support</a>
+  </li>
+  <li class="settings-options-cell">
+    <a href="#" data-bind="{{ onClick: 'logout' | redirect() }}">Log out</a>
+  </li>
+  <li class="settings-options-cell">
+    <a href="#" data-bind="{{ onClick: pauseBrowser() }}">Pause Browser</a>
+  </li>
+  <li class="settings-options-cell">
+    <a href="#" data-bind="{{ onClick: 'tunnel' | redirect() }}">setup local tunnel</a>
+  </li>
+</ul>

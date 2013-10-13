@@ -635,6 +635,19 @@ a img {
   position: relative;
   top: 6px;
 }
+.settings {
+  width: 600px;
+  height: 300px;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-border-radius: 10px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 10px;
+  -moz-background-clip: padding;
+  border-radius: 10px;
+  background-clip: padding-box;
+  top: 100px;
+  position: relative;
+}
 .screen-switcher {
   color: #FFF;
 }
@@ -683,4 +696,15 @@ a img {
   border-bottom: 5px solid rgba(0, 0, 0, 0);
   width: 10px;
   height: 10px;
+}
+.settings-options-cell {
+  list-style-type: none;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  float: left;
+  padding: 10px;
+}
+.settings-options-cell > a {
+  color: #FFF;
 }

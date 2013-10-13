@@ -23,6 +23,62 @@ module.exports = {
       main: "auth",
       auth: "forgot"
     }
+  },
+  "/settings": {
+    name: "settings",
+    states: {
+      main: "app",
+      app: "screen",
+      settings: "options"
+    }
+  },
+  "/settings/payment": {
+    name: "payment",
+    states: {
+      main: "app",
+      app: "screen",
+      settings: "payment"
+    }
+  },
+  "/settings/extensions": {
+    name: "extensions",
+    states: {
+      main: "app",
+      app: "screen",
+      settings: "extensions"
+    }
+  },
+  "/settings/report-bug": {
+    name: "reportBug",
+    states: {
+      main: "app",
+      app: "screen",
+      settings: "reportBug"
+    }
+  },
+  "/settings/help": {
+    name: "help",
+    states: {
+      main: "app",
+      app: "screen",
+      settings: "help"
+    }
+  },
+  "/settings/contact": {
+    name: "contact",
+    states: {
+      main: "app",
+      app: "screen",
+      settings: "contact"
+    }
+  },
+  "/settings/tunnel": {
+    name: "tunnel",
+    states: {
+      main: "app",
+      app: "screen",
+      settings: "tunnel"
+    }
   }
 };
 

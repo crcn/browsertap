@@ -17,5 +17,6 @@ class AppView extends mojo.View
       views: [
         { class: require("./screen"), name: "screen" }
       ]
+    settings: require("./settings")
 
 module.exports = AppView

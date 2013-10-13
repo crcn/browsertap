@@ -1,0 +1,5 @@
+<div class="center-outer" data-bind="{{ show: models.states.settings }}">
+  <div class="settings center-inner">
+    {{ html: sections.settings }}
+  </div>
+</div>
