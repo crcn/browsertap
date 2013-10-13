@@ -1,40 +1,40 @@
 mojo = require "mojojs"
 bindable = require "bindable"
+PlatformOption = require "./platformOption"
 
-
-platform = new bindable.Object({
+platform = new PlatformOption({
   name: "browsertap",
   options: new bindable.Collection([
-    new bindable.Object({ 
+    new PlatformOption({ 
       name: "desktop", 
       options:  new bindable.Collection([
-        new bindable.Object({
+        new PlatformOption({
           name: "firefox",
           options: new bindable.Collection([
-            new bindable.Object({ name: "7" }),
-            new bindable.Object({ name: "8" }),
-            new bindable.Object({ name: "9" })
+            new PlatformOption({ name: "7" }),
+            new PlatformOption({ name: "8" }),
+            new PlatformOption({ name: "9" })
           ])
         }),
-        new bindable.Object({
+        new PlatformOption({
           name: "IE",
           options: new bindable.Collection([
-            new bindable.Object({ name: "8" }),
-            new bindable.Object({ name: "9" }),
-            new bindable.Object({ name: "10" })
+            new PlatformOption({ name: "8" }),
+            new PlatformOption({ name: "9" }),
+            new PlatformOption({ name: "10" })
           ])
         })
       ])
     }),
-    new bindable.Object({ 
+    new PlatformOption({ 
       name: "mobile", 
       options:  new bindable.Collection([
-        new bindable.Object({
+        new PlatformOption({
           name: "safari",
           options: new bindable.Collection([
-            new bindable.Object({ name: "7" }),
-            new bindable.Object({ name: "8" }),
-            new bindable.Object({ name: "9" })
+            new PlatformOption({ name: "7" }),
+            new PlatformOption({ name: "8" }),
+            new PlatformOption({ name: "9" })
           ])
         })
       ])

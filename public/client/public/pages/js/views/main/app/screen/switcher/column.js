@@ -37,16 +37,23 @@ ColumnView = (function(_super) {
   */
 
 
+  ColumnView.prototype._onRender = function() {
+    return ColumnView.__super__._onRender.call(this);
+  };
+
+  /*
+  */
+
+
   ColumnView.prototype.selectOption = function(option) {
-    if (this._selected) {
-      this._selected.set("selected", false);
+    var _ref1;
+    if ((_ref1 = this._selected) != null) {
+      _ref1.deselect();
     }
     this._selected = option;
-    option.set("selected", true);
+    option.select();
     if (option.get("options.length")) {
       return this._addChild(option);
-    } else {
-      return this._open(option);
     }
   };
 
@@ -63,14 +70,6 @@ ColumnView = (function(_super) {
     });
     this._child.render();
     return this.set("sections.child", this._child);
-  };
-
-  /*
-  */
-
-
-  ColumnView.prototype._open = function(option) {
-    return console.log("OPEN");
   };
 
   return ColumnView;

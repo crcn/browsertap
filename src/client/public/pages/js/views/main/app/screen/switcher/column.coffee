@@ -19,19 +19,21 @@ class ColumnView extends mojo.View
   ###
   ###
 
+  _onRender: () ->
+    super()
+
+  ###
+  ###
+
   selectOption: (option) =>
 
-    if @_selected
-      @_selected.set "selected", false
+    @_selected?.deselect()
 
     @_selected = option
-    option.set "selected", true
-
+    option.select()
 
     if option.get("options.length")
       @_addChild option
-    else
-      @_open option
 
   ###
   ###
@@ -42,15 +44,6 @@ class ColumnView extends mojo.View
     @_child = new ColumnView { model: option }
     @_child.render()
     @set "sections.child", @_child
-
-  ###
-  ###
-
-  _open: (option) ->
-    console.log "OPEN"
-
-
-
 
 
 module.exports = ColumnView

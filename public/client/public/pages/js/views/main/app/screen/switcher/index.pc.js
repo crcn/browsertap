@@ -20,5 +20,5 @@ module.exports = function(fragment, block, element, text, parse, modifiers) {
                 refs: [ "visible" ]
             }
         } ]
-    }, [ text("toggle") ]) ]);
+    }, [ text("toggle") ]), text(" ") ]);
 };
