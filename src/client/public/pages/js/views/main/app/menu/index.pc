@@ -2,11 +2,12 @@
 
   <span>{{label}}</span>
 
+  <a href="#" data-bind="{{ onClick: 'settings' | redirect() }}">
+    options
+  </a>
+  
   <a href="#" data-bind="{{ onClick: nextPosition() }}">
     next
   </a>
 
-  <a href="#" data-bind="{{ onClick: 'settings' | redirect() }}">
-    settings
-  </a>
 </div>

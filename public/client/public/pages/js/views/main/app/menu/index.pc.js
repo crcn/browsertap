@@ -16,20 +16,20 @@ module.exports = function(fragment, block, element, text, parse, modifiers) {
         "data-bind": [ {
             onClick: {
                 fn: function() {
-                    return this.call("nextPosition", []).value();
-                },
-                refs: [ "nextPosition" ]
-            }
-        } ]
-    }, [ text(" next ") ]), text(" "), element("a", {
-        href: [ "#" ],
-        "data-bind": [ {
-            onClick: {
-                fn: function() {
                     return modifiers.redirect("settings");
                 },
                 refs: []
             }
         } ]
-    }, [ text(" settings ") ]), text(" ") ]) ]);
+    }, [ text(" options ") ]), text(" "), element("a", {
+        href: [ "#" ],
+        "data-bind": [ {
+            onClick: {
+                fn: function() {
+                    return this.call("nextPosition", []).value();
+                },
+                refs: [ "nextPosition" ]
+            }
+        } ]
+    }, [ text(" next ") ]), text(" ") ]) ]);
 };
