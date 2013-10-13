@@ -1,4 +1,9 @@
 module.exports =
+  "/":
+    states:
+      main : "app"
+      app  : "screen"
+
   "/login": 
     states:
       main: "auth"
