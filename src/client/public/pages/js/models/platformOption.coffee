@@ -11,12 +11,20 @@ class PlatformOption extends bindable.Object
     for option in @get("options").source()
       option.deselect()
 
-
   ###
   ###
 
   select: () ->
     @set "selected", true
 
+
+    unless @get("options.length")
+      @_open()
+
+  ###
+  ###
+
+  _open: () ->
+    # EXEC COMMAND
 
 module.exports = PlatformOption
