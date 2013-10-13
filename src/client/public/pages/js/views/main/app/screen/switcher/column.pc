@@ -1,0 +1,6 @@
+
+<ul class="screen-switcher-column">
+  {{ html: sections.options }}
+</ul>
+
+{{ html: sections.child }}

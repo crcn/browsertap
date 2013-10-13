@@ -1,5 +1,6 @@
 commands = require "./commands"
-
+require "./models"
+require "./template"
 MainView = require "./views/main"
 
 

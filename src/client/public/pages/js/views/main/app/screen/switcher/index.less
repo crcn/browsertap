@@ -2,8 +2,45 @@
 
   color: #FFF;
 
-  &-background {
+
+  &-outer {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+  }
+
+  &-inner {
     background-color: rgba(0, 0, 0, 0.5);
     .border-radius(10px);
+    padding: 20px;
+    min-width: 100px;
+    min-height: 100px;
+
+    margin-top: 100px;
+    position: relative;
+  }
+
+  &-column {
+    float: left;
+    margin: 0px;
+    padding: 10px;
+  }
+
+  &-option {
+    list-style-type: none;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+    > a {
+      color: #FFF;
+      text-decoration: none;
+    }
+
+    & :hover {
+      background-color: #CCC;
+    }
+
+    &-selected {
+      background-color: #CCC;
+    }
   }
 }

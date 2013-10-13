@@ -1,0 +1,9 @@
+<li class="screen-switcher-option" data-bind="{{
+  css: {
+    'screen-switcher-option-selected': model.selected
+  }
+}}">
+  <a href="#" data-bind="{{ onClick: selectOption(model) }}">
+    {{ model.name }}
+  </a>
+</li>

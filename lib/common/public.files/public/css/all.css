@@ -1,7 +1,22 @@
+.center-outer {
+  text-align: center;
+}
+.center-inner {
+  display: table;
+  margin: 0px auto;
+}
+.top {
+  z-index: 1024;
+}
 .screen-switcher {
   color: #FFF;
 }
-.screen-switcher-background {
+.screen-switcher-outer {
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+}
+.screen-switcher-inner {
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-border-radius: 10px;
   -webkit-background-clip: padding-box;
@@ -9,4 +24,29 @@
   -moz-background-clip: padding;
   border-radius: 10px;
   background-clip: padding-box;
+  padding: 20px;
+  min-width: 100px;
+  min-height: 100px;
+  margin-top: 100px;
+  position: relative;
+}
+.screen-switcher-column {
+  float: left;
+  margin: 0px;
+  padding: 10px;
+}
+.screen-switcher-option {
+  list-style-type: none;
+  text-align: left;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+}
+.screen-switcher-option > a {
+  color: #FFF;
+  text-decoration: none;
+}
+.screen-switcher-option :hover {
+  background-color: #CCC;
+}
+.screen-switcher-option-selected {
+  background-color: #CCC;
 }
