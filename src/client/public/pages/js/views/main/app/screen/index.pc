@@ -1,1 +1,1 @@
-SCREEN {{ html: sections.switcher }}
+{{ html: sections.switcher }}

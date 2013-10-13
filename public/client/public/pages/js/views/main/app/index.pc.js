@@ -1,5 +1,5 @@
 module.exports = function(fragment, block, element, text, parse, modifiers) {
-    return fragment([ text("APP "), block({
+    return fragment([ block({
         html: {
             fn: function() {
                 return this.ref("sections.app").value();

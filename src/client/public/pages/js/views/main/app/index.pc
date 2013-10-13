@@ -1,1 +1,1 @@
-APP {{ html: sections.app }}
+{{ html: sections.app }}
