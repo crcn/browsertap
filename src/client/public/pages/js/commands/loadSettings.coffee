@@ -16,6 +16,7 @@ module.exports = (mediator) ->
         showChrome: false
         highQuality: false
         sound: false
+        menuPosition: 0
 
 
     next()

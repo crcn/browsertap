@@ -18,5 +18,6 @@ class AppView extends mojo.View
         { class: require("./screen"), name: "screen" }
       ]
     settings: require("./settings")
+    menu: require("./menu")
 
 module.exports = AppView

@@ -21,7 +21,8 @@ module.exports = function(mediator) {
       settings: {
         showChrome: false,
         highQuality: false,
-        sound: false
+        sound: false,
+        menuPosition: 0
       }
     });
     return next();
