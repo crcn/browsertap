@@ -7,7 +7,7 @@ MainView = require "./views/main"
 
 
 
-commands.execute "bootstrap", () ->
+commands.execute "load", () ->
 
   ###debug
     console.log("initialize application")

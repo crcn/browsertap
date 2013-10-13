@@ -1,1 +1,2 @@
-module.exports = ["load", "initialize"]
+module.exports = (mediator) ->
+  mediator.on "bootstrap", ["load", "initialize"]

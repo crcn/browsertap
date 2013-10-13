@@ -3,9 +3,17 @@ mojo    = require "mojojs"
 mojo.funwrap = funwrap
 mojo.mediator = funwrap.mediator
 
-funwrap.mediator.on "load"         , require("./load")
-funwrap.mediator.on "initialize"   , require("./initialize")
-funwrap.mediator.on "bootstrap"    , require("./bootstrap")
-funwrap.mediator.on "openApplication"  , require("./openApplication")
+
+commands = [
+  require("./load"), 
+  require("./waitForDOM"),
+  require("./loadApplicationOptions"),
+  require("./initialize"),
+  require("./bootstrap"),
+  require("./openApplication")
+]
+
+for command in commands
+  command funwrap.mediator
 
 module.exports = funwrap.mediator
