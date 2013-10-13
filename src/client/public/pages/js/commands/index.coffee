@@ -17,7 +17,8 @@ commands = [
   require("./resetPassword"),
   require("./login"),
   require("./checkSession"),
-  require("./signup")
+  require("./signup"),
+  require("./keys")
 ]
 
 for command in commands
