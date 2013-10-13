@@ -6,7 +6,7 @@ models = require("mojojs").models;
 module.exports = function(mediator) {
   return mediator.on("openApplication", function(option, next) {
     {
-      console.log("opening application " + option.get("name"))
+      console.log("opening application " + option.get("_id"))
     }
 
     return next();

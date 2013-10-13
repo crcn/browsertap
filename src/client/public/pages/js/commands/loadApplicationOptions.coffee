@@ -6,6 +6,8 @@ module.exports = (mediator) ->
     ###debug
       console.log("loading application options");
     ###
+
+    # fixture data for now
     platform = new PlatformOption({
       name: "browsertap",
       options: new bindable.Collection([
@@ -36,9 +38,9 @@ module.exports = (mediator) ->
             new PlatformOption({
               name: "safari",
               options: new bindable.Collection([
-                new PlatformOption({ name: "7" }),
-                new PlatformOption({ name: "8" }),
-                new PlatformOption({ name: "9" })
+                new PlatformOption({ _id: "7" }),
+                new PlatformOption({ _id: "8" }),
+                new PlatformOption({ _id: "9" })
               ])
             })
           ])
