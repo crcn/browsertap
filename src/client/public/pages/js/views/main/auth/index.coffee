@@ -9,8 +9,9 @@ class AuthView extends mojo.View
       type: "states"
       index: 0
       views: [
-        { class: require("./login"), name: "login"   }
-        { class: require("./signup"), name: "signup" }
+        { class: require("./login")         , name: "login"   }
+        { class: require("./passwordReset") , name: "passwordReset"   }
+        { class: require("./signup")        , name: "signup" }
       ]
 
 module.exports = AuthView
