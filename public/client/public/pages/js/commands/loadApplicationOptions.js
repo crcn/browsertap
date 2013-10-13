@@ -47,11 +47,14 @@ module.exports = function(mediator) {
               name: "safari",
               options: new bindable.Collection([
                 new PlatformOption({
-                  _id: "7"
+                  _id: "mobile-safari-7",
+                  name: "7"
                 }), new PlatformOption({
-                  _id: "8"
+                  _id: "mobile-safari-8",
+                  name: "8"
                 }), new PlatformOption({
-                  _id: "9"
+                  _id: "mobile-safari-9",
+                  name: "9"
                 })
               ])
             })

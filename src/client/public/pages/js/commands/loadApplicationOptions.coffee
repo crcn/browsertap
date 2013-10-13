@@ -38,9 +38,9 @@ module.exports = (mediator) ->
             new PlatformOption({
               name: "safari",
               options: new bindable.Collection([
-                new PlatformOption({ _id: "7" }),
-                new PlatformOption({ _id: "8" }),
-                new PlatformOption({ _id: "9" })
+                new PlatformOption({ _id: "mobile-safari-7", name: "7" }),
+                new PlatformOption({ _id: "mobile-safari-8", name: "8" }),
+                new PlatformOption({ _id: "mobile-safari-9", name: "9" })
               ])
             })
           ])
