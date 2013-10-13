@@ -26,7 +26,7 @@ MainView = (function(_super) {
   MainView.prototype.sections = {
     main: {
       type: "states",
-      index: 1,
+      route: "main",
       views: [
         {
           "class": require("./auth"),

@@ -1,7 +1,7 @@
 PlatformOption = require "../models/platformOption"
 
 module.exports = (mediator) ->
-  mediator.on "pre load", (next) ->
+  mediator.on "pre load", (options..., next) ->
 
     ###debug
       console.log("loading application options");

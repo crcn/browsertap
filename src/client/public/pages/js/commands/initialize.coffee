@@ -1,1 +1,1 @@
-module.exports = (mediator) -> mediator.on "initialize", (next) -> next()
+module.exports = (mediator) -> mediator.on "initialize", (options..., next) -> next()

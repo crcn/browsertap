@@ -1,16 +1,33 @@
 mojo = require "mojojs"
 
 class AuthView extends mojo.View
+
+  ###
+  ###
+
+  define: ["user"]
+  
+  ###
+  ###
   
   paper: require("./index.pc")
+
+  ###
+  ###
+
+  bindings:
+    "models.user": "user"
+
+  ###
+  ###
 
   sections:
     auth:
       type: "states"
-      index: 0
+      route: "auth"
       views: [
         { class: require("./login")         , name: "login"   }
-        { class: require("./passwordReset") , name: "passwordReset"   }
+        { class: require("./forgot")        , name: "forgot"   }
         { class: require("./signup")        , name: "signup" }
       ]
 

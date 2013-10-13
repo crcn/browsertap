@@ -1,1 +1,7 @@
-SIGNUP
+Signup
+<form data-bind="{{ onSubmit: signup() }}">
+  <input type="text" name="email" placeholder="Email" data-bind="{{ model: user }}"></input>
+  <input type="password" name="password" placeholder="Password" data-bind="{{ model: user }}"></input>
+  <input type="submit" value="Signup"></input>
+  <a href="#" data-bind="{{ onClick: 'login' | redirect() }}">login</a>
+</form>

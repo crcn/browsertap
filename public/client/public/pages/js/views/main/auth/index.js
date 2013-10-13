@@ -13,19 +13,41 @@ AuthView = (function(_super) {
     return _ref;
   }
 
+  /*
+  */
+
+
+  AuthView.prototype.define = ["user"];
+
+  /*
+  */
+
+
   AuthView.prototype.paper = require("./index.pc");
+
+  /*
+  */
+
+
+  AuthView.prototype.bindings = {
+    "models.user": "user"
+  };
+
+  /*
+  */
+
 
   AuthView.prototype.sections = {
     auth: {
       type: "states",
-      index: 0,
+      route: "auth",
       views: [
         {
           "class": require("./login"),
           name: "login"
         }, {
-          "class": require("./passwordReset"),
-          name: "passwordReset"
+          "class": require("./forgot"),
+          name: "forgot"
         }, {
           "class": require("./signup"),
           name: "signup"

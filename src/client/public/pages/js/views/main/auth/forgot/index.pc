@@ -1,0 +1,12 @@
+<h1>password reset</h1>
+
+{{#if:loading}}
+  console.log "resetting"
+{{/}}
+
+<form data-bind="{{ onSubmit: reset() }}">
+  <input type="text" name="email" placeholder="Email" data-bind="{{ model: user }}"></input>
+  <input type="submit" value="reset"></input>
+</form>
+
+<a href="#" data-bind="{{ onClick: 'login' | redirect() }}">login</a>

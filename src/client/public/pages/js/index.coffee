@@ -1,13 +1,16 @@
 require("events").EventEmitter.defaultMaxListeners = 9999
 
+commands = require "./commands"
 require "./models"
 require "./template"
-commands = require "./commands"
+require "./views/decorators"
+require "./views/components"
+require "./routes"
 MainView = require "./views/main"
 
 
 
-commands.execute "load", () ->
+commands.execute "bootstrap", () ->
 
   ###debug
     console.log("initialize application")

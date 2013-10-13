@@ -1,5 +1,5 @@
 module.exports = (mediator) ->
-  mediator.on "load", (next) -> 
+  mediator.on "load", (options..., next) -> 
 
     ###debug
       console.log("loading application")

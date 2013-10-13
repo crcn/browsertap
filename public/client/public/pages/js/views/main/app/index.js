@@ -26,7 +26,7 @@ AppView = (function(_super) {
   AppView.prototype.sections = {
     app: {
       type: "states",
-      index: 0,
+      route: "app",
       views: [
         {
           "class": require("./screen"),

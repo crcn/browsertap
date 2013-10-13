@@ -1,0 +1,8 @@
+Login
+<form data-bind="{{ onSubmit: login() }}">
+  <input type="text" name="email" placeholder="Email" data-bind="{{ model: user }}"></input>
+  <input type="password" name="password" placeholder="Password" data-bind="{{ model: user }}"></input>
+  <input type="submit" value="Login"></input>
+  <a href="#" data-bind="{{ onClick: 'signup' | redirect() }}">signup</a>
+  <a href="#" data-bind="{{ onClick: 'forgot' | redirect() }}">forgot</a>
+</form>

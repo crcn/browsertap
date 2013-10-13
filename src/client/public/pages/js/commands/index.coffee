@@ -10,7 +10,11 @@ commands = [
   require("./loadApplicationOptions"),
   require("./initialize"),
   require("./bootstrap"),
-  require("./openApplication")
+  require("./openApplication"),
+  require("./resetPassword"),
+  require("./login"),
+  require("./checkSession"),
+  require("./signup")
 ]
 
 for command in commands

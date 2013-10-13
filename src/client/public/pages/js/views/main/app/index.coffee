@@ -13,7 +13,7 @@ class AppView extends mojo.View
   sections:
     app:
       type: "states"
-      index: 0
+      route: "app"
       views: [
         { class: require("./screen"), name: "screen" }
       ]
