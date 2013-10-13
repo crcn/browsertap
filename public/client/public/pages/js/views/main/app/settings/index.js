@@ -17,6 +17,12 @@ SettingsView = (function(_super) {
   */
 
 
+  SettingsView.prototype.define = ["visible"];
+
+  /*
+  */
+
+
   SettingsView.prototype.paper = require("./index.pc");
 
   SettingsView.prototype.bindings = {

@@ -1,6 +1,11 @@
 mojo = require "mojojs"
 
 class SettingsView extends mojo.View
+
+  ###
+  ###
+
+  define: ["visible"]
   
   ###
   ###

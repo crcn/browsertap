@@ -54,7 +54,7 @@ module.exports = function(fragment, block, element, text, parse, modifiers) {
         "data-bind": [ {
             onClick: {
                 fn: function() {
-                    return modifiers.redirect("extension");
+                    return modifiers.redirect("extensions");
                 },
                 refs: []
             }

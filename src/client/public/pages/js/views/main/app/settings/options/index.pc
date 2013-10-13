@@ -12,7 +12,7 @@
     <a href="#" data-bind="{{ onClick: 'browsers' | redirect() }}">show browser switcher</a>
   </li>
   <li class="settings-options-cell">
-    <a href="#" data-bind="{{ onClick: 'extension' | redirect() }}">tools & extensions</a>
+    <a href="#" data-bind="{{ onClick: 'extensions' | redirect() }}">tools & extensions</a>
   </li>
   <li class="settings-options-cell">
     <a href="#" data-bind="{{ onClick: 'payment' | redirect() }}">payment options</a>

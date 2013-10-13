@@ -19,6 +19,38 @@ cells = OptionsView = (function(_super) {
 
   OptionsView.prototype.paper = require("./index.pc");
 
+  /*
+  */
+
+
+  OptionsView.prototype.toggleQuality = function() {
+    return console.log("toggle quality");
+  };
+
+  /*
+  */
+
+
+  OptionsView.prototype.toggleSound = function() {
+    return console.log("toggle sound");
+  };
+
+  /*
+  */
+
+
+  OptionsView.prototype.showHideBrowserChrome = function() {
+    return console.log("show / hide browser");
+  };
+
+  /*
+  */
+
+
+  OptionsView.prototype.pauseBrowser = function() {
+    return console.log("pause browser");
+  };
+
   return OptionsView;
 
 })(mojo.View);
