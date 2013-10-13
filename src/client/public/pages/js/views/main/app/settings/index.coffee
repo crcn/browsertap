@@ -7,6 +7,15 @@ class SettingsView extends mojo.View
 
   paper: require("./index.pc")
 
+
+  bindings:
+    "visible": (value) ->
+      $self = $(".screen-switcher-outer")
+      if value
+        $self.transit { opacity: 1 }
+      else
+        $self.transit { opacity: 0 }
+
   ###
   ###
 
@@ -21,6 +30,7 @@ class SettingsView extends mojo.View
         { class: require("./payment"), name: "payment" },
         { class: require("./help"), name: "help" },
         { class: require("./reportBug"), name: "reportBug" },
+        { class: require("./switcher"), name: "browsers" },
         { class: require("./tunnel"), name: "tunnel" }
       ]
 

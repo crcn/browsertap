@@ -33,6 +33,13 @@ module.exports =
       app      : "screen"
       settings : "payment"
 
+  "/settings/browsers":
+    name: "browsers"
+    states:
+      main     : "app"
+      app      : "screen"
+      settings : "browsers"
+
   "/settings/extensions":
     name: "extensions"
     states:

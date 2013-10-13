@@ -19,14 +19,6 @@ ScreenView = (function(_super) {
 
   ScreenView.prototype.paper = require("./index.pc");
 
-  /*
-  */
-
-
-  ScreenView.prototype.sections = {
-    switcher: require("./switcher")
-  };
-
   return ScreenView;
 
 })(mojo.View);

@@ -17,12 +17,6 @@ class SwitcherView extends mojo.View
 
   bindings:
     "models.platform": "sections.platforms.model"
-    "visible": (value) ->
-      $self = $(".screen-switcher-outer")
-      if value
-        $self.transit { opacity: 1 }
-      else
-        $self.transit { opacity: 0 }
 
   ###
   ###

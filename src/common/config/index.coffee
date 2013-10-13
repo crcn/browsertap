@@ -21,7 +21,6 @@ exports.load = () ->
     }
   }
 
-
   env = process.env.NODE_ENV ? "debug"
 
   new bindable.Object _.extend { env: env, type: process.env.TYPE }, config[env] ? {}, config.default

@@ -648,27 +648,19 @@ a img {
   top: 100px;
   position: relative;
 }
-.screen-switcher {
+.settings-options-cell {
+  list-style-type: none;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  float: left;
+  padding: 10px;
+}
+.settings-options-cell > a {
   color: #FFF;
 }
-.screen-switcher-outer {
-  position: absolute;
-  width: 100%;
-  opacity: 0;
-}
-.screen-switcher-inner {
-  background-color: rgba(0, 0, 0, 0.5);
-  -webkit-border-radius: 10px;
-  -webkit-background-clip: padding-box;
-  -moz-border-radius: 10px;
-  -moz-background-clip: padding;
-  border-radius: 10px;
-  background-clip: padding-box;
-  padding: 20px;
-  min-width: 100px;
-  min-height: 100px;
-  top: 100px;
-  position: relative;
+.screen-switcher {
+  color: #FFF;
 }
 .screen-switcher-column {
   float: left;
@@ -696,15 +688,4 @@ a img {
   border-bottom: 5px solid rgba(0, 0, 0, 0);
   width: 10px;
   height: 10px;
-}
-.settings-options-cell {
-  list-style-type: none;
-  width: 100px;
-  height: 100px;
-  text-align: center;
-  float: left;
-  padding: 10px;
-}
-.settings-options-cell > a {
-  color: #FFF;
 }

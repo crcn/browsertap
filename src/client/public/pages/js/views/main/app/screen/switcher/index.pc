@@ -1,8 +1,0 @@
-
-<a href="#" data-bind="{{ onClick: visible = !visible}}">toggle</a>
-<div class="screen-switcher-outer center-outer">
-  <div class="screen-switcher-inner center-inner">
-    {{ html: sections.platforms }}
-  </div>
-</div>
-
