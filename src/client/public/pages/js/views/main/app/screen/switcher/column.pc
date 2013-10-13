@@ -1,4 +1,8 @@
 
+{{#if: openBrowserRequest }}
+  opening platform
+{{/}}
+
 <ul class="screen-switcher-column">
   {{ html: sections.options }}
 </ul>

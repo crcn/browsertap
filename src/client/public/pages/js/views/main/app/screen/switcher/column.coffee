@@ -1,6 +1,11 @@
 mojo = require "mojojs"
 
 class ColumnView extends mojo.View
+
+  ###
+  ###
+
+  define: ["openBrowserRequest"]
   
   ###
   ###
@@ -30,7 +35,7 @@ class ColumnView extends mojo.View
     @_selected?.deselect()
 
     @_selected = option
-    option.select()
+    @set "openBrowserRequest", option.select()
 
     if option.get("options.length")
       @_addChild option

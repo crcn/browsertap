@@ -19,6 +19,12 @@ ColumnView = (function(_super) {
   */
 
 
+  ColumnView.prototype.define = ["openBrowserRequest"];
+
+  /*
+  */
+
+
   ColumnView.prototype.paper = require("./column.pc");
 
   /*
@@ -51,7 +57,7 @@ ColumnView = (function(_super) {
       _ref1.deselect();
     }
     this._selected = option;
-    option.select();
+    this.set("openBrowserRequest", option.select());
     if (option.get("options.length")) {
       return this._addChild(option);
     }

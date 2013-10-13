@@ -1,4 +1,5 @@
 bindable = require "bindable"
+mojo     = require "mojojs"
 
 class PlatformOption extends bindable.Object
 
@@ -17,7 +18,7 @@ class PlatformOption extends bindable.Object
   select: () ->
     @set "selected", true
 
-
+    # return command 
     unless @get("options.length")
       @_open()
 
@@ -25,6 +26,6 @@ class PlatformOption extends bindable.Object
   ###
 
   _open: () ->
-    # EXEC COMMAND
+    mojo.mediator.execute("openApplication", @)
 
 module.exports = PlatformOption
