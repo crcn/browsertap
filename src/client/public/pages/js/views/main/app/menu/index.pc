@@ -1,12 +1,12 @@
 <div class="app-menu app-menu-{{position}}">
 
-  <a href="#" data-bind="{{ onClick: nextPosition(), show: position == 1 || position == 2 }}">
-    {{ position == 2 ? 'left' : 'up' }}
+  <span>{{label}}</span>
+
+  <a href="#" data-bind="{{ onClick: nextPosition() }}">
+    next
   </a>
 
-  {{label}}
-
-  <a href="#" data-bind="{{ onClick: nextPosition(), show: position == 0 || position == 3 }}">
-    {{ position == 0 ? 'right' : 'down' }}
+  <a href="#" data-bind="{{ onClick: 'settings' | redirect() }}">
+    settings
   </a>
 </div>

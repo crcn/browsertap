@@ -658,17 +658,29 @@ a img {
   left: 0;
   bottom: 0;
 }
+.app-menu-0 span {
+  float: left;
+}
 .app-menu-1 {
   right: 0;
   bottom: 0;
+}
+.app-menu-1 span {
+  float: right;
 }
 .app-menu-2 {
   right: 0;
   top: 0;
 }
+.app-menu-2 span {
+  float: right;
+}
 .app-menu-3 {
   left: 0;
   top: 0;
+}
+.app-menu-3 span {
+  float: left;
 }
 .screen-switcher {
   color: #FFF;

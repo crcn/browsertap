@@ -1,5 +1,6 @@
 <div class="center-outer" data-bind="{{ show: models.states.settings }}">
   <div class="settings center-inner">
+    <a href="#" data-bind="{{ onClick: '/' | redirect() }}">close</a>
     {{ html: sections.settings }}
   </div>
 </div>
