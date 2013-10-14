@@ -38,6 +38,7 @@ BrowserTap comes with a few parts:
 
 1. POST /signup
 2. GET /account - return account info
+3. PUT /account - update account
 3. GET /browsers - return available browsers
 4. GET /browsers/:_id - get browser and status
 5. POST /browsers/:_id - create a new instance of the browser
