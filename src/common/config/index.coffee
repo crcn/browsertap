@@ -8,6 +8,11 @@ exports.load = () ->
 
     },
     debug: {
+      mongodb: {
+        host: "127.0.0.1",
+        port: 27017,
+        db: "browsertap-dev"
+      },
       website: {
         http: {
           port: 8080

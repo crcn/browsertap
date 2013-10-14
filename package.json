@@ -42,7 +42,8 @@
     "crossroads": "~0.12.0",
     "hasher": "~1.1.4",
     "mousetrap": "0.0.1",
-    "vine": "~0.1.1"
+    "vine": "~0.1.1",
+    "connect-mongo": "~0.3.3"
   },
   "devDependencies": {
     "coffee-script": "1.6.x",
@@ -54,6 +55,8 @@
     "glob": "~3.2.6",
     "handlebars": "~1.0.12",
     "node-osx-notifier": "~0.1.0",
-    "less": "~1.4.2"
+    "less": "~1.4.2",
+    "expect.js": "~0.2.0",
+    "mocha": "~1.13.0"
   }
 }
