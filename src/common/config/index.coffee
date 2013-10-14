@@ -18,6 +18,10 @@ exports.load = () ->
           port: 8080
         }
       },
+      provisioner: {
+        host: "ludacraig.local",
+        port: 8082
+      },
       client: {
         http: {
           port: 8081
