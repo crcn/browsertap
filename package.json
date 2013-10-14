@@ -43,7 +43,8 @@
     "hasher": "~1.1.4",
     "mousetrap": "0.0.1",
     "vine": "~0.1.1",
-    "connect-mongo": "~0.3.3"
+    "connect-mongo": "~0.3.3",
+    "comerr": "0.0.6"
   },
   "devDependencies": {
     "coffee-script": "1.6.x",
