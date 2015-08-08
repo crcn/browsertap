@@ -14,6 +14,7 @@ BrowserTap 2.0 will be an open-source core, with a closed-sourcea native desktop
 - ability to run server on mac & windows
 - synchronize *all* windows that popup on the server - vmware fusion style
 - ability to tunnel local servers automatically by reading `/etc/host`.
+- quick launch menu for starting frequently used apps
 
 ### Future Features
 
@@ -26,4 +27,5 @@ Just some features to keep in mind to ensure we get some of the plumbing right.
 - drag & drop native applications to app -> upload & run them in the cloud.
   - Requires apps to be sandboxed, or identify where settings are stored.
   - need to Identify what architecture the app supports.
-  - Maybe use some sort of puppet script for this. 
+  - Maybe use some sort of puppet script for this.
+- ability to share VM - screenhero style.
