@@ -33,3 +33,7 @@ Just some features to keep in mind to ensure we get some of the plumbing right.
 #### Crazy Features
 
 - enable people to setup a server machine & get paid for hosting apps
+  - security is an issue here - maybe have trusted hosts
+  - get paid for old devices you're not using
+  - would enable people to connect to nearby hosts - like torrenting.
+  - enable people to do this for free as well
