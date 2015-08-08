@@ -29,3 +29,7 @@ Just some features to keep in mind to ensure we get some of the plumbing right.
   - need to Identify what architecture the app supports.
   - Maybe use some sort of puppet script for this.
 - ability to share VM - screenhero style.
+
+#### Crazy Features
+
+- enable people to setup a server machine & get paid for hosting apps
