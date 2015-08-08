@@ -8,7 +8,22 @@ BrowserTap 2.0 will be an open-source core, with a closed-sourcea native desktop
 - desktop software. Anyone can install the server on a host machine, but most will run with one-click AWS installs
 - (if possible, not MVP) allow multiple user sessions for one machine (needed for multiple keyboards & mice). Need to hack into /dev/0
 
-### Features
+### MVP Features
 
 - dead-simple Mac app to start an instance, give it a local URL to tunnel to the instance, and auto-open in your local browser
+- ability to run server on mac & windows
+- synchronize *all* windows that popup on the server - vmware fusion style
+- ability to tunnel local servers automatically by reading `/etc/host`.
+
+### Future Features
+
+Just some features to keep in mind to ensure we get some of the plumbing right.
+
 - auto discover devices plugged in via USB and broadcast them via BT software.
+- ability to install any application
+- ensure that windows can be resized to any dimension
+- ability to stream just the desktop
+- drag & drop native applications to app -> upload & run them in the cloud.
+  - Requires apps to be sandboxed, or identify where settings are stored.
+  - need to Identify what architecture the app supports.
+  - Maybe use some sort of puppet script for this. 
