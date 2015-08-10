@@ -9,10 +9,11 @@ mkdir -p ./vendor/webrtc;
 #git clone https://chromium.googlesource.com/external/webrtc ./vendor/webrtc;
 cd ./vendor/webrtc;
 gclient config --name src https://chromium.googlesource.com/external/webrtc
-
-echo "target_os = ['mac']" >> .gclient # appends to gclient - needed for mac clients otherwise errors occur
 gclient sync --force;
-gclient runhooks;
+echo "target_os = ['mac']" >> .gclient # appends to gclient - needed for mac clients otherwise errors occur
+cd src;
+
+# gclient runhooks;
 python webrtc/build/gyp_webrtc;
 ninja -C out/Debug;
 ninja -C out/Release;
