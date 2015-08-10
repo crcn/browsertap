@@ -5,7 +5,6 @@ BrowserTap 2.0 will be an open-source core, with a closed-sourcea native desktop
 
 ### Business
 
-
 #### user hooks
 
 - entirely open source. enable people to run BT on their infastructure. Entices people to improve the core, while allowing a revenue generating biz model
