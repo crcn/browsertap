@@ -19,6 +19,7 @@ class KeyboardEvent extends HardwareEvent {
 }
 
 class Screen {
+    id: 0
     x: 100
     y: 100
     width: 100
@@ -38,6 +39,34 @@ class MacAdapter {
 };
 
 
-var rd = new RemoteDesktop(
-    new MacAcapter()
-);
+MacAdapter ma        = new MacAdapter();
+RemoteAdapter ra     = new RemoteAdapter();
+
+projector.addEventListener("event", function(event) {
+    ma.dispatchHardwareEvent(event);
+});
+
+int ticks = 0;
+int ms    = 30/60;
+
+// TODO - do this:
+
+/*
+
+Window win = ra.createWindow();
+win.update(screen.print(), screen.x, screen.y, screen.width, screen.height);
+
+win.close();
+*/
+
+while (1) {
+
+    if (!screen.inFocus && !(++ticks % 20)) continue;
+
+    // TODO - do some diffing here on screens
+    for (var screen in ma.screens) {
+        ra.project(screen.print(), screen.x, screen.y, screen.width, screen.height);
+    }
+
+    sleep(fps);
+}
