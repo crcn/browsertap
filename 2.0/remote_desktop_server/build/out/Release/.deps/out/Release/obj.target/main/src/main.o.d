@@ -1,0 +1,5 @@
+cmd_out/Release/obj.target/main/src/main.o := c++ '-DNDEBUG'   -fasm-blocks -mpascal-strings -O3 -arch x86_64 -fvisibility-inlines-hidden -MMD -MF out/Release/.deps/out/Release/obj.target/main/src/main.o.d.raw  -c -o out/Release/obj.target/main/src/main.o ../src/main.cc
+out/Release/obj.target/main/src/main.o: ../src/main.cc \
+  ../src/./base/bounds.h
+../src/main.cc:
+../src/./base/bounds.h:
