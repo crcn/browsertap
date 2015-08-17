@@ -53,7 +53,9 @@ CFLAGS_OBJCC_Release :=
 INCS_Release :=
 
 OBJS := \
-	$(obj).target/$(TARGET)/src/main.o
+	$(obj).target/$(TARGET)/src/main.o \
+	$(obj).target/$(TARGET)/src/osx/system.o \
+	$(obj).target/$(TARGET)/src/osx/window.o
 
 # Add to the list of files we specially track dependencies for.
 all_deps += $(OBJS)
@@ -94,7 +96,9 @@ LDFLAGS_Release := \
 
 LIBTOOLFLAGS_Release :=
 
-LIBS :=
+LIBS := \
+	-framework AppKit \
+	-framework Foundation
 
 $(builddir)/main: GYP_LDFLAGS := $(LDFLAGS_$(BUILDTYPE))
 $(builddir)/main: LIBS := $(LIBS)

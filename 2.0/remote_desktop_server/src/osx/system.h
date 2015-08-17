@@ -9,12 +9,13 @@
 #ifndef RemoteDesktop_OSXSystem_h
 #define RemoteDesktop_OSXSystem_h
 
-#include "./System.h"
+#include "../base/system.h"
 #include <ApplicationServices/ApplicationServices.h>
 
-class OSXSystem : System {
-public:
-    virtual BaseWindow* getWindows();
-};
-
+namespace osx {
+  class System : base::System {
+  public:
+      virtual base::Window* getWindows();
+  };
+}
 #endif

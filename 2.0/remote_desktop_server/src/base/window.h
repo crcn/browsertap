@@ -9,12 +9,14 @@
 #ifndef RemoteDesktop_BaseWindow_h
 #define RemoteDesktop_BaseWindow_h
 
-#include "./Bounds.h"
+#include "../geom/bounds.h"
 
-class BaseWindow {
-public:
-    virtual Bounds& getBounds()=0;
-    virtual void setBounds(Bounds& bounds)=0;
-};
+namespace base {
+  class Window {
+  public:
+      virtual geom::Bounds getBounds()=0;
+      virtual void setBounds(geom::Bounds bounds)=0;
+  };
+}
 
 #endif

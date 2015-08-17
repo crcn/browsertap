@@ -10,11 +10,13 @@
 #define __RemoteDesktop__OSXSystem__
 
 #include <vector>
-#include "./BaseWindow.h"
+#include "./window.h"
 
-class System {
-public:
-    virtual BaseWindow* getWindows()=0;
+namespace base{
+  class System {
+  public:
+      virtual base::Window* getWindows()=0;
+  };
 };
 
 

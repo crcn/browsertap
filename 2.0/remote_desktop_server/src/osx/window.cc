@@ -6,14 +6,13 @@
 //  Copyright (c) 2015 browsertap. All rights reserved.
 //
 
-#include "./OSXWindow.h"
-#include "./Bounds.h"
+#include "./window.h"
 
-Bounds& OSXScreen::getBounds() {
-    Bounds b = Bounds(0, 0, 100, 100);
+geom::Bounds osx::Window::getBounds() {
+    geom::Bounds b = geom::Bounds(0, 0, 100, 100);
     return b;
 };
 
-void OSXScreen::setBounds(Bounds& bounds) {
+void osx::Window::setBounds(geom::Bounds bounds) {
     
 };

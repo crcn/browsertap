@@ -10,13 +10,15 @@
 #define __RemoteDesktop__OSXScreen__
 
 #include <stdio.h>
-#include "./BaseWindow.h"
-#include "./Bounds.h"
+#include "../base/window.h"
+#include "../geom/bounds.h"
 
-class OSXScreen : BaseWindow {
-public:
-    Bounds& getBounds();
-    void setBounds(Bounds& bounds);
-};
+namespace osx {
+  class Window : base::Window {
+  public:
+      geom::Bounds getBounds();
+      void setBounds(geom::Bounds bounds);
+  };
+}
 
 #endif /* defined(__RemoteDesktop__OSXScreen__) */

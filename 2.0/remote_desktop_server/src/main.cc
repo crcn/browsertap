@@ -7,19 +7,23 @@
 //
 
 #include <iostream>
-//#include "./OSXSystem.h"
-#include "./base/bounds.h"
+#include "./osx/system.h"
+#include "./geom/bounds.h"
 
 int main(int argc, const char * argv[]) {
     
-    //OSXSystem* sys = new OSXSystem();
+    osx::System* sys = new osx::System();
+
+    base::Window* wins = sys->getWindows();
+
+    std::cout << sizeof(wins) << std::endl;
     //BaseWindow* screens = sys->getWindows();
     
 //    if (screens != NULL) {
 //        std::cout << "BLAH" << std::endl;
 //    }
 
-    Bounds b = Bounds(100, 0, 100, 100);
+    geom::Bounds b = geom::Bounds(100, 0, 100, 100);
 
     std::cout << b.x << std::endl;
 
