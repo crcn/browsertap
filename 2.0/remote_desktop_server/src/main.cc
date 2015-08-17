@@ -16,12 +16,15 @@ int main(int argc, const char * argv[]) {
 
     std::vector<base::Window*> windows = sys->windows();
 
-    std::cout << windows.at(0)->bounds().height << std::endl;
+    std::cout << windows.at(1)->bounds().height << std::endl;
     //BaseWindow* screens = sys->getWindows();
 
 //    if (screens != NULL) {
 //        std::cout << "BLAH" << std::endl;
 //    }
+
+    graphics::Bitmap* image = windows.at(0)->print();
+    std::cout << image->bounds.width << " " << image->bounds.height << std::endl;
 
     geom::Bounds b = geom::Bounds(100, 0, 100, 100);
 

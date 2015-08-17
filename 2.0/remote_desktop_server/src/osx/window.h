@@ -13,19 +13,21 @@
 #include <ApplicationServices/ApplicationServices.h>
 
 #include "../base/window.h"
-#include "../geom/bounds.h"
 
 namespace osx {
-  class Window : base::Window {
-  private:
-      CFDictionaryRef _info;
-      geom::Bounds _bounds;
+    class Window : base::Window {
+    private:
+        CFDictionaryRef _info;
+        CGRect _cgbounds();
+        geom::Bounds _convertBounds(CGRect rect);
 
-  public:
-      Window(CFDictionaryRef info);
-      geom::Bounds bounds();
-      void bounds(geom::Bounds bounds);
-  };
+    public:
+        Window(CFDictionaryRef info);
+        geom::Bounds bounds();
+        graphics::Bitmap* print();
+        void bounds(geom::Bounds bounds);
+
+    };
 }
 
 #endif /* defined(__RemoteDesktop__OSXScreen__) */

@@ -10,12 +10,14 @@
 #define RemoteDesktop_BaseWindow_h
 
 #include "../geom/bounds.h"
+#include "../graphics/bitmap.h"
 
 namespace base {
   class Window {
   public:
       virtual geom::Bounds bounds()=0;
       virtual void bounds(geom::Bounds bounds)=0;
+      virtual graphics::Bitmap* print()=0;
   };
 }
 

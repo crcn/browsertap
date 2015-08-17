@@ -2,10 +2,11 @@ cmd_out/Release/obj.target/main/src/osx/system.o := c++ '-DNDEBUG'   -fasm-block
 out/Release/obj.target/main/src/osx/system.o: ../src/osx/system.cc \
   ../src/osx/./system.h ../src/osx/../base/system.h \
   ../src/osx/../base/./window.h ../src/osx/../base/../geom/bounds.h \
-  ../src/osx/./window.h
+  ../src/osx/../base/../graphics/bitmap.h ../src/osx/./window.h
 ../src/osx/system.cc:
 ../src/osx/./system.h:
 ../src/osx/../base/system.h:
 ../src/osx/../base/./window.h:
 ../src/osx/../base/../geom/bounds.h:
+../src/osx/../base/../graphics/bitmap.h:
 ../src/osx/./window.h:

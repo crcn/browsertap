@@ -20,5 +20,7 @@ std::vector<base::Window*> osx::System::windows() {
         this->_windows.push_back((base::Window*)new osx::Window(info));
     }
 
+    // CFRelease(windows);
+
     return this->_windows;
 }
