@@ -1,4 +1,7 @@
-all: ./build ./build/out/Release/main
+all: ./vendor/webrtc ./build ./build/out/Release/main
+
+./vendor/webrtc:
+	./scripts/get_and_build_webrtc.sh
 
 ./deps/gyp:
 	git clone --depth 1 https://chromium.googlesource.com/external/gyp.git ./deps/gyp
