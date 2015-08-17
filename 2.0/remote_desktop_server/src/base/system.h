@@ -15,7 +15,7 @@
 namespace base{
   class System {
   public:
-      virtual base::Window* getWindows()=0;
+      virtual std::vector<base::Window*> windows()=0;
   };
 };
 

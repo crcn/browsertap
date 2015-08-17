@@ -14,8 +14,8 @@
 namespace base {
   class Window {
   public:
-      virtual geom::Bounds getBounds()=0;
-      virtual void setBounds(geom::Bounds bounds)=0;
+      virtual geom::Bounds bounds()=0;
+      virtual void bounds(geom::Bounds bounds)=0;
   };
 }
 

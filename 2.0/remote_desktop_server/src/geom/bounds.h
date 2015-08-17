@@ -14,18 +14,24 @@
 namespace geom {
     class Bounds {
     public:
-        
+
         int x;
         int y;
         int width;
         int height;
-        
+
         Bounds(int x, int y, int width, int height) {
             this->x      = x;
             this->y      = y;
             this->width  = width;
             this->height = height;
         }
+
+        Bounds():
+        x(0),
+        y(0),
+        width(0),
+        height(0) { }
     };
 };
 

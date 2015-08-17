@@ -7,14 +7,18 @@
 //
 
 #include "./system.h"
+#include "./window.h"
 #include <iostream>
 
 
-base::Window* osx::System::getWindows() {
+std::vector<base::Window*> osx::System::windows() {
     CFArrayRef windows = CGWindowListCopyWindowInfo(kCGWindowListOptionOnScreenOnly, kCGNullWindowID);
-    long numWindows    = CFArrayGetCount(windows);
+    int numWindows    = CFArrayGetCount(windows);
 
-    
+    for (int i = 0, n = numWindows; i < n; i++) {
+        CFDictionaryRef info = (CFDictionaryRef)CFArrayGetValueAtIndex(windows, i);
+        this->_windows.push_back((base::Window*)new osx::Window(info));
+    }
 
-    return NULL;
+    return this->_windows;
 }

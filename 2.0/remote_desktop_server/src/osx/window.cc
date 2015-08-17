@@ -7,12 +7,22 @@
 //
 
 #include "./window.h"
+#include <iostream>
 
-geom::Bounds osx::Window::getBounds() {
-    geom::Bounds b = geom::Bounds(0, 0, 100, 100);
-    return b;
+osx::Window::Window(CFDictionaryRef info):
+_info(info) {
+
+    CGRect rect;
+
+    CGRectMakeWithDictionaryRepresentation((CFDictionaryRef)CFDictionaryGetValue(info, kCGWindowBounds ), &rect);
+    this->_bounds = geom::Bounds(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
+}
+
+geom::Bounds osx::Window::bounds() {
+    return this->_bounds;
 };
 
-void osx::Window::setBounds(geom::Bounds bounds) {
-    
+void osx::Window::bounds(geom::Bounds bounds) {
+    this->_bounds = bounds;
+    // TODO - resize window here
 };

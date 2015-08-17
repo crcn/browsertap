@@ -14,8 +14,10 @@
 
 namespace osx {
   class System : base::System {
+  private:
+      std::vector<base::Window*> _windows;
   public:
-      virtual base::Window* getWindows();
+      virtual std::vector<base::Window*> windows();
   };
 }
 #endif

@@ -10,14 +10,21 @@
 #define __RemoteDesktop__OSXScreen__
 
 #include <stdio.h>
+#include <ApplicationServices/ApplicationServices.h>
+
 #include "../base/window.h"
 #include "../geom/bounds.h"
 
 namespace osx {
   class Window : base::Window {
+  private:
+      CFDictionaryRef _info;
+      geom::Bounds _bounds;
+
   public:
-      geom::Bounds getBounds();
-      void setBounds(geom::Bounds bounds);
+      Window(CFDictionaryRef info);
+      geom::Bounds bounds();
+      void bounds(geom::Bounds bounds);
   };
 }
 

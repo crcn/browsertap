@@ -10,8 +10,8 @@
                     "type": "executable",
                     "sources": [
                         "./src/main.cc",
-                        "./src/osx/system.cc",
-                        "./src/osx/window.cc"
+                        "./src/osx/window.cc",
+                        "./src/osx/system.cc"
                     ],
 
                     "link_settings": {

@@ -11,14 +11,14 @@
 #include "./geom/bounds.h"
 
 int main(int argc, const char * argv[]) {
-    
+
     osx::System* sys = new osx::System();
 
-    base::Window* wins = sys->getWindows();
+    std::vector<base::Window*> windows = sys->windows();
 
-    std::cout << sizeof(wins) << std::endl;
+    std::cout << windows.at(0)->bounds().height << std::endl;
     //BaseWindow* screens = sys->getWindows();
-    
+
 //    if (screens != NULL) {
 //        std::cout << "BLAH" << std::endl;
 //    }
@@ -28,6 +28,6 @@ int main(int argc, const char * argv[]) {
     std::cout << b.x << std::endl;
 
     std::cout << "Hello World" << std::endl;
-    
+
     return 0;
 }
