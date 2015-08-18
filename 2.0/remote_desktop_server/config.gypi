@@ -3,12 +3,12 @@
   'variables': {
     'use_openssl': 0,
     'os_posix': 1,
+    'clang': 0,
     'lsan': 1,
     'tsan': 1,
     'host_arch': 'x64',
     # 'python': '/usr/bin/python',
     'target_arch': 'x64',
-    'copy_dev_lib': 'true',
     'standalone_static_library': 1
   }
 }

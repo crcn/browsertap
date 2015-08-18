@@ -7,26 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		14F7D51FD2372D36F6EBE6CA /* window.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2944306DE45DBF028EF5D452 /* window.cc */; };
-		1D91213A3018D97C7679E762 /* system.cc in Sources */ = {isa = PBXBuildFile; fileRef = 7A75A3B01700FC73CAC29582 /* system.cc */; };
-		49445CBE4A96DAF01F4A10B3 /* libWebRTC-9725-mac-x86_64-Debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2117FE6FD32C14925530AD6E /* libWebRTC-9725-mac-x86_64-Debug.a */; };
-		7740A2E72A130DC046AD479D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C80BDC9867AC45521F86CE88 /* Foundation.framework */; };
-		D850D16A2C2904726CE47E6A /* main.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3E40B8F5AFAF0F6F6065BD61 /* main.cc */; };
-		E260D63EFAF1A68C9AFE884E /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEE1F4A278F608D920549694 /* AppKit.framework */; };
+		1CC5E0F84217B5C7EDB6B52B /* system.cc in Sources */ = {isa = PBXBuildFile; fileRef = 7A75A3B01700FC73CAC29582 /* system.cc */; };
+		61F88E799FDC3A4A688075CA /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93199D96CF574561481CFAD2 /* OpenGL.framework */; };
+		7565C844C2A9B8535368795C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E3E8C3E970AACC4AE7B167 /* AppKit.framework */; };
+		83325DC39E21C7933D5FE730 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA561A0FD98F131E61B56650 /* AudioToolbox.framework */; };
+		896470836D9C56F0AD2E1A06 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5A18A6FAEC1532CA9DE8B4 /* AudioUnit.framework */; };
+		8E53C28F2D72C6FD42528120 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3840078CE11D7699A409E862 /* CoreVideo.framework */; };
+		B4961326C6ACC810A4CA3369 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B898A7D1531439D634549F /* CoreAudio.framework */; };
+		D2F5FCB544F61F0A52959182 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8FA9A9BD347EA4F37D56CF6 /* Foundation.framework */; };
+		D7ABCB621FCF6B44AD4B314C /* window.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2944306DE45DBF028EF5D452 /* window.cc */; };
+		D8FABD20EFF00C9988184254 /* peer_connection.cc in Sources */ = {isa = PBXBuildFile; fileRef = E36A63F45BA9218DDEB726D8 /* peer_connection.cc */; };
+		E49C2405E98EDD399568D96D /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4FBE740C7661172C17A869 /* QTKit.framework */; };
+		EA2840F27E511946A39B8D83 /* libWebRTC-9725-mac-x86_64-Debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2117FE6FD32C14925530AD6E /* libWebRTC-9725-mac-x86_64-Debug.a */; };
+		EE71D0F5C2F3E4D219F840F3 /* main.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3E40B8F5AFAF0F6F6065BD61 /* main.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2117FE6FD32C14925530AD6E /* libWebRTC-9725-mac-x86_64-Debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libWebRTC-9725-mac-x86_64-Debug.a"; path = "/usr/local/bt/remote-desktop-server/vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds/libWebRTC-9725-mac-x86_64-Debug.a"; sourceTree = "<group>"; };
+		2142CB3B55F8E5A8D2059E3B /* ice_server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ice_server.h; sourceTree = "<group>"; };
 		2944306DE45DBF028EF5D452 /* window.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = window.cc; sourceTree = "<group>"; };
+		3840078CE11D7699A409E862 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		3E40B8F5AFAF0F6F6065BD61 /* main.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cc; sourceTree = "<group>"; };
 		43E17C441DF0FF1C94A78598 /* main */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = main; sourceTree = BUILT_PRODUCTS_DIR; };
+		56E3E8C3E970AACC4AE7B167 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		7A75A3B01700FC73CAC29582 /* system.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = system.cc; sourceTree = "<group>"; };
+		7AB939D216A1C0273552B76D /* supplement.gypi */ = {isa = PBXFileReference; explicitFileType = sourcecode; name = supplement.gypi; path = "vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/supplement.gypi"; sourceTree = "<group>"; };
+		7D4FBE740C7661172C17A869 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
+		82B898A7D1531439D634549F /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		8E084368B92B2FC5EFB8380F /* config.gypi */ = {isa = PBXFileReference; explicitFileType = sourcecode; path = config.gypi; sourceTree = "<group>"; };
+		93199D96CF574561481CFAD2 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		A5DEDE164BCAFB45DC0DBE5C /* remote_desktop_server.gyp */ = {isa = PBXFileReference; explicitFileType = sourcecode; path = remote_desktop_server.gyp; sourceTree = "<group>"; };
 		A60A726D927F25D203DBAD68 /* common.gypi */ = {isa = PBXFileReference; explicitFileType = sourcecode; name = common.gypi; path = "vendor/webrtc-build-scripts/ios/webrtc/src/talk/build/common.gypi"; sourceTree = "<group>"; };
+		BB5A18A6FAEC1532CA9DE8B4 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		C758098EE0D04DDAE84328D0 /* common.gypi */ = {isa = PBXFileReference; explicitFileType = sourcecode; path = common.gypi; sourceTree = "<group>"; };
-		C80BDC9867AC45521F86CE88 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<group>"; };
-		EEE1F4A278F608D920549694 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<group>"; };
+		C8FA9A9BD347EA4F37D56CF6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DA561A0FD98F131E61B56650 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		DB395B5CD175B8D257BC32E6 /* configuration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = configuration.h; sourceTree = "<group>"; };
+		E36A63F45BA9218DDEB726D8 /* peer_connection.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = peer_connection.cc; sourceTree = "<group>"; };
 		F90C410C4E050DE18DD0244B /* common.gypi */ = {isa = PBXFileReference; explicitFileType = sourcecode; name = common.gypi; path = "vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/build/common.gypi"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -35,45 +52,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49445CBE4A96DAF01F4A10B3 /* libWebRTC-9725-mac-x86_64-Debug.a in Frameworks */,
-				E260D63EFAF1A68C9AFE884E /* AppKit.framework in Frameworks */,
-				7740A2E72A130DC046AD479D /* Foundation.framework in Frameworks */,
+				EA2840F27E511946A39B8D83 /* libWebRTC-9725-mac-x86_64-Debug.a in Frameworks */,
+				83325DC39E21C7933D5FE730 /* AudioToolbox.framework in Frameworks */,
+				896470836D9C56F0AD2E1A06 /* AudioUnit.framework in Frameworks */,
+				B4961326C6ACC810A4CA3369 /* CoreAudio.framework in Frameworks */,
+				8E53C28F2D72C6FD42528120 /* CoreVideo.framework in Frameworks */,
+				61F88E799FDC3A4A688075CA /* OpenGL.framework in Frameworks */,
+				E49C2405E98EDD399568D96D /* QTKit.framework in Frameworks */,
+				7565C844C2A9B8535368795C /* AppKit.framework in Frameworks */,
+				D2F5FCB544F61F0A52959182 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3473326E42505A5B7810DD8A /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				A472BE449E4899F019C924A1 /* osx */,
-				3E40B8F5AFAF0F6F6065BD61 /* main.cc */,
-			);
-			name = Source;
-			path = src;
-			sourceTree = "<group>";
-		};
 		6AD403C2196746C47A545CE0 = {
 			isa = PBXGroup;
 			children = (
-				3473326E42505A5B7810DD8A /* Source */,
-				BC9855D5BE17BE4705D999F6 /* Frameworks */,
+				ED3C75EDC48C296C0F201A01 /* Source */,
+				B8100EA67639F8F02E93BE5D /* Frameworks */,
 				CB0BA706B424027614637795 /* Products */,
-				9A153CAADBF078D8035E696C /* Build */,
+				FE7A3D976586561C2908D268 /* Build */,
 			);
-			sourceTree = "<group>";
-		};
-		9A153CAADBF078D8035E696C /* Build */ = {
-			isa = PBXGroup;
-			children = (
-				F90C410C4E050DE18DD0244B /* common.gypi */,
-				A60A726D927F25D203DBAD68 /* common.gypi */,
-				C758098EE0D04DDAE84328D0 /* common.gypi */,
-				8E084368B92B2FC5EFB8380F /* config.gypi */,
-				A5DEDE164BCAFB45DC0DBE5C /* remote_desktop_server.gyp */,
-			);
-			name = Build;
 			sourceTree = "<group>";
 		};
 		A472BE449E4899F019C924A1 /* osx */ = {
@@ -85,11 +86,17 @@
 			path = osx;
 			sourceTree = "<group>";
 		};
-		BC9855D5BE17BE4705D999F6 /* Frameworks */ = {
+		B8100EA67639F8F02E93BE5D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EEE1F4A278F608D920549694 /* AppKit.framework */,
-				C80BDC9867AC45521F86CE88 /* Foundation.framework */,
+				56E3E8C3E970AACC4AE7B167 /* AppKit.framework */,
+				DA561A0FD98F131E61B56650 /* AudioToolbox.framework */,
+				BB5A18A6FAEC1532CA9DE8B4 /* AudioUnit.framework */,
+				82B898A7D1531439D634549F /* CoreAudio.framework */,
+				3840078CE11D7699A409E862 /* CoreVideo.framework */,
+				C8FA9A9BD347EA4F37D56CF6 /* Foundation.framework */,
+				93199D96CF574561481CFAD2 /* OpenGL.framework */,
+				7D4FBE740C7661172C17A869 /* QTKit.framework */,
 				2117FE6FD32C14925530AD6E /* libWebRTC-9725-mac-x86_64-Debug.a */,
 			);
 			name = Frameworks;
@@ -101,6 +108,40 @@
 				43E17C441DF0FF1C94A78598 /* main */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		ED3C75EDC48C296C0F201A01 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				A472BE449E4899F019C924A1 /* osx */,
+				F6B345E0AB03382335B00B1E /* rtc */,
+				3E40B8F5AFAF0F6F6065BD61 /* main.cc */,
+			);
+			name = Source;
+			path = src;
+			sourceTree = "<group>";
+		};
+		F6B345E0AB03382335B00B1E /* rtc */ = {
+			isa = PBXGroup;
+			children = (
+				DB395B5CD175B8D257BC32E6 /* configuration.h */,
+				2142CB3B55F8E5A8D2059E3B /* ice_server.h */,
+				E36A63F45BA9218DDEB726D8 /* peer_connection.cc */,
+			);
+			path = rtc;
+			sourceTree = "<group>";
+		};
+		FE7A3D976586561C2908D268 /* Build */ = {
+			isa = PBXGroup;
+			children = (
+				F90C410C4E050DE18DD0244B /* common.gypi */,
+				A60A726D927F25D203DBAD68 /* common.gypi */,
+				C758098EE0D04DDAE84328D0 /* common.gypi */,
+				8E084368B92B2FC5EFB8380F /* config.gypi */,
+				A5DEDE164BCAFB45DC0DBE5C /* remote_desktop_server.gyp */,
+				7AB939D216A1C0273552B76D /* supplement.gypi */,
+			);
+			name = Build;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,9 +188,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D850D16A2C2904726CE47E6A /* main.cc in Sources */,
-				14F7D51FD2372D36F6EBE6CA /* window.cc in Sources */,
-				1D91213A3018D97C7679E762 /* system.cc in Sources */,
+				EE71D0F5C2F3E4D219F840F3 /* main.cc in Sources */,
+				D7ABCB621FCF6B44AD4B314C /* window.cc in Sources */,
+				1CC5E0F84217B5C7EDB6B52B /* system.cc in Sources */,
+				D8FABD20EFF00C9988184254 /* peer_connection.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,11 +219,9 @@
 					HAVE_SRTP,
 					HAVE_WEBRTC_VIDEO,
 					HAVE_WEBRTC_VOICE,
-					WEBRTC_RESTRICT_LOGGING,
-					WEBRTC_CHROMIUM_BUILD,
-					LOGGING_INSIDE_WEBRTC,
 					WEBRTC_POSIX,
 					WEBRTC_MAC,
+					WEBRTC_INCLUDE_INTERNAL_AUDIO_DEVICE,
 					OSX,
 					"CARBON_DEPRECATED=YES",
 					"HASH_NAMESPACE=__gnu_cxx",
@@ -195,12 +235,13 @@
 					"vendor/webrtc-build-scripts/ios/webrtc/src/third_party",
 					"vendor/webrtc-build-scripts/ios/webrtc/src/third_party/webrtc",
 					"vendor/webrtc-build-scripts/ios/webrtc/src/webrtc",
-					.,
-					"vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/overrides",
+					"./vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include",
+					"./vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp",
+					"./vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"/usr/local/bt/remote-desktop-server/vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds",
-					/System/Library/Frameworks,
+					"$(SDKROOT)/System/Library/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OTHER_CFLAGS = "-fno-strict-aliasing";
@@ -233,11 +274,9 @@
 					HAVE_SRTP,
 					HAVE_WEBRTC_VIDEO,
 					HAVE_WEBRTC_VOICE,
-					WEBRTC_RESTRICT_LOGGING,
-					WEBRTC_CHROMIUM_BUILD,
-					LOGGING_INSIDE_WEBRTC,
 					WEBRTC_POSIX,
 					WEBRTC_MAC,
+					WEBRTC_INCLUDE_INTERNAL_AUDIO_DEVICE,
 					OSX,
 					"CARBON_DEPRECATED=YES",
 					"HASH_NAMESPACE=__gnu_cxx",
@@ -251,12 +290,13 @@
 					"vendor/webrtc-build-scripts/ios/webrtc/src/third_party",
 					"vendor/webrtc-build-scripts/ios/webrtc/src/third_party/webrtc",
 					"vendor/webrtc-build-scripts/ios/webrtc/src/webrtc",
-					.,
-					"vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/overrides",
+					"./vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include",
+					"./vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp",
+					"./vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"/usr/local/bt/remote-desktop-server/vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds",
-					/System/Library/Frameworks,
+					"$(SDKROOT)/System/Library/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OTHER_CFLAGS = "-fno-strict-aliasing";
@@ -317,11 +357,9 @@
 					HAVE_SRTP,
 					HAVE_WEBRTC_VIDEO,
 					HAVE_WEBRTC_VOICE,
-					WEBRTC_RESTRICT_LOGGING,
-					WEBRTC_CHROMIUM_BUILD,
-					LOGGING_INSIDE_WEBRTC,
 					WEBRTC_POSIX,
 					WEBRTC_MAC,
+					WEBRTC_INCLUDE_INTERNAL_AUDIO_DEVICE,
 					OSX,
 					"CARBON_DEPRECATED=YES",
 					"HASH_NAMESPACE=__gnu_cxx",
@@ -335,12 +373,13 @@
 					"vendor/webrtc-build-scripts/ios/webrtc/src/third_party",
 					"vendor/webrtc-build-scripts/ios/webrtc/src/third_party/webrtc",
 					"vendor/webrtc-build-scripts/ios/webrtc/src/webrtc",
-					.,
-					"vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/overrides",
+					"./vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include",
+					"./vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp",
+					"./vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"/usr/local/bt/remote-desktop-server/vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds",
-					/System/Library/Frameworks,
+					"$(SDKROOT)/System/Library/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OTHER_CFLAGS = "-fno-strict-aliasing";

@@ -15,11 +15,9 @@ DEFS_Debug := \
 	'-DHAVE_SRTP' \
 	'-DHAVE_WEBRTC_VIDEO' \
 	'-DHAVE_WEBRTC_VOICE' \
-	'-DWEBRTC_RESTRICT_LOGGING' \
-	'-DWEBRTC_CHROMIUM_BUILD' \
-	'-DLOGGING_INSIDE_WEBRTC' \
 	'-DWEBRTC_POSIX' \
 	'-DWEBRTC_MAC' \
+	'-DWEBRTC_INCLUDE_INTERNAL_AUDIO_DEVICE' \
 	'-DOSX' \
 	'-DCARBON_DEPRECATED=YES' \
 	'-DHASH_NAMESPACE=__gnu_cxx' \
@@ -62,8 +60,9 @@ INCS_Debug := \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/webrtc \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc \
-	-I$(srcdir)/. \
-	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/overrides
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include \
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp \
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include
 
 DEFS_Debug_Base := \
 	'-DEXPAT_RELATIVE_PATH' \
@@ -78,11 +77,9 @@ DEFS_Debug_Base := \
 	'-DHAVE_SRTP' \
 	'-DHAVE_WEBRTC_VIDEO' \
 	'-DHAVE_WEBRTC_VOICE' \
-	'-DWEBRTC_RESTRICT_LOGGING' \
-	'-DWEBRTC_CHROMIUM_BUILD' \
-	'-DLOGGING_INSIDE_WEBRTC' \
 	'-DWEBRTC_POSIX' \
 	'-DWEBRTC_MAC' \
+	'-DWEBRTC_INCLUDE_INTERNAL_AUDIO_DEVICE' \
 	'-DOSX' \
 	'-DCARBON_DEPRECATED=YES' \
 	'-DHASH_NAMESPACE=__gnu_cxx' \
@@ -125,8 +122,9 @@ INCS_Debug_Base := \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/webrtc \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc \
-	-I$(srcdir)/. \
-	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/overrides
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include \
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp \
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include
 
 DEFS_Release := \
 	'-DEXPAT_RELATIVE_PATH' \
@@ -141,11 +139,9 @@ DEFS_Release := \
 	'-DHAVE_SRTP' \
 	'-DHAVE_WEBRTC_VIDEO' \
 	'-DHAVE_WEBRTC_VOICE' \
-	'-DWEBRTC_RESTRICT_LOGGING' \
-	'-DWEBRTC_CHROMIUM_BUILD' \
-	'-DLOGGING_INSIDE_WEBRTC' \
 	'-DWEBRTC_POSIX' \
 	'-DWEBRTC_MAC' \
+	'-DWEBRTC_INCLUDE_INTERNAL_AUDIO_DEVICE' \
 	'-DOSX' \
 	'-DCARBON_DEPRECATED=YES' \
 	'-DHASH_NAMESPACE=__gnu_cxx' \
@@ -188,13 +184,15 @@ INCS_Release := \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/webrtc \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc \
-	-I$(srcdir)/. \
-	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/overrides
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include \
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp \
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include
 
 OBJS := \
 	$(obj).target/$(TARGET)/src/main.o \
 	$(obj).target/$(TARGET)/src/osx/window.o \
-	$(obj).target/$(TARGET)/src/osx/system.o
+	$(obj).target/$(TARGET)/src/osx/system.o \
+	$(obj).target/$(TARGET)/src/rtc/peer_connection.o
 
 # Add to the list of files we specially track dependencies for.
 all_deps += $(OBJS)
@@ -246,6 +244,12 @@ LIBTOOLFLAGS_Release :=
 
 LIBS := \
 	/usr/local/bt/remote-desktop-server/vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds/libWebRTC-9725-mac-x86_64-Debug.a \
+	-framework AudioToolbox \
+	-framework AudioUnit \
+	-framework CoreAudio \
+	-framework CoreVideo \
+	-framework OpenGL \
+	-framework QTKit \
 	-framework AppKit \
 	-framework Foundation
 

@@ -1,4 +1,4 @@
-cmd_out/Release/obj.target/main/src/main.o := c++ '-DEXPAT_RELATIVE_PATH' '-DFEATURE_ENABLE_VOICEMAIL' '-DGTEST_RELATIVE_PATH' '-DJSONCPP_RELATIVE_PATH' '-DLOGGING=1' '-DSRTP_RELATIVE_PATH' '-DFEATURE_ENABLE_SSL' '-DFEATURE_ENABLE_PSTN' '-DHAVE_SCTP' '-DHAVE_SRTP' '-DHAVE_WEBRTC_VIDEO' '-DHAVE_WEBRTC_VOICE' '-DWEBRTC_RESTRICT_LOGGING' '-DWEBRTC_CHROMIUM_BUILD' '-DLOGGING_INSIDE_WEBRTC' '-DWEBRTC_POSIX' '-DWEBRTC_MAC' '-DOSX' '-DCARBON_DEPRECATED=YES' '-DHASH_NAMESPACE=__gnu_cxx' '-DDISABLE_DYNAMIC_CAST' '-D_REENTRANT' '-DNDEBUG' -I../../. -I../../vendor/webrtc-build-scripts/ios/webrtc/src -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/webrtc -I../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc -I../../. -I../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/overrides  -fasm-blocks -mpascal-strings -O3 -mmacosx-version-min=10.5 -arch x86_64 -Wall -Wendif-labels -W -Wno-unused-parameter -std=c++11 -fno-rtti -fvisibility-inlines-hidden -fno-strict-aliasing -MMD -MF out/Release/.deps/out/Release/obj.target/main/src/main.o.d.raw  -c -o out/Release/obj.target/main/src/main.o ../../src/main.cc
+cmd_out/Release/obj.target/main/src/main.o := c++ '-DEXPAT_RELATIVE_PATH' '-DFEATURE_ENABLE_VOICEMAIL' '-DGTEST_RELATIVE_PATH' '-DJSONCPP_RELATIVE_PATH' '-DLOGGING=1' '-DSRTP_RELATIVE_PATH' '-DFEATURE_ENABLE_SSL' '-DFEATURE_ENABLE_PSTN' '-DHAVE_SCTP' '-DHAVE_SRTP' '-DHAVE_WEBRTC_VIDEO' '-DHAVE_WEBRTC_VOICE' '-DWEBRTC_POSIX' '-DWEBRTC_MAC' '-DWEBRTC_INCLUDE_INTERNAL_AUDIO_DEVICE' '-DOSX' '-DCARBON_DEPRECATED=YES' '-DHASH_NAMESPACE=__gnu_cxx' '-DDISABLE_DYNAMIC_CAST' '-D_REENTRANT' '-DNDEBUG' -I../../. -I../../vendor/webrtc-build-scripts/ios/webrtc/src -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/webrtc -I../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include  -fasm-blocks -mpascal-strings -O3 -mmacosx-version-min=10.5 -arch x86_64 -Wall -Wendif-labels -W -Wno-unused-parameter -std=c++11 -fno-rtti -fvisibility-inlines-hidden -fno-strict-aliasing -MMD -MF out/Release/.deps/out/Release/obj.target/main/src/main.o.d.raw  -c -o out/Release/obj.target/main/src/main.o ../../src/main.cc
 out/Release/obj.target/main/src/main.o: ../../src/main.cc \
   ../../src/./osx/system.h ../../src/./osx/../base/system.h \
   ../../src/./osx/../base/./window.h \
@@ -27,7 +27,61 @@ out/Release/obj.target/main/src/main.o: ../../src/main.cc \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/byteorder.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/asyncsocket.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/common.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/timeutils.h
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/timeutils.h \
+  ../../src/./rtc/peer_connection.h ../../src/./rtc/./configuration.h \
+  ../../src/./rtc/./ice_server.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosourceinterface.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediastreaminterface.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/refcount.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/mediachannel.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/codec.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/constants.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/streamparams.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/dscp.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/window.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/stringencode.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/checks.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/session/media/audiomonitor.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/port.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/candidate.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/constants.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/helpers.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/network.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/packetsocketfactory.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/proxyinfo.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/cryptstring.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/linked_ptr.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/portinterface.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/transport.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/sessiondescription.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/transportinfo.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/transportdescription.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/sslfingerprint.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/sslidentity.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/messagedigest.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/sslstreamadapter.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/stun.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/bytebuffer.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/stunrequest.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/thread.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/event.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/asyncpacketsocket.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/ratetracker.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/peerconnectionfactoryproxy.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/peerconnectioninterface.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/datachannelinterface.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/dtlsidentitystore.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/dtmfsenderinterface.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/jsep.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/statstypes.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/thread_checker.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/thread_checker_impl.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/platform_thread.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/umametrics.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/fileutils.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/platform_file.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/proxy.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/bind.h
 ../../src/main.cc:
 ../../src/./osx/system.h:
 ../../src/./osx/../base/system.h:
@@ -58,3 +112,58 @@ out/Release/obj.target/main/src/main.o: ../../src/main.cc \
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/asyncsocket.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/common.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/timeutils.h:
+../../src/./rtc/peer_connection.h:
+../../src/./rtc/./configuration.h:
+../../src/./rtc/./ice_server.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosourceinterface.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediastreaminterface.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/refcount.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/mediachannel.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/codec.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/constants.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/streamparams.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/dscp.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/window.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/stringencode.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/checks.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/session/media/audiomonitor.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/port.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/candidate.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/constants.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/helpers.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/network.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/packetsocketfactory.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/proxyinfo.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/cryptstring.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/linked_ptr.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/portinterface.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/transport.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/sessiondescription.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/transportinfo.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/transportdescription.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/sslfingerprint.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/sslidentity.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/messagedigest.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/sslstreamadapter.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/stun.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/bytebuffer.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/stunrequest.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/thread.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/event.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/asyncpacketsocket.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/ratetracker.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/peerconnectionfactoryproxy.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/peerconnectioninterface.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/datachannelinterface.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/dtlsidentitystore.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/dtmfsenderinterface.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/jsep.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/statstypes.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/thread_checker.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/thread_checker_impl.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/platform_thread.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/umametrics.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/fileutils.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/platform_file.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/proxy.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/bind.h:
