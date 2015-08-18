@@ -1,8 +1,7 @@
 {
     'includes': [
-        # './vendor/webrtc/src/webrtc/supplement.gypi',
-        './vendor/webrtc/src/webrtc/build/common.gypi',
-        './vendor/webrtc/src/talk/build/common.gypi',
+        './vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/build/common.gypi',
+        './vendor/webrtc-build-scripts/ios/webrtc/src/talk/build/common.gypi',
         './common.gypi',
         './config.gypi'
     ],
@@ -19,7 +18,7 @@
                 ],
 
                 'libraries': [
-                    '-L`pwd`/../vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds', '-lWebRTC-9721-mac-x86_64-Release',
+                    '-L`pwd`/../vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds', '-lWebRTC-9725-mac-x86_64-Debug',
                     '/System/Library/Frameworks/AppKit.framework',
                     '/System/Library/Frameworks/Foundation.framework'
                 ],
@@ -40,7 +39,6 @@
                 },
 
                 'include_dirs': [
-                    '<(DEPTH)/vendor/webrtc/src'
                 ]
             }]
         }]

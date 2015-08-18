@@ -58,13 +58,12 @@ CFLAGS_OBJCC_Debug :=
 
 INCS_Debug := \
 	-I$(srcdir)/. \
-	-I$(srcdir)/vendor/webrtc/src \
-	-I$(srcdir)/vendor/webrtc/src/third_party \
-	-I$(srcdir)/vendor/webrtc/src/third_party/webrtc \
-	-I$(srcdir)/vendor/webrtc/src/webrtc \
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src \
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party \
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/webrtc \
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc \
 	-I$(srcdir)/. \
-	-I$(srcdir)/vendor/webrtc/src/webrtc/overrides \
-	-I$(srcdir)/vendor/webrtc/src
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/overrides
 
 DEFS_Debug_Base := \
 	'-DEXPAT_RELATIVE_PATH' \
@@ -122,13 +121,12 @@ CFLAGS_OBJCC_Debug_Base :=
 
 INCS_Debug_Base := \
 	-I$(srcdir)/. \
-	-I$(srcdir)/vendor/webrtc/src \
-	-I$(srcdir)/vendor/webrtc/src/third_party \
-	-I$(srcdir)/vendor/webrtc/src/third_party/webrtc \
-	-I$(srcdir)/vendor/webrtc/src/webrtc \
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src \
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party \
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/webrtc \
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc \
 	-I$(srcdir)/. \
-	-I$(srcdir)/vendor/webrtc/src/webrtc/overrides \
-	-I$(srcdir)/vendor/webrtc/src
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/overrides
 
 DEFS_Release := \
 	'-DEXPAT_RELATIVE_PATH' \
@@ -186,13 +184,12 @@ CFLAGS_OBJCC_Release :=
 
 INCS_Release := \
 	-I$(srcdir)/. \
-	-I$(srcdir)/vendor/webrtc/src \
-	-I$(srcdir)/vendor/webrtc/src/third_party \
-	-I$(srcdir)/vendor/webrtc/src/third_party/webrtc \
-	-I$(srcdir)/vendor/webrtc/src/webrtc \
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src \
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party \
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/webrtc \
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc \
 	-I$(srcdir)/. \
-	-I$(srcdir)/vendor/webrtc/src/webrtc/overrides \
-	-I$(srcdir)/vendor/webrtc/src
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/overrides
 
 OBJS := \
 	$(obj).target/$(TARGET)/src/main.o \
@@ -249,7 +246,7 @@ LIBTOOLFLAGS_Release :=
 
 LIBS := \
 	-L`pwd`/../vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds \
-	-lWebRTC-9721-mac-x86_64-Release \
+	-lWebRTC-9725-mac-x86_64-Debug \
 	-framework AppKit \
 	-framework Foundation
 

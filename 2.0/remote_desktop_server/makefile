@@ -1,6 +1,6 @@
-all: ./vendor/webrtc ./build ./build/out/Release/main
+all: ./vendor/webrtc-build-scripts ./build ./build/out/Release/main
 
-./vendor/webrtc:
+./vendor/webrtc-build-scripts:
 	./scripts/get_and_build_webrtc.sh
 
 
