@@ -38,10 +38,6 @@ abs_obj := $(abspath $(obj))
 # generated dependency rule Makefiles in one pass.
 all_deps :=
 
-ifneq (,$(filter $(origin CXX), undefined default))
-  CXX = $(abspath /usr/bin/clang++)
-endif
-LINK ?= $(abspath /usr/bin/clang++)
 
 
 CC.target ?= $(CC)
@@ -331,7 +327,7 @@ endif
 
 quiet_cmd_regen_makefile = ACTION Regenerating $@
 cmd_regen_makefile = cd $(srcdir); ./vendor/gyp/gyp_main.py -fmake --ignore-environment "--toplevel-dir=." "--depth=." "--generator-output=build" remote_desktop_server.gyp
-Makefile: $(srcdir)/common.gypi $(srcdir)/remote_desktop_server.gyp $(srcdir)/vendor/webrtc/src/talk/build/common.gypi $(srcdir)/vars.gypi $(srcdir)/vendor/webrtc/src/webrtc/supplement.gypi $(srcdir)/vendor/webrtc/src/webrtc/build/common.gypi $(srcdir)/config.gypi
+Makefile: $(srcdir)/remote_desktop_server.gyp $(srcdir)/vendor/webrtc/src/webrtc/build/common.gypi $(srcdir)/vendor/webrtc/src/talk/build/common.gypi $(srcdir)/common.gypi $(srcdir)/config.gypi
 	$(call do_cmd,regen_makefile)
 
 # "all" is a concatenation of the "all" targets from all the included

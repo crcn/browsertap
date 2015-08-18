@@ -14,6 +14,30 @@
 // #include "talk/app/webrtc/proxy.h"
 #include "webrtc/base/stream.h"
 
+class WebRtcLogger : public rtc::StreamInterface {
+public:
+    WebRtcLogger() { }
+    ~WebRtcLogger() { }
+
+    rtc::StreamResult Read(void* buffer,
+                                    size_t buffer_len,
+                                    size_t* read,
+                                    int* error) {
+        // No-op, this is used for outbound logging only
+        return rtc::SR_SUCCESS;
+  }
+
+  rtc::StreamResult Write(const void* data,
+                                  size_t data_len,
+                                  size_t* written,
+                                  int* error) {
+                                      return rtc::SR_SUCCESS;
+                                  }
+
+  rtc::StreamState GetState() const { return rtc::SS_OPEN; }
+
+  virtual void Close() { }
+};
 
 int main(int argc, const char * argv[]) {
 
@@ -27,6 +51,8 @@ int main(int argc, const char * argv[]) {
 //    if (screens != NULL) {
 //        std::cout << "BLAH" << std::endl;
 //    }
+
+    WebRtcLogger* logger = new WebRtcLogger();
 
     graphics::Bitmap* image = windows.at(0)->print();
     std::cout << image->bounds.width << " " << image->bounds.height << std::endl;
