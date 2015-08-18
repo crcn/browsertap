@@ -10,6 +10,11 @@
 #include "./osx/system.h"
 #include "./geom/bounds.h"
 
+// #include "talk/app/webrtc/peerconnectionfactoryproxy.h"
+// #include "talk/app/webrtc/proxy.h"
+#include "webrtc/base/stream.h"
+
+
 int main(int argc, const char * argv[]) {
 
     osx::System* sys = new osx::System();

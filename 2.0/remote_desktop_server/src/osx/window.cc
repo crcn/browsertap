@@ -39,9 +39,8 @@ graphics::Bitmap* osx::Window::print() {
     CGRect rect = this->_cgbounds();
     int winId = 0;
 
-    CFNumberRef windowNumber = (CFNumberRef)CFDictionaryGetValue( this->_info, kCGWindowNumber );
+    CFNumberRef windowNumber = (CFNumberRef)CFDictionaryGetValue( this->_info, kCGWindowNumber);
     CFNumberGetValue(windowNumber, kCFNumberIntType, &winId);
-
 
     CGImageRef image = CGWindowListCreateImage(rect,
         kCGWindowListOptionIncludingWindow,

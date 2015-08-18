@@ -3,54 +3,221 @@
 TOOLSET := target
 TARGET := main
 DEFS_Debug := \
-	'-DDEBUG'
+	'-DEXPAT_RELATIVE_PATH' \
+	'-DFEATURE_ENABLE_VOICEMAIL' \
+	'-DGTEST_RELATIVE_PATH' \
+	'-DJSONCPP_RELATIVE_PATH' \
+	'-DLOGGING=1' \
+	'-DSRTP_RELATIVE_PATH' \
+	'-DFEATURE_ENABLE_SSL' \
+	'-DFEATURE_ENABLE_PSTN' \
+	'-DHAVE_SCTP' \
+	'-DHAVE_SRTP' \
+	'-DHAVE_WEBRTC_VIDEO' \
+	'-DHAVE_WEBRTC_VOICE' \
+	'-DWEBRTC_POSIX' \
+	'-DWEBRTC_MAC' \
+	'-DWEBRTC_INCLUDE_INTERNAL_AUDIO_DEVICE' \
+	'-DOSX' \
+	'-DCARBON_DEPRECATED=YES' \
+	'-DHASH_NAMESPACE=__gnu_cxx' \
+	'-DDISABLE_DYNAMIC_CAST' \
+	'-D_REENTRANT' \
+	'-D_DARWIN_USE_64_BIT_INODE=1' \
+	'-DDEBUG' \
+	'-D_DEBUG'
 
 # Flags passed to all source files.
 CFLAGS_Debug := \
-	-fasm-blocks \
-	-mpascal-strings \
 	-O0 \
 	-gdwarf-2 \
-	-arch x86_64
+	-mmacosx-version-min=10.5 \
+	-arch x86_64 \
+	-Wall \
+	-Wendif-labels \
+	-W \
+	-Wno-unused-parameter \
+	-Wall \
+	-Wendif-labels \
+	-W \
+	-Wno-unused-parameter
 
 # Flags passed to only C files.
-CFLAGS_C_Debug :=
+CFLAGS_C_Debug := \
+	-fno-strict-aliasing \
+	-fno-strict-aliasing
 
 # Flags passed to only C++ files.
-CFLAGS_CC_Debug :=
+CFLAGS_CC_Debug := \
+	-std=c++11 \
+	-fno-rtti \
+	-fno-exceptions \
+	-fno-threadsafe-statics \
+	-fno-strict-aliasing \
+	-fno-strict-aliasing
 
 # Flags passed to only ObjC files.
-CFLAGS_OBJC_Debug :=
+CFLAGS_OBJC_Debug := \
+	-Wobjc-missing-property-synthesis
 
 # Flags passed to only ObjC++ files.
-CFLAGS_OBJCC_Debug :=
+CFLAGS_OBJCC_Debug := \
+	-Wobjc-missing-property-synthesis
 
-INCS_Debug :=
+INCS_Debug := \
+	-I$(srcdir)/. \
+	-I$(srcdir)/vendor/webrtc/src \
+	-I$(srcdir)/vendor/webrtc/src/third_party \
+	-I$(srcdir)/vendor/webrtc/src/third_party/webrtc \
+	-I$(srcdir)/vendor/webrtc/src/webrtc \
+	-I$(srcdir)/vendor/webrtc/src/third_party/jsoncpp/source/include \
+	-I$(srcdir)/vendor/webrtc/src/third_party/libsrtp/srtp \
+	-I$(srcdir)/vendor/webrtc/src/third_party/libyuv/include \
+	-I$(srcdir)/vendor/webrtc/src
+
+DEFS_Debug_Base := \
+	'-DEXPAT_RELATIVE_PATH' \
+	'-DFEATURE_ENABLE_VOICEMAIL' \
+	'-DGTEST_RELATIVE_PATH' \
+	'-DJSONCPP_RELATIVE_PATH' \
+	'-DLOGGING=1' \
+	'-DSRTP_RELATIVE_PATH' \
+	'-DFEATURE_ENABLE_SSL' \
+	'-DFEATURE_ENABLE_PSTN' \
+	'-DHAVE_SCTP' \
+	'-DHAVE_SRTP' \
+	'-DHAVE_WEBRTC_VIDEO' \
+	'-DHAVE_WEBRTC_VOICE' \
+	'-DWEBRTC_POSIX' \
+	'-DWEBRTC_MAC' \
+	'-DWEBRTC_INCLUDE_INTERNAL_AUDIO_DEVICE' \
+	'-DOSX' \
+	'-DCARBON_DEPRECATED=YES' \
+	'-DHASH_NAMESPACE=__gnu_cxx' \
+	'-DDISABLE_DYNAMIC_CAST' \
+	'-D_REENTRANT' \
+	'-D_DARWIN_USE_64_BIT_INODE=1' \
+	'-D_DEBUG'
+
+# Flags passed to all source files.
+CFLAGS_Debug_Base := \
+	-Os \
+	-gdwarf-2 \
+	-mmacosx-version-min=10.5 \
+	-arch x86_64 \
+	-Wall \
+	-Wendif-labels \
+	-W \
+	-Wno-unused-parameter \
+	-Wall \
+	-Wendif-labels \
+	-W \
+	-Wno-unused-parameter
+
+# Flags passed to only C files.
+CFLAGS_C_Debug_Base := \
+	-fno-strict-aliasing \
+	-fno-strict-aliasing
+
+# Flags passed to only C++ files.
+CFLAGS_CC_Debug_Base := \
+	-std=c++11 \
+	-fno-rtti \
+	-fno-exceptions \
+	-fno-threadsafe-statics \
+	-fno-strict-aliasing \
+	-fno-strict-aliasing
+
+# Flags passed to only ObjC files.
+CFLAGS_OBJC_Debug_Base := \
+	-Wobjc-missing-property-synthesis
+
+# Flags passed to only ObjC++ files.
+CFLAGS_OBJCC_Debug_Base := \
+	-Wobjc-missing-property-synthesis
+
+INCS_Debug_Base := \
+	-I$(srcdir)/. \
+	-I$(srcdir)/vendor/webrtc/src \
+	-I$(srcdir)/vendor/webrtc/src/third_party \
+	-I$(srcdir)/vendor/webrtc/src/third_party/webrtc \
+	-I$(srcdir)/vendor/webrtc/src/webrtc \
+	-I$(srcdir)/vendor/webrtc/src/third_party/jsoncpp/source/include \
+	-I$(srcdir)/vendor/webrtc/src/third_party/libsrtp/srtp \
+	-I$(srcdir)/vendor/webrtc/src/third_party/libyuv/include \
+	-I$(srcdir)/vendor/webrtc/src
 
 DEFS_Release := \
+	'-DEXPAT_RELATIVE_PATH' \
+	'-DFEATURE_ENABLE_VOICEMAIL' \
+	'-DGTEST_RELATIVE_PATH' \
+	'-DJSONCPP_RELATIVE_PATH' \
+	'-DLOGGING=1' \
+	'-DSRTP_RELATIVE_PATH' \
+	'-DFEATURE_ENABLE_SSL' \
+	'-DFEATURE_ENABLE_PSTN' \
+	'-DHAVE_SCTP' \
+	'-DHAVE_SRTP' \
+	'-DHAVE_WEBRTC_VIDEO' \
+	'-DHAVE_WEBRTC_VOICE' \
+	'-DWEBRTC_POSIX' \
+	'-DWEBRTC_MAC' \
+	'-DWEBRTC_INCLUDE_INTERNAL_AUDIO_DEVICE' \
+	'-DOSX' \
+	'-DCARBON_DEPRECATED=YES' \
+	'-DHASH_NAMESPACE=__gnu_cxx' \
+	'-DDISABLE_DYNAMIC_CAST' \
+	'-D_REENTRANT' \
+	'-D_DARWIN_USE_64_BIT_INODE=1' \
 	'-DNDEBUG'
 
 # Flags passed to all source files.
 CFLAGS_Release := \
-	-fasm-blocks \
-	-mpascal-strings \
 	-O3 \
-	-arch x86_64
+	-mmacosx-version-min=10.5 \
+	-arch x86_64 \
+	-Wall \
+	-Wendif-labels \
+	-W \
+	-Wno-unused-parameter \
+	-Wall \
+	-Wendif-labels \
+	-W \
+	-Wno-unused-parameter
 
 # Flags passed to only C files.
-CFLAGS_C_Release :=
+CFLAGS_C_Release := \
+	-fno-strict-aliasing \
+	-fno-strict-aliasing
 
 # Flags passed to only C++ files.
 CFLAGS_CC_Release := \
-	-fvisibility-inlines-hidden
+	-std=c++11 \
+	-fno-rtti \
+	-fno-exceptions \
+	-fvisibility-inlines-hidden \
+	-fno-threadsafe-statics \
+	-fno-strict-aliasing \
+	-fno-strict-aliasing
 
 # Flags passed to only ObjC files.
-CFLAGS_OBJC_Release :=
+CFLAGS_OBJC_Release := \
+	-Wobjc-missing-property-synthesis
 
 # Flags passed to only ObjC++ files.
-CFLAGS_OBJCC_Release :=
+CFLAGS_OBJCC_Release := \
+	-Wobjc-missing-property-synthesis
 
-INCS_Release :=
+INCS_Release := \
+	-I$(srcdir)/. \
+	-I$(srcdir)/vendor/webrtc/src \
+	-I$(srcdir)/vendor/webrtc/src/third_party \
+	-I$(srcdir)/vendor/webrtc/src/third_party/webrtc \
+	-I$(srcdir)/vendor/webrtc/src/webrtc \
+	-I$(srcdir)/vendor/webrtc/src/third_party/jsoncpp/source/include \
+	-I$(srcdir)/vendor/webrtc/src/third_party/libsrtp/srtp \
+	-I$(srcdir)/vendor/webrtc/src/third_party/libyuv/include \
+	-I$(srcdir)/vendor/webrtc/src
 
 OBJS := \
 	$(obj).target/$(TARGET)/src/main.o \
@@ -84,17 +251,32 @@ $(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj)/%.cc FORCE_DO_CMD
 # End of this set of suffix rules
 ### Rules for final target.
 LDFLAGS_Debug := \
+	-Wl,-search_paths_first \
+	-mmacosx-version-min=10.5 \
 	-arch x86_64 \
 	-L$(builddir)
 
-LIBTOOLFLAGS_Debug :=
+LIBTOOLFLAGS_Debug := \
+	-Wl,-search_paths_first
+
+LDFLAGS_Debug_Base := \
+	-Wl,-search_paths_first \
+	-mmacosx-version-min=10.5 \
+	-arch x86_64 \
+	-L$(builddir)
+
+LIBTOOLFLAGS_Debug_Base := \
+	-Wl,-search_paths_first
 
 LDFLAGS_Release := \
+	-Wl,-search_paths_first \
 	-Wl,-dead_strip \
+	-mmacosx-version-min=10.5 \
 	-arch x86_64 \
 	-L$(builddir)
 
-LIBTOOLFLAGS_Release :=
+LIBTOOLFLAGS_Release := \
+	-Wl,-search_paths_first
 
 LIBS := \
 	-framework AppKit \
