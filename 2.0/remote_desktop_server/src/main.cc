@@ -40,6 +40,7 @@ public:
 };
 
 int main(int argc, const char * argv[]) {
+    
 
     osx::System* sys = new osx::System();
 
@@ -51,6 +52,7 @@ int main(int argc, const char * argv[]) {
 //    if (screens != NULL) {
 //        std::cout << "BLAH" << std::endl;
 //    }
+
 
     WebRtcLogger* logger = new WebRtcLogger();
 

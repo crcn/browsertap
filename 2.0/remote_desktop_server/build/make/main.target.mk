@@ -245,8 +245,7 @@ LDFLAGS_Release := \
 LIBTOOLFLAGS_Release :=
 
 LIBS := \
-	-L`pwd`/../vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds \
-	-lWebRTC-9725-mac-x86_64-Debug \
+	/usr/local/bt/remote-desktop-server/vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds/libWebRTC-9725-mac-x86_64-Debug.a \
 	-framework AppKit \
 	-framework Foundation
 

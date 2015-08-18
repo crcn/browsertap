@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>72EDC2AA-8D0C-4144-B8D3-9E3C54117F7B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>remote_desktop_server</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>8FFACF9194D48576A22F6F0C4F6B4F0BA1ABFC64</key>
+		<string>https://chromium.googlesource.com/external/webrtc</string>
+		<key>B870EFBBC3F470B69DA515B33FCBF15540AE6FE8</key>
+		<string>github.com:crcn/browsertap.git</string>
+		<key>C9515563FCCB6E03492535E0732AB0EDB73E0628</key>
+		<string>github.com:pristineio/webrtc-build-scripts.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>2.0/remote_desktop_server/build/xcodefiles/remote_desktop_server.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>8FFACF9194D48576A22F6F0C4F6B4F0BA1ABFC64</key>
+		<string>../../../../../..2.0/remote_desktop_server/vendor/webrtc-build-scripts/ios/webrtc/src/</string>
+		<key>B870EFBBC3F470B69DA515B33FCBF15540AE6FE8</key>
+		<string>../../../../../..</string>
+		<key>C9515563FCCB6E03492535E0732AB0EDB73E0628</key>
+		<string>../../../../../..2.0/remote_desktop_server/vendor/webrtc-build-scripts/</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:crcn/browsertap.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>B870EFBBC3F470B69DA515B33FCBF15540AE6FE8</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B870EFBBC3F470B69DA515B33FCBF15540AE6FE8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>browsertap</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8FFACF9194D48576A22F6F0C4F6B4F0BA1ABFC64</string>
+			<key>IDESourceControlWCCName</key>
+			<string>src</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C9515563FCCB6E03492535E0732AB0EDB73E0628</string>
+			<key>IDESourceControlWCCName</key>
+			<string>webrtc-build-scripts</string>
+		</dict>
+	</array>
+</dict>
+</plist>

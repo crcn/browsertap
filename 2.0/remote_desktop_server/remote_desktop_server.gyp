@@ -17,11 +17,14 @@
                     './src/osx/system.cc'
                 ],
 
-                'libraries': [
-                    '-L`pwd`/../vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds', '-lWebRTC-9725-mac-x86_64-Debug',
-                    '/System/Library/Frameworks/AppKit.framework',
-                    '/System/Library/Frameworks/Foundation.framework'
-                ],
+      'link_settings': {
+        'libraries': [
+            '/usr/local/bt/remote-desktop-server/vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds/libWebRTC-9725-mac-x86_64-Debug.a',
+            '/System/Library/Frameworks/AppKit.framework',
+            '/System/Library/Frameworks/Foundation.framework'
+        ],
+      },
+
 
                 'xcode_settings': {
                     'CLANG_CXX_LANGUAGE_STANDARD': 'c++11',
