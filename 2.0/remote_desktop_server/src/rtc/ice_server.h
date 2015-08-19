@@ -2,27 +2,22 @@
 #define _RTC_ICE_SERVER_
 
 #include <vector>
+#include "talk/app/webrtc/peerconnectioninterface.h"
 
 namespace rtc {
-  class ICEServer {
+  class IceServer : public webrtc::PeerConnectionInterface::IceServer {
 
   public:
-    std::vector<const char*> urls;
-    const char* username;
-    const char* credential;
 
-    ICEServer(std::vector<const char*> urls, const char* username = NULL, const char* credential = NULL):
-    urls(urls),
-    username(username),
-    credential(credential) {
-      
+    IceServer(const char* url) {
+      this->uri        = url;
     }
 
-    ICEServer(const char* url, const char* username = NULL, const char* credential = NULL):
-    username(username),
-    credential(credential) {
-      urls.push_back(url);
-    }
+    // IceServer(const char* url, const char* username = 0, const char* credential = 0) {
+    //   this->uri        = url;
+    //   this->username   = username;
+    //   // this->password   = credential;
+    // }
   };
 };
 

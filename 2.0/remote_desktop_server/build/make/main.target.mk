@@ -192,6 +192,8 @@ OBJS := \
 	$(obj).target/$(TARGET)/src/main.o \
 	$(obj).target/$(TARGET)/src/osx/window.o \
 	$(obj).target/$(TARGET)/src/osx/system.o \
+	$(obj).target/$(TARGET)/src/core/event_emitter.o \
+	$(obj).target/$(TARGET)/src/rtc/observers.o \
 	$(obj).target/$(TARGET)/src/rtc/peer_connection.o
 
 # Add to the list of files we specially track dependencies for.

@@ -17,9 +17,12 @@
                     './src/osx/window.cc',
                     './src/osx/system.cc',
 
+                    './src/core/event_emitter.cc',
+
                     './src/rtc/ice_server.h',
                     './src/rtc/configuration.h',
-                    './src/rtc/peer_connection.cc'
+                    './src/rtc/observers.cc',
+                    './src/rtc/peer_connection.cc',
                 ],
 
                 'link_settings': {

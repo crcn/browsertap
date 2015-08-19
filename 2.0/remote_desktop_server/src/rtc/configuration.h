@@ -2,18 +2,18 @@
 #define  _RemoteDesktop_RTCConfiguration_
 
 #include "./ice_server.h"
-#include <vector>
 
 namespace rtc {
   class Configuration {
   public:
-    std::vector<ICEServer> iceServers;
-    Configuration(std::vector<ICEServer> iceServers):
+    webrtc::PeerConnectionInterface::IceServers iceServers;
+
+    Configuration(webrtc::PeerConnectionInterface::IceServers iceServers):
     iceServers(iceServers) {
 
     }
 
-    Configuration(ICEServer server) {
+    Configuration(IceServer server) {
       this->iceServers.push_back(server);
     }
   };

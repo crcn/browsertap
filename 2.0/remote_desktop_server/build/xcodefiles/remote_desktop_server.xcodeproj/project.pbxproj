@@ -7,19 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1CC5E0F84217B5C7EDB6B52B /* system.cc in Sources */ = {isa = PBXBuildFile; fileRef = 7A75A3B01700FC73CAC29582 /* system.cc */; };
+		03F98BCFE3B05FD9F43EF7EA /* window.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2944306DE45DBF028EF5D452 /* window.cc */; };
+		0C638B86178DBADBE580BD79 /* event_emitter.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6126500A7642E6A0641802A0 /* event_emitter.cc */; };
 		61F88E799FDC3A4A688075CA /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93199D96CF574561481CFAD2 /* OpenGL.framework */; };
 		7565C844C2A9B8535368795C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E3E8C3E970AACC4AE7B167 /* AppKit.framework */; };
 		83325DC39E21C7933D5FE730 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA561A0FD98F131E61B56650 /* AudioToolbox.framework */; };
+		88DCB37964D4AE9832EDAF63 /* system.cc in Sources */ = {isa = PBXBuildFile; fileRef = 7A75A3B01700FC73CAC29582 /* system.cc */; };
 		896470836D9C56F0AD2E1A06 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5A18A6FAEC1532CA9DE8B4 /* AudioUnit.framework */; };
 		8E53C28F2D72C6FD42528120 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3840078CE11D7699A409E862 /* CoreVideo.framework */; };
+		A552345693C4C0DAB6730FC6 /* observers.cc in Sources */ = {isa = PBXBuildFile; fileRef = 4347A2A3D13455F7D7FD3D51 /* observers.cc */; };
+		A6F404CA313AAA3CDB72D227 /* main.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3E40B8F5AFAF0F6F6065BD61 /* main.cc */; };
 		B4961326C6ACC810A4CA3369 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B898A7D1531439D634549F /* CoreAudio.framework */; };
 		D2F5FCB544F61F0A52959182 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8FA9A9BD347EA4F37D56CF6 /* Foundation.framework */; };
-		D7ABCB621FCF6B44AD4B314C /* window.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2944306DE45DBF028EF5D452 /* window.cc */; };
-		D8FABD20EFF00C9988184254 /* peer_connection.cc in Sources */ = {isa = PBXBuildFile; fileRef = E36A63F45BA9218DDEB726D8 /* peer_connection.cc */; };
+		E34F54FABF961458BC9EC624 /* peer_connection.cc in Sources */ = {isa = PBXBuildFile; fileRef = E36A63F45BA9218DDEB726D8 /* peer_connection.cc */; };
 		E49C2405E98EDD399568D96D /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4FBE740C7661172C17A869 /* QTKit.framework */; };
 		EA2840F27E511946A39B8D83 /* libWebRTC-9725-mac-x86_64-Debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2117FE6FD32C14925530AD6E /* libWebRTC-9725-mac-x86_64-Debug.a */; };
-		EE71D0F5C2F3E4D219F840F3 /* main.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3E40B8F5AFAF0F6F6065BD61 /* main.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +30,10 @@
 		2944306DE45DBF028EF5D452 /* window.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = window.cc; sourceTree = "<group>"; };
 		3840078CE11D7699A409E862 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		3E40B8F5AFAF0F6F6065BD61 /* main.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cc; sourceTree = "<group>"; };
+		4347A2A3D13455F7D7FD3D51 /* observers.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = observers.cc; sourceTree = "<group>"; };
 		43E17C441DF0FF1C94A78598 /* main */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = main; sourceTree = BUILT_PRODUCTS_DIR; };
 		56E3E8C3E970AACC4AE7B167 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		6126500A7642E6A0641802A0 /* event_emitter.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = event_emitter.cc; sourceTree = "<group>"; };
 		7A75A3B01700FC73CAC29582 /* system.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = system.cc; sourceTree = "<group>"; };
 		7AB939D216A1C0273552B76D /* supplement.gypi */ = {isa = PBXFileReference; explicitFileType = sourcecode; name = supplement.gypi; path = "vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/supplement.gypi"; sourceTree = "<group>"; };
 		7D4FBE740C7661172C17A869 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
@@ -67,10 +71,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		108CBD2E2F69F4759CDEE7EE /* core */ = {
+			isa = PBXGroup;
+			children = (
+				6126500A7642E6A0641802A0 /* event_emitter.cc */,
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
+		50E0FC6A4843BBF13515E22B /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				108CBD2E2F69F4759CDEE7EE /* core */,
+				A472BE449E4899F019C924A1 /* osx */,
+				ECF095E2E6CAB5126CEA258D /* rtc */,
+				3E40B8F5AFAF0F6F6065BD61 /* main.cc */,
+			);
+			name = Source;
+			path = src;
+			sourceTree = "<group>";
+		};
 		6AD403C2196746C47A545CE0 = {
 			isa = PBXGroup;
 			children = (
-				ED3C75EDC48C296C0F201A01 /* Source */,
+				50E0FC6A4843BBF13515E22B /* Source */,
 				B8100EA67639F8F02E93BE5D /* Frameworks */,
 				CB0BA706B424027614637795 /* Products */,
 				FE7A3D976586561C2908D268 /* Build */,
@@ -110,22 +134,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		ED3C75EDC48C296C0F201A01 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				A472BE449E4899F019C924A1 /* osx */,
-				F6B345E0AB03382335B00B1E /* rtc */,
-				3E40B8F5AFAF0F6F6065BD61 /* main.cc */,
-			);
-			name = Source;
-			path = src;
-			sourceTree = "<group>";
-		};
-		F6B345E0AB03382335B00B1E /* rtc */ = {
+		ECF095E2E6CAB5126CEA258D /* rtc */ = {
 			isa = PBXGroup;
 			children = (
 				DB395B5CD175B8D257BC32E6 /* configuration.h */,
 				2142CB3B55F8E5A8D2059E3B /* ice_server.h */,
+				4347A2A3D13455F7D7FD3D51 /* observers.cc */,
 				E36A63F45BA9218DDEB726D8 /* peer_connection.cc */,
 			);
 			path = rtc;
@@ -188,10 +202,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE71D0F5C2F3E4D219F840F3 /* main.cc in Sources */,
-				D7ABCB621FCF6B44AD4B314C /* window.cc in Sources */,
-				1CC5E0F84217B5C7EDB6B52B /* system.cc in Sources */,
-				D8FABD20EFF00C9988184254 /* peer_connection.cc in Sources */,
+				A6F404CA313AAA3CDB72D227 /* main.cc in Sources */,
+				03F98BCFE3B05FD9F43EF7EA /* window.cc in Sources */,
+				88DCB37964D4AE9832EDAF63 /* system.cc in Sources */,
+				0C638B86178DBADBE580BD79 /* event_emitter.cc in Sources */,
+				A552345693C4C0DAB6730FC6 /* observers.cc in Sources */,
+				E34F54FABF961458BC9EC624 /* peer_connection.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
