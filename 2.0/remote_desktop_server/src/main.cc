@@ -49,7 +49,7 @@ public:
   }
   void Stop() {
     std::cout << "Called with Stop " << std::endl;
-    SetCaptureFormat(NULL);    
+    // SetCaptureFormat(NULL);    
   };
   bool IsRunning() { return true; }
   bool IsScreencast() const { return false; }
@@ -69,28 +69,39 @@ int main(int argc, const char * argv[]) {
 
     // rtc::PeerConnection pc(rtc::Configuration(rtc::IceServer("stun.l.google.com:19302")));
 
+    rtc::scoped_refptr<webrtc::PeerConnectionInterface> socket;
+
+
+    webrtc::PeerConnectionInterface::IceServers iceServers;
+
+    iceServers.push_back(rtc::IceServer("stun:stun.l.google.com:19302"));
+
+
+    rtc::scoped_refptr<rtc::PeerConnectionObserver> peer = new rtc::RefCountedObject<rtc::PeerConnectionObserver>(new core::EventEmitter());
+
+    webrtc::FakeConstraints constraints;
+
+    constraints.SetAllowDtlsSctpDataChannels();
 
     rtc::scoped_refptr<webrtc::PeerConnectionFactoryInterface> factory = webrtc::CreatePeerConnectionFactory();
+    socket = factory->CreatePeerConnection(iceServers, &constraints, NULL, NULL, peer.get());
 
     VideoCapturer* vcapture = new VideoCapturer();
-    vcapture->set_enable_camera_list(true);
+    // vcapture->set_enable_camera_list(true);
 
     rtc::scoped_refptr<webrtc::MediaStreamInterface> stream = factory->CreateLocalMediaStream("simple_stream");
 
-    rtc::scoped_refptr<webrtc::VideoSourceInterface> videoSource(factory->CreateVideoSource(vcapture, NULL));
-    // rtc::scoped_refptr<webrtc::VideoTrackInterface> videoTrack(factory->CreateVideoTrack("simple_video", videoSource));
-    // stream->AddTrack(videoTrack);
+    rtc::scoped_refptr<webrtc::VideoSourceInterface> videoSource;
+    videoSource = factory->CreateVideoSource(vcapture, NULL);
+    rtc::scoped_refptr<webrtc::VideoTrackInterface> videoTrack(factory->CreateVideoTrack("simple_video", videoSource));
+    stream->AddTrack(videoTrack);
 
 
-    // rtc::scoped_refptr<webrtc::MediaStream> ms;
-    // rtc::scoped_refptr<webrtc::VideoTrack> vt;
-    // VideoRenderer* vr = new VideoRenderer();
-    // vt.get()->AddRenderer(vr);
+    socket.get()->AddStream(stream);
 
+    std::cout << "END" << std::endl;
 
-
-    // ms.get()->AddTrack(vt);
-    // pc.addStream(ms);
+    while(1);
 
 
     return 0;
