@@ -1,7 +1,7 @@
 {
-  "name": "common",
-  "version": "1.0.0",
+  "name": "browser-client",
   "private": true,
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {

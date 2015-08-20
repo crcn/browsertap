@@ -14,4 +14,13 @@ apps/ - all application sources that need to get compiled
   js/ - all JavaScript-based applications. Either node or built
 docs/ - various docs, wikis, business plans, etc.
 home/ - the main home page
+  build/ - built JS 
 ```
+
+#### Apps 
+
+Below are a set apps to be developed
+
+- [API](./apps/js/api) - orchestration, billing, *all* backend related stuff
+- [browser client](./apps/js/browser-client) - web client which launches browsers
+- [desktop client](./apps/js/desktop-client) - desktop client people can install from the app store
