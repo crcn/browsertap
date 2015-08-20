@@ -17,7 +17,10 @@ extend(Application.prototype, BaseModel.prototype, {
   /**
    */
 
-  plugins: [],
+  plugins: [
+    require("./logger"),
+    require("./commands")
+  ],
 
   /**
    */

@@ -16,7 +16,7 @@ extend(APIApplication.prototype, BaseApplication.prototype, {
   /**
    */
 
-  plugins: [
+  plugins: BaseApplication.prototype.plugins.concat([
 
     // handles all in-app communication
     require("./bus"),
@@ -29,7 +29,7 @@ extend(APIApplication.prototype, BaseApplication.prototype, {
 
     // initialize the models
     require("./models")
-  ]
+  ])
 });
 
 /**
