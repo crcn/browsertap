@@ -12,11 +12,8 @@ module.exports = function(app) {
     info     : "magenta"
   };
 
-
   return {
     log: function(operation, next) {
-
-
       var msg = padRight(operation.type, 8, " ")[colors[operation.type] || "grey"] + ": " + sprintf.apply(void 0, operation.args);
 
       if (/warn|error/.test(operation.type)) {

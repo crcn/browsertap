@@ -28,7 +28,6 @@ apps.forEach(function(app) {
   paths.testFiles.push(app.name + "/**/*-test.js");
 });
 
-
 /**
  */
 
