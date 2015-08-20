@@ -6,7 +6,6 @@ void core::EventEmitter::emit(int type = 0) {
 }
 
 void core::EventEmitter::emit(Event* event) {
-  std::cout << "EVENT" << std::endl;
   for (int i = 0, n = _listeners.size(); i < n; i++) {
     _listeners.at(i)->handleEvent(event);
   }

@@ -15,14 +15,13 @@
                 'sources': [
                     './src/main.cc',
                     './src/osx/window.cc',
-                    './src/osx/system.cc',
+                    './src/osx/desktop.cc',
 
-                    './src/core/event_emitter.cc',
+                    './src/remote/server.cc',
+                    './src/remote/peer.cc',
+                    './src/remote/core.cc',
 
-                    './src/rtc/ice_server.h',
-                    './src/rtc/configuration.h',
-                    './src/rtc/observers.cc',
-                    './src/rtc/peer_connection.cc',
+                    './src/core/event_emitter.cc'
                 ],
 
                 'link_settings': {

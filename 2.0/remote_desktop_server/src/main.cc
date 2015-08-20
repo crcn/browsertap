@@ -7,102 +7,57 @@
 //
 
 #include <iostream>
-#include "./osx/system.h"
+#include "./osx/desktop.h"
+#include "./remote/server.h"
 #include "./geom/bounds.h"
 
-// #include "talk/app/webrtc/peerconnectionfactoryproxy.h"
-// #include "talk/app/webrtc/proxy.h"
-#include "webrtc/base/stream.h"
-#include "./rtc/peer_connection.h"
-#include "./rtc/configuration.h"
-#include "talk/app/webrtc/videotrack.h"
-#include "talk/app/webrtc/mediastream.h"
+class Runnable : public rtc::Runnable {
+  void Run(rtc::Thread* thread) {
 
-class VideoRenderer : public webrtc::VideoRendererInterface {
-public:
-
-  VideoRenderer(){};
-
-  void RenderFrame(const cricket::VideoFrame* frame) {
-    // std::cout << "RENDER" << std::endl;
   }
-  void SetSize(int width, int height) {
-    // std::cout << "SET SIZE" << std::endl;
-  }
-};
-
-class VideoCapturer : public cricket::VideoCapturer {
-public:
-  VideoCapturer() {
-    std::vector<cricket::VideoFormat> supported;
-    cricket::VideoFormat format(704, 576, 
-            FPS_TO_INTERVAL(15), 
-            cricket::FOURCC_I420); 
-    supported.push_back(format);
-  }
-
-
-  // Override virtual methods of parent class VideoCapturer.
-  cricket::CaptureState Start(const cricket::VideoFormat& capture_format) {
-    std::cout << "Called with Start " << std::endl;
-    return cricket::CS_RUNNING;
-  }
-  void Stop() {
-    std::cout << "Called with Stop " << std::endl;
-    // SetCaptureFormat(NULL);    
-  };
-  bool IsRunning() { return true; }
-  bool IsScreencast() const { return false; }
-  bool GetPreferredFourccs(std::vector<uint32>* fourccs) {
-    std::cout << ">>>>>>>>>>>> Called with GetPreferredFourccs " << std::endl;
-    
-    if (!fourccs) {
-        return false;
-    }
-    fourccs->push_back(cricket::FOURCC_I420);  
-    return true;
-  };
 };
 
 
 int main(int argc, const char * argv[]) {
 
-    // rtc::PeerConnection pc(rtc::Configuration(rtc::IceServer("stun.l.google.com:19302")));
 
-    rtc::scoped_refptr<webrtc::PeerConnectionInterface> socket;
+  std::cout << "RUN" << std::endl;
 
+  osx::Desktop* desktop = new osx::Desktop();
+  remote::Server* server = new remote::Server(desktop); 
+  server->connect("host", 8080);
 
-    webrtc::PeerConnectionInterface::IceServers iceServers;
+  std::cout << "CON" << std::endl;
+  std::string item;
 
-    iceServers.push_back(rtc::IceServer("stun:stun.l.google.com:19302"));
+  while(1) {
+    rtc::Thread::Current()->ProcessMessages(10);
+    sleep(1);
+  }
 
+  delete server;
 
-    rtc::scoped_refptr<rtc::PeerConnectionObserver> peer = new rtc::RefCountedObject<rtc::PeerConnectionObserver>(new core::EventEmitter());
+  /*
 
-    webrtc::FakeConstraints constraints;
+  osx::Desktop desktop = new osx::Desktop();
+  signal::Stomp signal;
 
-    constraints.SetAllowDtlsSctpDataChannels();
+  remote::Server()
 
-    rtc::scoped_refptr<webrtc::PeerConnectionFactoryInterface> factory = webrtc::CreatePeerConnectionFactory();
-    socket = factory->CreatePeerConnection(iceServers, &constraints, NULL, NULL, peer.get());
+  rtc::DesktopClient 
+  
+  rtc::Desktop desktop(desktop)
 
-    VideoCapturer* vcapture = new VideoCapturer();
-    // vcapture->set_enable_camera_list(true);
+  serve::Desktop desktop(&sys, &signal);
+  remoteDesktop.setSecret("abba");
 
-    rtc::scoped_refptr<webrtc::MediaStreamInterface> stream = factory->CreateLocalMediaStream("simple_stream");
+  */
 
-    rtc::scoped_refptr<webrtc::VideoSourceInterface> videoSource;
-    videoSource = factory->CreateVideoSource(vcapture, NULL);
-    rtc::scoped_refptr<webrtc::VideoTrackInterface> videoTrack(factory->CreateVideoTrack("simple_video", videoSource));
-    stream->AddTrack(videoTrack);
+  // webrtc::PeerConnectionInterface::IceServers servers;
+  // webrtc::PeerConnectionInterface::IceServer server;
+  // server.uri = "stun:stun.l.google.com:19302";
+  // servers.push_back(server);
 
-
-    socket.get()->AddStream(stream);
-
-    std::cout << "END" << std::endl;
-
-    while(1);
-
-
-    return 0;
+  // rtc::PeerConnection* pc = new rtc::PeerConnection(servers);
+  return 0;
 }

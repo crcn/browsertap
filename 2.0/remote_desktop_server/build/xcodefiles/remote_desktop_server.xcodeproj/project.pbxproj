@@ -7,34 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03F98BCFE3B05FD9F43EF7EA /* window.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2944306DE45DBF028EF5D452 /* window.cc */; };
-		0C638B86178DBADBE580BD79 /* event_emitter.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6126500A7642E6A0641802A0 /* event_emitter.cc */; };
 		61F88E799FDC3A4A688075CA /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93199D96CF574561481CFAD2 /* OpenGL.framework */; };
+		6F7B4A123E74DC4C621D182A /* event_emitter.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6126500A7642E6A0641802A0 /* event_emitter.cc */; };
+		6FEFF3D677B00B6E6B957608 /* core.cc in Sources */ = {isa = PBXBuildFile; fileRef = 17F56381834C331149F60438 /* core.cc */; };
 		7565C844C2A9B8535368795C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E3E8C3E970AACC4AE7B167 /* AppKit.framework */; };
 		83325DC39E21C7933D5FE730 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA561A0FD98F131E61B56650 /* AudioToolbox.framework */; };
-		88DCB37964D4AE9832EDAF63 /* system.cc in Sources */ = {isa = PBXBuildFile; fileRef = 7A75A3B01700FC73CAC29582 /* system.cc */; };
 		896470836D9C56F0AD2E1A06 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5A18A6FAEC1532CA9DE8B4 /* AudioUnit.framework */; };
 		8E53C28F2D72C6FD42528120 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3840078CE11D7699A409E862 /* CoreVideo.framework */; };
-		A552345693C4C0DAB6730FC6 /* observers.cc in Sources */ = {isa = PBXBuildFile; fileRef = 4347A2A3D13455F7D7FD3D51 /* observers.cc */; };
-		A6F404CA313AAA3CDB72D227 /* main.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3E40B8F5AFAF0F6F6065BD61 /* main.cc */; };
+		9F2E79E96770E7356048B72B /* window.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2944306DE45DBF028EF5D452 /* window.cc */; };
 		B4961326C6ACC810A4CA3369 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B898A7D1531439D634549F /* CoreAudio.framework */; };
+		C31B0847BACA88EAD8969DD0 /* peer.cc in Sources */ = {isa = PBXBuildFile; fileRef = C42B4027718619561ACDC73D /* peer.cc */; };
 		D2F5FCB544F61F0A52959182 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8FA9A9BD347EA4F37D56CF6 /* Foundation.framework */; };
-		E34F54FABF961458BC9EC624 /* peer_connection.cc in Sources */ = {isa = PBXBuildFile; fileRef = E36A63F45BA9218DDEB726D8 /* peer_connection.cc */; };
+		D75639E36CAB1180C04E05A4 /* desktop.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3AC75AF3F4083FD974B33A68 /* desktop.cc */; };
+		E057226FCEE49B54B267AC0E /* main.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3E40B8F5AFAF0F6F6065BD61 /* main.cc */; };
 		E49C2405E98EDD399568D96D /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4FBE740C7661172C17A869 /* QTKit.framework */; };
 		EA2840F27E511946A39B8D83 /* libWebRTC-9725-mac-x86_64-Debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2117FE6FD32C14925530AD6E /* libWebRTC-9725-mac-x86_64-Debug.a */; };
+		F10253875EB633EC38CCEEC9 /* server.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2C16CCA4FEE960EA2916DAAE /* server.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		17F56381834C331149F60438 /* core.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = core.cc; sourceTree = "<group>"; };
 		2117FE6FD32C14925530AD6E /* libWebRTC-9725-mac-x86_64-Debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libWebRTC-9725-mac-x86_64-Debug.a"; path = "/usr/local/bt/remote-desktop-server/vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds/libWebRTC-9725-mac-x86_64-Debug.a"; sourceTree = "<group>"; };
-		2142CB3B55F8E5A8D2059E3B /* ice_server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ice_server.h; sourceTree = "<group>"; };
 		2944306DE45DBF028EF5D452 /* window.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = window.cc; sourceTree = "<group>"; };
+		2C16CCA4FEE960EA2916DAAE /* server.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = server.cc; sourceTree = "<group>"; };
 		3840078CE11D7699A409E862 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		3AC75AF3F4083FD974B33A68 /* desktop.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = desktop.cc; sourceTree = "<group>"; };
 		3E40B8F5AFAF0F6F6065BD61 /* main.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cc; sourceTree = "<group>"; };
-		4347A2A3D13455F7D7FD3D51 /* observers.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = observers.cc; sourceTree = "<group>"; };
 		43E17C441DF0FF1C94A78598 /* main */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = main; sourceTree = BUILT_PRODUCTS_DIR; };
 		56E3E8C3E970AACC4AE7B167 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		6126500A7642E6A0641802A0 /* event_emitter.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = event_emitter.cc; sourceTree = "<group>"; };
-		7A75A3B01700FC73CAC29582 /* system.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = system.cc; sourceTree = "<group>"; };
 		7AB939D216A1C0273552B76D /* supplement.gypi */ = {isa = PBXFileReference; explicitFileType = sourcecode; name = supplement.gypi; path = "vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/supplement.gypi"; sourceTree = "<group>"; };
 		7D4FBE740C7661172C17A869 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 		82B898A7D1531439D634549F /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
@@ -43,11 +44,10 @@
 		A5DEDE164BCAFB45DC0DBE5C /* remote_desktop_server.gyp */ = {isa = PBXFileReference; explicitFileType = sourcecode; path = remote_desktop_server.gyp; sourceTree = "<group>"; };
 		A60A726D927F25D203DBAD68 /* common.gypi */ = {isa = PBXFileReference; explicitFileType = sourcecode; name = common.gypi; path = "vendor/webrtc-build-scripts/ios/webrtc/src/talk/build/common.gypi"; sourceTree = "<group>"; };
 		BB5A18A6FAEC1532CA9DE8B4 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		C42B4027718619561ACDC73D /* peer.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = peer.cc; sourceTree = "<group>"; };
 		C758098EE0D04DDAE84328D0 /* common.gypi */ = {isa = PBXFileReference; explicitFileType = sourcecode; path = common.gypi; sourceTree = "<group>"; };
 		C8FA9A9BD347EA4F37D56CF6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DA561A0FD98F131E61B56650 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		DB395B5CD175B8D257BC32E6 /* configuration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = configuration.h; sourceTree = "<group>"; };
-		E36A63F45BA9218DDEB726D8 /* peer_connection.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = peer_connection.cc; sourceTree = "<group>"; };
 		F90C410C4E050DE18DD0244B /* common.gypi */ = {isa = PBXFileReference; explicitFileType = sourcecode; name = common.gypi; path = "vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/build/common.gypi"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,35 +79,24 @@
 			path = core;
 			sourceTree = "<group>";
 		};
-		50E0FC6A4843BBF13515E22B /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				108CBD2E2F69F4759CDEE7EE /* core */,
-				A472BE449E4899F019C924A1 /* osx */,
-				ECF095E2E6CAB5126CEA258D /* rtc */,
-				3E40B8F5AFAF0F6F6065BD61 /* main.cc */,
-			);
-			name = Source;
-			path = src;
-			sourceTree = "<group>";
-		};
 		6AD403C2196746C47A545CE0 = {
 			isa = PBXGroup;
 			children = (
-				50E0FC6A4843BBF13515E22B /* Source */,
+				E81254126D5AB9EA1B3462DD /* Source */,
 				B8100EA67639F8F02E93BE5D /* Frameworks */,
 				CB0BA706B424027614637795 /* Products */,
 				FE7A3D976586561C2908D268 /* Build */,
 			);
 			sourceTree = "<group>";
 		};
-		A472BE449E4899F019C924A1 /* osx */ = {
+		B5B2BD56FB25C2FA4CD58F80 /* remote */ = {
 			isa = PBXGroup;
 			children = (
-				7A75A3B01700FC73CAC29582 /* system.cc */,
-				2944306DE45DBF028EF5D452 /* window.cc */,
+				17F56381834C331149F60438 /* core.cc */,
+				C42B4027718619561ACDC73D /* peer.cc */,
+				2C16CCA4FEE960EA2916DAAE /* server.cc */,
 			);
-			path = osx;
+			path = remote;
 			sourceTree = "<group>";
 		};
 		B8100EA67639F8F02E93BE5D /* Frameworks */ = {
@@ -126,6 +115,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C558415A3C607F94948F89D4 /* osx */ = {
+			isa = PBXGroup;
+			children = (
+				3AC75AF3F4083FD974B33A68 /* desktop.cc */,
+				2944306DE45DBF028EF5D452 /* window.cc */,
+			);
+			path = osx;
+			sourceTree = "<group>";
+		};
 		CB0BA706B424027614637795 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,15 +132,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		ECF095E2E6CAB5126CEA258D /* rtc */ = {
+		E81254126D5AB9EA1B3462DD /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				DB395B5CD175B8D257BC32E6 /* configuration.h */,
-				2142CB3B55F8E5A8D2059E3B /* ice_server.h */,
-				4347A2A3D13455F7D7FD3D51 /* observers.cc */,
-				E36A63F45BA9218DDEB726D8 /* peer_connection.cc */,
+				108CBD2E2F69F4759CDEE7EE /* core */,
+				C558415A3C607F94948F89D4 /* osx */,
+				B5B2BD56FB25C2FA4CD58F80 /* remote */,
+				3E40B8F5AFAF0F6F6065BD61 /* main.cc */,
 			);
-			path = rtc;
+			name = Source;
+			path = src;
 			sourceTree = "<group>";
 		};
 		FE7A3D976586561C2908D268 /* Build */ = {
@@ -202,12 +201,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6F404CA313AAA3CDB72D227 /* main.cc in Sources */,
-				03F98BCFE3B05FD9F43EF7EA /* window.cc in Sources */,
-				88DCB37964D4AE9832EDAF63 /* system.cc in Sources */,
-				0C638B86178DBADBE580BD79 /* event_emitter.cc in Sources */,
-				A552345693C4C0DAB6730FC6 /* observers.cc in Sources */,
-				E34F54FABF961458BC9EC624 /* peer_connection.cc in Sources */,
+				E057226FCEE49B54B267AC0E /* main.cc in Sources */,
+				9F2E79E96770E7356048B72B /* window.cc in Sources */,
+				D75639E36CAB1180C04E05A4 /* desktop.cc in Sources */,
+				F10253875EB633EC38CCEEC9 /* server.cc in Sources */,
+				C31B0847BACA88EAD8969DD0 /* peer.cc in Sources */,
+				6FEFF3D677B00B6E6B957608 /* core.cc in Sources */,
+				6F7B4A123E74DC4C621D182A /* event_emitter.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

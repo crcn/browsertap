@@ -1,1 +1,0 @@
-based on the webrtc spec: https://developer.mozilla.org/en-US/docs/Web/API/RTCConfiguration

@@ -191,10 +191,11 @@ INCS_Release := \
 OBJS := \
 	$(obj).target/$(TARGET)/src/main.o \
 	$(obj).target/$(TARGET)/src/osx/window.o \
-	$(obj).target/$(TARGET)/src/osx/system.o \
-	$(obj).target/$(TARGET)/src/core/event_emitter.o \
-	$(obj).target/$(TARGET)/src/rtc/observers.o \
-	$(obj).target/$(TARGET)/src/rtc/peer_connection.o
+	$(obj).target/$(TARGET)/src/osx/desktop.o \
+	$(obj).target/$(TARGET)/src/remote/server.o \
+	$(obj).target/$(TARGET)/src/remote/peer.o \
+	$(obj).target/$(TARGET)/src/remote/core.o \
+	$(obj).target/$(TARGET)/src/core/event_emitter.o
 
 # Add to the list of files we specially track dependencies for.
 all_deps += $(OBJS)
