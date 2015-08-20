@@ -11,15 +11,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mesh": "^4.1.0",
-    "react": "^0.13.3",
-    "socket.io": "^1.3.6",
-    "browser-client": "file:./browser-client",
     "api": "file:./api",
+    "browser-client": "file:./browser-client",
+    "common": "file:./common",
     "desktop-client": "file:./desktop-client",
     "desktop-server": "file:./desktop-server",
+    "express": "^4.13.3",
+    "mesh": "^4.1.0",
     "modules": "file:./modules",
-    "common": "file:./common"
+    "react": "^0.13.3",
+    "socket.io": "^1.3.6"
   },
   "devDependencies": {
     "browserify": "^11.0.1",

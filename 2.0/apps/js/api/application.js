@@ -25,7 +25,10 @@ extend(APIApplication.prototype, BaseApplication.prototype, {
     require("./commands"),
 
     // http / socket server
-    require("./server")
+    require("./server"),
+
+    // initialize the models
+    require("./models")
   ]
 });
 
