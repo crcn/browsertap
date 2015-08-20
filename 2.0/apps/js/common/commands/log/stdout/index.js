@@ -1,5 +1,6 @@
-var sprintf = require("sprintf").sprintf;
-var colors  = require("colors");
+var sprintf  = require("sprintf").sprintf;
+var colors   = require("colors");
+var padRight = require("lodash/string/padRight");
 
 module.exports = function(app) {
 
@@ -14,7 +15,9 @@ module.exports = function(app) {
 
   return {
     log: function(operation, next) {
-      var msg = operation.type[colors.notice || "grey"] + ": " + sprintf.apply(void 0, operation.args);
+
+
+      var msg = padRight(operation.type, 8, " ")[colors[operation.type] || "grey"] + ": " + sprintf.apply(void 0, operation.args);
 
       if (/warn|error/.test(operation.type)) {
         console.error(msg);

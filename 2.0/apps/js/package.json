@@ -18,6 +18,7 @@
     "desktop-client": "file:./desktop-client",
     "desktop-server": "file:./desktop-server",
     "express": "^4.13.3",
+    "lodash": "^3.10.1",
     "mesh": "^4.1.0",
     "modules": "file:./modules",
     "react": "^0.13.3",
