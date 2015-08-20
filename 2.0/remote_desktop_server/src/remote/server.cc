@@ -63,8 +63,21 @@ namespace remote {
     _localDescriptionObserver = new rtc::RefCountedObject<LocalDescriptionObserver>(this);
     _localDescriptionObserver = new rtc::RefCountedObject<LocalDescriptionObserver>(this);
 
+    _peerConnectionObserver->onIceCandidate.connect(this, &Server::_onIceCandidate);
     _offerObserver->onSuccess.connect(this, &Server::_onOfferSuccess);
     _localDescriptionObserver->onSuccess.connect(this, &Server::_onLocalDescriptionSuccuess);
+  }
+
+  /**
+   */
+
+  void Server::_onIceCandidate(const webrtc::IceCandidateInterface* candidate) {
+    std::cout << "ICY" << std::endl;
+    std::string out;
+    _connection->local_description()->ToString(&out);
+    std::cout << "-----------------------" << std::endl;
+    std::cout << out << std::endl;
+    std::cout << "-----------------------" << std::endl;
   }
 
   /**
@@ -90,11 +103,6 @@ namespace remote {
   void Server::_onLocalDescriptionSuccuess() {
     std::cout << "OFFER MUCH SUCC!" << std::endl;
 
-    std::string out;
-    _connection->local_description()->ToString(&out);
-    std::cout << "-----------------------" << std::endl;
-    std::cout << out << std::endl;
-    std::cout << "-----------------------" << std::endl;
   }
 
   /**
@@ -102,22 +110,22 @@ namespace remote {
 
   void Server::_createPeerFactory() {
 
-    webrtc::FakeConstraints constraints;
 
     // constraints.AddMandatory(webrtc::MediaConstraintsInterface::kOfferToReceiveAudio, webrtc::MediaConstraintsInterface::kValueTrue);
     // constraints.AddMandatory(webrtc::MediaConstraintsInterface::kOfferToReceiveVideo, webrtc::MediaConstraintsInterface::kValueTrue);
-    constraints.AddOptional(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp, webrtc::MediaConstraintsInterface::kValueTrue);
-    constraints.AddOptional(webrtc::MediaConstraintsInterface::kEnableRtpDataChannels, webrtc::MediaConstraintsInterface::kValueTrue);
+    _constraints.AddOptional(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp, webrtc::MediaConstraintsInterface::kValueTrue);
+    // _constraints.AddMandatory(webrtc::MediaConstraintsInterface::kEnableDscp, webrtc::MediaConstraintsInterface::kValueTrue);
+    // _constraints.AddOptional(webrtc::MediaConstraintsInterface::kEnableRtpDataChannels, webrtc::MediaConstraintsInterface::kValueTrue);
 
     _factory     = webrtc::CreatePeerConnectionFactory();
-    _connection  = _factory->CreatePeerConnection(_iceServers(), &constraints, NULL, NULL, _peerConnectionObserver.get());
+    _connection  = _factory->CreatePeerConnection(_iceServers(), &_constraints, NULL, NULL, _peerConnectionObserver.get());
   }
 
   /**
    */
 
   void Server::_createOffers() {
-    _connection.get()->CreateOffer(_offerObserver.get(), NULL);
+    _connection.get()->CreateOffer(_offerObserver.get(), &_constraints);
   }
 
   /**
@@ -154,6 +162,8 @@ namespace remote {
 
   void PeerConnectionObserver::OnIceCandidate(const webrtc::IceCandidateInterface* candidate) {
     std::cout << "-----ice candidate" <<std::endl;
+    onIceCandidate.emit(candidate);
+
   }
 
   void PeerConnectionObserver::OnDataChannel(webrtc::DataChannelInterface* channel) {

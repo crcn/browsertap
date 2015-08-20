@@ -49,7 +49,8 @@ namespace remote {
 
   class PeerConnectionObserver : 
     public webrtc::PeerConnectionObserver, 
-    public rtc::RefCountInterface 
+    public rtc::RefCountInterface,
+    public sigslot::has_slots<>
   {
    public:
     PeerConnectionObserver(Server* _server);
@@ -64,6 +65,9 @@ namespace remote {
 
     void OnAddStream(webrtc::MediaStreamInterface* stream) final;
     void OnRemoveStream(webrtc::MediaStreamInterface* stream) final;
+
+
+    sigslot::signal1<const webrtc::IceCandidateInterface*> onIceCandidate;
 
 
    private:
@@ -120,6 +124,7 @@ namespace remote {
   private:
     base::Desktop* _desktop;
     rtc::Thread* _signalThread;
+    webrtc::FakeConstraints _constraints;
     Peer* _peer;
     rtc::scoped_refptr<webrtc::PeerConnectionFactoryInterface> _factory;
     rtc::scoped_refptr<webrtc::PeerConnectionInterface> _connection;
@@ -139,6 +144,8 @@ namespace remote {
     void _createDataChannels();
     void _createOffers();
     void _onOfferSuccess(webrtc::SessionDescriptionInterface* sdp);
+    void _onIceCandidate(const webrtc::IceCandidateInterface* candidate);
+
     void _onLocalDescriptionSuccuess();
     webrtc::PeerConnectionInterface::IceServers _iceServers();
   };

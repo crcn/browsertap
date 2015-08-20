@@ -21,6 +21,7 @@ class Runnable : public rtc::Runnable {
 int main(int argc, const char * argv[]) {
 
 
+  // rtc::InitializeSSL();
   std::cout << "RUN" << std::endl;
 
   osx::Desktop* desktop = new osx::Desktop();
