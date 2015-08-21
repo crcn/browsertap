@@ -1,6 +1,6 @@
 module.exports = function(app) {
   var router = app.router;
-  
+
   router.addRoute("home", "/", function(location) {
     location.setProperties({
       state: {
@@ -27,5 +27,4 @@ module.exports = function(app) {
       }
     });
   });
-
 };

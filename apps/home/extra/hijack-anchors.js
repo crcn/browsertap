@@ -10,4 +10,4 @@ module.exports = function(app) {
     app.router.redirect(href);
     event.preventDefault();
   });
-}
+};

@@ -5,4 +5,3 @@ var app = global.app = new Application({
 });
 
 app.initialize();
- 
