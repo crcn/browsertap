@@ -1,5 +1,5 @@
 var extend       = require("lodash/object/extend");
-var EventEmitter = require("events");
+var EventEmitter = require("events").EventEmitter;
 
 var __getters = {};
 
