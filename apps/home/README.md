@@ -14,7 +14,7 @@ routes/ - application states. Modify this if you want to add pages.
 
 ### Testing
 
-Note that *all* tasks for *all* apps happen in the [root](../../) directory. Run these commands to get started with front-end dev for the home page:
+Note that *all* tasks for *all* apps happen in the [root](/crcn/browsertap) directory. Run these commands to get started with front-end dev for the home page:
 
 ```
 npm start # start the static server
