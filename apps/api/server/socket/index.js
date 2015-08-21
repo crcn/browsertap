@@ -1,5 +1,7 @@
 var io          = require("socket.io");
 var socketioBus = require("common/bus/socketio");
+var sift        = require("sift");
+var mesh        = require("mesh");
 
 /**
  */
@@ -18,6 +20,12 @@ module.exports = function(app) {
         var bus = app.bus;
 
         app.logger.verbose("socket.io client connected");
+
+        bus = mesh.accept(
+          sift({
+            name: {$in: ["hello"]}
+          })
+        , bus)
 
         // TODO - sandbox operations here
         bus = socketioBus(channel, client, bus);
