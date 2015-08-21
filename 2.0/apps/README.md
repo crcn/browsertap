@@ -11,3 +11,4 @@
 - [ ] e2e files
 - [ ] browser tests via karma
 - [ ] add cc makefile commands to gulp task
+- [ ] add gulptask files for each app
