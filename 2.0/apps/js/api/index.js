@@ -19,5 +19,5 @@ var app = new Application({
  */
 
 app.initialize(function() {
-  app.logger.verbose("initialized");
+  app.logger.info("initialized");
 });
