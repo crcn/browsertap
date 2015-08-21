@@ -1,4 +1,4 @@
-### BrowserTap 2.0
+### BrowserTap 2.0 [![Circle CI](https://circleci.com/gh/crcn/browsertap.svg?style=svg)](https://circleci.com/gh/crcn/browsertap)
 
 
 BrowserTap 2.0 will be an open-source core, with a closed-sourcea native desktop application that enables (likely) QA testers and engineers to enter their AWS credentials, to allow one-click creation of a Windows, etc instance to debug their application manually, broadcasted from a web browser running on said instance.
