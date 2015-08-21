@@ -10,21 +10,33 @@ var Body            = require("./components/body");
 function HomeApplication(properties) {
   this.router = new Router();
   BaseApplication.call(this, properties);
-}
+}  
 
 /**
- */
+ */ 
 
 extend(HomeApplication.prototype, BaseApplication.prototype, {
+
+  /**
+   */
+
   plugins: BaseApplication.prototype.plugins.concat([
     require("./routes"),
     require("./extra/hijack-anchors")
   ]),
+
+  /**
+   */
+
   initialize: function() {
     this.router.initialize();
     BaseApplication.prototype.initialize.call(this);
     this.renderBodyComponent(this.element);
   },
+
+  /**
+   */
+
   renderRootComponent: function(component, props, element) {
 
     if (arguments.length === 2) {
@@ -41,6 +53,10 @@ extend(HomeApplication.prototype, BaseApplication.prototype, {
 
     return element;
   },
+
+  /**
+   */
+   
   renderBodyComponent: function(element) {
     return this.renderRootComponent(Body, {}, element);
   }

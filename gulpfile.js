@@ -58,7 +58,7 @@ var ops = {
 apps.forEach(function(app) {
   paths.allFiles.push("apps/" + app.name + "/**/*.js");
   paths.testFiles.push("apps/" + app.name + "/**/*-test.js");
-  paths.watchFiles.push("apps/" + app.name + "/**");
+  paths.watchFiles.push("apps/" + app.name + "/**/*");
 });
 
 /**
@@ -216,7 +216,7 @@ var iofwatch = process.argv.indexOf("watch");
  */
 
 gulp.task("watch", function () {
-  gulp.watch(paths.allFiles, process.argv.slice(2, iofwatch));
+  gulp.watch(paths.watchFiles, process.argv.slice(2, iofwatch));
 });
 
 /**
