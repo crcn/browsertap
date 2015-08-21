@@ -42,14 +42,14 @@ extend(Application.prototype, BaseModel.prototype, {
    */
 
   initialize: function(next) {
-    return this.bus({ name: "initialize", special: true }).once("end", next || function() { });
+    return this.bus({ name: "initialize" }).once("end", next || function() { });
   },
 
   /**
    */
 
   terminate: function(next) {
-    return this.bus({ name: "terminate", special: true  }).once("end", next || function() { });
+    return this.bus({ name: "terminate" }).once("end", next || function() { });
   }
 });
 

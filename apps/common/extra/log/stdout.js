@@ -39,7 +39,7 @@ module.exports = function(app) {
 
       var color = colors[operation.type];
 
-      var label = process.pid + ": ";
+      var label = ": ";
 
       if (color) {
         label = chalk[color](label);

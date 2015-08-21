@@ -20,3 +20,5 @@ LOG_LEVEL=VERBOSE npm start
 - [ ] - graceful shutdown if stuff crashes
 - [ ] - sandbox remote operations
 - [ ] - process on exit logs
+- [ ] - stdin commands
+  - help()
