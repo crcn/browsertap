@@ -26,7 +26,7 @@ var apps = [
 var paths = {
   testFiles      : ["test/**/*.js"],
   allFiles       : ["test/**/*.js"],
-  buildDirectory : path.normalize(__dirname + "/../../home/public/build")
+  buildDirectory : path.normalize(__dirname + "/home/public/build")
 };
 
 var ops = {
@@ -39,9 +39,11 @@ var ops = {
 };
 
 apps.forEach(function(app) {
-  paths.allFiles.push(app.name + "/**/*.js");
-  paths.testFiles.push(app.name + "/**/*-test.js");
+  paths.allFiles.push("apps/" + app.name + "/**/*.js");
+  paths.testFiles.push("apps/" + app.name + "/**/*-test.js");
 });
+
+console.log(paths);
 
 /**
  */

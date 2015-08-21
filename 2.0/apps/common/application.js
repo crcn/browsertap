@@ -1,5 +1,5 @@
 var BaseModel       = require("./models/base/model");
-var extend          = require("xtend/mutable");
+var extend          = require("lodash/object/extend");
 var mesh            = require("mesh");
 var registerPlugins = require("./core/register-plugins");
 var flatten         = require("lodash/array/flattenDeep");
