@@ -21,6 +21,8 @@ home/ - the main home page
 
 Below are a set apps to be developed
 
-- [API](./apps/js/api) - orchestration, billing, *all* backend related stuff
-- [browser client](./apps/js/browser-client) - web client which launches browsers
-- [desktop client](./apps/js/desktop-client) - desktop client people can install from the app store
+- [API](./apps/api) - orchestration, billing, *all* backend related stuff
+- [browser client](./apps/browser-client) - web client which launches browsers
+- [desktop client](./apps/desktop-client) - desktop client people can install from the app store
+- [desktop server](./apps/desktop-server) - connects to the API server and does all the signaling for desktop. Also does cleanup when a user logs out.
+- [desktop](./apps/desktop) - desktop controller. Does magical webrtc shit and other nice things.

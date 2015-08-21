@@ -17,5 +17,5 @@ extend(BrowserClientApplication.prototype, BaseApplication.prototype, {
 
 /**
  */
- 
+
 module.exports = BrowserClientApplication;
