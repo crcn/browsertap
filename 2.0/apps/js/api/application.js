@@ -1,5 +1,5 @@
 var BaseApplication = require("common/application");
-var extend          = require("xtend/mutable");
+var extend          = require("lodash/object/extend");
 
 /**
  */

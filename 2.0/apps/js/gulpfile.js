@@ -86,6 +86,7 @@ gulp.task("jscs", function() {
       "validateLineBreaks": "LF",
       "validateIndentation": 2,
       "validateQuoteMarks": "\"",
+      "disallowSpaceAfterObjectKeys": "ignoreMultiLine",
 
       "disallowKeywords": ["with"],
       "disallowSpacesInsideObjectBrackets": null,

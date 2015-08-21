@@ -1,4 +1,4 @@
-var extend     = require("xtend/mutable");
+var extend     = require("lodash/object/extend");
 
 var __getters = {};
 

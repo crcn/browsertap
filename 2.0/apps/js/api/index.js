@@ -1,11 +1,23 @@
 var Application = require("./application");
+var getConfig   = require("./get-config");
+
+/**
+ */
+ 
+if (!process.env.NODE_ENV) {
+  process.env.NODE_ENV = "development";
+}
+
+/**
+ */
 
 var app = new Application({
-  log: {
-    level: require("common/logger/levels").ALL
-  }
+  config: getConfig(process.env)
 });
 
-app.logger.info("Hello World");
-app.logger.verbose("Hello World");
-app.logger.error("Hello World");
+/**
+ */
+
+app.initialize(function() {
+  app.logger.verbose("initialized");
+});

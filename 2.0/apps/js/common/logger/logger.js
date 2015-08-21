@@ -1,5 +1,5 @@
 var BaseModel = require("../models/base/model");
-var extend    = require("xtend/mutable");
+var extend    = require("lodash/object/extend");
 var LogLevels = require("./levels");
 var mesh      = require("mesh");
 

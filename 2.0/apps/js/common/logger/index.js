@@ -1,5 +1,5 @@
 var Logger = require("./logger");
-var extend = require("xtend/mutable");
+var extend = require("lodash/object/extend");
 
 /**
  */

@@ -1,4 +1,3 @@
-var sprintf  = require("sprintf").sprintf;
 var colors   = require("colors");
 var padRight = require("lodash/string/padRight");
 
@@ -14,7 +13,18 @@ module.exports = function(app) {
 
   return {
     log: function(operation, next) {
-      var msg = padRight(operation.type, 8, " ")[colors[operation.type] || "grey"] + ": " + sprintf.apply(void 0, operation.args);
+
+      var args = operation.args.map(function(arg) {
+        if (typeof arg !== "object") return arg;
+        return JSON.stringify(arg);
+      }).concat();
+
+      var msg = args.shift();
+      msg     = msg.replace(/%./g, args.shift.bind(args));
+
+      msg += args.join(" ");
+
+      msg = padRight(operation.type, 8, " ")[colors[operation.type] || "grey"] + ": " + msg;
 
       if (/warn|error/.test(operation.type)) {
         console.error(msg);

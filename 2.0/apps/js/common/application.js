@@ -1,5 +1,8 @@
-var BaseModel = require("./models/base/model");
-var extend    = require("xtend/mutable");
+var BaseModel       = require("./models/base/model");
+var extend          = require("xtend/mutable");
+var mesh            = require("mesh");
+var registerPlugins = require("./core/register-plugins");
+var flatten         = require("lodash/array/flattenDeep");
 
 /**
  */
@@ -17,18 +20,36 @@ extend(Application.prototype, BaseModel.prototype, {
   /**
    */
 
+  bus: mesh.noop,
+
+  /**
+   */
+
   plugins: [
+    require("./commands"),
     require("./logger"),
-    require("./commands")
+    require("./extra")
   ],
 
   /**
    */
 
   use: function() {
-    Array.prototype.forEach.call(arguments, function(plugin) {
-      plugin(this);
-    }.bind(this));
+    registerPlugins(this, flatten(Array.prototype.slice.call(arguments)));
+  },
+
+  /**
+   */
+
+  initialize: function(next) {
+    return this.bus({ name: "initialize" }).once("end", next || function() { });
+  },
+
+  /**
+   */
+
+  terminate: function(next) {
+    return this.bus({ name: "terminate" }).once("end", next || function() { });
   }
 });
 
