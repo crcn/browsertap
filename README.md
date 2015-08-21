@@ -10,11 +10,10 @@ Here's the general folder structure for v2 of BrowserTap:
 
 ```
 apps/ - all application sources that need to get compiled
-  cc/ - all C++ sources that need to be bundled into binaries
-  js/ - all JavaScript-based applications. Either node or built
 docs/ - various docs, wikis, business plans, etc.
 home/ - the main home page
   build/ - built JS 
+old/ - old files
 ```
 
 #### Apps 
