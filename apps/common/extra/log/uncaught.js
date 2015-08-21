@@ -1,4 +1,5 @@
-var platform = require("platform");
+var platform   = require("platform");
+var parseStack = require("parse-stack");
 
 /**
  */
@@ -21,7 +22,7 @@ function browser(app) {
     app.logger.error(error.message, {
       url        : url,
       lineNumber : lineNumber,
-      stack      : error.stack,
+      stack      : parseStack(error),
       platform   : platformInfo
     });
   };
@@ -32,7 +33,7 @@ function browser(app) {
 
 function server(app) {
   process.on("uncaughtException", function(error) {
-    app.logger.error(error.message, { stack: error.stack, platform: platformInfo });
+    app.logger.error(error.message, { stack: parseStack(error), platform: platformInfo });
     app.logger.notice("gracefully shutting down");
 
     // give some time for the op to send to loggly

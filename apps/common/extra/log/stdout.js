@@ -25,6 +25,7 @@ module.exports = function(app) {
       var args = operation.args.map(function(arg) {
         if (typeof arg !== "object") return arg;
         return JSON.stringify(arg, null, 2);
+        // return "\n" + prttty.render(arg, { noColor: true });
 
         // .replace(/".*?"/g, function(match) {
         //   return chalk.blue(match)
