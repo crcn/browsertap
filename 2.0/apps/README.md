@@ -5,7 +5,8 @@ desktop apps and use native components such as native elements & gyp build files
 1. easily share common modules
 2. easily share common test cases, scripts, and other build tools
 
-#### TODOS
+### TODO
 
-- [ ] - fill out makefile to build *all* app sources
-- [ ] - e2e files
+- [ ] fill out makefile to build *all* app sources
+- [ ] e2e files
+- [ ] browser tests via karma

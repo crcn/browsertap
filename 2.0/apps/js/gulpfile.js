@@ -1,26 +1,41 @@
-var gulp       = require("gulp");
-var mocha      = require("gulp-mocha");
-var plumber    = require("gulp-plumber");
-var browserify = require("browserify");
-var jscs       = require("gulp-jscs");
-var jshint     = require("gulp-jshint");
-var spawn      = require("child_process").spawn;
-var uglify     = require("gulp-uglify");
-var source     = require("vinyl-source-stream");
-var buffer     = require("vinyl-buffer");
-var collapse   = require("bundle-collapser/plugin");
-var options    = require("yargs").argv;
+var gulp        = require("gulp");
+var mocha       = require("gulp-mocha");
+var plumber     = require("gulp-plumber");
+var glob        = require("glob");
+var sift        = require("sift");
+var browserify  = require("browserify");
+var jscs        = require("gulp-jscs");
+var jshint      = require("gulp-jshint");
+var spawn       = require("child_process").spawn;
+var uglify      = require("gulp-uglify");
+var rename      = require("gulp-rename");
+var source      = require("vinyl-source-stream");
+var buffer      = require("vinyl-buffer");
+var path        = require("path");
+var collapse    = require("bundle-collapser/plugin");
+var options     = require("yargs").argv;
+var mergeStream = require("merge-stream");
 
 var apps = [
-  { name: "api"     , bundle: false },
-  { name: "browser" , bundle: true  },
-  { name: "common"  , bundle: false },
-  { name: "desktop" , bundle: false }
+  { name: "api"            , bundle: false },
+  { name: "browser-client" , bundle: true  },
+  { name: "common"         , bundle: false },
+  { name: "desktop-client" , bundle: false }
 ];
 
 var paths = {
-  testFiles : ["test/**/*.js"],
-  allFiles  : ["test/**/*.js"]
+  testFiles      : ["test/**/*.js"],
+  allFiles       : ["test/**/*.js"],
+  buildDirectory : path.normalize(__dirname + "/../../home/public/build")
+};
+
+var ops = {
+  mocha: {
+    bail     : options.bail     !== 'false',
+    reporter : options.reporter || 'dot',
+    grep     : options.grep     || options.only,
+    timeout  : 500
+  }
 };
 
 apps.forEach(function(app) {
@@ -31,44 +46,29 @@ apps.forEach(function(app) {
 /**
  */
 
-var mochaOptions = {
-  bail     : options.bail     !== 'false',
-  reporter : options.reporter || 'dot',
-  grep     : options.grep     || options.only,
-  timeout  : 500
-}
-
-/**
- */
-
-function bundle(src, out) {
-    return browserify(src).
+gulp.task("bundle", function() {
+  return mergeStream(sift({ bundle: true }, apps).map(function(app) {
+    return browserify(__dirname + "/" + app.name).
     plugin(collapse).
     bundle().
-    pipe(source(out)).
+    pipe(source(app.name + ".bundle.js")).
     pipe(buffer()).
-    pipe(gulp.dest('./dist'));
-}
-
-/**
- */
-
-gulp.task("bundle", function() {
-  return bundle(pkg.browser || pkg.main, pkg.name + ".js");
+    pipe(gulp.dest(paths.buildDirectory))
+  }));
 });
 
 /**
  * TODO - modify me for all apps
  */
 
-gulp.task("minify", ["bundle", "bundle-parser"], function() {
+gulp.task("minify", ["bundle"], function() {
   return gulp.
-  src(["./dist/" + pkg.name + ".js", "./dist/parser.js"]).
+  src(glob.sync(paths.buildDirectory + "/*.bundle.js")).
   pipe(uglify()).
   pipe(rename(function(path) {
-      path.basename += ".min";
+      path.basename = path.basename.replace(".bundle", ".min");
   })).
-  pipe(gulp.dest('./dist'));
+  pipe(gulp.dest(paths.buildDirectory));
 });
 
 /**
@@ -138,7 +138,7 @@ gulp.task("test", function (complete) {
   gulp.
   src(paths.testFiles, { read: false }).
   pipe(plumber()).
-  pipe(mocha(mochaOptions)).
+  pipe(mocha(ops.mocha)).
   on("error", complete).
   on("end", complete);
 });
@@ -157,7 +157,7 @@ gulp.task("watch", function () {
  */
 
 gulp.task("default", function () {
-  return gulp.run("test-coverage");
+  return gulp.run("test");
 });
 
 /**

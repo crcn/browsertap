@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ."
+    "start": "node .",
+    "test" : "gulp lint test --only=api"
   },
   "author": "",
   "license": "ISC",
