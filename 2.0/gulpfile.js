@@ -1,24 +1,31 @@
-var gulp        = require("gulp");
-var mocha       = require("gulp-mocha");
-var plumber     = require("gulp-plumber");
-var glob        = require("glob");
-var sift        = require("sift");
-var browserify  = require("browserify");
-var jscs        = require("gulp-jscs");
-var jshint      = require("gulp-jshint");
-var spawn       = require("child_process").spawn;
-var uglify      = require("gulp-uglify");
-var rename      = require("gulp-rename");
-var source      = require("vinyl-source-stream");
-var buffer      = require("vinyl-buffer");
-var path        = require("path");
-var collapse    = require("bundle-collapser/plugin");
-var options     = require("yargs").argv;
-var mergeStream = require("merge-stream");
+require("./gulp/dom");
+require("jsx-require-extension");
+var gulp            = require("gulp");
+var mocha           = require("gulp-mocha");
+var mkdirp          = require("mkdirp");
+var plumber         = require("gulp-plumber");
+var glob            = require("glob");
+var sift            = require("sift");
+var browserify      = require("browserify");
+var jscs            = require("gulp-jscs");
+var jshint          = require("gulp-jshint");
+var spawn           = require("child_process").spawn;
+var uglify          = require("gulp-uglify");
+var rename          = require("gulp-rename");
+var source          = require("vinyl-source-stream");
+var buffer          = require("vinyl-buffer");
+var path            = require("path");
+var collapse        = require("bundle-collapser/plugin");
+var options         = require("yargs").argv;
+var mergeStream     = require("merge-stream");
+var HomeApplication = require("./apps/home/application");
+var mu              = require("mustache");
+var fs              = require("fs");
 
 var apps = [
   { name: "api"            , bundle: false },
   { name: "browser-client" , bundle: true  },
+  { name: "home"           , bundle: true  },
   { name: "common"         , bundle: false },
   { name: "desktop-client" , bundle: false }
 ];
@@ -26,8 +33,17 @@ var apps = [
 var paths = {
   testFiles      : ["test/**/*.js"],
   allFiles       : ["test/**/*.js"],
-  buildDirectory : path.normalize(__dirname + "/public/build")
+  watchFiles     : [],
+  buildDirectory : path.normalize(__dirname + "/public"),
+  publicDirectory : path.normalize(__dirname + "/public")
 };
+
+var homeLayouts = {};
+
+glob.sync(__dirname + "/apps/home/layouts/**.mu").map(function(filepath) {
+  homeLayouts[path.basename(filepath).split(".").shift()] = fs.readFileSync(filepath, "utf8");
+})
+
 
 var ops = {
   mocha: {
@@ -35,39 +51,89 @@ var ops = {
     reporter : options.reporter || 'dot',
     grep     : options.grep     || options.only,
     timeout  : 500
-  }
+  },
+  homeLayouts : homeLayouts
 };
 
 apps.forEach(function(app) {
   paths.allFiles.push("apps/" + app.name + "/**/*.js");
   paths.testFiles.push("apps/" + app.name + "/**/*-test.js");
+  paths.watchFiles.push("apps/" + app.name + "/**");
 });
 
 /**
  */
 
-gulp.task("bundle", function() {
+gulp.task("bundle", ["bundle-js", "bundle-home"], function(next) {
+  next();
+});
+
+/**
+ */
+
+gulp.task("bundle-js", function() {
   return mergeStream(sift({ bundle: true }, apps).map(function(app) {
-    return browserify(__dirname + "/apps/" + app.name).
-    // plugin(collapse).
-    bundle().
-    pipe(source(app.name + ".bundle.js")).
+
+    var b = browserify(__dirname + "/apps/" + app.name, {
+      extensions: [".jsx"]
+    }).
+    plugin(collapse);
+
+    b.transform({ global: true }, "reactify");
+
+    return b.bundle().pipe(source(app.name + ".bundle.js")).
     pipe(buffer()).
-    pipe(gulp.dest(paths.buildDirectory))
+    pipe(gulp.dest(paths.buildDirectory + "/js"))
   }));
 });
+
+gulp.task("bundle-home", function() {
+  var element = document.createElement("div");
+
+  var app = new HomeApplication({
+    element: element,
+    config: {
+      log: { level: 0 }
+    }
+  });
+
+  app.initialize();
+
+  for (var routeName in app.router._routes) {
+    app.router.redirect(routeName);
+    var loc = app.router.location;
+
+    var html = mu.render(ops.homeLayouts[loc.state.layout || "default"], {
+      state: loc.state,
+      sections: {
+        body: element.innerHTML
+      }
+    });
+
+    var pathname = loc.pathname;
+
+    if (pathname === "/") {
+      pathname = "/index";
+    } else {
+      pathname += "/index";
+    }
+
+    var filename = paths.buildDirectory + pathname + ".html";
+    mkdirp.sync(path.dirname(filename));
+    fs.writeFileSync(filename, html);
+  }
+});
+
+
 
 /**
  * TODO - modify me for all apps
  */
 
-gulp.task("minify", ["bundle"], function() {
+gulp.task("minify-js", ["bundle-js"], function() {
   return gulp.
   src(glob.sync(paths.buildDirectory + "/*.bundle.js")).
   pipe(uglify()).
-  pipe(rename(function(path) {
-      path.basename = path.basename.replace(".bundle", ".min");
-  })).
   pipe(gulp.dest(paths.buildDirectory));
 });
 

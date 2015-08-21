@@ -28,7 +28,8 @@ module.exports = function(app) {
       }).concat();
 
       var msg = args.shift();
-      msg     = msg.replace(/%./g, args.shift.bind(args));
+
+      msg     = typeof msg === "string" ? msg.replace(/%./g, args.shift.bind(args)) : "";
 
       msg = [msg].concat(args).join(" ");
 

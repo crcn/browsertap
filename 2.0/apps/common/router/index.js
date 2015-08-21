@@ -1,6 +1,7 @@
 var extend    = require("lodash/object/extend");
 var BaseModel = require("../models/base/model");
 var Location  = require("./location");
+var debounce  = require("lodash/function/debounce");
 var qs        = require("qs");
 
 /**
@@ -54,18 +55,26 @@ function _bindWindowLocation(router) {
   // when the location changes in the hash, reflect that change
   // back down to the application state.
   window.onpopstate = function() {
-    var newLocation = new Location(_parseUrl(window.location.hash.replace("#", "")));
-    if (router.location.toString() !== newLocation.toString()) {
-      router.redirect(newLocation.toString());
-    }
+    var newLocation = getNewLocation();
+    if (!newLocation) return;
+    router.redirect(newLocation);
   };
+
+  function getNewLocation() {
+    var newLocation = new Location(_parseUrl(window.location.pathname));
+    if (router.location.toString() !== newLocation.toString()) {
+      return newLocation.toString();
+    }
+    return void 0;
+  }
 
   // watch the location for any change, stringify it, then reflect
   // that change in the location hash. This will ensure that the user
   // is able to reload the page and still maintain the application state
-  router.location.on("change", function() {
-    window.location.hash = router.location.toString();
-  });
+  router.location.on("change", debounce(function(op, np) {
+    if (!getNewLocation()) return;
+    history.pushState({}, router.location.state.title, router.location.toString());
+  }), 10);
 }
 
 function Router(properties) {
@@ -85,11 +94,11 @@ extend(Router.prototype, BaseModel.prototype, {
   /**
    */
 
-  bootstrap: function() {
+  initialize: function() {
 
     // redirect
     if (process.browser) {
-      this.redirect("/" + location.hash.replace("#", ""));
+      this.redirect(location.pathname);
     }
   },
 

@@ -10,7 +10,7 @@ module.exports = function(app) {
 
   return {
     initialize: function(operation, next) {
-      app.logger.info("start socket.io server");
+      app.logger.info("init socket.io server");
       server = io(app.http);
 
       server.on("connection", function(client) {

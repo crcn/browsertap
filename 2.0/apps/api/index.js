@@ -18,5 +18,4 @@ var app = new Application({
 /**
  */
 
-app.initialize(function() {
-});
+app.initialize();
