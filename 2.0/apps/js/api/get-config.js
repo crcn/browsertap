@@ -1,6 +1,7 @@
-var LogLevels  = require("common/logger/levels");
-var deepExtend = require("deep-extend");
-var os         = require("os");
+var LogLevels       = require("common/logger/levels");
+var deepExtend      = require("deep-extend");
+var os              = require("os");
+var getCommonConfig = require("common/get-config");
 
 module.exports = function(env) {
 
@@ -24,9 +25,12 @@ module.exports = function(env) {
       },
       socket: {
         channel: "operations"
+      },
+      loggly: {
+        tags: ["api"]
       }
     }
   };
 
-  return deepExtend({}, configs.defaults, configs[env.NODE_ENV] || {});
+  return deepExtend({}, getCommonConfig(env), configs.defaults, configs[env.NODE_ENV] || {});
 };

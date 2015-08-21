@@ -22,7 +22,7 @@ module.exports = function(app) {
       var msg = args.shift();
       msg     = msg.replace(/%./g, args.shift.bind(args));
 
-      msg += args.join(" ");
+      msg = [msg].concat(args).join(" ");
 
       msg = padRight(operation.type, 8, " ")[colors[operation.type] || "grey"] + ": " + msg;
 

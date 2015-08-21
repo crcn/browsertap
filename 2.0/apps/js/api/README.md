@@ -18,3 +18,4 @@ LOG_LEVEL=VERBOSE npm start
 #### TODO
 
 - [ ] - graceful shutdown if stuff crashes
+- [ ] - sandbox remote operations

@@ -15,6 +15,8 @@ module.exports = function(app) {
 
       server.on("connection", function(client) {
         var bus = app.bus;
+
+        // TODO - sandbox operations here
         bus = socketioBus(app.get("config.socket.channel"), client, bus);
       });
 

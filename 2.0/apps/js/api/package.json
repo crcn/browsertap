@@ -9,5 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "mesh-mongodb": "^1.0.1"
   }
 }
