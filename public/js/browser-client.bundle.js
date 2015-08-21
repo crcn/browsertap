@@ -62,18 +62,30 @@ module.exports = function() {
 };
 
 },{}],4:[function(require,module,exports){
+(function (global){
 var Application = require(1);
 var getConfig   = require(16);
 
-var app = new Application({
+/**
+ */
+
+var app = global.app = new Application({
   element: document.getElementById("application"),
-  config: getConfig({})
+  config: getConfig({
+    socket: {
+      client: "http://0.0.0.0:8080"
+    }
+  })
 });
+
+/**
+ */
 
 app.initialize(function() {
   app.logger.info("initialized");
 });
 
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"1":1,"16":16}],5:[function(require,module,exports){
 var BaseModel       = require(20);
 var extend          = require(62);
@@ -393,6 +405,9 @@ module.exports = function() {
       // https://browsertap.loggly.com/login
       token: "8b127293-b6a6-40a8-b010-fbbcf9ea3437",
       subdomain: "browsertap"
+    },
+    socket: {
+      channel: "operations"
     }
   };
 };

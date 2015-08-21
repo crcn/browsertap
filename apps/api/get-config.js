@@ -23,9 +23,6 @@ module.exports = function(env) {
       log : {
         level: LogLevels.fromString(env.LOG_LEVEL || env.NODE_ENV)
       },
-      socket: {
-        channel: "operations"
-      },
       loggly: {
         tags: ["api"]
       }
