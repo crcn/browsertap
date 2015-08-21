@@ -10,14 +10,15 @@ module.exports = function(app) {
 
   return {
     initialize: function(operation, next) {
-      app.logger.info("init socket.io server");
+      var channel = app.get("config.socket.channel");
+      app.logger.info("init socket.io server on channel \"%s\"", channel);
       server = io(app.http);
 
       server.on("connection", function(client) {
         var bus = app.bus;
 
         // TODO - sandbox operations here
-        bus = socketioBus(app.get("config.socket.channel"), client, bus);
+        bus = socketioBus(channel, client, bus);
       });
 
       next();
