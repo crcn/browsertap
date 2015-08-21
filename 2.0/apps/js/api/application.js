@@ -1,5 +1,6 @@
 var BaseApplication = require("common/application");
 var extend          = require("lodash/object/extend");
+var cluster         = require("cluster");
 
 /**
  */
@@ -29,7 +30,29 @@ extend(APIApplication.prototype, BaseApplication.prototype, {
 
     // initialize the models
     require("./models")
-  ])
+  ]),
+
+  /**
+   */
+
+  initialize: function(next) {
+
+    if (cluster.isMaster && this.get("config.numCores") > 0) {
+      this.logger.info("forking this sucker %d times", this.config.numCores);
+      for (var i = this.config.numCores; i--;) this.fork();
+      if (next) next();
+    } else {
+      BaseApplication.prototype.initialize.call(this, next);
+    }
+
+  },
+
+  /**
+   */
+
+  fork: function() {
+    cluster.fork().once("exit", this.fork.bind(this));
+  }
 });
 
 /**

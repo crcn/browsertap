@@ -1,17 +1,21 @@
 var LogLevels  = require("common/logger/levels");
 var deepExtend = require("deep-extend");
+var os         = require("os");
 
 module.exports = function(env) {
 
   var configs = {
 
-    development : {},
+    development : {
+      numCores: 0,
+    },
 
     production  : {},
 
     staging     : {},
 
     defaults: {
+      numCores: os.cpus().length,
       http: {
         port: env.PORT || 8080,
       },
