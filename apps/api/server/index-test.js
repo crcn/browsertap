@@ -40,7 +40,7 @@ describe(__filename + "#", function() {
 
   it("can pass remote operations from socket.io to the server", function(next) {
 
-    app.commands.addHandler("someCommand", mesh.stream(function(operation, stream) {
+    app.publicCommands.addHandler("someCommand", mesh.stream(function(operation, stream) {
       stream.write("hello");
       stream.end("world");
     }));

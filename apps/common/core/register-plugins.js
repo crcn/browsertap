@@ -7,10 +7,10 @@ module.exports = function(app, plugins) {
     var disposables = [];
 
     for (var name in commands) {
-      disposables.push(app.commands.addHandler(name, commands[name]));
+      disposables.push(app.internalCommands.addHandler(name, commands[name]));
     }
 
-    app.commands.addHandler("terminate", function(operation, next) {
+    app.internalCommands.addHandler("terminate", function(operation, next) {
       disposables.forEach(function(disposable) {
         disposable.dispose();
       });

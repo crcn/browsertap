@@ -17,21 +17,12 @@ module.exports = function(app) {
       server = io(app.http);
 
       server.on("connection", function(client) {
-        var bus = app.bus;
+        var bus = app.publicCommands;
 
         app.logger.verbose("socket.io client connected");
 
-        // TODO: don't do this here. { public: true } should be defined for route handlers.
-        // OR pass in the PUBLIC BUS
-        bus = mesh.accept(
-          sift({
-            name: {$in: ["hello"]}
-          })
-        , bus)
-
         // TODO - sandbox operations here
         bus = socketioBus(channel, client, bus);
-
 
         client.on("disconnect", function() {
 

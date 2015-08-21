@@ -1,4 +1,5 @@
 var mesh = require("mesh");
+var sift = require("sift");
 
 module.exports = function(handlers, defaultBus) {
   var busses = {};
@@ -9,13 +10,23 @@ module.exports = function(handlers, defaultBus) {
     return bus(operation);
   }
 
-  commands.addHandler = function(name, handler) {
+  commands.addHandler = function(name, condition, handler) {
+
+    if (arguments.length === 2) {
+      handler    = condition;
+      condition  = void 0;
+    }
+
     var bus;
 
     if (handler.length === 2) {
       bus = mesh.wrap(handler);
     } else {
       bus = handler;
+    }
+
+    if (condition) {
+      bus = mesh.accept(sift(condition), bus);
     }
 
     var __handlers = [];
@@ -36,7 +47,9 @@ module.exports = function(handlers, defaultBus) {
     };
   };
 
-  for (var name in handlers) commands.addHandler(name, handlers[name]);
+  for (var name in handlers) {
+    commands.addHandler(name, handlers[name]);
+  }
 
   return commands;
 };

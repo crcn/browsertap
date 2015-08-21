@@ -82,4 +82,23 @@ describe(__filename + "#", function() {
       });
     });
   });
+
+  xit("skips a handler if public is true", function(next) {
+    var bus = commands();
+    var i = 0;
+
+    function handle(operation, next) {
+      i++;
+      next();
+    }
+
+    bus.addHandler("next", handle);
+
+    bus({ name: "next", public: true }).on("end", function() {
+      bus({ name: "next" }).on("end", function() {
+        expect(i).to.be(1);
+        next();
+      });
+    });
+  });
 });
