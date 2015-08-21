@@ -11,7 +11,7 @@ module.exports = function(app) {
   return {
     initialize: function(operation, next) {
       var channel = app.get("config.socket.channel");
-      app.logger.info("init socket.io server on channel \"%s\"", channel);
+      app.logger.info("socket.io channel : \"%s\"", channel);
       server = io(app.http);
 
       server.on("connection", function(client) {
