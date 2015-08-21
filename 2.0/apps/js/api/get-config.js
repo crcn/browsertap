@@ -15,9 +15,9 @@ module.exports = function(env) {
     staging     : {},
 
     defaults: {
-      numCores: os.cpus().length,
+      numCores: Number(process.env.NUM_CORES || os.cpus().length),
       http: {
-        port: env.PORT || 8080,
+        port: Number(env.PORT || 8080),
       },
       log : {
         level: LogLevels.fromString(env.LOG_LEVEL || env.NODE_ENV)
