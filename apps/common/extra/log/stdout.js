@@ -24,7 +24,11 @@ module.exports = function(app) {
 
       var args = operation.args.map(function(arg) {
         if (typeof arg !== "object") return arg;
-        return JSON.stringify(arg);
+        return JSON.stringify(arg, null, 2);
+
+        // .replace(/".*?"/g, function(match) {
+        //   return chalk.blue(match)
+        // })
       }).concat();
 
       var msg = args.shift();

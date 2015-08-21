@@ -18,4 +18,6 @@ var app = new Application({
 /**
  */
 
-app.initialize();
+app.initialize(function() {
+  app.logger.info("initialized and ready to serve 🍰");
+});
