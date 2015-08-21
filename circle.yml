@@ -1,4 +1,6 @@
 general:
   branches:
     only:
-      - 2.0	
+      - master
+  node:
+    version: 0.10.22
