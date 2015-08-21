@@ -1,23 +1,29 @@
-## Project Structure
-
-- `application/` - the website, & online application
-- `browser_extension/` - the extension for browsers
-- `desktop_player` - the SWF that plays remote desktops
-- `display_driver` - the display driver that runs on the server
-- `http_client` - deprecated for application
-- `puppet` - puppet library interfaces WKM & handles application startup / shutdown
-- `puppeteer` - runs on each VM - interface to the client
-- `website` - depecated - should be in application
-- `wkm` - window / keyboard / mouse hook command line
+### BrowserTap 2.0
 
 
-## Application requirements
+BrowserTap 2.0 will be an open-source core, with a closed-sourcea native desktop application that enables (likely) QA testers and engineers to enter their AWS credentials, to allow one-click creation of a Windows, etc instance to debug their application manually, broadcasted from a web browser running on said instance.
 
-- [node.js](http://nodejs.org)
-- [supervisor](http://supervisord.org)
-- [red5](http://red5.org)
 
-## Puppeteer requirements
+### Structure
 
-- [node.js](http://nodejs.org)
+Here's the general folder structure for v2 of BrowserTap:
 
+```
+apps/ - all application sources that need to get compiled
+  cc/ - all C++ sources that need to be bundled into binaries
+  js/ - all JavaScript-based applications. Either node or built
+docs/ - various docs, wikis, business plans, etc.
+home/ - the main home page
+  build/ - built JS 
+```
+
+#### Apps 
+
+Below are a set apps to be developed
+
+- [Home](./apps/home) - Home application
+- [API](./apps/api) - orchestration, billing, *all* backend related stuff
+- [browser client](./apps/browser-client) - web client which launches browsers
+- [desktop client](./apps/desktop-client) - desktop client people can install from the app store
+- [desktop server](./apps/desktop-server) - connects to the API server and does all the signaling for desktop. Also does cleanup when a user logs out.
+- [desktop](./apps/desktop) - desktop controller. Does magical webrtc shit and other nice things.
