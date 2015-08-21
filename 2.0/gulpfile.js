@@ -26,7 +26,7 @@ var apps = [
 var paths = {
   testFiles      : ["test/**/*.js"],
   allFiles       : ["test/**/*.js"],
-  buildDirectory : path.normalize(__dirname + "/home/public/build")
+  buildDirectory : path.normalize(__dirname + "/public/build")
 };
 
 var ops = {
@@ -49,7 +49,7 @@ apps.forEach(function(app) {
 gulp.task("bundle", function() {
   return mergeStream(sift({ bundle: true }, apps).map(function(app) {
     return browserify(__dirname + "/apps/" + app.name).
-    plugin(collapse).
+    // plugin(collapse).
     bundle().
     pipe(source(app.name + ".bundle.js")).
     pipe(buffer()).

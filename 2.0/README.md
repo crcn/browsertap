@@ -21,6 +21,7 @@ home/ - the main home page
 
 Below are a set apps to be developed
 
+- [Home](./apps/home) - Home application
 - [API](./apps/api) - orchestration, billing, *all* backend related stuff
 - [browser client](./apps/browser-client) - web client which launches browsers
 - [desktop client](./apps/desktop-client) - desktop client people can install from the app store

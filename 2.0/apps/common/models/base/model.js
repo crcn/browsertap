@@ -1,4 +1,5 @@
-var extend     = require("lodash/object/extend");
+var extend       = require("lodash/object/extend");
+var EventEmitter = require("events");
 
 var __getters = {};
 
@@ -6,22 +7,34 @@ var __getters = {};
  */
 
 function BaseModel(properties) {
+  EventEmitter.call(this);
   if (properties) extend(this, properties);
 }
 
 /**
  */
 
-extend(BaseModel.prototype, {
+extend(BaseModel.prototype, EventEmitter.prototype, {
 
   /**
    * sets properties on the model
    */
 
   setProperties: function(properties) {
+
+    var oldProps   = {};
+    var newProps   = {};
+    var hasChanged = false;
+
     for (var key in properties) {
-      this[key] = properties[key];
+      if (this[key] !== properties[key]) {
+        hasChanged = true;
+        oldProps[key] = this[key];
+        newProps[key] = this[key] = properties[key];
+      }
     }
+
+    if (hasChanged) this.emit("change", { properties: newProps }, { properties: oldProps });
   },
 
   /**

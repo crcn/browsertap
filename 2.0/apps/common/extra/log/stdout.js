@@ -1,5 +1,5 @@
-var colors   = require("colors");
 var padRight = require("lodash/string/padRight");
+var chalk    = require("chalk");
 
 module.exports = function(app) {
 
@@ -8,11 +8,19 @@ module.exports = function(app) {
     warn     : "yellow",
     error    : "red",
     verbose  : "grey",
-    info     : "magenta"
+    info     : "cyan"
+  };
+
+  var snippets = {
+    ":break": function() {
+      return "------------------------------------------------";
+    }
   };
 
   return {
     log: function(operation, next) {
+
+      // TODO - calc log info here such as log(":break");
 
       var args = operation.args.map(function(arg) {
         if (typeof arg !== "object") return arg;
@@ -24,7 +32,19 @@ module.exports = function(app) {
 
       msg = [msg].concat(args).join(" ");
 
-      msg = padRight(operation.type, 8, " ")[colors[operation.type] || "grey"] + ": " + msg;
+      if (snippets[msg]) {
+        msg = snippets[msg]();
+      }
+
+      var color = colors[operation.type];
+
+      var label = ": ";
+
+      if (color) {
+        label = chalk[color](label);
+      }
+
+      msg =  label + msg;
 
       if (/warn|error/.test(operation.type)) {
         console.error(msg);
