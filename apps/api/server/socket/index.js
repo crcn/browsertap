@@ -21,6 +21,8 @@ module.exports = function(app) {
 
         app.logger.verbose("socket.io client connected");
 
+        // TODO: don't do this here. { public: true } should be defined for route handlers.
+        // OR pass in the PUBLIC BUS
         bus = mesh.accept(
           sift({
             name: {$in: ["hello"]}
@@ -29,6 +31,13 @@ module.exports = function(app) {
 
         // TODO - sandbox operations here
         bus = socketioBus(channel, client, bus);
+
+
+        client.on("disconnect", function() {
+
+          // TODO: dispose socketioBus here
+          app.logger.verbose("socket.io disconect");
+        });
       });
 
       next();
