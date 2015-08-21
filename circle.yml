@@ -2,5 +2,7 @@ general:
   branches:
     only:
       - master
+
+machine:
   node:
     version: 0.10.22
