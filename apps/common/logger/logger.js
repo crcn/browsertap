@@ -23,7 +23,20 @@ extend(Logger.prototype, BaseModel.prototype, {
   /**
    */
 
-  level: LogLevels.ALL
+  level: LogLevels.ALL,
+
+  /**
+   * TODO
+   */
+
+  child: function(prefix) {
+    return new Logger({
+      prefix : prefix,
+      bus    : this.bus,
+      level  : this.level,
+      parent : this
+    });
+  }
 });
 
 /**

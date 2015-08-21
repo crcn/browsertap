@@ -20,9 +20,9 @@ extend(BrowserClientApplication.prototype, BaseApplication.prototype, {
   /**
    */
 
-  plugins: [
+  plugins: [require("./bus")].concat(BaseApplication.prototype.plugins, [
     require("./routes")
-  ],
+  ]),
 
   /**
    */
