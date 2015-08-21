@@ -19,6 +19,16 @@ module.exports = function(app) {
     });
   });
 
+  router.addRoute("app", "/app", function(location) {
+    location.setProperties({
+      state: {
+        layout: "app",
+        bodyPage: "app",
+        title: "Browser Client"
+      }
+    });
+  });
+
   router.addRoute("contact", "/contact", function(location) {
     location.setProperties({
       state: {

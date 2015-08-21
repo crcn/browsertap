@@ -1,10 +1,10 @@
 <html>
   <head>
-    <title>Contact</title>
+    <title>{{ state.title }}</title>
     <link crossorigin="anonymous" href="/vendor/bootstrap/css/bootstrap.min.css" media="all" rel="stylesheet" />
   </head>
   <body>  
-    <div id="application"><div data-reactid=".0">contact</div></div>
-    <script src="/js/home.bundle.js"></script>
+    <div id="application">{{{ sections.body }}}</div>
+    <script src="/js/browser-client.bundle.js"></script>
   </body>
 </html>

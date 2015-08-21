@@ -8,7 +8,7 @@ var Body            = require("./components/body");
  */
 
 function HomeApplication(properties) {
-  this.router = new Router();
+  this.router = new Router({ sync: !process.browser });
   BaseApplication.call(this, properties);
 }  
 
@@ -56,7 +56,7 @@ extend(HomeApplication.prototype, BaseApplication.prototype, {
 
   /**
    */
-   
+
   renderBodyComponent: function(element) {
     return this.renderRootComponent(Body, {}, element);
   }

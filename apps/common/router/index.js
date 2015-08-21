@@ -81,7 +81,7 @@ function Router(properties) {
   BaseModel.call(this, properties);
   this.location = new Location();
   this._routes = {};
-  if (process.browser) {
+  if (process.browser && this.sync !== false) {
     _bindWindowLocation(this);
   }
 }
