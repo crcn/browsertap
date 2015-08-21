@@ -43,14 +43,12 @@ apps.forEach(function(app) {
   paths.testFiles.push("apps/" + app.name + "/**/*-test.js");
 });
 
-console.log(paths);
-
 /**
  */
 
 gulp.task("bundle", function() {
   return mergeStream(sift({ bundle: true }, apps).map(function(app) {
-    return browserify(__dirname + "/" + app.name).
+    return browserify(__dirname + "/apps/" + app.name).
     plugin(collapse).
     bundle().
     pipe(source(app.name + ".bundle.js")).

@@ -45,6 +45,7 @@
     "gulp-uglify": "^1.2.0",
     "linklocal": "^2.5.2",
     "merge-stream": "^1.0.0",
+    "node-static": "^0.7.7",
     "sinon": "^1.16.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
