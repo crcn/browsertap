@@ -32,12 +32,20 @@ function browser(app) {
  */
 
 function server(app) {
-  process.on("uncaughtException", function(error) {
+
+  function onException(error) {
     app.logger.error(error.message, { stack: parseStack(error), platform: platformInfo });
     app.logger.notice("gracefully shutting down");
 
     // give some time for the op to send to loggly
     setTimeout(process.exit.bind(process, 1), 1000 * 4);
+  }
+
+  process.on("uncaughtException", onException);
+
+  app.internalCommands.addHandler("dispose", function(operation, next) {
+    process.removeListener("uncaughtException", onException);
+    next();
   });
 }
 
