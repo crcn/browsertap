@@ -10,11 +10,23 @@ module.exports = function(env) {
       numCores: 0,
     },
 
-    production  : {},
+    production: {
+      db: {
+        host: "mongodb://localhost:27017/browsertap-production"
+      }
+    },
 
-    staging     : {},
+    staging: {
+      db: {
+        host: "mongodb://localhost:27017/browsertap-staging"
+      }
+    },
 
     defaults: {
+      db: {
+        type: "mongo",
+        host: "mongodb://127.0.0.1:27017/browsertap-development",
+      },
       numCores: Number(process.env.NUM_CORES || os.cpus().length),
       http: {
         port: Number(env.PORT || 8080),

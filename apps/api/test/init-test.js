@@ -9,6 +9,9 @@ beforeEach(function(next) {
       log: {
         level: 0
       },
+      db: {
+        type: "mock"
+      },
       socket: {
         channel: "test-ops",
         host: "http://127.0.0.1:" + port,

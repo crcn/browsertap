@@ -1,6 +1,6 @@
-var commands = require("./commands");
-var expect   = require("expect.js");
-var mesh     = require("mesh");
+var commands     = require("./commands");
+var expect       = require("expect.js");
+var mesh         = require("mesh");
 
 describe(__filename + "#", function() {
   it("can execute a command", function(next) {
@@ -83,22 +83,26 @@ describe(__filename + "#", function() {
     });
   });
 
-  xit("skips a handler if public is true", function(next) {
+  it("can register a hash of handlers", function(next) {
+
     var bus = commands();
     var i = 0;
 
-    function handle(operation, next) {
-      i++;
+    bus.addHandler({
+      a: function(o, n) { i++; n(); },
+      b: function(o, n) { i++; n(); },
+      c: function(o, n) { i++; n(); },
+      d: function(o, n) { i++; n(); },
+    });
+
+    bus = mesh.limit(1, bus);
+
+    bus({ name: "a" });
+    bus({ name: "b" });
+    bus({ name: "c" });
+    bus({ name: "d" }).on("end", function() {
+      expect(i).to.be(4);
       next();
-    }
-
-    bus.addHandler("next", handle);
-
-    bus({ name: "next", public: true }).on("end", function() {
-      bus({ name: "next" }).on("end", function() {
-        expect(i).to.be(1);
-        next();
-      });
     });
   });
 });

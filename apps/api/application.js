@@ -29,7 +29,10 @@ extend(APIApplication.prototype, BaseApplication.prototype, {
     require("./http"),
 
     // socket.io
-    require("./socket")
+    require("./socket"),
+
+    // db - mock, mongodb, etc
+    require("./db")
   ]),
 
   /**

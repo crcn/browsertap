@@ -12,6 +12,14 @@ module.exports = function(handlers, defaultBus) {
 
   commands.addHandler = function(name, condition, handler) {
 
+    if (typeof name === "object") {
+      var handlers = name;
+      for (var n2 in handlers) {
+        commands.addHandler(n2, handlers[n2]);
+      }
+      return;
+    }
+
     if (arguments.length === 2) {
       handler    = condition;
       condition  = void 0;
@@ -47,9 +55,7 @@ module.exports = function(handlers, defaultBus) {
     };
   };
 
-  for (var name in handlers) {
-    commands.addHandler(name, handlers[name]);
-  }
+  if (handlers) commands.addHandler(handlers);
 
   return commands;
 };
