@@ -1,5 +1,9 @@
 module.exports = function(app) {
-  app.publicCommands.addHandler("test", function(operation, next) {
-    next(void 0, "blarg");
-  });
+  app.publicCommands.addHandler({
+
+    insert: function(operation, next) {
+      console.log("INSERT USER");
+    }
+
+  }, { collection: "users" });
 };

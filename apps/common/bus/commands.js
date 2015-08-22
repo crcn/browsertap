@@ -15,7 +15,7 @@ module.exports = function(handlers, defaultBus) {
     if (typeof name === "object") {
       var handlers = name;
       for (var n2 in handlers) {
-        commands.addHandler(n2, handlers[n2]);
+        commands.addHandler(n2, condition, handlers[n2]);
       }
       return;
     }
