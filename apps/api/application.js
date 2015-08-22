@@ -17,19 +17,19 @@ extend(APIApplication.prototype, BaseApplication.prototype, {
   /**
    */
 
-  plugins: [require("./bus")].concat(BaseApplication.prototype.plugins).concat([
+  plugins: BaseApplication.prototype.plugins.concat([
 
-    // registered commands executable from anywhere in the app
-    require("./commands"),
-
-    // http / socket server
-    require("./server"),
-
-    // public endpoints
-    require("./endpoints"),
+    // public en
+    require("./public-commands"),
 
     // initialize the models
-    require("./models")
+    require("./models"),
+
+    // http server
+    require("./http"),
+
+    // socket.io
+    require("./socket")
   ]),
 
   /**

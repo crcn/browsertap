@@ -48,8 +48,8 @@ extend(Application.prototype, BaseModel.prototype, {
   /**
    */
 
-  terminate: function(next) {
-    return this.bus({ name: "terminate" }).once("end", next || function() { });
+  dispose: function(next) {
+    return this.bus({ name: "dispose" }).once("end", next || function() { });
   }
 });
 

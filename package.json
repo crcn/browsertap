@@ -6,7 +6,8 @@
   "scripts": {
     "test": "gulp lint test",
     "postinstall": "linklocal",
-    "start": "static public --port=8085"
+    "start": "static public --port=8085",
+    "start-api": "cd apps/api; npm start"
   },
   "author": "",
   "license": "ISC",

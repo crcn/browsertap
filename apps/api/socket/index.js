@@ -33,7 +33,7 @@ module.exports = function(app) {
 
       next();
     },
-    terminate: function(operation, next) {
+    dispose: function(operation, next) {
       server.close();
       next();
     }
