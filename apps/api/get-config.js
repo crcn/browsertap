@@ -24,7 +24,7 @@ module.exports = function(env) {
 
     defaults: {
       db: {
-        type: "mongo",
+        type: process.env.DB || "mongo",
         host: "mongodb://127.0.0.1:27017/browsertap-development",
       },
       numCores: Number(process.env.NUM_CORES || os.cpus().length),

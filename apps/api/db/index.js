@@ -14,8 +14,16 @@ module.exports = function(app) {
         throw new Error("db transport " + type + " does not exist");
       }
 
-      dbs[type](app);
-      next();
+      var bus = dbs[type](app);
+
+      app.internalCommands.addHandler({
+        insert : bus,
+        remove : bus,
+        update : bus,
+        load   : bus
+      });
+
+      return next();
     }
   };
 };

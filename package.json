@@ -29,6 +29,7 @@
     "loggly": "^1.0.8",
     "loggly-browserify": "^1.0.4",
     "mesh": "^4.1.0",
+    "mesh-memory": "^2.0.13",
     "mesh-mongodb": "^1.0.1",
     "modules": "file:./apps/modules",
     "mongodb": "^2.0.42",
