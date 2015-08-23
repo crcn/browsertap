@@ -20,7 +20,7 @@ extend(APIApplication.prototype, BaseApplication.prototype, {
   plugins: BaseApplication.prototype.plugins.concat([
 
     // public en
-    require("./public-commands"),
+    // require("./public-commands"),
 
     // initialize the models
     require("./models"),

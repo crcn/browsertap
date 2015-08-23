@@ -25,6 +25,7 @@
     "desktop-server": "file:./apps/desktop-server",
     "express": "^4.13.3",
     "intl": "^1.0.0",
+    "joi": "^6.6.1",
     "lodash": "^3.10.1",
     "loggly": "^1.0.8",
     "loggly-browserify": "^1.0.4",
