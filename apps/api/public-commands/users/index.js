@@ -1,6 +1,7 @@
 var mesh         = require("mesh");
 var sift         = require("sift");
 var createRouter = require("../utils/create-router");
+var exists       = require("../utils/exists");
 
 module.exports = function(internalBus) {
   return createRouter([
@@ -15,7 +16,10 @@ module.exports = function(internalBus) {
         return internalBus({
           collection: operation.collection,
           name: "load",
-          query: { emailAddress: operation.data.emailAddress, password: operation.data.password }
+          query: {
+            emailAddress: operation.data.emailAddress,
+            password: operation.data.password
+          }
         });
       }, mesh.yields(new Error("user exists"))),
 
@@ -33,20 +37,3 @@ module.exports = function(internalBus) {
   ]);
 };
 
-/**
- */
-
-function exists(bus, yesBus, noBus) {
-
-  if (!noBus) noBus   = mesh.noop;
-  if (!yesBus) yesBus = mesh.noop;
-
-  return mesh.stream(function(operation, stream) {
-    var data = [];
-    bus(operation)
-    .on("data", data.push.bind(data))
-    .on("end", function() {
-      (data.length ? yesBus(operation) : noBus(operation)).pipe(stream);
-    });
-  });
-}
