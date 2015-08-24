@@ -34,3 +34,10 @@ Just some features to keep in mind to ensure we get some of the plumbing right.
   - would enable people to connect to nearby hosts - like torrenting.
   - enable people to do this for free as well
 - run virtual box VMs on user's machine & broadcast screens back
+
+
+#### target markets
+
+- qa engineers & qa companies
+  - rainforest QA
+- dev companies that do virtualizations
