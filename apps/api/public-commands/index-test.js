@@ -68,5 +68,9 @@ describe(__filename + "#", function() {
         next();
       });
     });
+
+    it("can reset the password of the user", function() {
+      usersBus({ name: "resetPassword", collection: "users" });
+    });
   });
 });

@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "api": "file:./apps/api",
+    "async": "^1.4.2",
     "browser-client": "file:./apps/browser-client",
     "chalk": "^1.1.1",
     "colors": "^1.1.2",

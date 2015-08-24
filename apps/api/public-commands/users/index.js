@@ -4,6 +4,7 @@ var createRouter = require("../utils/create-router");
 var exists       = require("../utils/exists");
 
 module.exports = function(internalBus) {
+
   return createRouter([
 
     // register
@@ -33,6 +34,19 @@ module.exports = function(internalBus) {
 
       // validate query
       internalBus
+    ),
+
+    // reset password
+    sift({ name: "resetPassword" }),
+    mesh.sequence(
+
+      // TODO
+      // join("user", function(operation) { })
+      mesh.stream(function(operation, stream) {
+
+        // internalBus({ collection: operation.collection, query: { emailAddress: operation.query.emailAddress }}).
+
+      })
     )
   ]);
 };

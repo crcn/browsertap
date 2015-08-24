@@ -1,0 +1,2 @@
+- selenium test generator (automated assistent)
+- ability to install plugins in browsertap
