@@ -17,9 +17,7 @@ describe(__filename + "#", function() {
       dbOps.push(op);
       return mesh.noop();
     });
-    var app = { bus: db };
-    createPublicCommands(app);
-    bus = mesh.limit(1, app.publicBus);
+    bus = mesh.limit(1, createPublicCommands(db));
     data = [];
   });
 
