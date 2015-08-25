@@ -1,16 +1,73 @@
-var Logger = require("./logger");
-var extend = require("lodash/object/extend");
+var BaseModel = require("../models/base/model");
+var extend    = require("lodash/object/extend");
+var LogLevels = require("./levels");
+var mesh      = require("mesh");
 
 /**
  */
 
-module.exports = function(app) {
+function Logger(properties) {
+  BaseModel.call(this, properties);
+}
 
-  var config = extend({
-    bus: function(operation) {
-      return app.bus(operation);
-    }
-  }, app.get("config.log"));
+/**
+ */
 
-  app.logger = new Logger(config);
-};
+extend(Logger.prototype, BaseModel.prototype, {
+
+  /**
+   */
+
+  bus: mesh.noop,
+
+  /**
+   */
+
+  level: LogLevels.ALL,
+
+  /**
+   * TODO
+   */
+
+  child: function(prefix) {
+    return new Logger({
+      prefix : prefix,
+      bus    : this.bus,
+      level  : this.level,
+      parent : this
+    });
+  }
+});
+
+/**
+ * attach the methods
+ */
+
+Object.keys(LogLevels).forEach(function(key) {
+  var code = LogLevels[key];
+  if (!(code & LogLevels.NONE)) {
+    var type = key.toLowerCase();
+    Logger.prototype[type] = function() {
+      if (!(this.level & code)) return;
+      this.bus({
+
+        // blast off into the either. Enable any handler for logs.
+        name: "log",
+
+        // add english term to log
+        type: type,
+
+        // maintain consistent property
+        level: code,
+
+        // don't do anything to the arguments
+        args: Array.prototype.slice.call(arguments, 0)
+      });
+    };
+  }
+});
+
+/**
+ */
+
+module.exports = Logger;

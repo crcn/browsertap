@@ -1,7 +1,7 @@
-var BaseModel       = require("./models/base/model");
+var BaseModel       = require("common/models/base/model");
 var extend          = require("lodash/object/extend");
 var mesh            = require("mesh");
-var registerPlugins = require("./core/register-plugins");
+var registerPlugins = require("./register-plugins");
 var flatten         = require("lodash/array/flattenDeep");
 
 /**
@@ -26,9 +26,10 @@ extend(Application.prototype, BaseModel.prototype, {
    */
 
   plugins: [
-    require("./commands"),
-    require("./logger"),
-    require("./extra")
+    require("./plugins/bus"),
+    require("./plugins/commands"),
+    require("./plugins/logger"),
+    require("./plugins/extra")
   ],
 
   /**

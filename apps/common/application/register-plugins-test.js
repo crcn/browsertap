@@ -1,6 +1,6 @@
 var plugins        = require("./register-plugins");
 var BaseModel      = require("../models/base/model");
-var commandsPlugin = require("../commands");
+var commandsPlugin = require("./plugins/commands");
 var expect         = require("expect.js");
 
 describe(__filename + "#", function() {

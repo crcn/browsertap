@@ -1,6 +1,6 @@
 var deepExtend      = require("deep-extend");
 var os              = require("os");
-var getCommonConfig = require("common/get-config");
+var getCommonConfig = require("common/utils/get-config");
 
 module.exports = function(env) {
 

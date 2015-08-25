@@ -23,16 +23,15 @@ extend(APIApplication.prototype, BaseApplication.prototype, {
     // require("./public-commands"),
 
     // initialize the models
-    require("./models"),
 
     // http server
-    require("./http"),
+    require("./plugins/http"),
 
     // socket.io
-    require("./socket"),
+    require("./plugins/socket"),
 
     // db - mock, mongodb, etc
-    require("./db")
+    require("./plugins/db")
   ]),
 
   /**

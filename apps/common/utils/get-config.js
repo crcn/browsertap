@@ -1,4 +1,4 @@
-var LogLevels = require("./logger/levels");
+var LogLevels = require("common/logger/levels");
 
 /**
  */
