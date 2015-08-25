@@ -1,4 +1,4 @@
-var Application = require("./index");
+var Application = require("./application");
 var expect      = require("expect.js");
 
 describe(__filename + "#", function() {

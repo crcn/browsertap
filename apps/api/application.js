@@ -17,6 +17,11 @@ extend(APIApplication.prototype, BaseApplication.prototype, {
   /**
    */
 
+  bus: require("api/bus"),
+
+  /**
+   */
+
   plugins: BaseApplication.prototype.plugins.concat([
 
     // public en
@@ -38,7 +43,6 @@ extend(APIApplication.prototype, BaseApplication.prototype, {
    */
 
   initialize: function(next) {
-
     if (cluster.isMaster && this.get("config.numCores") > 0) {
       this.logger.info("fourk it %d times ✊", this.config.numCores);
       for (var i = this.config.numCores; i--;) this.fork();
@@ -46,7 +50,6 @@ extend(APIApplication.prototype, BaseApplication.prototype, {
     } else {
       BaseApplication.prototype.initialize.call(this, next);
     }
-
   },
 
   /**
