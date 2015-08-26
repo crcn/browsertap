@@ -18,16 +18,6 @@ describe(__filename + "#", function() {
     expect(app.c).to.be("d");
   });
 
-  it("automatically adds .plugins", function() {
-    var app = new Application({
-      plugins: [
-        function(app) { app.a = "b"; },
-        function(app) { app.c = "d"; }
-      ]
-    });
-    expect(app.a).to.be("b");
-    expect(app.c).to.be("d");
-  });
 
   it("logger exists", function() {
     var app = new Application();

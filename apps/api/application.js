@@ -1,6 +1,9 @@
 var BaseApplication = require("common/application");
 var extend          = require("lodash/object/extend");
 var cluster         = require("cluster");
+var http            = require("./http");
+var socket          = require("./socket");
+var createBus       = require("./bus");
 
 /**
  */
@@ -17,40 +20,29 @@ extend(APIApplication.prototype, BaseApplication.prototype, {
   /**
    */
 
-  bus: require("api/bus"),
-
-  /**
-   */
-
-  plugins: BaseApplication.prototype.plugins.concat([
-
-    // public en
-    // require("./public-commands"),
-
-    // initialize the models
-
-    // http server
-    require("./plugins/http"),
-
-    // socket.io
-    require("./plugins/socket"),
-
-    // db - mock, mongodb, etc
-    require("./plugins/db")
-  ]),
-
-  /**
-   */
-
   initialize: function(next) {
+
+    // fork it?
     if (cluster.isMaster && this.get("config.numCores") > 0) {
       this.logger.info("fourk it %d times ✊", this.config.numCores);
       for (var i = this.config.numCores; i--;) this.fork();
       if (next) next();
-    } else {
-      BaseApplication.prototype.initialize.call(this, next);
+      return;
     }
+
+    return BaseApplication.prototype.initialize.call(this, next);
   },
+
+  /**
+   */
+
+  initializePlugins: function() {
+    BaseApplication.prototype.initializePlugins.call(this);
+    this.use(http);
+    this.use(socket);
+    this.bus = createBus(this, this.bus);
+  },
+
 
   /**
    */

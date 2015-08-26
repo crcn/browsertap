@@ -1,7 +1,7 @@
 var mesh         = require("mesh");
 var sift         = require("sift");
-var createRouter = require("api/bus/common/create-router");
-var exists       = require("api/bus/common/exists");
+var createRouter = require("api/bus/utils/create-router");
+var exists       = require("api/bus/utils/exists");
 
 module.exports = function(internalBus) {
 

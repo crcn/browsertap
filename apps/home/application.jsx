@@ -4,6 +4,11 @@ var React           = require("react");
 var Router          = require("common/router");
 var Body            = require("./components/body");
 
+var plugins = [
+    require("./routes"),
+    require("./extra/hijack-anchors")
+]
+
 /**
  */
 
@@ -20,10 +25,9 @@ extend(HomeApplication.prototype, BaseApplication.prototype, {
   /**
    */
 
-  plugins: BaseApplication.prototype.plugins.concat([
-    require("./routes"),
-    require("./extra/hijack-anchors")
-  ]),
+  initializePlugins: function() {
+    this.use(plugins);
+  },
 
   /**
    */

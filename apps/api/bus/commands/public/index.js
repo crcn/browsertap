@@ -1,6 +1,6 @@
 var mesh         = require("mesh");
 var sift         = require("sift");
-var createRouter = require("api/bus/common/create-router");
+var createRouter = require("api/bus/utils/create-router");
 
 /**
  */

@@ -1,5 +1,6 @@
 var platform   = require("platform");
 var parseStack = require("parse-stack");
+var mesh       = require("mesh");
 
 /**
  */
@@ -42,10 +43,15 @@ function server(app) {
   }
 
   process.on("uncaughtException", onException);
-
-  app.internalCommands.addHandler("dispose", function(operation, next) {
-    process.removeListener("uncaughtException", onException);
-    next();
+  
+  app.bus({
+    name: "intercept",
+    max: 1,
+    query: { name: "dispose" },
+    bus: mesh.wrap(function(operation, next) {
+      process.removeListener("uncaughtException", onException);
+      next();
+    })
   });
 }
 
