@@ -33,6 +33,14 @@ module.exports = function(env) {
       },
       loggly: {
         tags: ["api"]
+      },
+      email: {
+        type: "mailgun",
+        key: "key-21e1112af96563149f95a2e6a93f0406",
+        domain: "sandbox4ae439fbc90a424083d002263e5b9fd9.mailgun.org",
+        from: {
+          default: "postmaster@sandbox4ae439fbc90a424083d002263e5b9fd9.mailgun.org"
+        }
       }
     }
   };

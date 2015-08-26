@@ -38,6 +38,15 @@ describe(__filename + "#", function() {
       });
     });
 
+    it("cannot load the user if the username or password is not present", function(next) {
+      usersBus({ name: "insert", data: { emailAddress: "a@b.com", password: "ccc" } });
+      usersBus({ name: "load", query: { password: "ccc" } });
+      usersBus({ name: "load", query: { emailAddress: "a@b.com" }}).on("data", data.push.bind(data)).on("end", function() {
+        expect(dbOps.length).to.be(2);
+        expect(data.length).to.be(0);
+        next();
+      });
+    });
 
     // prevent injections
     it("cannot load the user if the query param is NOT a string", function(next) {
