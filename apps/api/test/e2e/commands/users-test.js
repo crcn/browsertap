@@ -59,5 +59,11 @@ describe(__filename + "#", function() {
         next();
       });
     });
+
+    it("can reset a password", function(next) {
+      // bus({ name: "insert", data:  fixtures.user1 });
+      // bus({ name: "" });
+      next();
+    });
   });
 });

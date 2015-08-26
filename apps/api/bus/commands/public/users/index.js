@@ -68,8 +68,12 @@ module.exports = function(internalBus) {
       // join("user", function(operation) { })
       mesh.stream(function(operation, stream) {
 
+        // 1 check for email address
+        // 2 add reset password token
+        // 3 send reset password link
         // internalBus({ collection: operation.collection, query: { emailAddress: operation.query.emailAddress }}).
 
+        stream.end();
       })
     )
   ]);
