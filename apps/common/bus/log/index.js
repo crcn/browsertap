@@ -13,10 +13,10 @@ module.exports = function(app, bus) {
   if (!bus) bus = mesh.noop;
 
   bus = mesh.accept(
-    sift({ name: "log" }), 
+    sift({ name: "log" }),
     mesh.parallel(busFactories.map(function(createBus) {
       return createBus(app, bus);
-    })), 
+    })),
     logOperations(app, bus)
   );
 

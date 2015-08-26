@@ -29,7 +29,6 @@ module.exports = function(app, bus) {
     });
   });
 
-
   app.bus({
     name: "intercept",
     max: 1,

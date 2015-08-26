@@ -2,7 +2,6 @@ var BaseApplication = require("common/application");
 var extend          = require("lodash/object/extend");
 var cluster         = require("cluster");
 var http            = require("./http");
-var socket          = require("./socket");
 var createBus       = require("./bus");
 
 /**
@@ -39,10 +38,8 @@ extend(APIApplication.prototype, BaseApplication.prototype, {
   initializePlugins: function() {
     BaseApplication.prototype.initializePlugins.call(this);
     this.use(http);
-    this.use(socket);
     this.bus = createBus(this, this.bus);
   },
-
 
   /**
    */

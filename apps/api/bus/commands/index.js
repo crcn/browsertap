@@ -5,10 +5,10 @@ var publicCommands = require("./public");
 /**
  */
 
-module.exports = function(options, internalBus) {
+module.exports = function(app, bus) {
   return mesh.accept(
     sift({ public: true }),
-    publicCommands(internalBus),
-    internalBus
+    publicCommands(bus),
+    bus
   );
 };

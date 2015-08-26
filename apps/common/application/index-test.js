@@ -18,7 +18,6 @@ describe(__filename + "#", function() {
     expect(app.c).to.be("d");
   });
 
-
   it("logger exists", function() {
     var app = new Application();
     expect(app.logger).not.to.be(void 0);

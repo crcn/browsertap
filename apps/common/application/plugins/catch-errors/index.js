@@ -43,7 +43,7 @@ function server(app) {
   }
 
   process.on("uncaughtException", onException);
-  
+
   app.bus({
     name: "intercept",
     max: 1,

@@ -2,16 +2,19 @@ var mesh         = require("mesh");
 var sift         = require("sift");
 var createRouter = require("api/bus/utils/create-router");
 var exists       = require("api/bus/utils/exists");
+var map          = require("api/bus/utils/map");
+var userSchema   = require("common/schemas/user");
 
 module.exports = function(internalBus) {
 
   return createRouter([
 
-    // register
+    /**
+     * register
+     */
+
     sift({ name: "insert" }),
     mesh.sequence(
-      // validate
-
       // user exists?
       exists(function(operation) {
         return internalBus({
@@ -28,15 +31,25 @@ module.exports = function(internalBus) {
       internalBus
     ),
 
-    // login
+    /**
+     * login
+     */
+
     sift({ name: "load", query: { emailAddress: /^.+$/, password: /^.+$/ }}),
     mesh.sequence(
 
       // validate query
-      internalBus
+      map(internalBus, function(data) {
+        return {
+          emailAddress: data.emailAddress
+        };
+      })
     ),
 
-    // reset password
+    /**
+     * reset password
+     */
+
     sift({ name: "resetPassword" }),
     mesh.sequence(
 

@@ -16,11 +16,10 @@ function Application(properties) {
   this.bus = createCommonBus(this);
 
   this.logger = new Logger(extend({
-    bus: function(operation) { 
-      return this.bus(operation); 
+    bus: function(operation) {
+      return this.bus(operation);
     }.bind(this)
   }, this.get("config.log")));
-
 }
 
 /**
