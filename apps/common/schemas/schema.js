@@ -50,7 +50,7 @@ extend(PropertyValidator.prototype, {
       return new Error("invalid");
     }
   },
-  map: function(value) { return value; }
+  serialize: function(value) { return value; }
 });
 
 /**
@@ -94,14 +94,14 @@ extend(Schema.prototype, {
   /**
    */
 
-  map: function(data) {
+  serialize: function(data) {
     var validators = this.getValidators();
     var newData = {};
     for (var i = validators.length; i--;) {
       var validator = validators[i];
       var value     = get(data, validator.property);
       if (value == void 0) continue;
-      newData[validator.property] = validator.map(value);
+      newData[validator.property] = validator.serialize(value);
     }
     return newData;
   },

@@ -97,7 +97,7 @@ describe(__filename + "#", function() {
     var schema = new Schema({
       a: {
         private: true,
-        map: function(v) {
+        serialize: function(v) {
           return v.toUpperCase();
         },
         validate: { $eq: "a" }
@@ -107,7 +107,7 @@ describe(__filename + "#", function() {
       }
     });
 
-    var newData = schema.map({ a: "b", b: "c" });
+    var newData = schema.serialize({ a: "b", b: "c" });
     expect(newData.a).to.be("B");
     expect(newData.b).to.be("c");
   });
