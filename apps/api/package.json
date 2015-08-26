@@ -5,11 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "test" : "gulp lint test --only=api"
+    "test": "gulp lint test --only=api"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "mesh-mongodb": "^1.0.1"
-  }
+  "dependencies": { }
 }

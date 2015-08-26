@@ -2,8 +2,11 @@ var mesh         = require("mesh");
 var sift         = require("sift");
 var createRouter = require("api/bus/utils/create-router");
 var exists       = require("api/bus/utils/exists");
-var map          = require("api/bus/utils/map");
+var mapOperation = require("api/bus/utils/map-operation");
+var extend       = require("lodash/object/extend");
 var userSchema   = require("common/schemas/user");
+var passwordHash = require("password-hash");
+var httperr      = require("httperr");
 
 module.exports = function(internalBus) {
 
@@ -13,44 +16,52 @@ module.exports = function(internalBus) {
      * register
      */
 
-    sift({ name: "insert" }),
+    sift({ name: "insert", data: userSchema.validate.bind(userSchema) }),
     mesh.sequence(
+
       // user exists?
       exists(function(operation) {
         return internalBus({
           collection: operation.collection,
           name: "load",
-          query: {
-            emailAddress: operation.data.emailAddress,
-            password: operation.data.password
-          }
+          query: userSchema.pluck({ property: /emailAddress/ }, operation.data)
         });
-      }, mesh.yields(new Error("user exists"))),
+      }, mesh.yields(new httperr.Conflict("user exists"))),
 
       // No - insert it
-      internalBus
+      function(operation) {
+        var data = userSchema.serialize(operation.data);
+        data.password = passwordHash.generate(data.password);
+        return internalBus(extend({}, operation, { data: data}));
+      }
     ),
 
     /**
      * login
      */
 
-    sift({ name: "load", query: { emailAddress: /^.+$/, password: /^.+$/ }}),
-    mesh.sequence(
+    sift({ name: "load", query: userSchema.validate.bind(userSchema, { property: /emailAddress|password/ })}),
+    mesh.wrap(function(operation, next) {
 
-      // validate query
-      map(internalBus, function(data) {
-        return {
-          emailAddress: data.emailAddress
-        };
-      })
-    ),
+      internalBus(extend({}, operation, {
+        query: { emailAddress: operation.query.emailAddress }
+      })).once("data", function(userData) {
+
+        if (!passwordHash.verify(operation.query.password, userData.password)) {
+          return next(new httperr.Unauthorized("password is incorrect"));
+        }
+
+        next(void 0, userSchema.pluck({
+          private: { $ne: true }
+        }, userData));
+      });
+    }),
 
     /**
      * reset password
      */
 
-    sift({ name: "resetPassword" }),
+    sift({ name: "resetPassword", query: userSchema.validate.bind(userSchema, { property: /emailAddress/ }) }),
     mesh.sequence(
 
       // TODO
