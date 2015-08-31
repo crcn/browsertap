@@ -105,6 +105,7 @@ extend(Schema.prototype, {
   },
 
   /**
+   * pluck properties
    */
 
   pluck: function(propsFilter, data) {

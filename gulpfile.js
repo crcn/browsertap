@@ -9,6 +9,7 @@ var sift            = require("sift");
 var browserify      = require("browserify");
 var jscs            = require("gulp-jscs");
 var jshint          = require("gulp-jshint");
+var babel           = require("babel/register");
 var spawn           = require("child_process").spawn;
 var uglify          = require("gulp-uglify");
 var rename          = require("gulp-rename");
@@ -50,7 +51,10 @@ var ops = {
     bail     : options.bail     !== 'false',
     reporter : options.reporter || 'dot',
     grep     : options.grep     || options.only,
-    timeout  : 500
+    timeout  : 500,
+    compilers : {
+      js: babel
+    }
   },
   homeLayouts : homeLayouts
 };
@@ -177,6 +181,7 @@ gulp.task("jshint", function() {
     pipe(jshint({
       "node"     : true,
       "bitwise"  : false,
+      "esnext"   : true,
       "eqnull"   : true,
       "browser"  : true,
       "undef"    : true,

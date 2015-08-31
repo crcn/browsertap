@@ -4,7 +4,8 @@
   "description": "",
   "private": true,
   "scripts": {
-    "test": "gulp lint test",
+    "test": "node `which gulp` lint test",
+    "test-watch": "node `which gulp` lint test watch",
     "postinstall": "linklocal",
     "start": "static public --port=8085",
     "start-api": "cd apps/api; npm start"
@@ -19,6 +20,7 @@
     "async": "^1.4.2",
     "browser-client": "file:./apps/browser-client",
     "chalk": "^1.1.1",
+    "co": "^4.6.0",
     "colors": "^1.1.2",
     "common": "file:./apps/common",
     "deep-extend": "^0.4.0",
@@ -55,6 +57,7 @@
     "socket.io-client": "^1.3.6"
   },
   "devDependencies": {
+    "babel": "^5.8.23",
     "browserify": "^11.0.1",
     "bundle-collapser": "^1.2.1",
     "expect.js": "^0.3.1",
