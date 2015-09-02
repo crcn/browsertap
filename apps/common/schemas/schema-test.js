@@ -1,6 +1,7 @@
 var Schema = require("./schema");
 var expect = require("expect.js");
 
+
 describe(__filename + "#", function() {
   it("can be created", function() {
     new Schema();

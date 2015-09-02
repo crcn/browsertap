@@ -1,4 +1,3 @@
-import extend from "lodash/object/extend";
 import sift from "sift";
 import get from "common/utils/get-property";
 
@@ -13,7 +12,7 @@ class PropertyValidator {
   constructor(property, options) {
     this.property = property;
 
-    extend(this, options);
+    Object.assign(this, options);
 
     this.required = options.required;
     var validate = options.validate;
@@ -141,8 +140,7 @@ class Schema {
   }
 }
 
-
 /**
  */
 
-module.exports = Schema;
+export default Schema;
