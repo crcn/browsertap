@@ -17,6 +17,20 @@ module.exports = function(internalBus) {
      */
 
     sift({ name: "insert", data: userSchema.validate.bind(userSchema) }),
+    // gen(function*() {
+
+    //   var exists = yield ps(internalBus({
+    //     collection: operation.collection,
+    //     name: "load",
+    //     query: userSchema.pluck({ property: /emailAddress/ }, operation.data)
+    //   }));
+
+    //   if (exists) throw new httperr.Conflict("user exists");
+
+
+      
+    // }),
+
     mesh.sequence(
 
       // user exists?
