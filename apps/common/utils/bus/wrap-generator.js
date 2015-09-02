@@ -9,7 +9,11 @@ module.exports = function(generator) {
       if (Object.prototype.toString.call(result) !== "[object Array]") {
         result = result != void 0 ? [result] : [];
       }
-      console.log(result);
+
+      if (operation.multi !== true && result.length) {
+        result = [result[0]];
+      }
+
       result.forEach(function(data) {
         stream.emit("data", data);
       });

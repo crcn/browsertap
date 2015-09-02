@@ -1,6 +1,7 @@
 var expect = require("expect.js");
 var mesh   = require("mesh");
 var sift   = require("sift");
+var co     = require("co");
 
 describe(__filename + "#", function() {
 
@@ -19,6 +20,7 @@ describe(__filename + "#", function() {
   describe("insert# ", function() {
 
     it("can register a new user", function(next) {
+      
       bus({ name: "insert", data:  fixtures.user1 });
       bus({ name: "load", query: fixtures.user1 }).on("data", function(data) {
         expect(data.emailAddress).to.be("a@b.com");

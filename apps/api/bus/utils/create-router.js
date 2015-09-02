@@ -1,6 +1,8 @@
 var mesh = require("mesh");
 
-module.exports = function(routes) {
+module.exports = function(routes, noop) {
+
+  if (!noop) noop = mesh.noop;
 
   return function(operation) {
 
@@ -10,6 +12,6 @@ module.exports = function(routes) {
       if (test(operation)) return bus(operation);
     }
 
-    return mesh.noop(operation);
+    return noop(operation);
   };
 };

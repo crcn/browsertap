@@ -49,23 +49,4 @@ describe(__filename + "#", function() {
       expect(err.message).to.be("fail");
     }).then(done, done);
   });
-
-  it("can read a lot of stuff", function(done) {
-
-    function* run2() {
-      yield 2;
-    }
-
-
-    function* run() {
-      var result = yield run2();
-      yield result;
-    }
-
-    co(function*() {
-      console.log(...run(), "OK");
-    });
-
-    setTimeout(done, 100);
-  });
 });
