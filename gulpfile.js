@@ -23,6 +23,7 @@ var HomeApplication = require("./apps/home/application");
 var mu              = require("mustache");
 var fs              = require("fs");
 
+
 var apps = [
   { name: "api"            , bundle: false },
   { name: "browser-client" , bundle: true  },
