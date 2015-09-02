@@ -62,7 +62,7 @@ class Schema {
 
     this.__validators = [];
 
-    for (var key in properties) {
+    for (let key in properties) {
       this.__validators.push(new PropertyValidator(key, properties[key]));
     }
   }
@@ -80,7 +80,7 @@ class Schema {
     var validators = this.getValidators(propsFilter);
 
     var error;
-    for (var i = 0, n = validators.length; i < n; i++) {
+    for (let i = 0, n = validators.length; i < n; i++) {
       var validator = validators[i];
       if ((error = validator.getError(get(data, validator.property)))) return error;
     }
@@ -93,7 +93,7 @@ class Schema {
   serialize(data) {
     var validators = this.getValidators();
     var newData = {};
-    for (var i = validators.length; i--;) {
+    for (let i = validators.length; i--;) {
       var validator = validators[i];
       var value     = get(data, validator.property);
       if (value == void 0) continue;
@@ -118,7 +118,7 @@ class Schema {
       return validator.property;
     });
     var newData = {};
-    for (var i = keys.length; i--;) {
+    for (let i = keys.length; i--;) {
       var key = keys[i];
       var value = data[key];
       if (value != void 0) newData[key] = value;
