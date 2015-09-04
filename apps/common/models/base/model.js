@@ -1,26 +1,33 @@
-var extend       = require("lodash/object/extend");
 var EventEmitter = require("events").EventEmitter;
+
 
 var __getters = {};
 
 /**
  */
 
-function BaseModel(properties) {
-  EventEmitter.call(this);
-  if (properties) extend(this, properties);
-}
+class BaseModel extends EventEmitter {
 
-/**
- */
+  /**
+   */
 
-extend(BaseModel.prototype, EventEmitter.prototype, {
+  constructor(properties) {
+    super();
+    if (properties) Object.assign(this, properties);
+    
+    if (this.constructor.mixin) {
+      for (var mixin of this.constructor.mixin()) {
+        mixin(this.constructor.prototype);
+        Object.assign(this.constructor.prototype, this);
+      }
+    }
+  }
 
   /**
    * sets properties on the model
    */
 
-  setProperties: function(properties) {
+  setProperties(properties) {
 
     var oldProps   = {};
     var newProps   = {};
@@ -35,20 +42,27 @@ extend(BaseModel.prototype, EventEmitter.prototype, {
     }
 
     if (hasChanged) this.emit("change", { properties: newProps }, { properties: oldProps });
-  },
+  }
 
   /**
    * GET properties on the model without busting
    */
 
-  get: function(keypath) {
+  get(keypath) {
     if (__getters[keypath]) return __getters[keypath](this);
     __getters[keypath] = new Function("self", "try { return self." + keypath + "} catch(e) { }");
     return this.get(keypath);
   }
-});
+
+  /**
+   */
+
+  _createMixins() {
+    return {}
+  }
+}
 
 /**
  */
 
-module.exports = BaseModel;
+export default BaseModel;

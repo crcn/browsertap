@@ -3,33 +3,23 @@ var extend    = require("lodash/object/extend");
 var LogLevels = require("./levels");
 var mesh      = require("mesh");
 
-/**
- */
-
-function Logger(properties) {
-  BaseModel.call(this, properties);
-}
-
-/**
- */
-
-extend(Logger.prototype, BaseModel.prototype, {
+class Logger extends BaseModel {
 
   /**
    */
 
-  bus: mesh.noop,
+  bus: mesh.noop
 
   /**
    */
 
-  level: LogLevels.ALL,
+  level: LogLevels.ALL
 
   /**
    * TODO
    */
 
-  child: function(prefix) {
+  child(prefix) {
     return new Logger({
       prefix : prefix,
       bus    : this.bus,
@@ -37,7 +27,7 @@ extend(Logger.prototype, BaseModel.prototype, {
       parent : this
     });
   }
-});
+}
 
 /**
  * attach the methods
@@ -70,4 +60,4 @@ Object.keys(LogLevels).forEach(function(key) {
 /**
  */
 
-module.exports = Logger;
+export default Logger;

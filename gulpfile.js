@@ -1,5 +1,6 @@
 require("./gulp/dom");
-require("jsx-require-extension");
+
+// require("jsx-require-extension");
 var gulp            = require("gulp");
 var mocha           = require("gulp-mocha");
 var mkdirp          = require("mkdirp");
@@ -9,7 +10,9 @@ var sift            = require("sift");
 var browserify      = require("browserify");
 var jscs            = require("gulp-jscs");
 var jshint          = require("gulp-jshint");
-var babel           = require("babel/register");
+var babel           = require("babel/register")({
+  optional: ["es7.classProperties", "es7.decorators"]
+});
 var spawn           = require("child_process").spawn;
 var uglify          = require("gulp-uglify");
 var rename          = require("gulp-rename");

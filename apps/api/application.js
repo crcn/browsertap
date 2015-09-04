@@ -4,22 +4,13 @@ var cluster         = require("cluster");
 var http            = require("./http");
 var createBus       = require("./bus");
 
-/**
- */
 
-function APIApplication(properties) {
-  BaseApplication.call(this, properties);
-}
-
-/**
- */
-
-extend(APIApplication.prototype, BaseApplication.prototype, {
+class APIApplication extends BaseApplication {
 
   /**
    */
 
-  initialize: function(next) {
+  initialize(next) {
 
     // fork it?
     if (cluster.isMaster && this.get("config.numCores") > 0) {
@@ -29,25 +20,25 @@ extend(APIApplication.prototype, BaseApplication.prototype, {
       return;
     }
 
-    return BaseApplication.prototype.initialize.call(this, next);
-  },
+    return super.initialize(next);
+  }
 
   /**
    */
 
-  initializePlugins: function() {
-    BaseApplication.prototype.initializePlugins.call(this);
+  initializePlugins() {
+    super.initializePlugins();
     this.use(http);
     this.bus = createBus(this, this.bus);
-  },
+  }
 
   /**
    */
 
-  fork: function() {
+  fork() {
     cluster.fork().once("exit", this.fork.bind(this));
   }
-});
+}
 
 /**
  */

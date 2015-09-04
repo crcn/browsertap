@@ -31,7 +31,12 @@ describe(__filename + "#", function() {
     var ops = [];
 
     var model = new BaseModel({
-      bus: ops.push.bind(ops)
+      bus: ops.push.bind(ops),
+      config: {
+        log: {
+          level: LogLevels.ALL
+        }
+      }
     });
 
     loggerPlugin(model);

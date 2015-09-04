@@ -4,13 +4,40 @@ var createRouter = require("api/bus/utils/create-router");
 var exists       = require("api/bus/utils/exists");
 var mapOperation = require("api/bus/utils/map-operation");
 var extend       = require("lodash/object/extend");
-var userSchema   = require("common/schemas/user");
+// var userSchema   = require("common/schemas/user");
 var passwordHash = require("password-hash");
 var httperr      = require("httperr");
 var runOp        = require("common/utils/bus/create-promise");
 var gen          = require("common/utils/bus/wrap-generator");
 
+
+/*
+
+var account = new Account();
+account.save(); // insert
+
+account.addKey({
+  secret: password
+});
+
+account.addKey({
+  oauthToken: "token"
+});
+
+
+*/
 module.exports = function(internalBus) {
+
+  return createRouter([
+
+    /**
+     */
+
+    sift({ name: "insert" }),
+    gen(function*(operation) {
+      
+    })
+  ]);
 
   return createRouter([
 
@@ -21,6 +48,7 @@ module.exports = function(internalBus) {
     sift({ name: "insert", data: userSchema.validate.bind(userSchema) }),
     gen(function*(operation) {
 
+      // TODO - insert account instead
       // check to see if the user exists
       var exists = !!(yield runOp(internalBus, {
         collection: operation.collection,
@@ -36,7 +64,6 @@ module.exports = function(internalBus) {
 
       // hash the password
       data.password = passwordHash.generate(data.password);
-
 
       // actually insert the ser
       return yield runOp(internalBus, extend({}, operation, { data: data }));
