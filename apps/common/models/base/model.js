@@ -1,4 +1,5 @@
 var EventEmitter = require("events").EventEmitter;
+var mesh         = require("mesh");
 
 
 var __getters = {};
@@ -11,10 +12,15 @@ class BaseModel extends EventEmitter {
   /**
    */
 
+  bus = mesh.noop;
+
+  /**
+   */
+
   constructor(properties) {
     super();
     if (properties) Object.assign(this, properties);
-    
+
     if (this.constructor.mixin) {
       for (var mixin of this.constructor.mixin()) {
         mixin(this.constructor.prototype);

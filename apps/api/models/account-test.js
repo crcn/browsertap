@@ -4,8 +4,7 @@ import mesh from "mesh"
 describe(__filename + "#", function() {
 
   it("can be created", function() {
-    var acc = new Account();
-    console.log(acc.load);
+    var acc = new Account({name:1});
   });
 
 

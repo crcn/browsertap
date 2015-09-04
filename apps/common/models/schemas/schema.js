@@ -105,7 +105,7 @@ class Schema {
    */
 
   validate() {
-    return !this.getError.apply(this, arguments);
+    return !this.getError(...arguments);
   }
 
   /**
