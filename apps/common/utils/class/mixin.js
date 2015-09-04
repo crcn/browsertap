@@ -23,6 +23,7 @@ function mixin (behaviour, sharedBehaviour = {}) {
     }
 
     for (let property of instanceKeys) {
+      if (clazz.prototype[property] != void 0) continue;
       Object.defineProperty(clazz.prototype, property, {
         value: behaviour[property],
         writable: true

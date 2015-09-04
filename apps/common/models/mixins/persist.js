@@ -1,39 +1,53 @@
 import mixin from "common/utils/class/mixin";
+import cp from "common/utils/bus/create-promise"
 
-export default mixin({
+export default function(collection) {
+  return mixin({
 
-  /**
-   */
+    /**
+     */
 
-  load () {
+    load () {
 
-  },
+    },
 
-  /**
-   */
+    /**
+     */
 
-  remove () {
+    remove () {
 
-  },
+    },
 
-  /**
-   */
+    /**
+     */
 
-  save() {
+    save() {
+        console.log("SV");
+    },
 
-  },
+    /**
+     */
 
-  /**
-   */
+    insert() {
 
-  insert() {
+    },
 
-  },
+    /**
+     */
 
-  /**
-   */
+    update() {
 
-  update() {
+    },
 
-  }
-});
+    /**
+     */
+
+    *fetch(operationName, properties) {
+        return yield cp(this.bus, Object.assign({
+            target: this,
+            name: operationName
+        }, properties));
+    }
+  });
+
+};
