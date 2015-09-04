@@ -1,6 +1,9 @@
-var mixin = require("common/utils/class/mixin");
-var mesh  = require("mesh");
+import mixin from "common/utils/class/mixin";
+import mesh from "mesh";
 
+/**
+ */
+ 
 export default function(schema) {
   return mixin({
 

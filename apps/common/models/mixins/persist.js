@@ -1,4 +1,4 @@
-var mixin = require("common/utils/class/mixin");
+import mixin from "common/utils/class/mixin";
 
 export default mixin({
 

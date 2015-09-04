@@ -8,6 +8,13 @@ import validateMixin from "common/models/mixins/validate"
 
 var schema = new Schema({
 
+  /**
+   */
+
+  emailAddress: { 
+    req: true, 
+    validate: require("common/utils/validate/email")
+  }
 });
 
 /**

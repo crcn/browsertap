@@ -12,7 +12,7 @@ class PropertyValidator {
   constructor(property, options) {
     this.property = property;
 
-    Object.assign(this, options);
+    this.options = options;
 
     this.required = options.required;
     var validate = options.validate;
@@ -27,22 +27,21 @@ class PropertyValidator {
       };
     }
 
-    this.validate = validate;
+    this._validate = validate;
   }
 
   /**
    */
 
-  getError(value) {
+  validate(value) {
 
     if (value == void 0) {
-      if (this.required) return new Error("not defined");
-      return;
+      if (this.options.req) return Promise.reject(new Error("not defined"));
+    } else if (!this._validate(value)) {
+      return Promise.reject(new Error("invalid"));
     }
 
-    if (!this.validate(value)) {
-      return new Error("invalid");
-    }
+    return Promise.resolve(true);
   }
 
   /**
@@ -69,7 +68,7 @@ class Schema {
   /**
    */
 
-  getError(propsFilter, data) {
+  validate(propsFilter, data) {
 
     if (arguments.length === 1) {
       data        = propsFilter;
@@ -78,12 +77,11 @@ class Schema {
 
     var validators = this.getValidators(propsFilter);
 
-    var error;
-    for (let i = 0, n = validators.length; i < n; i++) {
-      var validator = validators[i];
-      if ((error = validator.getError(get(data, validator.property)))) return error;
-    }
-    return error;
+    return Promise.all(validators.map(function(validator) {
+      return validator.validate(get(data, validator.property));
+    })).then(function() {
+      return Promise.resolve(true);
+    });
   }
 
   /**
@@ -99,13 +97,6 @@ class Schema {
       newData[validator.property] = validator.serialize(value);
     }
     return newData;
-  }
-
-  /**
-   */
-
-  validate() {
-    return !this.getError(...arguments);
   }
 
   /**
