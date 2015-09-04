@@ -34,9 +34,30 @@ module.exports = function(internalBus) {
 
     sift({ name: "insert" }),
     gen(function*(operation) {
-      var user = new User(operation.data);
+      // var user = new User(operation.data);
+      // user.register();
+
+      // user.addKey({
+      //   password: 
+      // });
+
       // yield user.insert();
-    })
+    }),
+
+    /**
+     */
+
+    sift({ name: "load" }),
+    gen(function*(operation) {
+      // var user = User.find({ emailAddress})
+      // user.load("emailAddress");
+
+      // user.addKey({
+      //   password: 
+      // });
+
+      // yield user.insert();
+    }),
   ]);
 };
 

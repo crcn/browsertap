@@ -7,6 +7,37 @@ export default function(collection) {
     /**
      */
 
+    constructor() {
+        this.on("change", this._pOnChange);
+        this._pOnChange(this);
+    },
+
+    /**
+     */
+
+    _pOnChange(properties) {
+        if (properties.data) {
+            this.setProperties(this.deserialize(properties.data));
+        }
+    },
+
+    /**
+     */
+
+    serialize() {
+        // OVERRIDE ME
+    },
+
+    /**
+     */
+
+    deserialize() {
+        // OVERRIDE ME
+    },
+
+    /**
+     */
+
     load () {
 
     },

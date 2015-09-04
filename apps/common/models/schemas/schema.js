@@ -48,6 +48,11 @@ class PropertyValidator {
    */
 
   serialize(value) { return value; }
+
+  /**
+   */
+
+  deserialize(value) { return value; }
 };
 
 class Schema {
@@ -95,6 +100,21 @@ class Schema {
       var value     = get(data, validator.property);
       if (value == void 0) continue;
       newData[validator.property] = validator.serialize(value);
+    }
+    return newData;
+  }
+
+  /**
+   */
+
+  deserialize(data) {
+    var validators = this.getValidators();
+    var newData = {};
+    for (let i = validators.length; i--;) {
+      var validator = validators[i];
+      var value     = get(data, validator.property);
+      if (value == void 0) continue;
+      newData[validator.property] = validator.deserialize(value);
     }
     return newData;
   }

@@ -37,9 +37,27 @@ describe(__filename + "#", function() {
     var err;
 
     try {
-      yield user.insert();
+      yield user.register();
     } catch(e) { err = e; }
 
     expect(err.message).to.be("user already exists");
   }));
+
+  it("only serializes data defined within the schema", function() {
+    var user = new User({
+      emailAddress: "a@b.com",
+      badProp: 12345
+    });
+
+    expect(user.serialize().badProp).to.be(void 0);
+  });
+
+  it("properly deserializes data", function() {
+    
+    var user = new User({
+      data: { emailAddress: "a@b.com" }
+    });
+
+    expect(user.emailAddress).to.be("a@b.com");
+  });
 });

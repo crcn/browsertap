@@ -36,10 +36,13 @@ class User extends Model {
   /**
    */
 
-  *insert() {
+  *register() {
+
     if (yield this.existsWithEmailAddress()) {
       throw new Error("user already exists");
     }
+
+    return this.insert();
   }
 
   /**

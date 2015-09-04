@@ -20,7 +20,20 @@ export default function(schema) {
 
     validate() {
       return schema.validate(this);
-    }
+    },
+
+    /**
+     */
+
+    serialize() {
+      return schema.serialize(this);
+    },
+
+    /**
+     */
     
+    deserialize(data) {
+      return schema.deserialize(data);
+    }
   });
 }
