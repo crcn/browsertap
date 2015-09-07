@@ -1,118 +1,82 @@
-var Schema = require("./schema");
-var expect = require("expect.js");
-var co     = require("co");
+import Schema from "./schema2";
+import expect from "expect.js";
+
+/*
+
+class EmailAddressSchema extends Schema {
+  
+}
+
+class PasswordSchema extends Schema {
+  serialize() {
+  
+  }
+  equals() {
+    
+  }
+}
+
+class UserSchema extends MongoSchema {
+  $name: "user",
+  emailAddress: new EmailAddressSchema()
+  password: new PasswordSchema
+}
+
+*/
 
 
 describe(__filename + "#", function() {
+
   it("can be created", function() {
     new Schema();
   });
 
-  return;
-
-  it("can validate with just a required property", function() {
+  it("can set mongodb properties on the schema & validate against a value", function() {
 
     var schema = new Schema({
-      a: {
-        required: true
-      }
+      $eq: /a|b/
     });
 
-    expect(schema.validate({ })).not.to.be(void 0);
-    expect(schema.validate({ a: null })).not.to.be(void 0);
-    expect(schema.validate({ a: void 0 })).not.to.be(void 0);
-    expect(schema.validate({ a: 0 })).to.be(void 0);
-    expect(schema.validate({ a: false })).to.be(void 0);
+    expect(schema.validate("a")).to.be(true);
   });
 
-  it("can add a validator to the property without a required field", function() {
-
+  it("can validate against a schema and return an error", function() {
     var schema = new Schema({
-      a: {
-        validate: { $eq: /aa|bb/ }
-      }
+      $eq: /a|b/
     });
 
-    expect(schema.validate({ a: "cc" })).not.to.be(void 0);
-    expect(schema.validate({ a: "aa" })).to.be(void 0);
-    expect(schema.validate({ a: "bb" })).to.be(void 0);
-    expect(schema.validate({ })).to.be(void 0);
+    expect(schema.validate("c").message).to.be("invalid");
   });
 
-  it("can add a validator to the property with a required field", function() {
-
+  it("returns a 'bad request' error if the schema is invalid", function() {
     var schema = new Schema({
-      a: {
-        required: true,
-        validate: { $eq: /aa|bb/ }
-      }
+      $eq: /a|b/
     });
-
-    expect(schema.validate({ a: "aa" })).to.be(void 0);
-    expect(schema.validate({ })).not.to.be(void 0);
+    expect(schema.validate("c").statusCode).to.be(400);
   });
 
-  it("can add a validator to the property with a required field", function() {
-
+  it("validates true if the schema is not present and $req is false", function() {
     var schema = new Schema({
-      a: {
-        required: true,
-        validate: { $eq: /aa|bb/ }
-      }
+      $req: false,
+      $eq: /a|b/
     });
-
-    expect(schema.validate({ a: "aa" })).to.be(void 0);
-    expect(schema.validate({ })).not.to.be(void 0);
+    expect(schema.validate(void 0)).to.be(true);
   });
 
-  it("can validate specific properties", function() {
-
+  it("validates false if $req is absent and the schema value is undefined", function() {
     var schema = new Schema({
-      a: {
-        validate: { $eq: "a" }
-      },
-      b: {
-        validate: { $eq: "b" }
-      }
+      $eq: /a|b/
     });
-
-    expect(schema.validate({ property: "a" }, { a: "a", b: "c" })).to.be(true);
-    expect(schema.validate({ property: /a|b/ }, { a: "a", b: "c" })).to.be(false);
+    expect(schema.validate(void 0)).not.to.be(true);
   });
 
-  it("can pluck properties from the data based on the schema", function() {
-
+  it("combines the $name in the error message", function() {
     var schema = new Schema({
-      a: {
-        private: true,
-        validate: { $eq: "a" }
-      },
-      b: {
-        validate: { $eq: "b" }
-      }
+      $name: "fieldName",
+      $eq: /a|b/
     });
-
-    expect(schema.pluck({ private: true }, { a: "b", b: "c" }).a).to.be("b");
-    expect(schema.pluck({ private: { $ne: true } }, { a: "b", b: "c" }).a).to.be(void 0);
+    expect(schema.validate(void 0).message).to.be("fieldName.invalid");
   });
 
-  it("can map values", function() {
 
-    var schema = new Schema({
-      a: {
-        private: true,
-        serialize: function(v) {
-          return v.toUpperCase();
-        },
-        validate: { $eq: "a" }
-      },
-      b: {
-        validate: { $eq: "b" }
-      }
-    });
-
-    var newData = schema.serialize({ a: "b", b: "c" });
-    expect(newData.a).to.be("B");
-    expect(newData.b).to.be("c");
-  });
 });

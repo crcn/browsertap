@@ -12,7 +12,7 @@ export default function(schema) {
 
     constructor() {
       // console.log(...arguments);
-      // TODO - replace bus with stop-gap
+      // TODO - replace bus here with validator bus
     },
 
     /**

@@ -1,6 +1,7 @@
 var http   = require("http");
 var socket = require("./socket");
 var mesh   = require("mesh");
+var routes = require("./routes");
 
 /**
  */
@@ -23,4 +24,5 @@ module.exports = function(app) {
   });
 
   socket(app);
+  routes(app.http, app);
 };

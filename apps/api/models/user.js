@@ -1,6 +1,6 @@
-import Model from "common/models/base/model"
-import Schema from "common/models/schemas/schema"
-import persistMixin from "common/models/mixins/persist"
+import Model         from "common/models/base/model"
+import Schema        from "common/models/schemas/schema"
+import persistMixin  from "common/models/mixins/persist"
 import validateMixin from "common/models/mixins/validate"
 
 /**
@@ -11,8 +11,14 @@ var schema = new Schema({
   /**
    */
 
+  _id: { },
+
+  /**
+   */
+
   emailAddress: { 
     req: true, 
+    unique: true,
     validate: require("common/utils/validate/email")
   }
 });
@@ -36,20 +42,8 @@ class User extends Model {
   /**
    */
 
-  *register() {
-
-    if (yield this.existsWithEmailAddress()) {
-      throw new Error("user already exists");
-    }
-
-    return this.insert();
-  }
-
-  /**
-   */
-
   *existsWithEmailAddress() {
-    return Promise.resolve(!!(yield this.fetch("load", { emailAddress: this.emailAddress })));
+    return Promise.resolve(!!(yield this.fetch("load", { query: { emailAddress: this.emailAddress } })));
   }
 }
 

@@ -34,29 +34,33 @@ module.exports = function(internalBus) {
 
     sift({ name: "insert" }),
     gen(function*(operation) {
-      // var user = new User(operation.data);
+
+      // TODO - oauth token or other shit here
+      if (!operation.data.password) {
+        throw new httperr.BadRequest("password must be present");
+      }
+
+      var user = new User({ bus: internalBus, data: operation.data });
+      yield user.insert();
+
       // user.register();
 
       // user.addKey({
       //   password: 
       // });
 
-      // yield user.insert();
+      return user.serialize();
     }),
 
     /**
      */
 
-    sift({ name: "load" }),
+    sift({ name: "load", query: { emailAddress: { $exists: true } } }),
     gen(function*(operation) {
-      // var user = User.find({ emailAddress})
-      // user.load("emailAddress");
-
-      // user.addKey({
-      //   password: 
-      // });
-
-      // yield user.insert();
+      var user = yield User.findOne(internalBus, { emailAddress: operation.query.emailAddress });
+      if (!user) throw new httperr.NotFound("user not found");
+      if (!operation.query.password) throw new httperr.Unauthorized("Password must be present");
+      return user.serialize();
     }),
   ]);
 };

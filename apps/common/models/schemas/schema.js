@@ -1,6 +1,21 @@
 import sift from "sift";
 import get from "common/utils/get-property";
 
+/*
+
+
+class ObjectSchema extends Schema {
+  _id: new Schema({
+    $eq: 
+  })
+}
+
+var schema = new ObjectSchema({
+  
+});
+
+*/
+
 /**
  */
 

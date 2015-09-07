@@ -1,9 +1,22 @@
-import User from "./user"
+import User   from "./user"
 import expect from "expect.js"
-import mesh from "mesh"
-import co from "co"
+import mesh   from "mesh"
+import memory from "mesh-memory"
+import co     from "co"
+import wp     from "common/utils/bus/create-promise"
 
 describe(__filename + "#", function() {
+
+  var fakeBus;
+  var fixture = {
+    emailAddress: "a@b.com"
+  };
+
+  beforeEach(function(next) {
+    fakeBus = memory();
+    fakeBus = mesh.limit(1, fakeBus);
+    fakeBus({ name: "insert", data: fixture, collection: "users" }).on("end", next);
+  })
 
   it("properly validates the model email and fails", co.wrap(function*() {
     var user = new User();
@@ -29,20 +42,6 @@ describe(__filename + "#", function() {
     expect(err.message).to.be("invalid");
   }));
 
-  it("cannot insert a user if it exists", co.wrap(function*() {
-    var user = new User({
-      bus: mesh.yields(void 0, { emailAddress: "Blarg" })
-    });
-
-    var err;
-
-    try {
-      yield user.register();
-    } catch(e) { err = e; }
-
-    expect(err.message).to.be("user already exists");
-  }));
-
   it("only serializes data defined within the schema", function() {
     var user = new User({
       emailAddress: "a@b.com",
@@ -53,7 +52,7 @@ describe(__filename + "#", function() {
   });
 
   it("properly deserializes data", function() {
-    
+
     var user = new User({
       data: { emailAddress: "a@b.com" }
     });
