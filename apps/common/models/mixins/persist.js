@@ -1,5 +1,5 @@
 import mixin from "common/utils/class/mixin";
-import cp from "common/utils/bus/create-promise"
+import cp from "common/bus/utils/promise"
 import httperr from "httperr"
 
 export default function(collectionName) {

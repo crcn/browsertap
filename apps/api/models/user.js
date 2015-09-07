@@ -18,8 +18,7 @@ var schema = new Schema({
 
   emailAddress: { 
     req: true, 
-    unique: true,
-    validate: require("common/utils/validate/email")
+    unique: true
   }
 });
 

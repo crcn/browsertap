@@ -1,5 +1,5 @@
 var mesh      = require("mesh");
-var intercept = require("./utils/intercept");
+var intercept = require("./drivers/intercept");
 var log       = require("./log");
 
 module.exports = function(app, bus) {

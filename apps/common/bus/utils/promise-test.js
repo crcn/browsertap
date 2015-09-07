@@ -1,4 +1,4 @@
-var createGenerator = require("./create-promise");
+var createGenerator = require("./promise");
 var expect          = require("expect.js");
 var mesh            = require("mesh");
 var co              = require("co");

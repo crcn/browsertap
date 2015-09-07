@@ -1,4 +1,4 @@
-var gen    = require("./wrap-generator");
+var gen    = require("./generator");
 var expect = require("expect.js");
 
 describe(__filename + "#", function() {

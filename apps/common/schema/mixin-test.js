@@ -45,6 +45,7 @@ describe(__filename + "#", function() {
   });
 
   it("can properly be serialized into a json object", function() {
+
     var m = new Person({
       emailAddress: "a@b.com",
       location: {
@@ -53,6 +54,8 @@ describe(__filename + "#", function() {
     });
 
     var obj = JSON.parse(JSON.stringify(m));
-
+    expect(obj.emailAddress).to.be("a@b.com");
+    expect(obj.location.city).to.be("San Francisco");
+    expect(obj.location.state).to.be(void 0);
   });
 });

@@ -18,7 +18,7 @@ describe(__filename + "#", function() {
       }
     });
 
-    expect(schema.fields.emailAddress).to.be(EmailAddress);
+    expect(schema.fields.emailAddress.typeClass).to.be(EmailAddress);
   });
 
   it("can coerce an object into something else", function() {

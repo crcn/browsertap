@@ -1,9 +1,5 @@
-var Schema = require("common/models/schemas/schema");
+import mixinSchema = require("common/schema/mixin");
 
 var SignupForm = new Schema({
 
-  /**
-   */
-
-  emailAddress: 
 });

@@ -1,5 +1,5 @@
 var sift         = require("sift");
-var createRouter = require("api/bus/utils/create-router");
+var createRouter = require("api/bus/drivers/create-router");
 
 /**
  */

@@ -1,12 +1,11 @@
-var sift         = require("sift");
-var createRouter = require("api/bus/utils/create-router");
+var sift               = require("sift");
+var createRouterBus    = require("api/bus/drivers/create-router");
 
 /**
  */
 
 module.exports = function(bus) {
-  return createRouter([
-    sift({ collection: "users" }),
-    require("./users")(bus)
-  ]);
+  return createRouterBus(
+    require("./authorization")(bus).concat([])
+  );
 };

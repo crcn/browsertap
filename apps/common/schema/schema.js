@@ -3,13 +3,36 @@ import httperr from "httperr"
 /**
  */
 
+class Field {
+  constructor(properties) {
+    if (typeof properties === "function") {
+      this.typeClass = properties;
+    } else {
+      Object.assign(this, properties);
+    }
+  }
+}
+
+/**
+ */
+
 class Schema {
 
   /**
    */
 
   constructor(options) {
-    Object.assign(this, options);
+
+    if (!options) options = {};
+
+    var fields  = options.fields || {};
+    var _fields = {};
+
+    for (var key in fields) {
+      _fields[key] = new Field(fields[key]);
+    }
+
+    this.fields = _fields;
   }
 
   /**
@@ -20,16 +43,21 @@ class Schema {
 
     for (var property in this.fields) {
 
-      var fieldClass = this.fields[property];
-      var value      = data[property];
+      var field  = this.fields[property];
+      var value  = data[property];
+
+      if (value == void 0) continue;
 
       try {
-        coercedData[property] = new fieldClass(value);
+        coercedData[property] = new field.typeClass(value);
       } catch(e) {
 
         // re-throw with a more especific error message. This is coded as well so that it can be
         // internationalized. 
-        if (e.statusCode === 400) throw new httperr.BadRequest(property + "." + e.message);
+        if (e.statusCode === 400) {
+          throw new httperr.BadRequest(property + "." + e.message);
+        }
+
         throw e;
       }
     }

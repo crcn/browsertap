@@ -8,6 +8,13 @@ export default function(schema) {
 
     constructor(properties) {
       Object.assign(this, schema.coerce(properties || {}));
+    },
+
+    /**
+     */
+
+    get schema() {
+      return schema;
     }
   });
 };

@@ -2,7 +2,7 @@ var expect = require("expect.js");
 var mesh   = require("mesh");
 var sift   = require("sift");
 var co     = require("co");
-var runOp  = require("common/utils/bus/create-promise");
+var runOp  = require("common/bus/utils/promise");
 var User   = require("api/models/user");
 
 describe(__filename + "#", function() {
