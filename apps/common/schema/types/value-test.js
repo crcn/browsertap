@@ -56,4 +56,9 @@ describe(__filename + "#", function() {
   it("pulls the value of a value in from the constructor", function() {
     expect(new ValueType(new ValueType(10)).valueOf()).to.be(10);
   });
+
+  it("can properly be converted to a JSON object", function() {
+    var v = new ValueType(10);
+    expect(JSON.parse(JSON.stringify(v))).to.be(10);
+  })
 });

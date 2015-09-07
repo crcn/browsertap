@@ -66,6 +66,13 @@ class ValueType {
   toString() {
     return this._value;
   }
+
+  /**
+   */
+
+  toJSON() {
+    return this._value;
+  }
 }
 
 /**
