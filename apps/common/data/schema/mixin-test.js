@@ -1,5 +1,6 @@
 import mixinSchema  from "./mixin"
 import EmailAddress from "common/data/types/email-address"
+import Password     from "common/data/types/password"
 import Schema       from "./schema"
 import expect       from "expect.js"
 
@@ -21,7 +22,8 @@ describe(__filename + "#", function() {
     fields: {
       emailAddress: EmailAddress,
       fullName: String,
-      location: Location
+      location: Location,
+      password: { type: Password, internal: true }
     }
   });
 

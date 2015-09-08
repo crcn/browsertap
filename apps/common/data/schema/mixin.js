@@ -20,12 +20,28 @@ export default function(schema) {
     /**
      */
 
-    toJSON() {
+    _toObject(includeInternal) {
       var data = {};
       for (var property in schema.fields) {
+        var field = schema.fields[property];
+        if (field.internal && includeInternal !== true) continue;
         data[property] = this[property];
       }
       return JSON.parse(JSON.stringify(data));
+    },
+
+    /**
+     */
+
+    toPublic() {
+      return this._toObject(false);
+    },
+
+    /**
+     */
+
+    toJSON() {
+      return this._toObject(true);
     }
   });
 };

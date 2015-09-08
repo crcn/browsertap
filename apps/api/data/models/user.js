@@ -8,18 +8,43 @@ import mixinSchema   from "common/data/schema/mixin";
 
 var userSchema = new Schema({
   fields: {
+
+    /**
+     * required for executing DB commands
+     */
+
     bus: {
       required: true,
       type: require("common/data/types/bus")
     },
+
+    /**
+     * ID of the user 
+     */
+
     _id: {
       type: require("common/data/types/object-id")
     },
+
+    /**
+     */
+
     emailAddress: { 
       required: true, 
+
+      // TODO - need to implement this
       unique: true,
       type: require("common/data/types/email-address")
-    }
+    },
+
+    /**
+     * secret keys including password
+     */
+
+    keys: [{
+      internal: true,
+      type: require("./password-key")
+    }]
   }
 });
 

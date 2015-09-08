@@ -34,7 +34,18 @@ class Field {
       return;
     }
 
-    return new this.type(value);
+    var typeClass = this.type;
+
+    if (this.collection) {
+      if (!Array.isArray(value)) {
+        throw new httperr.BadRequest("invalid");
+      }
+      return value.map(function(value) {
+        return new typeClass(value);
+      });
+    }
+
+    return new typeClass(value);
   }
 }
 
@@ -54,7 +65,15 @@ class Schema {
     var _fields = {};
 
     for (var key in fields) {
-      _fields[key] = new Field(fields[key]);
+      var fieldOptions = fields[key];
+      if (Array.isArray(fieldOptions)) {
+        fieldOptions = typeof fieldOptions[0] === "function" ? {
+          type: fieldOptions[0]
+        } : fieldOptions[0];
+
+        fieldOptions = Object.assign({ collection: true }, fieldOptions);
+      }
+      _fields[key] = new Field(fieldOptions);
     }
 
     this.fields = _fields;

@@ -55,4 +55,28 @@ describe(__filename + "#", function() {
 
     expect(err.message).to.be("emailAddress.invalid");
   });
+
+  it("can define a collection as a field item", function() {
+
+    var schema = new Schema({
+      fields: {
+        emailAddresses: [EmailAddress]
+      }
+    });
+
+    var err;
+
+    try {
+      schema.coerce({emailAddresses:"a@b.com"});
+    } catch(e) {
+      err = e;
+    }
+
+    expect(err.message).to.be("emailAddresses.invalid");
+
+    var data = schema.coerce({ emailAddresses:["a@b.com", "b@c.com"]})
+
+    expect(data.emailAddresses[0] instanceof EmailAddress).to.be(true);
+    expect(data.emailAddresses[1] instanceof EmailAddress).to.be(true);
+  });
 });

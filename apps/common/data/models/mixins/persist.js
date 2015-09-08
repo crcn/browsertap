@@ -56,10 +56,11 @@ export default function(collectionName) {
     /**
      */
 
-    insert() {
-      return this.fetch("insert", {
+    *insert() {
+      var data = yield this.fetch("insert", {
         data : this.toJSON()
       });
+      return this;
     },
 
     /**
@@ -83,9 +84,7 @@ export default function(collectionName) {
       }, properties));
 
       if (data) {
-        this.setProperties({
-          data: data
-        });
+        this.setProperties(data);
       }
 
       return data;
@@ -97,7 +96,7 @@ export default function(collectionName) {
 
     function *_find(multi, bus, query) {
 
-      var data = yield cp(bus, {
+      var data = yield bus({
         name       : "load",
         multi      : multi,
         query      : query,
@@ -105,8 +104,8 @@ export default function(collectionName) {
       });
 
       return multi ? data.map(function(data) {
-        return new clazz({ data: data });
-      }) : data ? new clazz({ data: data }) : void 0;
+        return new clazz(Object.assign({ bus: bus }, data));
+      }) : data ? new clazz(Object.assign({ bus: bus }, data)) : void 0;
     }
 
     clazz.find    = _find.bind(void 0, true);
