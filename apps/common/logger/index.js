@@ -1,4 +1,4 @@
-var BaseModel = require("../models/base/model");
+var BaseModel = require("common/data/models/base/model");
 var extend    = require("lodash/object/extend");
 var LogLevels = require("./levels");
 var mesh      = require("mesh");

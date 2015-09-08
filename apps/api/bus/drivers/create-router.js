@@ -1,4 +1,4 @@
-var mesh = require("mesh");
+import mesh from "common/mesh";
 
 module.exports = function(routes, noop) {
 

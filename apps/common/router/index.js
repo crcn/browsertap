@@ -1,5 +1,5 @@
 var extend    = require("lodash/object/extend");
-var BaseModel = require("../models/base/model");
+var BaseModel = require("common/data/models/base/model");
 var Location  = require("./location");
 var debounce  = require("lodash/function/debounce");
 var qs        = require("qs");

@@ -2,7 +2,7 @@ var loggerPlugin = require("./index");
 var mesh         = require("mesh");
 var expect       = require("expect.js");
 var LogLevels    = require("common/logger/levels");
-var BaseModel    = require("common/models/base/model");
+var BaseModel    = require("common/data/models/base/model");
 
 describe(__filename + "#", function() {
 

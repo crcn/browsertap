@@ -4,7 +4,6 @@ var cluster         = require("cluster");
 var http            = require("./http");
 var createBus       = require("./bus");
 
-
 class APIApplication extends BaseApplication {
 
   /**
@@ -28,7 +27,7 @@ class APIApplication extends BaseApplication {
 
   initializePlugins() {
     super.initializePlugins();
-    this.use(http);
+    // this.use(http);
     this.bus = createBus(this, this.bus);
   }
 

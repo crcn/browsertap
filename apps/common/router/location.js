@@ -1,5 +1,5 @@
 var qs        = require("qs");
-var BaseModel = require("common/models/base/model");
+var BaseModel = require("common/data/models/base/model");
 var extend    = require("lodash/object/extend");
 
 function Location(properties) {

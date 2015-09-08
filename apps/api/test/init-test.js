@@ -25,9 +25,11 @@ beforeEach(function(next) {
     }
   });
 
-  global.apiApp.initialize(next);
+  global.apiApp.initialize().then(next);
 });
 
 afterEach(function(next) {
-  global.apiApp.dispose(next);
+
+  // global.apiApp.dispose().then(next);
+  next();
 });

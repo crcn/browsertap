@@ -1,9 +1,10 @@
 var expect = require("expect.js");
-var mesh   = require("mesh");
+var mesh   = require("common/mesh");
 var sift   = require("sift");
 var co     = require("co");
 var runOp  = require("common/bus/utils/promise");
-var User   = require("api/models/user");
+var User   = require("api/data/models/user");
+var SignupForm = require("api/data/forms/signup");
 
 describe(__filename + "#", function() {
 
@@ -21,23 +22,26 @@ describe(__filename + "#", function() {
 
   describe("insert# ", function() {
 
-    xit("cannot register a new user if a password is not present", co.wrap(function*() {
-      var user = new User({ bus: bus, data: { emailAddress: fixtures.user1.emailAddress }});
+    it("cannot register a new user if a password is not present", co.wrap(function*() {
       var err;
 
       try {
-        yield user.insert();
+        yield bus({
+          name: "register",
+          data: { emailAddress: "a@b.com" }
+        });
       } catch(e) {
         err = e;
       }
 
-      expect(err).not.to.be(void 0);
+      expect(err.statusCode).to.be(400);
     }));
 
-    xit("can register a new user if the password is present", co.wrap(function*() {
-      var user = new User({ bus: bus, data: fixtures.user1 });
-      expect(user._id).to.be(void 0);
-      yield user.insert();
+    it("can register a new user if the password is present", co.wrap(function*() {
+      var form = new SignupForm(Object.assign({ bus: bus }, fixtures.user1));
+      var user = yield form.submit();
+      expect(user.emailAddress).to.be(fixtures.user1.emailAddress);
+      expect(user.password).to.be(void 0);
       expect(user._id).not.to.be(void 0);
     }));
 

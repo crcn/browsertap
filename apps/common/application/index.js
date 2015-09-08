@@ -1,4 +1,4 @@
-var BaseModel       = require("common/models/base/model");
+var BaseModel       = require("common/data/models/base/model");
 var extend          = require("lodash/object/extend");
 var mesh            = require("mesh");
 var flatten         = require("lodash/array/flattenDeep");
@@ -40,9 +40,9 @@ class Application extends BaseModel {
   /**
    */
 
-  initialize(next) {
+  initialize() {
     this.initializePlugins();
-    return this.bus({ name: "initialize" }).once("end", next || function() { });
+    return this.bus({ name: "initialize" });
   }
 
   /**
@@ -55,8 +55,8 @@ class Application extends BaseModel {
   /**
    */
 
-  dispose(next) {
-    return this.bus({ name: "dispose" }).once("end", next || function() { });
+  dispose() {
+    return this.bus({ name: "dispose" });
   }
 }
 

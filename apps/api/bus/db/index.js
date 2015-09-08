@@ -1,5 +1,7 @@
 var sift = require("sift");
-var mesh = require("mesh");
+var mesh = require("common/mesh");
+var co   = require("co");
+var wp   = require("common/bus/utils/promise");
 
 var dbs = {
   mock  : require("./mock"),
@@ -16,7 +18,15 @@ module.exports = function(app, bus) {
 
   return mesh.accept(
     sift({ name: /insert|update|remove|load/ }),
-    dbs[type](app),
+    _wrapBus20(dbs[type](app)),
     bus
   );
 };
+
+function _wrapBus20(bus) {
+  return function(operation) {
+    return co(function*() {
+      return yield wp(bus, operation);
+    });
+  }
+}
