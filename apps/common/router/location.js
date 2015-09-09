@@ -2,27 +2,23 @@ import qs from "qs";
 import BaseModel from "common/data/models/base/model";
 import extend from "lodash/object/extend";
 
-function Location(properties) {
-  BaseModel.call(this, properties);
-}
-
 /**
  */
 
-extend(Location.prototype, BaseModel.prototype, {
+class Location extends BaseModel {
 
   /**
    * Initial properties
    */
 
-  state: { },
-  query: { },
+  state = {}
+  query = {}
 
   /**
    * Stringifies the location into something like /path/to/route?query=value
    */
 
-  toString: function() {
+  toString() {
     var path = this.pathname;
 
     if (this.query && !!Object.keys(this.query).length) {
@@ -40,7 +36,7 @@ extend(Location.prototype, BaseModel.prototype, {
 
     return path;
   }
-});
+}
 
-module.exports = Location;
+export default Location;
 

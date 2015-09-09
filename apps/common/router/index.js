@@ -1,4 +1,4 @@
-import extend from "lodash/object/extend";
+
 import BaseModel from "common/data/models/base/model";
 import Location from "./location";
 import debounce from "lodash/function/debounce";
@@ -77,35 +77,35 @@ function _bindWindowLocation(router) {
   }), 10);
 }
 
-function Router(properties) {
-  BaseModel.call(this, properties);
-  this.location = new Location();
-  this._routes = {};
-  if (process.browser && this.sync !== false) {
-    _bindWindowLocation(this);
-  }
-}
-
-/**
- */
-
-extend(Router.prototype, BaseModel.prototype, {
+class Router extends BaseModel {
 
   /**
    */
 
-  initialize: function() {
+  constructor(properties) {
+    super(properties);
+    this.location = new Location();
+    this._routes = {};
+    if (process.browser && this.sync !== false) {
+      _bindWindowLocation(this);
+    }
+  }
+
+  /**
+   */
+
+  initialize() {
 
     // redirect
     if (process.browser) {
       this.redirect(location.pathname);
     }
-  },
+  }
 
   /**
    */
 
-  addRoute: function(alias, pathname, handler) {
+  addRoute(alias, pathname, handler) {
     if (!handler) handler = function() { };
 
     // convert something like /home/:id/path to /home/(\w+)/
@@ -144,12 +144,12 @@ extend(Router.prototype, BaseModel.prototype, {
       },
       handler: handler
     };
-  },
+  }
 
   /**
    */
 
-  redirect: function(aliasOrPathname, options) {
+  redirect(aliasOrPathname, options) {
 
     if (!options) options = {};
 
@@ -159,10 +159,10 @@ extend(Router.prototype, BaseModel.prototype, {
 
     var route = this.getRoute(pathParts.pathname);
 
-    this.location.setProperties(extend({
+    this.location.setProperties(Object.assign({
       pathname: route ? route.getPathname(pathParts.pathname, options) : pathParts.pathname,
       params  : options.params,
-      query   : extend({}, options.query, pathParts.query)
+      query   : object.assign({}, options.query, pathParts.query)
     }, options));
 
     if (route) {
@@ -172,33 +172,33 @@ extend(Router.prototype, BaseModel.prototype, {
       error.code = 404;
       this.emit("error", error);
     }
-  },
+  }
 
   /**
    * returns /just/the/path/name
    */
 
-  getPathname: function(aliasOrPathname, options) {
+  getPathname(aliasOrPathname, options) {
     var route = this.getRoute(aliasOrPathname);
     return route ? route.getPathname(aliasOrPathname, options) : aliasOrPathname;
-  },
+  }
 
   /**
    * returns something like /path?query=value
    */
 
-  getPath: function(aliasOrPathname, options) {
+  getPath(aliasOrPathname, options) {
     var pathname = this.getPathname(aliasOrPathname, options);
     return (new Location({
       pathname: pathname,
       query: options.query
     })).toString();
-  },
+  }
 
   /**
    */
 
-  getRoute: function(aliasOrPathname) {
+  getRoute(aliasOrPathname) {
     // aliasOrPathname = aliasOrPathname.replace(/\/+/g, "/"); // remove double slashes
 
     for (var alias in this._routes) {
@@ -206,6 +206,6 @@ extend(Router.prototype, BaseModel.prototype, {
       if (route.test(aliasOrPathname)) return route;
     }
   }
-});
+}
 
-module.exports = Router;
+export default Router;

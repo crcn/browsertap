@@ -7,28 +7,24 @@ var Main            = require("./components/main");
 /**
  */
 
-function BrowserClientApplication(properties) {
-  BaseApplication.call(this, properties);
-  this.router = new Router();
-}
+class BrowserClientApplication extends BaseApplication {
 
-/**
- */
+  /**
+   */
+  constructor() {
+    super(...arguments);
+    this.router = new Router();
+  }
 
-extend(BrowserClientApplication.prototype, BaseApplication.prototype, {
+  // plugins: [require("./bus")].concat(BaseApplication.prototype.plugins, [
+  //   require("./routes")
+  // ]),
 
   /**
    */
 
-  plugins: [require("./bus")].concat(BaseApplication.prototype.plugins, [
-    require("./routes")
-  ]),
-
-  /**
-   */
-
-  initialize: function() {
-    BaseApplication.prototype.initialize.call(this);
+  initialize() {
+    super.initialize(this);
 
     var props = extend({
       app      : this,
@@ -37,7 +33,7 @@ extend(BrowserClientApplication.prototype, BaseApplication.prototype, {
 
     React.render(React.createElement(Main, props), this.element);
   }
-});
+}
 
 /**
  */

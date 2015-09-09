@@ -30,7 +30,7 @@ var fs              = require("fs");
 var apps = [
   { name: "api"            , bundle: false },
   { name: "browser-client" , bundle: true  },
-  { name: "home"           , bundle: true  },
+  { name: "home"           , bundle: false  },
   { name: "common"         , bundle: false },
   { name: "desktop-client" , bundle: false }
 ];
@@ -97,6 +97,8 @@ gulp.task("bundle-js", function() {
 
 gulp.task("bundle-home", function() {
   var element = document.createElement("div");
+
+  return;
 
   var app = new HomeApplication({
     element: element,
