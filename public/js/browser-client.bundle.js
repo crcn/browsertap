@@ -730,14 +730,12 @@ var Field = _react2["default"].createClass({
     var valid;
 
     try {
-      this.props.field.coerce(value);
+      this.props.field.coerce(value, this.props.data);
       valid = true;
     } catch (e) {
       valid = false;
-      console.log(e);
+      this.props.onFieldData(this.props.name, value);
     }
-
-    console.log(valid);
 
     this.setState({ valid: valid });
   },
@@ -768,10 +766,10 @@ var Field = _react2["default"].createClass({
       ),
       _react2["default"].createElement(
         "div",
-        { className: "input-group" },
-        fieldElement
-      ),
-      this.state.valid === false ? _react2["default"].createElement("span", { className: "ion-close form-control-feedback" }) : void 0
+        null,
+        fieldElement,
+        this.state.valid != void 0 ? _react2["default"].createElement("span", { className: "ion-" + (this.state.valid ? "checkmark" : "close") + " form-control-feedback" }) : void 0
+      )
     );
   },
 
@@ -805,7 +803,19 @@ var DataForm = _react2["default"].createClass({
    */
 
   getInitialState: function getInitialState() {
-    return {};
+    return {
+      data: {}
+    };
+  },
+
+  /**
+   */
+
+  onFieldData: function onFieldData(name, value) {
+    this.state.data[name] = value;
+    this.setState({
+      data: this.state.data
+    });
   },
 
   /**
@@ -845,7 +855,7 @@ var DataForm = _react2["default"].createClass({
 
     for (var name in schema.fields) {
       var field = schema.fields[name];
-      formFields.push(_react2["default"].createElement(Field, { key: name, name: name, field: field }));
+      formFields.push(_react2["default"].createElement(Field, { key: name, name: name, field: field, onFieldData: this.onFieldData, data: this.state.data }));
     }
 
     return _react2["default"].createElement(

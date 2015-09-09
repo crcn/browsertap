@@ -28,11 +28,8 @@ var Field = React.createClass({
       valid = true;
     } catch(e) {
       valid = false;
-      console.log(e);
       this.props.onFieldData(this.props.name, value);
     }
-
-    console.log(valid);
 
     this.setState({ valid: valid });
   },
@@ -55,10 +52,10 @@ var Field = React.createClass({
 
     return <div className={classNames} onChange={this.onChange}>
       <label>{this.props.name}</label>
-      <div className="input-group">
+      <div>
         { fieldElement }
+        { this.state.valid != void 0 ? <span className={"ion-" + (this.state.valid ? "checkmark" : "close") + " form-control-feedback"}></span> : void 0 }
       </div>
-      { this.state.valid === false ? <span className="ion-close form-control-feedback"></span> : void 0 }
     </div>;
   },
 
