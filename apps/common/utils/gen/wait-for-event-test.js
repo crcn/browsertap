@@ -1,6 +1,6 @@
-var waitForEvent = require("./wait-for-event");
-var expect       = require("expect.js");
-var EventEmitter = require("events").EventEmitter;
+import waitForEvent from "./wait-for-event";
+import expect from "expect.js";
+import {EventEmitter} from "events";
 
 describe(__filename + "#", function() {
   var em;

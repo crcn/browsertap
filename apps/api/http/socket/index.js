@@ -1,7 +1,7 @@
-var io          = require("socket.io");
-var socketioBus = require("common/bus/drivers/socketio");
-var sift        = require("sift");
-var mesh        = require("mesh");
+import io from "socket.io";
+import socketioBus from "common/bus/drivers/socketio";
+import sift from "sift";
+import mesh from "mesh";
 
 /**
  */

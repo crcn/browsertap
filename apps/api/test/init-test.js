@@ -1,4 +1,4 @@
-var APIApplication = require("../application");
+import APIApplication from "../application";
 
 var port = 8091;
 

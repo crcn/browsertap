@@ -1,8 +1,8 @@
-var extend    = require("lodash/object/extend");
-var BaseModel = require("common/data/models/base/model");
-var Location  = require("./location");
-var debounce  = require("lodash/function/debounce");
-var qs        = require("qs");
+import extend from "lodash/object/extend";
+import BaseModel from "common/data/models/base/model";
+import Location from "./location";
+import debounce from "lodash/function/debounce";
+import qs from "qs";
 
 /**
  * _setter for a deep path

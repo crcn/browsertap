@@ -1,5 +1,5 @@
-var ValueType = require("./value");
-var expect    = require("expect.js");
+import ValueType from "./value";
+import expect from "expect.js";
 
 describe(__filename + "#", function() {
 

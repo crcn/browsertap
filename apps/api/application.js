@@ -1,8 +1,9 @@
-var BaseApplication = require("common/application");
-var extend          = require("lodash/object/extend");
-var cluster         = require("cluster");
-var http            = require("./http");
-var createBus       = require("./bus");
+import BaseApplication from "common/application";
+import extend from "lodash/object/extend";
+import cluster from "cluster";
+import http from "./http";
+import email from "./email";
+import createBus from "./bus";
 
 class APIApplication extends BaseApplication {
 
@@ -28,6 +29,7 @@ class APIApplication extends BaseApplication {
   initializePlugins() {
     super.initializePlugins();
     // this.use(http);
+    this.use(email);
     this.bus = createBus(this, this.bus);
   }
 

@@ -1,4 +1,4 @@
-var httperr = require("httperr");
+import httperr from "httperr";
 /**
  */
 

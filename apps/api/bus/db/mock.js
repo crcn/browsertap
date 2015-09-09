@@ -1,6 +1,6 @@
-var memory = require("mesh-memory");
-var mesh   = require("mesh");
-var sift   = require("sift");
+import memory from "mesh-memory";
+import mesh from "mesh";
+import sift from "sift";
 
 module.exports = function(app) {
   app.logger.info("init mock db");

@@ -1,6 +1,6 @@
-var mesh      = require("mesh");
-var intercept = require("./drivers/intercept");
-var log       = require("./log");
+import mesh from "mesh";
+import intercept from "./drivers/intercept";
+import log from "./log";
 
 module.exports = function(app, bus) {
 

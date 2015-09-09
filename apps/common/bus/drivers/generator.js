@@ -1,5 +1,5 @@
-var co   = require("co");
-var mesh = require("mesh");
+import co from "co";
+import mesh from "mesh";
 
 module.exports = function(generator) {
   return mesh.stream(function(operation, stream) {

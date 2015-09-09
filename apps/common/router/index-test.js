@@ -1,5 +1,5 @@
-var Router = require("./index");
-var expect = require("expect.js");
+import Router from "./index";
+import expect from "expect.js";
 
 describe(__filename + "#", function() {
 

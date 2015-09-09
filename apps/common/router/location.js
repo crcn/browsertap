@@ -1,6 +1,6 @@
-var qs        = require("qs");
-var BaseModel = require("common/data/models/base/model");
-var extend    = require("lodash/object/extend");
+import qs from "qs";
+import BaseModel from "common/data/models/base/model";
+import extend from "lodash/object/extend";
 
 function Location(properties) {
   BaseModel.call(this, properties);

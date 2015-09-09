@@ -1,5 +1,5 @@
-var Logger = require("common/logger");
-var extend = require("lodash/object/extend");
+import Logger from "common/logger";
+import extend from "lodash/object/extend";
 
 /**
  */

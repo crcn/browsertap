@@ -1,5 +1,5 @@
-var gen    = require("./generator");
-var expect = require("expect.js");
+import gen from "./generator";
+import expect from "expect.js";
 
 describe(__filename + "#", function() {
   it("can wrap a generator and stream the yielded data", function(next) {

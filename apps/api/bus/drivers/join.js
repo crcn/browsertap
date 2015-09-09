@@ -1,5 +1,5 @@
-var mesh  = require("mesh");
-var async = require("async");
+import mesh from "mesh";
+import async from "async";
 
 //join()
 module.exports = function(createJoin) {

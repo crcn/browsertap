@@ -1,7 +1,7 @@
-var http   = require("http");
-var socket = require("./socket");
-var mesh   = require("mesh");
-var routes = require("./routes");
+import http from "http";
+import socket from "./socket";
+import mesh from "mesh";
+import routes from "./routes";
 
 /**
  */

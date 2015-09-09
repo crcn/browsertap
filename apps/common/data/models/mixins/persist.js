@@ -43,7 +43,10 @@ export default function(collectionName) {
      */
 
     *remove () {
-
+      var data = yield this.fetch("remove", {
+        query: { _id: String(this._id) }
+      });
+      return this;
     },
 
     /**
@@ -68,7 +71,8 @@ export default function(collectionName) {
 
     *update() {
       return yield this.fetch("update", {
-        data : this.toJSON()
+        data : this.toJSON(),
+        query: { _id: String(this._id) }
       });
     },
 
@@ -84,7 +88,7 @@ export default function(collectionName) {
       }, properties));
 
       if (data) {
-        this.setProperties(data);
+        this.setProperties(this.schema.coerce(Object.assign({}, this, data)));
       }
 
       return data;

@@ -1,6 +1,6 @@
-var expect    = require("expect.js");
-var mesh      = require("mesh");
-var BaseModel = require("./model");
+import expect from "expect.js";
+import mesh from "mesh";
+import BaseModel from "./model";
 
 describe(__filename + "#", function() {
   it("can be created", function() {

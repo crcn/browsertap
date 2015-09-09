@@ -1,5 +1,5 @@
-var React = require("react");
-var Pages = require("./pages");
+import React from "react";
+import Pages from "./pages";
 
 var Main = React.createClass({
   componentDidMount: function() {

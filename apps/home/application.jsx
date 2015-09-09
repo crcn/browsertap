@@ -1,8 +1,8 @@
-var BaseApplication = require("common/application");
-var extend          = require("lodash/object/extend");
-var React           = require("react");
-var Router          = require("common/router");
-var Body            = require("./components/body");
+import BaseApplication from "common/application";
+import extend from "lodash/object/extend";
+import React from "react";
+import Router from "common/router";
+import Body from "./components/body";
 
 var plugins = [
     require("./routes"),

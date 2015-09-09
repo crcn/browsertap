@@ -1,5 +1,5 @@
-var ros      = require("ros");
-var mesh     = require("mesh");
+import ros from "ros";
+import mesh from "mesh";
 
 /**
  */

@@ -1,7 +1,7 @@
-var sift = require("sift");
-var mesh = require("common/mesh");
-var co   = require("co");
-var wp   = require("common/bus/utils/promise");
+import sift from "sift";
+import mesh from "common/mesh";
+import co from "co";
+import wp from "common/bus/utils/promise";
 
 var dbs = {
   mock  : require("./mock"),

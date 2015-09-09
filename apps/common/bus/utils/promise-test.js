@@ -1,7 +1,7 @@
-var createGenerator = require("./promise");
-var expect          = require("expect.js");
-var mesh            = require("mesh");
-var co              = require("co");
+import createGenerator from "./promise";
+import expect from "expect.js";
+import mesh from "mesh";
+import co from "co";
 
 describe(__filename + "#", function() {
   it("yields one value if multi is false", function(done) {

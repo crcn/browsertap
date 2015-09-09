@@ -1,5 +1,5 @@
-var Application = require("./application");
-var getConfig   = require("./get-config");
+import Application from "./application";
+import getConfig from "./get-config";
 
 /**
  */

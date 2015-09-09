@@ -1,11 +1,11 @@
-var BaseModel       = require("common/data/models/base/model");
-var extend          = require("lodash/object/extend");
-var mesh            = require("mesh");
-var flatten         = require("lodash/array/flattenDeep");
-var Logger          = require("common/logger");
-var createBus       = require("common/bus");
-var catchError      = require("./plugins/catch-errors");
-var createCommonBus = require("common/bus");
+import BaseModel from "common/data/models/base/model";
+import extend from "lodash/object/extend";
+import mesh from "mesh";
+import flatten from "lodash/array/flattenDeep";
+import Logger from "common/logger";
+import createBus from "common/bus";
+import catchError from "./plugins/catch-errors";
+import createCommonBus from "common/bus";
 
 /**
  */

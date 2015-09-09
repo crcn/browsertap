@@ -1,4 +1,4 @@
-var LogLevels = require("common/logger/levels");
+import LogLevels from "common/logger/levels";
 
 /**
  */

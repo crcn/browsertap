@@ -2,6 +2,7 @@ import Model         from "common/data/models/base/model"
 import Schema        from "common/data/schema/schema";
 import persistMixin  from "common/data/models/mixins/persist"
 import mixinSchema   from "common/data/schema/mixin";
+import Organization  from "api/data/models/organization";
 
 /**
  */
@@ -31,12 +32,31 @@ var userSchema = new Schema({
 
     emailAddress: { 
       required: true, 
-
-      // TODO - need to implement this
-      unique: true,
+      unique: true, // TODO
       type: require("common/data/types/email-address")
     },
 
+    /**
+     */
+
+    locale: {
+      type: require("common/data/types/locale")
+    },
+
+    /**
+     */
+
+    firstName: {
+      type: String
+    },
+
+    /**
+     */
+
+    lastName: {
+      type: String
+    },
+    
     /**
      * secret keys including password
      */
@@ -56,19 +76,29 @@ var userSchema = new Schema({
 class User extends Model {
 
   /**
-   * adds a key to the account. This is typically a password, but``
-   * it'll also work for other authorization strategies such as oauth
    */
 
-  addKey(properties) {
-    return (new Key(Object.assign({}, properties, { bus: this.bus }))).save();
+  *getOrganizations() {
+    return yield Organization.find(this.bus.value, {
+      "access.user": {
+        _id: this._id.valueOf()
+      }
+    });
   }
 
   /**
    */
 
-  *existsWithEmailAddress() {
-    return Promise.resolve(!!(yield this.fetch("load", { query: { emailAddress: this.emailAddress } })));
+
+  *createOrganization() {
+    var organization = new Organization({
+      bus: this.bus,
+      access: [{
+        user: { _id: this._id },
+        level: "admin"
+      }]
+    });
+    return yield organization.insert();
   }
 }
 

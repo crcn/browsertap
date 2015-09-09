@@ -24,28 +24,40 @@ class Field {
   /**
    */
 
-  coerce(value) {
+  coerce(value, data) {
 
     // TODO - check for invalid
     if (value == void 0) {
-      if (this.required) {
+      if (this.default) {
+        value = typeof this.default === "function" ? this.default() : this.default;
+      } else if (this.required) {
         throw new httperr.BadRequest("invalid");
+      } else {
+        return;
       }
-      return;
     }
 
-    var typeClass = this.type;
+    if (this.validate && !this.validate(value, data)) {
+      throw new httperr.BadRequest("invalid");
+    }
 
     if (this.collection) {
       if (!Array.isArray(value)) {
         throw new httperr.BadRequest("invalid");
       }
       return value.map(function(value) {
-        return new typeClass(value);
-      });
+        return this._cast(value);
+      }.bind(this));
     }
 
-    return new typeClass(value);
+    return this._cast(value);
+  }
+
+  /**
+   */
+
+  _cast(value) {
+    return !(value instanceof this.type) ? new this.type(value) : value;
   }
 }
 
@@ -91,7 +103,7 @@ class Schema {
       var value  = data[property];
 
       try {
-        coercedData[property] = field.coerce(value);
+        coercedData[property] = field.coerce(value, data);
       } catch(e) {
 
         // re-throw with a more especific error message. This is coded as well so that it can be

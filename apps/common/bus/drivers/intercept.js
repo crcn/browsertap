@@ -1,6 +1,6 @@
-var mesh   = require("mesh");
-var Stream = require("obj-stream").Stream;
-var sift   = require("sift");
+import mesh from "mesh";
+import {Stream} from "obj-stream";
+import sift from "sift";
 
 // TODO - implement max, and once: Boolean
 module.exports = function(bus) {

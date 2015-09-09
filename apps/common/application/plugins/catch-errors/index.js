@@ -1,6 +1,6 @@
-var platform   = require("platform");
-var parseStack = require("parse-stack");
-var mesh       = require("mesh");
+import platform from "platform";
+import parseStack from "parse-stack";
+import mesh from "mesh";
 
 /**
  */

@@ -1,5 +1,5 @@
-var loggly = require("loggly");
-var mesh   = require("mesh");
+import loggly from "loggly";
+import mesh from "mesh";
 
 module.exports = function(app) {
 

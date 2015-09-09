@@ -1,12 +1,12 @@
-var mesh = require("mesh");
-var sift = require("sift");
+import mesh from "mesh";
+import sift from "sift";
 
 var busFactories = [
   require("./loggly"),
   require("./stdout")
 ];
 
-var logOperations = require("./operations");
+import logOperations from "./operations";
 
 module.exports = function(app, bus) {
 

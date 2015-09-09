@@ -1,5 +1,5 @@
-var Application = require("./application");
-var expect      = require("expect.js");
+import Application from "./application";
+import expect from "expect.js";
 
 describe(__filename + "#", function() {
   it("can be created", function() {

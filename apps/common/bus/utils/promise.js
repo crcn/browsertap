@@ -1,4 +1,4 @@
-var co = require("co");
+import co from "co";
 
 module.exports = function*(bus, operation) {
   var request = bus(operation);

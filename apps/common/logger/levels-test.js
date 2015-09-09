@@ -1,5 +1,5 @@
-var LogLevels = require("./levels");
-var expect    = require("expect.js");
+import LogLevels from "./levels";
+import expect from "expect.js";
 
 describe(__filename + "#", function() {
 

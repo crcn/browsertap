@@ -1,8 +1,8 @@
-var loggerPlugin = require("./index");
-var mesh         = require("mesh");
-var expect       = require("expect.js");
-var LogLevels    = require("common/logger/levels");
-var BaseModel    = require("common/data/models/base/model");
+import loggerPlugin from "./index";
+import mesh from "mesh";
+import expect from "expect.js";
+import LogLevels from "common/logger/levels";
+import BaseModel from "common/data/models/base/model";
 
 describe(__filename + "#", function() {
 

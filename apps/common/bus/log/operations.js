@@ -1,5 +1,5 @@
-var mesh = require("mesh");
-var sift = require("sift");
+import mesh from "mesh";
+import sift from "sift";
 
 module.exports = function(app, bus) {
   return function(operation) {

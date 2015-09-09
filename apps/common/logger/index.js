@@ -1,7 +1,7 @@
-var BaseModel = require("common/data/models/base/model");
-var extend    = require("lodash/object/extend");
-var LogLevels = require("./levels");
-var mesh      = require("mesh");
+import BaseModel from "common/data/models/base/model";
+import extend from "lodash/object/extend";
+import LogLevels from "./levels";
+import mesh from "mesh";
 
 class Logger extends BaseModel {
 

@@ -1,5 +1,5 @@
-var EventEmitter = require("events").EventEmitter;
-var mesh         = require("mesh");
+import {EventEmitter} from "events";
+import mesh from "mesh";
 
 
 var __getters = {};

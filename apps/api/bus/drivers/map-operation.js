@@ -1,6 +1,6 @@
-var mesh = require("mesh");
-var get  = require("common/utils/get-property");
-var set  = require("common/utils/set-property");
+import mesh from "mesh";
+import get from "common/utils/get-property";
+import set from "common/utils/set-property";
 
 /**
  */

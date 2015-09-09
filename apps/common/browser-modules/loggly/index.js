@@ -1,4 +1,4 @@
-var Loggly = require("loggly-browserify");
+import Loggly from "loggly-browserify";
 
 exports.createClient = function(config) {
   var logger = new Loggly(config.token);

@@ -1,6 +1,6 @@
-var padRight = require("lodash/string/padRight");
-var chalk    = require("chalk");
-var mesh     = require("mesh");
+import padRight from "lodash/string/padRight";
+import chalk from "chalk";
+import mesh from "mesh";
 
 module.exports = function(app) {
 

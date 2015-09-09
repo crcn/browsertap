@@ -1,5 +1,5 @@
-var Location = require("./location");
-var expect   = require("expect.js");
+import Location from "./location";
+import expect from "expect.js";
 
 describe(__filename + "#", function() {
 

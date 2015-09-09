@@ -1,8 +1,8 @@
 
-var mesh               = require("mesh");
-var sift               = require("sift");
-var createInterceptBus = require("./intercept");
-var expect             = require("expect.js");
+import mesh from "mesh";
+import sift from "sift";
+import createInterceptBus from "./intercept";
+import expect from "expect.js";
 
 describe(__filename + "#", function() {
 
