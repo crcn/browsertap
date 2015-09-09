@@ -1,3 +1,4 @@
+
 import createRouter       from "api/bus/drivers/create-router";
 import sift               from "sift";
 import SignupForm         from "api/data/forms/signup";
@@ -52,6 +53,7 @@ export default function(app, bus) {
         ]
       });
 
+      // register the user
       yield user.insert();
 
       // also create an organization for the user

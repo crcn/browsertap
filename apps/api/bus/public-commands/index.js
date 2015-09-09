@@ -12,19 +12,7 @@ import httperr            from "httperr";
 import mu                 from "mustache";
 import fs                 from "fs";
 
-
 export default function(app, bus) {
-
-  function *getLoggedInUser(operation) {
-    if (!operation.token) throw new httperr.Unauthorized("token does not exist");
-    var token = yield Token.findOne(bus, operation.token);
-    var user  = yield User.findOne({ 
-      emailAddress: token.key
-    });
-    if (!user) throw new httperr.Unauthorized("user does not exist");
-    return user;
-  }
-
   return createRouter(
     require("./account")(app, bus)
   , bus);
