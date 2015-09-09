@@ -747,6 +747,7 @@ var Field = _react2["default"].createClass({
 
     var classNames = (0, _classnames2["default"])({
       "form-group": true,
+      "form-inline": true,
       "has-error": this.state.valid === false,
       "has-success": this.state.valid === true,
       "has-feedback": this.state.valid != void 0

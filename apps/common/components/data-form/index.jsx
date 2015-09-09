@@ -40,7 +40,8 @@ var Field = React.createClass({
   render: function() {
 
     var classNames = cx({
-      "form-group"  : true,
+      "form-group"   : true,
+      "form-inline"  : true,
       "has-error"    : this.state.valid === false,
       "has-success"  : this.state.valid === true,
       "has-feedback" : this.state.valid != void 0
