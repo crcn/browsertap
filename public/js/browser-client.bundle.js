@@ -861,7 +861,7 @@ var DataForm = _react2["default"].createClass({
 
     return _react2["default"].createElement(
       "form",
-      { onChange: this._onChange },
+      { onChange: this._onChange, className: "m-common-data-form" },
       formFields
     );
   }
@@ -1426,7 +1426,7 @@ var EmailAddress = (function (_ValueType) {
   _createClass(EmailAddress, [{
     key: "validate",
     value: function validate(value) {
-      return (/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i.test(value)
+      return (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(value)
       );
     }
   }]);

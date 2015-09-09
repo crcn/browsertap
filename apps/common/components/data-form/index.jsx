@@ -50,7 +50,7 @@ var Field = React.createClass({
     var fieldElement = this._createFromField(this.props.name, this.props.field);
 
     if (!fieldElement) return <div style={{display:"none"}}></div>;
-
+ 
     return <div className={classNames} onChange={this.onChange}>
       <label>{this.props.name}</label>
       <div>
@@ -144,7 +144,7 @@ var DataForm = React.createClass({
       );
     }
     
-    return <form onChange={this._onChange}>
+    return <form onChange={this._onChange} className="m-common-data-form">
       { formFields }
     </form>
   }

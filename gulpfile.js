@@ -3,11 +3,14 @@ require("./gulp/dom");
 // require("jsx-require-extension");
 var gulp            = require("gulp");
 var mocha           = require("gulp-mocha");
+var concat          = require("gulp-concat");
+var less            = require("gulp-less");
 var mkdirp          = require("mkdirp");
 var plumber         = require("gulp-plumber");
 var glob            = require("glob");
 var sift            = require("sift");
 var browserify      = require("browserify");
+var watchify        = require("watchify");
 var babelify        = require("babelify");
 var jscs            = require("gulp-jscs");
 var jshint          = require("gulp-jshint");
@@ -39,6 +42,7 @@ var apps = [
 var paths = {
   testFiles      : ["test/**/*.js"],
   allFiles       : ["test/**/*.js"],
+  lessFiles      : [],
   watchFiles     : [],
   buildDirectory : path.normalize(__dirname + "/public"),
   publicDirectory : path.normalize(__dirname + "/public")
@@ -67,31 +71,53 @@ var ops = {
 apps.forEach(function(app) {
   paths.allFiles.push("apps/" + app.name + "/**/*.js");
   paths.testFiles.push("apps/" + app.name + "/**/*-test.js");
+  paths.lessFiles.push("apps/" + app.name + "/**/*.less");
   paths.watchFiles.push("apps/" + app.name + "/**/*");
 });
 
 /**
  */
 
-gulp.task("bundle", ["bundle-js", "bundle-home"], function(next) {
+gulp.task("bundle", ["bundle-css", "bundle-js", "bundle-home"], function(next) {
   next();
 });
 
 /**
  */
 
+gulp.task("bundle-css", function() {
+  return gulp.src(paths.lessFiles)
+    .pipe(less({
+      paths: []
+    }))
+    .pipe(concat("all.css"))
+    .pipe(gulp.dest(__dirname + '/public/css'));
+});
+
+/**
+ */
+
+var _bundles = {};
+
 gulp.task("bundle-js", function() {
   return mergeStream(sift({ bundle: true }, apps).map(function(app) {
 
-    var b = browserify(__dirname + "/apps/" + app.name, {
-      extensions: [".jsx"]
-    }).
-    plugin(collapse);
+    var b;
 
-    b.transform({ global: true }, babelify.configure({
-      optional: ["es7.classProperties", "es7.decorators"]
-    }));
-    // b.transform({ global: true }, "reactify");
+    if (!(b = _bundles[app.name])) {
+      b = browserify(__dirname + "/apps/" + app.name, Object.assign({}, watchify.args, {
+      extensions: [".jsx"]
+      })).
+      plugin(collapse);
+
+      b.transform({ global: true }, babelify.configure({
+        optional: ["es7.classProperties", "es7.decorators"]
+      }));
+
+      b = watchify(b);
+
+      _bundles[app.name] = b;
+    }
 
     return b.bundle().pipe(source(app.name + ".bundle.js")).
     pipe(buffer()).
