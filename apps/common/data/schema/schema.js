@@ -109,7 +109,9 @@ class Schema {
         // re-throw with a more especific error message. This is coded as well so that it can be
         // internationalized. 
         if (e.statusCode === 400) {
-          throw new httperr.BadRequest(property + "." + e.message);
+          var err   = new httperr.BadRequest(property + "." + e.message);
+          err.field = this.fields[property];
+          throw err;
         }
 
         throw e;

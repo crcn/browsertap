@@ -5,7 +5,7 @@ import co from "co";
 import runOp from "common/bus/utils/promise";
 import User from "api/data/models/user";
 import SignupForm from "api/data/forms/signup";
-import LoginForm from "api/data/forms/login";
+import LoginForm from "common/data/forms/login";
 import ForgotPasswordForm from "api/data/forms/forgot-password";
 import ResetPasswordForm from "api/data/forms/reset-password";
 import Token from "api/data/models/token";

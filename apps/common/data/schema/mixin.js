@@ -1,7 +1,7 @@
 import mixin from "common/utils/class/mixin"
 
 export default function(schema) {
-  return mixin({
+  var _mixin = mixin({
 
     /**
      */
@@ -44,4 +44,10 @@ export default function(schema) {
       return this._toObject(true);
     }
   });
+
+  return function(clazz) {
+    clazz = _mixin(clazz);
+    clazz.schema = schema;
+    return clazz;
+  }
 };
