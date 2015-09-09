@@ -8,6 +8,7 @@ var plumber         = require("gulp-plumber");
 var glob            = require("glob");
 var sift            = require("sift");
 var browserify      = require("browserify");
+var babelify        = require("babelify");
 var jscs            = require("gulp-jscs");
 var jshint          = require("gulp-jshint");
 var babel           = require("babel/register")({
@@ -87,7 +88,10 @@ gulp.task("bundle-js", function() {
     }).
     plugin(collapse);
 
-    b.transform({ global: true }, "reactify");
+    b.transform({ global: true }, babelify.configure({
+      optional: ["es7.classProperties", "es7.decorators"]
+    }));
+    // b.transform({ global: true }, "reactify");
 
     return b.bundle().pipe(source(app.name + ".bundle.js")).
     pipe(buffer()).

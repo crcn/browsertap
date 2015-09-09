@@ -1,6 +1,6 @@
 
-var getConfig   = require("common/get-config");
-var deepExtend  = require("deep-extend");
+var getConfig   = require("common/utils/get-config");
+var deepExtend  = require("lodash/object/defaultsDeep");
 
 module.exports = function(env) {
 

@@ -57,7 +57,7 @@ var desktopSchema = new Schema({
 class Desktop {
 
   /**
-   * stops the desktop
+   * stops the desktopr
    */
 
   *stop() {
