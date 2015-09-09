@@ -53,6 +53,8 @@ export default function(app, bus) {
       });
 
       yield user.insert();
+
+      // also create an organization for the user
       var org = yield user.createOrganization();
 
       // login to create the session and other things 

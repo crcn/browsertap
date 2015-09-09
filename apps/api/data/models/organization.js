@@ -87,6 +87,29 @@ var organizationSchema = new Schema({
 @mixinSchema(organizationSchema)
 class Organization extends Model {
 
+  /**
+   * returns the billing info such as plan, number of hours used, etc
+   */
+
+  *getBillingInfo() {
+    // TODO
+  }
+
+  /**
+   * returns the current plan for the organization
+   */
+
+  *getPlan() {
+
+  }
+
+  /**
+   * gets the current running desktops
+   */
+
+  *getDesktops() {
+
+  }
 }
 
 /**
