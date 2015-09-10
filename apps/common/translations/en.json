@@ -1,4 +1,7 @@
 {
+  "errors": {
+    "notImplemented": "not implemented yet"
+  },
   "fieldsLabels": {
     "emailAddress": "Email Address",
     "password": "Password",

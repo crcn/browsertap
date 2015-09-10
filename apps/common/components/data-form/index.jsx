@@ -132,6 +132,11 @@ var DataForm = React.createClass({
   /**
    */
 
+  mixins: [IntlMixin],
+
+  /**
+   */
+
   getInitialState: function() {
     return {
       data: this.props.data || {}
@@ -171,6 +176,9 @@ var DataForm = React.createClass({
     event.preventDefault();  
     var result = yield this.state.form.submit();
     console.log(result);
+    this.setState({
+      error: new Error("errors.notImplemented")
+    });
   }),
 
   /**
@@ -187,10 +195,13 @@ var DataForm = React.createClass({
       var field = schema.fields[name];
       formFields.push(
         <Field key={name} name={name} field={field} onFieldData={this.onFieldData} data={this.state.data} {...this.props} />
-      );
+      ); 
     }
     
     return <form onChange={this._onChange} className="m-common-data-form" onSubmit={this.onSubmit}>
+      { this.state.error ? <div className="alert alert-danger">{
+        <FormattedMessage message={this.getIntlMessage(this.state.error.message)} />
+      }</div> : void 0 }
       { formFields }
       <div className="form-group form-inline">  
         <input type="submit" className="form-control" value="submit" disabled={!this.state.form} />

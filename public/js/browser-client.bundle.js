@@ -898,6 +898,11 @@ var DataForm = _react2["default"].createClass({
   /**
    */
 
+  mixins: [IntlMixin],
+
+  /**
+   */
+
   getInitialState: function getInitialState() {
     return {
       data: this.props.data || {}
@@ -944,8 +949,11 @@ var DataForm = _react2["default"].createClass({
           result = context$1$0.sent;
 
           console.log(result);
+          this.setState({
+            error: new Error("errors.notImplemented")
+          });
 
-        case 5:
+        case 6:
         case "end":
           return context$1$0.stop();
       }
@@ -970,6 +978,11 @@ var DataForm = _react2["default"].createClass({
     return _react2["default"].createElement(
       "form",
       { onChange: this._onChange, className: "m-common-data-form", onSubmit: this.onSubmit },
+      this.state.error ? _react2["default"].createElement(
+        "div",
+        { className: "alert alert-danger" },
+        _react2["default"].createElement(FormattedMessage, { message: this.getIntlMessage(this.state.error.message) })
+      ) : void 0,
       formFields,
       _react2["default"].createElement(
         "div",
@@ -2538,6 +2551,9 @@ module.exports = exports["default"];
 
 },{"common/data/models/base/model":23,"lodash/object/extend":451,"qs":507}],42:[function(require,module,exports){
 module.exports={
+  "errors": {
+    "notImplemented": "not implemented yet"
+  },
   "fieldsLabels": {
     "emailAddress": "Email Address",
     "password": "Password",
