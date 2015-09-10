@@ -2,11 +2,29 @@ import React        from "react"
 import EmailAddress from "common/data/types/email-address"
 import Password     from "common/data/types/password"
 import cx           from "classnames"
+import ReactIntl    from "react-intl";
+import co           from "co";
+
+var IntlMixin         = ReactIntl.IntlMixin;
+var FormattedMessage  = ReactIntl.FormattedMessage;
+var FormattedRelative = ReactIntl.FormattedRelative;
 
 /**
  */
 
 var Field = React.createClass({
+
+  /**
+   */
+
+  propTypes: {
+    messages: React.PropTypes.object.isRequired
+  },
+ 
+  /**
+   */
+
+  mixins: [IntlMixin],
 
   /**
    */
@@ -28,9 +46,9 @@ var Field = React.createClass({
       valid = true;
     } catch(e) {
       valid = false;
-      this.props.onFieldData(this.props.name, value);
     }
 
+    this.props.onFieldData(this.props.name, value);
     this.setState({ valid: valid });
   },
 
@@ -45,14 +63,14 @@ var Field = React.createClass({
       "has-error"    : this.state.valid === false,
       "has-success"  : this.state.valid === true,
       "has-feedback" : this.state.valid != void 0
-    });
+    }); 
 
     var fieldElement = this._createFromField(this.props.name, this.props.field);
 
     if (!fieldElement) return <div style={{display:"none"}}></div>;
- 
+
     return <div className={classNames} onChange={this.onChange}>
-      <label>{this.props.name}</label>
+      <label><FormattedMessage message={this.getIntlMessage("fieldsLabels." + this.props.name)} /></label>
       <div>
         { fieldElement }
         { this.state.valid != void 0 ? <span className={"ion-" + (this.state.valid ? "checkmark" : "close") + " form-control-feedback"}></span> : void 0 }
@@ -65,9 +83,16 @@ var Field = React.createClass({
 
   _createFromField: function(name, field) {
     switch(field.type) {
-      case EmailAddress : return <input type="text" className="form-control" placeholder="email address"  />;
-      case Password     : return <input type="password" className="form-control" placeholder="password" />;
+      case EmailAddress : return <input type="text" className="form-control" placeholder={this._getPlaceHolderText(name)}  />;
+      case Password     : return <input type="password" className="form-control" placeholder={this._getPlaceHolderText(name)} />;
     }
+  },
+
+  /**
+   */
+
+  _getPlaceHolderText: function(name) {
+    return this.getIntlMessage("fieldPlaceholders." + name);
   }
 });
 
@@ -96,8 +121,22 @@ var DataForm = React.createClass({
    */
 
   onFieldData: function(name, value) {
-    this.state.data[name] = value;
+    var data = this.state.data;
+    data[name] = value;
+
+    var formClass = this.props.formClass;
+    var schema    = formClass.schema;
+
+    data.bus = this.props.app.bus;
+
+    var form;
+
+    try {
+      var form = new formClass(data);
+    } catch(e) { }
+
     this.setState({
+      form: form,
       data: this.state.data
     });
   },
@@ -105,27 +144,11 @@ var DataForm = React.createClass({
   /**
    */
 
-  _onChange: function(event) {
-
-    var formClass = this.props.formClass;
-    var schema    = formClass.schema;
-
-    var formData = {};
-
-    for (var fieldName in this.refs) {
-      formData[fieldName] = React.findDOMNode(this.refs[fieldName]).value;
-    }
-
-    formData.bus = this.props.app.bus;
-
-    try {
-      var form = new formClass(formData);
-    } catch(e) {
-      this.setState({
-        error: e
-      });
-    }
-  },
+  onSubmit: co.wrap(function*(event) {
+    event.preventDefault();  
+    var result = yield this.state.form.submit();
+    console.log(result);
+  }),
 
   /**
    */
@@ -140,12 +163,17 @@ var DataForm = React.createClass({
     for (var name in schema.fields) {
       var field = schema.fields[name];
       formFields.push(
-        <Field key={name} name={name} field={field} onFieldData={this.onFieldData} data={this.state.data} />
+        <Field key={name} name={name} field={field} onFieldData={this.onFieldData} data={this.state.data} {...this.props} />
       );
     }
     
-    return <form onChange={this._onChange} className="m-common-data-form">
+    return <form onChange={this._onChange} className="m-common-data-form" onSubmit={this.onSubmit}>
+
       { formFields }
+
+      <div className="form-group form-inline">  
+        <input type="submit" className="form-control" disabled={!this.state.form} />
+      </div>
     </form>
   }
 });

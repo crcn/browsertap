@@ -1,7 +1,7 @@
 var createSocketBus = require("common/bus/socketio");
 var io              = require("socket.io-client");
 var mesh            = require("mesh");
-
+ 
 module.exports = function(app) {
 
   var host    = app.get("config.socket.host");

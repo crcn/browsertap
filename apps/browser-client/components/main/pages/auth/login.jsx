@@ -7,5 +7,5 @@ var Login = React.createClass({
     return <DataForm formClass={LoginForm} {...this.props} />;
   }
 });
-
+ 
 export default Login;

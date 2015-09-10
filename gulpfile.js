@@ -26,6 +26,7 @@ var path            = require("path");
 var collapse        = require("bundle-collapser/plugin");
 var options         = require("yargs").argv;
 var mergeStream     = require("merge-stream");
+var Stream          = require("stream").Stream;
 var HomeApplication = require("./apps/home/application");
 var mu              = require("mustache");
 var fs              = require("fs");
@@ -99,27 +100,34 @@ gulp.task("bundle-css", function() {
 
 var _bundles = {};
 
+
 gulp.task("bundle-js", function() {
   return mergeStream(sift({ bundle: true }, apps).map(function(app) {
 
     var b;
 
     if (!(b = _bundles[app.name])) {
-      b = browserify(__dirname + "/apps/" + app.name, Object.assign({}, watchify.args, {
-      extensions: [".jsx"]
-      })).
-      plugin(collapse);
 
+      var opts = Object.assign({}, watchify.args, {
+          debug: false,
+          entries: [require.resolve(__dirname + "/apps/" + app.name)],
+          extensions: [".jsx"]
+      });
+
+      b = watchify(browserify(opts));
+
+      // b.plugin(collapse);
       b.transform({ global: true }, babelify.configure({
         optional: ["es7.classProperties", "es7.decorators"]
       }));
 
-      b = watchify(b);
-
       _bundles[app.name] = b;
+
     }
 
-    return b.bundle().pipe(source(app.name + ".bundle.js")).
+    var s;
+
+    return s = b.bundle().on("error", function(err){ console.error(err.stack); s.end(); }).pipe(source(app.name + ".bundle.js")).
     pipe(buffer()).
     pipe(gulp.dest(paths.buildDirectory + "/js"))
   }));

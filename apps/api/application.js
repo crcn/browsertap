@@ -8,7 +8,7 @@ import createBus from "./bus";
 class APIApplication extends BaseApplication {
 
   /**
-   */
+   */ 
 
   initialize(next) {
 

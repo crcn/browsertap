@@ -1,4 +1,4 @@
-import mesh from "mesh";
+import mesh from "common/mesh";
 import sift from "sift";
 
 module.exports = function(app, bus) {

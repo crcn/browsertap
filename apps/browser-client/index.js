@@ -4,7 +4,7 @@ var getConfig   = require("./get-config");
 
 /**
  */
-
+ 
 var app = global.app = new Application({
   element: document.getElementById("application"),
   config: getConfig({})
@@ -16,3 +16,4 @@ var app = global.app = new Application({
 app.initialize(function() {
   app.logger.info("initialized");
 });
+

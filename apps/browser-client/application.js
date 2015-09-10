@@ -1,13 +1,20 @@
 var React           = require("react");
 var BaseApplication = require("common/application");
-var extend          = require("lodash/object/extend");
 var Router          = require("common/router");
 var Main            = require("./components/main");
-
+ 
 /**
  */
 
+
 class BrowserClientApplication extends BaseApplication {
+
+  /**
+   */
+
+  intl = {
+    messages: Object.assign({}, require("./translations/en"), require("common/translations/en"))
+  }
 
   /**
    */
@@ -16,20 +23,16 @@ class BrowserClientApplication extends BaseApplication {
     this.router = new Router();
   }
 
-  // plugins: [require("./bus")].concat(BaseApplication.prototype.plugins, [
-  //   require("./routes")
-  // ]),
-
   /**
    */
 
   initialize() {
     super.initialize(this);
 
-    var props = extend({
+    var props = Object.assign({
       app      : this,
       location : this.router.location
-    });
+    }, this.intl);
 
     React.render(React.createElement(Main, props), this.element);
   }

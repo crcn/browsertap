@@ -1,0 +1,10 @@
+{
+  "fieldsLabels": {
+    "emailAddress": "Email Address",
+    "password": "Password"
+  },
+  "fieldPlaceholders": {
+    "emailAddress": "email address",
+    "password": "password"
+  }
+}

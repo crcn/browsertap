@@ -1,5 +1,4 @@
 import BaseModel from "common/data/models/base/model";
-import mesh from "mesh";
 import flatten from "lodash/array/flattenDeep"
 import Logger from "common/logger"
 import createBus from "common/bus"

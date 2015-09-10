@@ -1,6 +1,5 @@
 import padRight from "lodash/string/padRight";
 import chalk from "chalk";
-import mesh from "mesh";
 
 module.exports = function(app) {
 
@@ -18,7 +17,7 @@ module.exports = function(app) {
     }
   };
 
-  return mesh.wrap(function(operation, next) {
+  return function(operation) {
 
     // TODO - calc log info here such as log(":break");
 
@@ -58,6 +57,6 @@ module.exports = function(app) {
       console.log(msg);
     }
 
-    next();
-  });
+    return Promise.resolve();
+  };
 };

@@ -1,5 +1,5 @@
 import loggly from "loggly";
-import mesh from "mesh";
+import mesh from "common/mesh";
 
 module.exports = function(app) {
 
@@ -9,12 +9,12 @@ module.exports = function(app) {
 
   var client = loggly.createClient(config);
 
-  return mesh.wrap(function(operation, next) {
+  return function(operation) {
 
     if (/warn|error/.test(operation.type)) {
       client.log(operation);
     }
 
-    next();
-  });
+    return Promise.resolve();
+  };
 };
