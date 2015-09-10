@@ -10,7 +10,8 @@ var Signup         = require("./signup");
 var AuthPages = React.createClass({
   render: function() {
 
-    var page = "login";
+    var page = "resetPassword"; 
+    
 
     switch(page) {
       case "login"          : return <Login {...this.props} />;

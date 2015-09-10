@@ -54,6 +54,7 @@ describe(__filename + "#", function() {
 
     // test ui state
     React.addons.TestUtils.Simulate.change(passwordInput);
+
     expect(passwordInput.parentNode.querySelector(".ion-close")).not.to.be(null);
     passwordInput.value = "password";
     React.addons.TestUtils.Simulate.change(passwordInput);
@@ -66,7 +67,44 @@ describe(__filename + "#", function() {
     expect(submitButton.disabled).to.be(false);
   });
 
-  // it("can render a form that depends on another field", function() {
+  it("can render a form that depends on another field", function() {
 
-  // });
+    @mixinSchema(new Schema({
+      fields: {
+        password       : Password,
+        repeatPassword : {
+          type: Password,
+          validate: function(password, data) {
+            return String(password) === String(data.password);
+          }
+        }
+      }
+    }))
+    class Form { }
+
+    var div = renderDataForm({ formClass: Form });
+
+    var submitButton      = div.querySelector("*[type='submit']");
+
+    var emailAddressInput = div.querySelector("*[placeholder='email address']");
+    var passwordInputs    = div.querySelectorAll("*[type='password']");
+    var passwordInput     = passwordInputs[0];
+    var passwordInput2    = passwordInputs[1];
+
+    expect(submitButton.disabled).to.be(true);
+    passwordInput.value  = "password";
+    passwordInput2.value = "password1";
+
+    React.addons.TestUtils.Simulate.change(passwordInput);
+    React.addons.TestUtils.Simulate.change(passwordInput2);
+
+    expect(submitButton.disabled).to.be(true);
+
+    passwordInput.value  = "password1";
+    React.addons.TestUtils.Simulate.change(passwordInput);
+    expect(submitButton.disabled).to.be(false);
+
+    expect(passwordInput2.parentNode.querySelector(".ion-checkmark")).not.to.be(null);
+    
+  });
 }); 

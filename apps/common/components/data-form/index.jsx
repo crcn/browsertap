@@ -4,6 +4,7 @@ import Password     from "common/data/types/password"
 import cx           from "classnames"
 import ReactIntl    from "react-intl";
 import co           from "co";
+import diff         from "object-diff";
 
 var IntlMixin         = ReactIntl.IntlMixin;
 var FormattedMessage  = ReactIntl.FormattedMessage;
@@ -37,19 +38,36 @@ var Field = React.createClass({
    */
 
   onChange: function(event) {
-    var value = event.target.value;
+    this._validate(event.target.value);
+  },
 
-    var valid;
+  /**
+   */
 
+  _validate: function(value) {
+
+    var valid = false;
     try {
       this.props.field.coerce(value, this.props.data);
       valid = true;
     } catch(e) {
-      valid = false;
     }
 
+
+    var newState = { valid: valid, value: value };
+
+    if (!Object.keys(diff(this.state, newState)).length) return;
+
+
     this.props.onFieldData(this.props.name, value);
-    this.setState({ valid: valid });
+    this.setState(newState);
+  },
+
+  /**
+   */
+
+  componentWillReceiveProps: function(props) {
+    if (this.state.value != void 0) this._validate(this.state.value);
   },
 
   /**
@@ -67,7 +85,9 @@ var Field = React.createClass({
 
     var fieldElement = this._createFromField(this.props.name, this.props.field);
 
-    if (!fieldElement) return <div style={{display:"none"}}></div>;
+    if (fieldElement.props.type === "hidden") {
+      return <div style={{display:"none"}}>{fieldElement}</div>;
+    }
 
     return <div className={classNames} onChange={this.onChange}>
       <label><FormattedMessage message={this.getIntlMessage("fieldsLabels." + this.props.name)} /></label>
@@ -75,7 +95,7 @@ var Field = React.createClass({
         { fieldElement }
         { this.state.valid != void 0 ? <span className={"ion-" + (this.state.valid ? "checkmark" : "close") + " form-control-feedback"}></span> : void 0 }
       </div>
-    </div>;
+    </div>; 
   },
 
   /**
@@ -85,6 +105,7 @@ var Field = React.createClass({
     switch(field.type) {
       case EmailAddress : return <input type="text" className="form-control" placeholder={this._getPlaceHolderText(name)}  />;
       case Password     : return <input type="password" className="form-control" placeholder={this._getPlaceHolderText(name)} />;
+      default           : return <input type="hidden" className="form-control" />;
     }
   },
 
@@ -113,7 +134,7 @@ var DataForm = React.createClass({
 
   getInitialState: function() {
     return {
-      data: {}
+      data: this.props.data || {}
     }
   },
 
@@ -133,7 +154,9 @@ var DataForm = React.createClass({
 
     try {
       var form = new formClass(data);
-    } catch(e) { }
+    } catch(e) {
+
+    }
 
     this.setState({
       form: form,
@@ -168,9 +191,7 @@ var DataForm = React.createClass({
     }
     
     return <form onChange={this._onChange} className="m-common-data-form" onSubmit={this.onSubmit}>
-
       { formFields }
-
       <div className="form-group form-inline">  
         <input type="submit" className="form-control" value="submit" disabled={!this.state.form} />
       </div>
