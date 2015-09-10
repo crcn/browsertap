@@ -8,5 +8,8 @@
     "lastName": "Last Name",
     "password": "Password",
     "repeatPassword": "Repeat Password"
+  },
+  "buttons": {
+    "submit": "submit"
   }
 }

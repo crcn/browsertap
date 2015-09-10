@@ -10,7 +10,7 @@ var Signup         = require("./signup");
 var AuthPages = React.createClass({
   render: function() {
 
-    var page = "signup"; 
+    var page = "login";  
  
     var element = {
       login         : <Login {...this.props} />,

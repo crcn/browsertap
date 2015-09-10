@@ -1,5 +1,17 @@
 {
   "fields": {
     "emailAddress": "Email Address"
+  },
+  "authLogin": {
+    "submitLabel": "login"
+  },
+  "authSignup": {
+    "submitLabel": "sign up"
+  },
+  "authResetPassword": {
+    "submitLabel": "reset password"
+  },
+  "authForgotPassword": {
+    "submitLabel": "send password reset email"
   }
 }

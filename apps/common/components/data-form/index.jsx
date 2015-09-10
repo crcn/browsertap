@@ -196,8 +196,7 @@ var DataForm = React.createClass({
     var formFields = [];
  
     for (var name in schema.fields) {
-      var field = schema.fields[name];
-      if (!field.required) continue;
+      var field = schema.fields[name]; 
       formFields.push(
         <Field key={name} name={name} field={field} onFieldData={this.onFieldData} data={this.state.data} {...this.props} />
       ); 
@@ -209,7 +208,7 @@ var DataForm = React.createClass({
       }</div> : void 0 }
       { formFields }
       <div className="form-group form-inline">  
-        <input type="submit" className="form-control" value="submit" disabled={!this.state.form} />
+        <input type="submit" className="form-control" value={this.getIntlMessage(this.props.submitLabel || "buttons.submit")} disabled={!this.state.form} />
       </div>
     </form>
   }

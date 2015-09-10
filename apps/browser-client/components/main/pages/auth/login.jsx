@@ -4,7 +4,7 @@ import LoginForm from "common/data/forms/login";
 
 var Login = React.createClass({
   render: function() {
-    return <DataForm formClass={LoginForm} {...this.props} />;
+    return <DataForm formClass={LoginForm} {...this.props} submitLabel="authLogin.submitLabel" />;
   }
 });
  

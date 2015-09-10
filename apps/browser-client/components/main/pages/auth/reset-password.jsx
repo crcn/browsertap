@@ -9,7 +9,7 @@ var ResetPassword = React.createClass({
       token: { _id: "123456789123456789123456" }
     };
  
-    return <DataForm formClass={ResetPasswordForm} {...this.props} data={data} />;
+    return <DataForm formClass={ResetPasswordForm} {...this.props} data={data}  submitLabel="authResetPassword.submitLabel" />;
   }
 });
  

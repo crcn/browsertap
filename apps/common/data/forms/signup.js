@@ -14,14 +14,14 @@ var signupFormSchema = new Schema({
       required : true,
       type     : require("common/data/types/email-address")
     },
-    firstName:  {
-      required : false,
-      type     : String
-    },
-    lastName:  {
-      required : false,
-      type     : String
-    },
+    // firstName:  {
+    //   required : false,
+    //   type     : String
+    // },
+    // lastName:  {
+    //   required : false,
+    //   type     : String
+    // },
     password: {
       required : true,
       type     : require("common/data/types/password")

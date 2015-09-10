@@ -4,7 +4,7 @@ import SignupForm from "common/data/forms/signup";
 
 var Signup = React.createClass({
   render: function() {
-    return <DataForm formClass={SignupForm} {...this.props} />;
+    return <DataForm formClass={SignupForm} {...this.props} submitLabel="authSignup.submitLabel"  />;
   }
 }); 
  

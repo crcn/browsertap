@@ -131,7 +131,7 @@ var AuthPages = React.createClass({
 
   render: function render() {
 
-    var page = "signup";
+    var page = "login";
 
     var element = ({
       login: React.createElement(Login, this.props),
@@ -181,7 +181,7 @@ var Login = _react2["default"].createClass({
   displayName: "Login",
 
   render: function render() {
-    return _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ formClass: _commonDataFormsLogin2["default"] }, this.props));
+    return _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ formClass: _commonDataFormsLogin2["default"] }, this.props, { submitLabel: "authLogin.submitLabel" }));
   }
 });
 
@@ -220,7 +220,7 @@ var ResetPassword = _react2["default"].createClass({
       token: { _id: "123456789123456789123456" }
     };
 
-    return _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ formClass: _commonDataFormsResetPassword2["default"] }, this.props, { data: data }));
+    return _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ formClass: _commonDataFormsResetPassword2["default"] }, this.props, { data: data, submitLabel: "authResetPassword.submitLabel" }));
   }
 });
 
@@ -254,7 +254,7 @@ var Signup = _react2["default"].createClass({
   displayName: "Signup",
 
   render: function render() {
-    return _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ formClass: _commonDataFormsSignup2["default"] }, this.props));
+    return _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ formClass: _commonDataFormsSignup2["default"] }, this.props, { submitLabel: "authSignup.submitLabel" }));
   }
 });
 
@@ -308,6 +308,18 @@ app.initialize(function () {
 module.exports={
   "fields": {
     "emailAddress": "Email Address"
+  },
+  "authLogin": {
+    "submitLabel": "login"
+  },
+  "authSignup": {
+    "submitLabel": "sign up"
+  },
+  "authResetPassword": {
+    "submitLabel": "reset password"
+  },
+  "authForgotPassword": {
+    "submitLabel": "send password reset email"
   }
 }
 },{}],11:[function(require,module,exports){
@@ -1009,7 +1021,6 @@ var DataForm = _react2["default"].createClass({
 
     for (var name in schema.fields) {
       var field = schema.fields[name];
-      if (!field.required) continue;
       formFields.push(_react2["default"].createElement(Field, _extends({ key: name, name: name, field: field, onFieldData: this.onFieldData, data: this.state.data }, this.props)));
     }
 
@@ -1025,7 +1036,7 @@ var DataForm = _react2["default"].createClass({
       _react2["default"].createElement(
         "div",
         { className: "form-group form-inline" },
-        _react2["default"].createElement("input", { type: "submit", className: "form-control", value: "submit", disabled: !this.state.form })
+        _react2["default"].createElement("input", { type: "submit", className: "form-control", value: this.getIntlMessage(this.props.submitLabel || "buttons.submit"), disabled: !this.state.form })
       )
     );
   }
@@ -1270,14 +1281,14 @@ var signupFormSchema = new _commonDataSchemaSchema2["default"]({
       required: true,
       type: require("common/data/types/email-address")
     },
-    firstName: {
-      required: false,
-      type: String
-    },
-    lastName: {
-      required: false,
-      type: String
-    },
+    // firstName:  {
+    //   required : false,
+    //   type     : String
+    // },
+    // lastName:  {
+    //   required : false,
+    //   type     : String
+    // },
     password: {
       required: true,
       type: require("common/data/types/password")
@@ -2705,6 +2716,9 @@ module.exports={
     "lastName": "Last Name",
     "password": "Password",
     "repeatPassword": "Repeat Password"
+  },
+  "buttons": {
+    "submit": "submit"
   }
 }
 },{}],44:[function(require,module,exports){
