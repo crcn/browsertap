@@ -4,12 +4,9 @@
   },
   "fieldsLabels": {
     "emailAddress": "Email Address",
+    "firstName": "First Name",
+    "lastName": "Last Name",
     "password": "Password",
     "repeatPassword": "Repeat Password"
-  },
-  "fieldPlaceholders": {
-    "emailAddress": "email address",
-    "password": "password",
-    "repeatPassword": "repeat password"
   }
 }

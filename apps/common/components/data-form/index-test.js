@@ -31,7 +31,7 @@ describe(__filename + "#", function() {
     var div = renderDataForm({ formClass: Form });
 
     expect(div.querySelector("*[type='password']")).not.to.be(null);
-    expect(div.querySelector("*[placeholder='email address']")).not.to.be(null);
+    expect(div.querySelector("*[placeholder='Email Address']")).not.to.be(null);
   });
 
   it("enables the submit button once all the fields have been validated", function() {
@@ -46,7 +46,7 @@ describe(__filename + "#", function() {
 
     var div = renderDataForm({ formClass: Form });
 
-    var emailAddressInput = div.querySelector("*[placeholder='email address']");
+    var emailAddressInput = div.querySelector("*[placeholder='Email Address']");
     var passwordInput     = div.querySelector("*[type='password']");
     var submitButton      = div.querySelector("*[type='submit']");
 
@@ -86,7 +86,7 @@ describe(__filename + "#", function() {
 
     var submitButton      = div.querySelector("*[type='submit']");
 
-    var emailAddressInput = div.querySelector("*[placeholder='email address']");
+    var emailAddressInput = div.querySelector("*[placeholder='Email Address']");
     var passwordInputs    = div.querySelectorAll("*[type='password']");
     var passwordInput     = passwordInputs[0];
     var passwordInput2    = passwordInputs[1];
@@ -105,6 +105,6 @@ describe(__filename + "#", function() {
     expect(submitButton.disabled).to.be(false);
 
     expect(passwordInput2.parentNode.querySelector(".ion-checkmark")).not.to.be(null);
-    
+
   });
 }); 

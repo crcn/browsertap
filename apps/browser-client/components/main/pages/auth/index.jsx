@@ -10,7 +10,7 @@ var Signup         = require("./signup");
 var AuthPages = React.createClass({
   render: function() {
 
-    var page = "resetPassword"; 
+    var page = "signup"; 
  
     var element = {
       login         : <Login {...this.props} />,
@@ -19,12 +19,9 @@ var AuthPages = React.createClass({
       forgotPassword: <ForgotPassword {...this.props} />
     }[page];
 
-    return <div className="row">
-      <div className="m-browser-client-auth">
-        { element }
-      </div>
+    return <div className="m-browser-client-auth">
+      { element }
     </div>;
-
   }
 });
 

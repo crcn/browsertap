@@ -102,18 +102,22 @@ var Field = React.createClass({
    */
 
   _createFromField: function(name, field) {
-    switch(field.type) {
-      case EmailAddress : return <input type="text" className="form-control" placeholder={this._getPlaceHolderText(name)}  />;
-      case Password     : return <input type="password" className="form-control" placeholder={this._getPlaceHolderText(name)} />;
-      default           : return <input type="hidden" className="form-control" />;
+
+    if(field.type === EmailAddress || field.type === String) {
+      return <input type="text" className="form-control" placeholder={this._getPlaceHolderText(name)}  />;
+    } else if (field.type === Password) {
+      return <input type="password" className="form-control" placeholder={this._getPlaceHolderText(name)} />;
+    } else {
+      return <input type="hidden" className="form-control" />;
     }
+
   },
 
   /**
    */
 
   _getPlaceHolderText: function(name) {
-    return this.getIntlMessage("fieldPlaceholders." + name);
+    return this.getIntlMessage("fieldsLabels." + name);
   }
 });
 
@@ -190,9 +194,10 @@ var DataForm = React.createClass({
     var schema    = formClass.schema;
 
     var formFields = [];
-
+ 
     for (var name in schema.fields) {
       var field = schema.fields[name];
+      if (!field.required) continue;
       formFields.push(
         <Field key={name} name={name} field={field} onFieldData={this.onFieldData} data={this.state.data} {...this.props} />
       ); 

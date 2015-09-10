@@ -16,7 +16,8 @@ describe(__filename + "#", function() {
   var fixtures = {
     user1: {
       emailAddress: "a@b.com",
-      password: "password"
+      password: "password",
+      repeatPassword: "password"
     }
   };
 
@@ -239,6 +240,8 @@ describe(__filename + "#", function() {
 
         expect(err.statusCode).to.be(406);
       }));
+
+      // xit("cannot register a new user if the passwords do not match");
     });
   
 

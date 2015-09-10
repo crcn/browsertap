@@ -3,7 +3,7 @@ import Schema      from "common/data/schema/schema";
 
 /**
  */
-
+ 
 var signupFormSchema = new Schema({
   fields: {
     bus: {
@@ -14,12 +14,27 @@ var signupFormSchema = new Schema({
       required : true,
       type     : require("common/data/types/email-address")
     },
+    firstName:  {
+      required : false,
+      type     : String
+    },
+    lastName:  {
+      required : false,
+      type     : String
+    },
     password: {
       required : true,
       type     : require("common/data/types/password")
     }
+    // repeatPassword: {
+    //   required : true,
+    //   type     : require("common/data/types/password"),
+    //   validate : function(password, data) {
+    //     return String(password) === String(data.password);
+    //   }
+    // }
   }
-});
+}); 
 
 /**
 
