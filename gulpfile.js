@@ -12,8 +12,10 @@ var sift            = require("sift");
 var browserify      = require("browserify");
 var watchify        = require("watchify");
 var babelify        = require("babelify");
+var File            = require("vinyl");
 var jscs            = require("gulp-jscs");
 var jshint          = require("gulp-jshint");
+var flatten         = require("lodash/array/flatten");
 var babel           = require("babel/register")({
   optional: ["es7.classProperties", "es7.decorators"]
 });
@@ -43,7 +45,7 @@ var apps = [
 var paths = {
   testFiles      : ["test/**/*.js"],
   allFiles       : ["test/**/*.js"],
-  lessFiles      : [],
+  lessFiles      : ["apps/common/less/**/*.less"],
   watchFiles     : [],
   buildDirectory : path.normalize(__dirname + "/public"),
   publicDirectory : path.normalize(__dirname + "/public")
@@ -87,11 +89,19 @@ gulp.task("bundle", ["bundle-css", "bundle-js", "bundle-home"], function(next) {
  */
 
 gulp.task("bundle-css", function() {
-  return gulp.src(paths.lessFiles)
-    .pipe(less({
-      paths: []
-    }))
-    .pipe(concat("all.css"))
+
+  var concated = flatten(paths.lessFiles.map(function(g) {
+    return glob.sync(g);
+  })).map(function(filepath) {
+    return fs.readFileSync(filepath, "utf8");
+  }).join("\n");
+
+  var file = new File({
+    basename: "all.css",
+    contents: new Buffer(concated)
+  });
+
+  return file.pipe(source("all.css")).pipe(buffer()).pipe(less())
     .pipe(gulp.dest(__dirname + '/public/css'));
 });
 

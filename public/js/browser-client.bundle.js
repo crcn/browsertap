@@ -78,7 +78,11 @@ var Main = _react2["default"].createClass({
   displayName: "Main",
 
   render: function render() {
-    return _react2["default"].createElement(_pagesAuth2["default"], this.props);
+    return _react2["default"].createElement(
+      "div",
+      { className: "container" },
+      _react2["default"].createElement(_pagesAuth2["default"], this.props)
+    );
   }
 });
 
@@ -87,7 +91,27 @@ module.exports = Main;
 },{"./pages/auth":4,"react":695}],3:[function(require,module,exports){
 "use strict";
 
-},{}],4:[function(require,module,exports){
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var React = require("react");
+
+var ForgotPassword = React.createClass({
+  displayName: "ForgotPassword",
+
+  render: function render() {
+    return React.createElement(
+      "div",
+      null,
+      "forgot password"
+    );
+  }
+});
+
+exports["default"] = ForgotPassword;
+module.exports = exports["default"];
+
+},{"react":695}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -109,16 +133,22 @@ var AuthPages = React.createClass({
 
     var page = "resetPassword";
 
-    switch (page) {
-      case "login":
-        return React.createElement(Login, this.props);
-      case "signup":
-        return React.createElement(Signup, this.props);
-      case "resetPassword":
-        return React.createElement(ResetPassword, this.props);
-      case "forgotPassword":
-        return React.createElement(ForgotPassword, this.props);
-    }
+    var element = ({
+      login: React.createElement(Login, this.props),
+      signup: React.createElement(Signup, this.props),
+      resetPassword: React.createElement(ResetPassword, this.props),
+      forgotPassword: React.createElement(ForgotPassword, this.props)
+    })[page];
+
+    return React.createElement(
+      "div",
+      { className: "row" },
+      React.createElement(
+        "div",
+        { className: "col-sm-12" },
+        element
+      )
+    );
   }
 });
 

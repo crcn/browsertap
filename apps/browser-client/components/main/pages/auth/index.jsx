@@ -11,14 +11,20 @@ var AuthPages = React.createClass({
   render: function() {
 
     var page = "resetPassword"; 
-    
+ 
+    var element = {
+      login         : <Login {...this.props} />,
+      signup        : <Signup {...this.props} />,
+      resetPassword : <ResetPassword {...this.props} />,
+      forgotPassword: <ForgotPassword {...this.props} />
+    }[page];
 
-    switch(page) {
-      case "login"          : return <Login {...this.props} />;
-      case "signup"         : return <Signup {...this.props} />;
-      case "resetPassword"  : return <ResetPassword {...this.props} />;
-      case "forgotPassword" : return <ForgotPassword {...this.props} />;
-    }
+    return <div className="row">
+      <div className="m-browser-client-auth">
+        { element }
+      </div>
+    </div>;
+
   }
 });
 
