@@ -912,7 +912,7 @@ var DataForm = _react2["default"].createClass({
       _react2["default"].createElement(
         "div",
         { className: "form-group form-inline" },
-        _react2["default"].createElement("input", { type: "submit", className: "form-control", disabled: !this.state.form })
+        _react2["default"].createElement("input", { type: "submit", className: "form-control", value: "submit", disabled: !this.state.form })
       )
     );
   }

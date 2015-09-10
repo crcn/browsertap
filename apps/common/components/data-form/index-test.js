@@ -48,6 +48,9 @@ describe(__filename + "#", function() {
 
     var emailAddressInput = div.querySelector("*[placeholder='email address']");
     var passwordInput     = div.querySelector("*[type='password']");
+    var submitButton      = div.querySelector("*[type='submit']");
+
+    expect(submitButton.disabled).to.be(true);
 
     // test ui state
     React.addons.TestUtils.Simulate.change(passwordInput);
@@ -60,7 +63,7 @@ describe(__filename + "#", function() {
     emailAddressInput.value = "a@b.com";
     React.addons.TestUtils.Simulate.change(emailAddressInput);
 
-
+    expect(submitButton.disabled).to.be(false);
   });
 
   // it("can render a form that depends on another field", function() {

@@ -172,7 +172,7 @@ var DataForm = React.createClass({
       { formFields }
 
       <div className="form-group form-inline">  
-        <input type="submit" className="form-control" disabled={!this.state.form} />
+        <input type="submit" className="form-control" value="submit" disabled={!this.state.form} />
       </div>
     </form>
   }
