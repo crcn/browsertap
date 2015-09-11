@@ -32,7 +32,7 @@ var tokenSchema = new Schema({
 
     expiresAt: { 
       default: function() {
-        return new Date(Date.now() + 3600 * 24); // 24 hours
+        return new Date(Date.now() + 3600 * 24 * 1000); // 24 hours
       },
       type: Date
     },

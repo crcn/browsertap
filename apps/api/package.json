@@ -16,6 +16,7 @@
     "nodemailer": "^1.4.0",
     "npm": "^2.14.2",
     "sendgrid": "^1.9.2",
-    "stripe": "^3.7.1"
+    "stripe": "^3.7.1",
+    "traverse": "^0.6.6"
   }
 }

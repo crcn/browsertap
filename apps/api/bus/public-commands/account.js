@@ -136,6 +136,7 @@ export default function(app, bus) {
       var token = yield Token.findOne(bus, { _id: String(form.token._id) });
       if (!token) throw new httperr.NotFound("tokenDoesNotExist");
 
+
       if (token.expired) throw new httperr.NotAcceptable("tokenHasExpired");
 
       // fetch the email stored in the token
