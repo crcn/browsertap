@@ -17,7 +17,7 @@ var AuthPages = React.createClass({
       signup        : <Signup {...this.props} />,
       resetPassword : <ResetPassword {...this.props} />,
       forgotPassword: <ForgotPassword {...this.props} />
-    }[page];
+    }[this.props.location.state.authPage];
 
     return <div className="m-browser-client-auth">
       { element }

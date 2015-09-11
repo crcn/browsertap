@@ -3,15 +3,18 @@
     "emailAddress": "Email Address"
   },
   "authLogin": {
-    "submitLabel": "login"
+    "submitLabel": "Log In",
+    "signUpCta": "Don't have an account? <a href='{signUpLink}'>Sign up</a>!",
+    "forgotCta": "<a href='{forgotLink}'>Forgot your password?</a>"
   },
   "authSignup": {
-    "submitLabel": "sign up"
+    "submitLabel": "Sign Up",
+    "logInCta": "<a href='{logInLink}'>Already have an account?</a>"
   },
   "authResetPassword": {
     "submitLabel": "reset password"
-  },
+  }, 
   "authForgotPassword": {
-    "submitLabel": "send password reset email"
+    "submitLabel": "Reset Password"
   }
 }

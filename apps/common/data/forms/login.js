@@ -8,6 +8,7 @@ var loginFormSchema = new Schema({
   fields: {
     bus: {
       required : true,
+      hidden   : true,
       type     : require("common/data/types/bus")
     },
     emailAddress:  {

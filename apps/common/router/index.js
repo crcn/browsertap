@@ -61,7 +61,7 @@ function _bindWindowLocation(router) {
   };
 
   function getNewLocation() {
-    var newLocation = new Location(_parseUrl(window.location.pathname));
+    var newLocation = new Location(_parseUrl(window.location.hash));
     if (router.location.toString() !== newLocation.toString()) {
       return newLocation.toString();
     }
@@ -73,7 +73,8 @@ function _bindWindowLocation(router) {
   // is able to reload the page and still maintain the application state
   router.location.on("change", debounce(function(op, np) {
     if (!getNewLocation()) return;
-    history.pushState({}, router.location.state.title, router.location.toString());
+    location.hash = router.location.toString(); 
+    // history.pushState({}, router.location.state.title, router.location.toString());
   }), 10);
 }
 
@@ -98,7 +99,7 @@ class Router extends BaseModel {
 
     // redirect
     if (process.browser) {
-      this.redirect(location.pathname);
+      this.redirect(location.hash); 
     }
   }
 
@@ -161,8 +162,8 @@ class Router extends BaseModel {
 
     this.location.setProperties(Object.assign({
       pathname: route ? route.getPathname(pathParts.pathname, options) : pathParts.pathname,
-      params  : options.params,
-      query   : object.assign({}, options.query, pathParts.query)
+      params  : options.params, 
+      query   : Object.assign({}, options.query, pathParts.query)
     }, options));
 
     if (route) {
@@ -193,6 +194,14 @@ class Router extends BaseModel {
       pathname: pathname,
       query: options.query
     })).toString();
+  }
+
+  /**
+   * returns something like /path?query=value
+   */
+
+  getUrl(aliasOrPathname, options) {
+    return "#" + this.getPathname(aliasOrPathname, options); 
   }
 
   /**

@@ -2,10 +2,10 @@ var React           = require("react");
 var BaseApplication = require("common/application");
 var Router          = require("common/router");
 var Main            = require("./components/main");
+var routes          = require("./routes");
  
 /**
  */
-
 
 class BrowserClientApplication extends BaseApplication {
 
@@ -13,11 +13,15 @@ class BrowserClientApplication extends BaseApplication {
    */
 
   intl = {
-    messages: Object.assign({}, require("./translations/en"), require("common/translations/en"))
+    messages: Object.assign({}, 
+      require("./translations/en"), 
+      require("common/translations/en")
+    )
   }
 
   /**
    */
+
   constructor() {
     super(...arguments);
     this.router = new Router();
@@ -28,6 +32,8 @@ class BrowserClientApplication extends BaseApplication {
 
   initialize() {
     super.initialize(this);
+    this.use(routes);
+    this.router.initialize(); 
 
     var props = Object.assign({
       app      : this,

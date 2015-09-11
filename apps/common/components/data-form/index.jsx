@@ -76,7 +76,8 @@ var Field = React.createClass({
   render: function() {
 
     var classNames = cx({
-      "form-group"   : true,
+      "field"        : true,
+      // "form-group"   : true, 
       "form-inline"  : true,
       "has-error"    : this.state.valid === false,
       "has-success"  : this.state.valid === true,
@@ -86,15 +87,15 @@ var Field = React.createClass({
     var fieldElement = this._createFromField(this.props.name, this.props.field);
 
     if (fieldElement.props.type === "hidden") {
-      return <div style={{display:"none"}}>{fieldElement}</div>;
+      return null; 
     }
 
     return <div className={classNames} onChange={this.onChange}>
-      <label><FormattedMessage message={this.getIntlMessage("fieldsLabels." + this.props.name)} /></label>
-      <div>
+      <label className="control-label"><FormattedMessage message={this.getIntlMessage("fieldsLabels." + this.props.name)} /></label>
+      <div className="input">
         { fieldElement }
-        { this.state.valid != void 0 ? <span className={"ion-" + (this.state.valid ? "checkmark" : "close") + " form-control-feedback"}></span> : void 0 }
       </div>
+        { this.state.valid != void 0  ? <span className={"ion-" + (this.state.valid ? "checkmark" : "close") + " form-control-feedback"}></span> : void 0 }
     </div>; 
   },
 
@@ -104,9 +105,9 @@ var Field = React.createClass({
   _createFromField: function(name, field) {
 
     if(field.type === EmailAddress || field.type === String) {
-      return <input type="text" className="form-control" placeholder={this._getPlaceHolderText(name)}  />;
+      return <input type="text" className="form-control" />;
     } else if (field.type === Password) {
-      return <input type="password" className="form-control" placeholder={this._getPlaceHolderText(name)} />;
+      return <input type="password" className="form-control" />;
     } else {
       return <input type="hidden" className="form-control" />;
     }
@@ -167,6 +168,10 @@ var DataForm = React.createClass({
 
     }
 
+    if (form && this.props.onForm) {
+      this.props.onForm(form);
+    }
+
     this.setState({
       form: form,
       data: this.state.data
@@ -197,18 +202,24 @@ var DataForm = React.createClass({
  
     for (var name in schema.fields) {
       var field = schema.fields[name]; 
+      if (field.hidden) continue;
       formFields.push(
         <Field key={name} name={name} field={field} onFieldData={this.onFieldData} data={this.state.data} {...this.props} />
-      ); 
+      );  
     }
     
-    return <form onChange={this._onChange} className="m-common-data-form" onSubmit={this.onSubmit}>
+    
+    return <form onChange={this._onChange} className="form-horizontal m-common-data-form" onSubmit={this.onSubmit}>
       { this.state.error ? <div className="alert alert-danger">{
         <FormattedMessage message={this.getIntlMessage(this.state.error.message)} />
       }</div> : void 0 }
-      { formFields }
-      <div className="form-group form-inline">  
-        <input type="submit" className="form-control" value={this.getIntlMessage(this.props.submitLabel || "buttons.submit")} disabled={!this.state.form} />
+      <div className="fields">
+        { formFields }
+      </div>
+      <div className="form-group">  
+        <button type="submit" className="form-control" disabled={!this.state.form}>
+          {this.getIntlMessage(this.props.submitLabel || "buttons.submit")}
+        </button> 
       </div>
     </form>
   }
