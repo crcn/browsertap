@@ -53,7 +53,9 @@ Below are a set apps to be developed
   - [ ] ability to run JS unit tests in browsers
   - [ ] appm for installing apps
   - [ ] mac & linux vms
+  - [ ] clipboard support
 - [ ] nice features
   - [ ] resize windows to any size
   - [ ] sync audio
   - [ ] ability to invite people to session
+  - [ ] ability to install any browser plugin (using robot)
