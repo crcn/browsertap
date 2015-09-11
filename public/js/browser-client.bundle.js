@@ -1167,33 +1167,36 @@ var DataForm = _react2["default"].createClass({
         case 0:
           event.preventDefault();
 
-          context$1$0.prev = 1;
-          context$1$0.next = 4;
+          this.setState({ loading: true });
+
+          context$1$0.prev = 2;
+          context$1$0.next = 5;
           return this.state.form.submit();
 
-        case 4:
+        case 5:
           result = context$1$0.sent;
-          context$1$0.next = 10;
+          context$1$0.next = 11;
           break;
 
-        case 7:
-          context$1$0.prev = 7;
-          context$1$0.t0 = context$1$0["catch"](1);
+        case 8:
+          context$1$0.prev = 8;
+          context$1$0.t0 = context$1$0["catch"](2);
 
           err = context$1$0.t0;
 
-        case 10:
+        case 11:
 
           this.setState({
+            loading: false,
             error: err,
             success: !err
           });
 
-        case 11:
+        case 12:
         case "end":
           return context$1$0.stop();
       }
-    }, callee$0$0, this, [[1, 7]]);
+    }, callee$0$0, this, [[2, 8]]);
   })),
 
   /**
@@ -1232,10 +1235,10 @@ var DataForm = _react2["default"].createClass({
       ),
       _react2["default"].createElement(
         "div",
-        { className: "form-group" },
+        { className: "form-group submit-button" },
         _react2["default"].createElement(
           "button",
-          { type: "submit", className: "form-control", disabled: !this.state.form },
+          { type: "submit", className: "form-control", disabled: !this.state.form && !this.state.loading },
           this.getIntlMessage(this.props.submitLabel || "buttons.submit")
         )
       )

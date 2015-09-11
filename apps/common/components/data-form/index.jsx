@@ -13,6 +13,7 @@ var FormattedRelative = ReactIntl.FormattedRelative;
 /**
  */
 
+
 var Field = React.createClass({
 
   /**
@@ -183,6 +184,8 @@ var DataForm = React.createClass({
   onSubmit: co.wrap(function*(event) {
     event.preventDefault();  
 
+    this.setState({ loading: true });
+
     var err;
     try {
       var result = yield this.state.form.submit();
@@ -191,6 +194,7 @@ var DataForm = React.createClass({
     }
 
     this.setState({
+      loading: false,
       error: err,
       success: !err
     }); 
@@ -213,7 +217,7 @@ var DataForm = React.createClass({
         <Field key={name} name={name} field={field} onFieldData={this.onFieldData} data={this.state.data} {...this.props} />
       );  
     }
-    
+
     return <form onChange={this._onChange} className="form-horizontal m-common-data-form" onSubmit={this.onSubmit}>
       { this.state.error ? <div className="alert alert-danger">{
         <FormattedMessage message={this.getIntlMessage("errors." + this.state.error.message)} />
@@ -224,10 +228,10 @@ var DataForm = React.createClass({
       }</div> : void 0 }
       <div className="fields">
         { formFields }
-      </div>
-      <div className="form-group">  
-        <button type="submit" className="form-control" disabled={!this.state.form}>
-          {this.getIntlMessage(this.props.submitLabel || "buttons.submit")}
+      </div>  
+      <div className="form-group submit-button">   
+        <button type="submit" className="form-control" disabled={!this.state.form && !this.state.loading}>
+          { this.getIntlMessage(this.props.submitLabel || "buttons.submit") }
         </button> 
       </div>
     </form>
