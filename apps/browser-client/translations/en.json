@@ -20,6 +20,9 @@
     "submitLabel": "Reset password", 
     "successMessage": "Success! Redirecting you to the main app"
   }, 
+  "authConfirmed": {
+    "thanks": "All verified. Thanks!"
+  },
   "authForgotPassword": {
     "title": "Password Reset",
     "submitLabel": "Reset rassword",

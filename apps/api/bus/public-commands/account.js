@@ -162,6 +162,7 @@ export default function(app, bus) {
       user.confirmed = true;
 
       yield user.update();
+      yield token.remove();
     },
 
     /**

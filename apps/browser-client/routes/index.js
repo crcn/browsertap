@@ -19,7 +19,7 @@ module.exports = function(app) {
         mainPage: "app",
       }
     });
-  }); 
+  });
 
   router.addRoute("signup", "/signup", function(location) {
     location.setProperties({
@@ -59,7 +59,22 @@ module.exports = function(app) {
   });
 
   router.addRoute("confirm", "/confirm/:token._id", co.wrap(function*(location) {
-    var form = new ConfirmForm({ token: location.params.token })
-    yield form.submit();
+    var form = new ConfirmForm({ bus: app.bus, token: location.params.token })
+
+    var err; 
+
+    try {
+      yield form.submit();
+    } catch(e) {
+      err = e;
+    }
+
+    location.setProperties({
+      state: {
+        mainPage: "auth",
+        error   : err,
+        authPage: "confirmed"
+      }
+    });
   }));
 };

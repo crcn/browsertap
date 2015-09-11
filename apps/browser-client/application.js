@@ -35,7 +35,7 @@ class BrowserClientApplication extends BaseApplication {
     super.initializePlugins();
     this.use(routes);
     this.bus = createBus(this, this.bus);
-  }
+  } 
 
   /**
    */
