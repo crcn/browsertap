@@ -53,6 +53,8 @@ Below are a set apps to be developed
   - [ ] free promotional minutes
 - [ ] support
   - [ ] bug report form (include screenshot if possible)
+- [ ] promotion
+  - [ ] add promo codes for free minutes
 - desktop app features
 - common features
   - [ ] ability to SSH into machine
