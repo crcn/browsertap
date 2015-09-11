@@ -61,6 +61,10 @@ Below are a set apps to be developed
   - [ ] appm for installing apps
   - [ ] mac & linux vms
   - [ ] clipboard support
+  - [ ] ability to invite people into organization
+    - [ ] need to accept link sent via email
+    - [ ] need to be able to sign up or log in from link
+  - [ ] ability to have multiple organizations
 - [ ] nice features
   - [ ] resize windows to any size
   - [ ] sync audio
