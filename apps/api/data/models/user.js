@@ -30,6 +30,14 @@ var userSchema = new Schema({
     /**
      */
 
+    confirmed: {
+      type: Boolean,
+      default: false
+    },
+
+    /**
+     */
+
     emailAddress: { 
       required: true, 
       unique: true, // TODO
