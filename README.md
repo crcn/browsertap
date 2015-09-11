@@ -51,6 +51,8 @@ Below are a set apps to be developed
   - [ ] integrate stripe
   - [ ] charge users for time used
   - [ ] free promotional minutes
+- [ ] support
+  - [ ] bug report form (include screenshot if possible)
 - desktop app features
 - common features
   - [ ] ability to SSH into machine
