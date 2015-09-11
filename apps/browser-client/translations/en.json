@@ -3,22 +3,26 @@
     "emailAddress": "Email Address"
   },
   "authLogin": {
-    "submitLabel": "Log In",
+    "submitLabel": "Log in",
+    "title": "Come on in!",
     "signUpCta": "Don't have an account? <a href='{signUpLink}'>Sign up</a>!",
     "forgotCta": "<a href='{forgotLink}'>Forgot your password?</a>",
     "successMessage": "Success! Redirecting you to the main app"
   },
   "authSignup": {
-    "submitLabel": "Sign Up",
+    "submitLabel": "Sign up",
+    "title": "Sign up",
     "logInCta": "<a href='{logInLink}'>Already have an account?</a>",
     "successMessage": "Thanks for signing up! Redirecting you to the main app"
   },
   "authResetPassword": {
-    "submitLabel": "reset password",
+    "title": "Pick a new password",
+    "submitLabel": "Reset password", 
     "successMessage": "Success! Redirecting you to the main app"
   }, 
   "authForgotPassword": {
-    "submitLabel": "Reset Password",
+    "title": "Password Reset",
+    "submitLabel": "Reset rassword",
     "successMessage": "Check your email for instructions on resetting your password!"
   }
 }

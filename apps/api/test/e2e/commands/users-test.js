@@ -9,6 +9,7 @@ import LoginForm from "common/data/forms/login";
 import ForgotPasswordForm from "common/data/forms/forgot-password";
 import ResetPasswordForm from "common/data/forms/reset-password";
 import Token from "api/data/models/token";
+import ConfirmAccountForm from "common/data/forms/confirm-account";
 
 describe(__filename + "#", function() {
 
@@ -62,6 +63,47 @@ describe(__filename + "#", function() {
       }
 
       expect(err.statusCode).to.be(409);
+    }));
+
+    it("can confirm an account for registration", co.wrap(function*() {
+      var form = new SignupForm(Object.assign({ bus: bus }, fixtures.user1));
+      yield form.submit();
+
+      var user = yield User.findOne(bus, { emailAddress: fixtures.user1.emailAddress });
+      expect(user.confirmed.valueOf()).to.be(false);
+
+      var message = apiApp.emailer.outbox.messages.pop();
+      expect(message.subject.valueOf()).to.contain("Confirm");
+
+      var tokenId = message.body.match(/confirm\/(.*)/)[1];
+
+      var confirm = new ConfirmAccountForm({
+        bus: bus,
+        token: { _id: tokenId }
+      });
+
+      var result = yield confirm.submit();
+
+      var user = yield User.findOne(bus, { emailAddress: fixtures.user1.emailAddress });
+      expect(user.confirmed.valueOf()).to.be(true);
+    }));
+
+    it("cannot confirm an account if the token id is invalid", co.wrap(function*() {
+
+      var tokenId = "123456789123456789123456"
+
+      var confirm = new ConfirmAccountForm({
+        bus: bus,
+        token: { _id: tokenId }
+      });
+
+      var err;
+
+      try {
+        yield confirm.submit();
+      } catch(e) { err = e; }
+
+      expect(err.statusCode).to.be(404);
     }));
 
     it("can login a user", co.wrap(function*() {

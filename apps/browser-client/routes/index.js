@@ -1,3 +1,6 @@
+import ConfirmForm from "common/data/forms/confirm-account";
+import co          from "co";
+
 module.exports = function(app) {
   var router = app.router;
 
@@ -54,4 +57,9 @@ module.exports = function(app) {
       }
     });
   });
+
+  router.addRoute("confirm", "/confirm/:token._id", co.wrap(function*(location) {
+    var form = new ConfirmForm({ token: location.params.token })
+    yield form.submit();
+  }));
 };

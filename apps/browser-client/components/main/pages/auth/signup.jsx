@@ -14,7 +14,7 @@ var Signup = React.createClass({
 
   render: function() {
     return <div className="signup-form">
-      <DataForm formClass={SignupForm} {...this.props} onSuccess={this.onSuccess} successMessage="authSignup.successMessage" submitLabel="authSignup.submitLabel"  />
+      <DataForm title="authSignup.title" formClass={SignupForm} {...this.props} onSuccess={this.onSuccess} successMessage="authSignup.successMessage" submitLabel="authSignup.submitLabel"  />
       <div className="footer">
         <span className="cta">
           <FormattedHTMLMessage message={this.getIntlMessage("authSignup.logInCta")} logInLink={this.props.app.router.getUrl("login")} />

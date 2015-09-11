@@ -220,10 +220,16 @@ var DataForm = React.createClass({
       );  
     }
 
+
     return <form onChange={this._onChange} className="form-horizontal m-common-data-form" onSubmit={this.onSubmit}>
+
+      {this.props.title ? <h4>
+          <FormattedMessage message={this.getIntlMessage(this.props.title)} />
+      </h4> : void 0 }
+
       { this.state.error ? <div className="alert alert-danger">{
         <FormattedMessage message={this.getIntlMessage("errors." + this.state.error.message)} />
-      }</div> : void 0 }
+      }</div> : void 0 } 
 
       { this.state.success && this.props.successMessage ? <div className="alert alert-success">{
         <FormattedMessage message={this.getIntlMessage(this.props.successMessage)} /> 

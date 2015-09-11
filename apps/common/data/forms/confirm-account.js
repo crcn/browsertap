@@ -4,7 +4,6 @@ import Schema      from "common/data/schema/schema";
 /**
  */
 
-
 @mixinSchema(new Schema({
   fields: {
     _id: {
@@ -17,7 +16,7 @@ class Token {
 
 }
 
-var resetPaswordSchema = new Schema({
+var confirmAccountSchema = new Schema({
   fields: {
     bus: {
       required : true,
@@ -28,17 +27,6 @@ var resetPaswordSchema = new Schema({
       required : true,
       hidden   : true,
       type     : Token
-    },
-    password:  {
-      required : true,
-      type     : require("common/data/types/password")
-    },
-    repeatPassword:  {
-      required : true,
-      type     : require("common/data/types/password"),
-      validate : function(value, data) {
-        return value.valueOf() === data.password.valueOf();
-      }
     }
   }
 });
@@ -46,15 +34,15 @@ var resetPaswordSchema = new Schema({
 /**
  */
 
-@mixinSchema(resetPaswordSchema)
-class ResetPasswordForm {
+@mixinSchema(confirmAccountSchema)
+class ConfirmAccountSchema {
 
   /**
    */
 
   *submit() {
     return yield this.bus.execute({ 
-      name: "resetPassword", 
+      name: "confirmAccount", 
       data: this 
     });
   }
@@ -63,4 +51,4 @@ class ResetPasswordForm {
 /**
 */
 
-export default ResetPasswordForm;
+export default ConfirmAccountSchema;

@@ -3,6 +3,7 @@ import sift               from "sift";
 import SignupForm         from "common/data/forms/signup";
 import LoginForm          from "common/data/forms/login";
 import ForgotPasswordForm from "common/data/forms/forgot-password";
+import ConfirmAccountForm from "common/data/forms/confirm-account";
 import ResetPasswordForm  from "common/data/forms/reset-password";
 import EmailForm          from "api/data/forms/email";
 import User               from "api/data/models/user";
@@ -12,6 +13,7 @@ import Session            from "api/data/models/session";
 import httperr            from "httperr";
 import mu                 from "mustache";
 import fs                 from "fs";
+import templates          from "./templates"
 
 
 export default function(app, bus) {
@@ -57,6 +59,25 @@ export default function(app, bus) {
 
       // register the user
       yield user.insert();
+
+      var token = new Token({
+        bus: bus,
+        key: user.emailAddress
+      });
+
+      yield token.insert();
+
+      // TODO - i18n translate this shit
+      var emailForm = new EmailForm({
+        bus: bus,
+        to: user.emailAddress,
+        subject: "Confirm account",
+        body: templates.confirmAccount({
+          link: browserHost + "#/confirm/" + token._id
+        })
+      });
+
+      yield emailForm.submit();
 
       // also create an organization for the user
       var org = yield user.createOrganization();
@@ -104,7 +125,7 @@ export default function(app, bus) {
       var form = new ForgotPasswordForm(Object.assign({ bus: bus }, operation.data));
       var user = yield User.findOne(bus, { emailAddress: form.emailAddress.valueOf() });
       if (!user) throw new httperr.NotFound("emailAddressNotFound");
-
+ 
       var token = new Token({
         bus: bus,
         key: user.emailAddress
@@ -128,6 +149,24 @@ export default function(app, bus) {
     /**
      */
 
+    sift({ name: "confirmAccount" }),
+    function*(operation) {
+      var form  = new ConfirmAccountForm(Object.assign({ bus: bus }, operation.data));
+      var token = yield Token.findOne(bus, { _id: String(form.token._id) });
+      if (!token) throw new httperr.NotFound("tokenDoesNotExist");
+
+      // fetch the email stored in the token
+      var user = yield User.findOne(bus, { emailAddress: String(token.key) });
+      if (!user) throw new httperr.NotFound("emailAddressNotFound");
+
+      user.confirmed = true;
+
+      yield user.update();
+    },
+
+    /**
+     */
+
     sift({ name: "resetPassword" }),
     function*(operation) {
       var form = new ResetPasswordForm(Object.assign({ bus: bus }, operation.data));
@@ -135,7 +174,6 @@ export default function(app, bus) {
       // find the token from the form
       var token = yield Token.findOne(bus, { _id: String(form.token._id) });
       if (!token) throw new httperr.NotFound("tokenDoesNotExist");
-
 
       if (token.expired) throw new httperr.NotAcceptable("tokenHasExpired");
 

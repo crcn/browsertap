@@ -13,6 +13,6 @@ function set(target, keypath, value) {
 
   ct[keys[keys.length - 1]] = value;
   return value;
-}
+} 
 
 module.exports = set;

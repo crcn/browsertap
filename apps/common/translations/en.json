@@ -14,7 +14,7 @@
     "firstName": "First Name",
     "lastName": "Last Name",
     "password": "Password",
-    "repeatPassword": "Repeat Password"
+    "repeatPassword": "Repeat"
   },
   "buttons": {
     "submit": "submit"

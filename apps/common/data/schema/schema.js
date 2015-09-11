@@ -28,7 +28,7 @@ class Field {
 
     // TODO - check for invalid
     if (value == void 0) {
-      if (this.default) {
+      if (this.default != void 0) {
         value = typeof this.default === "function" ? this.default() : this.default;
       } else if (this.required) {
         throw new httperr.BadRequest("invalid");
