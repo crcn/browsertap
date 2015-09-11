@@ -12,7 +12,7 @@ var ForgotPassword = React.createClass({
 
   render: function() {
     return <div className="forgot-password-form">
-      <DataForm formClass={ForgotPasswordForm} {...this.props} submitLabel="authForgotPassword.submitLabel" />
+      <DataForm formClass={ForgotPasswordForm} {...this.props} successMessage="authForgotPassword.successMessage" submitLabel="authForgotPassword.submitLabel" />
     </div>;
   }
 });

@@ -7,7 +7,7 @@ var Signup = React.createClass({
   mixins: [IntlMixin],
   render: function() {
     return <div className="signup-form">
-      <DataForm formClass={SignupForm} {...this.props} submitLabel="authSignup.submitLabel"  />
+      <DataForm formClass={SignupForm} {...this.props}  successMessage="authSignup.successMessage" submitLabel="authSignup.submitLabel"  />
       <div className="footer">
         <span className="cta">
           <FormattedHTMLMessage message={this.getIntlMessage("authSignup.logInCta")} logInLink={this.props.app.router.getUrl("login")} />

@@ -12,7 +12,7 @@ var Login = React.createClass({
 
   render: function() {
     return <div className="login-form">
-      <DataForm formClass={LoginForm} {...this.props} submitLabel="authLogin.submitLabel" />
+      <DataForm formClass={LoginForm} {...this.props} successMessage="authLogin.successMessage" submitLabel="authLogin.submitLabel" />
       <div className="footer">
 
         <span className="cta">

@@ -182,13 +182,18 @@ var DataForm = React.createClass({
 
   onSubmit: co.wrap(function*(event) {
     event.preventDefault();  
+
+    var err;
     try {
       var result = yield this.state.form.submit();
     } catch(e) {
-      this.setState({
-        error: e
-      }); 
+      err = e;
     }
+
+    this.setState({
+      error: err,
+      success: !err
+    }); 
   }),
 
   /**
@@ -209,10 +214,13 @@ var DataForm = React.createClass({
       );  
     }
     
-    
     return <form onChange={this._onChange} className="form-horizontal m-common-data-form" onSubmit={this.onSubmit}>
       { this.state.error ? <div className="alert alert-danger">{
         <FormattedMessage message={this.getIntlMessage("errors." + this.state.error.message)} />
+      }</div> : void 0 }
+
+      { this.state.success && this.props.successMessage ? <div className="alert alert-success">{
+        <FormattedMessage message={this.getIntlMessage(this.props.successMessage)} /> 
       }</div> : void 0 }
       <div className="fields">
         { formFields }

@@ -187,7 +187,7 @@ var ForgotPassword = _react2["default"].createClass({
     return _react2["default"].createElement(
       "div",
       { className: "forgot-password-form" },
-      _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ formClass: _commonDataFormsForgotPassword2["default"] }, this.props, { submitLabel: "authForgotPassword.submitLabel" }))
+      _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ formClass: _commonDataFormsForgotPassword2["default"] }, this.props, { successMessage: "authForgotPassword.successMessage", submitLabel: "authForgotPassword.submitLabel" }))
     );
   }
 });
@@ -274,7 +274,7 @@ var Login = _react2["default"].createClass({
     return _react2["default"].createElement(
       "div",
       { className: "login-form" },
-      _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ formClass: _commonDataFormsLogin2["default"] }, this.props, { submitLabel: "authLogin.submitLabel" })),
+      _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ formClass: _commonDataFormsLogin2["default"] }, this.props, { successMessage: "authLogin.successMessage", submitLabel: "authLogin.submitLabel" })),
       _react2["default"].createElement(
         "div",
         { className: "footer" },
@@ -328,7 +328,7 @@ var ResetPassword = _react2["default"].createClass({
       token: { _id: "123456789123456789123456" }
     };
 
-    return _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ formClass: _commonDataFormsResetPassword2["default"] }, this.props, { data: data, submitLabel: "authResetPassword.submitLabel" }));
+    return _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ formClass: _commonDataFormsResetPassword2["default"] }, this.props, { data: data, successMessage: "authResetPassword.successMessage", submitLabel: "authResetPassword.submitLabel" }));
   }
 });
 
@@ -368,7 +368,7 @@ var Signup = _react2["default"].createClass({
     return _react2["default"].createElement(
       "div",
       { className: "signup-form" },
-      _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ formClass: _commonDataFormsSignup2["default"] }, this.props, { submitLabel: "authSignup.submitLabel" })),
+      _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ formClass: _commonDataFormsSignup2["default"] }, this.props, { successMessage: "authSignup.successMessage", submitLabel: "authSignup.submitLabel" })),
       _react2["default"].createElement(
         "div",
         { className: "footer" },
@@ -479,17 +479,21 @@ module.exports={
   "authLogin": {
     "submitLabel": "Log In",
     "signUpCta": "Don't have an account? <a href='{signUpLink}'>Sign up</a>!",
-    "forgotCta": "<a href='{forgotLink}'>Forgot your password?</a>"
+    "forgotCta": "<a href='{forgotLink}'>Forgot your password?</a>",
+    "successMessage": "Success! Redirecting you to the main app"
   },
   "authSignup": {
     "submitLabel": "Sign Up",
-    "logInCta": "<a href='{logInLink}'>Already have an account?</a>"
+    "logInCta": "<a href='{logInLink}'>Already have an account?</a>",
+    "successMessage": "Thanks for signing up! Redirecting you to the main app"
   },
   "authResetPassword": {
-    "submitLabel": "reset password"
+    "submitLabel": "reset password",
+    "successMessage": "Success! Redirecting you to the main app"
   }, 
   "authForgotPassword": {
-    "submitLabel": "Reset Password"
+    "submitLabel": "Reset Password",
+    "successMessage": "Check your email for instructions on resetting your password!"
   }
 }
 },{}],13:[function(require,module,exports){
@@ -1157,11 +1161,12 @@ var DataForm = _react2["default"].createClass({
    */
 
   onSubmit: _co2["default"].wrap(regeneratorRuntime.mark(function callee$0$0(event) {
-    var result;
+    var err, result;
     return regeneratorRuntime.wrap(function callee$0$0$(context$1$0) {
       while (1) switch (context$1$0.prev = context$1$0.next) {
         case 0:
           event.preventDefault();
+
           context$1$0.prev = 1;
           context$1$0.next = 4;
           return this.state.form.submit();
@@ -1175,11 +1180,16 @@ var DataForm = _react2["default"].createClass({
           context$1$0.prev = 7;
           context$1$0.t0 = context$1$0["catch"](1);
 
-          this.setState({
-            error: context$1$0.t0
-          });
+          err = context$1$0.t0;
 
         case 10:
+
+          this.setState({
+            error: err,
+            success: !err
+          });
+
+        case 11:
         case "end":
           return context$1$0.stop();
       }
@@ -1209,6 +1219,11 @@ var DataForm = _react2["default"].createClass({
         "div",
         { className: "alert alert-danger" },
         _react2["default"].createElement(FormattedMessage, { message: this.getIntlMessage("errors." + this.state.error.message) })
+      ) : void 0,
+      this.state.success && this.props.successMessage ? _react2["default"].createElement(
+        "div",
+        { className: "alert alert-success" },
+        _react2["default"].createElement(FormattedMessage, { message: this.getIntlMessage(this.props.successMessage) })
       ) : void 0,
       _react2["default"].createElement(
         "div",
