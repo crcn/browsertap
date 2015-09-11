@@ -55,7 +55,6 @@ var BrowserClientApplication = (function (_BaseApplication) {
   }, {
     key: "initialize",
     value: function initialize() {
-      _get(Object.getPrototypeOf(BrowserClientApplication.prototype), "initialize", this).call(this, this);
       this.router.initialize();
 
       var props = Object.assign({
@@ -63,7 +62,9 @@ var BrowserClientApplication = (function (_BaseApplication) {
         location: this.router.location
       }, this.intl);
 
-      React.render(React.createElement(Main, props), this.element);
+      if (this.element) React.render(React.createElement(Main, props), this.element);
+
+      return _get(Object.getPrototypeOf(BrowserClientApplication.prototype), "initialize", this).call(this, this);
     }
   }]);
 
@@ -76,6 +77,7 @@ module.exports = BrowserClientApplication;
  */
 
 },{"./bus":2,"./components/main":3,"./routes":13,"./translations/en":14,"common/application":15,"common/router":46,"common/translations/en":48,"react":701}],2:[function(require,module,exports){
+(function (process){
 // var createSocketBus = require("common/bus/socketio");
 // var io              = require("socket.io-client");
 // var mesh            = require("mesh");
@@ -85,7 +87,7 @@ var mesh = require("common/mesh");
 var sa = require("superagent");
 var httperr = require("httperr");
 
-module.exports = function (app) {
+module.exports = function (app, bus) {
 
   var host = app.get("config.api.host");
   // var channel = app.get("config.socket.channel");
@@ -96,6 +98,9 @@ module.exports = function (app) {
   // var client = io(host);
   // var bus    = void 0;
   // bus        = createSocketBus(channel, client, bus);
+
+  if (!bus) bus = mesh.noop;
+  if (!process.browser) return bus;
 
   var bus = function bus(operation) {
     return new Promise(function (resolve, reject) {
@@ -116,7 +121,8 @@ module.exports = function (app) {
   return bus;
 };
 
-},{"common/mesh":42,"httperr":413,"superagent":703}],3:[function(require,module,exports){
+}).call(this,require('_process'))
+},{"_process":383,"common/mesh":42,"httperr":413,"superagent":703}],3:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -630,7 +636,7 @@ var Application = (function (_BaseModel) {
 
     _get(Object.getPrototypeOf(Application.prototype), "constructor", this).call(this, properties);
 
-    this.bus = (0, _commonBus3["default"])(this);
+    this.bus = (0, _commonBus3["default"])(this, this.bus);
 
     this.logger = new _commonLogger2["default"](Object.assign({
       bus: (function (operation) {
@@ -1167,11 +1173,11 @@ var Field = _react2["default"].createClass({
   _createFromField: function _createFromField(name, field) {
 
     if (field.type === _commonDataTypesEmailAddress2["default"] || field.type === String) {
-      return _react2["default"].createElement("input", { type: "text", className: "form-control" });
+      return _react2["default"].createElement("input", { name: name, type: "text", className: "form-control" });
     } else if (field.type === _commonDataTypesPassword2["default"]) {
-      return _react2["default"].createElement("input", { type: "password", className: "form-control" });
+      return _react2["default"].createElement("input", { name: name, type: "password", className: "form-control" });
     } else {
-      return _react2["default"].createElement("input", { type: "hidden", className: "form-control" });
+      return _react2["default"].createElement("input", { name: name, type: "hidden", className: "form-control" });
     }
   },
 
@@ -1323,7 +1329,7 @@ var DataForm = _react2["default"].createClass({
         { className: "form-group submit-button" },
         _react2["default"].createElement(
           "button",
-          { type: "submit", className: "form-control", disabled: !this.state.form && !this.state.loading },
+          { name: "submit", type: "submit", className: "form-control", disabled: !this.state.form && !this.state.loading },
           this.getIntlMessage(this.props.submitLabel || "buttons.submit")
         )
       )

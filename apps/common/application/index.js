@@ -16,7 +16,7 @@ class Application extends BaseModel {
   constructor(properties) {
     super(properties);
 
-    this.bus = createCommonBus(this);
+    this.bus = createCommonBus(this, this.bus);
 
     this.logger = new Logger(Object.assign({
       bus: function(operation) {

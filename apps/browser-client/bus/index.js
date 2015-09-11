@@ -5,7 +5,7 @@ var mesh = require("common/mesh");
 var sa   = require("superagent");
 var httperr = require("httperr");
  
-module.exports = function(app) {
+module.exports = function(app, bus) {
 
   var host    = app.get("config.api.host");
   // var channel = app.get("config.socket.channel");
@@ -16,6 +16,9 @@ module.exports = function(app) {
   // var client = io(host);
   // var bus    = void 0;
   // bus        = createSocketBus(channel, client, bus);
+
+  if (!bus) bus = mesh.noop;
+  if (!process.browser) return bus;
 
   var bus = function(operation) {
     return new Promise(function(resolve, reject) {

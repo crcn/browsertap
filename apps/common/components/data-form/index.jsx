@@ -51,9 +51,7 @@ var Field = React.createClass({
     try {
       this.props.field.coerce(value, this.props.data);
       valid = true;
-    } catch(e) {
-    }
-
+    } catch(e) { }
 
     var newState = { valid: valid, value: value };
 
@@ -105,11 +103,11 @@ var Field = React.createClass({
   _createFromField: function(name, field) {
 
     if(field.type === EmailAddress || field.type === String) {
-      return <input type="text" className="form-control" />;
+      return <input name={name} type="text" className="form-control" />;
     } else if (field.type === Password) {
-      return <input type="password" className="form-control" />;
+      return <input name={name} type="password" className="form-control" />;
     } else {
-      return <input type="hidden" className="form-control" />;
+      return <input name={name} type="hidden" className="form-control" />;
     }
 
   },
@@ -234,7 +232,7 @@ var DataForm = React.createClass({
         { formFields }
       </div>  
       <div className="form-group submit-button">   
-        <button type="submit" className="form-control" disabled={!this.state.form && !this.state.loading}>
+        <button name="submit" type="submit" className="form-control" disabled={!this.state.form && !this.state.loading}>
           { this.getIntlMessage(this.props.submitLabel || "buttons.submit") }
         </button> 
       </div>

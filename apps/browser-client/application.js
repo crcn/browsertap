@@ -41,7 +41,6 @@ class BrowserClientApplication extends BaseApplication {
    */
 
   initialize() {
-    super.initialize(this);
     this.router.initialize(); 
 
     var props = Object.assign({
@@ -49,7 +48,9 @@ class BrowserClientApplication extends BaseApplication {
       location : this.router.location
     }, this.intl);
 
-    React.render(React.createElement(Main, props), this.element);
+    if (this.element) React.render(React.createElement(Main, props), this.element);
+
+    return super.initialize(this);
   }
 }
 
