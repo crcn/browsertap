@@ -2260,7 +2260,7 @@ var ObjectId = (function (_ValueType) {
   }, {
     key: "coerce",
     value: function coerce(value) {
-      return value == void 0 ? createObjectId() : value;
+      return String(value == void 0 ? createObjectId() : value);
     }
   }]);
 

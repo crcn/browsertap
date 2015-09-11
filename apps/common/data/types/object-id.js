@@ -16,7 +16,7 @@ class ObjectId extends ValueType {
    */
 
   coerce(value) {
-    return value == void 0 ? createObjectId() : value;
+    return String(value == void 0 ? createObjectId() : value);
   }
 
 }
