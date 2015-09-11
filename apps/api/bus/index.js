@@ -10,8 +10,3 @@ module.exports = function(app, bus) {
   bus = publicCommands(app, bus);
   return bus;
 };
-
-
-function _wrapGenerator(bus) {
-  
-}

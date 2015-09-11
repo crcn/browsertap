@@ -142,7 +142,7 @@ describe(__filename + "#", function() {
         err = e;
       }
 
-      expect(err.message).to.be("token does not exist");
+      expect(err.message).to.be("tokenDoesNotExist");
     }));
 
     it("new user has an organization", co.wrap(function*() {
