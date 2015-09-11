@@ -193,6 +193,10 @@ var DataForm = React.createClass({
       err = e;
     }
 
+    if (!err && this.props.onSuccess) {
+      this.props.onSuccess(result);
+    }
+
     this.setState({
       loading: false,
       error: err,

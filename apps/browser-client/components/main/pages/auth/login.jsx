@@ -10,9 +10,15 @@ var Login = React.createClass({
 
   mixins: [IntlMixin],
 
+  onSuccess: function(result) {
+    setTimeout(function() {
+      this.props.app.router.redirect("app"); 
+    }.bind(this), 1000 * 2);
+  },
+
   render: function() {
     return <div className="login-form">
-      <DataForm formClass={LoginForm} {...this.props} successMessage="authLogin.successMessage" submitLabel="authLogin.submitLabel" />
+      <DataForm formClass={LoginForm} {...this.props} onSuccess={this.onSuccess} successMessage="authLogin.successMessage" submitLabel="authLogin.submitLabel" />
       <div className="footer">
 
         <span className="cta">

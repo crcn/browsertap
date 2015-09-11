@@ -10,6 +10,14 @@ module.exports = function(app) {
     });
   });
 
+  router.addRoute("app", "/app", function(location) {
+    location.setProperties({
+      state: {
+        mainPage: "app",
+      }
+    });
+  }); 
+
   router.addRoute("signup", "/signup", function(location) {
     location.setProperties({
       state: {
