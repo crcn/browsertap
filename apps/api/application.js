@@ -8,6 +8,13 @@ import createBus from "./bus";
 class APIApplication extends BaseApplication {
 
   /**
+   */
+
+  intl = {
+    messages: require("common/translations/en")
+  }
+
+  /**
    */ 
 
   initialize(next) {

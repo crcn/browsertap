@@ -6,16 +6,12 @@ import mixinSchema from "common/data/schema/mixin"
 import Schema from "common/data/schema/schema"
 import Password from "common/data/types/password"
 import EmailAddress from "common/data/types/email-address"
+import testUtils from "common/test/utils"
  
 describe(__filename + "#", function() {
 
   function renderDataForm(props) {
-    var div = document.createElement("div");
-    var component = React.createElement(DataForm, Object.assign({
-      app: { bus: mesh.noop }, messages: require("common/translations/en")
-    }, props));
-    React.render(component, div);
-    return div;
+    return testUtils.renderElement(DataForm, props);
   }
 
   it("can render various forms", function() {
