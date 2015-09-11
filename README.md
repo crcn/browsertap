@@ -26,3 +26,34 @@ Below are a set apps to be developed
 - [desktop client](./apps/desktop-client) - desktop client people can install from the app store
 - [desktop server](./apps/desktop-server) - connects to the API server and does all the signaling for desktop. Also does cleanup when a user logs out.
 - [desktop](./apps/desktop) - desktop controller. Does magical webrtc shit and other nice things.
+
+
+#### Roadmap
+
+- [ ] setup authentication
+  - [x] login
+  - [x] signup
+  - [ ] sign up verification
+  - [x] forgot password
+  - [ ] reset password email
+  - [ ] reset password
+- [ ] security
+  - [ ] lock account after N minutes
+- [ ] plans
+  - [ ] free 30 minutes
+  - [ ] integrate stripe
+  - [ ] charge users for time used
+  - [ ] free promotional minutes
+- desktop app features
+- common features
+  - [ ] ability to SSH into machine
+  - [ ] automatically sync localhost to remote machine
+  - [ ] sync all open windows to user
+  - [ ] ability to see desktop or all windows
+  - [ ] ability to run JS unit tests in browsers
+  - [ ] appm for installing apps
+  - [ ] mac & linux vms
+- [ ] nice features
+  - [ ] resize windows to any size
+  - [ ] sync audio
+  - [ ] ability to invite people to session
