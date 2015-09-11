@@ -13,6 +13,10 @@ module.exports = function(env) {
     production: {
       db: {
         host: "mongodb://localhost:27017/browsertap-production"
+      },
+      stripe: {
+        sk : process.env.STRIPE_SK,
+        pk : process.env.STRIPE_PK
       }
     },
 
@@ -41,6 +45,10 @@ module.exports = function(env) {
         from: {
           default: "postmaster@sandbox4ae439fbc90a424083d002263e5b9fd9.mailgun.org"
         }
+      },
+      stripe: {
+        sk: "sk_test_rvnY0JY1f7qdoVcFJ03TdiL9",
+        pk: "pk_test_kWLhP5fJcWHvPPaC054C38RE"
       }
     }
   };
