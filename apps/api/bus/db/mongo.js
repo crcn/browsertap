@@ -17,7 +17,6 @@ module.exports = function(app) {
       operation.query._id = ObjectId(operation.query._id);
     }
 
-
     // TODO - props from types should be passed here. Should
     // check if each prop is instance of ObjectId and re-case
     if (operation.data && operation.data._id) {

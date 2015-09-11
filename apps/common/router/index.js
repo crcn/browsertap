@@ -93,13 +93,13 @@ class Router extends BaseModel {
   }
 
   /**
-   */
+   */ 
 
   initialize() {
 
     // redirect
     if (process.browser) {
-      this.redirect(location.hash); 
+      this.redirect(location.hash === "" ? "/" : location.hash); 
     }
   }
 
