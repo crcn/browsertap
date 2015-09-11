@@ -1,5 +1,6 @@
 import padRight from "lodash/string/padRight";
 import chalk from "chalk";
+import parseStack from "parse-stack";
 
 module.exports = function(app) {
 
@@ -21,8 +22,16 @@ module.exports = function(app) {
 
     // TODO - calc log info here such as log(":break");
 
+    // if (operation.args[0] instanceof Array) {
+    //   var error = operation.args[0].error;
+    //   operation.args = [error.message, { stack: parseStack(error), platform: platformInfo }]
+    // }
+
     var args = operation.args.map(function(arg) {
       if (typeof arg !== "object") return arg;
+      if (arg instanceof Error) {
+        return arg.stack;
+      }
       return JSON.stringify(arg, null, 2);
       // return "\n" + prttty.render(arg, { noColor: true });
 

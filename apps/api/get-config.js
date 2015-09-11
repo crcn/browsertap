@@ -38,13 +38,10 @@ module.exports = function(env) {
       loggly: {
         tags: ["api"]
       },
-      email: {
-        type: "mailgun",
-        key: "key-21e1112af96563149f95a2e6a93f0406",
-        domain: "sandbox4ae439fbc90a424083d002263e5b9fd9.mailgun.org",
-        from: {
-          default: "postmaster@sandbox4ae439fbc90a424083d002263e5b9fd9.mailgun.org"
-        }
+      emailer: {
+        type: "sendgrid",
+        from: "support@browsertap.com",
+        key: "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"
       },
       stripe: {
         sk: "sk_test_rvnY0JY1f7qdoVcFJ03TdiL9",

@@ -39,6 +39,13 @@ Below are a set apps to be developed
   - [ ] reset password
 - [ ] security
   - [ ] lock account after N minutes
+  - [ ] CSRF token
+- [ ] speed
+  - FE and website hosted on EC2
+  - VMs hosted on EC2 and azure
+- [ ] deployment
+  - [ ] use appm for hosting apps & their versions
+  - [ ] ability to point to private appm registry
 - [ ] plans
   - [ ] free 30 minutes
   - [ ] integrate stripe

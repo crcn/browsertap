@@ -58,6 +58,7 @@
     "react": "^0.13.3",
     "react-intl": "^1.2.0",
     "ros": "^1.0.4",
+    "sendgrid": "^1.9.2",
     "sift": "^2.0.4",
     "socket.io": "^1.3.6",
     "socket.io-client": "^1.3.6",

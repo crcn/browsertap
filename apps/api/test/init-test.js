@@ -13,7 +13,7 @@ beforeEach(function(next) {
       db: {
         type: "mock"
       },
-      email: {
+      emailer: {
         type: "mock"
       },
       socket: {

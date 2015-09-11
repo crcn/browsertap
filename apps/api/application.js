@@ -1,9 +1,9 @@
 import BaseApplication from "common/application";
-import extend from "lodash/object/extend";
-import cluster from "cluster";
-import http from "./http";
-import email from "./email";
-import createBus from "./bus";
+import extend          from "lodash/object/extend";
+import cluster         from "cluster";
+import http            from "./http";
+import emailer         from "./emailer";
+import createBus       from "./bus";
 
 class APIApplication extends BaseApplication {
 
@@ -34,12 +34,12 @@ class APIApplication extends BaseApplication {
    */
 
   initializePlugins() {
+    this.bus = createBus(this, this.bus);
     super.initializePlugins();
     if (this.debug !== true) {
       this.use(http);
     }
-    this.use(email);
-    this.bus = createBus(this, this.bus);
+    this.use(emailer);
   }
 
   /**

@@ -10,11 +10,12 @@ module.exports = function(server, app) {
     try {
       this.body = yield app.bus(Object.assign({}, this.request.body, { public: true }));
     } catch(e) {
-      this.status = e.statusCode;
+      var statusCode = e.statusCode || 500;
+      this.status = statusCode;
       this.body = {
         error: {
           message: e.message,
-          statusCode: e.statusCode
+          statusCode: statusCode
         }
       };
       return;

@@ -4,6 +4,7 @@ import Logger from "common/logger"
 import createBus from "common/bus"
 import catchError from "./plugins/catch-errors"
 import createCommonBus from "common/bus"
+import createLogBus    from "common/bus/log"
 
 /**
  */
@@ -19,9 +20,7 @@ class Application extends BaseModel {
     this.bus = createCommonBus(this, this.bus);
 
     this.logger = new Logger(Object.assign({
-      bus: function(operation) {
-        return this.bus(operation);
-      }.bind(this)
+      bus: createLogBus(this)
     }, this.get("config.log")));
   }
 

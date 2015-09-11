@@ -19,6 +19,7 @@ class MockMailer {
   // @params(EmailForm)
   send(email) {
     this.outbox.messages.push(email);
+    return Promise.resolve();
   }
 }
 
@@ -26,5 +27,5 @@ class MockMailer {
  */
 
 export default function(app) {
-  app.emailer = new MockMailer();
+  return new MockMailer();
 }

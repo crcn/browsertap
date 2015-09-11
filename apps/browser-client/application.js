@@ -41,6 +41,7 @@ class BrowserClientApplication extends BaseApplication {
    */
 
   initialize() {
+    super.initialize(this);
     this.router.initialize(); 
 
     var props = Object.assign({
@@ -50,7 +51,7 @@ class BrowserClientApplication extends BaseApplication {
 
     if (this.element) React.render(React.createElement(Main, props), this.element);
 
-    return super.initialize(this);
+    return Promise.resolve();
   }
 }
 

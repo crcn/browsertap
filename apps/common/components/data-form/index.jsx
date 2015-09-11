@@ -232,8 +232,8 @@ var DataForm = React.createClass({
         { formFields }
       </div>  
       <div className="form-group submit-button">   
-        <button name="submit" type="submit" className="form-control" disabled={!this.state.form && !this.state.loading}>
-          { this.getIntlMessage(this.props.submitLabel || "buttons.submit") }
+        <button name="submit" type="submit" className="form-control" disabled={!this.state.form || this.state.loading}>
+          { this.state.loading ? "loading..." : this.getIntlMessage(this.props.submitLabel || "buttons.submit") }
         </button> 
       </div>
     </form>

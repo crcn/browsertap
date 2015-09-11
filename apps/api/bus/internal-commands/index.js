@@ -12,7 +12,7 @@ export default function(app, bus) {
     sift({ name: "sendEmail" }),
     function*(operation) {
       var form = new EmailForm(Object.assign({ bus: bus }, operation.data));
-      app.emailer.send(form);
+      yield app.emailer.send(form);
     }
   ], bus);
 };

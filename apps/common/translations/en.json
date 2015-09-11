@@ -6,7 +6,8 @@
     "tokenHasExpired": "Token has expired",
     "emailAddressExists": "Email address already exists",
     "userDoesNotExist": "User does not exist",
-    "passwordIncorrect": "Password incorrect"
+    "passwordIncorrect": "Password incorrect",
+    "couldNotSendEmail": "Could not send email. Please try again in a bit!"
   },
   "fieldsLabels": {
     "emailAddress": "Email Address",
