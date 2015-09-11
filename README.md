@@ -65,6 +65,7 @@ Below are a set apps to be developed
     - [ ] need to accept link sent via email
     - [ ] need to be able to sign up or log in from link
   - [ ] ability to have multiple organizations
+  - [ ] ability to set app hotkeys
 - [ ] nice features
   - [ ] resize windows to any size
   - [ ] sync audio
