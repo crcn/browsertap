@@ -26,7 +26,6 @@ describe(__filename + "#", function() {
   });
 
   describe("insert# ", function() {
-
     it("cannot register a new user if a password is not present", co.wrap(function*() {
       var err;
 

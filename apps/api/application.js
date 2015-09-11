@@ -28,7 +28,9 @@ class APIApplication extends BaseApplication {
 
   initializePlugins() {
     super.initializePlugins();
-    // this.use(http);
+    if (this.debug !== true) {
+      this.use(http);
+    }
     this.use(email);
     this.bus = createBus(this, this.bus);
   }

@@ -58,7 +58,6 @@ var Field = React.createClass({
 
     if (!Object.keys(diff(this.state, newState)).length) return;
 
-
     this.props.onFieldData(this.props.name, value);
     this.setState(newState);
   },
@@ -183,11 +182,13 @@ var DataForm = React.createClass({
 
   onSubmit: co.wrap(function*(event) {
     event.preventDefault();  
-    var result = yield this.state.form.submit();
-    console.log(result);
-    this.setState({
-      error: new Error("errors.notImplemented")
-    });
+    try {
+      var result = yield this.state.form.submit();
+    } catch(e) {
+      this.setState({
+        error: e
+      }); 
+    }
   }),
 
   /**
@@ -211,7 +212,7 @@ var DataForm = React.createClass({
     
     return <form onChange={this._onChange} className="form-horizontal m-common-data-form" onSubmit={this.onSubmit}>
       { this.state.error ? <div className="alert alert-danger">{
-        <FormattedMessage message={this.getIntlMessage(this.state.error.message)} />
+        <FormattedMessage message={this.getIntlMessage("errors." + this.state.error.message)} />
       }</div> : void 0 }
       <div className="fields">
         { formFields }

@@ -1,5 +1,8 @@
-import Application from "./application";
-import getConfig from "./get-config";
+require("babel/register")({
+  optional: ["es7.classProperties", "es7.decorators"]
+});
+var Application = require("./application");
+var getConfig = require("./get-config");
 
 /**
  */

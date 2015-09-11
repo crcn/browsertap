@@ -44,14 +44,14 @@ function server(app) {
 
   process.on("uncaughtException", onException);
 
-  app.bus({
-    name: "intercept",
-    max: 1,
-    query: { name: "dispose" },
-    bus: mesh.wrap(function(operation, next) {
-      process.removeListener("uncaughtException", onException);
-      next();
-    })
-  });
+  // app.bus({
+  //   name: "intercept",
+  //   max: 1,
+  //   query: { name: "dispose" },
+  //   bus: mesh.wrap(function(operation, next) {
+  //     process.removeListener("uncaughtException", onException);
+  //     next();
+  //   })
+  // });
 }
 

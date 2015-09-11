@@ -5,6 +5,7 @@ var port = 8091;
 beforeEach(function(next) {
 
   global.apiApp = new APIApplication({
+    debug: true,
     config: {
       log: {
         level: 0

@@ -1,6 +1,12 @@
 {
   "errors": {
-    "notImplemented": "not implemented yet"
+    "notImplemented": "not implemented yet",
+    "emailAddressNotFound": "Email address not found",
+    "tokenDoesNotExist": "Token does not exist",
+    "tokenHasExpired": "Token has expired",
+    "emailAddressExists": "Email address already exists",
+    "userDoesNotExist": "User does not exist",
+    "passwordIncorrect": "Password incorrect"
   },
   "fieldsLabels": {
     "emailAddress": "Email Address",

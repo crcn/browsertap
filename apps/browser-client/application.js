@@ -3,6 +3,7 @@ var BaseApplication = require("common/application");
 var Router          = require("common/router");
 var Main            = require("./components/main");
 var routes          = require("./routes");
+var createBus       = require("./bus");
  
 /**
  */
@@ -30,9 +31,17 @@ class BrowserClientApplication extends BaseApplication {
   /**
    */
 
+  initializePlugins() {
+    super.initializePlugins();
+    this.use(routes);
+    this.bus = createBus(this, this.bus);
+  }
+
+  /**
+   */
+
   initialize() {
     super.initialize(this);
-    this.use(routes);
     this.router.initialize(); 
 
     var props = Object.assign({

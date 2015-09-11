@@ -17,12 +17,12 @@ import fs                 from "fs";
 export default function(app, bus) {
 
   function *getLoggedInUser(operation) {
-    if (!operation.token) throw new httperr.Unauthorized("token does not exist");
+    if (!operation.token) throw new httperr.Unauthorized("tokenDoesNotExist");
     var token = yield Token.findOne(bus, operation.token);
     var user  = yield User.findOne({ 
       emailAddress: token.key
     });
-    if (!user) throw new httperr.Unauthorized("user does not exist");
+    if (!user) throw new httperr.Unauthorized("userDoesNotExist");
     return user;
   }
 
@@ -38,7 +38,7 @@ export default function(app, bus) {
       var form = new SignupForm(Object.assign({ bus: bus }, operation.data));
 
       if (yield User.findOne(bus, { emailAddress: form.emailAddress.valueOf() })) {
-        throw new httperr.Conflict("emailAddress.exists");
+        throw new httperr.Conflict("emailAddressExists");
       }
 
       // create the new user object
@@ -77,13 +77,15 @@ export default function(app, bus) {
       var form = new LoginForm(Object.assign({ bus: bus }, operation.data));
       var user = yield User.findOne(bus, { emailAddress: form.emailAddress.valueOf() });
 
-      if (!user) throw new httperr.NotFound("email address not found");
+      if (!user) {
+        throw new httperr.NotFound("emailAddressNotFound");
+      }
 
       var hasMatch = !!user.keys.filter(function(key) {
         if (key.secret && key.secret.verify(form.password)) return true;
       }).length;
 
-      if (!hasMatch) throw new httperr.Unauthorized("password incorrect")
+      if (!hasMatch) throw new httperr.Unauthorized("passwordIncorrect")
 
       // TODO - add more security stuff here based on operation
       var session = new Session({ bus: bus, user: user });
@@ -98,7 +100,7 @@ export default function(app, bus) {
     function*(operation) {
       var form = new ForgotPasswordForm(Object.assign({ bus: bus }, operation.data));
       var user = yield User.findOne(bus, { emailAddress: form.emailAddress.valueOf() });
-      if (!user) throw new httperr.NotFound("email address not found");
+      if (!user) throw new httperr.NotFound("emailAddressNotFound");
 
       var token = new Token({
         bus: bus,
@@ -129,13 +131,13 @@ export default function(app, bus) {
 
       // find the token from the form
       var token = yield Token.findOne(bus, { _id: String(form.token._id) });
-      if (!token) throw new httperr.NotFound("token does not exist");
+      if (!token) throw new httperr.NotFound("tokenDoesNotExist");
 
-      if (token.expired) throw new httperr.NotAcceptable("token has expired");
+      if (token.expired) throw new httperr.NotAcceptable("tokenHasExpired");
 
       // fetch the email stored in the token
       var user = yield User.findOne(bus, { emailAddress: String(token.key) });
-      if (!user) throw new httperr.NotFound("email address does not exist");
+      if (!user) throw new httperr.NotFound("emailAddressNotFound");
 
       // reset the password here
       user.keys.forEach(function(key) {
