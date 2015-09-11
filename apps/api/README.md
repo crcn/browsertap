@@ -15,11 +15,3 @@ DB=mock npm start # start mock mongodb
 
 - ability to execute remote operations via socket.io
 
-
-#### TODO
-
-- [ ] - graceful shutdown if stuff crashes
-- [ ] - sandbox remote operations
-- [ ] - process on exit logs
-- [ ] - stdin commands
-  - help()

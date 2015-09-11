@@ -30,13 +30,13 @@ Below are a set apps to be developed
 
 #### Roadmap
 
-- [ ] setup authentication
+- [x] setup authentication
   - [x] login
   - [x] signup
-  - [ ] sign up verification
+  - [x] sign up verification
   - [x] forgot password
-  - [ ] reset password email
-  - [ ] reset password
+  - [x] reset password email
+  - [x] reset password
 - [ ] security
   - [ ] lock account after N minutes
   - [ ] CSRF token
