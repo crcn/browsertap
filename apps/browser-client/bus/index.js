@@ -7,11 +7,11 @@ var httperr = require("httperr");
  
 module.exports = function(app) {
 
-  var host    = app.get("config.socket.host");
-  var channel = app.get("config.socket.channel");
+  var host    = app.get("config.api.host");
+  // var channel = app.get("config.socket.channel");
 
   // app.logger.info("socket.io channel: %s", channel);
-  // app.logger.info("socket.io host: %s", host);
+  app.logger.info("api host: %s", host);
 
   // var client = io(host);
   // var bus    = void 0;
@@ -19,9 +19,7 @@ module.exports = function(app) {
 
   var bus = function(operation) {
     return new Promise(function(resolve, reject) {
-
-      var r = sa.post("http://localhost:8080/o").send(operation).end(function(err, response) {
-
+      var r = sa.post(host + "/o").send(operation).end(function(err, response) {
         var body = response.body;
         if (!body) return resolve();
 

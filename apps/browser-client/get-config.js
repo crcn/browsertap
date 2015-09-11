@@ -6,8 +6,13 @@ module.exports = function(env) {
 
   var config = {
     defaults: {
-      socket: {
+      api: {
         host: "http://0.0.0.0:8080"
+      }
+    },
+    staging: {
+      api: {
+        host: "http://staging.browsertap.com/api"
       }
     }
   };

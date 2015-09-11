@@ -7,7 +7,7 @@ module.exports = function(env) {
   var configs = {
 
     development : {
-      numCores: 0,
+      numCores: 0
     },
 
     production: {
