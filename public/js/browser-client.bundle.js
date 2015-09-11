@@ -393,11 +393,18 @@ var Signup = _react2["default"].createClass({
   displayName: "Signup",
 
   mixins: [_reactIntl.IntlMixin],
+
+  onSuccess: function onSuccess(result) {
+    setTimeout((function () {
+      this.props.app.router.redirect("app");
+    }).bind(this), 1000 * 2);
+  },
+
   render: function render() {
     return _react2["default"].createElement(
       "div",
       { className: "signup-form" },
-      _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ formClass: _commonDataFormsSignup2["default"] }, this.props, { successMessage: "authSignup.successMessage", submitLabel: "authSignup.submitLabel" })),
+      _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ formClass: _commonDataFormsSignup2["default"] }, this.props, { onSuccess: this.onSuccess, successMessage: "authSignup.successMessage", submitLabel: "authSignup.submitLabel" })),
       _react2["default"].createElement(
         "div",
         { className: "footer" },
