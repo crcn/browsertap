@@ -90,7 +90,7 @@ var httperr = require("httperr");
 
 module.exports = function (app, bus) {
 
-  var host = app.get("config.api.host");
+  var host = app.get("config.hosts.api");
   // var channel = app.get("config.socket.channel");
 
   // app.logger.info("socket.io channel: %s", channel);
@@ -3325,6 +3325,11 @@ module.exports = function (env) {
     },
     socket: {
       channel: "operations"
+    },
+    hosts: {
+      api: "http://0.0.0.0:8080",
+      browser: "http://0.0.0.0:8085",
+      cdn: "http://0.0.0.0:8080"
     }
   };
 };

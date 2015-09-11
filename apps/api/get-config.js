@@ -39,9 +39,11 @@ module.exports = function(env) {
         tags: ["api"]
       },
       emailer: {
-        type: "sendgrid",
-        from: "support@browsertap.com",
-        key: "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"
+        service: process.env.EMAILER || "mailgun",
+        auth: {
+          user: "postmaster@sandbox4ae439fbc90a424083d002263e5b9fd9.mailgun.org",
+          pass: "29c5fc01d35b1d8605b6c3982bcb3091"
+        }
       },
       stripe: {
         sk: "sk_test_rvnY0JY1f7qdoVcFJ03TdiL9",

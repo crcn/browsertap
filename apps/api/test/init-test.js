@@ -14,7 +14,7 @@ beforeEach(function(next) {
         type: "mock"
       },
       emailer: {
-        type: "mock"
+        service: "mock"
       },
       socket: {
         channel: "test-ops",

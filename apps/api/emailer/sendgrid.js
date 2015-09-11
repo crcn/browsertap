@@ -32,7 +32,6 @@ class Emailer {
 
     return new Promise(function(resolve, reject) {
       this._sg.send(email, function(err, response) {
-        console.log(arguments);
         if (err) {
           this.app.logger.error(err.stack);
           return reject(new httperr[500]("couldNotSendEmail"));

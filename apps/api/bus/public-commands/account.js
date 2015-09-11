@@ -26,6 +26,9 @@ export default function(app, bus) {
     return user;
   }
 
+
+  var browserHost = app.get("config.hosts.browser");
+
   return [
 
     /**
@@ -115,7 +118,7 @@ export default function(app, bus) {
         to: user.emailAddress,
         subject: "Password reset",
         body: mu.render(fs.readFileSync(__dirname + "/templates/reset-password-email.mu", "utf8"), {
-          link: app.host + "/#!/reset-password/" + token._id
+          link: browserHost + "/#/reset-password/" + token._id
         })
       });
 

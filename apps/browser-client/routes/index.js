@@ -36,6 +36,16 @@ module.exports = function(app) {
     });
   });
 
+  router.addRoute("resetPassword", "/reset-password/:token._id", function(location) {
+    location.setProperties({
+      state: {
+        token: location.params.token,
+        mainPage: "auth",
+        authPage: "forgotPassword"
+      }
+    });
+  });
+
   router.addRoute("login", "/login", function(location) {
     location.setProperties({
       state: {

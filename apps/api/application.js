@@ -19,6 +19,8 @@ class APIApplication extends BaseApplication {
 
   initialize(next) {
 
+    this.logger.info("hosts: ", this.get("config.hosts"));
+
     // fork it?
     if (cluster.isMaster && this.get("config.numCores") > 0) {
       this.logger.info("fourk it %d times ✊", this.config.numCores);

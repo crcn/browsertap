@@ -16,6 +16,11 @@ module.exports = function(env) {
     },
     socket: {
       channel: "operations"
+    },
+    hosts: {
+      api: "http://0.0.0.0:8080",
+      browser: "http://0.0.0.0:8085",
+      cdn: "http://0.0.0.0:8080",
     }
   };
 };

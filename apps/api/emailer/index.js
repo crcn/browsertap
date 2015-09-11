@@ -1,14 +1,16 @@
+var nodemailer = require('nodemailer');
+
+
 
 var mailers = {
   mock     : require("./mock"),
-  mailgun  : require("./mailgun"),
-  sendgrid : require("./sendgrid")
+  default  : require("./nodemailer")
 };
 
 export default function(app) {
-  var type = app.get("config.emailer.type");
+  var type = app.get("config.emailer.service");
   app.logger.info("init emailer: ", type);
-  var emailer = mailers[type];
+  var emailer = mailers[type] || mailers.default;
 
   app.emailer = emailer(app, app.get("config.emailer"));
 };
