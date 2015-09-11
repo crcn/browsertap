@@ -6,7 +6,7 @@ var ResetPassword = React.createClass({
   render: function() {
 
     var data = {
-      token: { _id: "123456789123456789123456" }
+      token: this.props.location.state.token
     };
  
     return <DataForm formClass={ResetPasswordForm} {...this.props} data={data} successMessage="authResetPassword.successMessage"  submitLabel="authResetPassword.submitLabel" />;

@@ -359,7 +359,7 @@ var ResetPassword = _react2["default"].createClass({
   render: function render() {
 
     var data = {
-      token: { _id: "123456789123456789123456" }
+      token: this.props.location.state.token
     };
 
     return _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ formClass: _commonDataFormsResetPassword2["default"] }, this.props, { data: data, successMessage: "authResetPassword.successMessage", submitLabel: "authResetPassword.submitLabel" }));
@@ -545,6 +545,16 @@ module.exports = function (app) {
       state: {
         mainPage: "auth",
         authPage: "forgotPassword"
+      }
+    });
+  });
+
+  router.addRoute("resetPassword", "/reset-password/:token._id", function (location) {
+    location.setProperties({
+      state: {
+        token: location.params.token,
+        mainPage: "auth",
+        authPage: "resetPassword"
       }
     });
   });

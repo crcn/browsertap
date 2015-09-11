@@ -41,7 +41,7 @@ module.exports = function(app) {
       state: {
         token: location.params.token,
         mainPage: "auth",
-        authPage: "forgotPassword"
+        authPage: "resetPassword" 
       }
     });
   });
