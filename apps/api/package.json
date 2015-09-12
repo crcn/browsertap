@@ -13,6 +13,7 @@
     "i": "^0.3.3",
     "koa-bodyparser": "^2.0.1",
     "koa-cors": "0.0.16",
+    "koa-static": "^1.4.9",
     "nodemailer": "^1.4.0",
     "npm": "^2.14.2",
     "sendgrid": "^1.9.2",

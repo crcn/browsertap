@@ -3551,7 +3551,7 @@ module.exports = function (env) {
     },
     hosts: {
       api: "http://0.0.0.0:8080",
-      browser: "http://0.0.0.0:8085",
+      browser: "http://0.0.0.0:8080",
       cdn: "http://0.0.0.0:8080"
     }
   };

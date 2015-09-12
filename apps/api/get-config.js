@@ -1,6 +1,7 @@
-import deepExtend from "deep-extend";
-import os from "os";
+import deepExtend      from "deep-extend";
+import os              from "os";
 import getCommonConfig from "common/utils/get-config";
+import path            from "path"
 
 module.exports = function(env) {
 
@@ -27,6 +28,12 @@ module.exports = function(env) {
     },
 
     defaults: {
+      directories: {
+        public: path.normalize(__dirname + "/../../public")
+      },
+      redis: {
+        host: process.env.REDIS || "http://0.0.0.0:6379"
+      },
       db: {
         type: process.env.DB || "mongo",
         host: "mongodb://127.0.0.1:27017/browsertap-development",

@@ -19,7 +19,9 @@ class APIApplication extends BaseApplication {
 
   initialize(next) {
 
-    this.logger.info("hosts: ", this.get("config.hosts"));
+    this.logger.info("bt hosts: ", this.get("config.hosts"));
+    this.logger.info("redis host: ", this.get("config.redis.host"));
+    this.logger.info("directories: ", this.get("config.directories"));
 
     // fork it?
     if (cluster.isMaster && this.get("config.numCores") > 0) {

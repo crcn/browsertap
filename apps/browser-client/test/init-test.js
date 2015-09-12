@@ -5,9 +5,11 @@ var port = 8091;
 
 beforeEach(function(next) {
 
+  var session = {};
+
   global.browserApp = new BrowserApplication({
     element: document.createElement("div"),
-    bus: mesh.attach({ public: true }, apiApp.bus),
+    bus: mesh.attach({ public: true, session: session }, apiApp.bus),
     debug: true,
     config: {
       log: {

@@ -27,7 +27,6 @@ Below are a set apps to be developed
 - [desktop server](./apps/desktop-server) - connects to the API server and does all the signaling for desktop. Also does cleanup when a user logs out.
 - [desktop](./apps/desktop) - desktop controller. Does magical webrtc shit and other nice things.
 
-
 #### Roadmap
 
 - [x] setup authentication
@@ -37,6 +36,7 @@ Below are a set apps to be developed
   - [x] forgot password
   - [x] reset password email
   - [x] reset password
+  - [ ] store session (there's always a session)
 - [ ] security
   - [ ] lock account after N minutes
   - [ ] CSRF token

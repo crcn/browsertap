@@ -14,6 +14,7 @@ import ConfirmAccountForm from "common/data/forms/confirm-account";
 describe(__filename + "#", function() {
 
   var bus;
+  var session;
   var fixtures = {
     user1: {
       emailAddress: "a@b.com",
@@ -23,7 +24,8 @@ describe(__filename + "#", function() {
   };
 
   beforeEach(function() {
-    bus = mesh.attach({ public: true }, global.apiApp.bus);
+    session = {};
+    global.apiApp.bus = bus = mesh.attach({ public: true, session: session }, global.apiApp.bus);
   });
 
   describe("insert# ", function() {
@@ -44,11 +46,10 @@ describe(__filename + "#", function() {
 
     it("can register a new user if the password is present", co.wrap(function*() {
       var form = new SignupForm(Object.assign({ bus: bus }, fixtures.user1));
-      var session = yield form.submit();
-      expect(session.user.emailAddress).to.be(fixtures.user1.emailAddress);
-      expect(session.user.password).to.be(void 0);
-      expect(session.user.keys).to.be(void 0);
-      expect(session._id).not.to.be(void 0);
+      var user = yield form.submit();
+      expect(user.emailAddress).to.be(fixtures.user1.emailAddress);
+      expect(user.password).to.be(void 0);
+      expect(user.keys).to.be(void 0);
     }));
 
     it("cannot register a user if the email address already exists", co.wrap(function*() {
@@ -110,6 +111,7 @@ describe(__filename + "#", function() {
       yield new SignupForm(Object.assign({ bus: bus }, fixtures.user1)).submit();
       var form = new LoginForm(Object.assign({ bus: bus }, fixtures.user1));
       var user = yield form.submit();
+      expect(session.user._id.valueOf()).to.be(user._id);
     }));
 
     it("cannot login a user with a bad password", co.wrap(function*() {
@@ -255,9 +257,9 @@ describe(__filename + "#", function() {
           password: form.password
         });
 
-        var session = yield lform.submit();
-        expect(session._id).not.to.be(void 0);
-        expect(session.user.emailAddress).to.be("a@b.com");
+        var user = yield lform.submit();
+        expect(user._id).not.to.be(void 0);
+        expect(user.emailAddress).to.be("a@b.com");
       }));
 
       it("cannot reset a password if the token has expired", co.wrap(function*() {

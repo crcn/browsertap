@@ -1,10 +1,13 @@
-import http from "http";
-import socket from "./socket";
-import mesh from "mesh";
-import routes from "./routes";
-import koa from "koa"
+import http       from "http";
+import socket     from "./socket";
+import mesh       from "mesh";
+import routes     from "./routes";
+import koa        from "koa"
 import bodyparser from "koa-bodyparser";
-import cors from "koa-cors"
+import cors       from "koa-cors"
+import redisStore from "koa-redis";
+import session    from "koa-generic-session"
+import serve      from "koa-static";
 
 /**
  */
@@ -15,8 +18,18 @@ module.exports = function(app) {
 
   var k = koa();
 
+  k.use(serve(app.get("config.directories.public")));
+
+  k.keys = ['keys', 'keykeys'];
+
   k.use(cors());
   k.use(bodyparser());
+  k.use(session({
+    store: redisStore({
+      host: void 0
+    })
+  }));
+
   routes(k, app);
 
   var server = app.http = http.createServer(k.callback());

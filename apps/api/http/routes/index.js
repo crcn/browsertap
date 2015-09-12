@@ -7,8 +7,12 @@ module.exports = function(server, app) {
   var router = createRouter();
  
   router.all("/o", function*(next) {
+
+    var session = this.session;
+
+    console.log(session.user);
     try {
-      this.body = yield app.bus(Object.assign({}, this.request.body, { public: true }));
+      this.body = yield app.bus(Object.assign({}, this.request.body, { session: session, public: true }));
     } catch(e) {
       var statusCode = e.statusCode || 500;
       this.status = statusCode;

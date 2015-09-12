@@ -13,8 +13,18 @@ import mu                 from "mustache";
 import fs                 from "fs";
 
 export default function(app, bus) {
-  return createRouter(
-    require("./account")(app, bus)
+
+  return _commands(
+    Object.assign({},
+      require("./account")(app, bus)
+    )
   , bus);
 };
 
+
+
+function _commands(commands, bus) {
+  return function*(operation) {
+    return yield (commands[operation.name] || bus)(operation);
+  };
+}
