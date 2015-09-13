@@ -11,15 +11,6 @@ var stripeCustomerSchema = new Schema({
   fields: {
 
     /**
-     * required for executing DB commands
-     */
-
-    bus: {
-      required: true,
-      type: require("common/data/types/bus")
-    },
-
-    /**
      * ID of the user 
      */
 
@@ -43,7 +34,13 @@ var stripeCustomerSchema = new Schema({
 @persistMixin("stripeCustomers")
 @mixinSchema(stripeCustomerSchema)
 class StripeCustomer extends Model {
-
+  *charge(amount) {
+    var result = yield this.app.stripe.charges.create({
+      amount: amount,
+      currency: "usd",
+      customer: this.id.valueOf()
+    });
+  }
 }
 
 /**

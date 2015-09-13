@@ -5,7 +5,7 @@ import httperr            from "httperr";
 import mu                 from "mustache";
 import fs                 from "fs";
 import templates          from "./templates"
-import _command           from "./_command";
+import _command           from "api/bus/drivers/command";
 import cstripe            from "stripe"
 import Organization       from "api/data/models/organization"
 

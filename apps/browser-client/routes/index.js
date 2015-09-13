@@ -22,7 +22,6 @@ module.exports = function(app) {
       });
       next();
     } catch(e) {
-      console.log(e); 
       return router.redirect("login", {
         error: e
       });

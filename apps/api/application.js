@@ -3,6 +3,7 @@ import extend          from "lodash/object/extend";
 import cluster         from "cluster";
 import http            from "./http";
 import emailer         from "./emailer";
+import stripe          from "./stripe";
 import createBus       from "./bus";
 
 class APIApplication extends BaseApplication {
@@ -44,6 +45,7 @@ class APIApplication extends BaseApplication {
       this.use(http);
     }
     this.use(emailer);
+    this.use(stripe);
   }
 
   /**

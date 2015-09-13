@@ -21,7 +21,6 @@ class Emailer {
         subject : options.subject,
         html    : options.body
       }, function(error, info){
-          console.log(arguments);
           if(error) {
             this.app.logger.error(err.stack);
            return reject(new httperr[500]("couldNotSendEmail"));

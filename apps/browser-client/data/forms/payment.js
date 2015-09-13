@@ -49,7 +49,6 @@ class PaymentForm {
         exp_month: 10,
         exp_year: 16
       }, function(status, result) {
-        console.log(arguments);
         if (status !== 200) return reject(new httperr[status]("errors.unableToPay"));
         resolve(result);
       });
@@ -57,7 +56,10 @@ class PaymentForm {
 
     return yield this.bus.execute({
       name: "addStripeCustomer",
-      data: result
+      data: {
+        organization: this.organization,
+        customer: result
+      }
     });
   }
 };

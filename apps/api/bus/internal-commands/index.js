@@ -3,17 +3,12 @@ import sift               from "sift";
 import EmailForm          from "api/data/forms/email";
 import httperr            from "httperr";
 
+import commands           from "api/bus/drivers/commands";
+
 export default function(app, bus) {
-  return createRouter([
-
-    /**
-     */
-
-    sift({ name: "sendEmail" }),
-    function*(operation) {
-      var form = new EmailForm(Object.assign({ bus: bus }, operation.data));
-      yield app.emailer.send(form);
-    }
-  ], bus);
+  return commands(Object.assign(
+    require("./email")(app, bus),
+    require("./payments")(app, bus)
+  ), bus);
 };
 

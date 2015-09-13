@@ -884,7 +884,10 @@ var Payment = _react2["default"].createClass({
   displayName: "Payment",
 
   render: function render() {
-    return _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ formClass: _browserClientDataFormsPayment2["default"] }, this.props));
+    var data = {
+      organization: this.props.location.organization
+    };
+    return _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ formClass: _browserClientDataFormsPayment2["default"] }, this.props, { data: data }));
   }
 });
 
@@ -1550,7 +1553,6 @@ var PaymentForm = (function () {
                 exp_month: 10,
                 exp_year: 16
               }, function (status, result) {
-                console.log(arguments);
                 if (status !== 200) return reject(new _httperr2["default"][status]("errors.unableToPay"));
                 resolve(result);
               });
@@ -1561,7 +1563,10 @@ var PaymentForm = (function () {
             context$2$0.next = 5;
             return this.bus.execute({
               name: "addStripeCustomer",
-              data: result
+              data: {
+                organization: this.organization,
+                customer: result
+              }
             });
 
           case 5:
@@ -1685,19 +1690,17 @@ module.exports = function (app) {
             organization: organization
           });
           next();
-          context$2$0.next = 17;
+          context$2$0.next = 16;
           break;
 
         case 13:
           context$2$0.prev = 13;
           context$2$0.t0 = context$2$0["catch"](0);
-
-          console.log(context$2$0.t0);
           return context$2$0.abrupt("return", router.redirect("login", {
             error: context$2$0.t0
           }));
 
-        case 17:
+        case 16:
         case "end":
           return context$2$0.stop();
       }

@@ -11,10 +11,10 @@ import PasswordKey        from "api/data/models/password-key";
 import httperr            from "httperr";
 import mu                 from "mustache";
 import fs                 from "fs";
-
+import commands           from "api/bus/drivers/commands";
+  
 export default function(app, bus) {
-
-  return _commands(
+  return commands(
     Object.assign({},
       require("./account")(app, bus),
       require("./payments")(app, bus),
@@ -22,11 +22,3 @@ export default function(app, bus) {
     )
   , bus);
 };
-
-
-
-function _commands(commands, bus) {
-  return function*(operation) {
-    return yield (commands[operation.name] || bus)(operation);
-  };
-}

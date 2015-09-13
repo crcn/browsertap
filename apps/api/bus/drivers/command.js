@@ -1,31 +1,26 @@
-import mesh from "mesh";
-import gen from "common/bus/drivers/generator"
-import sift from "sift"
+import httperr from "httperr";
+import User from "api/data/models/user";
 
 /**
+ */
 
-command({
-  execute: function*(operation) {
-    
-  }
-});
+export default function(options) {
 
-*/
+  var {auth, execute} = options;
 
-export default function(command) {
+  return function*(operation) {
 
-  var { execute, test, schema } = command;
+    // TODO - add schema here
 
-  if (typeof test === "object") test = sift(test);
+    if (auth === true) {
 
-  var bus = gen(function*(operation) {
-    schema.validate(operation.data);
-    var result = yield execute(operation);
-    return result;
-  });
+      if (!operation.session.userId) {
+        throw new httperr.Unauthorized("must be logged in for this");
+      }
 
-  return function(operation) {
-    if (test && !test(operation)) return mesh.noop(operation);
-    return bus(operation);
+      operation.user = yield User.findOne(operation.app.bus, { _id: String(operation.session.userId) });
+    }
+
+    return yield execute(operation);
   };
-};  
+};
