@@ -25,15 +25,16 @@ export default function(app, bus) {
           throw new httperr.Conflict("userEmailAddressExists");
         }
 
-        if (yield Invitee.findOne(bus, { emailAddress: form.emailAddress.valueOf() })) {
-          throw new httperr.Conflict("inviteeExists");
+        var invitee;
+
+        // return invitee based on email address. Don't want to lock them out
+        // from seeing the secondary page which allows them to invite people.
+        if (!(invitee = yield Invitee.findOne(bus, { emailAddress: form.emailAddress.valueOf() }))) {
+          var invitee = new Invitee(form);
+          yield invitee.insert();
         }
 
-        var invitee = new Invitee(form);
-
-        var ret = yield invitee.insert();
-
-        return ret.toJSON();
+        return invitee;
       }
     })
   };
