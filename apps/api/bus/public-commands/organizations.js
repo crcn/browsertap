@@ -11,8 +11,7 @@ import Organization       from "api/data/models/organization"
 
 export default function(app, bus) {
 
-  var browserHost = app.get("config.hosts.browser");
-  var stripe      = cstripe(app.get("config.stripe.sk"));
+  var browserHost = app.get("config.hosts.browser"); 
 
   return {
 

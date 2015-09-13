@@ -13,6 +13,15 @@ var RequestInvite = React.createClass({
   /**
    */
 
+  onSuccess: function(result) {
+    this.props.app.router.redirect("requestInviteComplete", {
+
+    });
+  },
+
+  /**
+   */
+
   render: function() {
     return <div className="request-invite-form">
       <h4><FormattedMessage message={this.getIntlMessage("authRequstInvite.title")} /></h4>

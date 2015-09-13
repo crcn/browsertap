@@ -52,6 +52,15 @@ module.exports = function(app) {
         authPage: "signup"
       }
     });
+  }); 
+
+  router.addRoute("requestInviteComplete", "/request-invite-complete", function(location) {
+    location.setProperties({
+      state: {
+        mainPage: "auth",
+        authPage: "requestInviteComplete"
+      }
+    });
   });
 
   router.addRoute("forgotPassword", "/forgot", function(location) {

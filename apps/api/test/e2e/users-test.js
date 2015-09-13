@@ -25,8 +25,8 @@ describe(__filename + "#", function() {
   };
 
   beforeEach(function() {
-    session = {};
-    global.apiApp.bus = bus = mesh.attach({ app: global.apiApp, public: true, session: session }, global.apiApp.bus);
+    session = global.apiApp.session;
+    global.apiApp.bus = bus = mesh.attach({ app: global.apiApp, public: true }, global.apiApp.bus);
   });
 
   describe("insert# ", function() {
@@ -225,6 +225,7 @@ describe(__filename + "#", function() {
 
     it("cannot load a user if they're logged in", co.wrap(function*() {
       var err;
+
       try {
         yield forms.getSessionUser(bus);
       } catch(e) {

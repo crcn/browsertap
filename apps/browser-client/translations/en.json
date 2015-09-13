@@ -19,6 +19,10 @@
     "submitLabel": "Request invite",
     "title": "Sign up for early access",
     "info": "BrowserTap is currently in <strong>beta</strong>. Enter in your email for early access!"
+  }, 
+  "authRequestInviteComplete": {
+    "message": "You'll all signed up! We'll send you a message as soon as a spot opens up.",
+    "cta": "Want to get early access and free minutes? Share the link below!"
   },
   "authResetPassword": {
     "title": "Pick a new password",

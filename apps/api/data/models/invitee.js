@@ -21,6 +21,13 @@ var inviteeMixin = new Schema({
     /**
      */
 
+    _id: { 
+      type: require("common/data/types/object-id")
+    },
+
+    /**
+     */
+
     emailAddress: { 
       required: true, 
       unique: true, // TODO

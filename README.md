@@ -61,6 +61,8 @@ Below are a set apps to be developed
   - [ ] ability for people to share a particular screen
 - [ ] promotion
   - [ ] add promo codes for free minutes
+  - [ ] invite more people to get early access
+  - [ ] shortcode service
 - desktop app features
 - common features
   - [ ] ability to SSH into machine
