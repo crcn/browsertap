@@ -939,6 +939,12 @@ var ops = [{
   label: "Shortcuts",
   componentClass: require("./shortcuts")
 }, {
+  name: "logout",
+  label: "logout",
+  click: function click(props) {
+    props.app.router.redirect("logout");
+  }
+}, {
   name: "support",
   label: "Support",
   componentClass: require("./support")
@@ -956,6 +962,7 @@ var Cell = React.createClass({
   displayName: "Cell",
 
   redirect: function redirect() {
+    if (this.props.cell.click) return this.props.cell.click(this.props);
     this.props.app.router.setQuery({
       showControls: this.props.cell.name
     });
@@ -1772,7 +1779,7 @@ module.exports = function (app) {
           return _commonDataForms2["default"].logout(app.bus);
 
         case 2:
-          router.redirect("home");
+          router.redirect("login");
 
         case 3:
         case "end":
@@ -1842,7 +1849,7 @@ exports["default"] = function (app) {
 
       "alt+space": function altSpace() {
         app.router.setQuery({
-          showControls: !app.router.location.query.showControls
+          showControls: app.router.location.query.showControls ? void 0 : true
         });
       },
 

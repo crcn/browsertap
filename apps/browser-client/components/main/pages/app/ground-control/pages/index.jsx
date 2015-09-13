@@ -28,6 +28,13 @@ var ops = [
     componentClass: require("./shortcuts")
   },
   {
+    name: "logout",
+    label: "logout",
+    click: function(props) {
+      props.app.router.redirect("logout");
+    }
+  },
+  {
     name: "support",
     label: "Support",
     componentClass: require("./support")
@@ -46,6 +53,7 @@ var ops = [
 
 var Cell = React.createClass({
   redirect: function() { 
+    if (this.props.cell.click) return this.props.cell.click(this.props);
     this.props.app.router.setQuery({
       showControls: this.props.cell.name
     }); 

@@ -74,7 +74,7 @@ module.exports = function(app) {
 
   router.addRoute("logout", "/logout", co.wrap(function*(location) {
     yield forms.logout(app.bus);
-    router.redirect("home");
+    router.redirect("login");
   }));
 
   router.addRoute("confirm", "/confirm/:token._id", co.wrap(function*(location) {

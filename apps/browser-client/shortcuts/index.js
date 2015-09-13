@@ -16,10 +16,10 @@ export default function(app) {
 
       "alt+space": function() {
         app.router.setQuery({
-          showControls: !app.router.location.query.showControls 
+          showControls: app.router.location.query.showControls ? void 0 : true 
         })
       },
-  
+
       /**
        */
 
