@@ -7,12 +7,11 @@ import extend from "lodash/object/extend";
 
 class Location extends BaseModel {
 
-  /**
-   * Initial properties
-   */
-
-  state = {}
-  query = {}
+  constructor(properties) {
+    super(properties); 
+    if (!this.query) this.query   = {}; 
+    if (!this.state) this.state   = {}; 
+  }
 
   /**
    * Stringifies the location into something like /path/to/route?query=value

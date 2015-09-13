@@ -54,6 +54,10 @@ Below are a set apps to be developed
   - [ ] free promotional minutes
 - [ ] support
   - [ ] bug report form (include screenshot if possible)
+  - [ ] ability for people to log directly into session
+- [ ] collaboration
+  - [ ] ability for people to share mouse & keyboard of particular device
+  - [ ] ability for people to share a particular screen
 - [ ] promotion
   - [ ] add promo codes for free minutes
 - desktop app features
@@ -66,13 +70,19 @@ Below are a set apps to be developed
   - [ ] appm for installing apps
   - [ ] mac & linux vms
   - [ ] clipboard support
+  - [ ] geo location testing
   - [ ] ability to invite people into organization
     - [ ] need to accept link sent via email
     - [ ] need to be able to sign up or log in from link
   - [ ] ability to have multiple organizations
   - [ ] ability to set app hotkeys
+  - [ ] ability to take a screenshot
+  - [ ] sniff traffic and sync current location to btap
 - [ ] nice features
   - [ ] resize windows to any size
   - [ ] sync audio
   - [ ] ability to invite people to session
   - [ ] ability to install any browser plugin (using robot)
+
+- [ ] core
+  - [ ] report bugs to github

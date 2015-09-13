@@ -1,11 +1,22 @@
-import React from "react";
+import React         from "react";
+import GroundControl from "./ground-control"
+import Portal        from "browser-client/components/common/portal"
+import Toolbar       from "./toolbar"
+
 
 var App = React.createClass({
   render: function() {
-    return <div>{
-      JSON.stringify(this.props.location.user) 
-    }</div>;
-  }
-});
+    return <div className="m-browser-client-app">
 
-module.exports = App;
+      {
+        String(Boolean(this.props.location.query.showControls)) !== "false" ? 
+        <Portal><GroundControl {...this.props} /></Portal> 
+        : void 0 
+      } 
+
+      <Toolbar {...this.props} /> 
+    </div>;
+  }
+}); 
+
+module.exports = App;  

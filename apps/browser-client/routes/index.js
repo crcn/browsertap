@@ -6,9 +6,9 @@ module.exports = function(app) {
 
   var auth = co.wrap(function*(location, next) {
 
-    try {
+    try { 
       location.setProperties({
-        user: yield forms.getSessionUser(app.bus)
+        user: location.user || (yield forms.getSessionUser(app.bus))
       });
       next();
     } catch(e) {

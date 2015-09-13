@@ -4,6 +4,7 @@ var Router          = require("common/router");
 var Main            = require("./components/main");
 var routes          = require("./routes");
 var createBus       = require("./bus");
+var shortcuts       = require("./shortcuts");
  
 /**
  */
@@ -34,6 +35,7 @@ class BrowserClientApplication extends BaseApplication {
   initializePlugins() {
     super.initializePlugins();
     this.use(routes);
+    this.use(shortcuts);
     this.bus = createBus(this, this.bus);
   } 
 

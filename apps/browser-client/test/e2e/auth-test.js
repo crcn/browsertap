@@ -18,8 +18,7 @@ describe(__filename + "#", function() {
     expect(browserApp.element.querySelector(".forgot-password-form")).not.to.be(null);
   });
 
-  it("can successfuly sign up a user", function(next) {
-
+  function signup() {
     browserApp.router.redirect("signup");
     var emailAddressInput = browserApp.element.querySelector("*[name='emailAddress']");
     var passwordInput     = browserApp.element.querySelector("*[name='password']");
@@ -28,7 +27,11 @@ describe(__filename + "#", function() {
     React.addons.TestUtils.Simulate.change(emailAddressInput);
     React.addons.TestUtils.Simulate.change(passwordInput);
     React.addons.TestUtils.Simulate.submit(browserApp.element.querySelector("form"));
+  }
 
+  it("can successfuly sign up a user", function(next) {
+
+    signup();
     setTimeout(function() {
       expect(browserApp.element.querySelector(".alert-success")).not.to.be(null);
       next();
@@ -36,16 +39,7 @@ describe(__filename + "#", function() {
   });
 
   it("can confirm an account after signing up", function(next) {
-    browserApp.router.redirect("signup");
-    var emailAddressInput = browserApp.element.querySelector("*[name='emailAddress']");
-    var passwordInput     = browserApp.element.querySelector("*[name='password']");
-    emailAddressInput.value = "a@b.com";
-    passwordInput.value     = "password";
-    React.addons.TestUtils.Simulate.change(emailAddressInput);
-    React.addons.TestUtils.Simulate.change(passwordInput);
-    React.addons.TestUtils.Simulate.submit(browserApp.element.querySelector("form"));
-    
-
+    signup();
     setTimeout(function() {
       var messages = apiApp.emailer.outbox.messages;
       var message = messages.shift();
@@ -64,7 +58,9 @@ describe(__filename + "#", function() {
       expect(browserApp.element.innerHTML).to.contain("login-form");
       next();
     }, 1)
-  })
+  });
 
-  xit("can login a user after signing up");
+  xit("can logout", function() {
+    signup();
+  });
 });

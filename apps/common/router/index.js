@@ -64,7 +64,7 @@ function _bindWindowLocation(router) {
     var newLocation = new Location(_parseUrl(window.location.hash));
     if (router.location.toString() !== newLocation.toString()) {
       return newLocation.toString();
-    }
+    } 
     return void 0;
   }
 
@@ -159,7 +159,23 @@ class Router extends BaseModel {
   /**
    */
 
+  setQuery(query) {
+    this.redirect({
+      query: Object.assign({}, this.location.query, query)
+    }) 
+  }
+
+  /**
+   */
+
   redirect(aliasOrPathname, options) {
+
+    // just modify the options 
+    if (arguments.length === 1 && typeof aliasOrPathname === "object") {
+      options         = aliasOrPathname;
+      // TODO - take params into consideration 
+      aliasOrPathname = this.location.pathname;
+    }
 
     if (!options) options = {};
 

@@ -9,7 +9,7 @@ var Main = React.createClass({
     this.forceUpdate();
   },
   render: function() {
-    return <div className="container m-browser-client-main">
+    return <div className="m-browser-client-main">
       <Pages {...this.props} />
     </div>;
   }
