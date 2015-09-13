@@ -18,7 +18,18 @@ export default function(app, bus) {
 
     chargeUsersForUsage: _command({
       execute: function*(operation) {
-        console.log("EXC");
+        for (var customer of StripeCustomer.all(app.bus)) {
+          var organization = Organization.findOne(app.bus, { _id: customer.organization._id });
+          var plan         = yield organization.getPlan();
+          var usage        = yield organization.getUsage();
+
+          // TODO - charge based on plan
+          var amount = plan.calculateChargeAmount(usage);
+          if (amount === 0) continue;
+          var invoice = yield customer.charge(amount);
+
+          // TODO - send email here
+        }
       }
     })
   };
