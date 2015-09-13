@@ -26,8 +26,10 @@ export default function(app, bus) {
           // TODO - charge based on plan
           var amount = plan.calculateChargeAmount(usage);
           if (amount === 0) continue;
+
           var invoice = yield customer.charge(amount);
 
+          yield usage.reset();
           // TODO - send email here
         }
       }

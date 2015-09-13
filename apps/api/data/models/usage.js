@@ -43,7 +43,14 @@ var usageSchema = new Schema({
 @persistMixin("usages")
 @mixinSchema(usageSchema)
 class Usage extends Model {
-  
+  *reset() {
+    this.minutes = 0;
+    return yield this.update();
+  }
+  *addMinutes(amount) {
+    this.minutes += amount;
+    return yield.this.update();
+  }
 }
 
 /**

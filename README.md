@@ -38,6 +38,7 @@ Below are a set apps to be developed
   - [x] reset password
   - [x] store session (there's always a session)
   - [ ] re-send confirmation email
+  - [ ] track last login
 - [ ] security
   - [ ] lock account after N minutes
   - [ ] CSRF token
