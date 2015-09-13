@@ -3,7 +3,7 @@ import Schema        from "common/data/schema/schema";
 import persistMixin  from "common/data/models/mixins/persist"
 import mixinSchema   from "common/data/schema/mixin";
 import httperr       from "httperr";
-import Reference     from "common/data/types/reference";
+import Reference     from "api/data/types/reference";
 
 /**
  */
@@ -49,4 +49,4 @@ class Usage extends Model {
 /**
  */
 
-export default usage;
+export default Usage;

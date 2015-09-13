@@ -3,6 +3,7 @@ import Schema        from "common/data/schema/schema";
 import persistMixin  from "common/data/models/mixins/persist"
 import mixinSchema   from "common/data/schema/mixin";
 import Reference     from "api/data/types/reference";
+import Usage         from "api/data/models/usage";
 
 /**
  */
@@ -70,6 +71,16 @@ var organizationSchema = new Schema({
 @persistMixin("organizations")
 @mixinSchema(organizationSchema)
 class Organization extends Model {
+
+  /**
+   */
+
+  *getUsage() {
+    return new Usage(Object.assign({ bus: this.bus }, yield this.bus({
+      name: "getUsage",
+      organization: this
+    })));
+  }
 
   /**
    * returns the billing info such as plan, number of hours used, etc
