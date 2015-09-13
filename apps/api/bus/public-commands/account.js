@@ -121,6 +121,16 @@ export default function(app, bus) {
     }),
 
     /**
+     * logs the user in
+     */
+
+    logout: _command({
+      execute: function*(operation) {
+        operation.session.userId = void 0;
+      }
+    }),
+
+    /**
      */
 
     forgotPassword: _command({

@@ -2,7 +2,9 @@ import React from "react";
 
 var App = React.createClass({
   render: function() {
-    return <div>fsdfsdfsdfs</div>;
+    return <div>{
+      JSON.stringify(this.props.location.user) 
+    }</div>;
   }
 });
 

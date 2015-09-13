@@ -4,16 +4,30 @@ import co    from "co";
 module.exports = function(app) {
   var router = app.router;
 
-  router.addRoute("home", "/", function(location) {
+  var auth = co.wrap(function*(location, next) {
+
+    try {
+      location.setProperties({
+        user: yield forms.getSessionUser(app.bus)
+      });
+      next();
+    } catch(e) {
+      return router.redirect("login", {
+        error: e
+      });
+    }
+  });
+
+  router.addRoute("home", "/", auth, co.wrap(function*(location) {
     location.setProperties({
       state: {
         mainPage: "home", 
         authPage: "signup"
       }
     });
-  });
+  }));
 
-  router.addRoute("app", "/app", function(location) {
+  router.addRoute("app", "/app", auth, function(location) {
     location.setProperties({
       state: {
         mainPage: "app",
@@ -58,10 +72,15 @@ module.exports = function(app) {
     });
   });
 
+  router.addRoute("logout", "/logout", co.wrap(function*(location) {
+    yield forms.logout(app.bus);
+    router.redirect("home");
+  }));
+
   router.addRoute("confirm", "/confirm/:token._id", co.wrap(function*(location) {
 
     var err;
-    
+
     try {
       yield forms.confirmAccount(app.bus, location.params.token);
     } catch(e) {

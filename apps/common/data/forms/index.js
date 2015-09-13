@@ -1,5 +1,6 @@
 import ConfirmAccountForm from "./confirm-account"
 import ForgotPassword     from "./forgot-password"
+import User               from "api/data/models/user"
 
 export default {
 
@@ -7,7 +8,7 @@ export default {
    */
 
   getSessionUser: function*(bus) {
-    return yield bus({ name: "getSessionUser" });
+    return new User(Object.assign({ bus: bus }, yield bus({ name: "getSessionUser" })));
   },
 
   /**
@@ -15,5 +16,12 @@ export default {
 
   confirmAccount: function*(bus, token) {
     return yield (new ConfirmAccountForm(Object.assign({ bus: bus, token: token }))).submit();
+  },
+
+  /**
+   */
+
+  logout: function*(bus) {
+    return yield bus({ name: "logout" });
   }
 };

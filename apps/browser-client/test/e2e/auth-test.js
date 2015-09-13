@@ -58,5 +58,13 @@ describe(__filename + "#", function() {
     }, 1);
   });
 
+  it("redirects to the login page if on the home page and not authorized", function(next) {
+    browserApp.router.redirect("/");
+    setTimeout(function() {
+      expect(browserApp.element.innerHTML).to.contain("login-form");
+      next();
+    }, 1)
+  })
+
   xit("can login a user after signing up");
 });

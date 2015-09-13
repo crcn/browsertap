@@ -106,7 +106,16 @@ class Router extends BaseModel {
   /**
    */
 
-  addRoute(alias, pathname, handler) {
+  addRoute(alias, pathname, ...handlers) {
+
+    var handler = function(location) {
+      var i = 0;
+      function next() {
+        if (i < handlers.length) handlers[i++](location, next);
+      }
+      next();
+    }
+
     if (!handler) handler = function() { };
 
     // convert something like /home/:id/path to /home/(\w+)/

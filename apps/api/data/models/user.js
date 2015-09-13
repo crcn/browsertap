@@ -97,7 +97,6 @@ class User extends Model {
   /**
    */
 
-
   *createOrganization() {
     var organization = new Organization({
       bus: this.bus,
