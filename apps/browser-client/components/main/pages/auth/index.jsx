@@ -12,9 +12,7 @@ var RequestInviteComplete = require("./request-invite-complete");
 
 var AuthPages = React.createClass({
   render: function() {
-    
-    console.log(this.props.location.state.authPage);
-  
+
     var element = {
       login                 : <Login {...this.props} />,
       signup                : this.props.app.config.beta ? <RequestInvite {...this.props} /> : <Signup {...this.props} />,

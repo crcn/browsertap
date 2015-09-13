@@ -1491,8 +1491,6 @@ var AuthPages = React.createClass({
 
   render: function render() {
 
-    console.log(this.props.location.state.authPage);
-
     var element = ({
       login: React.createElement(Login, this.props),
       signup: this.props.app.config.beta ? React.createElement(RequestInvite, this.props) : React.createElement(Signup, this.props),
