@@ -30,8 +30,31 @@ describe(__filename + "#", function() {
     React.addons.TestUtils.Simulate.submit(browserApp.element.querySelector("form"));
 
     setTimeout(function() {
-      // expect(browserApp.element.querySelector(".alert-success")).not.to.be(null);
+      expect(browserApp.element.querySelector(".alert-success")).not.to.be(null);
       next();
+    }, 1);
+  });
+
+  it("can confirm an account after signing up", function(next) {
+    browserApp.router.redirect("signup");
+    var emailAddressInput = browserApp.element.querySelector("*[name='emailAddress']");
+    var passwordInput     = browserApp.element.querySelector("*[name='password']");
+    emailAddressInput.value = "a@b.com";
+    passwordInput.value     = "password";
+    React.addons.TestUtils.Simulate.change(emailAddressInput);
+    React.addons.TestUtils.Simulate.change(passwordInput);
+    React.addons.TestUtils.Simulate.submit(browserApp.element.querySelector("form"));
+    
+
+    setTimeout(function() {
+      var messages = apiApp.emailer.outbox.messages;
+      var message = messages.shift();
+      var route = message.body.match(/(\/confirm\/.*)/)[1];
+      browserApp.router.redirect(route);
+      setTimeout(function() {
+        expect(browserApp.element.innerHTML).to.contain("alert-success");
+        next();
+      }, 1);
     }, 1);
   });
 

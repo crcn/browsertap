@@ -1,5 +1,5 @@
-import ConfirmForm from "common/data/forms/confirm-account";
-import co          from "co";
+import forms from "common/data/forms";
+import co    from "co";
 
 module.exports = function(app) {
   var router = app.router;
@@ -59,12 +59,11 @@ module.exports = function(app) {
   });
 
   router.addRoute("confirm", "/confirm/:token._id", co.wrap(function*(location) {
-    var form = new ConfirmForm({ bus: app.bus, token: location.params.token })
 
-    var err; 
-
+    var err;
+    
     try {
-      yield form.submit();
+      yield forms.confirmAccount(app.bus, location.params.token);
     } catch(e) {
       err = e;
     }

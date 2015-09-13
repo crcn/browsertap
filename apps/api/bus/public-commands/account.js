@@ -1,5 +1,6 @@
 import createRouter       from "api/bus/drivers/create-router";
 import sift               from "sift";
+import mesh               from "common/mesh";
 import SignupForm         from "common/data/forms/signup";
 import LoginForm          from "common/data/forms/login";
 import ForgotPasswordForm from "common/data/forms/forgot-password";
@@ -84,7 +85,7 @@ export default function(app, bus) {
 
         // login to create the session and other things 
         var loginForm = new LoginForm({
-          bus          : app.bus,
+          bus          : mesh.attach({ session: operation.session }, app.bus),
           emailAddress : form.emailAddress,
           password     : form.password
         });
@@ -113,7 +114,7 @@ export default function(app, bus) {
 
         if (!hasMatch) throw new httperr.Unauthorized("passwordIncorrect")
 
-        operation.session.user = user;
+        operation.session.userId = user._id;
 
         return user.toPublic();
       }
@@ -152,6 +153,15 @@ export default function(app, bus) {
     /**
      */
 
+    getSessionUser: _command({
+      auth: true,
+      execute: function*(operation) {
+        return operation.user.toPublic();
+      }
+    }),
+
+    /**
+     */
 
     confirmAccount: _command({
       execute: function*(operation) {
@@ -202,8 +212,8 @@ export default function(app, bus) {
       }
     }),
 
-    // /**
-    //  */
+    /**
+     */
 
     updateUser: _command({
       auth: true,

@@ -6,6 +6,7 @@ import runOp from "common/bus/utils/promise";
 import User from "api/data/models/user";
 import SignupForm from "common/data/forms/signup";
 import LoginForm from "common/data/forms/login";
+import forms from "common/data/forms";
 import ForgotPasswordForm from "common/data/forms/forgot-password";
 import ResetPasswordForm from "common/data/forms/reset-password";
 import Token from "api/data/models/token";
@@ -25,7 +26,7 @@ describe(__filename + "#", function() {
 
   beforeEach(function() {
     session = {};
-    global.apiApp.bus = bus = mesh.attach({ public: true, session: session }, global.apiApp.bus);
+    global.apiApp.bus = bus = mesh.attach({ app: global.apiApp, public: true, session: session }, global.apiApp.bus);
   });
 
   describe("insert# ", function() {
@@ -111,7 +112,7 @@ describe(__filename + "#", function() {
       yield new SignupForm(Object.assign({ bus: bus }, fixtures.user1)).submit();
       var form = new LoginForm(Object.assign({ bus: bus }, fixtures.user1));
       var user = yield form.submit();
-      expect(session.user._id.valueOf()).to.be(user._id);
+      expect(session.userId.valueOf()).to.be(user._id);
     }));
 
     it("cannot login a user with a bad password", co.wrap(function*() {
@@ -196,6 +197,27 @@ describe(__filename + "#", function() {
       var organizations = yield user.getOrganizations();
       expect(organizations.length).to.be(1);
       expect(organizations[0].access[0].user._id.valueOf()).to.be(user._id.valueOf());
+    }));
+
+    // xit("cannot register a new user if the passwords do not match");
+
+    it("cannot load a user if they're not logged in", co.wrap(function*() {
+
+      var form = new SignupForm(Object.assign({ bus: bus }, fixtures.user1));
+      var u = yield form.submit();
+
+      var u2 = yield forms.getSessionUser(bus);
+      expect(u._id.valueOf()).to.be(u2._id.valueOf());
+    }));
+
+    it("cannot load a user if they're logged in", co.wrap(function*() {
+      var err;
+      try {
+        yield forms.getSessionUser(bus);
+      } catch(e) {
+        err = e;
+      }
+      expect(err.statusCode).to.be(401);
     }));
 
     describe("with a token", function() {
@@ -284,7 +306,6 @@ describe(__filename + "#", function() {
         expect(err.statusCode).to.be(406);
       }));
 
-      // xit("cannot register a new user if the passwords do not match");
     });
   
 
@@ -293,6 +314,7 @@ describe(__filename + "#", function() {
       beforeEach(co.wrap(function*() {
         yield new SignupForm(Object.assign({ bus: bus }, fixtures.user1)).submit();
       }));
+
 
       it("cannot change the email to something else if the email already exists");
       it("can change the password");
