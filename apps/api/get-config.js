@@ -20,7 +20,6 @@ module.exports = function(env) {
         pk : process.env.STRIPE_PK
       }
     },
-
     staging: {
       db: {
         host: "mongodb://localhost:27017/browsertap-staging"
@@ -28,6 +27,11 @@ module.exports = function(env) {
     },
 
     defaults: {
+      jobs: [
+
+        // charge users once a month
+        { cron: "0 0 1 * *", name: "chargeUsersForUsage" }
+      ],
       directories: {
         public: path.normalize(__dirname + "/../../public")
       },

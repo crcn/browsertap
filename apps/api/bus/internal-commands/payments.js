@@ -16,9 +16,9 @@ export default function(app, bus) {
     /**
      */
 
-    chargeStripeCustomer: _command({
+    chargeUsersForUsage: _command({
       execute: function*(operation) {
-
+        console.log("EXC");
       }
     })
   };

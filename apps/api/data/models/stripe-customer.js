@@ -35,11 +35,13 @@ var stripeCustomerSchema = new Schema({
 @mixinSchema(stripeCustomerSchema)
 class StripeCustomer extends Model {
   *charge(amount) {
+    
     var result = yield this.app.stripe.charges.create({
       amount: amount,
       currency: "usd",
       customer: this.id.valueOf()
     });
+
   }
 }
 

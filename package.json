@@ -25,6 +25,7 @@
     "colors": "^1.1.2",
     "common": "file:./apps/common",
     "credit-card": "^1.2.1",
+    "cron": "^1.0.9",
     "deep-extend": "^0.4.0",
     "desktop-client": "file:./apps/desktop-client",
     "desktop-server": "file:./apps/desktop-server",

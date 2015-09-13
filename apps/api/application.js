@@ -5,6 +5,7 @@ import http            from "./http";
 import emailer         from "./emailer";
 import stripe          from "./stripe";
 import createBus       from "./bus";
+import jobs            from "./jobs";
 
 class APIApplication extends BaseApplication {
 
@@ -46,6 +47,7 @@ class APIApplication extends BaseApplication {
     }
     this.use(emailer);
     this.use(stripe);
+    this.use(jobs);
   }
 
   /**
