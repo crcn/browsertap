@@ -45,6 +45,19 @@ describe(__filename + "#", function() {
       expect(err.statusCode).to.be(400);
     }));
 
+    it("cannot register a new user if the application is in beta mode", co.wrap(function*() {
+      apiApp.config.beta = true;
+      var form = new SignupForm(Object.assign({ bus: bus }, fixtures.user1));
+      var err;
+      try {
+        yield form.submit();
+      } catch(e) {
+        err = e;
+      }
+      expect(err.statusCode).to.be(401);
+      expect(err.message).to.be("cannotRegisterInBeta");
+    }));
+
     it("can register a new user if the password is present", co.wrap(function*() {
       var form = new SignupForm(Object.assign({ bus: bus }, fixtures.user1));
       var user = yield form.submit();

@@ -15,6 +15,11 @@
     "logInCta": "<a href='{logInLink}'>Already have an account?</a>",
     "successMessage": "Thanks for signing up! Redirecting you to the main app"
   },
+  "authRequstInvite": {
+    "submitLabel": "Request invite",
+    "title": "Sign up for early access",
+    "info": "BrowserTap is currently in <strong>beta</strong>. Enter in your email for early access!"
+  },
   "authResetPassword": {
     "title": "Pick a new password",
     "submitLabel": "Reset password", 

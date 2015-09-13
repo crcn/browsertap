@@ -7,6 +7,7 @@ beforeEach(function(next) {
   global.apiApp = new APIApplication({
     debug: true,
     config: {
+      beta: false,
       log: {
         level: 0
       },

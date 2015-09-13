@@ -9,6 +9,7 @@ describe(__filename + "#", function() {
     expect(browserApp.element.querySelector(".login-form")).not.to.be(null);
   });
 
+
   it("can redirect to the signup page", function() {
     browserApp.router.redirect("signup");
     expect(browserApp.element.querySelector(".signup-form")).not.to.be(null);

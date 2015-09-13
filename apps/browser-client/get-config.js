@@ -6,6 +6,7 @@ module.exports = function(env) {
 
   var config = {
     defaults: {
+      beta: true,
       api: {
         host: "http://0.0.0.0:8080"
       }

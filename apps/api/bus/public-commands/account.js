@@ -9,6 +9,7 @@ import ResetPasswordForm  from "common/data/forms/reset-password";
 import EmailForm          from "api/data/forms/email";
 import User               from "api/data/models/user";
 import Token              from "api/data/models/token";
+import Invitee            from "api/data/models/invitee";
 import PasswordKey        from "api/data/models/password-key";
 import httperr            from "httperr";
 import mu                 from "mustache";
@@ -27,6 +28,10 @@ export default function(app, bus) {
 
     register: _command({
       execute: function*(operation) {
+
+        if (app.config.beta) {
+          throw new httperr.Unauthorized("cannotRegisterInBeta");
+        }
 
         // form here for validation
         var form = new SignupForm(Object.assign({ bus: bus }, operation.data));

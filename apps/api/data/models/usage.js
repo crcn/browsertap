@@ -49,7 +49,7 @@ class Usage extends Model {
   }
   *addMinutes(amount) {
     this.minutes += amount;
-    return yield.this.update();
+    return yield this.update();
   }
 }
 

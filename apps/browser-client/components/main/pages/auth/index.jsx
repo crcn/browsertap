@@ -4,6 +4,7 @@ var ResetPassword  = require("./reset-password");
 var ForgotPassword = require("./forgot-password");
 var Signup         = require("./signup");
 var Confirmed      = require("./confirmed");
+var RequestInvite  = require("./request-invite");
 
 /**
  */
@@ -13,7 +14,7 @@ var AuthPages = React.createClass({
  
     var element = {
       login          : <Login {...this.props} />,
-      signup         : <Signup {...this.props} />,
+      signup         : this.props.app.config.beta ? <RequestInvite {...this.props} /> : <Signup {...this.props} />,
       resetPassword  : <ResetPassword {...this.props} />,
       forgotPassword : <ForgotPassword {...this.props} />,
       confirmed      : <Confirmed {...this.props} />

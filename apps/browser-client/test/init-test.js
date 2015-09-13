@@ -13,6 +13,7 @@ beforeEach(function(next) {
     bus: mesh.attach({ public: true, session: session }, apiApp.bus),
     debug: true,
     config: {
+      beta: false,
       log: {
         level: 0
       },

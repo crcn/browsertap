@@ -18,7 +18,8 @@ export default function(app, bus) {
     Object.assign({},
       require("./account")(app, bus),
       require("./payments")(app, bus),
-      require("./organizations")(app, bus)
+      require("./organizations")(app, bus),
+      require("./invitees")(app, bus)
     )
   , bus);
 };
