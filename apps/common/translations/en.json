@@ -14,7 +14,9 @@
     "firstName": "First Name",
     "lastName": "Last Name",
     "password": "Password",
-    "repeatPassword": "Repeat"
+    "repeatPassword": "Repeat",
+    "cardNumber": "Card Number",
+    "cvc": "CVC"
   },
   "buttons": {
     "submit": "submit"

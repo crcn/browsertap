@@ -7,7 +7,7 @@ import fs                 from "fs";
 import templates          from "./templates"
 import _command           from "./_command";
 import cstripe            from "stripe"
-import Organization       from "api/data/models/organization"
+import StripeCustomer     from "api/data/models/stripe-customer"
 
 export default function(app, bus) {
 
@@ -19,12 +19,21 @@ export default function(app, bus) {
     /**
      */
 
-    getUserOrganizations: _command({
+    addStripeCustomer: _command({
       auth: true,
       execute: function*(operation) {
-        return yield Organization.find(bus, {
-          "access.user._id": operation.user._id.valueOf()
+
+        var data = yield stripe.customers.create({
+          source: operation.data.id,
+          email: operation.user.emailAddress.valueOf()
         });
+
+        // TODO - find existing customer
+        var customer = new StripeCustomer(Object.assign({ bus: app.bus }, data, {
+          organization: operation.data.organization
+        }))
+
+        customer.insert();
       }
     })
   };

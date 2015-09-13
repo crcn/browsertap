@@ -19,17 +19,6 @@ import _command           from "./_command";
 
 export default function(app, bus) {
 
-  function *getLoggedInUser(operation) {
-    if (!operation.token) throw new httperr.Unauthorized("tokenDoesNotExist");
-    var token = yield Token.findOne(bus, operation.token);
-    var user  = yield User.findOne({ 
-      emailAddress: token.key
-    });
-    if (!user) throw new httperr.Unauthorized("userDoesNotExist");
-    return user;
-  }
-
-
   var browserHost = app.get("config.hosts.browser");
 
   return {

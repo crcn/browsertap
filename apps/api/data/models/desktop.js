@@ -3,25 +3,8 @@ import Schema        from "common/data/schema/schema";
 import persistMixin  from "common/data/models/mixins/persist"
 import mixinSchema   from "common/data/schema/mixin"
 import DesktopState  from "api/data/types/desktop-state"
+import Reference     from "api/data/types/reference";
 
-/**
- */
-
-var ownerSchema = new Schema({
-  fields: {
-    _id: {
-      type: require("common/data/types/object-id")
-    }
-  }
-});
-
-/**
- */
-
-@mixinSchema(ownerSchema)
-class Owner {
-
-};
 /**
  */
 
@@ -44,7 +27,7 @@ var desktopSchema = new Schema({
      */
 
     owner: {
-      type: Owner
+      type: Reference
     }
   }
 });

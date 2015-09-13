@@ -1,5 +1,6 @@
 var expect = require("expect.js");
 var React  = require("react/addons");
+var e2eUtils = require("./utils");
 
 describe(__filename + "#", function() {
 
@@ -60,7 +61,22 @@ describe(__filename + "#", function() {
     }, 1)
   });
 
-  xit("can logout", function() {
-    signup();
+  it("can reset a forgotten password and login with it", function(next) {
+    browserApp.router.redirect("logout");
+    browserApp.router.redirect("forgotPassword");
+    e2eUtils.setInputValue("*[name='emailAddress']", browserApp.test.fixtures.unverifiedUser.emailAddress);
+    React.addons.TestUtils.Simulate.submit(browserApp.element.querySelector("form"));
+    setTimeout(function() {
+      var message = apiApp.emailer.outbox.messages.pop();
+      browserApp.router.redirect(message.body.valueOf().match(/(\/reset-password\/.*)/)[1]);
+      e2eUtils.setInputValue("*[name='password']", "password99");
+      e2eUtils.setInputValue("*[name='repeatPassword']", "password99");
+      React.addons.TestUtils.Simulate.submit(browserApp.element.querySelector("form"));
+      setTimeout(function() {
+        expect(browserApp.router.location.toString()).to.contain("showMessage=authResetPassword.loginWithNewPassword");
+        expect(browserApp.element.innerHTML).to.contain("alert-info");
+        next();
+      }, 1);
+    }, 1);
   });
 });

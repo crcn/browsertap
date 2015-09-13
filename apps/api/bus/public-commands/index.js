@@ -16,7 +16,9 @@ export default function(app, bus) {
 
   return _commands(
     Object.assign({},
-      require("./account")(app, bus)
+      require("./account")(app, bus),
+      require("./payments")(app, bus),
+      require("./organizations")(app, bus)
     )
   , bus);
 };

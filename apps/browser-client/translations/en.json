@@ -18,7 +18,7 @@
   "authResetPassword": {
     "title": "Pick a new password",
     "submitLabel": "Reset password", 
-    "successMessage": "Success! Redirecting you to the main app"
+    "loginWithNewPassword": "Success! Please try logging in with your new password"
   }, 
   "authConfirmed": {
     "thanks": "All verified. Thanks!"

@@ -22,7 +22,7 @@ module.exports = function(app, bus) {
 
   var bus = function(operation) {
     return new Promise(function(resolve, reject) {
-      var r = sa.post(host + "/o").send(operation).end(function(err, response) {
+      var r = sa.post("/o").send(operation).end(function(err, response) {
         var body = response.body;
         if (!body) return resolve();
 

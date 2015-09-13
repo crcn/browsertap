@@ -8,6 +8,7 @@ beforeEach(function(next) {
   var session = {};
 
   global.browserApp = new BrowserApplication({
+    test: {},
     element: document.createElement("div"),
     bus: mesh.attach({ public: true, session: session }, apiApp.bus),
     debug: true,

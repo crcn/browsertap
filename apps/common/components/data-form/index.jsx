@@ -1,11 +1,13 @@
 import React        from "react"
 import EmailAddress from "common/data/types/email-address"
 import Password     from "common/data/types/password"
+import CreditCardNumber from "common/data/types/credit-card-number"
+import CVC          from "common/data/types/credit-card-number"
 import cx           from "classnames"
 import ReactIntl    from "react-intl";
 import co           from "co";
 import diff         from "object-diff";
-
+ 
 var IntlMixin         = ReactIntl.IntlMixin;
 var FormattedMessage  = ReactIntl.FormattedMessage;
 var FormattedRelative = ReactIntl.FormattedRelative;
@@ -101,8 +103,8 @@ var Field = React.createClass({
    */
 
   _createFromField: function(name, field) {
-
-    if(field.type === EmailAddress || field.type === String) {
+ 
+    if(field.type === EmailAddress || field.type === String || field.type === CVC || field.type === CreditCardNumber) {
       return <input name={name} type="text" className="form-control" />;
     } else if (field.type === Password) {
       return <input name={name} type="password" className="form-control" />;
@@ -219,7 +221,6 @@ var DataForm = React.createClass({
         <Field key={name} name={name} field={field} onFieldData={this.onFieldData} data={this.state.data} {...this.props} />
       );  
     }
-
 
     return <form onChange={this._onChange} className="form-horizontal m-common-data-form" onSubmit={this.onSubmit}>
 

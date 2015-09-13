@@ -4,6 +4,9 @@
 
 class Outbox {
   constructor() {
+    this.clear();
+  }
+  clear() {
     this.messages = [];
   }
 }

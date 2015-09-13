@@ -7,11 +7,22 @@ module.exports = function(app) {
   var auth = co.wrap(function*(location, next) {
 
     try { 
+
+      // stuff already exists
+      if (location.user)  {
+        return next();
+      }
+ 
+      var user         = (yield forms.getSessionUser(app.bus));
+      var organization = (yield user.getOrganizations())[0]; 
+
       location.setProperties({
-        user: location.user || (yield forms.getSessionUser(app.bus))
+        user         : user,
+        organization : organization
       });
       next();
     } catch(e) {
+      console.log(e); 
       return router.redirect("login", {
         error: e
       });

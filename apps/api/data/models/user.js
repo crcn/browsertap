@@ -87,11 +87,11 @@ class User extends Model {
    */
 
   *getOrganizations() {
-    return yield Organization.find(this.bus.value, {
-      "access.user": {
-        _id: this._id.valueOf()
-      }
-    });
+    return (yield this.bus.execute({
+      name: "getUserOrganizations"
+    })).map(function(data) {
+      return new Organization(Object.assign({ bus: this.bus.value }, data));
+    }.bind(this));
   }
 
   /**

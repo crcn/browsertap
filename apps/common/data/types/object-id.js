@@ -12,7 +12,7 @@ class ObjectId extends ValueType {
     return /^\w{24}$/i.test(value);
   }
 
-  /**
+  /** 
    */
 
   coerce(value) {
