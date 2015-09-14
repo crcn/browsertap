@@ -32,23 +32,18 @@ describe(__filename + "#", function() {
     expect(err.message).to.be("userEmailAddressExists");
   }));
 
-  it("cannot request an invite if the user already entered in an email", co.wrap(function*() {
+  it("returns the same invitee object if the email exists", co.wrap(function*() {
     var requestInviteForm = new RequestInviteForm({
       bus: apiApp.bus,
       emailAddress: "a@b.com"
     });
 
     var err;
-    yield requestInviteForm.submit();
+    var invitee = yield requestInviteForm.submit();
+    var inviteeb = yield requestInviteForm.submit();
 
-    try {
-      yield requestInviteForm.submit();
-    } catch(e) {
-      err = e;
-    }
 
-    expect(err.statusCode).to.be(409);
-    expect(err.message).to.be("inviteeExists");
+    expect(invitee._id.valueOf()).to.be(inviteeb._id.valueOf());
   }));
 
   xit("cannot request an invite an invitee already exists");
