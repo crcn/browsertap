@@ -5661,8 +5661,7 @@ module.exports={
     "userDoesNotExist": "User does not exist",
     "passwordIncorrect": "Password incorrect",
     "couldNotSendEmail": "Could not send email. Please try again in a bit!",
-    "userEmailAddressExists": "A registered user with that email address already exists",
-    "inviteeExists": "Want early access and free minutes? Share the links below!"
+    "userEmailAddressExists": "A registered user with that email address already exists"
   },
   "fieldsLabels": {
     "emailAddress": "Email Address",
