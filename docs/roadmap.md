@@ -78,6 +78,7 @@ An artificially intelligent agent for automating quality assurance. The tool wou
 3. Could be used to test eyebrowse against multiple platforms. (BOOM TESTCEPTION).
 4. Ability to create scripts which execute features against apps. Installing extensions for instance.
 5. Make device testing more consistent.
+6. Possibly setup batch settings for things like email clients, and taking screenshots. Think litmus app running locally.
 
 ## Other ideas
 
