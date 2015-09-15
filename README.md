@@ -90,5 +90,10 @@ Below are a set apps to be developed
   - [ ] ability to invite people to session
   - [ ] ability to install any browser plugin (using robot)
 
-- [ ] core
-  - [ ] report bugs to github
+- eyebrowse
+  - [ ] ability to launch AWS servers - pull AMI from public registry
+  - [ ] ability to connect computers via bonjour
+  - [ ] client & server supported on mac, windows, and linux
+  - [ ] appm allows people to publish and install software from registry
+  - [ ] stream windows back to users machine
+  - [ ] registered service tell eyebrowse what apps can be launched
