@@ -1,8 +1,9 @@
-var createRouter = require("koa-router");
+import createRouter from "koa-router";
+
 /**
  */
 
-module.exports = function(server, app) {
+export default function(server, app) {
 
   var router = createRouter();
  
@@ -12,7 +13,7 @@ module.exports = function(server, app) {
 
     try {
       this.body = yield app.bus(Object.assign({}, this.request.body, { app: app, session: session, public: true }));
-    } catch(e) {
+    } catch (e) {
       var statusCode = e.statusCode || 500;
       this.status = statusCode;
       this.body = {
@@ -26,6 +27,4 @@ module.exports = function(server, app) {
   });
 
   server.use(router.routes()).use(router.allowedMethods());
-
-}
-
+};

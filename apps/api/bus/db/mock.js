@@ -13,7 +13,6 @@ module.exports = function(app) {
   return bus;
 };
 
-
 function createId() {
   var buffer = [];
   for (var i = 24; i--;) {

@@ -14,7 +14,7 @@ import PasswordKey        from "api/data/models/password-key";
 import httperr            from "httperr";
 import mu                 from "mustache";
 import fs                 from "fs";
-import templates          from "./templates"
+import templates          from "./templates";
 import _command           from "api/bus/drivers/command";
 
 export default function(app, bus) {

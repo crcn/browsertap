@@ -28,5 +28,5 @@ function _wrapBus20(bus) {
     return co(function*() {
       return yield wp(bus, operation);
     });
-  }
+  };
 }

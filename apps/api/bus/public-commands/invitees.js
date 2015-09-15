@@ -1,7 +1,6 @@
 import sift              from "sift";
 import mesh              from "common/mesh";
 import httperr           from "httperr";
-import templates         from "./templates"
 import _command          from "api/bus/drivers/command";
 import Invitee           from "api/data/models/invitee";
 import User              from "api/data/models/user";

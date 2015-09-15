@@ -1,12 +1,11 @@
 import http       from "http";
-import socket     from "./socket";
 import mesh       from "mesh";
 import routes     from "./routes";
-import koa        from "koa"
+import koa        from "koa";
 import bodyparser from "koa-bodyparser";
 import cors       from "koa-cors"
 import redisStore from "koa-redis";
-import session    from "koa-generic-session"
+import session    from "koa-generic-session";
 import serve      from "koa-static";
 
 /**
@@ -34,16 +33,4 @@ module.exports = function(app) {
 
   var server = app.http = http.createServer(k.callback());
   app.http.listen(port);
-
-  // app.bus({
-  //   name: "intercept",
-  //   max: 1,
-  //   query: { name: "dispose" },
-  //   bus: mesh.wrap(function(operation, next) {
-  //     server.close();
-  //     next();
-  //   })
-  // });
-
-  socket(app);
 };
