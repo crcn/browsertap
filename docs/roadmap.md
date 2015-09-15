@@ -67,7 +67,14 @@ Device lending service by Eyebrowse would allow people to loan their unused devi
 
 ## 3. Robo QA assistant
 
-An artificially intelligent agent for automating quality assurance. The tool would basically work in tandem with Eyebrowse.
+An artificially intelligent agent for automating quality assurance. The tool would basically work in tandem with Eyebrowse. It'd work by using visual information to go through flows.
+
+
+#### How would this make other apps better?
+
+1. Enable people to create automation flows for any device. 
+2. No code required. 
+
 
 ## Other ideas
 
