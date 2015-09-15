@@ -59,6 +59,7 @@ Device lending service by Eyebrowse would allow people to loan their unused devi
 #### Explicit features
 
 1. Lend out loaned devices to companies that want devices to test locally. We'd basically give them a rack full of physical devices and eyebrowse server pre-installed. 
+2. See your loaned devices and their usage.
 
 #### Required Modules
 
