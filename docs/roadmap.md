@@ -75,7 +75,8 @@ An artificially intelligent agent for automating quality assurance. The tool wou
 1. Enable people to create automation flows for any device. 
 2. No code required. 
 3. Could be used to test eyebrowse against multiple platforms. (BOOM TESTCEPTION).
-
+4. Ability to create scripts which execute features against apps. Installing extensions for instance.
+5. Make device testing more consistent.
 
 ## Other ideas
 
