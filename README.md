@@ -43,6 +43,8 @@ Below are a set apps to be developed
   - [x] enable people to share invitee link
   - [x] shortcode
   - [ ] "what is it" for invite page
+  - [ ] social links for invite complete
+  - [ ] ability to invite people
 - [ ] security
   - [ ] lock account after N minutes
   - [ ] CSRF token

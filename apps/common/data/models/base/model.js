@@ -15,13 +15,6 @@ class BaseModel extends EventEmitter {
   constructor(properties) {
     super();
     if (properties) Object.assign(this, properties);
-
-    if (this.constructor.mixin) {
-      for (var mixin of this.constructor.mixin()) {
-        mixin(this.constructor.prototype);
-        Object.assign(this.constructor.prototype, this);
-      }
-    }
   }
 
   /**
