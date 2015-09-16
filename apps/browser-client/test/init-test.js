@@ -29,6 +29,9 @@ beforeEach(function(next) {
       },
       http: {
         port: port++
+      },
+      hosts: {
+        browser: "0.0.0.0:8080"
       }
     }
   });

@@ -59,8 +59,8 @@ var Field = React.createClass({
 
     if (!Object.keys(diff(this.state, newState)).length) return;
 
-    this.props.onFieldData(this.props.name, value);
     this.setState(newState);
+    this.props.onFieldData(this.props.name, value);
   },
 
   /**
@@ -168,14 +168,14 @@ var DataForm = React.createClass({
 
     }
 
-    if (form && this.props.onForm) {
-      this.props.onForm(form);
-    }
-
     this.setState({
       form: form,
       data: this.state.data
     });
+
+    if (form && this.props.onForm) {
+      this.props.onForm(form);
+    }
   },
 
   /**
@@ -192,16 +192,16 @@ var DataForm = React.createClass({
     } catch(e) {
       err = e;
     }
-
-    if (!err && this.props.onSuccess) {
-      this.props.onSuccess(result);
-    }
-
-    this.setState({
+    
+    if (this.isMounted()) this.setState({
       loading: false,
       error: err,
       success: !err
     }); 
+
+    if (!err && this.props.onSuccess) {
+      this.props.onSuccess(result);
+    }
   }),
 
   /**

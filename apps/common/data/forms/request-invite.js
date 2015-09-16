@@ -12,6 +12,14 @@ var requestInviteFormSchema = new Schema({
       hidden   : true,
       type     : require("common/data/types/bus")
     },
+    inviterShortcode: {
+      hidden : true,
+      type: String
+    },
+    name:  {
+      required : true,
+      type     : String
+    },
     emailAddress:  {
       required : true,
       type     : require("common/data/types/email-address")

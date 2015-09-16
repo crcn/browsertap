@@ -6,6 +6,7 @@ var Signup                = require("./signup");
 var Confirmed             = require("./confirmed");
 var RequestInvite         = require("./request-invite");
 var RequestInviteComplete = require("./request-invite-complete");
+var Invited               = require("./invited");
 
 /**
  */
@@ -19,7 +20,8 @@ var AuthPages = React.createClass({
       resetPassword         : <ResetPassword {...this.props} />,
       requestInviteComplete : <RequestInviteComplete {...this.props} />,
       forgotPassword        : <ForgotPassword {...this.props} />,
-      confirmed             : <Confirmed {...this.props} />
+      confirmed             : <Confirmed {...this.props} />,
+      invited               : <Invited {...this.props} />
     }[this.props.location.state.authPage];
 
     return <div className="m-browser-client-auth">

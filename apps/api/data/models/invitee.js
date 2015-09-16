@@ -21,6 +21,28 @@ var inviteeMixin = new Schema({
     /**
      */
 
+    shortcode: {
+      type: String
+    },
+
+    /**
+     */
+
+    inviter: {
+      type: require("api/data/types/reference")
+    },
+
+    /**
+     */
+
+    inviteCount: {
+      type: Number,
+      default: 0
+    },
+
+    /**
+     */
+
     _id: { 
       type: require("common/data/types/object-id")
     },
@@ -28,8 +50,16 @@ var inviteeMixin = new Schema({
     /**
      */
 
+    name:  {
+      required : true,
+      type     : String
+    },
+
+    /**
+     */
+
     emailAddress: { 
-      required: true, 
+      required: false, 
       unique: true, // TODO
       type: require("common/data/types/email-address")
     }
@@ -43,6 +73,9 @@ var inviteeMixin = new Schema({
 @mixinSchema(inviteeMixin)
 class Invitee extends Model {
 
+  // getShareLink() {
+  //   return this.app.config.hosts.browser + "#/w/" + this.shortcode;
+  // }
 }
 
 /**

@@ -47,6 +47,28 @@ var inviteeMixin = new _commonDataSchemaSchema2["default"]({
     /**
      */
 
+    shortcode: {
+      type: String
+    },
+
+    /**
+     */
+
+    inviter: {
+      type: require("api/data/types/reference")
+    },
+
+    /**
+     */
+
+    inviteCount: {
+      type: Number,
+      "default": 0
+    },
+
+    /**
+     */
+
     _id: {
       type: require("common/data/types/object-id")
     },
@@ -54,8 +76,16 @@ var inviteeMixin = new _commonDataSchemaSchema2["default"]({
     /**
      */
 
-    emailAddress: {
+    name: {
       required: true,
+      type: String
+    },
+
+    /**
+     */
+
+    emailAddress: {
+      required: false,
       unique: true, // TODO
       type: require("common/data/types/email-address")
     }
@@ -74,19 +104,23 @@ var Invitee = (function (_Model) {
     _get(Object.getPrototypeOf(_Invitee.prototype), "constructor", this).apply(this, arguments);
   }
 
-  /**
-   */
-
   var _Invitee = Invitee;
   Invitee = (0, _commonDataSchemaMixin2["default"])(inviteeMixin)(Invitee) || Invitee;
   Invitee = (0, _commonDataModelsMixinsPersist2["default"])("invitees")(Invitee) || Invitee;
   return Invitee;
 })(_commonDataModelsBaseModel2["default"]);
 
+// getShareLink() {
+//   return this.app.config.hosts.browser + "#/w/" + this.shortcode;
+// }
+
+/**
+ */
+
 exports["default"] = Invitee;
 module.exports = exports["default"];
 
-},{"common/data/models/base/model":56,"common/data/models/mixins/persist":57,"common/data/schema/mixin":58,"common/data/schema/schema":59,"common/data/types/bus":60,"common/data/types/email-address":63,"common/data/types/object-id":65}],2:[function(require,module,exports){
+},{"api/data/types/reference":6,"common/data/models/base/model":56,"common/data/models/mixins/persist":57,"common/data/schema/mixin":58,"common/data/schema/schema":59,"common/data/types/bus":60,"common/data/types/email-address":63,"common/data/types/object-id":65}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -823,7 +857,7 @@ module.exports = BrowserClientApplication;
 /**
  */
 
-},{"./bus":8,"./components/main":10,"./routes":35,"./shortcuts":36,"./translations/en":37,"common/application":38,"common/router":78,"common/translations/en":80,"react":739}],8:[function(require,module,exports){
+},{"./bus":8,"./components/main":10,"./routes":36,"./shortcuts":37,"./translations/en":38,"common/application":39,"common/router":78,"common/translations/en":80,"react":739}],8:[function(require,module,exports){
 (function (process){
 // var createSocketBus = require("common/bus/socketio");
 // var io              = require("socket.io-client");
@@ -942,7 +976,7 @@ var Main = _react2["default"].createClass({
 
 module.exports = Main;
 
-},{"./pages":31,"react":739}],11:[function(require,module,exports){
+},{"./pages":32,"react":739}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1153,7 +1187,7 @@ var Payment = _react2["default"].createClass({
 exports["default"] = Payment;
 module.exports = exports["default"];
 
-},{"browser-client/data/forms/payment":32,"common/components/data-form":48,"react":739}],15:[function(require,module,exports){
+},{"browser-client/data/forms/payment":33,"common/components/data-form":48,"react":739}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1482,6 +1516,7 @@ var Signup = require("./signup");
 var Confirmed = require("./confirmed");
 var RequestInvite = require("./request-invite");
 var RequestInviteComplete = require("./request-invite-complete");
+var Invited = require("./invited");
 
 /**
  */
@@ -1497,7 +1532,8 @@ var AuthPages = React.createClass({
       resetPassword: React.createElement(ResetPassword, this.props),
       requestInviteComplete: React.createElement(RequestInviteComplete, this.props),
       forgotPassword: React.createElement(ForgotPassword, this.props),
-      confirmed: React.createElement(Confirmed, this.props)
+      confirmed: React.createElement(Confirmed, this.props),
+      invited: React.createElement(Invited, this.props)
     })[this.props.location.state.authPage];
 
     return React.createElement(
@@ -1514,7 +1550,58 @@ var AuthPages = React.createClass({
 exports["default"] = AuthPages;
 module.exports = exports["default"];
 
-},{"./confirmed":23,"./forgot-password":24,"./login":26,"./request-invite":28,"./request-invite-complete":27,"./reset-password":29,"./signup":30,"react":739}],26:[function(require,module,exports){
+},{"./confirmed":23,"./forgot-password":24,"./invited":26,"./login":27,"./request-invite":29,"./request-invite-complete":28,"./reset-password":30,"./signup":31,"react":739}],26:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _commonComponentsDataForm = require("common/components/data-form");
+
+var _commonComponentsDataForm2 = _interopRequireDefault(_commonComponentsDataForm);
+
+var _commonDataFormsForgotPassword = require("common/data/forms/forgot-password");
+
+var _commonDataFormsForgotPassword2 = _interopRequireDefault(_commonDataFormsForgotPassword);
+
+// import Link      from "common/components/link"
+
+var _reactIntl = require("react-intl");
+
+var Invitied = _react2["default"].createClass({
+  displayName: "Invitied",
+
+  mixins: [_reactIntl.IntlMixin],
+
+  render: function render() {
+    return _react2["default"].createElement(
+      "div",
+      { className: "auth-invited" },
+      _react2["default"].createElement(
+        "span",
+        { className: "message" },
+        _react2["default"].createElement(_reactIntl.FormattedHTMLMessage, { message: this.getIntlMessage("invited.message"), inviter: this.props.location.state.inviter.name })
+      ),
+      _react2["default"].createElement(
+        "a",
+        { href: "#" + this.props.app.router.getPath("signup", { query: { shortcode: this.props.location.state.shortcode } }) },
+        _react2["default"].createElement(_reactIntl.FormattedHTMLMessage, { message: this.getIntlMessage("invited.signupButtonLabel") })
+      )
+    );
+  }
+});
+
+exports["default"] = Invitied;
+module.exports = exports["default"];
+
+},{"common/components/data-form":48,"common/data/forms/forgot-password":50,"react":739,"react-intl":555}],27:[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -1590,7 +1677,7 @@ exports["default"] = Login;
 module.exports = exports["default"];
 
 }).call(this,require('_process'))
-},{"_process":416,"common/components/data-form":48,"common/data/forms/login":52,"react":739,"react-intl":555}],27:[function(require,module,exports){
+},{"_process":416,"common/components/data-form":48,"common/data/forms/login":52,"react":739,"react-intl":555}],28:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1619,7 +1706,6 @@ var RequestInviteComplete = _react2["default"].createClass({
   displayName: "RequestInviteComplete",
 
   mixins: [_reactIntl.IntlMixin],
-
   render: function render() {
     return _react2["default"].createElement(
       "div",
@@ -1633,7 +1719,8 @@ var RequestInviteComplete = _react2["default"].createClass({
         "span",
         { className: "cta" },
         _react2["default"].createElement(_reactIntl.FormattedMessage, { message: this.getIntlMessage("authRequestInviteComplete.cta") })
-      )
+      ),
+      _react2["default"].createElement("input", { className: "form-control", type: "text", editable: false, defaultValue: this.props.app.config.hosts.browser + "/#/invite/" + this.props.location.query.shortcode })
     );
   }
 });
@@ -1641,7 +1728,7 @@ var RequestInviteComplete = _react2["default"].createClass({
 exports["default"] = RequestInviteComplete;
 module.exports = exports["default"];
 
-},{"common/components/data-form":48,"common/data/forms/login":52,"react":739,"react-intl":555}],28:[function(require,module,exports){
+},{"common/components/data-form":48,"common/data/forms/login":52,"react":739,"react-intl":555}],29:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1678,13 +1765,22 @@ var RequestInvite = _react2["default"].createClass({
    */
 
   onSuccess: function onSuccess(result) {
-    this.props.app.router.redirect("requestInviteComplete", {});
+    this.props.app.router.redirect("requestInviteComplete", {
+      query: {
+        shortcode: String(result.shortcode)
+      }
+    });
   },
 
   /**
    */
 
   render: function render() {
+
+    var data = {
+      inviterShortcode: this.props.location.query.shortcode
+    };
+
     return _react2["default"].createElement(
       "div",
       { className: "request-invite-form" },
@@ -1698,8 +1794,7 @@ var RequestInvite = _react2["default"].createClass({
         { className: "muted" },
         _react2["default"].createElement(_reactIntl.FormattedHTMLMessage, { message: this.getIntlMessage("authRequstInvite.info") })
       ),
-      _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ onSuccess: this.onSuccess, formClass: _commonDataFormsRequestInvite2["default"] }, this.props, { submitLabel: "authRequstInvite.submitLabel" })),
-      ";"
+      _react2["default"].createElement(_commonComponentsDataForm2["default"], _extends({ onSuccess: this.onSuccess, data: data, formClass: _commonDataFormsRequestInvite2["default"] }, this.props, { submitLabel: "authRequstInvite.submitLabel" }))
     );
   }
 });
@@ -1707,7 +1802,7 @@ var RequestInvite = _react2["default"].createClass({
 exports["default"] = RequestInvite;
 module.exports = exports["default"];
 
-},{"common/components/data-form":48,"common/data/forms/request-invite":53,"react":739,"react-intl":555}],29:[function(require,module,exports){
+},{"common/components/data-form":48,"common/data/forms/request-invite":53,"react":739,"react-intl":555}],30:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1753,7 +1848,7 @@ var ResetPassword = _react2["default"].createClass({
 exports["default"] = ResetPassword;
 module.exports = exports["default"];
 
-},{"common/components/data-form":48,"common/data/forms/reset-password":54,"react":739}],30:[function(require,module,exports){
+},{"common/components/data-form":48,"common/data/forms/reset-password":54,"react":739}],31:[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -1812,7 +1907,7 @@ exports["default"] = Signup;
 module.exports = exports["default"];
 
 }).call(this,require('_process'))
-},{"_process":416,"common/components/data-form":48,"common/data/forms/signup":55,"react":739,"react-intl":555}],31:[function(require,module,exports){
+},{"_process":416,"common/components/data-form":48,"common/data/forms/signup":55,"react":739,"react-intl":555}],32:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -1846,7 +1941,7 @@ var Pages = _react2["default"].createClass({
 
 module.exports = Pages;
 
-},{"./app":21,"./auth":25,"react":739}],32:[function(require,module,exports){
+},{"./app":21,"./auth":25,"react":739}],33:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1974,7 +2069,7 @@ module.exports = exports["default"];
 
 // TODO - move this to command
 
-},{"api/data/types/reference":6,"common/data/schema/mixin":58,"common/data/schema/schema":59,"common/data/types/bus":60,"common/data/types/credit-card-number":61,"common/data/types/cvc":62,"httperr":450}],33:[function(require,module,exports){
+},{"api/data/types/reference":6,"common/data/schema/mixin":58,"common/data/schema/schema":59,"common/data/types/bus":60,"common/data/types/credit-card-number":61,"common/data/types/cvc":62,"httperr":450}],34:[function(require,module,exports){
 "use strict";
 
 var getConfig = require("common/utils/get-config");
@@ -1999,7 +2094,7 @@ module.exports = function (env) {
   return deepExtend({}, getConfig(env), config.defaults);
 };
 
-},{"common/utils/get-config":82,"lodash/object/defaultsDeep":493}],34:[function(require,module,exports){
+},{"common/utils/get-config":82,"lodash/object/defaultsDeep":493}],35:[function(require,module,exports){
 (function (global){
 "use strict";
 
@@ -2023,7 +2118,7 @@ app.initialize(function () {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./application":7,"./get-config":33,"babel/polyfill":265}],35:[function(require,module,exports){
+},{"./application":7,"./get-config":34,"babel/polyfill":265}],36:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -2035,6 +2130,10 @@ var _commonDataForms2 = _interopRequireDefault(_commonDataForms);
 var _co = require("co");
 
 var _co2 = _interopRequireDefault(_co);
+
+var _apiDataModelsInvitee = require("api/data/models/invitee");
+
+var _apiDataModelsInvitee2 = _interopRequireDefault(_apiDataModelsInvitee);
 
 module.exports = function (app) {
   var router = app.router;
@@ -2131,6 +2230,39 @@ module.exports = function (app) {
     });
   });
 
+  router.addRoute("invite", "/invite/:shortcode", _co2["default"].wrap(regeneratorRuntime.mark(function callee$1$0(location) {
+    var data;
+    return regeneratorRuntime.wrap(function callee$1$0$(context$2$0) {
+      while (1) switch (context$2$0.prev = context$2$0.next) {
+        case 0:
+          context$2$0.t0 = Object;
+          context$2$0.t1 = { bus: app.bus };
+          context$2$0.next = 4;
+          return app.bus({
+            name: "getInviteeFromShortCode",
+            shortcode: location.params.shortcode
+          });
+
+        case 4:
+          context$2$0.t2 = context$2$0.sent;
+          data = context$2$0.t0.assign.call(context$2$0.t0, context$2$0.t1, context$2$0.t2);
+
+          location.setProperties({
+            state: {
+              inviter: new _apiDataModelsInvitee2["default"](data),
+              mainPage: "auth",
+              shortcode: location.params.shortcode,
+              authPage: "invited"
+            }
+          });
+
+        case 7:
+        case "end":
+          return context$2$0.stop();
+      }
+    }, callee$1$0, this);
+  })));
+
   router.addRoute("forgotPassword", "/forgot", function (location) {
     location.setProperties({
       state: {
@@ -2215,7 +2347,7 @@ module.exports = function (app) {
 
 // stuff already exists
 
-},{"co":445,"common/data/forms":51}],36:[function(require,module,exports){
+},{"api/data/models/invitee":1,"co":445,"common/data/forms":51}],37:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2289,7 +2421,7 @@ function _bindKey(key, handler) {
 }
 module.exports = exports["default"];
 
-},{"mousetrap":538}],37:[function(require,module,exports){
+},{"mousetrap":546}],38:[function(require,module,exports){
 module.exports={
   "fields": {
     "emailAddress": "Email Address"
@@ -2324,13 +2456,17 @@ module.exports={
   "authConfirmed": {
     "thanks": "All verified. Thanks!"
   },
+  "invited": {
+    "message": "<strong>{inviter}</strong> has invited you to join BrowserTap!",
+    "signupButtonLabel": "Sign up"
+  },
   "authForgotPassword": {
     "title": "Password Reset",
     "submitLabel": "Reset rassword",
     "successMessage": "Check your email for instructions on resetting your password!"
   }
 }
-},{}],38:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2443,7 +2579,7 @@ var Application = (function (_BaseModel) {
 exports["default"] = Application;
 module.exports = exports["default"];
 
-},{"./plugins/catch-errors":39,"common/bus":42,"common/bus/log":43,"common/data/models/base/model":56,"common/logger":68,"lodash/array/flattenDeep":451}],39:[function(require,module,exports){
+},{"./plugins/catch-errors":40,"common/bus":42,"common/bus/log":43,"common/data/models/base/model":56,"common/logger":68,"lodash/array/flattenDeep":451}],40:[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -2515,7 +2651,7 @@ function server(app) {
 }
 
 }).call(this,require('_process'))
-},{"_process":416,"mesh":518,"parse-stack":548,"platform":550}],40:[function(require,module,exports){
+},{"_process":416,"mesh":518,"parse-stack":548,"platform":550}],41:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -2533,68 +2669,7 @@ exports.createClient = function (config) {
   };
 };
 
-},{"loggly-browserify":501}],41:[function(require,module,exports){
-"use strict";
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var _mesh = require("mesh");
-
-var _mesh2 = _interopRequireDefault(_mesh);
-
-var _objStream = require("obj-stream");
-
-var _sift = require("sift");
-
-var _sift2 = _interopRequireDefault(_sift);
-
-// TODO - implement max, and once: Boolean
-module.exports = function (bus) {
-  var interceptors = [];
-
-  return function (operation) {
-    var ret;
-
-    if (operation.name === "intercept") {
-      ret = new _objStream.Stream();
-
-      ret.operation = operation;
-      ret.test = (0, _sift2["default"])(operation.query || function () {
-        return true;
-      });
-      ret.count = 0;
-      ret.max = ret.operation.max || Infinity;
-
-      interceptors.push(ret);
-
-      // TODO - remote interceptor on end
-      ret.once("end", function () {
-        interceptors.splice(interceptors.indexOf(ret), 1);
-      });
-    } else {
-      var use = [];
-
-      for (var i = interceptors.length; i--;) {
-        var interceptor = interceptors[i];
-        if (interceptor.test(operation)) {
-          use.push(interceptor.operation.bus);
-          if (++interceptor.count >= interceptor.max) {
-            interceptor.end();
-          }
-        }
-      }
-
-      use.push(bus);
-
-      var ibus = use.length > 1 ? _mesh2["default"].sequence(use) : use[0];
-      ret = ibus(operation);
-    }
-
-    return ret;
-  };
-};
-
-},{"mesh":518,"obj-stream":539,"sift":740}],42:[function(require,module,exports){
+},{"loggly-browserify":501}],42:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -2602,10 +2677,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 var _commonMesh = require("common/mesh");
 
 var _commonMesh2 = _interopRequireDefault(_commonMesh);
-
-var _driversIntercept = require("./drivers/intercept");
-
-var _driversIntercept2 = _interopRequireDefault(_driversIntercept);
 
 module.exports = function (app, bus) {
 
@@ -2616,7 +2687,7 @@ module.exports = function (app, bus) {
   return bus;
 };
 
-},{"./drivers/intercept":41,"common/mesh":74}],43:[function(require,module,exports){
+},{"common/mesh":74}],43:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -2677,7 +2748,7 @@ module.exports = function (app) {
   };
 };
 
-},{"common/mesh":74,"loggly":40}],45:[function(require,module,exports){
+},{"common/mesh":74,"loggly":41}],45:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -2915,8 +2986,8 @@ var Field = _react2["default"].createClass({
 
     if (!Object.keys((0, _objectDiff2["default"])(this.state, newState)).length) return;
 
-    this.props.onFieldData(this.props.name, value);
     this.setState(newState);
+    this.props.onFieldData(this.props.name, value);
   },
 
   /**
@@ -3030,14 +3101,14 @@ var DataForm = _react2["default"].createClass({
       var form = new formClass(data);
     } catch (e) {}
 
-    if (form && this.props.onForm) {
-      this.props.onForm(form);
-    }
-
     this.setState({
       form: form,
       data: this.state.data
     });
+
+    if (form && this.props.onForm) {
+      this.props.onForm(form);
+    }
   },
 
   /**
@@ -3069,15 +3140,15 @@ var DataForm = _react2["default"].createClass({
 
         case 11:
 
-          if (!err && this.props.onSuccess) {
-            this.props.onSuccess(result);
-          }
-
-          this.setState({
+          if (this.isMounted()) this.setState({
             loading: false,
             error: err,
             success: !err
           });
+
+          if (!err && this.props.onSuccess) {
+            this.props.onSuccess(result);
+          }
 
         case 13:
         case "end":
@@ -3545,6 +3616,14 @@ var requestInviteFormSchema = new _commonDataSchemaSchema2["default"]({
       required: true,
       hidden: true,
       type: require("common/data/types/bus")
+    },
+    inviterShortcode: {
+      hidden: true,
+      type: String
+    },
+    name: {
+      required: true,
+      type: String
     },
     emailAddress: {
       required: true,
@@ -5670,6 +5749,7 @@ module.exports={
     "password": "Password",
     "repeatPassword": "Repeat",
     "cardNumber": "Card Number",
+    "name": "Full Name",
     "cvc": "CVC"
   },
   "buttons": {
@@ -19262,7 +19342,8 @@ module.exports={
     "tarball": "http://registry.npmjs.org/elliptic/-/elliptic-3.1.0.tgz"
   },
   "directories": {},
-  "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-3.1.0.tgz"
+  "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-3.1.0.tgz",
+  "readme": "ERROR: No README data found!"
 }
 
 },{}],316:[function(require,module,exports){
@@ -20451,11 +20532,13 @@ DERNode.prototype._decodeTag = function decodeTag(buffer, tag, any) {
   if (decodedTag.primitive || len !== null) return buffer.skip(len, 'Failed to match body of: "' + tag + '"');
 
   // Indefinite length... find END tag
-  var state = buffer.start();
+  var state = buffer.save();
   var res = this._skipUntilEnd(buffer, 'Failed to skip indefinite length body: "' + this.tag + '"');
   if (buffer.isError(res)) return res;
 
-  return buffer.cut(state);
+  len = buffer.offset - state.offset;
+  buffer.restore(state);
+  return buffer.skip(len, 'Failed to match body of: "' + tag + '"');
 };
 
 DERNode.prototype._skipUntilEnd = function skipUntilEnd(buffer, fail) {
@@ -27376,8 +27459,8 @@ Sha.prototype._update = function (M) {
   var d = this._d;
   var e = this._e;
 
-  var j = 0,
-      k;
+  var j = 0;
+  var k;
 
   /*
    * SHA-1 has a bitwise rotate left operation. But, SHA is not
@@ -27484,8 +27567,8 @@ Sha1.prototype._update = function (M) {
   var d = this._d;
   var e = this._e;
 
-  var j = 0,
-      k;
+  var j = 0;
+  var k;
 
   function calcW() {
     return rol(W[j - 3] ^ W[j - 8] ^ W[j - 14] ^ W[j - 16], 1);
@@ -27870,8 +27953,8 @@ Sha512.prototype._update = function (M) {
   var gl = this._gl | 0;
   var hl = this._hl | 0;
 
-  var i = 0,
-      j = 0;
+  var i = 0;
+  var j = 0;
   var Wi, Wil;
   function calcW() {
     var x = W[j - 15 * 2];
@@ -34094,11 +34177,13 @@ DERNode.prototype._decodeTag = function decodeTag(buffer, tag, any) {
   if (decodedTag.primitive || len !== null) return buffer.skip(len, 'Failed to match body of: "' + tag + '"');
 
   // Indefinite length... find END tag
-  var state = buffer.start();
+  var state = buffer.save();
   var res = this._skipUntilEnd(buffer, 'Failed to skip indefinite length body: "' + this.tag + '"');
   if (buffer.isError(res)) return res;
 
-  return buffer.cut(state);
+  len = buffer.offset - state.offset;
+  buffer.restore(state);
+  return buffer.skip(len, 'Failed to match body of: "' + tag + '"');
 };
 
 DERNode.prototype._skipUntilEnd = function skipUntilEnd(buffer, fail) {
@@ -37219,7 +37304,7 @@ module.exports = nextTick;
 function nextTick(fn) {
   var args = new Array(arguments.length - 1);
   var i = 0;
-  while (i < arguments.length) {
+  while (i < args.length) {
     args[i++] = arguments[i];
   }
   process.nextTick(function afterTick() {
@@ -42426,7 +42511,7 @@ module.exports = function (fn) {
 };
 
 }).call(this,require('_process'))
-},{"_process":416,"obj-stream":539}],503:[function(require,module,exports){
+},{"_process":416,"obj-stream":537}],503:[function(require,module,exports){
 "use strict";
 
 module.exports = function (items, each, complete) {
@@ -42605,7 +42690,7 @@ module.exports = function (iterator) {
   });
 };
 
-},{"./_async":502,"./_eachSeries":504,"./_group":507,"obj-stream":539}],511:[function(require,module,exports){
+},{"./_async":502,"./_eachSeries":504,"./_group":507,"obj-stream":537}],511:[function(require,module,exports){
 "use strict";
 
 var _isArray = require("./_isArray");
@@ -42666,7 +42751,7 @@ module.exports = function (options, bus) {
   return ret;
 };
 
-},{"./operation":523,"xtend/mutable":537}],514:[function(require,module,exports){
+},{"./operation":523,"xtend/mutable":545}],514:[function(require,module,exports){
 "use strict";
 
 var stream = require("./stream");
@@ -42817,7 +42902,7 @@ module.exports = function (bus, map) {
   });
 };
 
-},{"./stream":531,"obj-stream":539}],521:[function(require,module,exports){
+},{"./stream":531,"obj-stream":537}],521:[function(require,module,exports){
 "use strict";
 
 var stream = require("./stream");
@@ -42840,7 +42925,7 @@ module.exports = function (bus) {
   });
 };
 
-},{"obj-stream":539}],523:[function(require,module,exports){
+},{"obj-stream":537}],523:[function(require,module,exports){
 "use strict";
 
 var extend = require("xtend/mutable");
@@ -42861,7 +42946,7 @@ module.exports = function (name, options) {
   return new Operation(name, options);
 };
 
-},{"xtend/mutable":537}],524:[function(require,module,exports){
+},{"xtend/mutable":545}],524:[function(require,module,exports){
 "use strict";
 
 var _eachParallel = require("./_eachParallel");
@@ -42907,7 +42992,7 @@ module.exports = function (bus, reduce) {
   });
 };
 
-},{"./stream":531,"obj-stream":539}],527:[function(require,module,exports){
+},{"./stream":531,"obj-stream":537}],527:[function(require,module,exports){
 "use strict";
 
 var _getFilter = require("./_getFilter");
@@ -43056,7 +43141,7 @@ module.exports = function (bus, compare) {
   })));
 };
 
-},{"./_equals":505,"./accept":512,"./fallback":517,"./sequence":530,"./stream":531,"xtend/mutable":537}],533:[function(require,module,exports){
+},{"./_equals":505,"./accept":512,"./fallback":517,"./sequence":530,"./stream":531,"xtend/mutable":545}],533:[function(require,module,exports){
 "use strict";
 
 var stream = require("./stream");
@@ -43140,6 +43225,551 @@ module.exports = function (error, data) {
 },{"./attach":513,"./wrap":535}],537:[function(require,module,exports){
 "use strict";
 
+var Readable = require("./readable");
+var Writable = require("./writable");
+var Stream = require("./stream");
+var through = require("./through");
+var wrap = require("./wrap");
+
+exports.Readable = Readable;
+exports.readable = Readable;
+
+exports.Writable = Writable;
+exports.writable = Writable;
+
+exports.Stream = Stream;
+exports.stream = Stream;
+
+exports.through = through;
+
+exports.wrap = wrap;
+
+},{"./readable":539,"./stream":540,"./through":541,"./wrap":542,"./writable":543}],538:[function(require,module,exports){
+"use strict";
+
+module.exports = function (src, dst, ops) {
+
+  var listeners = [];
+
+  function cleanup() {
+    for (var i = listeners.length; i--;) listeners[i].dispose();
+  }
+
+  function onData(data) {
+    if (dst.writable && dst.write(data) === false) {
+      src.pause();
+    }
+  }
+
+  function onDrain() {
+    if (src.readable) {
+      src.resume();
+    }
+  }
+
+  function onError(error) {
+    cleanup();
+    dst.emit("error", error);
+    // TODO: throw error if there are no handlers here
+  }
+
+  var didEnd = false;
+
+  function onEnd() {
+    if (didEnd) return;
+    didEnd = true;
+    dst.end();
+  }
+
+  function onClose() {
+    if (didEnd) return;
+    didEnd = true;
+    if (typeof dst.destroy === "function") dst.destroy();
+  }
+
+  function listen(target, event, listener) {
+    target.on(event, listener);
+    return {
+      dispose: function dispose() {
+        return target.removeListener(event, listener);
+      }
+    };
+  }
+
+  if (!ops || ops.end !== false) {
+    listeners.push(listen(src, "end", onEnd), listen(src, "close", onClose));
+  }
+
+  listeners.push(listen(src, "data", onData), listen(dst, "drain", onDrain), listen(src, "end", cleanup), listen(src, "close", cleanup), listen(dst, "close", cleanup), listen(src, "error", onError), listen(dst, "error", cleanup));
+
+  dst.emit("pipe", src);
+
+  return dst;
+};
+
+},{}],539:[function(require,module,exports){
+"use strict";
+
+var protoclass = require("protoclass");
+var EventEmitter = require("events").EventEmitter;
+var _pipe = require("./pipe");
+
+/**
+ */
+
+function Readable() {
+  if (!(this instanceof Readable)) return new Readable();
+  EventEmitter.call(this);
+  this.setMaxListeners(0);
+}
+
+/**
+ */
+
+protoclass(EventEmitter, Readable, {
+
+  /**
+   */
+
+  _flowing: true,
+  readable: true,
+  writable: false,
+
+  /**
+   */
+
+  pause: function pause() {
+    if (!this._flowing) return;
+    this._flowing = false;
+    this.emit("pause");
+  },
+
+  /**
+   */
+
+  resume: function resume() {
+    if (this._flowing) return;
+    this._flowing = true;
+    this.emit("resume");
+  },
+
+  /**
+   */
+
+  isPaused: function isPaused() {
+    return !this._flowing;
+  },
+
+  /**
+   */
+
+  pipe: function pipe(dst, ops) {
+    return _pipe(this, dst, ops);
+  }
+});
+
+module.exports = Readable;
+
+},{"./pipe":538,"events":412,"protoclass":544}],540:[function(require,module,exports){
+"use strict";
+
+var protoclass = require("protoclass");
+var Writer = require("./writable");
+
+/**
+ */
+
+function Stream(reader, writer) {
+  if (!(this instanceof Stream)) return new Stream();
+  this._writer = writer || new Writer();
+  this._reader = reader || this._writer.reader;
+}
+
+/**
+ */
+
+protoclass(Stream, {
+
+  /**
+   */
+
+  readable: true,
+  writable: true,
+
+  /**
+   */
+
+  pause: function pause() {
+    return this._reader.pause();
+  },
+
+  /**
+   */
+
+  resume: function resume() {
+    return this._reader.resume();
+  },
+
+  /**
+   */
+
+  write: function write(object) {
+    return this._writer.write.apply(this._writer, arguments);
+  },
+
+  /**
+   */
+
+  end: function end(object) {
+    return this._writer.end.apply(this._writer, arguments);
+  },
+
+  /**
+   */
+
+  emit: function emit() {
+    return this._reader.emit.apply(this._reader, arguments);
+  },
+
+  /**
+   */
+
+  on: function on() {
+    this._reader.on.apply(this._reader, arguments);
+    return this;
+  },
+
+  /**
+   */
+
+  once: function once() {
+    this._reader.once.apply(this._reader, arguments);
+    return this;
+  },
+
+  /**
+   */
+
+  removeListener: function removeListener() {
+    return this._reader.removeListener.apply(this._reader, arguments);
+  },
+
+  /**
+   */
+
+  pipe: function pipe() {
+    return this._reader.pipe.apply(this._reader, arguments);
+  }
+});
+
+module.exports = Stream;
+
+},{"./writable":543,"protoclass":544}],541:[function(require,module,exports){
+(function (process){
+"use strict";
+
+var protoclass = require("protoclass");
+var Readable = require("./readable");
+var Stream = require("./stream");
+var Writable = require("./writable");
+
+/**
+ */
+
+function Through(stream) {
+  this._stream = stream;
+  this._reader = stream.reader;
+}
+
+/**
+ */
+
+protoclass(Through, {
+  push: function push(object) {
+
+    if (!this._reader._events.data) {
+      this._waitForListener();
+    }
+
+    this._stream.write(object);
+  },
+
+  /**
+   */
+
+  _waitForListener: function _waitForListener() {
+    if (this._waiting) return;
+    this._waiting = true;
+
+    var self = this;
+    function onListener(name) {
+      if (name === "data") {
+        self._reader.removeListener("newListener", onListener);
+        process.nextTick(function () {
+          self._reader.resume();
+        });
+      }
+    }
+
+    this._reader.on("newListener", onListener);
+    this._reader.pause();
+  }
+});
+
+/**
+ */
+
+module.exports = function (write, end) {
+
+  var dstWriter = new Writable();
+  var srcWriter = new Writable();
+  var stream = new Stream(dstWriter.reader, srcWriter);
+  var through = new Through(dstWriter);
+
+  var buffer = [];
+  var running = false;
+  var ended = false;
+
+  function _write() {
+    if (running) return;
+
+    if (buffer.length) {
+      running = true;
+      return write.call(through, buffer.shift(), function () {
+        running = false;
+        _write();
+      });
+    }
+
+    if (ended) {
+      if (end) end.call(through);
+      dstWriter.end();
+    }
+  }
+
+  srcWriter.reader.on("data", function (data) {
+    buffer.push(data);
+    _write();
+  }).on("end", function () {
+    ended = true;
+    _write();
+  });
+
+  return stream;
+};
+
+}).call(this,require('_process'))
+},{"./readable":539,"./stream":540,"./writable":543,"_process":416,"protoclass":544}],542:[function(require,module,exports){
+"use strict";
+
+var Stream = require("./stream");
+
+module.exports = function (fn) {
+  return function () {
+    var s = new Stream();
+    setTimeout(function (args) {
+      fn.apply(void 0, args.concat(function (err, data) {
+        if (err) return s.emit("error", err);
+        s.end(data);
+      }));
+    }, 0, Array.prototype.slice.call(arguments));
+    return s;
+  };
+};
+
+},{"./stream":540}],543:[function(require,module,exports){
+"use strict";
+
+var protoclass = require("protoclass");
+var EventEmitter = require("events").EventEmitter;
+var Reader = require("./readable");
+
+/**
+ */
+
+function Writable() {
+  if (!(this instanceof Writable)) return new Writable();
+  EventEmitter.call(this);
+  this.setMaxListeners(0);
+
+  this._pool = [];
+  this.reader = new Reader();
+
+  var self = this;
+
+  this.reader.on("pause", function () {
+    self._pause();
+  });
+
+  this.reader.on("resume", function () {
+    self._resume();
+  });
+}
+
+/**
+ */
+
+protoclass(EventEmitter, Writable, {
+
+  /**
+   */
+
+  _flowing: true,
+  readable: false,
+  writable: true,
+
+  /**
+   */
+
+  write: function write(object) {
+    if (!this._write(object)) {
+      this._pool.push(object);
+      return false;
+    }
+    return true;
+  },
+
+  /**
+   */
+
+  end: function end(object) {
+
+    this._ended = true;
+
+    if (object != void 0) {
+      this.write(object);
+    }
+
+    if (this._flowing) {
+      this.reader.emit("end");
+    }
+  },
+
+  /**
+   */
+
+  _write: function _write(object) {
+    if (this._flowing) {
+      this.reader.emit("data", object);
+
+      // might have changed on emit
+      return this._flowing;
+    } else {
+      return false;
+    }
+  },
+
+  /**
+   */
+
+  _pause: function _pause() {
+    this._flowing = false;
+  },
+
+  /**
+   */
+
+  _resume: function _resume() {
+    if (this._flowing) return;
+    this._flowing = true;
+    this.reader.emit("drain");
+
+    while (this._pool.length) {
+      var item = this._pool.shift();
+      if (!this._write(item)) {
+        this._pool.unshift(item);
+        break;
+      }
+    }
+
+    if (!this._pool.length && this._ended) {
+      this.end();
+    }
+  }
+});
+
+module.exports = Writable;
+
+},{"./readable":539,"events":412,"protoclass":544}],544:[function(require,module,exports){
+"use strict";
+
+function _copy(to, from) {
+
+  for (var i = 0, n = from.length; i < n; i++) {
+
+    var target = from[i];
+
+    for (var property in target) {
+      to[property] = target[property];
+    }
+  }
+
+  return to;
+}
+
+function protoclass(parent, child) {
+
+  var mixins = Array.prototype.slice.call(arguments, 2);
+
+  if (typeof child !== "function") {
+    if (child) mixins.unshift(child); // constructor is a mixin
+    child = parent;
+    parent = function () {};
+  }
+
+  _copy(child, parent);
+
+  function ctor() {
+    this.constructor = child;
+  }
+
+  ctor.prototype = parent.prototype;
+  child.prototype = new ctor();
+  child.__super__ = parent.prototype;
+  child.parent = child.superclass = parent;
+
+  _copy(child.prototype, mixins);
+
+  protoclass.setup(child);
+
+  return child;
+}
+
+protoclass.setup = function (child) {
+
+  if (!child.extend) {
+    child.extend = function (constructor) {
+
+      var args = Array.prototype.slice.call(arguments, 0);
+
+      if (typeof constructor !== "function") {
+        args.unshift(constructor = function () {
+          constructor.parent.apply(this, arguments);
+        });
+      }
+
+      return protoclass.apply(this, [this].concat(args));
+    };
+
+    child.mixin = function (proto) {
+      _copy(this.prototype, arguments);
+    };
+
+    child.create = function () {
+      var obj = Object.create(child.prototype);
+      child.apply(obj, arguments);
+      return obj;
+    };
+  }
+
+  return child;
+};
+
+module.exports = protoclass;
+
+},{}],545:[function(require,module,exports){
+"use strict";
+
 module.exports = extend;
 
 function extend(target) {
@@ -43156,7 +43786,7 @@ function extend(target) {
     return target;
 }
 
-},{}],538:[function(require,module,exports){
+},{}],546:[function(require,module,exports){
 /*global define:false */
 'use strict';
 
@@ -44191,551 +44821,6 @@ function extend(target) {
  * @version 1.5.3
  * @url craig.is/killing/mice
  */
-
-},{}],539:[function(require,module,exports){
-"use strict";
-
-var Readable = require("./readable");
-var Writable = require("./writable");
-var Stream = require("./stream");
-var through = require("./through");
-var wrap = require("./wrap");
-
-exports.Readable = Readable;
-exports.readable = Readable;
-
-exports.Writable = Writable;
-exports.writable = Writable;
-
-exports.Stream = Stream;
-exports.stream = Stream;
-
-exports.through = through;
-
-exports.wrap = wrap;
-
-},{"./readable":541,"./stream":542,"./through":543,"./wrap":544,"./writable":545}],540:[function(require,module,exports){
-"use strict";
-
-module.exports = function (src, dst, ops) {
-
-  var listeners = [];
-
-  function cleanup() {
-    for (var i = listeners.length; i--;) listeners[i].dispose();
-  }
-
-  function onData(data) {
-    if (dst.writable && dst.write(data) === false) {
-      src.pause();
-    }
-  }
-
-  function onDrain() {
-    if (src.readable) {
-      src.resume();
-    }
-  }
-
-  function onError(error) {
-    cleanup();
-    dst.emit("error", error);
-    // TODO: throw error if there are no handlers here
-  }
-
-  var didEnd = false;
-
-  function onEnd() {
-    if (didEnd) return;
-    didEnd = true;
-    dst.end();
-  }
-
-  function onClose() {
-    if (didEnd) return;
-    didEnd = true;
-    if (typeof dst.destroy === "function") dst.destroy();
-  }
-
-  function listen(target, event, listener) {
-    target.on(event, listener);
-    return {
-      dispose: function dispose() {
-        return target.removeListener(event, listener);
-      }
-    };
-  }
-
-  if (!ops || ops.end !== false) {
-    listeners.push(listen(src, "end", onEnd), listen(src, "close", onClose));
-  }
-
-  listeners.push(listen(src, "data", onData), listen(dst, "drain", onDrain), listen(src, "end", cleanup), listen(src, "close", cleanup), listen(dst, "close", cleanup), listen(src, "error", onError), listen(dst, "error", cleanup));
-
-  dst.emit("pipe", src);
-
-  return dst;
-};
-
-},{}],541:[function(require,module,exports){
-"use strict";
-
-var protoclass = require("protoclass");
-var EventEmitter = require("events").EventEmitter;
-var _pipe = require("./pipe");
-
-/**
- */
-
-function Readable() {
-  if (!(this instanceof Readable)) return new Readable();
-  EventEmitter.call(this);
-  this.setMaxListeners(0);
-}
-
-/**
- */
-
-protoclass(EventEmitter, Readable, {
-
-  /**
-   */
-
-  _flowing: true,
-  readable: true,
-  writable: false,
-
-  /**
-   */
-
-  pause: function pause() {
-    if (!this._flowing) return;
-    this._flowing = false;
-    this.emit("pause");
-  },
-
-  /**
-   */
-
-  resume: function resume() {
-    if (this._flowing) return;
-    this._flowing = true;
-    this.emit("resume");
-  },
-
-  /**
-   */
-
-  isPaused: function isPaused() {
-    return !this._flowing;
-  },
-
-  /**
-   */
-
-  pipe: function pipe(dst, ops) {
-    return _pipe(this, dst, ops);
-  }
-});
-
-module.exports = Readable;
-
-},{"./pipe":540,"events":412,"protoclass":546}],542:[function(require,module,exports){
-"use strict";
-
-var protoclass = require("protoclass");
-var Writer = require("./writable");
-
-/**
- */
-
-function Stream(reader, writer) {
-  if (!(this instanceof Stream)) return new Stream();
-  this._writer = writer || new Writer();
-  this._reader = reader || this._writer.reader;
-}
-
-/**
- */
-
-protoclass(Stream, {
-
-  /**
-   */
-
-  readable: true,
-  writable: true,
-
-  /**
-   */
-
-  pause: function pause() {
-    return this._reader.pause();
-  },
-
-  /**
-   */
-
-  resume: function resume() {
-    return this._reader.resume();
-  },
-
-  /**
-   */
-
-  write: function write(object) {
-    return this._writer.write.apply(this._writer, arguments);
-  },
-
-  /**
-   */
-
-  end: function end(object) {
-    return this._writer.end.apply(this._writer, arguments);
-  },
-
-  /**
-   */
-
-  emit: function emit() {
-    return this._reader.emit.apply(this._reader, arguments);
-  },
-
-  /**
-   */
-
-  on: function on() {
-    this._reader.on.apply(this._reader, arguments);
-    return this;
-  },
-
-  /**
-   */
-
-  once: function once() {
-    this._reader.once.apply(this._reader, arguments);
-    return this;
-  },
-
-  /**
-   */
-
-  removeListener: function removeListener() {
-    return this._reader.removeListener.apply(this._reader, arguments);
-  },
-
-  /**
-   */
-
-  pipe: function pipe() {
-    return this._reader.pipe.apply(this._reader, arguments);
-  }
-});
-
-module.exports = Stream;
-
-},{"./writable":545,"protoclass":546}],543:[function(require,module,exports){
-(function (process){
-"use strict";
-
-var protoclass = require("protoclass");
-var Readable = require("./readable");
-var Stream = require("./stream");
-var Writable = require("./writable");
-
-/**
- */
-
-function Through(stream) {
-  this._stream = stream;
-  this._reader = stream.reader;
-}
-
-/**
- */
-
-protoclass(Through, {
-  push: function push(object) {
-
-    if (!this._reader._events.data) {
-      this._waitForListener();
-    }
-
-    this._stream.write(object);
-  },
-
-  /**
-   */
-
-  _waitForListener: function _waitForListener() {
-    if (this._waiting) return;
-    this._waiting = true;
-
-    var self = this;
-    function onListener(name) {
-      if (name === "data") {
-        self._reader.removeListener("newListener", onListener);
-        process.nextTick(function () {
-          self._reader.resume();
-        });
-      }
-    }
-
-    this._reader.on("newListener", onListener);
-    this._reader.pause();
-  }
-});
-
-/**
- */
-
-module.exports = function (write, end) {
-
-  var dstWriter = new Writable();
-  var srcWriter = new Writable();
-  var stream = new Stream(dstWriter.reader, srcWriter);
-  var through = new Through(dstWriter);
-
-  var buffer = [];
-  var running = false;
-  var ended = false;
-
-  function _write() {
-    if (running) return;
-
-    if (buffer.length) {
-      running = true;
-      return write.call(through, buffer.shift(), function () {
-        running = false;
-        _write();
-      });
-    }
-
-    if (ended) {
-      if (end) end.call(through);
-      dstWriter.end();
-    }
-  }
-
-  srcWriter.reader.on("data", function (data) {
-    buffer.push(data);
-    _write();
-  }).on("end", function () {
-    ended = true;
-    _write();
-  });
-
-  return stream;
-};
-
-}).call(this,require('_process'))
-},{"./readable":541,"./stream":542,"./writable":545,"_process":416,"protoclass":546}],544:[function(require,module,exports){
-"use strict";
-
-var Stream = require("./stream");
-
-module.exports = function (fn) {
-  return function () {
-    var s = new Stream();
-    setTimeout(function (args) {
-      fn.apply(void 0, args.concat(function (err, data) {
-        if (err) return s.emit("error", err);
-        s.end(data);
-      }));
-    }, 0, Array.prototype.slice.call(arguments));
-    return s;
-  };
-};
-
-},{"./stream":542}],545:[function(require,module,exports){
-"use strict";
-
-var protoclass = require("protoclass");
-var EventEmitter = require("events").EventEmitter;
-var Reader = require("./readable");
-
-/**
- */
-
-function Writable() {
-  if (!(this instanceof Writable)) return new Writable();
-  EventEmitter.call(this);
-  this.setMaxListeners(0);
-
-  this._pool = [];
-  this.reader = new Reader();
-
-  var self = this;
-
-  this.reader.on("pause", function () {
-    self._pause();
-  });
-
-  this.reader.on("resume", function () {
-    self._resume();
-  });
-}
-
-/**
- */
-
-protoclass(EventEmitter, Writable, {
-
-  /**
-   */
-
-  _flowing: true,
-  readable: false,
-  writable: true,
-
-  /**
-   */
-
-  write: function write(object) {
-    if (!this._write(object)) {
-      this._pool.push(object);
-      return false;
-    }
-    return true;
-  },
-
-  /**
-   */
-
-  end: function end(object) {
-
-    this._ended = true;
-
-    if (object != void 0) {
-      this.write(object);
-    }
-
-    if (this._flowing) {
-      this.reader.emit("end");
-    }
-  },
-
-  /**
-   */
-
-  _write: function _write(object) {
-    if (this._flowing) {
-      this.reader.emit("data", object);
-
-      // might have changed on emit
-      return this._flowing;
-    } else {
-      return false;
-    }
-  },
-
-  /**
-   */
-
-  _pause: function _pause() {
-    this._flowing = false;
-  },
-
-  /**
-   */
-
-  _resume: function _resume() {
-    if (this._flowing) return;
-    this._flowing = true;
-    this.reader.emit("drain");
-
-    while (this._pool.length) {
-      var item = this._pool.shift();
-      if (!this._write(item)) {
-        this._pool.unshift(item);
-        break;
-      }
-    }
-
-    if (!this._pool.length && this._ended) {
-      this.end();
-    }
-  }
-});
-
-module.exports = Writable;
-
-},{"./readable":541,"events":412,"protoclass":546}],546:[function(require,module,exports){
-"use strict";
-
-function _copy(to, from) {
-
-  for (var i = 0, n = from.length; i < n; i++) {
-
-    var target = from[i];
-
-    for (var property in target) {
-      to[property] = target[property];
-    }
-  }
-
-  return to;
-}
-
-function protoclass(parent, child) {
-
-  var mixins = Array.prototype.slice.call(arguments, 2);
-
-  if (typeof child !== "function") {
-    if (child) mixins.unshift(child); // constructor is a mixin
-    child = parent;
-    parent = function () {};
-  }
-
-  _copy(child, parent);
-
-  function ctor() {
-    this.constructor = child;
-  }
-
-  ctor.prototype = parent.prototype;
-  child.prototype = new ctor();
-  child.__super__ = parent.prototype;
-  child.parent = child.superclass = parent;
-
-  _copy(child.prototype, mixins);
-
-  protoclass.setup(child);
-
-  return child;
-}
-
-protoclass.setup = function (child) {
-
-  if (!child.extend) {
-    child.extend = function (constructor) {
-
-      var args = Array.prototype.slice.call(arguments, 0);
-
-      if (typeof constructor !== "function") {
-        args.unshift(constructor = function () {
-          constructor.parent.apply(this, arguments);
-        });
-      }
-
-      return protoclass.apply(this, [this].concat(args));
-    };
-
-    child.mixin = function (proto) {
-      _copy(this.prototype, arguments);
-    };
-
-    child.create = function () {
-      var obj = Object.create(child.prototype);
-      child.apply(obj, arguments);
-      return obj;
-    };
-  }
-
-  return child;
-};
-
-module.exports = protoclass;
 
 },{}],547:[function(require,module,exports){
 'use strict';
@@ -67212,7 +67297,7 @@ module.exports = require('./lib/React');
 
   function or(validator) {
     return function (a, b) {
-      if (!isArray(b)) return validator(a, b);
+      if (!isArray(b) || !b.length) return validator(a, b);
       for (var i = 0, n = b.length; i < n; i++) if (validator(a, b[i])) return true;
       return false;
     };
@@ -67223,7 +67308,7 @@ module.exports = require('./lib/React');
 
   function and(validator) {
     return function (a, b) {
-      if (!isArray(b)) return validator(a, b);
+      if (!isArray(b) || !b.length) return validator(a, b);
       for (var i = 0, n = b.length; i < n; i++) if (!validator(a, b[i])) return false;
       return true;
     };
@@ -67410,6 +67495,11 @@ module.exports = require('./lib/React');
         };
       } else if (a instanceof Function) {
         return a;
+      } else if (isArray(a) && !a.length) {
+        // Special case of a == []
+        return function (b) {
+          return isArray(b) && !b.length;
+        };
       }
 
       return function (b) {
@@ -67655,7 +67745,17 @@ var reduce = require('reduce');
  * Root reference for iframes.
  */
 
-var root = 'undefined' == typeof window ? undefined || self : window;
+var root;
+if (typeof window !== 'undefined') {
+  // Browser window
+  root = window;
+} else if (typeof self !== 'undefined') {
+  // Web Worker
+  root = self;
+} else {
+  // Other environments
+  root = undefined;
+}
 
 /**
  * Noop.
@@ -67994,6 +68094,20 @@ Response.prototype.setHeaderProperties = function (header) {
 };
 
 /**
+ * Force given parser
+ * 
+ * Sets the body parser no matter type.
+ * 
+ * @param {Function}
+ * @api public
+ */
+
+Response.prototype.parse = function (fn) {
+  this.parser = fn;
+  return this;
+};
+
+/**
  * Parse the given body `str`.
  *
  * Used for auto-parsing of bodies. Parsers
@@ -68005,7 +68119,7 @@ Response.prototype.setHeaderProperties = function (header) {
  */
 
 Response.prototype.parseBody = function (str) {
-  var parse = request.parse[this.type];
+  var parse = this.parser || request.parse[this.type];
   return parse && str && (str.length || str instanceof Object) ? parse(str) : null;
 };
 
@@ -68039,7 +68153,7 @@ Response.prototype.setStatusProperties = function (status) {
   var type = status / 100 | 0;
 
   // status / class
-  this.status = status;
+  this.status = this.statusCode = status;
   this.statusType = type;
 
   // basics
@@ -68968,4 +69082,4 @@ module.exports = function (arr, fn, initial) {
   return curr;
 };
 
-},{}]},{},[34]);
+},{}]},{},[35]);

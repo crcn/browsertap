@@ -32,6 +32,10 @@
   "authConfirmed": {
     "thanks": "All verified. Thanks!"
   },
+  "invited": {
+    "message": "<strong>{inviter}</strong> has invited you to join BrowserTap!",
+    "signupButtonLabel": "Sign up"
+  },
   "authForgotPassword": {
     "title": "Password Reset",
     "submitLabel": "Reset rassword",

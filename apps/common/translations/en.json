@@ -17,6 +17,7 @@
     "password": "Password",
     "repeatPassword": "Repeat",
     "cardNumber": "Card Number",
+    "name": "Full Name",
     "cvc": "CVC"
   },
   "buttons": {

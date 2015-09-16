@@ -39,9 +39,10 @@ Below are a set apps to be developed
   - [x] store session (there's always a session)
   - [ ] re-send confirmation email
   - [ ] track last login
-  - [ ] invitee form
-  - [ ] enable people to share invitee link
-  - [ ] shortcode
+  - [x] invitee form
+  - [x] enable people to share invitee link
+  - [x] shortcode
+  - [ ] "what is it" for invite page
 - [ ] security
   - [ ] lock account after N minutes
   - [ ] CSRF token

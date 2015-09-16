@@ -8,6 +8,7 @@ describe(__filename + "#", function() {
 
     var signupForm = new SignupForm({
       bus: apiApp.bus,
+      name: "bob",
       emailAddress: "a@b.com",
       password: "password"
     });
@@ -17,6 +18,7 @@ describe(__filename + "#", function() {
 
     var requestInviteForm = new RequestInviteForm({
       bus: apiApp.bus,
+      name: "bob",
       emailAddress: "a@b.com"
     });
 
@@ -35,13 +37,13 @@ describe(__filename + "#", function() {
   it("returns the same invitee object if the email exists", co.wrap(function*() {
     var requestInviteForm = new RequestInviteForm({
       bus: apiApp.bus,
+      name: "bob",
       emailAddress: "a@b.com"
     });
 
     var err;
     var invitee = yield requestInviteForm.submit();
     var inviteeb = yield requestInviteForm.submit();
-
 
     expect(invitee._id.valueOf()).to.be(inviteeb._id.valueOf());
   }));

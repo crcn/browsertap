@@ -15,7 +15,9 @@ var RequestInvite = React.createClass({
 
   onSuccess: function(result) {
     this.props.app.router.redirect("requestInviteComplete", {
-
+      query: {
+        shortcode: String(result.shortcode) 
+      }
     });
   },
 
@@ -23,10 +25,15 @@ var RequestInvite = React.createClass({
    */
 
   render: function() {
+
+    var data = {
+      inviterShortcode: this.props.location.query.shortcode
+    };
+
     return <div className="request-invite-form">
       <h4><FormattedMessage message={this.getIntlMessage("authRequstInvite.title")} /></h4>
       <span className="muted"><FormattedHTMLMessage message={this.getIntlMessage("authRequstInvite.info")} /></span>
-      <DataForm onSuccess={this.onSuccess} formClass={RequestInviteForm} {...this.props} submitLabel="authRequstInvite.submitLabel" />;
+      <DataForm onSuccess={this.onSuccess} data={data} formClass={RequestInviteForm} {...this.props} submitLabel="authRequstInvite.submitLabel" />
     </div>;
   }
 });

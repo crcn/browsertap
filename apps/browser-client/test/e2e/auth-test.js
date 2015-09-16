@@ -67,11 +67,14 @@ describe(__filename + "#", function() {
     browserApp.router.redirect("forgotPassword");
     e2eUtils.setInputValue("*[name='emailAddress']", browserApp.test.fixtures.unverifiedUser.emailAddress);
     React.addons.TestUtils.Simulate.submit(browserApp.element.querySelector("form"));
+    
     setTimeout(function() {
+
       var message = apiApp.emailer.outbox.messages.pop();
       browserApp.router.redirect(message.body.valueOf().match(/(\/reset-password\/.*)/)[1]);
       e2eUtils.setInputValue("*[name='password']", "password99");
       e2eUtils.setInputValue("*[name='repeatPassword']", "password99");
+
       React.addons.TestUtils.Simulate.submit(browserApp.element.querySelector("form"));
       setTimeout(function() {
         expect(browserApp.router.location.toString()).to.contain("showMessage=authResetPassword.loginWithNewPassword");

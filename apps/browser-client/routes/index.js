@@ -1,5 +1,6 @@
-import forms from "common/data/forms";
-import co    from "co";
+import forms   from "common/data/forms";
+import co      from "co";
+import Invitee from "api/data/models/invitee";
 
 module.exports = function(app) {
   var router = app.router;
@@ -62,6 +63,23 @@ module.exports = function(app) {
       }
     });
   });
+
+  router.addRoute("invite", "/invite/:shortcode", co.wrap(function*(location) {
+
+    var data = Object.assign({ bus: app.bus }, yield app.bus({ 
+      name: "getInviteeFromShortCode", 
+      shortcode: location.params.shortcode 
+    }));
+ 
+    location.setProperties({ 
+      state: {
+        inviter  : new Invitee(data),
+        mainPage : "auth",
+        shortcode: location.params.shortcode,
+        authPage : "invited"
+      }
+    });
+  }));
 
   router.addRoute("forgotPassword", "/forgot", function(location) {
     location.setProperties({
