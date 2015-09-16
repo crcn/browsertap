@@ -2,8 +2,8 @@ import sift              from "sift";
 import mesh              from "common/mesh";
 import httperr           from "httperr";
 import _command          from "api/bus/drivers/command";
-import Invitee           from "api/data/models/invitee";
-import User              from "api/data/models/user";
+import Invitee           from "common/data/models/invitee";
+import User              from "common/data/models/user";
 import RequestInviteForm from "common/data/forms/request-invite";
 import crc32             from "crc32";
 

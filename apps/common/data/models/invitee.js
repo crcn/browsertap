@@ -29,7 +29,7 @@ var inviteeMixin = new Schema({
      */
 
     inviter: {
-      type: require("api/data/types/reference")
+      type: require("common/data/types/reference")
     },
 
     /**

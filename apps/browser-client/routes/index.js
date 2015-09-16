@@ -1,6 +1,6 @@
 import forms   from "common/data/forms";
 import co      from "co";
-import Invitee from "api/data/models/invitee";
+import Invitee from "common/data/models/invitee";
 
 module.exports = function(app) {
   var router = app.router;

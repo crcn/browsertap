@@ -1,6 +1,6 @@
 import ConfirmAccountForm from "./confirm-account"
 import ForgotPassword     from "./forgot-password"
-import User               from "api/data/models/user"
+import User               from "common/data/models/user"
 
 export default {
 

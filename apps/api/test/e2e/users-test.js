@@ -3,7 +3,7 @@ import mesh from "common/mesh";
 import sift from "sift";
 import co from "co";
 import runOp from "common/bus/utils/promise";
-import User from "api/data/models/user";
+import User from "common/data/models/user";
 import SignupForm from "common/data/forms/signup";
 import LoginForm from "common/data/forms/login";
 import forms from "common/data/forms";

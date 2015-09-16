@@ -1,6 +1,6 @@
 var expect   = require("expect.js");
 var React    = require("react/addons");
-var Invitee  = require("api/data/models/invitee");
+var Invitee  = require("common/data/models/invitee");
 var e2eUtils = require("./utils");
 var co       = require("co");
 

@@ -6,7 +6,7 @@ import mu                 from "mustache";
 import fs                 from "fs";
 import _command           from "api/bus/drivers/command";
 import cstripe            from "stripe";
-import Organization       from "api/data/models/organization";
+import Organization       from "common/data/models/organization";
 
 export default function(app, bus) {
 

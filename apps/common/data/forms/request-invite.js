@@ -1,6 +1,6 @@
 import mixinSchema from "common/data/schema/mixin";
 import Schema      from "common/data/schema/schema";
-import Invitee     from "api/data/models/invitee";
+import Invitee     from "common/data/models/invitee";
 
 /**
  */

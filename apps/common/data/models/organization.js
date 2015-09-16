@@ -2,8 +2,8 @@ import Model         from "common/data/models/base/model"
 import Schema        from "common/data/schema/schema";
 import persistMixin  from "common/data/models/mixins/persist"
 import mixinSchema   from "common/data/schema/mixin";
-import Reference     from "api/data/types/reference";
-import Usage         from "api/data/models/usage";
+import Reference     from "common/data/types/reference";
+import Usage         from "common/data/models/usage";
 
 /**
  */

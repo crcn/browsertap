@@ -2,7 +2,7 @@ import Model         from "common/data/models/base/model"
 import Schema        from "common/data/schema/schema";
 import persistMixin  from "common/data/models/mixins/persist"
 import mixinSchema   from "common/data/schema/mixin";
-import Reference     from "api/data/types/reference";
+import Reference     from "common/data/types/reference";
 
 /**
  */

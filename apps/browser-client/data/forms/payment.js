@@ -16,7 +16,7 @@ var paymenyFormSchema = new Schema({
     },
     organization: {
       required: true,
-      type: require("api/data/types/reference")
+      type: require("common/data/types/reference")
     },
     cardNumber: {
       type: CreditCardNumber

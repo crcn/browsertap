@@ -1,784 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _commonDataModelsBaseModel = require("common/data/models/base/model");
-
-var _commonDataModelsBaseModel2 = _interopRequireDefault(_commonDataModelsBaseModel);
-
-var _commonDataSchemaSchema = require("common/data/schema/schema");
-
-var _commonDataSchemaSchema2 = _interopRequireDefault(_commonDataSchemaSchema);
-
-var _commonDataModelsMixinsPersist = require("common/data/models/mixins/persist");
-
-var _commonDataModelsMixinsPersist2 = _interopRequireDefault(_commonDataModelsMixinsPersist);
-
-var _commonDataSchemaMixin = require("common/data/schema/mixin");
-
-var _commonDataSchemaMixin2 = _interopRequireDefault(_commonDataSchemaMixin);
-
-/**
- */
-
-var inviteeMixin = new _commonDataSchemaSchema2["default"]({
-  fields: {
-
-    /**
-     * required for executing DB commands
-     */
-
-    bus: {
-      required: true,
-      type: require("common/data/types/bus")
-    },
-
-    /**
-     */
-
-    shortcode: {
-      type: String
-    },
-
-    /**
-     */
-
-    inviter: {
-      type: require("api/data/types/reference")
-    },
-
-    /**
-     */
-
-    inviteCount: {
-      type: Number,
-      "default": 0
-    },
-
-    /**
-     */
-
-    _id: {
-      type: require("common/data/types/object-id")
-    },
-
-    /**
-     */
-
-    name: {
-      required: true,
-      type: String
-    },
-
-    /**
-     */
-
-    emailAddress: {
-      required: false,
-      unique: true, // TODO
-      type: require("common/data/types/email-address")
-    }
-  }
-});
-
-/**
- */
-
-var Invitee = (function (_Model) {
-  _inherits(Invitee, _Model);
-
-  function Invitee() {
-    _classCallCheck(this, _Invitee);
-
-    _get(Object.getPrototypeOf(_Invitee.prototype), "constructor", this).apply(this, arguments);
-  }
-
-  var _Invitee = Invitee;
-  Invitee = (0, _commonDataSchemaMixin2["default"])(inviteeMixin)(Invitee) || Invitee;
-  Invitee = (0, _commonDataModelsMixinsPersist2["default"])("invitees")(Invitee) || Invitee;
-  return Invitee;
-})(_commonDataModelsBaseModel2["default"]);
-
-// getShareLink() {
-//   return this.app.config.hosts.browser + "#/w/" + this.shortcode;
-// }
-
-/**
- */
-
-exports["default"] = Invitee;
-module.exports = exports["default"];
-
-},{"api/data/types/reference":6,"common/data/models/base/model":56,"common/data/models/mixins/persist":57,"common/data/schema/mixin":58,"common/data/schema/schema":59,"common/data/types/bus":60,"common/data/types/email-address":63,"common/data/types/object-id":65}],2:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var _commonDataModelsBaseModel = require("common/data/models/base/model");
-
-var _commonDataModelsBaseModel2 = _interopRequireDefault(_commonDataModelsBaseModel);
-
-var _commonDataSchemaSchema = require("common/data/schema/schema");
-
-var _commonDataSchemaSchema2 = _interopRequireDefault(_commonDataSchemaSchema);
-
-var _commonDataModelsMixinsPersist = require("common/data/models/mixins/persist");
-
-var _commonDataModelsMixinsPersist2 = _interopRequireDefault(_commonDataModelsMixinsPersist);
-
-var _commonDataSchemaMixin = require("common/data/schema/mixin");
-
-var _commonDataSchemaMixin2 = _interopRequireDefault(_commonDataSchemaMixin);
-
-var _apiDataTypesReference = require("api/data/types/reference");
-
-var _apiDataTypesReference2 = _interopRequireDefault(_apiDataTypesReference);
-
-var _apiDataModelsUsage = require("api/data/models/usage");
-
-var _apiDataModelsUsage2 = _interopRequireDefault(_apiDataModelsUsage);
-
-/**
- */
-
-var Access = (function () {
-  function Access() {
-    _classCallCheck(this, _Access);
-  }
-
-  /**
-   */
-
-  var _Access = Access;
-  Access = (0, _commonDataSchemaMixin2["default"])(new _commonDataSchemaSchema2["default"]({
-    fields: {
-      user: {
-        required: true,
-        type: _apiDataTypesReference2["default"]
-      },
-      level: {
-        "default": "admin",
-        required: true,
-        type: String
-      }
-    }
-  }))(Access) || Access;
-  return Access;
-})();
-
-var organizationSchema = new _commonDataSchemaSchema2["default"]({
-  fields: {
-
-    /**
-     * required for executing DB commands
-     */
-
-    bus: {
-      required: true,
-      type: require("common/data/types/bus")
-    },
-
-    /**
-     * ID of the user 
-     */
-
-    _id: {
-      type: require("common/data/types/object-id")
-    },
-
-    /**
-     */
-
-    name: {
-      required: false,
-      type: String
-    },
-
-    /**
-     */
-
-    access: [{
-      type: Access
-    }]
-  }
-});
-
-/**
- */
-
-var Organization = (function (_Model) {
-  _inherits(Organization, _Model);
-
-  function Organization() {
-    _classCallCheck(this, _Organization);
-
-    _get(Object.getPrototypeOf(_Organization.prototype), "constructor", this).apply(this, arguments);
-  }
-
-  /**
-   */
-
-  _createClass(Organization, [{
-    key: "getUsage",
-
-    /**
-     */
-
-    value: regeneratorRuntime.mark(function getUsage() {
-      return regeneratorRuntime.wrap(function getUsage$(context$2$0) {
-        while (1) switch (context$2$0.prev = context$2$0.next) {
-          case 0:
-            context$2$0.t0 = _apiDataModelsUsage2["default"];
-            context$2$0.t1 = Object;
-            context$2$0.t2 = { bus: this.bus };
-            context$2$0.next = 5;
-            return this.bus({
-              name: "getUsage",
-              organization: this
-            });
-
-          case 5:
-            context$2$0.t3 = context$2$0.sent;
-            context$2$0.t4 = context$2$0.t1.assign.call(context$2$0.t1, context$2$0.t2, context$2$0.t3);
-            return context$2$0.abrupt("return", new context$2$0.t0(context$2$0.t4));
-
-          case 8:
-          case "end":
-            return context$2$0.stop();
-        }
-      }, getUsage, this);
-    })
-
-    /**
-     * returns the billing info such as plan, number of hours used, etc
-     */
-
-  }, {
-    key: "getBillingInfo",
-    value: regeneratorRuntime.mark(function getBillingInfo() {
-      return regeneratorRuntime.wrap(function getBillingInfo$(context$2$0) {
-        while (1) switch (context$2$0.prev = context$2$0.next) {
-          case 0:
-          case "end":
-            return context$2$0.stop();
-        }
-      }, getBillingInfo, this);
-    })
-  }, {
-    key: "getPlan",
-
-    // TODO
-
-    /**
-     * returns the current plan for the organization
-     */
-
-    value: regeneratorRuntime.mark(function getPlan() {
-      return regeneratorRuntime.wrap(function getPlan$(context$2$0) {
-        while (1) switch (context$2$0.prev = context$2$0.next) {
-          case 0:
-          case "end":
-            return context$2$0.stop();
-        }
-      }, getPlan, this);
-    })
-
-    /**
-     * gets the current running desktops
-     */
-
-  }, {
-    key: "getDesktops",
-    value: regeneratorRuntime.mark(function getDesktops() {
-      return regeneratorRuntime.wrap(function getDesktops$(context$2$0) {
-        while (1) switch (context$2$0.prev = context$2$0.next) {
-          case 0:
-          case "end":
-            return context$2$0.stop();
-        }
-      }, getDesktops, this);
-    })
-
-    /**
-     */
-
-  }, {
-    key: "startDesktop",
-    value: regeneratorRuntime.mark(function startDesktop() {
-      return regeneratorRuntime.wrap(function startDesktop$(context$2$0) {
-        while (1) switch (context$2$0.prev = context$2$0.next) {
-          case 0:
-          case "end":
-            return context$2$0.stop();
-        }
-      }, startDesktop, this);
-    })
-  }]);
-
-  var _Organization = Organization;
-  Organization = (0, _commonDataSchemaMixin2["default"])(organizationSchema)(Organization) || Organization;
-  Organization = (0, _commonDataModelsMixinsPersist2["default"])("organizations")(Organization) || Organization;
-  return Organization;
-})(_commonDataModelsBaseModel2["default"]);
-
-exports["default"] = Organization;
-module.exports = exports["default"];
-
-},{"api/data/models/usage":4,"api/data/types/reference":6,"common/data/models/base/model":56,"common/data/models/mixins/persist":57,"common/data/schema/mixin":58,"common/data/schema/schema":59,"common/data/types/bus":60,"common/data/types/object-id":65}],3:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _commonDataModelsBaseModel = require("common/data/models/base/model");
-
-var _commonDataModelsBaseModel2 = _interopRequireDefault(_commonDataModelsBaseModel);
-
-var _commonDataSchemaSchema = require("common/data/schema/schema");
-
-var _commonDataSchemaSchema2 = _interopRequireDefault(_commonDataSchemaSchema);
-
-var _commonDataSchemaMixin = require("common/data/schema/mixin");
-
-var _commonDataSchemaMixin2 = _interopRequireDefault(_commonDataSchemaMixin);
-
-/**
- */
-
-var passwordSchema = new _commonDataSchemaSchema2["default"]({
-  fields: {
-    secret: {
-      required: true,
-      type: require("common/data/types/password")
-    }
-  }
-});
-
-/**
- */
-
-var PasswordKey = (function (_Model) {
-  _inherits(PasswordKey, _Model);
-
-  function PasswordKey() {
-    _classCallCheck(this, _PasswordKey);
-
-    _get(Object.getPrototypeOf(_PasswordKey.prototype), "constructor", this).apply(this, arguments);
-  }
-
-  var _PasswordKey = PasswordKey;
-  PasswordKey = (0, _commonDataSchemaMixin2["default"])(passwordSchema)(PasswordKey) || PasswordKey;
-  return PasswordKey;
-})(_commonDataModelsBaseModel2["default"]);
-
-exports["default"] = PasswordKey;
-module.exports = exports["default"];
-
-},{"common/data/models/base/model":56,"common/data/schema/mixin":58,"common/data/schema/schema":59,"common/data/types/password":66}],4:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _commonDataModelsBaseModel = require("common/data/models/base/model");
-
-var _commonDataModelsBaseModel2 = _interopRequireDefault(_commonDataModelsBaseModel);
-
-var _commonDataSchemaSchema = require("common/data/schema/schema");
-
-var _commonDataSchemaSchema2 = _interopRequireDefault(_commonDataSchemaSchema);
-
-var _commonDataModelsMixinsPersist = require("common/data/models/mixins/persist");
-
-var _commonDataModelsMixinsPersist2 = _interopRequireDefault(_commonDataModelsMixinsPersist);
-
-var _commonDataSchemaMixin = require("common/data/schema/mixin");
-
-var _commonDataSchemaMixin2 = _interopRequireDefault(_commonDataSchemaMixin);
-
-var _httperr = require("httperr");
-
-var _httperr2 = _interopRequireDefault(_httperr);
-
-var _apiDataTypesReference = require("api/data/types/reference");
-
-var _apiDataTypesReference2 = _interopRequireDefault(_apiDataTypesReference);
-
-/**
- */
-
-var usageSchema = new _commonDataSchemaSchema2["default"]({
-  fields: {
-
-    /**
-     * ID of the user 
-     */
-
-    _id: {
-      type: require("common/data/types/object-id")
-    },
-
-    /**
-     * ID of the user 
-     */
-
-    organization: {
-      type: _apiDataTypesReference2["default"]
-    },
-
-    /**
-     */
-
-    minutes: {
-      "default": 0,
-      type: Number
-    }
-  }
-});
-
-/**
- */
-
-var Usage = (function (_Model) {
-  _inherits(Usage, _Model);
-
-  function Usage() {
-    _classCallCheck(this, _Usage);
-
-    _get(Object.getPrototypeOf(_Usage.prototype), "constructor", this).apply(this, arguments);
-  }
-
-  /**
-   */
-
-  _createClass(Usage, [{
-    key: "reset",
-    value: regeneratorRuntime.mark(function reset() {
-      return regeneratorRuntime.wrap(function reset$(context$2$0) {
-        while (1) switch (context$2$0.prev = context$2$0.next) {
-          case 0:
-            this.minutes = 0;
-            context$2$0.next = 3;
-            return this.update();
-
-          case 3:
-            return context$2$0.abrupt("return", context$2$0.sent);
-
-          case 4:
-          case "end":
-            return context$2$0.stop();
-        }
-      }, reset, this);
-    })
-  }, {
-    key: "addMinutes",
-    value: regeneratorRuntime.mark(function addMinutes(amount) {
-      return regeneratorRuntime.wrap(function addMinutes$(context$2$0) {
-        while (1) switch (context$2$0.prev = context$2$0.next) {
-          case 0:
-            this.minutes += amount;
-            context$2$0.next = 3;
-            return this.update();
-
-          case 3:
-            return context$2$0.abrupt("return", context$2$0.sent);
-
-          case 4:
-          case "end":
-            return context$2$0.stop();
-        }
-      }, addMinutes, this);
-    })
-  }]);
-
-  var _Usage = Usage;
-  Usage = (0, _commonDataSchemaMixin2["default"])(usageSchema)(Usage) || Usage;
-  Usage = (0, _commonDataModelsMixinsPersist2["default"])("usages")(Usage) || Usage;
-  return Usage;
-})(_commonDataModelsBaseModel2["default"]);
-
-exports["default"] = Usage;
-module.exports = exports["default"];
-
-},{"api/data/types/reference":6,"common/data/models/base/model":56,"common/data/models/mixins/persist":57,"common/data/schema/mixin":58,"common/data/schema/schema":59,"common/data/types/object-id":65,"httperr":450}],5:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _commonDataModelsBaseModel = require("common/data/models/base/model");
-
-var _commonDataModelsBaseModel2 = _interopRequireDefault(_commonDataModelsBaseModel);
-
-var _commonDataSchemaSchema = require("common/data/schema/schema");
-
-var _commonDataSchemaSchema2 = _interopRequireDefault(_commonDataSchemaSchema);
-
-var _commonDataModelsMixinsPersist = require("common/data/models/mixins/persist");
-
-var _commonDataModelsMixinsPersist2 = _interopRequireDefault(_commonDataModelsMixinsPersist);
-
-var _commonDataSchemaMixin = require("common/data/schema/mixin");
-
-var _commonDataSchemaMixin2 = _interopRequireDefault(_commonDataSchemaMixin);
-
-var _apiDataModelsOrganization = require("api/data/models/organization");
-
-var _apiDataModelsOrganization2 = _interopRequireDefault(_apiDataModelsOrganization);
-
-/**
- */
-
-var userSchema = new _commonDataSchemaSchema2["default"]({
-  fields: {
-
-    /**
-     * required for executing DB commands
-     */
-
-    bus: {
-      required: true,
-      type: require("common/data/types/bus")
-    },
-
-    /**
-     * ID of the user 
-     */
-
-    _id: {
-      type: require("common/data/types/object-id")
-    },
-
-    /**
-     */
-
-    confirmed: {
-      type: Boolean,
-      "default": false
-    },
-
-    /**
-     */
-
-    emailAddress: {
-      required: true,
-      unique: true, // TODO
-      type: require("common/data/types/email-address")
-    },
-
-    /**
-     */
-
-    locale: {
-      type: require("common/data/types/locale")
-    },
-
-    /**
-     */
-
-    firstName: {
-      type: String
-    },
-
-    /**
-     */
-
-    lastName: {
-      type: String
-    },
-
-    /**
-     * secret keys including password
-     */
-
-    keys: [{
-      internal: true,
-      type: require("./password-key")
-    }]
-  }
-});
-
-/**
- */
-
-var User = (function (_Model) {
-  _inherits(User, _Model);
-
-  function User() {
-    _classCallCheck(this, _User);
-
-    _get(Object.getPrototypeOf(_User.prototype), "constructor", this).apply(this, arguments);
-  }
-
-  /**
-   */
-
-  _createClass(User, [{
-    key: "getOrganizations",
-
-    /**
-     */
-
-    value: regeneratorRuntime.mark(function getOrganizations() {
-      return regeneratorRuntime.wrap(function getOrganizations$(context$2$0) {
-        while (1) switch (context$2$0.prev = context$2$0.next) {
-          case 0:
-            context$2$0.next = 2;
-            return this.bus.execute({
-              name: "getUserOrganizations"
-            });
-
-          case 2:
-            context$2$0.t0 = (function (data) {
-              return new _apiDataModelsOrganization2["default"](Object.assign({ bus: this.bus.value }, data));
-            }).bind(this);
-
-            return context$2$0.abrupt("return", context$2$0.sent.map(context$2$0.t0));
-
-          case 4:
-          case "end":
-            return context$2$0.stop();
-        }
-      }, getOrganizations, this);
-    })
-
-    /**
-     */
-
-  }, {
-    key: "createOrganization",
-    value: regeneratorRuntime.mark(function createOrganization() {
-      var organization;
-      return regeneratorRuntime.wrap(function createOrganization$(context$2$0) {
-        while (1) switch (context$2$0.prev = context$2$0.next) {
-          case 0:
-            organization = new _apiDataModelsOrganization2["default"]({
-              bus: this.bus,
-              access: [{
-                user: { _id: this._id },
-                level: "admin"
-              }]
-            });
-            context$2$0.next = 3;
-            return organization.insert();
-
-          case 3:
-            return context$2$0.abrupt("return", context$2$0.sent);
-
-          case 4:
-          case "end":
-            return context$2$0.stop();
-        }
-      }, createOrganization, this);
-    })
-  }]);
-
-  var _User = User;
-  User = (0, _commonDataSchemaMixin2["default"])(userSchema)(User) || User;
-  User = (0, _commonDataModelsMixinsPersist2["default"])("users")(User) || User;
-  return User;
-})(_commonDataModelsBaseModel2["default"]);
-
-exports["default"] = User;
-module.exports = exports["default"];
-
-},{"./password-key":3,"api/data/models/organization":2,"common/data/models/base/model":56,"common/data/models/mixins/persist":57,"common/data/schema/mixin":58,"common/data/schema/schema":59,"common/data/types/bus":60,"common/data/types/email-address":63,"common/data/types/locale":64,"common/data/types/object-id":65}],6:[function(require,module,exports){
-"use strict";
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var _commonDataSchemaSchema = require("common/data/schema/schema");
-
-var _commonDataSchemaSchema2 = _interopRequireDefault(_commonDataSchemaSchema);
-
-var _commonDataSchemaMixin = require("common/data/schema/mixin");
-
-var _commonDataSchemaMixin2 = _interopRequireDefault(_commonDataSchemaMixin);
-
-/**
- */
-
-var Reference = (function () {
-  function Reference() {
-    _classCallCheck(this, _Reference);
-  }
-
-  /**
-   */
-
-  var _Reference = Reference;
-  Reference = (0, _commonDataSchemaMixin2["default"])(new _commonDataSchemaSchema2["default"]({
-    fields: {
-      _id: {
-        required: true,
-        type: require("common/data/types/object-id")
-      }
-    }
-  }))(Reference) || Reference;
-  return Reference;
-})();
-
-module.exports = Reference;
-
-},{"common/data/schema/mixin":58,"common/data/schema/schema":59,"common/data/types/object-id":65}],7:[function(require,module,exports){
-"use strict";
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
@@ -857,7 +79,7 @@ module.exports = BrowserClientApplication;
 /**
  */
 
-},{"./bus":8,"./components/main":10,"./routes":36,"./shortcuts":37,"./translations/en":38,"common/application":39,"common/router":78,"common/translations/en":80,"react":739}],8:[function(require,module,exports){
+},{"./bus":2,"./components/main":4,"./routes":30,"./shortcuts":31,"./translations/en":32,"common/application":33,"common/router":78,"common/translations/en":80,"react":739}],2:[function(require,module,exports){
 (function (process){
 // var createSocketBus = require("common/bus/socketio");
 // var io              = require("socket.io-client");
@@ -903,7 +125,7 @@ module.exports = function (app, bus) {
 };
 
 }).call(this,require('_process'))
-},{"_process":416,"common/mesh":74,"httperr":450,"superagent":741}],9:[function(require,module,exports){
+},{"_process":416,"common/mesh":74,"httperr":450,"superagent":741}],3:[function(require,module,exports){
 "use strict";
 
 var React = require("react");
@@ -943,7 +165,7 @@ var Portal = React.createClass({
 
 module.exports = Portal;
 
-},{"react":739}],10:[function(require,module,exports){
+},{"react":739}],4:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -976,7 +198,7 @@ var Main = _react2["default"].createClass({
 
 module.exports = Main;
 
-},{"./pages":32,"react":739}],11:[function(require,module,exports){
+},{"./pages":26,"react":739}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1008,7 +230,7 @@ var GroundControl = _react2["default"].createClass({
 exports["default"] = GroundControl;
 module.exports = exports["default"];
 
-},{"./pages":13,"react":739}],12:[function(require,module,exports){
+},{"./pages":7,"react":739}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1032,7 +254,7 @@ var Help = _react2["default"].createClass({
 exports["default"] = Help;
 module.exports = exports["default"];
 
-},{"react":739}],13:[function(require,module,exports){
+},{"react":739}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1150,7 +372,7 @@ var Options = React.createClass({
 exports["default"] = Options;
 module.exports = exports["default"];
 
-},{"./help":12,"./payment":14,"./playback-settings":15,"./report-bug":16,"./shortcuts":17,"./support":18,"./team-members":19,"./tools":20,"react":739,"sift":740}],14:[function(require,module,exports){
+},{"./help":6,"./payment":8,"./playback-settings":9,"./report-bug":10,"./shortcuts":11,"./support":12,"./team-members":13,"./tools":14,"react":739,"sift":740}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1187,7 +409,7 @@ var Payment = _react2["default"].createClass({
 exports["default"] = Payment;
 module.exports = exports["default"];
 
-},{"browser-client/data/forms/payment":33,"common/components/data-form":48,"react":739}],15:[function(require,module,exports){
+},{"browser-client/data/forms/payment":27,"common/components/data-form":42,"react":739}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1211,7 +433,7 @@ var PlaybackSettings = _react2["default"].createClass({
 exports["default"] = PlaybackSettings;
 module.exports = exports["default"];
 
-},{"react":739}],16:[function(require,module,exports){
+},{"react":739}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1235,7 +457,7 @@ var ReportBug = _react2["default"].createClass({
 exports["default"] = ReportBug;
 module.exports = exports["default"];
 
-},{"react":739}],17:[function(require,module,exports){
+},{"react":739}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1260,7 +482,7 @@ var Shortcuts = _react2["default"].createClass({
 exports["default"] = Shortcuts;
 module.exports = exports["default"];
 
-},{"react":739}],18:[function(require,module,exports){
+},{"react":739}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1284,7 +506,7 @@ var Support = _react2["default"].createClass({
 exports["default"] = Support;
 module.exports = exports["default"];
 
-},{"react":739}],19:[function(require,module,exports){
+},{"react":739}],13:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1310,7 +532,7 @@ var TeamMembers = _react2["default"].createClass({
 exports["default"] = TeamMembers;
 module.exports = exports["default"];
 
-},{"react":739}],20:[function(require,module,exports){
+},{"react":739}],14:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1334,7 +556,7 @@ var Tools = _react2["default"].createClass({
 exports["default"] = Tools;
 module.exports = exports["default"];
 
-},{"react":739}],21:[function(require,module,exports){
+},{"react":739}],15:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -1374,7 +596,7 @@ var App = _react2["default"].createClass({
 
 module.exports = App;
 
-},{"./ground-control":11,"./toolbar":22,"browser-client/components/common/portal":9,"react":739}],22:[function(require,module,exports){
+},{"./ground-control":5,"./toolbar":16,"browser-client/components/common/portal":3,"react":739}],16:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1409,7 +631,7 @@ var Toolbar = React.createClass({
 exports["default"] = Toolbar;
 module.exports = exports["default"];
 
-},{"classnames":444,"react":739}],23:[function(require,module,exports){
+},{"classnames":444,"react":739}],17:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1458,7 +680,7 @@ var Confirmed = _react2["default"].createClass({
 exports["default"] = Confirmed;
 module.exports = exports["default"];
 
-},{"common/components/data-form":48,"common/data/forms/forgot-password":50,"react":739,"react-intl":555}],24:[function(require,module,exports){
+},{"common/components/data-form":42,"common/data/forms/forgot-password":44,"react":739,"react-intl":555}],18:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1502,7 +724,7 @@ var ForgotPassword = _react2["default"].createClass({
 exports["default"] = ForgotPassword;
 module.exports = exports["default"];
 
-},{"common/components/data-form":48,"common/data/forms/forgot-password":50,"react":739,"react-intl":555}],25:[function(require,module,exports){
+},{"common/components/data-form":42,"common/data/forms/forgot-password":44,"react":739,"react-intl":555}],19:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1550,7 +772,7 @@ var AuthPages = React.createClass({
 exports["default"] = AuthPages;
 module.exports = exports["default"];
 
-},{"./confirmed":23,"./forgot-password":24,"./invited":26,"./login":27,"./request-invite":29,"./request-invite-complete":28,"./reset-password":30,"./signup":31,"react":739}],26:[function(require,module,exports){
+},{"./confirmed":17,"./forgot-password":18,"./invited":20,"./login":21,"./request-invite":23,"./request-invite-complete":22,"./reset-password":24,"./signup":25,"react":739}],20:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1601,7 +823,7 @@ var Invitied = _react2["default"].createClass({
 exports["default"] = Invitied;
 module.exports = exports["default"];
 
-},{"common/components/data-form":48,"common/data/forms/forgot-password":50,"react":739,"react-intl":555}],27:[function(require,module,exports){
+},{"common/components/data-form":42,"common/data/forms/forgot-password":44,"react":739,"react-intl":555}],21:[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -1677,7 +899,7 @@ exports["default"] = Login;
 module.exports = exports["default"];
 
 }).call(this,require('_process'))
-},{"_process":416,"common/components/data-form":48,"common/data/forms/login":52,"react":739,"react-intl":555}],28:[function(require,module,exports){
+},{"_process":416,"common/components/data-form":42,"common/data/forms/login":46,"react":739,"react-intl":555}],22:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1728,7 +950,7 @@ var RequestInviteComplete = _react2["default"].createClass({
 exports["default"] = RequestInviteComplete;
 module.exports = exports["default"];
 
-},{"common/components/data-form":48,"common/data/forms/login":52,"react":739,"react-intl":555}],29:[function(require,module,exports){
+},{"common/components/data-form":42,"common/data/forms/login":46,"react":739,"react-intl":555}],23:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1802,7 +1024,7 @@ var RequestInvite = _react2["default"].createClass({
 exports["default"] = RequestInvite;
 module.exports = exports["default"];
 
-},{"common/components/data-form":48,"common/data/forms/request-invite":53,"react":739,"react-intl":555}],30:[function(require,module,exports){
+},{"common/components/data-form":42,"common/data/forms/request-invite":47,"react":739,"react-intl":555}],24:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1848,7 +1070,7 @@ var ResetPassword = _react2["default"].createClass({
 exports["default"] = ResetPassword;
 module.exports = exports["default"];
 
-},{"common/components/data-form":48,"common/data/forms/reset-password":54,"react":739}],31:[function(require,module,exports){
+},{"common/components/data-form":42,"common/data/forms/reset-password":48,"react":739}],25:[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -1907,7 +1129,7 @@ exports["default"] = Signup;
 module.exports = exports["default"];
 
 }).call(this,require('_process'))
-},{"_process":416,"common/components/data-form":48,"common/data/forms/signup":55,"react":739,"react-intl":555}],32:[function(require,module,exports){
+},{"_process":416,"common/components/data-form":42,"common/data/forms/signup":49,"react":739,"react-intl":555}],26:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -1941,7 +1163,7 @@ var Pages = _react2["default"].createClass({
 
 module.exports = Pages;
 
-},{"./app":21,"./auth":25,"react":739}],33:[function(require,module,exports){
+},{"./app":15,"./auth":19,"react":739}],27:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1986,7 +1208,7 @@ var paymenyFormSchema = new _commonDataSchemaSchema2["default"]({
     },
     organization: {
       required: true,
-      type: require("api/data/types/reference")
+      type: require("common/data/types/reference")
     },
     cardNumber: {
       type: _commonDataTypesCreditCardNumber2["default"]
@@ -2069,7 +1291,7 @@ module.exports = exports["default"];
 
 // TODO - move this to command
 
-},{"api/data/types/reference":6,"common/data/schema/mixin":58,"common/data/schema/schema":59,"common/data/types/bus":60,"common/data/types/credit-card-number":61,"common/data/types/cvc":62,"httperr":450}],34:[function(require,module,exports){
+},{"common/data/schema/mixin":57,"common/data/schema/schema":58,"common/data/types/bus":59,"common/data/types/credit-card-number":60,"common/data/types/cvc":61,"common/data/types/reference":66,"httperr":450}],28:[function(require,module,exports){
 "use strict";
 
 var getConfig = require("common/utils/get-config");
@@ -2094,7 +1316,7 @@ module.exports = function (env) {
   return deepExtend({}, getConfig(env), config.defaults);
 };
 
-},{"common/utils/get-config":82,"lodash/object/defaultsDeep":493}],35:[function(require,module,exports){
+},{"common/utils/get-config":82,"lodash/object/defaultsDeep":493}],29:[function(require,module,exports){
 (function (global){
 "use strict";
 
@@ -2118,7 +1340,7 @@ app.initialize(function () {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./application":7,"./get-config":34,"babel/polyfill":265}],36:[function(require,module,exports){
+},{"./application":1,"./get-config":28,"babel/polyfill":265}],30:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -2131,9 +1353,9 @@ var _co = require("co");
 
 var _co2 = _interopRequireDefault(_co);
 
-var _apiDataModelsInvitee = require("api/data/models/invitee");
+var _commonDataModelsInvitee = require("common/data/models/invitee");
 
-var _apiDataModelsInvitee2 = _interopRequireDefault(_apiDataModelsInvitee);
+var _commonDataModelsInvitee2 = _interopRequireDefault(_commonDataModelsInvitee);
 
 module.exports = function (app) {
   var router = app.router;
@@ -2249,7 +1471,7 @@ module.exports = function (app) {
 
           location.setProperties({
             state: {
-              inviter: new _apiDataModelsInvitee2["default"](data),
+              inviter: new _commonDataModelsInvitee2["default"](data),
               mainPage: "auth",
               shortcode: location.params.shortcode,
               authPage: "invited"
@@ -2347,7 +1569,7 @@ module.exports = function (app) {
 
 // stuff already exists
 
-},{"api/data/models/invitee":1,"co":445,"common/data/forms":51}],37:[function(require,module,exports){
+},{"co":445,"common/data/forms":45,"common/data/models/invitee":51}],31:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2421,7 +1643,7 @@ function _bindKey(key, handler) {
 }
 module.exports = exports["default"];
 
-},{"mousetrap":546}],38:[function(require,module,exports){
+},{"mousetrap":546}],32:[function(require,module,exports){
 module.exports={
   "fields": {
     "emailAddress": "Email Address"
@@ -2466,7 +1688,7 @@ module.exports={
     "successMessage": "Check your email for instructions on resetting your password!"
   }
 }
-},{}],39:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2579,7 +1801,7 @@ var Application = (function (_BaseModel) {
 exports["default"] = Application;
 module.exports = exports["default"];
 
-},{"./plugins/catch-errors":40,"common/bus":42,"common/bus/log":43,"common/data/models/base/model":56,"common/logger":68,"lodash/array/flattenDeep":451}],40:[function(require,module,exports){
+},{"./plugins/catch-errors":34,"common/bus":36,"common/bus/log":37,"common/data/models/base/model":50,"common/logger":68,"lodash/array/flattenDeep":451}],34:[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -2651,7 +1873,7 @@ function server(app) {
 }
 
 }).call(this,require('_process'))
-},{"_process":416,"mesh":518,"parse-stack":548,"platform":550}],41:[function(require,module,exports){
+},{"_process":416,"mesh":518,"parse-stack":548,"platform":550}],35:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -2669,7 +1891,7 @@ exports.createClient = function (config) {
   };
 };
 
-},{"loggly-browserify":501}],42:[function(require,module,exports){
+},{"loggly-browserify":501}],36:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -2687,7 +1909,7 @@ module.exports = function (app, bus) {
   return bus;
 };
 
-},{"common/mesh":74}],43:[function(require,module,exports){
+},{"common/mesh":74}],37:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -2717,7 +1939,7 @@ module.exports = function (app, bus) {
   return bus;
 };
 
-},{"./loggly":44,"./operations":45,"./stdout":46,"common/mesh":74,"sift":740}],44:[function(require,module,exports){
+},{"./loggly":38,"./operations":39,"./stdout":40,"common/mesh":74,"sift":740}],38:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -2748,7 +1970,7 @@ module.exports = function (app) {
   };
 };
 
-},{"common/mesh":74,"loggly":41}],45:[function(require,module,exports){
+},{"common/mesh":74,"loggly":35}],39:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -2773,7 +1995,7 @@ module.exports = function (app, bus) {
   };
 };
 
-},{"common/mesh":74,"sift":740}],46:[function(require,module,exports){
+},{"common/mesh":74,"sift":740}],40:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -2858,7 +2080,7 @@ module.exports = function (app) {
   };
 };
 
-},{"chalk":436,"lodash/string/padRight":498,"parse-stack":548}],47:[function(require,module,exports){
+},{"chalk":436,"lodash/string/padRight":498,"parse-stack":548}],41:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -2890,7 +2112,7 @@ module.exports = regeneratorRuntime.mark(function callee$0$0(bus, operation) {
   }, callee$0$0, this);
 });
 
-},{"co":445}],48:[function(require,module,exports){
+},{"co":445}],42:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3212,7 +2434,7 @@ var DataForm = _react2["default"].createClass({
 exports["default"] = DataForm;
 module.exports = exports["default"];
 
-},{"classnames":444,"co":445,"common/data/types/credit-card-number":61,"common/data/types/email-address":63,"common/data/types/password":66,"object-diff":547,"react":739,"react-intl":555}],49:[function(require,module,exports){
+},{"classnames":444,"co":445,"common/data/types/credit-card-number":60,"common/data/types/email-address":62,"common/data/types/password":65,"object-diff":547,"react":739,"react-intl":555}],43:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3316,7 +2538,7 @@ var ConfirmAccountSchema = (function () {
 exports["default"] = ConfirmAccountSchema;
 module.exports = exports["default"];
 
-},{"common/data/schema/mixin":58,"common/data/schema/schema":59,"common/data/types/bus":60,"common/data/types/object-id":65}],50:[function(require,module,exports){
+},{"common/data/schema/mixin":57,"common/data/schema/schema":58,"common/data/types/bus":59,"common/data/types/object-id":64}],44:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3402,7 +2624,7 @@ var ForgotPasswordForm = (function () {
 exports["default"] = ForgotPasswordForm;
 module.exports = exports["default"];
 
-},{"common/data/schema/mixin":58,"common/data/schema/schema":59,"common/data/types/bus":60,"common/data/types/email-address":63}],51:[function(require,module,exports){
+},{"common/data/schema/mixin":57,"common/data/schema/schema":58,"common/data/types/bus":59,"common/data/types/email-address":62}],45:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3419,9 +2641,9 @@ var _forgotPassword = require("./forgot-password");
 
 var _forgotPassword2 = _interopRequireDefault(_forgotPassword);
 
-var _apiDataModelsUser = require("api/data/models/user");
+var _commonDataModelsUser = require("common/data/models/user");
 
-var _apiDataModelsUser2 = _interopRequireDefault(_apiDataModelsUser);
+var _commonDataModelsUser2 = _interopRequireDefault(_commonDataModelsUser);
 
 exports["default"] = {
 
@@ -3432,7 +2654,7 @@ exports["default"] = {
     return regeneratorRuntime.wrap(function getSessionUser$(context$1$0) {
       while (1) switch (context$1$0.prev = context$1$0.next) {
         case 0:
-          context$1$0.t0 = _apiDataModelsUser2["default"];
+          context$1$0.t0 = _commonDataModelsUser2["default"];
           context$1$0.t1 = Object;
           context$1$0.t2 = { bus: bus };
           context$1$0.next = 5;
@@ -3492,7 +2714,7 @@ exports["default"] = {
 };
 module.exports = exports["default"];
 
-},{"./confirm-account":49,"./forgot-password":50,"api/data/models/user":5}],52:[function(require,module,exports){
+},{"./confirm-account":43,"./forgot-password":44,"common/data/models/user":56}],46:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3582,7 +2804,7 @@ var LoginForm = (function () {
 exports["default"] = LoginForm;
 module.exports = exports["default"];
 
-},{"common/data/schema/mixin":58,"common/data/schema/schema":59,"common/data/types/bus":60,"common/data/types/email-address":63,"common/data/types/password":66}],53:[function(require,module,exports){
+},{"common/data/schema/mixin":57,"common/data/schema/schema":58,"common/data/types/bus":59,"common/data/types/email-address":62,"common/data/types/password":65}],47:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3603,9 +2825,9 @@ var _commonDataSchemaSchema = require("common/data/schema/schema");
 
 var _commonDataSchemaSchema2 = _interopRequireDefault(_commonDataSchemaSchema);
 
-var _apiDataModelsInvitee = require("api/data/models/invitee");
+var _commonDataModelsInvitee = require("common/data/models/invitee");
 
-var _apiDataModelsInvitee2 = _interopRequireDefault(_apiDataModelsInvitee);
+var _commonDataModelsInvitee2 = _interopRequireDefault(_commonDataModelsInvitee);
 
 /**
  */
@@ -3650,7 +2872,7 @@ var RequestInviteForm = (function () {
       return regeneratorRuntime.wrap(function submit$(context$2$0) {
         while (1) switch (context$2$0.prev = context$2$0.next) {
           case 0:
-            context$2$0.t0 = _apiDataModelsInvitee2["default"];
+            context$2$0.t0 = _commonDataModelsInvitee2["default"];
             context$2$0.t1 = Object;
             context$2$0.t2 = { bus: this.bus };
             context$2$0.next = 5;
@@ -3685,7 +2907,7 @@ var RequestInviteForm = (function () {
 exports["default"] = RequestInviteForm;
 module.exports = exports["default"];
 
-},{"api/data/models/invitee":1,"common/data/schema/mixin":58,"common/data/schema/schema":59,"common/data/types/bus":60,"common/data/types/email-address":63}],54:[function(require,module,exports){
+},{"common/data/models/invitee":51,"common/data/schema/mixin":57,"common/data/schema/schema":58,"common/data/types/bus":59,"common/data/types/email-address":62}],48:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3800,7 +3022,7 @@ var ResetPasswordForm = (function () {
 exports["default"] = ResetPasswordForm;
 module.exports = exports["default"];
 
-},{"common/data/schema/mixin":58,"common/data/schema/schema":59,"common/data/types/bus":60,"common/data/types/object-id":65,"common/data/types/password":66}],55:[function(require,module,exports){
+},{"common/data/schema/mixin":57,"common/data/schema/schema":58,"common/data/types/bus":59,"common/data/types/object-id":64,"common/data/types/password":65}],49:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3908,7 +3130,7 @@ var SignupForm = (function () {
 exports["default"] = SignupForm;
 module.exports = exports["default"];
 
-},{"common/data/schema/mixin":58,"common/data/schema/schema":59,"common/data/types/bus":60,"common/data/types/email-address":63,"common/data/types/password":66}],56:[function(require,module,exports){
+},{"common/data/schema/mixin":57,"common/data/schema/schema":58,"common/data/types/bus":59,"common/data/types/email-address":62,"common/data/types/password":65}],50:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4003,7 +3225,129 @@ var BaseModel = (function (_EventEmitter) {
 exports["default"] = BaseModel;
 module.exports = exports["default"];
 
-},{"events":412,"mesh":518}],57:[function(require,module,exports){
+},{"events":412,"mesh":518}],51:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _commonDataModelsBaseModel = require("common/data/models/base/model");
+
+var _commonDataModelsBaseModel2 = _interopRequireDefault(_commonDataModelsBaseModel);
+
+var _commonDataSchemaSchema = require("common/data/schema/schema");
+
+var _commonDataSchemaSchema2 = _interopRequireDefault(_commonDataSchemaSchema);
+
+var _commonDataModelsMixinsPersist = require("common/data/models/mixins/persist");
+
+var _commonDataModelsMixinsPersist2 = _interopRequireDefault(_commonDataModelsMixinsPersist);
+
+var _commonDataSchemaMixin = require("common/data/schema/mixin");
+
+var _commonDataSchemaMixin2 = _interopRequireDefault(_commonDataSchemaMixin);
+
+/**
+ */
+
+var inviteeMixin = new _commonDataSchemaSchema2["default"]({
+  fields: {
+
+    /**
+     * required for executing DB commands
+     */
+
+    bus: {
+      required: true,
+      type: require("common/data/types/bus")
+    },
+
+    /**
+     */
+
+    shortcode: {
+      type: String
+    },
+
+    /**
+     */
+
+    inviter: {
+      type: require("common/data/types/reference")
+    },
+
+    /**
+     */
+
+    inviteCount: {
+      type: Number,
+      "default": 0
+    },
+
+    /**
+     */
+
+    _id: {
+      type: require("common/data/types/object-id")
+    },
+
+    /**
+     */
+
+    name: {
+      required: true,
+      type: String
+    },
+
+    /**
+     */
+
+    emailAddress: {
+      required: false,
+      unique: true, // TODO
+      type: require("common/data/types/email-address")
+    }
+  }
+});
+
+/**
+ */
+
+var Invitee = (function (_Model) {
+  _inherits(Invitee, _Model);
+
+  function Invitee() {
+    _classCallCheck(this, _Invitee);
+
+    _get(Object.getPrototypeOf(_Invitee.prototype), "constructor", this).apply(this, arguments);
+  }
+
+  var _Invitee = Invitee;
+  Invitee = (0, _commonDataSchemaMixin2["default"])(inviteeMixin)(Invitee) || Invitee;
+  Invitee = (0, _commonDataModelsMixinsPersist2["default"])("invitees")(Invitee) || Invitee;
+  return Invitee;
+})(_commonDataModelsBaseModel2["default"]);
+
+// getShareLink() {
+//   return this.app.config.hosts.browser + "#/w/" + this.shortcode;
+// }
+
+/**
+ */
+
+exports["default"] = Invitee;
+module.exports = exports["default"];
+
+},{"common/data/models/base/model":50,"common/data/models/mixins/persist":52,"common/data/schema/mixin":57,"common/data/schema/schema":58,"common/data/types/bus":59,"common/data/types/email-address":62,"common/data/types/object-id":64,"common/data/types/reference":66}],52:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4234,7 +3578,623 @@ exports["default"] = function (collectionName) {
 ;
 module.exports = exports["default"];
 
-},{"common/bus/utils/promise":47,"common/utils/class/mixin":81,"httperr":450}],58:[function(require,module,exports){
+},{"common/bus/utils/promise":41,"common/utils/class/mixin":81,"httperr":450}],53:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var _commonDataModelsBaseModel = require("common/data/models/base/model");
+
+var _commonDataModelsBaseModel2 = _interopRequireDefault(_commonDataModelsBaseModel);
+
+var _commonDataSchemaSchema = require("common/data/schema/schema");
+
+var _commonDataSchemaSchema2 = _interopRequireDefault(_commonDataSchemaSchema);
+
+var _commonDataModelsMixinsPersist = require("common/data/models/mixins/persist");
+
+var _commonDataModelsMixinsPersist2 = _interopRequireDefault(_commonDataModelsMixinsPersist);
+
+var _commonDataSchemaMixin = require("common/data/schema/mixin");
+
+var _commonDataSchemaMixin2 = _interopRequireDefault(_commonDataSchemaMixin);
+
+var _commonDataTypesReference = require("common/data/types/reference");
+
+var _commonDataTypesReference2 = _interopRequireDefault(_commonDataTypesReference);
+
+var _commonDataModelsUsage = require("common/data/models/usage");
+
+var _commonDataModelsUsage2 = _interopRequireDefault(_commonDataModelsUsage);
+
+/**
+ */
+
+var Access = (function () {
+  function Access() {
+    _classCallCheck(this, _Access);
+  }
+
+  /**
+   */
+
+  var _Access = Access;
+  Access = (0, _commonDataSchemaMixin2["default"])(new _commonDataSchemaSchema2["default"]({
+    fields: {
+      user: {
+        required: true,
+        type: _commonDataTypesReference2["default"]
+      },
+      level: {
+        "default": "admin",
+        required: true,
+        type: String
+      }
+    }
+  }))(Access) || Access;
+  return Access;
+})();
+
+var organizationSchema = new _commonDataSchemaSchema2["default"]({
+  fields: {
+
+    /**
+     * required for executing DB commands
+     */
+
+    bus: {
+      required: true,
+      type: require("common/data/types/bus")
+    },
+
+    /**
+     * ID of the user 
+     */
+
+    _id: {
+      type: require("common/data/types/object-id")
+    },
+
+    /**
+     */
+
+    name: {
+      required: false,
+      type: String
+    },
+
+    /**
+     */
+
+    access: [{
+      type: Access
+    }]
+  }
+});
+
+/**
+ */
+
+var Organization = (function (_Model) {
+  _inherits(Organization, _Model);
+
+  function Organization() {
+    _classCallCheck(this, _Organization);
+
+    _get(Object.getPrototypeOf(_Organization.prototype), "constructor", this).apply(this, arguments);
+  }
+
+  /**
+   */
+
+  _createClass(Organization, [{
+    key: "getUsage",
+
+    /**
+     */
+
+    value: regeneratorRuntime.mark(function getUsage() {
+      return regeneratorRuntime.wrap(function getUsage$(context$2$0) {
+        while (1) switch (context$2$0.prev = context$2$0.next) {
+          case 0:
+            context$2$0.t0 = _commonDataModelsUsage2["default"];
+            context$2$0.t1 = Object;
+            context$2$0.t2 = { bus: this.bus };
+            context$2$0.next = 5;
+            return this.bus({
+              name: "getUsage",
+              organization: this
+            });
+
+          case 5:
+            context$2$0.t3 = context$2$0.sent;
+            context$2$0.t4 = context$2$0.t1.assign.call(context$2$0.t1, context$2$0.t2, context$2$0.t3);
+            return context$2$0.abrupt("return", new context$2$0.t0(context$2$0.t4));
+
+          case 8:
+          case "end":
+            return context$2$0.stop();
+        }
+      }, getUsage, this);
+    })
+
+    /**
+     * returns the billing info such as plan, number of hours used, etc
+     */
+
+  }, {
+    key: "getBillingInfo",
+    value: regeneratorRuntime.mark(function getBillingInfo() {
+      return regeneratorRuntime.wrap(function getBillingInfo$(context$2$0) {
+        while (1) switch (context$2$0.prev = context$2$0.next) {
+          case 0:
+          case "end":
+            return context$2$0.stop();
+        }
+      }, getBillingInfo, this);
+    })
+  }, {
+    key: "getPlan",
+
+    // TODO
+
+    /**
+     * returns the current plan for the organization
+     */
+
+    value: regeneratorRuntime.mark(function getPlan() {
+      return regeneratorRuntime.wrap(function getPlan$(context$2$0) {
+        while (1) switch (context$2$0.prev = context$2$0.next) {
+          case 0:
+          case "end":
+            return context$2$0.stop();
+        }
+      }, getPlan, this);
+    })
+
+    /**
+     * gets the current running desktops
+     */
+
+  }, {
+    key: "getDesktops",
+    value: regeneratorRuntime.mark(function getDesktops() {
+      return regeneratorRuntime.wrap(function getDesktops$(context$2$0) {
+        while (1) switch (context$2$0.prev = context$2$0.next) {
+          case 0:
+          case "end":
+            return context$2$0.stop();
+        }
+      }, getDesktops, this);
+    })
+
+    /**
+     */
+
+  }, {
+    key: "startDesktop",
+    value: regeneratorRuntime.mark(function startDesktop() {
+      return regeneratorRuntime.wrap(function startDesktop$(context$2$0) {
+        while (1) switch (context$2$0.prev = context$2$0.next) {
+          case 0:
+          case "end":
+            return context$2$0.stop();
+        }
+      }, startDesktop, this);
+    })
+  }]);
+
+  var _Organization = Organization;
+  Organization = (0, _commonDataSchemaMixin2["default"])(organizationSchema)(Organization) || Organization;
+  Organization = (0, _commonDataModelsMixinsPersist2["default"])("organizations")(Organization) || Organization;
+  return Organization;
+})(_commonDataModelsBaseModel2["default"]);
+
+exports["default"] = Organization;
+module.exports = exports["default"];
+
+},{"common/data/models/base/model":50,"common/data/models/mixins/persist":52,"common/data/models/usage":55,"common/data/schema/mixin":57,"common/data/schema/schema":58,"common/data/types/bus":59,"common/data/types/object-id":64,"common/data/types/reference":66}],54:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _commonDataModelsBaseModel = require("common/data/models/base/model");
+
+var _commonDataModelsBaseModel2 = _interopRequireDefault(_commonDataModelsBaseModel);
+
+var _commonDataSchemaSchema = require("common/data/schema/schema");
+
+var _commonDataSchemaSchema2 = _interopRequireDefault(_commonDataSchemaSchema);
+
+var _commonDataSchemaMixin = require("common/data/schema/mixin");
+
+var _commonDataSchemaMixin2 = _interopRequireDefault(_commonDataSchemaMixin);
+
+/**
+ */
+
+var passwordSchema = new _commonDataSchemaSchema2["default"]({
+  fields: {
+    secret: {
+      required: true,
+      type: require("common/data/types/password")
+    }
+  }
+});
+
+/**
+ */
+
+var PasswordKey = (function (_Model) {
+  _inherits(PasswordKey, _Model);
+
+  function PasswordKey() {
+    _classCallCheck(this, _PasswordKey);
+
+    _get(Object.getPrototypeOf(_PasswordKey.prototype), "constructor", this).apply(this, arguments);
+  }
+
+  var _PasswordKey = PasswordKey;
+  PasswordKey = (0, _commonDataSchemaMixin2["default"])(passwordSchema)(PasswordKey) || PasswordKey;
+  return PasswordKey;
+})(_commonDataModelsBaseModel2["default"]);
+
+exports["default"] = PasswordKey;
+module.exports = exports["default"];
+
+},{"common/data/models/base/model":50,"common/data/schema/mixin":57,"common/data/schema/schema":58,"common/data/types/password":65}],55:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _commonDataModelsBaseModel = require("common/data/models/base/model");
+
+var _commonDataModelsBaseModel2 = _interopRequireDefault(_commonDataModelsBaseModel);
+
+var _commonDataSchemaSchema = require("common/data/schema/schema");
+
+var _commonDataSchemaSchema2 = _interopRequireDefault(_commonDataSchemaSchema);
+
+var _commonDataModelsMixinsPersist = require("common/data/models/mixins/persist");
+
+var _commonDataModelsMixinsPersist2 = _interopRequireDefault(_commonDataModelsMixinsPersist);
+
+var _commonDataSchemaMixin = require("common/data/schema/mixin");
+
+var _commonDataSchemaMixin2 = _interopRequireDefault(_commonDataSchemaMixin);
+
+var _httperr = require("httperr");
+
+var _httperr2 = _interopRequireDefault(_httperr);
+
+var _commonDataTypesReference = require("common/data/types/reference");
+
+var _commonDataTypesReference2 = _interopRequireDefault(_commonDataTypesReference);
+
+/**
+ */
+
+var usageSchema = new _commonDataSchemaSchema2["default"]({
+  fields: {
+
+    /**
+     * ID of the user 
+     */
+
+    _id: {
+      type: require("common/data/types/object-id")
+    },
+
+    /**
+     * ID of the user 
+     */
+
+    organization: {
+      type: _commonDataTypesReference2["default"]
+    },
+
+    /**
+     */
+
+    minutes: {
+      "default": 0,
+      type: Number
+    }
+  }
+});
+
+/**
+ */
+
+var Usage = (function (_Model) {
+  _inherits(Usage, _Model);
+
+  function Usage() {
+    _classCallCheck(this, _Usage);
+
+    _get(Object.getPrototypeOf(_Usage.prototype), "constructor", this).apply(this, arguments);
+  }
+
+  /**
+   */
+
+  _createClass(Usage, [{
+    key: "reset",
+    value: regeneratorRuntime.mark(function reset() {
+      return regeneratorRuntime.wrap(function reset$(context$2$0) {
+        while (1) switch (context$2$0.prev = context$2$0.next) {
+          case 0:
+            this.minutes = 0;
+            context$2$0.next = 3;
+            return this.update();
+
+          case 3:
+            return context$2$0.abrupt("return", context$2$0.sent);
+
+          case 4:
+          case "end":
+            return context$2$0.stop();
+        }
+      }, reset, this);
+    })
+  }, {
+    key: "addMinutes",
+    value: regeneratorRuntime.mark(function addMinutes(amount) {
+      return regeneratorRuntime.wrap(function addMinutes$(context$2$0) {
+        while (1) switch (context$2$0.prev = context$2$0.next) {
+          case 0:
+            this.minutes += amount;
+            context$2$0.next = 3;
+            return this.update();
+
+          case 3:
+            return context$2$0.abrupt("return", context$2$0.sent);
+
+          case 4:
+          case "end":
+            return context$2$0.stop();
+        }
+      }, addMinutes, this);
+    })
+  }]);
+
+  var _Usage = Usage;
+  Usage = (0, _commonDataSchemaMixin2["default"])(usageSchema)(Usage) || Usage;
+  Usage = (0, _commonDataModelsMixinsPersist2["default"])("usages")(Usage) || Usage;
+  return Usage;
+})(_commonDataModelsBaseModel2["default"]);
+
+exports["default"] = Usage;
+module.exports = exports["default"];
+
+},{"common/data/models/base/model":50,"common/data/models/mixins/persist":52,"common/data/schema/mixin":57,"common/data/schema/schema":58,"common/data/types/object-id":64,"common/data/types/reference":66,"httperr":450}],56:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _commonDataModelsBaseModel = require("common/data/models/base/model");
+
+var _commonDataModelsBaseModel2 = _interopRequireDefault(_commonDataModelsBaseModel);
+
+var _commonDataSchemaSchema = require("common/data/schema/schema");
+
+var _commonDataSchemaSchema2 = _interopRequireDefault(_commonDataSchemaSchema);
+
+var _commonDataModelsMixinsPersist = require("common/data/models/mixins/persist");
+
+var _commonDataModelsMixinsPersist2 = _interopRequireDefault(_commonDataModelsMixinsPersist);
+
+var _commonDataSchemaMixin = require("common/data/schema/mixin");
+
+var _commonDataSchemaMixin2 = _interopRequireDefault(_commonDataSchemaMixin);
+
+var _commonDataModelsOrganization = require("common/data/models/organization");
+
+var _commonDataModelsOrganization2 = _interopRequireDefault(_commonDataModelsOrganization);
+
+/**
+ */
+
+var userSchema = new _commonDataSchemaSchema2["default"]({
+  fields: {
+
+    /**
+     * required for executing DB commands
+     */
+
+    bus: {
+      required: true,
+      type: require("common/data/types/bus")
+    },
+
+    /**
+     * ID of the user 
+     */
+
+    _id: {
+      type: require("common/data/types/object-id")
+    },
+
+    /**
+     */
+
+    confirmed: {
+      type: Boolean,
+      "default": false
+    },
+
+    /**
+     */
+
+    emailAddress: {
+      required: true,
+      unique: true, // TODO
+      type: require("common/data/types/email-address")
+    },
+
+    /**
+     */
+
+    locale: {
+      type: require("common/data/types/locale")
+    },
+
+    /**
+     */
+
+    firstName: {
+      type: String
+    },
+
+    /**
+     */
+
+    lastName: {
+      type: String
+    },
+
+    /**
+     * secret keys including password
+     */
+
+    keys: [{
+      internal: true,
+      type: require("./password-key")
+    }]
+  }
+});
+
+/**
+ */
+
+var User = (function (_Model) {
+  _inherits(User, _Model);
+
+  function User() {
+    _classCallCheck(this, _User);
+
+    _get(Object.getPrototypeOf(_User.prototype), "constructor", this).apply(this, arguments);
+  }
+
+  /**
+   */
+
+  _createClass(User, [{
+    key: "getOrganizations",
+
+    /**
+     */
+
+    value: regeneratorRuntime.mark(function getOrganizations() {
+      return regeneratorRuntime.wrap(function getOrganizations$(context$2$0) {
+        while (1) switch (context$2$0.prev = context$2$0.next) {
+          case 0:
+            context$2$0.next = 2;
+            return this.bus.execute({
+              name: "getUserOrganizations"
+            });
+
+          case 2:
+            context$2$0.t0 = (function (data) {
+              return new _commonDataModelsOrganization2["default"](Object.assign({ bus: this.bus.value }, data));
+            }).bind(this);
+
+            return context$2$0.abrupt("return", context$2$0.sent.map(context$2$0.t0));
+
+          case 4:
+          case "end":
+            return context$2$0.stop();
+        }
+      }, getOrganizations, this);
+    })
+
+    /**
+     */
+
+  }, {
+    key: "createOrganization",
+    value: regeneratorRuntime.mark(function createOrganization() {
+      var organization;
+      return regeneratorRuntime.wrap(function createOrganization$(context$2$0) {
+        while (1) switch (context$2$0.prev = context$2$0.next) {
+          case 0:
+            organization = new _commonDataModelsOrganization2["default"]({
+              bus: this.bus,
+              access: [{
+                user: { _id: this._id },
+                level: "admin"
+              }]
+            });
+            context$2$0.next = 3;
+            return organization.insert();
+
+          case 3:
+            return context$2$0.abrupt("return", context$2$0.sent);
+
+          case 4:
+          case "end":
+            return context$2$0.stop();
+        }
+      }, createOrganization, this);
+    })
+  }]);
+
+  var _User = User;
+  User = (0, _commonDataSchemaMixin2["default"])(userSchema)(User) || User;
+  User = (0, _commonDataModelsMixinsPersist2["default"])("users")(User) || User;
+  return User;
+})(_commonDataModelsBaseModel2["default"]);
+
+exports["default"] = User;
+module.exports = exports["default"];
+
+},{"./password-key":54,"common/data/models/base/model":50,"common/data/models/mixins/persist":52,"common/data/models/organization":53,"common/data/schema/mixin":57,"common/data/schema/schema":58,"common/data/types/bus":59,"common/data/types/email-address":62,"common/data/types/locale":63,"common/data/types/object-id":64}],57:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4305,7 +4265,7 @@ exports["default"] = function (schema) {
 ;
 module.exports = exports["default"];
 
-},{"common/utils/class/mixin":81}],59:[function(require,module,exports){
+},{"common/utils/class/mixin":81}],58:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4464,7 +4424,7 @@ var Schema = (function () {
 exports["default"] = Schema;
 module.exports = exports["default"];
 
-},{"httperr":450}],60:[function(require,module,exports){
+},{"httperr":450}],59:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4539,7 +4499,7 @@ var Bus = (function (_ValueType) {
 exports["default"] = Bus;
 module.exports = exports["default"];
 
-},{"./value":67}],61:[function(require,module,exports){
+},{"./value":67}],60:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4597,7 +4557,7 @@ var CreditCardNumber = (function (_ValueType) {
 exports["default"] = CreditCardNumber;
 module.exports = exports["default"];
 
-},{"./value":67,"credit-card":446}],62:[function(require,module,exports){
+},{"./value":67,"credit-card":446}],61:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4647,7 +4607,7 @@ var CreditCardNumber = (function (_ValueType) {
 exports["default"] = CreditCardNumber;
 module.exports = exports["default"];
 
-},{"./value":67}],63:[function(require,module,exports){
+},{"./value":67}],62:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4697,7 +4657,7 @@ var EmailAddress = (function (_ValueType) {
 exports["default"] = EmailAddress;
 module.exports = exports["default"];
 
-},{"./value":67}],64:[function(require,module,exports){
+},{"./value":67}],63:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4751,7 +4711,7 @@ var Locale = (function (_ValueType) {
 exports["default"] = Locale;
 module.exports = exports["default"];
 
-},{"./value":67}],65:[function(require,module,exports){
+},{"./value":67}],64:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4814,7 +4774,7 @@ var ObjectId = (function (_ValueType) {
 exports["default"] = ObjectId;
 module.exports = exports["default"];
 
-},{"./value":67}],66:[function(require,module,exports){
+},{"./value":67}],65:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4878,7 +4838,47 @@ var Password = (function (_ValueType) {
 exports["default"] = Password;
 module.exports = exports["default"];
 
-},{"./value":67,"password-hash":549}],67:[function(require,module,exports){
+},{"./value":67,"password-hash":549}],66:[function(require,module,exports){
+"use strict";
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var _commonDataSchemaSchema = require("common/data/schema/schema");
+
+var _commonDataSchemaSchema2 = _interopRequireDefault(_commonDataSchemaSchema);
+
+var _commonDataSchemaMixin = require("common/data/schema/mixin");
+
+var _commonDataSchemaMixin2 = _interopRequireDefault(_commonDataSchemaMixin);
+
+/**
+ */
+
+var Reference = (function () {
+  function Reference() {
+    _classCallCheck(this, _Reference);
+  }
+
+  /**
+   */
+
+  var _Reference = Reference;
+  Reference = (0, _commonDataSchemaMixin2["default"])(new _commonDataSchemaSchema2["default"]({
+    fields: {
+      _id: {
+        required: true,
+        type: require("common/data/types/object-id")
+      }
+    }
+  }))(Reference) || Reference;
+  return Reference;
+})();
+
+module.exports = Reference;
+
+},{"common/data/schema/mixin":57,"common/data/schema/schema":58,"common/data/types/object-id":64}],67:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5097,7 +5097,7 @@ module.exports = exports["default"];
 /**
  */
 
-},{"./levels":69,"common/data/models/base/model":56,"lodash/object/extend":494,"mesh":518}],69:[function(require,module,exports){
+},{"./levels":69,"common/data/models/base/model":50,"lodash/object/extend":494,"mesh":518}],69:[function(require,module,exports){
 "use strict";
 
 exports.NONE = 1;
@@ -5626,7 +5626,7 @@ exports["default"] = Router;
 module.exports = exports["default"];
 
 }).call(this,require('_process'))
-},{"./location":79,"_process":416,"common/data/models/base/model":56,"lodash/function/debounce":453,"qs":551}],79:[function(require,module,exports){
+},{"./location":79,"_process":416,"common/data/models/base/model":50,"lodash/function/debounce":453,"qs":551}],79:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5701,7 +5701,7 @@ var Location = (function (_BaseModel) {
 exports["default"] = Location;
 module.exports = exports["default"];
 
-},{"common/data/models/base/model":56,"lodash/object/extend":494,"qs":551}],80:[function(require,module,exports){
+},{"common/data/models/base/model":50,"lodash/object/extend":494,"qs":551}],80:[function(require,module,exports){
 module.exports={
   "errors": {
     "notImplemented": "not implemented yet",
@@ -69054,4 +69054,4 @@ module.exports = function (arr, fn, initial) {
   return curr;
 };
 
-},{}]},{},[35]);
+},{}]},{},[29]);
