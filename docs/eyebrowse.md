@@ -8,3 +8,11 @@ Eyebrowse is an app that enables people to launch applications running on a diff
 
 #### UI 
 
+
+#### Why?
+
+- All offline. 
+- Secure - run everything locally.
+- Fast connection.
+- Fallback for machines you don't have (service).
+- 

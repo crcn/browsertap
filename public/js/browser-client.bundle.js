@@ -1850,7 +1850,6 @@ function browser(app) {
  */
 
 function server(app) {
-
   function onException(error) {
     app.logger.error(error.message, { stack: (0, _parseStack2["default"])(error), platform: platformInfo });
     app.logger.notice("gracefully shutting down");
@@ -1860,16 +1859,6 @@ function server(app) {
   }
 
   process.on("uncaughtException", onException);
-
-  // app.bus({
-  //   name: "intercept",
-  //   max: 1,
-  //   query: { name: "dispose" },
-  //   bus: mesh.wrap(function(operation, next) {
-  //     process.removeListener("uncaughtException", onException);
-  //     next();
-  //   })
-  // });
 }
 
 }).call(this,require('_process'))
