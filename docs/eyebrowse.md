@@ -16,3 +16,7 @@ Eyebrowse is an app that enables people to launch applications running on a diff
 - Fast connection.
 - Fallback for machines you don't have (service).
 - 
+
+
+
+#### Technical notes
