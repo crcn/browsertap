@@ -5,6 +5,7 @@ Eyebrowse is an app that enables people to launch applications running on a diff
 - Quick launch menu would enable people to start apps quickly
 - Some menu would show what VMs are currently running
 - Machines can easily be connected through MDNS (bonjour)
+- Automatically download IEVMS and run them
 
 #### Why use this over browserstack / saucelabs?
 
