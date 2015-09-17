@@ -36,9 +36,9 @@ module.exports = function(app) {
         authPage: "signup"
       }
     });
-  }));
+  })); 
 
-  router.addRoute("app", "/app", auth, function(location) {
+  router.addRoute("app", "/app", function(location) {
     location.setProperties({
       state: {
         mainPage: "app",

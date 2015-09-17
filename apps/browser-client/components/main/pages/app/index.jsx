@@ -2,9 +2,15 @@ import React         from "react";
 import GroundControl from "./ground-control"
 import Portal        from "browser-client/components/common/portal"
 import Toolbar       from "./toolbar"
+import RemoteDesktop from "common/remote-desktop";
 
 
 var App = React.createClass({
+  componentDidMount: function() {
+    var rd = new RemoteDesktop({
+      host: "http://0.0.0.0:8090"
+    });
+  },
   render: function() {
     return <div className="m-browser-client-app">
 

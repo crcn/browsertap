@@ -1,3 +1,4 @@
+
 require("babel/polyfill");
 var Application = require("./application");
 var getConfig   = require("./get-config");
