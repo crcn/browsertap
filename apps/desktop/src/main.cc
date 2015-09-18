@@ -8,7 +8,7 @@
 
 #include <iostream>
 #include "./osx/desktop.h"
-#include "./remote/server.h"
+// #include "./remote/server.h"
 #include "./geom/bounds.h"
 #include <json/json.h>
 
