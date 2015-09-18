@@ -18,6 +18,7 @@ namespace base {
       virtual geom::Bounds bounds()=0;
       virtual void bounds(geom::Bounds bounds)=0;
       virtual graphics::Bitmap* print()=0;
+      int id;
   };
 }
 

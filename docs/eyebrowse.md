@@ -16,8 +16,6 @@ Eyebrowse is an app that enables people to launch applications running on a diff
 - Fallback for machines you don't have (service).
 - 
 
-
-
 #### Technical notes
 
 - Configure machines however you want.
@@ -25,3 +23,8 @@ Eyebrowse is an app that enables people to launch applications running on a diff
 - connect devices and view them within eyebrowse.
 - connect machines from an intranet
 
+
+#### Monetization
+
+- charge monthly to access machine via browsertap.com (online testing)
+- charge for collaboration

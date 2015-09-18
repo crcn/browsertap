@@ -57,7 +57,8 @@
                 'include_dirs': [
                     './vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include',
                     './vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp',
-                    './vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include'
+                    './vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include',
+                    './vendor/jsoncpp/include'
                 ]
             }]
         }]

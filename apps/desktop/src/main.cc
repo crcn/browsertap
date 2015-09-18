@@ -10,6 +10,8 @@
 #include "./osx/desktop.h"
 #include "./remote/server.h"
 #include "./geom/bounds.h"
+#include <json/json.h>
+
 
 class Runnable : public rtc::Runnable {
   void Run(rtc::Thread* thread) {
@@ -20,23 +22,32 @@ class Runnable : public rtc::Runnable {
 
 int main(int argc, const char * argv[]) {
 
-
   // rtc::InitializeSSL();
-  std::cout << "RUN" << std::endl;
+  std::cout << "RUN!" << std::endl;
+
 
   osx::Desktop* desktop = new osx::Desktop();
-  remote::Server* server = new remote::Server(desktop); 
-  server->connect("host", 8080);
 
-  std::cout << "CON" << std::endl;
-  std::string item;
+  std::vector<base::Window*> windows = desktop->windows();
 
-  while(1) {
-    rtc::Thread::Current()->ProcessMessages(10);
-    sleep(1);
+  std::cout << windows.size() << std::endl;
+
+  for(int i = 0, n = windows.size(); i < n; i++) {
+    std::cout << windows.at(i)->print() << std::endl;
   }
 
-  delete server;
+  // remote::Server* server = new remote::Server(desktop); 
+  // server->connect("host", 8080);
+
+  // std::cout << "CON" << std::endl;
+  // std::string item;
+
+  // while(1) {
+  //   rtc::Thread::Current()->ProcessMessages(10);
+  //   sleep(1);
+  // }
+
+  // delete server;
 
   /*
 

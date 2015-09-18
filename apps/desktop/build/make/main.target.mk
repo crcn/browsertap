@@ -62,7 +62,8 @@ INCS_Debug := \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp \
-	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include \
+	-I$(srcdir)/vendor/jsoncpp/include
 
 DEFS_Debug_Base := \
 	'-DEXPAT_RELATIVE_PATH' \
@@ -124,7 +125,8 @@ INCS_Debug_Base := \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp \
-	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include \
+	-I$(srcdir)/vendor/jsoncpp/include
 
 DEFS_Release := \
 	'-DEXPAT_RELATIVE_PATH' \
@@ -186,7 +188,8 @@ INCS_Release := \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp \
-	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include \
+	-I$(srcdir)/vendor/jsoncpp/include
 
 OBJS := \
 	$(obj).target/$(TARGET)/src/main.o \

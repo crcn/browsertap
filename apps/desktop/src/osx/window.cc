@@ -11,9 +11,16 @@
 #include "./window.h"
 #include <iostream>
 
+int _id;
+
+int _generateId() {
+    _id++;
+    return _id;
+}
+
 osx::Window::Window(CFDictionaryRef info):
 _info(info) {
-
+    this->id = _generateId();
 }
 
 geom::Bounds osx::Window::bounds() {
@@ -26,7 +33,7 @@ geom::Bounds osx::Window::_convertBounds(CGRect rect) {
 
 CGRect osx::Window::_cgbounds() {
     CGRect rect;
-    CGRectMakeWithDictionaryRepresentation((CFDictionaryRef)CFDictionaryGetValue(this->_info, kCGWindowBounds ), &rect);
+    CGRectMakeWithDictionaryRepresentation((CFDictionaryRef)CFDictionaryGetValue(this->_info, kCGWindowBounds), &rect);
     return rect;
 };
 
@@ -39,7 +46,7 @@ graphics::Bitmap* osx::Window::print() {
     CGRect rect = this->_cgbounds();
     int winId = 0;
 
-    CFNumberRef windowNumber = (CFNumberRef)CFDictionaryGetValue( this->_info, kCGWindowNumber);
+    CFNumberRef windowNumber = (CFNumberRef)CFDictionaryGetValue(this->_info, kCGWindowNumber);
     CFNumberGetValue(windowNumber, kCFNumberIntType, &winId);
 
     CGImageRef image = CGWindowListCreateImage(rect,
