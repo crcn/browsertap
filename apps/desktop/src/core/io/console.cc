@@ -35,15 +35,21 @@ void* io::Console::captureStdin (void *ptr) {
     Json::Reader reader;
 
     if (reader.parse(input, root)) {
+
+      // execute the command
       mesh::Response* response = c->app->bus->execute(new mesh::Request(root["name"].asString(), (void*)&root));
       const char* chunk;
-      std::stringstream ss;
 
+      // boundary start
+      std::cout << ">>>>>>>>";
+
+      // output data  
       while(chunk = (const char*)response->read()) {
-        ss << chunk;
+        std::cout << chunk;
       }
 
-      std::cout << ss.str() << std::endl;
+      // boundary end
+      std::cout << "<<<<<<<<" << std::endl;
     }
   }
 } 
