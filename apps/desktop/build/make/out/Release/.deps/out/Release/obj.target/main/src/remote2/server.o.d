@@ -1,9 +1,10 @@
-cmd_out/Release/obj.target/main/src/remote/core.o := c++ '-DEXPAT_RELATIVE_PATH' '-DFEATURE_ENABLE_VOICEMAIL' '-DGTEST_RELATIVE_PATH' '-DJSONCPP_RELATIVE_PATH' '-DLOGGING=1' '-DSRTP_RELATIVE_PATH' '-DFEATURE_ENABLE_SSL' '-DFEATURE_ENABLE_PSTN' '-DHAVE_SCTP' '-DHAVE_SRTP' '-DHAVE_WEBRTC_VIDEO' '-DHAVE_WEBRTC_VOICE' '-DWEBRTC_POSIX' '-DWEBRTC_MAC' '-DWEBRTC_INCLUDE_INTERNAL_AUDIO_DEVICE' '-DOSX' '-DCARBON_DEPRECATED=YES' '-DHASH_NAMESPACE=__gnu_cxx' '-DDISABLE_DYNAMIC_CAST' '-D_REENTRANT' '-DNDEBUG' -I../../. -I../../vendor/webrtc-build-scripts/ios/webrtc/src -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/webrtc -I../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include -I../../vendor/jsoncpp/include  -fasm-blocks -mpascal-strings -O3 -mmacosx-version-min=10.5 -arch x86_64 -Wall -Wendif-labels -W -Wno-unused-parameter -std=c++11 -fno-rtti -fvisibility-inlines-hidden -fno-strict-aliasing -MMD -MF out/Release/.deps/out/Release/obj.target/main/src/remote/core.o.d.raw  -c -o out/Release/obj.target/main/src/remote/core.o ../../src/remote/core.cc
-out/Release/obj.target/main/src/remote/core.o: ../../src/remote/core.cc \
-  ../../src/remote/Core.h ../../src/remote/../base/desktop.h \
-  ../../src/remote/../base/./window.h \
-  ../../src/remote/../base/../geom/bounds.h \
-  ../../src/remote/../base/../graphics/bitmap.h \
+cmd_out/Release/obj.target/main/src/remote2/server.o := c++ '-DEXPAT_RELATIVE_PATH' '-DFEATURE_ENABLE_VOICEMAIL' '-DGTEST_RELATIVE_PATH' '-DJSONCPP_RELATIVE_PATH' '-DLOGGING=1' '-DSRTP_RELATIVE_PATH' '-DFEATURE_ENABLE_SSL' '-DFEATURE_ENABLE_PSTN' '-DHAVE_SCTP' '-DHAVE_SRTP' '-DHAVE_WEBRTC_VIDEO' '-DHAVE_WEBRTC_VOICE' '-DWEBRTC_POSIX' '-DWEBRTC_MAC' '-DWEBRTC_INCLUDE_INTERNAL_AUDIO_DEVICE' '-DOSX' '-DCARBON_DEPRECATED=YES' '-DHASH_NAMESPACE=__gnu_cxx' '-DDISABLE_DYNAMIC_CAST' '-D_REENTRANT' '-DNDEBUG' -I../../. -I../../vendor/webrtc-build-scripts/ios/webrtc/src -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/webrtc -I../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include -I../../vendor/jsoncpp/include  -fasm-blocks -mpascal-strings -O3 -mmacosx-version-min=10.7 -arch x86_64 -Wall -Wendif-labels -W -Wno-unused-parameter -std=c++11 -stdlib=libc++ -fno-rtti -fvisibility-inlines-hidden -fno-strict-aliasing -MMD -MF out/Release/.deps/out/Release/obj.target/main/src/remote2/server.o.d.raw  -c -o out/Release/obj.target/main/src/remote2/server.o ../../src/remote2/server.cc
+out/Release/obj.target/main/src/remote2/server.o: \
+  ../../src/remote2/server.cc ../../src/remote2/./server.h \
+  ../../src/remote2/../base/desktop.h \
+  ../../src/remote2/../base/./window.h \
+  ../../src/remote2/../base/../geom/bounds.h \
+  ../../src/remote2/../base/../graphics/bitmap.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosourceinterface.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediastreaminterface.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/basictypes.h \
@@ -138,13 +139,13 @@ out/Release/obj.target/main/src/remote/core.o: ../../src/remote/core.cc \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videorenderer.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/sctp/sctpdataengine.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/webrtc/webrtcvideocapturerfactory.h \
-  ../../src/remote/./peer.h
-../../src/remote/core.cc:
-../../src/remote/Core.h:
-../../src/remote/../base/desktop.h:
-../../src/remote/../base/./window.h:
-../../src/remote/../base/../geom/bounds.h:
-../../src/remote/../base/../graphics/bitmap.h:
+  ../../src/remote2/./peer.h ../../src/remote2/./core.h
+../../src/remote2/server.cc:
+../../src/remote2/./server.h:
+../../src/remote2/../base/desktop.h:
+../../src/remote2/../base/./window.h:
+../../src/remote2/../base/../geom/bounds.h:
+../../src/remote2/../base/../graphics/bitmap.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosourceinterface.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediastreaminterface.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/basictypes.h:
@@ -279,4 +280,5 @@ out/Release/obj.target/main/src/remote/core.o: ../../src/remote/core.cc \
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videorenderer.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/sctp/sctpdataengine.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/webrtc/webrtcvideocapturerfactory.h:
-../../src/remote/./peer.h:
+../../src/remote2/./peer.h:
+../../src/remote2/./core.h:

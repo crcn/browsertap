@@ -1,16 +1,17 @@
-#include "remote/transports.h"
+#include "./transports.h"
 #include <stdio.h>
 #include <iostream>
+#import <pthread.h>
 
-namespace Transports
+namespace remote
 {
-  BaseTransport::BaseTransport(Commanders::BaseCommander* commander):
+  BaseTransport::BaseTransport(remote::Commands* commander):
   _commander(commander)
   {
-    commander->addEventListener(Commanders::Command::COMMAND, new Events::ClassCbEventListener<BaseTransport, Commanders::Command>(this, &BaseTransport::onCommanderCommand));
+    commander->addEventListener(remote::Commands::COMMAND, new Events::ClassCbEventListener<BaseTransport, Commanders::Command>(this, &BaseTransport::onCommanderCommand));
   }
 
-  CLITransport::CLITransport(Commanders::BaseCommander* commander):
+  CLITransport::CLITransport(remote::Commands* commander):
   BaseTransport::BaseTransport(commander)
   {
 
@@ -20,10 +21,16 @@ namespace Transports
   {
     DWORD handleThreadId;
     /*CreateThread(NULL, 0, CLITransport::handleInput, this, 0, &handleThreadId);*/
+    pthread_c
+
+    // create a pthread
+
+    pthread_t *tID;
+    tErr = pthread_create(tID, NULL, CLITransport::handleInput, &tArg);
     this->handleOutput();
   }
-/*
-  DWORD WINAPI CLITransport::handleInput(LPVOID param)
+
+  static void CLITransport::handleInput(int* arg)
   {
     CLITransport* transport = (CLITransport*)param;
     std::string command;
@@ -35,7 +42,7 @@ namespace Transports
     }
 
     return 0;
-  }*/
+  }
 
   void CLITransport::onCommanderCommand(Commanders::Command* command)
   {

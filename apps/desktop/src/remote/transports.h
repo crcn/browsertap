@@ -1,19 +1,19 @@
 #ifndef TRANSPORTS_H_
 #define TRANSPORTS_H_
 
-#include <windows.h>
-#include "remote/commanders.h"
+// #include <windows.h>
+#include "./commands.h"
 
-namespace Transports
+namespace remote
 {
   class BaseTransport
   {
   public:
-    BaseTransport(Commanders::BaseCommander* commander);
+    BaseTransport(remote::Commands* commander);
     virtual void open() = 0;
-    virtual void onCommanderCommand(Commanders::Command* command) = 0;
+    virtual void onCommanderCommand(remote::Commands* command) = 0;
   protected:
-    Commanders::BaseCommander* _commander;
+    remote::Commands* _commands;
   };
 
 
@@ -21,13 +21,13 @@ namespace Transports
   {
 
   public:
-    CLITransport(Commanders::BaseCommander* commander);
+    CLITransport(remote::Commands* commands);
     void open();
-    void onCommanderCommand(Commanders::Command* command);
+    //void onCommanderCommand(Commanders::Command* command);
 
   private:
     void handleOutput();
-    // void handleInput();
+    static void handleInput(int *arg);
   };
 }
 

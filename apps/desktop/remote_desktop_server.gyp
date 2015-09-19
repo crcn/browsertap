@@ -13,15 +13,16 @@
                 'target_name': 'main',
                 'type': 'executable',
                 'sources': [
+
                     './src/main.cc',
                     './src/osx/window.cc',
                     './src/osx/desktop.cc',
 
-                    './src/remote/server.cc',
-                    './src/remote/peer.cc',
-                    './src/remote/core.cc',
+                    './src/remote2/server.cc',
+                    './src/remote2/peer.cc',
+                    './src/remote2/core.cc',
 
-                    './src/core/event_emitter.cc'
+                    './src/core/events/event_emitter.cc'
                 ],
 
                 'link_settings': {
@@ -41,8 +42,9 @@
 
                 'xcode_settings': {
                     'CLANG_CXX_LANGUAGE_STANDARD': 'c++11',
+                    'CLANG_CXX_LIBRARY': 'libc++', 
                     'GCC_ENABLE_CPP_RTTI': 'NO',
-                    'MACOSX_DEPLOYMENT_TARGET': '10.5',
+                    'MACOSX_DEPLOYMENT_TARGET': '10.7',
                     'OTHER_CFLAGS': [
                         '-fno-strict-aliasing'
                     ],
