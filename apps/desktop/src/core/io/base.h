@@ -7,8 +7,9 @@ class Application;
 namespace io {
   class Base {
   public:
-    Base(Application* app):app(app) {};
     Application* app;
+    Base(Application* app):app(app) { };
+    virtual void start() { };
   };
 }
 

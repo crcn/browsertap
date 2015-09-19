@@ -3,18 +3,23 @@
 #include <iostream>
 #include <pthread.h>
 
+/**
+ */
 
 io::Console::Console(Application* app):io::Base(app) {
+}
+
+/**
+ */
+
+void io::Console::start() {
+  LOG_INFO("init console IO transport");
   pthread_t thread;
-
-  // TODO - look for push command
-  // app->bus = new mesh::AcceptBus([](mesh::Request* request) -> bool {
-  //   std::cout << request->name << std::endl;
-  //   return request->name->find()
-  // }, app->bus);
-
   pthread_create (&thread, NULL, &captureStdin, this);
 }
+
+/**
+ */
 
 void* io::Console::captureStdin (void *ptr)
 {

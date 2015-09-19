@@ -18,7 +18,8 @@ out/Release/obj.target/main/src/main.o: ../../src/main.cc \
   ../../src/./core/mesh/./accept.h ../../src/./core/mesh/./reject.h \
   ../../src/./core/mesh/./commands.h ../../src/./core/mesh/./fn.h \
   ../../src/./core/mesh/./sequence.h ../../src/./application.h \
-  ../../src/./core/io/base.h ../../src/./core/io/../mesh/mesh.h
+  ../../src/./core/log/logger.h ../../src/./core/io/base.h \
+  ../../src/./core/io/../mesh/mesh.h
 ../../src/main.cc:
 ../../src/./osx/desktop.h:
 ../../src/./osx/../base/desktop.h:
@@ -44,5 +45,6 @@ out/Release/obj.target/main/src/main.o: ../../src/main.cc \
 ../../src/./core/mesh/./fn.h:
 ../../src/./core/mesh/./sequence.h:
 ../../src/./application.h:
+../../src/./core/log/logger.h:
 ../../src/./core/io/base.h:
 ../../src/./core/io/../mesh/mesh.h:

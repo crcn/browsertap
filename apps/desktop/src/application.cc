@@ -2,6 +2,9 @@
 #include "./core/io/console.h"
 #include <iostream>
 
+/**
+ */
+
 Application::Application() {
 
   // message layer
@@ -12,4 +15,17 @@ Application::Application() {
 
   // input / output to the application
   this->io     = new io::Console(this);
+}
+
+/**
+ */
+
+void Application::start() {
+
+  LOG_INFO("init application");
+
+  this->io->start();
+
+  // keep it alive
+  while(1);
 }

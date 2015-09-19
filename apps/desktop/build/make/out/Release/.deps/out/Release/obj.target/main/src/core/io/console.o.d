@@ -11,6 +11,7 @@ out/Release/obj.target/main/src/core/io/console.o: \
   ../../src/core/io/../mesh/./fn.h \
   ../../src/core/io/../mesh/./sequence.h \
   ../../src/core/io/../../application.h \
+  ../../src/core/io/../.././core/log/logger.h \
   ../../src/core/io/../.././core/mesh/mesh.h \
   ../../src/core/io/../.././osx/desktop.h \
   ../../src/core/io/../.././osx/../base/desktop.h \
@@ -38,6 +39,7 @@ out/Release/obj.target/main/src/core/io/console.o: \
 ../../src/core/io/../mesh/./fn.h:
 ../../src/core/io/../mesh/./sequence.h:
 ../../src/core/io/../../application.h:
+../../src/core/io/../.././core/log/logger.h:
 ../../src/core/io/../.././core/mesh/mesh.h:
 ../../src/core/io/../.././osx/desktop.h:
 ../../src/core/io/../.././osx/../base/desktop.h:
