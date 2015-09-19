@@ -1,8 +1,9 @@
-#ifndef MESH_OPERATION_H_
-#define MESH_OPERATION_H_
+#ifndef MESH_REQUEST_H_
+#define MESH_REQUEST_H_
 
 #include "./bus.h"
 #include <vector>
+#include <iostream>
 
 namespace mesh {
   class Request {

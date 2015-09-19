@@ -13,9 +13,12 @@ out/Release/obj.target/main/src/main.o: ../../src/main.cc \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/reader.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/features.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/writer.h \
-  ../../src/./core/mesh/sequence.h ../../src/./core/mesh/./bus.h \
-  ../../src/./core/mesh/./request.h ../../src/./core/mesh/commands.h \
-  ../../src/./core/mesh/accept.h ../../src/./core/mesh/reject.h
+  ../../src/./core/mesh/mesh.h ../../src/./core/mesh/./bus.h \
+  ../../src/./core/mesh/./request.h ../../src/./core/mesh/./response.h \
+  ../../src/./core/mesh/./accept.h ../../src/./core/mesh/./reject.h \
+  ../../src/./core/mesh/./commands.h ../../src/./core/mesh/./fn.h \
+  ../../src/./core/mesh/./sequence.h ../../src/./application.h \
+  ../../src/./core/io/base.h ../../src/./core/io/../mesh/mesh.h
 ../../src/main.cc:
 ../../src/./osx/desktop.h:
 ../../src/./osx/../base/desktop.h:
@@ -31,9 +34,15 @@ out/Release/obj.target/main/src/main.o: ../../src/main.cc \
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/reader.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/features.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/writer.h:
-../../src/./core/mesh/sequence.h:
+../../src/./core/mesh/mesh.h:
 ../../src/./core/mesh/./bus.h:
 ../../src/./core/mesh/./request.h:
-../../src/./core/mesh/commands.h:
-../../src/./core/mesh/accept.h:
-../../src/./core/mesh/reject.h:
+../../src/./core/mesh/./response.h:
+../../src/./core/mesh/./accept.h:
+../../src/./core/mesh/./reject.h:
+../../src/./core/mesh/./commands.h:
+../../src/./core/mesh/./fn.h:
+../../src/./core/mesh/./sequence.h:
+../../src/./application.h:
+../../src/./core/io/base.h:
+../../src/./core/io/../mesh/mesh.h:

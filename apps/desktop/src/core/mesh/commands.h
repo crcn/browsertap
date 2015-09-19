@@ -2,6 +2,7 @@
 #define MESH_COMMANDS_H_
 
 #include "./bus.h"
+#include <iostream>
 #include <map>
 
 namespace mesh {
@@ -11,7 +12,17 @@ namespace mesh {
     /**
      */
 
-    CommandsBus() { }
+    CommandsBus(Bus* noopBus):_noopBus(noopBus) {
+
+    }
+
+
+    /**
+     */
+
+    CommandsBus():CommandsBus(new Bus()) {
+
+    }
 
     /**
      */
@@ -24,13 +35,15 @@ namespace mesh {
     /**
      */
 
-    void execute(Request* request) {
+    Response* execute(Request* request) {
       Bus* bus = this->_busses[request->name];
-      if (bus != NULL) bus->execute(request);
+      if (bus != NULL) return bus->execute(request);
+      return this->_noopBus->execute(request);
     }
 
   private:
     std::map<std::string, Bus*> _busses;
+    Bus* _noopBus;
   };
 }
 

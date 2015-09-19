@@ -14,7 +14,7 @@ namespace mesh {
 
     AcceptBus(std::function<bool(Request*)> test, Bus* yesBus, Bus* noBus):
     _test(test), _yes(yesBus), _no(noBus) {
-      
+
     }
 
     /**
@@ -27,11 +27,11 @@ namespace mesh {
     /**
      */
 
-    void execute(Request* request) {
+    virtual Response* execute(Request* request) {
       if(this->_test(request)) {
-        this->_yes->execute(request);
+        return this->_yes->execute(request);
       } else {
-        this->_no->execute(request);
+        return this->_no->execute(request);
       }
     }
 

@@ -15,6 +15,7 @@
                 'sources': [
 
                     './src/main.cc',
+                    './src/application.cc',
                     './src/osx/window.cc',
                     './src/osx/desktop.cc',
 
@@ -22,7 +23,8 @@
                     './src/remote2/peer.cc',
                     './src/remote2/core.cc',
 
-                    './src/core/events/event_emitter.cc'
+                    './src/core/events/event_emitter.cc',
+                    './src/core/io/console.cc'
                 ],
 
                 'link_settings': {
