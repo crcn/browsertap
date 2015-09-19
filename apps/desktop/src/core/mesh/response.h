@@ -3,7 +3,6 @@
 
 #include "./bus.h"
 #include "./request.h"
-#include <functional>
 
 namespace mesh {
   class Response {
@@ -14,14 +13,14 @@ namespace mesh {
   template<typename Type>
   class FnResponse : public Response {
   public:
-    FnResponse(std::function<Type()> read):_read(read) {
+    FnResponse(Type (*read)()):_read(read) {
 
     }
     virtual void* read() {
       return (void *)this->_read();
     }
   private:
-    std::function<Type()> _read;
+    Type (*_read)();
   };
 
 

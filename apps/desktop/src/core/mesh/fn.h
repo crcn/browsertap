@@ -1,8 +1,7 @@
-#ifndef MES_FN_H_
-#define MES_FN_H_
+#ifndef MESH_FN_H_
+#define MESH_FN_H_
 
 #include "./bus.h"
-#include <functional>
 
 namespace mesh {
   class FnBus : public Bus {
@@ -11,7 +10,7 @@ namespace mesh {
     /**
      */
 
-    FnBus(std::function<Response*(Request*)> execute):_execute(execute) { }
+    FnBus(Response* (*execute)(Request*)):_execute(execute) { }
 
     /**
      */
@@ -21,7 +20,7 @@ namespace mesh {
     }
 
   private:
-    std::function<Response*(Request*)> _execute;
+    Response* (*_execute)(Request*);
   };
 }
 

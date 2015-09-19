@@ -44,9 +44,8 @@
 
                 'xcode_settings': {
                     'CLANG_CXX_LANGUAGE_STANDARD': 'c++11',
-                    'CLANG_CXX_LIBRARY': 'libc++', 
                     'GCC_ENABLE_CPP_RTTI': 'NO',
-                    'MACOSX_DEPLOYMENT_TARGET': '10.7',
+                    'MACOSX_DEPLOYMENT_TARGET': '10.5',
                     'OTHER_CFLAGS': [
                         '-fno-strict-aliasing'
                     ],

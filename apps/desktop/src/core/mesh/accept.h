@@ -3,7 +3,6 @@
 
 #include "./bus.h"
 #include "./request.h"
-#include <functional>
 
 namespace mesh {
   class AcceptBus : public Bus {
@@ -12,7 +11,7 @@ namespace mesh {
     /**
      */
 
-    AcceptBus(std::function<bool(Request*)> test, Bus* yesBus, Bus* noBus):
+    AcceptBus(bool (*test)(Request*), Bus* yesBus, Bus* noBus):
     _test(test), _yes(yesBus), _no(noBus) {
 
     }
@@ -20,7 +19,7 @@ namespace mesh {
     /**
      */
 
-    AcceptBus(std::function<bool(Request*)> test, Bus* yesBus):AcceptBus(test, yesBus, new Bus()) {
+    AcceptBus(bool (*test)(Request*), Bus* yesBus):AcceptBus(test, yesBus, new Bus()) {
 
     }
 
@@ -38,7 +37,7 @@ namespace mesh {
   private:
     Bus* _yes;
     Bus* _no;
-    std::function<bool(Request*)>  _test;
+    bool (*_test)(Request*);
   };
 }
 

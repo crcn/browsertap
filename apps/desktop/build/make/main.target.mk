@@ -31,7 +31,7 @@ CFLAGS_Debug := \
 	-mpascal-strings \
 	-O0 \
 	-gdwarf-2 \
-	-mmacosx-version-min=10.7 \
+	-mmacosx-version-min=10.5 \
 	-arch x86_64 \
 	-Wall \
 	-Wendif-labels \
@@ -45,7 +45,6 @@ CFLAGS_C_Debug := \
 # Flags passed to only C++ files.
 CFLAGS_CC_Debug := \
 	-std=c++11 \
-	-stdlib=libc++ \
 	-fno-rtti \
 	-fno-strict-aliasing
 
@@ -95,7 +94,7 @@ CFLAGS_Debug_Base := \
 	-mpascal-strings \
 	-Os \
 	-gdwarf-2 \
-	-mmacosx-version-min=10.7 \
+	-mmacosx-version-min=10.5 \
 	-arch x86_64 \
 	-Wall \
 	-Wendif-labels \
@@ -109,7 +108,6 @@ CFLAGS_C_Debug_Base := \
 # Flags passed to only C++ files.
 CFLAGS_CC_Debug_Base := \
 	-std=c++11 \
-	-stdlib=libc++ \
 	-fno-rtti \
 	-fno-strict-aliasing
 
@@ -158,7 +156,7 @@ CFLAGS_Release := \
 	-fasm-blocks \
 	-mpascal-strings \
 	-O3 \
-	-mmacosx-version-min=10.7 \
+	-mmacosx-version-min=10.5 \
 	-arch x86_64 \
 	-Wall \
 	-Wendif-labels \
@@ -172,7 +170,6 @@ CFLAGS_C_Release := \
 # Flags passed to only C++ files.
 CFLAGS_CC_Release := \
 	-std=c++11 \
-	-stdlib=libc++ \
 	-fno-rtti \
 	-fvisibility-inlines-hidden \
 	-fno-strict-aliasing
@@ -232,27 +229,24 @@ $(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj)/%.cc FORCE_DO_CMD
 # End of this set of suffix rules
 ### Rules for final target.
 LDFLAGS_Debug := \
-	-mmacosx-version-min=10.7 \
+	-mmacosx-version-min=10.5 \
 	-arch x86_64 \
-	-L$(builddir) \
-	-stdlib=libc++
+	-L$(builddir)
 
 LIBTOOLFLAGS_Debug :=
 
 LDFLAGS_Debug_Base := \
-	-mmacosx-version-min=10.7 \
+	-mmacosx-version-min=10.5 \
 	-arch x86_64 \
-	-L$(builddir) \
-	-stdlib=libc++
+	-L$(builddir)
 
 LIBTOOLFLAGS_Debug_Base :=
 
 LDFLAGS_Release := \
 	-Wl,-dead_strip \
-	-mmacosx-version-min=10.7 \
+	-mmacosx-version-min=10.5 \
 	-arch x86_64 \
-	-L$(builddir) \
-	-stdlib=libc++
+	-L$(builddir)
 
 LIBTOOLFLAGS_Release :=
 

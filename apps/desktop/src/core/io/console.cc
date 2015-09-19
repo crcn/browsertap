@@ -1,4 +1,5 @@
 #include "./console.h"
+#include <json/json.h>
 #include <iostream>
 #include <pthread.h>
 
@@ -10,5 +11,19 @@ io::Console::Console(mesh::Bus* bus):io::Base(bus) {
 
 void* io::Console::captureStdin (void *ptr)
 {
-  std::cout << "STDIN" << std::endl;
-} /* print_message_function ( void *ptr ) */
+  while(1) {
+    std::string input;
+    std::cin >>input;
+
+
+    Json::Value root;
+    Json::Reader reader;
+
+    if (reader.parse(input, root)) {
+      std::cout << "OK" << std::endl;
+    }
+
+
+    std::cout << input << std::endl;
+  }
+} 

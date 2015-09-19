@@ -2,7 +2,6 @@
 #define MESH_REJECT_H_
 
 #include "./accept.h"
-#include <functional>
 
 namespace mesh {
   class RejectBus : public AcceptBus {
@@ -11,7 +10,7 @@ namespace mesh {
     /**
      */
 
-    RejectBus(std::function<bool(Request*)> test, Bus* yesBus, Bus* noBus):
+    RejectBus(bool (*test)(Request*), Bus* yesBus, Bus* noBus):
     AcceptBus(test, noBus, yesBus) { }
   };
 }
