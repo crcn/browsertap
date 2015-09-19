@@ -10,6 +10,13 @@ out/Release/obj.target/main/src/core/io/console.o: \
   ../../src/core/io/../mesh/./commands.h \
   ../../src/core/io/../mesh/./fn.h \
   ../../src/core/io/../mesh/./sequence.h \
+  ../../src/core/io/../../application.h \
+  ../../src/core/io/../.././core/mesh/mesh.h \
+  ../../src/core/io/../.././osx/desktop.h \
+  ../../src/core/io/../.././osx/../base/desktop.h \
+  ../../src/core/io/../.././osx/../base/./window.h \
+  ../../src/core/io/../.././osx/../base/../geom/bounds.h \
+  ../../src/core/io/../.././osx/../base/../graphics/bitmap.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/config.h \
@@ -30,6 +37,13 @@ out/Release/obj.target/main/src/core/io/console.o: \
 ../../src/core/io/../mesh/./commands.h:
 ../../src/core/io/../mesh/./fn.h:
 ../../src/core/io/../mesh/./sequence.h:
+../../src/core/io/../../application.h:
+../../src/core/io/../.././core/mesh/mesh.h:
+../../src/core/io/../.././osx/desktop.h:
+../../src/core/io/../.././osx/../base/desktop.h:
+../../src/core/io/../.././osx/../base/./window.h:
+../../src/core/io/../.././osx/../base/../geom/bounds.h:
+../../src/core/io/../.././osx/../base/../graphics/bitmap.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/config.h:

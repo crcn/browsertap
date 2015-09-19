@@ -11,5 +11,5 @@ Application::Application() {
   this->destop = new osx::Desktop();
 
   // input / output to the application
-  this->io     = new io::Console(this->bus);
+  this->io     = new io::Console(this);
 }
