@@ -16,6 +16,7 @@
 
                     './src/main.cc',
                     './src/application.cc',
+                    './src/commands/commands.cc',
                     './src/osx/window.cc',
                     './src/osx/desktop.cc',
 

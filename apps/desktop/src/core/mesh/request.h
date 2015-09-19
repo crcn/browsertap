@@ -9,12 +9,21 @@ namespace mesh {
   class Request {
   public:
     std::string name;
+    void* data;
 
     /**
      */
 
-    Request(std::string name) {
+    Request(std::string name, void* data) {
       this->name = name;
+      this->data = data;
+    }
+
+    /**
+     */
+
+    Request(std::string name):Request(name, NULL) {
+
     }
   };
 }

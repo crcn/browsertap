@@ -2,12 +2,11 @@
 #define IO_CONSOLE_H_
 
 #include "./base.h"
-#include "../../application.h"
 
 namespace io {
   class Console : public Base {
   public:
-    Console(Application* application);
+    Console(base::Application* application);
     void start();
     static void* captureStdin (void*ptr);
   };

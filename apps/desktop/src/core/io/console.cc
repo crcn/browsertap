@@ -2,11 +2,13 @@
 #include <json/json.h>
 #include <iostream>
 #include <pthread.h>
+#include <sstream>     
 
 /**
  */
 
-io::Console::Console(Application* app):io::Base(app) {
+io::Console::Console(base::Application* app):io::Base(app) {
+
 }
 
 /**
@@ -21,8 +23,7 @@ void io::Console::start() {
 /**
  */
 
-void* io::Console::captureStdin (void *ptr)
-{
+void* io::Console::captureStdin (void *ptr) {
 
   io::Console* c = (io::Console*)ptr;
 
@@ -34,9 +35,15 @@ void* io::Console::captureStdin (void *ptr)
     Json::Reader reader;
 
     if (reader.parse(input, root)) {
-      c->app->bus->execute(new mesh::Request(root["name"].asString()));
-    }
+      mesh::Response* response = c->app->bus->execute(new mesh::Request(root["name"].asString(), (void*)&root));
+      const char* chunk;
+      std::stringstream ss;
 
-    std::cout << input << std::endl;
+      while(chunk = (const char*)response->read()) {
+        ss << chunk;
+      }
+
+      std::cout << ss.str() << std::endl;
+    }
   }
 } 

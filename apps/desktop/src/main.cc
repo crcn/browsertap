@@ -17,6 +17,6 @@
 #include "./application.h"
 
 int main(int argc, const char * argv[]) {
-  Application* app = new Application();
+  app::Application* app = new app::Application();
   app->start();
 }
