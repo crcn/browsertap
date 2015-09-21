@@ -4,7 +4,6 @@ out/Release/obj.target/main/src/main.o: ../../src/main.cc \
   ../../src/./osx/../base/./window.h \
   ../../src/./osx/../base/../geom/bounds.h \
   ../../src/./osx/../base/../graphics/bitmap.h \
-  ../../src/./remote/commands.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/config.h \
@@ -29,7 +28,6 @@ out/Release/obj.target/main/src/main.o: ../../src/main.cc \
 ../../src/./osx/../base/./window.h:
 ../../src/./osx/../base/../geom/bounds.h:
 ../../src/./osx/../base/../graphics/bitmap.h:
-../../src/./remote/commands.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/config.h:

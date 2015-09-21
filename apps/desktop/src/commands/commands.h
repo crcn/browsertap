@@ -5,11 +5,9 @@
 #include "../core/mesh/mesh.h"
 
 namespace app {
-  class Commands {
-  public:
-    Commands(base::Application* app);
-    base::Application* app;
-  };
+
+  /**
+   */
 
   class AppBus  : public mesh::Bus {
   public:
@@ -19,10 +17,41 @@ namespace app {
     base::Application* app;
   };
 
-  class PongBus : public AppBus {
+  /**
+   */
+
+  class AppFnBus : public AppBus {
   public:
-    PongBus(base::Application* app):AppBus(app) { }
-    mesh::Response* execute(mesh::Request* request);
+    AppFnBus(base::Application* app, mesh::Response* (*execute)(mesh::Request*)):AppBus(app),_execute(execute) {
+
+    }
+    virtual mesh::Response* execute(mesh::Request* request) {
+      return this->_execute(request);
+    }
+  private:
+    mesh::Response* (*_execute)(mesh::Request*);
+  };
+
+  /**
+   */
+
+  class Commands {
+  public:
+    Commands(base::Application* app);
+    base::Application* app;
+
+    /**
+     * returns all the windows running on the host machine
+     */
+
+    static mesh::Response* execGetWindows(mesh::Request* request);
+
+    /**
+     * starts a new window webRTC session
+     */
+
+    static mesh::Response* execStartWindowSession(mesh::Request* request);
+
   };
 }
 

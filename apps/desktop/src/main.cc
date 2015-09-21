@@ -9,7 +9,6 @@
 #include <iostream>
 #include "./osx/desktop.h"
 // #include "./remote/server.h"
-#include "./remote/commands.h"
 // #include "./remote/transports.h"
 #include "./geom/bounds.h"
 #include <json/json.h>
