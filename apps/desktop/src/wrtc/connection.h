@@ -64,8 +64,6 @@ namespace wrtc {
     void _onLocalDescriptionSuccuess();
 
     webrtc::PeerConnectionInterface::IceServers _iceServers();
-
-
   };
 }
 
