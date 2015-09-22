@@ -40,14 +40,14 @@ namespace wrtc {
    */
 
   void Connection::_onIceCandidate(const webrtc::IceCandidateInterface* candidate) {
-    LOG_VERBOSE("Connection::_onIceCandidate");
+    LOG_VERBOSE("wrtc::Connection::_onIceCandidate");
   }
 
   /**
    */
 
   void Connection::_onIceGatheringChange(webrtc::PeerConnectionInterface::IceGatheringState state) {
-    LOG_VERBOSE("Connection::_onIceGatheringChange");
+    LOG_VERBOSE("wrtc::Connection::_onIceGatheringChange");
 
     switch(state) {
       case webrtc::PeerConnectionInterface::kIceConnectionConnected: 
@@ -60,7 +60,7 @@ namespace wrtc {
    */
 
   void Connection::_onIceConnectionConnected() {
-    LOG_NOTICE("Connection::_onIceConnectionConnected");
+    LOG_NOTICE("wrtc::Connection::_onIceConnectionConnected");
 
     std::string out;
     _connection->local_description()->ToString(&out);
@@ -116,7 +116,7 @@ namespace wrtc {
    */
 
   void Connection::_onLocalDescriptionSuccuess() {
-    LOG_VERBOSE("Connection::_onLocalDescriptionSuccuess");
+    LOG_VERBOSE("wrtc::Connection::_onLocalDescriptionSuccuess");
   }
   /**
    */

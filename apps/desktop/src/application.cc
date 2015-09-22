@@ -24,7 +24,7 @@ app::Application::Application() {
 
 void app::Application::start() {
 
-  LOG_INFO("init application");
+  LOG_INFO("app::Application::start");
 
   this->io->start();
 }

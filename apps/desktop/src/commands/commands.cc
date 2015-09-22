@@ -4,7 +4,7 @@
  */
 
 app::Commands::Commands(base::Application* app):app(app) {
-  LOG_INFO("init commands");
+  LOG_INFO("app::Commands::Commands");
 
   // replace the application bus with the commands bus. Note that
   // any commands that do not get executed against *registered* commands
