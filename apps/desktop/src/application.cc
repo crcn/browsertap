@@ -10,7 +10,6 @@ app::Application::Application() {
   // message layer
   this->bus    = new mesh::Bus();
 
-
   // desktop controller
   this->desktop = new osx::Desktop();
 
@@ -28,9 +27,6 @@ void app::Application::start() {
   LOG_INFO("init application");
 
   this->io->start();
-
-  // keep it alive
-  while(1);
 }
 
 /**

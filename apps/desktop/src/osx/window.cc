@@ -49,6 +49,7 @@ graphics::Bitmap* osx::Window::print() {
     CFNumberRef windowNumber = (CFNumberRef)CFDictionaryGetValue(this->_info, kCGWindowNumber);
     CFNumberGetValue(windowNumber, kCFNumberIntType, &winId);
 
+    // TODO vs glgrab.c
     CGImageRef image = CGWindowListCreateImage(rect,
         kCGWindowListOptionIncludingWindow,
         winId,

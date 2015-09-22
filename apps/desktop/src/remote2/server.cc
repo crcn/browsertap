@@ -1,6 +1,7 @@
 #include "./server.h"
 #include "talk/app/webrtc/test/fakeconstraints.h"
 #include <iostream>
+#include <json/json.h>
 
 class VideoCapturer : public cricket::VideoCapturer {
 public:
@@ -126,7 +127,11 @@ namespace remote {
     std::string out;
     _connection->local_description()->ToString(&out);
     std::cout << "-----------------------" << std::endl;
-    std::cout << out << std::endl;
+    Json::Value value;
+    value["type"] = "offer";
+    value["sdp"]  = out;
+    Json::FastWriter writer;
+    std::cout << writer.write(value) << std::endl;
     std::cout << "-----------------------" << std::endl;
   }
 

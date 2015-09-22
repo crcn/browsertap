@@ -20,9 +20,9 @@
                     './src/osx/window.cc',
                     './src/osx/desktop.cc',
 
-                    './src/remote2/server.cc',
-                    './src/remote2/peer.cc',
-                    './src/remote2/core.cc',
+                    './src/wrtc/connection.cc',
+                    './src/wrtc/observers.cc',
+                    './src/wrtc/core.cc',
 
                     './src/core/events/event_emitter.cc',
                     './src/core/io/console.cc'
