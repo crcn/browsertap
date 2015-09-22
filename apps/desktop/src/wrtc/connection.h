@@ -57,46 +57,14 @@ namespace wrtc {
 
     void _onOfferSuccess(webrtc::SessionDescriptionInterface* sdp);
     void _onIceCandidate(const webrtc::IceCandidateInterface* candidate);
+    void _onIceConnectionConnected();
+    void _onIceGatheringChange(webrtc::PeerConnectionInterface::IceGatheringState state);
     void _onLocalDescriptionSuccuess();
 
     webrtc::PeerConnectionInterface::IceServers _iceServers();
+
+
   };
-
-
-
-class VideoCapturer : public cricket::VideoCapturer {
-public:
-  VideoCapturer() {
-    std::vector<cricket::VideoFormat> supported;
-    cricket::VideoFormat format(704, 576,
-            FPS_TO_INTERVAL(15),
-            cricket::FOURCC_I420);
-    supported.push_back(format);
-  }
-
-
-  // Override virtual methods of parent class VideoCapturer.
-  cricket::CaptureState Start(const cricket::VideoFormat& capture_format) {
-    std::cout << "Called with Start " << std::endl;
-    return cricket::CS_RUNNING;
-  }
-  void Stop() {
-    std::cout << "Called with Stop " << std::endl;
-    // SetCaptureFormat(NULL);
-  };
-  bool IsRunning() { return true; }
-  bool IsScreencast() const { return false; }
-  bool GetPreferredFourccs(std::vector<uint32>* fourccs) {
-    std::cout << ">>>>>>>>>>>> Called with GetPreferredFourccs " << std::endl;
-
-    if (!fourccs) {
-        return false;
-    }
-    fourccs->push_back(cricket::FOURCC_I420);
-    return true;
-  };
-};
-
 }
 
 #endif

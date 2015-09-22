@@ -30,6 +30,7 @@ namespace wrtc {
     void OnRemoveStream(webrtc::MediaStreamInterface* stream) final;
 
     sigslot::signal1<const webrtc::IceCandidateInterface*> onIceCandidate;
+    sigslot::signal1<webrtc::PeerConnectionInterface::IceGatheringState> onIceGatheringChange;
 
    private:
     Connection* _connection;

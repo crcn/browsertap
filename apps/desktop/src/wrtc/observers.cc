@@ -17,6 +17,7 @@ namespace wrtc {
 
   void PeerConnectionObserver::OnIceGatheringChange(webrtc::PeerConnectionInterface::IceGatheringState state) {
     LOG_VERBOSE("PeerConnectionObserver::OnIceGatheringChange");
+    onIceGatheringChange.emit(state);
   }
 
   void PeerConnectionObserver::OnStateChange(webrtc::PeerConnectionObserver::StateType state) {

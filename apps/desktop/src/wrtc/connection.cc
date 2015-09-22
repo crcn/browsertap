@@ -15,10 +15,11 @@ namespace wrtc {
     _localDescriptionObserver = new rtc::RefCountedObject<LocalDescriptionObserver>(this);
 
     _peerConnectionObserver->onIceCandidate.connect(this, &Connection::_onIceCandidate);
+    _peerConnectionObserver->onIceGatheringChange.connect(this, &Connection::_onIceGatheringChange);
     _offerObserver->onSuccess.connect(this, &Connection::_onOfferSuccess);
     _localDescriptionObserver->onSuccess.connect(this, &Connection::_onLocalDescriptionSuccuess);
 
-    // _constraints.AddOptional(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp, webrtc::MediaConstraintsInterface::kValueTrue);
+    _constraints.AddOptional(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp, webrtc::MediaConstraintsInterface::kValueTrue);
     _factory     = webrtc::CreatePeerConnectionFactory();
     _connection  = _factory->CreatePeerConnection(_iceServers(), &_constraints, NULL, NULL, _peerConnectionObserver.get());
 
@@ -54,6 +55,26 @@ namespace wrtc {
     // Json::FastWriter writer;
     // std::cout << writer.write(value) << std::endl;
   }
+
+  /**
+   */
+
+  void Connection::_onIceGatheringChange(webrtc::PeerConnectionInterface::IceGatheringState state) {
+    LOG_VERBOSE("Connection::_onIceGatheringChange");
+
+    switch(state) {
+      case webrtc::PeerConnectionInterface::kIceConnectionConnected: 
+        this->_onIceConnectionConnected();
+        break;
+    }
+  } 
+
+  /**
+   */
+
+  void Connection::_onIceConnectionConnected() {
+    LOG_NOTICE("Connection::_onIceConnectionConnected");
+  } 
 
   /**
    */
