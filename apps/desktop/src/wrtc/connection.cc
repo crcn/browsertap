@@ -40,7 +40,6 @@ namespace wrtc {
    */
 
   void Connection::_onIceCandidate(const webrtc::IceCandidateInterface* candidate) {
-    LOG_VERBOSE("wrtc::Connection::_onIceCandidate");
   }
 
   /**
