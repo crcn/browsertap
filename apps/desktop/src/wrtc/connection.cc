@@ -8,16 +8,20 @@ namespace wrtc {
 
   Connection::Connection() {
 
+    rtc::InitializeSSL();
+
     // observers
-    _peerConnectionObserver   = new rtc::RefCountedObject<PeerConnectionObserver>(this);
-    _offerObserver            = new rtc::RefCountedObject<OfferObserver>(this);
-    _localDescriptionObserver = new rtc::RefCountedObject<LocalDescriptionObserver>(this);
-    _localDescriptionObserver = new rtc::RefCountedObject<LocalDescriptionObserver>(this);
+    _peerConnectionObserver   = new rtc::RefCountedObject<PeerConnectionObserver>();
+    _offerObserver            = new rtc::RefCountedObject<OfferObserver>();
+    _localDescriptionObserver = new rtc::RefCountedObject<LocalDescriptionObserver>();
+    _localDescriptionObserver = new rtc::RefCountedObject<LocalDescriptionObserver>();
+    _dataChannelObserver      = new rtc::RefCountedObject<DataChannelObserver>();
 
     _peerConnectionObserver->onIceCandidate.connect(this, &Connection::_onIceCandidate);
     _peerConnectionObserver->onIceGatheringChange.connect(this, &Connection::_onIceGatheringChange);
     _offerObserver->onSuccess.connect(this, &Connection::_onOfferSuccess);
     _localDescriptionObserver->onSuccess.connect(this, &Connection::_onLocalDescriptionSuccuess);
+    _dataChannelObserver->onMessage.connect(this, &Connection::_onDataChannelMessage);
 
     _constraints.AddOptional(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp, webrtc::MediaConstraintsInterface::kValueTrue);
     _factory     = webrtc::CreatePeerConnectionFactory();
@@ -27,16 +31,7 @@ namespace wrtc {
     config.reliable = false;
     _dataChannel = _connection->CreateDataChannel("data", &config);
 
-
-    // VideoCapturer* vcapture = new VideoCapturer();
-    // rtc::scoped_refptr<webrtc::MediaStreamInterface> stream = _factory->CreateLocalMediaStream("simple_stream");
-
-    // rtc::scoped_refptr<webrtc::VideoSourceInterface> videoSource;
-    // videoSource = _factory->CreateVideoSource(vcapture, NULL);
-    // rtc::scoped_refptr<webrtc::VideoTrackInterface> videoTrack(_factory->CreateVideoTrack("simple_video", videoSource));
-    // stream->AddTrack(videoTrack);
-
-    // _connection->AddStream(stream);
+    _dataChannel->RegisterObserver(_dataChannelObserver);
 
     _connection.get()->CreateOffer(_offerObserver.get(), &_constraints);
   }
@@ -46,14 +41,6 @@ namespace wrtc {
 
   void Connection::_onIceCandidate(const webrtc::IceCandidateInterface* candidate) {
     LOG_VERBOSE("Connection::_onIceCandidate");
-    // std::string out;
-    // _connection->local_description()->ToString(&out);
-    // std::cout << "-----------------------" << std::endl;
-    // Json::Value value;
-    // value["type"] = "offer";
-    // value["sdp"]  = out;
-    // Json::FastWriter writer;
-    // std::cout << writer.write(value) << std::endl;
   }
 
   /**
@@ -74,7 +61,49 @@ namespace wrtc {
 
   void Connection::_onIceConnectionConnected() {
     LOG_NOTICE("Connection::_onIceConnectionConnected");
+
+    std::string out;
+    _connection->local_description()->ToString(&out);
+    Json::Value value;
+    value["type"] = "offer";
+    value["sdp"]  = out;
+    Json::FastWriter writer;
+    std::cout << writer.write(value) << std::endl;
+
+    std::cout << "paste your answer: " << std::endl;
+
+    std::string answer;
+    std::getline(std::cin, answer);
+
+    Json::Value root;
+    Json::Reader reader;
+    if(!reader.parse(answer, root)) {
+      std::cout << "unable to parse " << answer << std::endl;
+      return;
+    }
+
+    webrtc::SdpParseError error;
+
+    webrtc::SessionDescriptionInterface* sd(webrtc::CreateSessionDescription(root["type"].asString(), root["sdp"].asString(), &error));
+    if (!sd) {
+        LOG_ERROR(error.description.c_str());
+        LOG(WARNING) << "Can't parse received session description message."; 
+        return;
+    }
+
+    _connection->SetRemoteDescription(new rtc::RefCountedObject<LocalDescriptionObserver>(), sd);
   } 
+
+  /**
+   */
+
+  void Connection::_onDataChannelMessage(const webrtc::DataBuffer& buffer) {
+
+    std::string msg;
+    msg.assign((const char *)buffer.data.data(), (size_t)buffer.data.size());
+
+    LOG_INFO(msg);
+  }
 
   /**
    */

@@ -24,7 +24,7 @@ int main(int argc, const char * argv[]) {
 
   while(1) {
     rtc::Thread::Current()->ProcessMessages(10);
-    sleep(1);
+    // sleep(1);
   }
 
   // delete c;

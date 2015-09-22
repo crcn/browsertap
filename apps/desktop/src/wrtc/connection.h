@@ -49,6 +49,7 @@ namespace wrtc {
     rtc::scoped_refptr<PeerConnectionObserver> _peerConnectionObserver;
     rtc::scoped_refptr<OfferObserver> _offerObserver;
     rtc::scoped_refptr<LocalDescriptionObserver> _localDescriptionObserver;
+    rtc::scoped_refptr<DataChannelObserver> _dataChannelObserver;
 
     webrtc::FakeConstraints _constraints;
     rtc::scoped_refptr<webrtc::PeerConnectionFactoryInterface> _factory;
@@ -58,6 +59,7 @@ namespace wrtc {
     void _onOfferSuccess(webrtc::SessionDescriptionInterface* sdp);
     void _onIceCandidate(const webrtc::IceCandidateInterface* candidate);
     void _onIceConnectionConnected();
+    void _onDataChannelMessage(const webrtc::DataBuffer& buffer);
     void _onIceGatheringChange(webrtc::PeerConnectionInterface::IceGatheringState state);
     void _onLocalDescriptionSuccuess();
 

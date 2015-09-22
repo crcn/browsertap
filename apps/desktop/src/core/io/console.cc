@@ -17,7 +17,7 @@ io::Console::Console(base::Application* app):io::Base(app) {
 void io::Console::start() {
   LOG_INFO("init console IO transport");
   pthread_t thread;
-  pthread_create (&thread, NULL, &captureStdin, this);
+  // pthread_create (&thread, NULL, &captureStdin, this);
 }
 
 /**

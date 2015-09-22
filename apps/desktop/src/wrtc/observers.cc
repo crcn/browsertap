@@ -5,7 +5,7 @@ namespace wrtc {
   /**
    */
 
-  PeerConnectionObserver::PeerConnectionObserver(Connection* connection):_connection(connection) { }
+  PeerConnectionObserver::PeerConnectionObserver() { }
 
   void PeerConnectionObserver::OnSignalingChange(webrtc::PeerConnectionInterface::SignalingState state) {
     LOG_VERBOSE("PeerConnectionObserver::OnSignalingChange");
@@ -48,10 +48,7 @@ namespace wrtc {
   /**
    */
 
-  OfferObserver::OfferObserver(Connection* connection):
-  _connection(connection) {
-
-  }
+  OfferObserver::OfferObserver(){ }
 
   void OfferObserver::OnSuccess(webrtc::SessionDescriptionInterface* sdp) {
     LOG_VERBOSE("OfferObserver::OnSuccess");
@@ -63,25 +60,12 @@ namespace wrtc {
     onFailure.emit(error);
   }
 
-  LocalDescriptionObserver::LocalDescriptionObserver(Connection* connection):
-  _connection(connection) {
-
-  }
+  LocalDescriptionObserver::LocalDescriptionObserver() { }
 
 
   void LocalDescriptionObserver::OnSuccess() {
     LOG_VERBOSE("LocalDescriptionObserver::OnSuccess");
-
-    // string sd;
-    // desc->ToString(&sd);
-    // facade_->setLocalSessionDescription(sd);
-
-    // webrtc::SessionDescriptionInterface* pSessionDescription = webrtc::CreateSessionDescription("offer", sd);
-    // _server->_connection->SetLocalDescription(NULL, sdp);
-
-
     onSuccess.emit();
-    // _server->_connection->SetLocalOffer()
   }
 
   void LocalDescriptionObserver::OnFailure(const std::string &error) {
@@ -89,4 +73,15 @@ namespace wrtc {
     onFailure.emit(error);
   }
 
+  DataChannelObserver::DataChannelObserver() { }
+
+  void DataChannelObserver::OnStateChange() {
+    LOG_VERBOSE("DataChannelObserver::OnStateChange");
+    onStateChange.emit();
+  };
+
+  void DataChannelObserver::OnMessage(const webrtc::DataBuffer& buffer) {
+    LOG_VERBOSE("DataChannelObserver::OnMessage");
+    onMessage.emit(buffer);
+  }
 }
