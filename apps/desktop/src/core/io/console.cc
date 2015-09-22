@@ -15,7 +15,7 @@ io::Console::Console(base::Application* app):io::Base(app) {
  */
 
 void io::Console::start() {
-  LOG_INFO("io::Console::start()");
+  LOG_INFO("io::Console::start");
   pthread_t thread;
   // pthread_create (&thread, NULL, &captureStdin, this);
 }
