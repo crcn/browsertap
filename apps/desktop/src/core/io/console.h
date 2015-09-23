@@ -2,6 +2,7 @@
 #define IO_CONSOLE_H_
 
 #include "./base.h"
+#include <json/json.h>
 
 namespace io {
   class Console : public Base {
@@ -9,6 +10,7 @@ namespace io {
     Console(base::Application* application);
     void start();
     static void* captureStdin (void*ptr);
+    void executeCommand (Json::Value& value);
   };
 }
 

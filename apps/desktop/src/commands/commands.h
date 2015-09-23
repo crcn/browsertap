@@ -52,6 +52,11 @@ namespace app {
 
     static mesh::Response* execStartWindowSession(mesh::Request* request);
 
+    /**
+     */
+
+    static mesh::Response* execStartMainSession(mesh::Request* request);
+
   };
 }
 

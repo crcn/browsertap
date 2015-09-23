@@ -6,6 +6,8 @@
         './common.gypi',
         './config.gypi'
     ],
+    'make_global_settings': [
+      ],
 
     'conditions': [
         ['OS=="mac"', {
@@ -21,8 +23,13 @@
                     './src/osx/desktop.cc',
 
                     './src/wrtc/connection.cc',
+                    './src/wrtc/connections.cc',
                     './src/wrtc/observers.cc',
                     './src/wrtc/core.cc',
+
+                    './src/core/thread/condition.cc',
+                    './src/core/thread/mutex.cc',
+                    './src/core/thread/thread.cc',
 
                     './src/core/events/event_emitter.cc',
                     './src/core/io/console.cc'
@@ -54,7 +61,7 @@
                         '-Wall',
                         '-Wendif-labels',
                         '-W',
-                        '-Wno-unused-parameter',
+                        '-Wno-unused-parameter'
                     ],
                 },
 

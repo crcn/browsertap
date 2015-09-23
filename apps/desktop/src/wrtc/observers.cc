@@ -8,41 +8,41 @@ namespace wrtc {
   PeerConnectionObserver::PeerConnectionObserver() { }
 
   void PeerConnectionObserver::OnSignalingChange(webrtc::PeerConnectionInterface::SignalingState state) {
-    LOG_VERBOSE("wrtc::PeerConnectionObserver::OnSignalingChange");
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
   }
 
   void PeerConnectionObserver::OnIceConnectionChange(webrtc::PeerConnectionInterface::IceConnectionState state) {
-    LOG_VERBOSE("wrtc::PeerConnectionObserver::OnIceConnectionChange");
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
   }
 
   void PeerConnectionObserver::OnIceGatheringChange(webrtc::PeerConnectionInterface::IceGatheringState state) {
-    LOG_VERBOSE("wrtc::PeerConnectionObserver::OnIceGatheringChange");
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
     onIceGatheringChange.emit(state);
   }
 
   void PeerConnectionObserver::OnStateChange(webrtc::PeerConnectionObserver::StateType state) {
-    LOG_VERBOSE("wrtc::PeerConnectionObserver::OnStateChange");
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
   }
 
   void PeerConnectionObserver::OnIceCandidate(const webrtc::IceCandidateInterface* candidate) {
-    LOG_VERBOSE("wrtc::PeerConnectionObserver::onIceCandidate");
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
     onIceCandidate.emit(candidate);
   }
 
   void PeerConnectionObserver::OnDataChannel(webrtc::DataChannelInterface* channel) {
-    LOG_VERBOSE("wrtc::PeerConnectionObserver::OnDataChannel");
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
   }
 
   void PeerConnectionObserver::OnRenegotiationNeeded() {
-    LOG_VERBOSE("wrtc::PeerConnectionObserver::OnRenegotiationNeeded");
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
   }
 
   void PeerConnectionObserver::OnAddStream(webrtc::MediaStreamInterface* stream) {
-    LOG_VERBOSE("wrtc::PeerConnectionObserver::OnAddStream");
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
   }
 
   void PeerConnectionObserver::OnRemoveStream(webrtc::MediaStreamInterface* stream) {
-    LOG_VERBOSE("wrtc::PeerConnectionObserver::OnRemoveStream");
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
   }
 
   /**
@@ -51,12 +51,12 @@ namespace wrtc {
   OfferObserver::OfferObserver(){ }
 
   void OfferObserver::OnSuccess(webrtc::SessionDescriptionInterface* sdp) {
-    LOG_VERBOSE("wrtc::OfferObserver::OnSuccess");
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
     onSuccess.emit(sdp);
   }
 
   void OfferObserver::OnFailure(const std::string &error) {
-    LOG_VERBOSE("wrtc::OfferObserver::OnFailure");
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
     onFailure.emit(error);
   }
 
@@ -64,24 +64,24 @@ namespace wrtc {
 
 
   void LocalDescriptionObserver::OnSuccess() {
-    LOG_VERBOSE("wrtc::LocalDescriptionObserver::OnSuccess");
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
     onSuccess.emit();
   }
 
   void LocalDescriptionObserver::OnFailure(const std::string &error) {
-    LOG_VERBOSE("wrtc::LocalDescriptionObserver::OnFailure");
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
     onFailure.emit(error);
   }
 
   DataChannelObserver::DataChannelObserver() { }
 
   void DataChannelObserver::OnStateChange() {
-    LOG_VERBOSE("wrtc::DataChannelObserver::OnStateChange");
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
     onStateChange.emit();
   };
 
   void DataChannelObserver::OnMessage(const webrtc::DataBuffer& buffer) {
-    LOG_VERBOSE("wrtc::DataChannelObserver::OnMessage");
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
     onMessage.emit(buffer);
   }
 }

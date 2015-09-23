@@ -140,7 +140,18 @@ out/Release/obj.target/main/src/wrtc/connection.o: \
   ../../src/wrtc/../base/./window.h \
   ../../src/wrtc/../base/../geom/bounds.h \
   ../../src/wrtc/../base/../graphics/bitmap.h \
-  ../../src/wrtc/../core/log/logger.h ../../src/wrtc/./observers.h
+  ../../src/wrtc/../core/log/logger.h ../../src/wrtc/./observers.h \
+  ../../src/wrtc/../core/mesh/mesh.h ../../src/wrtc/../core/mesh/./bus.h \
+  ../../src/wrtc/../core/mesh/./request.h \
+  ../../src/wrtc/../core/mesh/./response.h \
+  ../../src/wrtc/../core/mesh/../thread/thread.h \
+  ../../src/wrtc/../core/mesh/../thread/condition.h \
+  ../../src/wrtc/../core/mesh/../thread/mutex.h \
+  ../../src/wrtc/../core/mesh/./accept.h \
+  ../../src/wrtc/../core/mesh/./reject.h \
+  ../../src/wrtc/../core/mesh/./commands.h \
+  ../../src/wrtc/../core/mesh/./fn.h \
+  ../../src/wrtc/../core/mesh/./sequence.h
 ../../src/wrtc/connection.cc:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/test/fakeconstraints.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediaconstraintsinterface.h:
@@ -284,3 +295,15 @@ out/Release/obj.target/main/src/wrtc/connection.o: \
 ../../src/wrtc/../base/../graphics/bitmap.h:
 ../../src/wrtc/../core/log/logger.h:
 ../../src/wrtc/./observers.h:
+../../src/wrtc/../core/mesh/mesh.h:
+../../src/wrtc/../core/mesh/./bus.h:
+../../src/wrtc/../core/mesh/./request.h:
+../../src/wrtc/../core/mesh/./response.h:
+../../src/wrtc/../core/mesh/../thread/thread.h:
+../../src/wrtc/../core/mesh/../thread/condition.h:
+../../src/wrtc/../core/mesh/../thread/mutex.h:
+../../src/wrtc/../core/mesh/./accept.h:
+../../src/wrtc/../core/mesh/./reject.h:
+../../src/wrtc/../core/mesh/./commands.h:
+../../src/wrtc/../core/mesh/./fn.h:
+../../src/wrtc/../core/mesh/./sequence.h:

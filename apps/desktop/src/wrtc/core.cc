@@ -37,7 +37,6 @@ using namespace wrtc;
 class ProcessMessages : public rtc::Runnable {
  public:
   virtual void Run(rtc::Thread* thread) {
-    LOG(LS_INFO) << __PRETTY_FUNCTION__;
     
     if (thread) {
       thread->ProcessMessages(rtc::ThreadManager::kForever);
@@ -83,27 +82,27 @@ rtc::scoped_refptr<webrtc::PeerConnectionFactoryInterface> _factory;
 void Core::Init() {
   LOG(LS_INFO) << __PRETTY_FUNCTION__;
   
-#ifdef WIN32
-  rtc::EnsureWinsockInit();
-#endif
-  rtc::InitializeSSL();
-  
-  _signal = new ThreadConstructor();
-  rtc::ThreadManager::Instance()->SetCurrentThread(_signal->Current());
-  
-  if (rtc::ThreadManager::Instance()->CurrentThread() != _signal->Current()) {
-    LOG(LS_ERROR) << "Internal Thread Error!";
-    abort();
-  }
-  
-  _factory = Core::CreateFactory();
+  #ifdef WIN32
+    rtc::EnsureWinsockInit();
+
+  #endif
+    rtc::InitializeSSL();
+
+    _signal = new ThreadConstructor();
+    rtc::ThreadManager::Instance()->SetCurrentThread(_signal->Current());
+    
+    if (rtc::ThreadManager::Instance()->CurrentThread() != _signal->Current()) {
+      LOG(LS_ERROR) << "Internal Thread Error!";
+      abort();
+    }
+    
+    _factory = Core::CreateFactory();
 
 }
 
 void Core::Dispose() {
   LOG(LS_INFO) << __PRETTY_FUNCTION__;
 
-  
   _factory.release();
 
   
@@ -111,6 +110,7 @@ void Core::Dispose() {
 }
 
 rtc::scoped_refptr<webrtc::PeerConnectionFactoryInterface> Core::CreateFactory() {
+
   rtc::scoped_refptr<PeerConnectionFactory> factory(new rtc::RefCountedObject<PeerConnectionFactory>());
   
   webrtc::MethodCall0<PeerConnectionFactory, bool> call(factory.get(), &webrtc::PeerConnectionFactory::Initialize);
@@ -124,7 +124,8 @@ rtc::scoped_refptr<webrtc::PeerConnectionFactoryInterface> Core::CreateFactory()
 }
 
 webrtc::PeerConnectionFactoryInterface* Core::GetFactory() {
-  LOG(LS_INFO) << __PRETTY_FUNCTION__;
+  LOG_VERBOSE(__FUNCTION__);
+  Core::Init();
   
   return _factory.get();
 }

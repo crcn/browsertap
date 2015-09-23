@@ -198,8 +198,12 @@ OBJS := \
 	$(obj).target/$(TARGET)/src/osx/window.o \
 	$(obj).target/$(TARGET)/src/osx/desktop.o \
 	$(obj).target/$(TARGET)/src/wrtc/connection.o \
+	$(obj).target/$(TARGET)/src/wrtc/connections.o \
 	$(obj).target/$(TARGET)/src/wrtc/observers.o \
 	$(obj).target/$(TARGET)/src/wrtc/core.o \
+	$(obj).target/$(TARGET)/src/core/thread/condition.o \
+	$(obj).target/$(TARGET)/src/core/thread/mutex.o \
+	$(obj).target/$(TARGET)/src/core/thread/thread.o \
 	$(obj).target/$(TARGET)/src/core/events/event_emitter.o \
 	$(obj).target/$(TARGET)/src/core/io/console.o
 

@@ -1,5 +1,4 @@
 #include "./console.h"
-#include <json/json.h>
 #include <iostream>
 #include <pthread.h>
 #include <sstream>     
@@ -15,10 +14,13 @@ io::Console::Console(base::Application* app):io::Base(app) {
  */
 
 void io::Console::start() {
-  LOG_INFO("io::Console::start");
+  LOG_INFO(__PRETTY_FUNCTION__);
   pthread_t thread;
-  // pthread_create (&thread, NULL, &captureStdin, this);
+  pthread_create (&thread, NULL, &captureStdin, this);
 }
+
+/**
+ */
 
 /**
  */
@@ -29,27 +31,37 @@ void* io::Console::captureStdin (void *ptr) {
 
   while(1) {
     std::string input;
-    std::cin >>input;
+    std::getline(std::cin, input);
 
     Json::Value root;
     Json::Reader reader;
 
     if (reader.parse(input, root)) {
-
-      // execute the command
-      mesh::Response* response = c->app->bus->execute(new mesh::Request(root["name"].asString(), (void*)&root));
-      const char* chunk;
-
-      // boundary start
-      std::cout << ">>>>>>>>";
-
-      // output data  
-      while(chunk = (const char*)response->read()) {
-        std::cout << chunk;
-      }
-
-      // boundary end
-      std::cout << "<<<<<<<<" << std::endl;
+      c->executeCommand(root);
     }
   }
 } 
+
+/**
+ */
+
+void io::Console::executeCommand(Json::Value& root) {
+
+    mesh::Response* response = this->app->bus->execute(new mesh::Request(root["name"].asString(), (void*)&root));
+    const char* chunk;
+
+    // boundary start
+    std::cout << ">>>>>>>>";
+
+    /*
+    response->read([](const char* ))
+    */
+
+    // output data  
+    while(chunk = (const char*)response->read()) {
+      std::cout << chunk;
+    }
+
+    // boundary end
+    std::cout << "<<<<<<<<" << std::endl;
+}

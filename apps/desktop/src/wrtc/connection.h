@@ -38,12 +38,15 @@
 #include "talk/media/webrtc/webrtcvideocapturerfactory.h"
 #include "./core.h"
 #include "./observers.h"
+#include "../core/mesh/mesh.h"
 #include <json/json.h>
 
 namespace wrtc {
   class Connection : public sigslot::has_slots<> {
   public:
-    Connection();
+    mesh::Bus* bus;
+
+    Connection(mesh::Bus* bus);
 
   private:
     rtc::scoped_refptr<PeerConnectionObserver> _peerConnectionObserver;
@@ -61,7 +64,7 @@ namespace wrtc {
     void _onIceConnectionConnected();
     void _onDataChannelMessage(const webrtc::DataBuffer& buffer);
     void _onIceGatheringChange(webrtc::PeerConnectionInterface::IceGatheringState state);
-    void _onLocalDescriptionSuccuess();
+    void _onLocalDescriptionSuccess();
 
     webrtc::PeerConnectionInterface::IceServers _iceServers();
   };

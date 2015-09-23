@@ -23,9 +23,7 @@ app::Application::Application() {
  */
 
 void app::Application::start() {
-
-  LOG_INFO("app::Application::start");
-
+  LOG_INFO(__PRETTY_FUNCTION__);
   this->io->start();
 }
 

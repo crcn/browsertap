@@ -6,6 +6,9 @@ out/Release/obj.target/main/src/application.o: ../../src/application.cc \
   ../../src/./core/base/../mesh/./bus.h \
   ../../src/./core/base/../mesh/./request.h \
   ../../src/./core/base/../mesh/./response.h \
+  ../../src/./core/base/../mesh/../thread/thread.h \
+  ../../src/./core/base/../mesh/../thread/condition.h \
+  ../../src/./core/base/../mesh/../thread/mutex.h \
   ../../src/./core/base/../mesh/./accept.h \
   ../../src/./core/base/../mesh/./reject.h \
   ../../src/./core/base/../mesh/./commands.h \
@@ -14,6 +17,14 @@ out/Release/obj.target/main/src/application.o: ../../src/application.cc \
   ../../src/./commands/commands.h \
   ../../src/./commands/../core/mesh/mesh.h ../../src/./core/io/console.h \
   ../../src/./core/io/./base.h ../../src/./core/io/../mesh/mesh.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/config.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/value.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/forwards.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/reader.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/features.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/writer.h \
   ../../src/./osx/desktop.h ../../src/./osx/../base/desktop.h \
   ../../src/./osx/../base/./window.h \
   ../../src/./osx/../base/../geom/bounds.h \
@@ -26,6 +37,9 @@ out/Release/obj.target/main/src/application.o: ../../src/application.cc \
 ../../src/./core/base/../mesh/./bus.h:
 ../../src/./core/base/../mesh/./request.h:
 ../../src/./core/base/../mesh/./response.h:
+../../src/./core/base/../mesh/../thread/thread.h:
+../../src/./core/base/../mesh/../thread/condition.h:
+../../src/./core/base/../mesh/../thread/mutex.h:
 ../../src/./core/base/../mesh/./accept.h:
 ../../src/./core/base/../mesh/./reject.h:
 ../../src/./core/base/../mesh/./commands.h:
@@ -36,6 +50,14 @@ out/Release/obj.target/main/src/application.o: ../../src/application.cc \
 ../../src/./core/io/console.h:
 ../../src/./core/io/./base.h:
 ../../src/./core/io/../mesh/mesh.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/config.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/value.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/forwards.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/reader.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/features.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/writer.h:
 ../../src/./osx/desktop.h:
 ../../src/./osx/../base/desktop.h:
 ../../src/./osx/../base/./window.h:

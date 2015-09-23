@@ -142,11 +142,19 @@ out/Release/obj.target/main/src/main.o: ../../src/main.cc \
   ../../src/./remote2/./peer.h ../../src/./remote2/./core.h \
   ../../src/./wrtc/connection.h ../../src/./wrtc/./core.h \
   ../../src/./wrtc/../core/log/logger.h ../../src/./wrtc/./observers.h \
-  ../../src/./core/mesh/mesh.h ../../src/./core/mesh/./bus.h \
-  ../../src/./core/mesh/./request.h ../../src/./core/mesh/./response.h \
-  ../../src/./core/mesh/./accept.h ../../src/./core/mesh/./reject.h \
-  ../../src/./core/mesh/./commands.h ../../src/./core/mesh/./fn.h \
-  ../../src/./core/mesh/./sequence.h ../../src/./application.h \
+  ../../src/./wrtc/../core/mesh/mesh.h \
+  ../../src/./wrtc/../core/mesh/./bus.h \
+  ../../src/./wrtc/../core/mesh/./request.h \
+  ../../src/./wrtc/../core/mesh/./response.h \
+  ../../src/./wrtc/../core/mesh/../thread/thread.h \
+  ../../src/./wrtc/../core/mesh/../thread/condition.h \
+  ../../src/./wrtc/../core/mesh/../thread/mutex.h \
+  ../../src/./wrtc/../core/mesh/./accept.h \
+  ../../src/./wrtc/../core/mesh/./reject.h \
+  ../../src/./wrtc/../core/mesh/./commands.h \
+  ../../src/./wrtc/../core/mesh/./fn.h \
+  ../../src/./wrtc/../core/mesh/./sequence.h \
+  ../../src/./core/mesh/mesh.h ../../src/./application.h \
   ../../src/./core/base/application.h \
   ../../src/./core/base/../mesh/mesh.h ../../src/./commands/commands.h \
   ../../src/./commands/../core/mesh/mesh.h ../../src/./core/io/console.h \
@@ -298,15 +306,19 @@ out/Release/obj.target/main/src/main.o: ../../src/main.cc \
 ../../src/./wrtc/./core.h:
 ../../src/./wrtc/../core/log/logger.h:
 ../../src/./wrtc/./observers.h:
+../../src/./wrtc/../core/mesh/mesh.h:
+../../src/./wrtc/../core/mesh/./bus.h:
+../../src/./wrtc/../core/mesh/./request.h:
+../../src/./wrtc/../core/mesh/./response.h:
+../../src/./wrtc/../core/mesh/../thread/thread.h:
+../../src/./wrtc/../core/mesh/../thread/condition.h:
+../../src/./wrtc/../core/mesh/../thread/mutex.h:
+../../src/./wrtc/../core/mesh/./accept.h:
+../../src/./wrtc/../core/mesh/./reject.h:
+../../src/./wrtc/../core/mesh/./commands.h:
+../../src/./wrtc/../core/mesh/./fn.h:
+../../src/./wrtc/../core/mesh/./sequence.h:
 ../../src/./core/mesh/mesh.h:
-../../src/./core/mesh/./bus.h:
-../../src/./core/mesh/./request.h:
-../../src/./core/mesh/./response.h:
-../../src/./core/mesh/./accept.h:
-../../src/./core/mesh/./reject.h:
-../../src/./core/mesh/./commands.h:
-../../src/./core/mesh/./fn.h:
-../../src/./core/mesh/./sequence.h:
 ../../src/./application.h:
 ../../src/./core/base/application.h:
 ../../src/./core/base/../mesh/mesh.h:

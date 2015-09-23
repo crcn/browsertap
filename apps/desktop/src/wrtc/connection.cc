@@ -1,14 +1,13 @@
 #include "talk/app/webrtc/test/fakeconstraints.h"
 #include "./connection.h"
+#include "./core.h"
 
 namespace wrtc {
 
   /**
    */
 
-  Connection::Connection() {
-
-    rtc::InitializeSSL();
+  Connection::Connection(mesh::Bus* bus):bus(bus) {
 
     // observers
     _peerConnectionObserver   = new rtc::RefCountedObject<PeerConnectionObserver>();
@@ -20,11 +19,11 @@ namespace wrtc {
     _peerConnectionObserver->onIceCandidate.connect(this, &Connection::_onIceCandidate);
     _peerConnectionObserver->onIceGatheringChange.connect(this, &Connection::_onIceGatheringChange);
     _offerObserver->onSuccess.connect(this, &Connection::_onOfferSuccess);
-    _localDescriptionObserver->onSuccess.connect(this, &Connection::_onLocalDescriptionSuccuess);
+    _localDescriptionObserver->onSuccess.connect(this, &Connection::_onLocalDescriptionSuccess);
     _dataChannelObserver->onMessage.connect(this, &Connection::_onDataChannelMessage);
 
     _constraints.AddOptional(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp, webrtc::MediaConstraintsInterface::kValueTrue);
-    _factory     = webrtc::CreatePeerConnectionFactory();
+    _factory     = Core::GetFactory();
     _connection  = _factory->CreatePeerConnection(_iceServers(), &_constraints, NULL, NULL, _peerConnectionObserver.get());
 
     webrtc::DataChannelInit config;
@@ -46,7 +45,7 @@ namespace wrtc {
    */
 
   void Connection::_onIceGatheringChange(webrtc::PeerConnectionInterface::IceGatheringState state) {
-    LOG_VERBOSE("wrtc::Connection::_onIceGatheringChange");
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
 
     switch(state) {
       case webrtc::PeerConnectionInterface::kIceConnectionConnected: 
@@ -59,14 +58,17 @@ namespace wrtc {
    */
 
   void Connection::_onIceConnectionConnected() {
-    LOG_NOTICE("wrtc::Connection::_onIceConnectionConnected");
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
 
     std::string out;
     _connection->local_description()->ToString(&out);
     Json::Value value;
     value["type"] = "offer";
     value["sdp"]  = out;
+    this->bus->execute(new mesh::Request("wrtcOffer", (void *)&value));
     Json::FastWriter writer;
+
+    return;
     std::cout << writer.write(value) << std::endl;
 
     std::cout << "paste your answer: " << std::endl;
@@ -114,8 +116,8 @@ namespace wrtc {
   /**
    */
 
-  void Connection::_onLocalDescriptionSuccuess() {
-    LOG_VERBOSE("wrtc::Connection::_onLocalDescriptionSuccuess");
+  void Connection::_onLocalDescriptionSuccess() {
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
   }
   /**
    */
