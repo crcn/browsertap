@@ -39,10 +39,19 @@
 #include "./core.h"
 #include "./observers.h"
 #include "../core/mesh/mesh.h"
+#include "../core/events/event_emitter.h"
+#include "../core/thread/mutex.h"
+#include "../core/thread/condition.h"
 #include <json/json.h>
 
 namespace wrtc {
-  class Connection : public sigslot::has_slots<> {
+
+  enum ConnectionEvent {
+    WRTC_OFFER
+  };
+
+
+  class Connection : public sigslot::has_slots<>, public core::EventEmitter {
   public:
     mesh::Bus* bus;
 
@@ -59,6 +68,7 @@ namespace wrtc {
     rtc::scoped_refptr<webrtc::PeerConnectionInterface> _connection;
     rtc::scoped_refptr<webrtc::DataChannelInterface> _dataChannel;
 
+    Json::Value& getLocalOffer();
     void _onOfferSuccess(webrtc::SessionDescriptionInterface* sdp);
     void _onIceCandidate(const webrtc::IceCandidateInterface* candidate);
     void _onIceConnectionConnected();
@@ -67,6 +77,8 @@ namespace wrtc {
     void _onLocalDescriptionSuccess();
 
     webrtc::PeerConnectionInterface::IceServers _iceServers();
+    // core::ThreadMutex _mutex;
+    // core::ThreadCondition _localOfferCondition;
   };
 }
 

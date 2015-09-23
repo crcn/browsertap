@@ -9,14 +9,18 @@ out/Release/obj.target/main/src/application.o: ../../src/application.cc \
   ../../src/./core/base/../mesh/../thread/thread.h \
   ../../src/./core/base/../mesh/../thread/condition.h \
   ../../src/./core/base/../mesh/../thread/mutex.h \
+  ../../src/./core/base/../mesh/../thread/runnable.h \
   ../../src/./core/base/../mesh/./accept.h \
   ../../src/./core/base/../mesh/./reject.h \
   ../../src/./core/base/../mesh/./commands.h \
   ../../src/./core/base/../mesh/./fn.h \
   ../../src/./core/base/../mesh/./sequence.h \
   ../../src/./commands/commands.h \
-  ../../src/./commands/../core/mesh/mesh.h ../../src/./core/io/console.h \
-  ../../src/./core/io/./base.h ../../src/./core/io/../mesh/mesh.h \
+  ../../src/./commands/../core/mesh/mesh.h \
+  ../../src/./commands/../core/events/event_listener.h \
+  ../../src/./commands/../core/events/./event.h \
+  ../../src/./core/io/console.h ../../src/./core/io/./base.h \
+  ../../src/./core/io/../mesh/mesh.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/config.h \
@@ -40,6 +44,7 @@ out/Release/obj.target/main/src/application.o: ../../src/application.cc \
 ../../src/./core/base/../mesh/../thread/thread.h:
 ../../src/./core/base/../mesh/../thread/condition.h:
 ../../src/./core/base/../mesh/../thread/mutex.h:
+../../src/./core/base/../mesh/../thread/runnable.h:
 ../../src/./core/base/../mesh/./accept.h:
 ../../src/./core/base/../mesh/./reject.h:
 ../../src/./core/base/../mesh/./commands.h:
@@ -47,6 +52,8 @@ out/Release/obj.target/main/src/application.o: ../../src/application.cc \
 ../../src/./core/base/../mesh/./sequence.h:
 ../../src/./commands/commands.h:
 ../../src/./commands/../core/mesh/mesh.h:
+../../src/./commands/../core/events/event_listener.h:
+../../src/./commands/../core/events/./event.h:
 ../../src/./core/io/console.h:
 ../../src/./core/io/./base.h:
 ../../src/./core/io/../mesh/mesh.h:

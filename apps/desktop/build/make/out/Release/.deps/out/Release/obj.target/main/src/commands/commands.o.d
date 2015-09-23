@@ -10,12 +10,15 @@ out/Release/obj.target/main/src/commands/commands.o: \
   ../../src/commands/../core/base/../mesh/../thread/thread.h \
   ../../src/commands/../core/base/../mesh/../thread/condition.h \
   ../../src/commands/../core/base/../mesh/../thread/mutex.h \
+  ../../src/commands/../core/base/../mesh/../thread/runnable.h \
   ../../src/commands/../core/base/../mesh/./accept.h \
   ../../src/commands/../core/base/../mesh/./reject.h \
   ../../src/commands/../core/base/../mesh/./commands.h \
   ../../src/commands/../core/base/../mesh/./fn.h \
   ../../src/commands/../core/base/../mesh/./sequence.h \
   ../../src/commands/../core/mesh/mesh.h \
+  ../../src/commands/../core/events/event_listener.h \
+  ../../src/commands/../core/events/./event.h \
   ../../src/commands/../wrtc/connection.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosourceinterface.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediastreaminterface.h \
@@ -157,7 +160,8 @@ out/Release/obj.target/main/src/commands/commands.o: \
   ../../src/commands/../wrtc/../base/../geom/bounds.h \
   ../../src/commands/../wrtc/../base/../graphics/bitmap.h \
   ../../src/commands/../wrtc/./observers.h \
-  ../../src/commands/../wrtc/../core/mesh/mesh.h
+  ../../src/commands/../wrtc/../core/mesh/mesh.h \
+  ../../src/commands/../wrtc/../core/events/event_emitter.h
 ../../src/commands/commands.cc:
 ../../src/commands/./commands.h:
 ../../src/commands/../core/base/application.h:
@@ -169,12 +173,15 @@ out/Release/obj.target/main/src/commands/commands.o: \
 ../../src/commands/../core/base/../mesh/../thread/thread.h:
 ../../src/commands/../core/base/../mesh/../thread/condition.h:
 ../../src/commands/../core/base/../mesh/../thread/mutex.h:
+../../src/commands/../core/base/../mesh/../thread/runnable.h:
 ../../src/commands/../core/base/../mesh/./accept.h:
 ../../src/commands/../core/base/../mesh/./reject.h:
 ../../src/commands/../core/base/../mesh/./commands.h:
 ../../src/commands/../core/base/../mesh/./fn.h:
 ../../src/commands/../core/base/../mesh/./sequence.h:
 ../../src/commands/../core/mesh/mesh.h:
+../../src/commands/../core/events/event_listener.h:
+../../src/commands/../core/events/./event.h:
 ../../src/commands/../wrtc/connection.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosourceinterface.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediastreaminterface.h:
@@ -317,3 +324,4 @@ out/Release/obj.target/main/src/commands/commands.o: \
 ../../src/commands/../wrtc/../base/../graphics/bitmap.h:
 ../../src/commands/../wrtc/./observers.h:
 ../../src/commands/../wrtc/../core/mesh/mesh.h:
+../../src/commands/../wrtc/../core/events/event_emitter.h:

@@ -6,6 +6,7 @@
 #include "../thread/thread.h"
 #include "../thread/condition.h"
 #include "../thread/mutex.h"
+#include "../thread/runnable.h"
 #include <queue>
 
 namespace mesh {
@@ -49,13 +50,12 @@ namespace mesh {
       Type _buffer;
   };
 
-
   class AsyncResponse : public Response {
     public:
-      AsyncResponse(void (*_run2)(mesh::AsyncResponse*)) {
-        this->_run2   = _run2;
-        this->ended   = false;
-        this->_thread = core::Thread::run((void *)this, &AsyncResponse::_run);
+      AsyncResponse(core::Runnable* _runnable) {
+        this->_runnable = _runnable;
+        this->ended     = false;
+        this->_thread   = core::Thread::run((void *)this, &AsyncResponse::_run);
       }
       void* read() {
         this->_mutex.lock();
@@ -90,21 +90,22 @@ namespace mesh {
         this->_endCondition.signal();
       }
     private:
+      void* _arg;
       core::ThreadMutex _mutex;
       core::ThreadCondition _chunkCondition;
       core::ThreadCondition _endCondition;
       core::Thread* _thread;
-      void (*_run2)(mesh::AsyncResponse*);
+      core::Runnable* _runnable;
       std::queue<void*> _chunks;
       bool ended;
       static void* _run(void* arg) {
-        AsyncResponse* resp = (AsyncResponse*) arg;
-        resp->_mutex.lock();
-        resp->_run2(resp);
-        if (!resp->ended) {
-          resp->_endCondition.wait(resp->_mutex);
+        AsyncResponse* _this = (AsyncResponse*) arg;
+        _this->_mutex.lock();
+        _this->_runnable->run();
+        if (!_this->ended) {
+          _this->_endCondition.wait(_this->_mutex);
         }
-        resp->_mutex.unlock();
+        _this->_mutex.unlock();
       }
   };
 }

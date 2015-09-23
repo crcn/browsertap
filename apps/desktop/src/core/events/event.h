@@ -5,7 +5,11 @@ namespace core {
   class Event {
   public:
     int type;
-    Event(int type):type(type) {
+    void* data;
+    Event(int type, void* data):type(type),data(data) {
+      
+    }
+    Event(int type):Event(type, NULL) {
       
     }
   };

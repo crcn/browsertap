@@ -149,13 +149,16 @@ out/Release/obj.target/main/src/main.o: ../../src/main.cc \
   ../../src/./wrtc/../core/mesh/../thread/thread.h \
   ../../src/./wrtc/../core/mesh/../thread/condition.h \
   ../../src/./wrtc/../core/mesh/../thread/mutex.h \
+  ../../src/./wrtc/../core/mesh/../thread/runnable.h \
   ../../src/./wrtc/../core/mesh/./accept.h \
   ../../src/./wrtc/../core/mesh/./reject.h \
   ../../src/./wrtc/../core/mesh/./commands.h \
   ../../src/./wrtc/../core/mesh/./fn.h \
   ../../src/./wrtc/../core/mesh/./sequence.h \
-  ../../src/./core/mesh/mesh.h ../../src/./application.h \
-  ../../src/./core/base/application.h \
+  ../../src/./wrtc/../core/events/event_emitter.h \
+  ../../src/./wrtc/../core/events/./event_listener.h \
+  ../../src/./wrtc/../core/events/./event.h ../../src/./core/mesh/mesh.h \
+  ../../src/./application.h ../../src/./core/base/application.h \
   ../../src/./core/base/../mesh/mesh.h ../../src/./commands/commands.h \
   ../../src/./commands/../core/mesh/mesh.h ../../src/./core/io/console.h \
   ../../src/./core/io/./base.h ../../src/./core/io/../mesh/mesh.h
@@ -313,11 +316,15 @@ out/Release/obj.target/main/src/main.o: ../../src/main.cc \
 ../../src/./wrtc/../core/mesh/../thread/thread.h:
 ../../src/./wrtc/../core/mesh/../thread/condition.h:
 ../../src/./wrtc/../core/mesh/../thread/mutex.h:
+../../src/./wrtc/../core/mesh/../thread/runnable.h:
 ../../src/./wrtc/../core/mesh/./accept.h:
 ../../src/./wrtc/../core/mesh/./reject.h:
 ../../src/./wrtc/../core/mesh/./commands.h:
 ../../src/./wrtc/../core/mesh/./fn.h:
 ../../src/./wrtc/../core/mesh/./sequence.h:
+../../src/./wrtc/../core/events/event_emitter.h:
+../../src/./wrtc/../core/events/./event_listener.h:
+../../src/./wrtc/../core/events/./event.h:
 ../../src/./core/mesh/mesh.h:
 ../../src/./application.h:
 ../../src/./core/base/application.h:

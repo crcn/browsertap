@@ -147,11 +147,15 @@ out/Release/obj.target/main/src/wrtc/connections.o: \
   ../../src/wrtc/../core/mesh/../thread/thread.h \
   ../../src/wrtc/../core/mesh/../thread/condition.h \
   ../../src/wrtc/../core/mesh/../thread/mutex.h \
+  ../../src/wrtc/../core/mesh/../thread/runnable.h \
   ../../src/wrtc/../core/mesh/./accept.h \
   ../../src/wrtc/../core/mesh/./reject.h \
   ../../src/wrtc/../core/mesh/./commands.h \
   ../../src/wrtc/../core/mesh/./fn.h \
-  ../../src/wrtc/../core/mesh/./sequence.h
+  ../../src/wrtc/../core/mesh/./sequence.h \
+  ../../src/wrtc/../core/events/event_emitter.h \
+  ../../src/wrtc/../core/events/./event_listener.h \
+  ../../src/wrtc/../core/events/./event.h
 ../../src/wrtc/connections.cc:
 ../../src/wrtc/./connections.h:
 ../../src/wrtc/./connection.h:
@@ -303,8 +307,12 @@ out/Release/obj.target/main/src/wrtc/connections.o: \
 ../../src/wrtc/../core/mesh/../thread/thread.h:
 ../../src/wrtc/../core/mesh/../thread/condition.h:
 ../../src/wrtc/../core/mesh/../thread/mutex.h:
+../../src/wrtc/../core/mesh/../thread/runnable.h:
 ../../src/wrtc/../core/mesh/./accept.h:
 ../../src/wrtc/../core/mesh/./reject.h:
 ../../src/wrtc/../core/mesh/./commands.h:
 ../../src/wrtc/../core/mesh/./fn.h:
 ../../src/wrtc/../core/mesh/./sequence.h:
+../../src/wrtc/../core/events/event_emitter.h:
+../../src/wrtc/../core/events/./event_listener.h:
+../../src/wrtc/../core/events/./event.h:

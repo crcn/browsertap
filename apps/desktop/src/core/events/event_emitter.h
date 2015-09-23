@@ -8,7 +8,7 @@
 namespace core {
   class EventEmitter {
   public:
-    void emit(int event);
+    void emit(int event, void* data);
     void emit(Event* event);
     void addListener(EventListener* listener);
   private:

@@ -36,20 +36,34 @@ mesh::Response* app::Commands::execStartWindowSession(mesh::Request* request) {
 /**
  */
 
+class MainSessionResponse : public core::EventListener, public mesh::Response, public core::Runnable {
+public:
+  MainSessionResponse(mesh::Request* request):core::EventListener() {
+    this->_response = new mesh::AsyncResponse(this);
+  }
+
+  void* read() {
+    return this->_response->read();
+  }
+
+  virtual void run() {
+    this->_connection = new wrtc::Connection(NULL);
+    this->_connection->addListener(this);
+  }
+
+  void handleEvent(core::Event* event) {
+    Json::Value value = *((Json::Value*)event->data);
+    Json::FastWriter writer;
+    this->_response->end((void *)writer.write(value).c_str());
+  }
+private:
+  mesh::AsyncResponse* _response;
+  wrtc::Connection* _connection;
+};
+
+/**
+ */
+
 mesh::Response* app::Commands::execStartMainSession(mesh::Request* request) {
-  pthread_mutex_t count_mutex;
-
-  wrtc::Connection* c = new wrtc::Connection(new mesh::FnBus([](mesh::Request* request) -> mesh::Response* {
-    std::cout << "OK" << std::endl;
-    return new mesh::NoResponse();
-  }));
-  
-  // wrtc::Connection* c = 
-  /*
-  wrtc::Connection* c = this->app->wrtcConnections->createConnection();
-  while (!c->ready()) sleep(1);
-  return c->
-  */
-
-  return new mesh::BufferedResponse<const char*>("start session");
+  return new MainSessionResponse(request);
 }

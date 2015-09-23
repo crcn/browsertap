@@ -1,8 +1,8 @@
 #include "./event_emitter.h"
 #include <iostream>
 
-void core::EventEmitter::emit(int type = 0) {
-  emit(new Event(type));
+void core::EventEmitter::emit(int type = 0, void* data = NULL) {
+  emit(new Event(type, data));
 }
 
 void core::EventEmitter::emit(Event* event) {

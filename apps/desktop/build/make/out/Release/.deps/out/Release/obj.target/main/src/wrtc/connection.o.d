@@ -147,11 +147,15 @@ out/Release/obj.target/main/src/wrtc/connection.o: \
   ../../src/wrtc/../core/mesh/../thread/thread.h \
   ../../src/wrtc/../core/mesh/../thread/condition.h \
   ../../src/wrtc/../core/mesh/../thread/mutex.h \
+  ../../src/wrtc/../core/mesh/../thread/runnable.h \
   ../../src/wrtc/../core/mesh/./accept.h \
   ../../src/wrtc/../core/mesh/./reject.h \
   ../../src/wrtc/../core/mesh/./commands.h \
   ../../src/wrtc/../core/mesh/./fn.h \
-  ../../src/wrtc/../core/mesh/./sequence.h
+  ../../src/wrtc/../core/mesh/./sequence.h \
+  ../../src/wrtc/../core/events/event_emitter.h \
+  ../../src/wrtc/../core/events/./event_listener.h \
+  ../../src/wrtc/../core/events/./event.h
 ../../src/wrtc/connection.cc:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/test/fakeconstraints.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediaconstraintsinterface.h:
@@ -302,8 +306,12 @@ out/Release/obj.target/main/src/wrtc/connection.o: \
 ../../src/wrtc/../core/mesh/../thread/thread.h:
 ../../src/wrtc/../core/mesh/../thread/condition.h:
 ../../src/wrtc/../core/mesh/../thread/mutex.h:
+../../src/wrtc/../core/mesh/../thread/runnable.h:
 ../../src/wrtc/../core/mesh/./accept.h:
 ../../src/wrtc/../core/mesh/./reject.h:
 ../../src/wrtc/../core/mesh/./commands.h:
 ../../src/wrtc/../core/mesh/./fn.h:
 ../../src/wrtc/../core/mesh/./sequence.h:
+../../src/wrtc/../core/events/event_emitter.h:
+../../src/wrtc/../core/events/./event_listener.h:
+../../src/wrtc/../core/events/./event.h:

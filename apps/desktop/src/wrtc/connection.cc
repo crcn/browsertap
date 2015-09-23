@@ -65,7 +65,7 @@ namespace wrtc {
     Json::Value value;
     value["type"] = "offer";
     value["sdp"]  = out;
-    this->bus->execute(new mesh::Request("wrtcOffer", (void *)&value));
+    this->emit(ConnectionEvent::WRTC_OFFER, &value);
     Json::FastWriter writer;
 
     return;
