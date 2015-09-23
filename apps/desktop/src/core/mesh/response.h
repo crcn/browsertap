@@ -83,9 +83,7 @@ namespace mesh {
         this->end();
       }
       void end() {
-        // this->_mutex.lock();
         this->ended = true;
-        // this->_mutex.unlock();
         this->_chunkCondition.signal();
         this->_endCondition.signal();
       }
