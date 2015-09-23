@@ -38,6 +38,7 @@ mesh::Response* app::Commands::execStartWindowSession(mesh::Request* request) {
 
 class MainSessionResponse : public core::EventListener, public mesh::Response, public core::Runnable {
 public:
+
   MainSessionResponse(mesh::Request* request):core::EventListener() {
     this->_response = new mesh::AsyncResponse(this);
   }
@@ -46,7 +47,7 @@ public:
     return this->_response->read();
   }
 
-  virtual void run() {
+  void run() {
     this->_connection = new wrtc::Connection(NULL);
     this->_connection->addListener(this);
   }
@@ -55,6 +56,11 @@ public:
     Json::Value value = *((Json::Value*)event->data);
     Json::FastWriter writer;
     this->_response->end((void *)writer.write(value).c_str());
+  }
+
+  ~MainSessionResponse() {
+    delete this->_response;
+    delete this->_connection;
   }
 private:
   mesh::AsyncResponse* _response;
