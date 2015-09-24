@@ -17,11 +17,14 @@
 #include "./core/thread/thread.h"
 #include "./core/thread/mutex.h"
 #include "./core/thread/condition.h"
+// #include <libwebsockets.h>
 
 int main(int argc, const char * argv[]) {
 
   app::Application* app = new app::Application();
   app->start();
+
+  // lws_frame_is_binary(NULL);
 
   while(1) sleep(1);
 }

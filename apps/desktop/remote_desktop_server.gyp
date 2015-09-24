@@ -38,6 +38,7 @@
                 'link_settings': {
                     'libraries': [
                         '/usr/local/bt/remote-desktop-server/vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds/libWebRTC-9725-mac-x86_64-Release.a',
+                        '/usr/local/bt/remote-desktop-server/vendor/libwebsockets/build/lib/libwebsockets.a',
                         '$(SDKROOT)/System/Library/Frameworks/AudioToolbox.framework',
                         '$(SDKROOT)/System/Library/Frameworks/AudioUnit.framework',
                         '$(SDKROOT)/System/Library/Frameworks/CoreAudio.framework',
@@ -69,6 +70,8 @@
                     './vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include',
                     './vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp',
                     './vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include',
+                    './vendor/libwebsockets/lib',
+                    './vendor/libwebsockets/build',
                     './vendor/jsoncpp/include'
                 ]
             }]

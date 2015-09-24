@@ -34,6 +34,7 @@ mesh::Response* app::Commands::execStartWindowSession(mesh::Request* request) {
 }
 
 /**
+ * TODO: move this to another file
  */
 
 class MainSessionResponse : public core::EventListener, public mesh::Response, public core::Runnable {

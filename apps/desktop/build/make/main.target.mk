@@ -63,6 +63,8 @@ INCS_Debug := \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include \
+	-I$(srcdir)/vendor/libwebsockets/lib \
+	-I$(srcdir)/vendor/libwebsockets/build \
 	-I$(srcdir)/vendor/jsoncpp/include
 
 DEFS_Debug_Base := \
@@ -126,6 +128,8 @@ INCS_Debug_Base := \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include \
+	-I$(srcdir)/vendor/libwebsockets/lib \
+	-I$(srcdir)/vendor/libwebsockets/build \
 	-I$(srcdir)/vendor/jsoncpp/include
 
 DEFS_Release := \
@@ -189,6 +193,8 @@ INCS_Release := \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include \
+	-I$(srcdir)/vendor/libwebsockets/lib \
+	-I$(srcdir)/vendor/libwebsockets/build \
 	-I$(srcdir)/vendor/jsoncpp/include
 
 OBJS := \
@@ -257,6 +263,7 @@ LIBTOOLFLAGS_Release :=
 
 LIBS := \
 	/usr/local/bt/remote-desktop-server/vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds/libWebRTC-9725-mac-x86_64-Release.a \
+	/usr/local/bt/remote-desktop-server/vendor/libwebsockets/build/lib/libwebsockets.a \
 	-framework AudioToolbox \
 	-framework AudioUnit \
 	-framework CoreAudio \
