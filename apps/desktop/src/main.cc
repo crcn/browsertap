@@ -17,7 +17,7 @@
 #include "./core/thread/thread.h"
 #include "./core/thread/mutex.h"
 #include "./core/thread/condition.h"
-// #include <libwebsockets.h>
+#include <libwebsockets.h>
 
 int main(int argc, const char * argv[]) {
 

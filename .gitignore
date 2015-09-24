@@ -2,4 +2,6 @@
 node_modules
 public/css/all.css
 *.dmg
+*.tar.gz
+*.pkg
 

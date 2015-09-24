@@ -162,7 +162,9 @@ out/Release/obj.target/main/src/main.o: ../../src/main.cc \
   ../../src/./application.h ../../src/./core/base/application.h \
   ../../src/./core/base/../mesh/mesh.h ../../src/./commands/commands.h \
   ../../src/./commands/../core/mesh/mesh.h ../../src/./core/io/console.h \
-  ../../src/./core/io/./base.h ../../src/./core/io/../mesh/mesh.h
+  ../../src/./core/io/./base.h ../../src/./core/io/../mesh/mesh.h \
+  ../../vendor/libwebsockets/lib/libwebsockets.h \
+  ../../vendor/libwebsockets/build/lws_config.h
 ../../src/main.cc:
 ../../src/./osx/desktop.h:
 ../../src/./osx/../base/desktop.h:
@@ -336,3 +338,5 @@ out/Release/obj.target/main/src/main.o: ../../src/main.cc \
 ../../src/./core/io/console.h:
 ../../src/./core/io/./base.h:
 ../../src/./core/io/../mesh/mesh.h:
+../../vendor/libwebsockets/lib/libwebsockets.h:
+../../vendor/libwebsockets/build/lws_config.h:
