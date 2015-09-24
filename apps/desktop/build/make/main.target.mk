@@ -264,6 +264,7 @@ LIBTOOLFLAGS_Release :=
 LIBS := \
 	/usr/local/bt/remote-desktop-server/vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds/libWebRTC-9725-mac-x86_64-Release.a \
 	/usr/local/bt/remote-desktop-server/vendor/libwebsockets/build/lib/libwebsockets.a \
+	-lz \
 	-framework AudioToolbox \
 	-framework AudioUnit \
 	-framework CoreAudio \

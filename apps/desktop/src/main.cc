@@ -32,14 +32,14 @@ struct lws_context_creation_info info;
 info.port = 9000;
 info.iface = NULL;
 info.protocols = NULL;
-// info.extensions = libwebsocket_get_internal_extensions();
+info.extensions = libwebsocket_get_internal_extensions();
 info.ssl_cert_filepath = NULL;
 info.ssl_private_key_filepath = NULL;
 info.gid = -1;
 info.uid = -1;
 info.options = 0;
 
-// context = libwebsocket_create_context(&info);
+context = libwebsocket_create_context(&info);
 // if (context == NULL) {
 
   while(1) sleep(1);
