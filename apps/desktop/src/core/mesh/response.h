@@ -61,17 +61,27 @@ namespace mesh {
 
       void* read() {
         this->_mutex.lock();
+
+        // continue until there is data, or the response
+        // has ended.
         while(1) {
+
+          // got chunks? Pop one off
           if(!this->_chunks.empty()) {
              void* chunk = this->_chunks.front();
              this->_chunks.pop();
             this->_mutex.unlock();
              return chunk;
           }
+
           if (this->ended) {
             this->_mutex.unlock();
+
+            // ended - return NULL - no data.
             return NULL;
           }
+
+          // no chunks & no end. Async stuff going on, so wait!
           this->_chunkCondition.wait(this->_mutex);
         }
       }
@@ -91,7 +101,7 @@ namespace mesh {
         this->_chunkCondition.signal();
         this->_endCondition.signal();
       }
-      
+
     private:
       void* _arg;
       core::ThreadMutex _mutex;
