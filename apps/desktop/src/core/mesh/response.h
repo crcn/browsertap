@@ -52,11 +52,13 @@ namespace mesh {
 
   class AsyncResponse : public Response {
     public:
+
       AsyncResponse(core::Runnable* _runnable) {
         this->_runnable = _runnable;
         this->ended     = false;
         this->_thread   = core::Thread::run((void *)this, &AsyncResponse::_run);
       }
+
       void* read() {
         this->_mutex.lock();
         while(1) {
@@ -73,6 +75,7 @@ namespace mesh {
           this->_chunkCondition.wait(this->_mutex);
         }
       }
+
       void write(void* chunk) {
         this->_chunks.push(chunk);
         this->_chunkCondition.signal();
@@ -82,11 +85,13 @@ namespace mesh {
         this->write(chunk);
         this->end();
       }
+
       void end() {
         this->ended = true;
         this->_chunkCondition.signal();
         this->_endCondition.signal();
       }
+      
     private:
       void* _arg;
       core::ThreadMutex _mutex;
