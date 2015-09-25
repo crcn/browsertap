@@ -17,6 +17,7 @@ out/Release/obj.target/main/src/core/active_record/db.o: \
   ../../src/core/active_record/../application/../mesh/./fn.h \
   ../../src/core/active_record/../application/../mesh/./sequence.h \
   ../../src/core/active_record/../application/../mesh/./resp.h \
+  ../../src/core/active_record/../application/../mesh/./tailable.h \
   ../../src/core/active_record/./collection.h \
   ../../src/core/active_record/../events/event_emitter.h \
   ../../src/core/active_record/../events/./event_listener.h \
@@ -49,6 +50,7 @@ out/Release/obj.target/main/src/core/active_record/db.o: \
 ../../src/core/active_record/../application/../mesh/./fn.h:
 ../../src/core/active_record/../application/../mesh/./sequence.h:
 ../../src/core/active_record/../application/../mesh/./resp.h:
+../../src/core/active_record/../application/../mesh/./tailable.h:
 ../../src/core/active_record/./collection.h:
 ../../src/core/active_record/../events/event_emitter.h:
 ../../src/core/active_record/../events/./event_listener.h:

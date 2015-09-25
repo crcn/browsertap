@@ -45,7 +45,7 @@ namespace app {
      * returns all the windows running on the host machine
      */
 
-    static mesh::Response* pong(mesh::Request* request);
+    static mesh::Response* execPong(mesh::Request* request);
 
 
     /**

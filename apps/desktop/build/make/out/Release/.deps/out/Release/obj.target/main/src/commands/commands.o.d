@@ -19,6 +19,7 @@ out/Release/obj.target/main/src/commands/commands.o: \
   ../../src/commands/.././core/active_record/../application/../mesh/./fn.h \
   ../../src/commands/.././core/active_record/../application/../mesh/./sequence.h \
   ../../src/commands/.././core/active_record/../application/../mesh/./resp.h \
+  ../../src/commands/.././core/active_record/../application/../mesh/./tailable.h \
   ../../src/commands/.././core/active_record/./collection.h \
   ../../src/commands/.././core/active_record/../events/event_emitter.h \
   ../../src/commands/.././core/active_record/../events/./event_listener.h \
@@ -192,6 +193,7 @@ out/Release/obj.target/main/src/commands/commands.o: \
 ../../src/commands/.././core/active_record/../application/../mesh/./fn.h:
 ../../src/commands/.././core/active_record/../application/../mesh/./sequence.h:
 ../../src/commands/.././core/active_record/../application/../mesh/./resp.h:
+../../src/commands/.././core/active_record/../application/../mesh/./tailable.h:
 ../../src/commands/.././core/active_record/./collection.h:
 ../../src/commands/.././core/active_record/../events/event_emitter.h:
 ../../src/commands/.././core/active_record/../events/./event_listener.h:

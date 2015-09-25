@@ -38,6 +38,7 @@ namespace activeRecord {
         break;
     }
 
-    this->app->bus->execute(new mesh::Request(name, &root));
+    mesh::Request request(name, &root);
+    this->app->bus->execute(&request);
   }
 }

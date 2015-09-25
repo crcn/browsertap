@@ -21,6 +21,9 @@ app::Application::Application() {
 
   // domain object base
   this->ardb    = new activeRecord::DB(this);
+
+  // TODO - this->bus = new mesh::TailableBus(this->bus);
+  // TODO - this->_busLogger = new BusLogger(this->bus); // tail bus here
 }
 
 /**
@@ -28,6 +31,13 @@ app::Application::Application() {
 
 void app::Application::start() {
   LOG_INFO(__PRETTY_FUNCTION__);
+
+  // hydrate the app with initial data
+  mesh::Request request("hydrate");
+  mesh::Response* response = this->bus->execute(&request);
+  while(response->read());
+  delete response;
+
   this->io->start();
 }
 

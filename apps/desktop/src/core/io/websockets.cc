@@ -51,6 +51,7 @@ static int callback_dumb_increment(struct libwebsocket_context * _this,
               mesh::Response* response = app->bus->execute(new mesh::Request("startMainSession", NULL));
               // mesh::Response* response = app->bus->execute(new mesh::Request("ping", NULL));
 
+              // TODO - thread this stuff here.
               void* chunk;
               // std::cout << (const char*)response->read() << std::endl;
               while(chunk = response->read()) {

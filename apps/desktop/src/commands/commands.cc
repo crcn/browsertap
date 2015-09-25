@@ -12,14 +12,18 @@ namespace app {
     // replace the application bus with the commands bus. Note that
     // any commands that do not get executed against *registered* commands
     // here will go back to the original app bus.
-    this->app->bus = new mesh::FnBus(&this->execStartMainSession);
+    this->app->bus = (new mesh::CommandsBus(app->bus))
+    ->add("ping", new mesh::FnBus(&this->execPong))
+    ->add("getWindows", new mesh::FnBus(&this->execGetWindows))
+    ->add("startWindowSession", new mesh::FnBus(&this->execStartWindowSession))
+    ->add("startMainSession", new mesh::FnBus(&this->execStartMainSession));
   }
 
   /**
    * return all desktop windows
    */
 
-  mesh::Response* Commands::pong(mesh::Request* request) {
+  mesh::Response* Commands::execPong(mesh::Request* request) {
     return new mesh::BufferedResponse<const char*>("pong");
   }
 
