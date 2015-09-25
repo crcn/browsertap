@@ -201,6 +201,8 @@ OBJS := \
 	$(obj).target/$(TARGET)/src/main.o \
 	$(obj).target/$(TARGET)/src/application.o \
 	$(obj).target/$(TARGET)/src/commands/commands.o \
+	$(obj).target/$(TARGET)/src/active_records/wrtc_connection.o \
+	$(obj).target/$(TARGET)/src/active_records/virt_window.o \
 	$(obj).target/$(TARGET)/src/core/virt/osx/window.o \
 	$(obj).target/$(TARGET)/src/core/virt/osx/desktop.o \
 	$(obj).target/$(TARGET)/src/core/wrtc/connection.o \
@@ -209,9 +211,9 @@ OBJS := \
 	$(obj).target/$(TARGET)/src/core/thread/condition.o \
 	$(obj).target/$(TARGET)/src/core/thread/mutex.o \
 	$(obj).target/$(TARGET)/src/core/thread/thread.o \
-	$(obj).target/$(TARGET)/src/core/do/object.o \
-	$(obj).target/$(TARGET)/src/core/do/collection.o \
-	$(obj).target/$(TARGET)/src/core/do/dob.o \
+	$(obj).target/$(TARGET)/src/core/active_record/object.o \
+	$(obj).target/$(TARGET)/src/core/active_record/collection.o \
+	$(obj).target/$(TARGET)/src/core/active_record/db.o \
 	$(obj).target/$(TARGET)/src/core/events/event_emitter.o \
 	$(obj).target/$(TARGET)/src/core/io/console.o \
 	$(obj).target/$(TARGET)/src/core/io/websockets.o

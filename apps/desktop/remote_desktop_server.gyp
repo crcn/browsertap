@@ -22,6 +22,8 @@
                     './src/main.cc',
                     './src/application.cc',
                     './src/commands/commands.cc',
+                    './src/active_records/wrtc_connection.cc',
+                    './src/active_records/virt_window.cc',
 
                     './src/core/virt/osx/window.cc',
                     './src/core/virt/osx/desktop.cc',
@@ -34,9 +36,9 @@
                     './src/core/thread/mutex.cc',
                     './src/core/thread/thread.cc',
 
-                    './src/core/do/object.cc',
-                    './src/core/do/collection.cc',
-                    './src/core/do/dob.cc',
+                    './src/core/active_record/object.cc',
+                    './src/core/active_record/collection.cc',
+                    './src/core/active_record/db.cc',
 
                     './src/core/events/event_emitter.cc',
                     './src/core/io/console.cc',

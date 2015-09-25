@@ -1,4 +1,5 @@
 #include "./application.h"
+#include "./commands/commands.h"
 #include "./core/io/websockets.h"
 #include <iostream>
 
@@ -18,8 +19,8 @@ app::Application::Application() {
   // input / output to the application
   this->io     = new io::WebSockets(this);
 
-  // domain object base. 
-  this->dob    = new app::DomainObjectBase(this);
+  // domain object base
+  this->ardb    = new activeRecord::DB(this);
 }
 
 /**
