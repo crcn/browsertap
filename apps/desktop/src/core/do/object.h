@@ -2,16 +2,19 @@
 #define DOMAIN_OBJECT_H_
 
 #include "../events/event_emitter.h"
-#include <json.h>
+#include "./events.h"
+#include <json/json.h>
 
 namespace domain {
+
+  // TODO - maybe change to active record
   class Object : public core::EventEmitter {
   public:
     Object();
     void remove();
     void update();
-    bool exists();
-    virtual JSON::Value toJSON()=0;
+    virtual bool exists()=0;
+    virtual Json::Value toJSON()=0;
     int id();
     ~Object();
   };

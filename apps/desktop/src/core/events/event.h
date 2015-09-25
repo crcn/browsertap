@@ -6,7 +6,9 @@ namespace core {
   public:
     int type;
     void* data;
-    Event(int type, void* data):type(type),data(data) {
+    void* target;
+    void* currentTarget;
+    Event(int type, void* data):type(type),data(data), target(NULL), currentTarget(NULL) {
       
     }
     Event(int type):Event(type, NULL) {

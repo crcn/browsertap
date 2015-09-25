@@ -20,6 +20,7 @@
                 'sources': [
 
                     './src/main.cc',
+                    './src/dob.cc',
                     './src/application.cc',
                     './src/commands/commands.cc',
                     './src/osx/window.cc',
@@ -35,6 +36,7 @@
                     './src/core/thread/thread.cc',
 
                     './src/core/do/object.cc',
+                    './src/core/do/collection.cc',
 
                     './src/core/events/event_emitter.cc',
                     './src/core/io/console.cc',

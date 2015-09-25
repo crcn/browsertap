@@ -1,6 +1,7 @@
 #ifndef APPLICATION_H_
 #define APPLICATION_H_
 
+#include "./dob.h"
 #include "./core/base/application.h"
 #include "./commands/commands.h"
 #include "./core/io/console.h"
@@ -13,8 +14,11 @@ namespace app {
     Application();
     ~Application();
     void start();
+    domain::Collection* webrtcConnections;
+    domain::Collection* windows;
   private:
     app::Commands* _commands;
+    app::DomainObjectBase* _dob;
   };
 }
 

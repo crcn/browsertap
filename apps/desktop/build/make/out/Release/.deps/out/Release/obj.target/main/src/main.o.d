@@ -159,8 +159,11 @@ out/Release/obj.target/main/src/main.o: ../../src/main.cc \
   ../../src/./wrtc/../core/events/event_emitter.h \
   ../../src/./wrtc/../core/events/./event_listener.h \
   ../../src/./wrtc/../core/events/./event.h ../../src/./core/mesh/mesh.h \
-  ../../src/./application.h ../../src/./core/base/application.h \
-  ../../src/./core/base/../mesh/mesh.h ../../src/./commands/commands.h \
+  ../../src/./application.h ../../src/./dob.h \
+  ../../src/./core/base/application.h \
+  ../../src/./core/base/../mesh/mesh.h ../../src/./core/do/collection.h \
+  ../../src/./core/do/./events.h ../../src/./core/do/./object.h \
+  ../../src/./commands/commands.h \
   ../../src/./commands/../core/mesh/mesh.h ../../src/./core/io/console.h \
   ../../src/./core/io/./base.h ../../src/./core/io/../mesh/mesh.h \
   ../../vendor/libwebsockets/lib/libwebsockets.h \
@@ -331,8 +334,12 @@ out/Release/obj.target/main/src/main.o: ../../src/main.cc \
 ../../src/./wrtc/../core/events/./event.h:
 ../../src/./core/mesh/mesh.h:
 ../../src/./application.h:
+../../src/./dob.h:
 ../../src/./core/base/application.h:
 ../../src/./core/base/../mesh/mesh.h:
+../../src/./core/do/collection.h:
+../../src/./core/do/./events.h:
+../../src/./core/do/./object.h:
 ../../src/./commands/commands.h:
 ../../src/./commands/../core/mesh/mesh.h:
 ../../src/./core/io/console.h:

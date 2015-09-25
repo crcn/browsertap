@@ -17,6 +17,9 @@ app::Application::Application() {
 
   // input / output to the application
   this->io     = new io::WebSockets(this);
+
+  this->_dob   = new app::DomainObjectBase(this);
+
 }
 
 /**

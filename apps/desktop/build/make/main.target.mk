@@ -199,6 +199,7 @@ INCS_Release := \
 
 OBJS := \
 	$(obj).target/$(TARGET)/src/main.o \
+	$(obj).target/$(TARGET)/src/dob.o \
 	$(obj).target/$(TARGET)/src/application.o \
 	$(obj).target/$(TARGET)/src/commands/commands.o \
 	$(obj).target/$(TARGET)/src/osx/window.o \
@@ -211,6 +212,7 @@ OBJS := \
 	$(obj).target/$(TARGET)/src/core/thread/mutex.o \
 	$(obj).target/$(TARGET)/src/core/thread/thread.o \
 	$(obj).target/$(TARGET)/src/core/do/object.o \
+	$(obj).target/$(TARGET)/src/core/do/collection.o \
 	$(obj).target/$(TARGET)/src/core/events/event_emitter.o \
 	$(obj).target/$(TARGET)/src/core/io/console.o \
 	$(obj).target/$(TARGET)/src/core/io/websockets.o
