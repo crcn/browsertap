@@ -54,11 +54,15 @@ public:
   }
 
   void run() {
+
+    // TODO - app->webRTCCollection->insert()->addListener(this);
     this->_connection = new wrtc::Connection(NULL);
     this->_connection->addListener(this);
   }
 
   void handleEvent(core::Event* event) {
+
+    // TODO - add session info to internal DB
     this->_connection->removeListener(this);
     Json::Value value = *((Json::Value*)event->data);
     Json::FastWriter writer;

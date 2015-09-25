@@ -20,7 +20,6 @@
 #include <libwebsockets.h>
 
 
-
 int main(int argc, const char * argv[]) {
 
   app::Application* app = new app::Application();

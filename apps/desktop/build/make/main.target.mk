@@ -210,6 +210,7 @@ OBJS := \
 	$(obj).target/$(TARGET)/src/core/thread/condition.o \
 	$(obj).target/$(TARGET)/src/core/thread/mutex.o \
 	$(obj).target/$(TARGET)/src/core/thread/thread.o \
+	$(obj).target/$(TARGET)/src/core/do/object.o \
 	$(obj).target/$(TARGET)/src/core/events/event_emitter.o \
 	$(obj).target/$(TARGET)/src/core/io/console.o \
 	$(obj).target/$(TARGET)/src/core/io/websockets.o

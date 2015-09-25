@@ -34,6 +34,8 @@
                     './src/core/thread/mutex.cc',
                     './src/core/thread/thread.cc',
 
+                    './src/core/do/object.cc',
+
                     './src/core/events/event_emitter.cc',
                     './src/core/io/console.cc',
                     './src/core/io/websockets.cc'
