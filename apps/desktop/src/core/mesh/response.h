@@ -13,6 +13,7 @@ namespace mesh {
   class Response {
   public:
     virtual void* read();
+    virtual ~Response() { };
   };
  
   template<typename Type>

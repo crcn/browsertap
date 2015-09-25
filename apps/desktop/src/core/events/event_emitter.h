@@ -11,6 +11,7 @@ namespace core {
     void emit(int event, void* data);
     void emit(Event* event);
     void addListener(EventListener* listener);
+    void removeListener(EventListener* listener);
   private:
     std::vector<EventListener*> _listeners;
     // void dispatchEvents();

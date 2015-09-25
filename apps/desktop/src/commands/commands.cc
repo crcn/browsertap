@@ -10,11 +10,7 @@ app::Commands::Commands(base::Application* app):app(app) {
   // replace the application bus with the commands bus. Note that
   // any commands that do not get executed against *registered* commands
   // here will go back to the original app bus.
-  this->app->bus = (new mesh::CommandsBus(app->bus))
-  ->add("ping", new mesh::FnBus(&this->pong))
-  ->add("getWindows", new mesh::FnBus(&this->execGetWindows))
-  ->add("startMainSession", new mesh::FnBus(&this->execStartMainSession))
-  ->add("startWindowSession", new mesh::FnBus(&this->execStartWindowSession));
+  this->app->bus = new mesh::FnBus(&this->execStartMainSession);
 }
 
 /**
@@ -49,7 +45,7 @@ mesh::Response* app::Commands::execStartWindowSession(mesh::Request* request) {
 class MainSessionResponse : public core::EventListener, public mesh::Response, public core::Runnable {
 public:
 
-  MainSessionResponse(mesh::Request* request):core::EventListener() {
+  MainSessionResponse(mesh::Request* request) {
     this->_response = new mesh::AsyncResponse(this);
   }
 
@@ -63,6 +59,7 @@ public:
   }
 
   void handleEvent(core::Event* event) {
+    this->_connection->removeListener(this);
     Json::Value value = *((Json::Value*)event->data);
     Json::FastWriter writer;
     this->_response->end((void *)writer.write(value).c_str());
@@ -70,7 +67,7 @@ public:
 
   ~MainSessionResponse() {
     delete this->_response;
-    delete this->_connection;
+    // delete this->_connection;
   }
 private:
   mesh::AsyncResponse* _response;

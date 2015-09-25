@@ -48,7 +48,7 @@ static int callback_dumb_increment(struct libwebsocket_context * _this,
             }
 
             if (reader.parse((char*)in, root)) {
-              mesh::Response* response = app->bus->execute(new mesh::Request("ping", NULL));
+              mesh::Response* response = app->bus->execute(new mesh::Request("startMainSession", NULL));
               // mesh::Response* response = app->bus->execute(new mesh::Request("ping", NULL));
 
               void* chunk;
