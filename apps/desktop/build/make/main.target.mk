@@ -203,6 +203,7 @@ OBJS := \
 	$(obj).target/$(TARGET)/src/commands/commands.o \
 	$(obj).target/$(TARGET)/src/active_records/wrtc_connection.o \
 	$(obj).target/$(TARGET)/src/active_records/virt_window.o \
+	$(obj).target/$(TARGET)/src/plugins/log_operations.o \
 	$(obj).target/$(TARGET)/src/core/virt/osx/window.o \
 	$(obj).target/$(TARGET)/src/core/virt/osx/desktop.o \
 	$(obj).target/$(TARGET)/src/core/wrtc/connection.o \

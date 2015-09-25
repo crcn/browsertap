@@ -54,10 +54,13 @@ namespace mesh {
   class AsyncResponse : public Response {
     public:
 
-      AsyncResponse(core::Runnable* _runnable) {
+      AsyncResponse(core::Runnable* _runnable = NULL) {
         this->_runnable = _runnable;
         this->ended     = false;
-        this->_thread   = core::Thread::run((void *)this, &AsyncResponse::_run);
+
+        if (_runnable != NULL) {
+          this->_thread   = core::Thread::run((void *)this, &AsyncResponse::_run);
+        }
       }
 
       void* read() {

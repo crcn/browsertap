@@ -16,9 +16,10 @@ namespace mesh {
     }
 
     Response* execute(Request* request) {
-      if (request->name.compare("tail")) {
-        // AsyncResponse* response = new AsyncResponse()
-        // TODO - add end listener
+      if (request->name.compare("tail") == 0) {
+        AsyncResponse* response = new AsyncResponse();
+        _tails.push_back(response);
+        return response;
       } else {
 
         for(int i = 0, n = _tails.size(); i < n; i++) {

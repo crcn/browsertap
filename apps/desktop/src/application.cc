@@ -10,6 +10,7 @@ app::Application::Application() {
 
   // message layer
   this->bus    = new mesh::Bus();
+  this->bus    = new mesh::TailableBus(this->bus);
 
   // desktop controller
   this->desktop = new osx::Desktop();
@@ -22,7 +23,8 @@ app::Application::Application() {
   // domain object base
   this->ardb    = new activeRecord::DB(this);
 
-  // TODO - this->bus = new mesh::TailableBus(this->bus);
+  this->_logOperations = new app::LogOperations(this);
+
   // TODO - this->_busLogger = new BusLogger(this->bus); // tail bus here
 }
 

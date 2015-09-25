@@ -38,7 +38,7 @@ out/Release/obj.target/main/src/application.o: ../../src/application.cc \
   ../../src/./core/virt/osx/../base/./window.h \
   ../../src/./core/virt/osx/../base/../../geom/bounds.h \
   ../../src/./core/virt/osx/../base/../../graphics/bitmap.h \
-  ../../src/./commands/commands.h \
+  ../../src/./plugins/log_operations.h ../../src/./commands/commands.h \
   ../../src/./commands/../core/mesh/mesh.h \
   ../../src/./core/io/websockets.h \
   ../../vendor/libwebsockets/lib/libwebsockets.h \
@@ -85,6 +85,7 @@ out/Release/obj.target/main/src/application.o: ../../src/application.cc \
 ../../src/./core/virt/osx/../base/./window.h:
 ../../src/./core/virt/osx/../base/../../geom/bounds.h:
 ../../src/./core/virt/osx/../base/../../graphics/bitmap.h:
+../../src/./plugins/log_operations.h:
 ../../src/./commands/commands.h:
 ../../src/./commands/../core/mesh/mesh.h:
 ../../src/./core/io/websockets.h:

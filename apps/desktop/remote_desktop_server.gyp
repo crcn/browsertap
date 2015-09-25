@@ -25,6 +25,8 @@
                     './src/active_records/wrtc_connection.cc',
                     './src/active_records/virt_window.cc',
 
+                    './src/plugins/log_operations.cc',
+
                     './src/core/virt/osx/window.cc',
                     './src/core/virt/osx/desktop.cc',
 
