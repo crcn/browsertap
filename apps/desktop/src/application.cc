@@ -1,5 +1,5 @@
 #include "./application.h"
-#include "./core/io/console.h"
+#include "./core/io/websockets.h"
 #include <iostream>
 
 /**
@@ -16,7 +16,7 @@ app::Application::Application() {
   this->_commands = new app::Commands(this);
 
   // input / output to the application
-  this->io     = new io::Console(this);
+  this->io     = new io::WebSockets(this);
 }
 
 /**

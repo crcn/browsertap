@@ -11,9 +11,18 @@ app::Commands::Commands(base::Application* app):app(app) {
   // any commands that do not get executed against *registered* commands
   // here will go back to the original app bus.
   this->app->bus = (new mesh::CommandsBus(app->bus))
+  ->add("ping", new mesh::FnBus(&this->pong))
   ->add("getWindows", new mesh::FnBus(&this->execGetWindows))
   ->add("startMainSession", new mesh::FnBus(&this->execStartMainSession))
   ->add("startWindowSession", new mesh::FnBus(&this->execStartWindowSession));
+}
+
+/**
+ * return all desktop windows
+ */
+
+mesh::Response* app::Commands::pong(mesh::Request* request) {
+  return new mesh::BufferedResponse<const char*>("pong");
 }
 
 /**

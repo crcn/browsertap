@@ -145,9 +145,9 @@ out/Release/obj.target/main/src/wrtc/connections.o: \
   ../../src/wrtc/../core/mesh/./request.h \
   ../../src/wrtc/../core/mesh/./response.h \
   ../../src/wrtc/../core/mesh/../thread/thread.h \
+  ../../src/wrtc/../core/mesh/../thread/./runnable.h \
   ../../src/wrtc/../core/mesh/../thread/condition.h \
   ../../src/wrtc/../core/mesh/../thread/mutex.h \
-  ../../src/wrtc/../core/mesh/../thread/runnable.h \
   ../../src/wrtc/../core/mesh/./accept.h \
   ../../src/wrtc/../core/mesh/./reject.h \
   ../../src/wrtc/../core/mesh/./commands.h \
@@ -306,9 +306,9 @@ out/Release/obj.target/main/src/wrtc/connections.o: \
 ../../src/wrtc/../core/mesh/./request.h:
 ../../src/wrtc/../core/mesh/./response.h:
 ../../src/wrtc/../core/mesh/../thread/thread.h:
+../../src/wrtc/../core/mesh/../thread/./runnable.h:
 ../../src/wrtc/../core/mesh/../thread/condition.h:
 ../../src/wrtc/../core/mesh/../thread/mutex.h:
-../../src/wrtc/../core/mesh/../thread/runnable.h:
 ../../src/wrtc/../core/mesh/./accept.h:
 ../../src/wrtc/../core/mesh/./reject.h:
 ../../src/wrtc/../core/mesh/./commands.h:

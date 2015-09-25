@@ -7,29 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		016AB6E45638E2E784BFCE93 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E3E8C3E970AACC4AE7B167 /* AppKit.framework */; };
 		085AE567EF02A2C0E14427F0 /* mutex.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6779D6C3A0B315694619923D /* mutex.cc */; };
 		1637C27DDCB6FECE2EDAA13F /* observers.cc in Sources */ = {isa = PBXBuildFile; fileRef = 74736A443612ED41CA1DFB11 /* observers.cc */; };
 		1BEC807F9B2328BAC5366839 /* connections.cc in Sources */ = {isa = PBXBuildFile; fileRef = 012FCE92615ED1881CC7FE77 /* connections.cc */; };
 		1BEF363EA8021879D4D595B6 /* commands.cc in Sources */ = {isa = PBXBuildFile; fileRef = E18012A24B373195BD28FB43 /* commands.cc */; };
-		1D16B901181F801B7E799263 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3840078CE11D7699A409E862 /* CoreVideo.framework */; };
-		33E350F18DB8C7683F0DEB2F /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B898A7D1531439D634549F /* CoreAudio.framework */; };
-		3DEE50F4A584FEAB4D9DE0A7 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93199D96CF574561481CFAD2 /* OpenGL.framework */; };
+		229A4BEF47B1CB068051103D /* console.cc in Sources */ = {isa = PBXBuildFile; fileRef = 7A83D82A74762341D32F56B4 /* console.cc */; };
+		4158BD9C14644606773E166C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3840078CE11D7699A409E862 /* CoreVideo.framework */; };
 		41B8FD4DFC5F750747811191 /* application.cc in Sources */ = {isa = PBXBuildFile; fileRef = 1C41361F380B0672C070E7AA /* application.cc */; };
 		4BEFDD3D98A3DF1094452A2F /* window.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2944306DE45DBF028EF5D452 /* window.cc */; };
+		673454C979DC54DA76E5E62E /* websockets.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9EB2DF668AB2ABF90B0EDF01 /* websockets.cc */; };
 		6C79174592FED7220DB66905 /* main.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3E40B8F5AFAF0F6F6065BD61 /* main.cc */; };
+		704C3871300E583F45E30F64 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E3E8C3E970AACC4AE7B167 /* AppKit.framework */; };
 		7492BA1F4B688FD8D415081D /* core.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5DEDB108E0402177E986DC8A /* core.cc */; };
-		7A58EB77834FDF941E9A7FEC /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4FBE740C7661172C17A869 /* QTKit.framework */; };
-		7C193F264984F28F4FBFA713 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8FA9A9BD347EA4F37D56CF6 /* Foundation.framework */; };
+		84E02B82A79A92FDE9E80103 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B898A7D1531439D634549F /* CoreAudio.framework */; };
 		8ED12288A16F7E2B390C83E4 /* thread.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3427524D860CD142B2B339CA /* thread.cc */; };
-		A418FDDE6951AD4B1FBB59F8 /* console.cc in Sources */ = {isa = PBXBuildFile; fileRef = 7A83D82A74762341D32F56B4 /* console.cc */; };
-		AEAA1738B6C5BB0D0B96E5FB /* libWebRTC-9725-mac-x86_64-Release.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA9EF0277407F1034FB39F9A /* libWebRTC-9725-mac-x86_64-Release.a */; };
+		9F83C20B2E99EE9ACDE1BA70 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93199D96CF574561481CFAD2 /* OpenGL.framework */; };
+		A3414FA8AADCD814AAF7CBF6 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5A18A6FAEC1532CA9DE8B4 /* AudioUnit.framework */; };
+		A544A14B3941C1BA3909B186 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8FA9A9BD347EA4F37D56CF6 /* Foundation.framework */; };
+		A5649BEBFC381AA5CDC08EE5 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4FBE740C7661172C17A869 /* QTKit.framework */; };
+		A89A2EB9C81E2C75A13E0644 /* libWebRTC-9725-mac-x86_64-Release.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA9EF0277407F1034FB39F9A /* libWebRTC-9725-mac-x86_64-Release.a */; };
+		ADA06C6D6392797F94980C99 /* libwebsockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68B3522057DA85C3A3874D58 /* libwebsockets.a */; };
 		B02E363614A7DDC0E3F6408E /* event_emitter.cc in Sources */ = {isa = PBXBuildFile; fileRef = AB91258A5CDD72EFD913C71C /* event_emitter.cc */; };
 		B4F5F8513C64C3CE8E12FAE1 /* desktop.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3AC75AF3F4083FD974B33A68 /* desktop.cc */; };
-		C85200401D59B9FE2DF86F0F /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5A18A6FAEC1532CA9DE8B4 /* AudioUnit.framework */; };
-		C9EC79007FCF45AF9689BB31 /* libwebsockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68B3522057DA85C3A3874D58 /* libwebsockets.a */; };
+		C1BB5153C49F81CCA08B337C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA561A0FD98F131E61B56650 /* AudioToolbox.framework */; };
+		D0150E425DD612367D2E8A57 /* -lz in Frameworks */ = {isa = PBXBuildFile; fileRef = 80E52F865CC9149683976F0C /* -lz */; };
 		DEBD6108FD67A69BD8345D68 /* connection.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9161DA5CF44545E3AA082587 /* connection.cc */; };
-		EB6BEF9F891D84D4F4AEBC86 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA561A0FD98F131E61B56650 /* AudioToolbox.framework */; };
 		F57FAABE2F479ADE85048A50 /* condition.cc in Sources */ = {isa = PBXBuildFile; fileRef = 5664565CDD653ED4B35FF0DF /* condition.cc */; };
 /* End PBXBuildFile section */
 
@@ -51,10 +53,12 @@
 		7A83D82A74762341D32F56B4 /* console.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = console.cc; sourceTree = "<group>"; };
 		7AB939D216A1C0273552B76D /* supplement.gypi */ = {isa = PBXFileReference; explicitFileType = sourcecode; name = supplement.gypi; path = "vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/supplement.gypi"; sourceTree = "<group>"; };
 		7D4FBE740C7661172C17A869 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
+		80E52F865CC9149683976F0C /* -lz */ = {isa = PBXFileReference; lastKnownFileType = text; path = "-lz"; sourceTree = "<group>"; };
 		82B898A7D1531439D634549F /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		8E084368B92B2FC5EFB8380F /* config.gypi */ = {isa = PBXFileReference; explicitFileType = sourcecode; path = config.gypi; sourceTree = "<group>"; };
 		9161DA5CF44545E3AA082587 /* connection.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = connection.cc; sourceTree = "<group>"; };
 		93199D96CF574561481CFAD2 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		9EB2DF668AB2ABF90B0EDF01 /* websockets.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = websockets.cc; sourceTree = "<group>"; };
 		A5DEDE164BCAFB45DC0DBE5C /* remote_desktop_server.gyp */ = {isa = PBXFileReference; explicitFileType = sourcecode; path = remote_desktop_server.gyp; sourceTree = "<group>"; };
 		A60A726D927F25D203DBAD68 /* common.gypi */ = {isa = PBXFileReference; explicitFileType = sourcecode; name = common.gypi; path = "vendor/webrtc-build-scripts/ios/webrtc/src/talk/build/common.gypi"; sourceTree = "<group>"; };
 		AB91258A5CDD72EFD913C71C /* event_emitter.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = event_emitter.cc; sourceTree = "<group>"; };
@@ -72,26 +76,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEAA1738B6C5BB0D0B96E5FB /* libWebRTC-9725-mac-x86_64-Release.a in Frameworks */,
-				C9EC79007FCF45AF9689BB31 /* libwebsockets.a in Frameworks */,
-				EB6BEF9F891D84D4F4AEBC86 /* AudioToolbox.framework in Frameworks */,
-				C85200401D59B9FE2DF86F0F /* AudioUnit.framework in Frameworks */,
-				33E350F18DB8C7683F0DEB2F /* CoreAudio.framework in Frameworks */,
-				1D16B901181F801B7E799263 /* CoreVideo.framework in Frameworks */,
-				3DEE50F4A584FEAB4D9DE0A7 /* OpenGL.framework in Frameworks */,
-				7A58EB77834FDF941E9A7FEC /* QTKit.framework in Frameworks */,
-				016AB6E45638E2E784BFCE93 /* AppKit.framework in Frameworks */,
-				7C193F264984F28F4FBFA713 /* Foundation.framework in Frameworks */,
+				A89A2EB9C81E2C75A13E0644 /* libWebRTC-9725-mac-x86_64-Release.a in Frameworks */,
+				ADA06C6D6392797F94980C99 /* libwebsockets.a in Frameworks */,
+				D0150E425DD612367D2E8A57 /* -lz in Frameworks */,
+				C1BB5153C49F81CCA08B337C /* AudioToolbox.framework in Frameworks */,
+				A3414FA8AADCD814AAF7CBF6 /* AudioUnit.framework in Frameworks */,
+				84E02B82A79A92FDE9E80103 /* CoreAudio.framework in Frameworks */,
+				4158BD9C14644606773E166C /* CoreVideo.framework in Frameworks */,
+				9F83C20B2E99EE9ACDE1BA70 /* OpenGL.framework in Frameworks */,
+				A5649BEBFC381AA5CDC08EE5 /* QTKit.framework in Frameworks */,
+				704C3871300E583F45E30F64 /* AppKit.framework in Frameworks */,
+				A544A14B3941C1BA3909B186 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		35261A1D6D8829183A14F084 /* io */ = {
+		204912D1D365425F4F986CF2 /* io */ = {
 			isa = PBXGroup;
 			children = (
 				7A83D82A74762341D32F56B4 /* console.cc */,
+				9EB2DF668AB2ABF90B0EDF01 /* websockets.cc */,
 			);
 			path = io;
 			sourceTree = "<group>";
@@ -108,27 +114,10 @@
 			isa = PBXGroup;
 			children = (
 				4387C3C3E5731B746AE87AE4 /* events */,
-				35261A1D6D8829183A14F084 /* io */,
+				204912D1D365425F4F986CF2 /* io */,
 				B98E0E12F4A4EDAE20C99754 /* thread */,
 			);
 			path = core;
-			sourceTree = "<group>";
-		};
-		5F1D1FB65D0323E7F653B0AB /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				56E3E8C3E970AACC4AE7B167 /* AppKit.framework */,
-				DA561A0FD98F131E61B56650 /* AudioToolbox.framework */,
-				BB5A18A6FAEC1532CA9DE8B4 /* AudioUnit.framework */,
-				82B898A7D1531439D634549F /* CoreAudio.framework */,
-				3840078CE11D7699A409E862 /* CoreVideo.framework */,
-				C8FA9A9BD347EA4F37D56CF6 /* Foundation.framework */,
-				93199D96CF574561481CFAD2 /* OpenGL.framework */,
-				7D4FBE740C7661172C17A869 /* QTKit.framework */,
-				BA9EF0277407F1034FB39F9A /* libWebRTC-9725-mac-x86_64-Release.a */,
-				68B3522057DA85C3A3874D58 /* libwebsockets.a */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		64A2CDAB4CC4D89A6313AAC9 /* Source */ = {
@@ -145,11 +134,29 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		6A33A04ACA19F0B23CD7F23B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				80E52F865CC9149683976F0C /* -lz */,
+				56E3E8C3E970AACC4AE7B167 /* AppKit.framework */,
+				DA561A0FD98F131E61B56650 /* AudioToolbox.framework */,
+				BB5A18A6FAEC1532CA9DE8B4 /* AudioUnit.framework */,
+				82B898A7D1531439D634549F /* CoreAudio.framework */,
+				3840078CE11D7699A409E862 /* CoreVideo.framework */,
+				C8FA9A9BD347EA4F37D56CF6 /* Foundation.framework */,
+				93199D96CF574561481CFAD2 /* OpenGL.framework */,
+				7D4FBE740C7661172C17A869 /* QTKit.framework */,
+				BA9EF0277407F1034FB39F9A /* libWebRTC-9725-mac-x86_64-Release.a */,
+				68B3522057DA85C3A3874D58 /* libwebsockets.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6AD403C2196746C47A545CE0 = {
 			isa = PBXGroup;
 			children = (
 				64A2CDAB4CC4D89A6313AAC9 /* Source */,
-				5F1D1FB65D0323E7F653B0AB /* Frameworks */,
+				6A33A04ACA19F0B23CD7F23B /* Frameworks */,
 				CB0BA706B424027614637795 /* Products */,
 				FE7A3D976586561C2908D268 /* Build */,
 			);
@@ -271,7 +278,8 @@
 				085AE567EF02A2C0E14427F0 /* mutex.cc in Sources */,
 				8ED12288A16F7E2B390C83E4 /* thread.cc in Sources */,
 				B02E363614A7DDC0E3F6408E /* event_emitter.cc in Sources */,
-				A418FDDE6951AD4B1FBB59F8 /* console.cc in Sources */,
+				229A4BEF47B1CB068051103D /* console.cc in Sources */,
+				673454C979DC54DA76E5E62E /* websockets.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +333,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"/usr/local/bt/remote-desktop-server/vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds",
 					"/usr/local/bt/remote-desktop-server/vendor/libwebsockets/build/lib",
+					"",
 					"$(SDKROOT)/System/Library/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
@@ -384,6 +393,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"/usr/local/bt/remote-desktop-server/vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds",
 					"/usr/local/bt/remote-desktop-server/vendor/libwebsockets/build/lib",
+					"",
 					"$(SDKROOT)/System/Library/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
@@ -471,6 +481,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"/usr/local/bt/remote-desktop-server/vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds",
 					"/usr/local/bt/remote-desktop-server/vendor/libwebsockets/build/lib",
+					"",
 					"$(SDKROOT)/System/Library/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.5;

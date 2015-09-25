@@ -45,6 +45,13 @@ namespace app {
      * returns all the windows running on the host machine
      */
 
+    static mesh::Response* pong(mesh::Request* request);
+
+
+    /**
+     * returns all the windows running on the host machine
+     */
+
     static mesh::Response* execGetWindows(mesh::Request* request);
 
     /**

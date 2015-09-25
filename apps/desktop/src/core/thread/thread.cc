@@ -16,6 +16,10 @@ namespace core {
   Thread* Thread::run(ThreadCallback* callback) {
     return Thread::run(NULL, callback);
   } 
+
+  Thread* Thread::run(Runnable* runnable) {
+    return Thread::run(runnable, &Thread::_runRunnable);
+  } 
   
   void* Thread::join() {
     void* result = NULL;
@@ -26,6 +30,11 @@ namespace core {
   void Thread::detach() {
     pthread_detach(this->_thread);
   }    
+
+  void* Thread::_runRunnable(void* runnable) {
+    Runnable* r = (Runnable*)runnable;
+    r->run();
+  }
   
   Thread::~Thread() {
     this->detach();

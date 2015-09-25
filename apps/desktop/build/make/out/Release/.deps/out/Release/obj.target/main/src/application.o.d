@@ -7,9 +7,9 @@ out/Release/obj.target/main/src/application.o: ../../src/application.cc \
   ../../src/./core/base/../mesh/./request.h \
   ../../src/./core/base/../mesh/./response.h \
   ../../src/./core/base/../mesh/../thread/thread.h \
+  ../../src/./core/base/../mesh/../thread/./runnable.h \
   ../../src/./core/base/../mesh/../thread/condition.h \
   ../../src/./core/base/../mesh/../thread/mutex.h \
-  ../../src/./core/base/../mesh/../thread/runnable.h \
   ../../src/./core/base/../mesh/./accept.h \
   ../../src/./core/base/../mesh/./reject.h \
   ../../src/./core/base/../mesh/./commands.h \
@@ -32,7 +32,10 @@ out/Release/obj.target/main/src/application.o: ../../src/application.cc \
   ../../src/./osx/desktop.h ../../src/./osx/../base/desktop.h \
   ../../src/./osx/../base/./window.h \
   ../../src/./osx/../base/../geom/bounds.h \
-  ../../src/./osx/../base/../graphics/bitmap.h
+  ../../src/./osx/../base/../graphics/bitmap.h \
+  ../../src/./core/io/websockets.h \
+  ../../vendor/libwebsockets/lib/libwebsockets.h \
+  ../../vendor/libwebsockets/build/lws_config.h
 ../../src/application.cc:
 ../../src/./application.h:
 ../../src/./core/base/application.h:
@@ -42,9 +45,9 @@ out/Release/obj.target/main/src/application.o: ../../src/application.cc \
 ../../src/./core/base/../mesh/./request.h:
 ../../src/./core/base/../mesh/./response.h:
 ../../src/./core/base/../mesh/../thread/thread.h:
+../../src/./core/base/../mesh/../thread/./runnable.h:
 ../../src/./core/base/../mesh/../thread/condition.h:
 ../../src/./core/base/../mesh/../thread/mutex.h:
-../../src/./core/base/../mesh/../thread/runnable.h:
 ../../src/./core/base/../mesh/./accept.h:
 ../../src/./core/base/../mesh/./reject.h:
 ../../src/./core/base/../mesh/./commands.h:
@@ -71,3 +74,6 @@ out/Release/obj.target/main/src/application.o: ../../src/application.cc \
 ../../src/./osx/../base/./window.h:
 ../../src/./osx/../base/../geom/bounds.h:
 ../../src/./osx/../base/../graphics/bitmap.h:
+../../src/./core/io/websockets.h:
+../../vendor/libwebsockets/lib/libwebsockets.h:
+../../vendor/libwebsockets/build/lws_config.h:

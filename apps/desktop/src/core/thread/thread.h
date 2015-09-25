@@ -2,6 +2,7 @@
 #define CORE_THREAD_H_
 
 #include <pthread.h>
+#include "./runnable.h"
 
 namespace core {
 
@@ -14,12 +15,14 @@ namespace core {
     void detach();    
     static Thread* run(void* data, ThreadCallback* callback);
     static Thread* run(ThreadCallback* callback);
+    static Thread* run(Runnable* runnable);
 
     ~Thread();
 
   private:
     pthread_t _thread; 
     Thread(void* data, ThreadCallback* callback);
+    static void* _runRunnable(void* runnable);
   };
 }
 

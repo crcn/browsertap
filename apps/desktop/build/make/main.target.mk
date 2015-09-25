@@ -211,7 +211,8 @@ OBJS := \
 	$(obj).target/$(TARGET)/src/core/thread/mutex.o \
 	$(obj).target/$(TARGET)/src/core/thread/thread.o \
 	$(obj).target/$(TARGET)/src/core/events/event_emitter.o \
-	$(obj).target/$(TARGET)/src/core/io/console.o
+	$(obj).target/$(TARGET)/src/core/io/console.o \
+	$(obj).target/$(TARGET)/src/core/io/websockets.o
 
 # Add to the list of files we specially track dependencies for.
 all_deps += $(OBJS)

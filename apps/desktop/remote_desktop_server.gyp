@@ -35,7 +35,8 @@
                     './src/core/thread/thread.cc',
 
                     './src/core/events/event_emitter.cc',
-                    './src/core/io/console.cc'
+                    './src/core/io/console.cc',
+                    './src/core/io/websockets.cc'
                 ],
 
                 'link_settings': {
