@@ -199,20 +199,19 @@ INCS_Release := \
 
 OBJS := \
 	$(obj).target/$(TARGET)/src/main.o \
-	$(obj).target/$(TARGET)/src/dob.o \
 	$(obj).target/$(TARGET)/src/application.o \
 	$(obj).target/$(TARGET)/src/commands/commands.o \
-	$(obj).target/$(TARGET)/src/osx/window.o \
-	$(obj).target/$(TARGET)/src/osx/desktop.o \
-	$(obj).target/$(TARGET)/src/wrtc/connection.o \
-	$(obj).target/$(TARGET)/src/wrtc/connections.o \
-	$(obj).target/$(TARGET)/src/wrtc/observers.o \
-	$(obj).target/$(TARGET)/src/wrtc/core.o \
+	$(obj).target/$(TARGET)/src/core/virt/osx/window.o \
+	$(obj).target/$(TARGET)/src/core/virt/osx/desktop.o \
+	$(obj).target/$(TARGET)/src/core/wrtc/connection.o \
+	$(obj).target/$(TARGET)/src/core/wrtc/observers.o \
+	$(obj).target/$(TARGET)/src/core/wrtc/core.o \
 	$(obj).target/$(TARGET)/src/core/thread/condition.o \
 	$(obj).target/$(TARGET)/src/core/thread/mutex.o \
 	$(obj).target/$(TARGET)/src/core/thread/thread.o \
 	$(obj).target/$(TARGET)/src/core/do/object.o \
 	$(obj).target/$(TARGET)/src/core/do/collection.o \
+	$(obj).target/$(TARGET)/src/core/do/dob.o \
 	$(obj).target/$(TARGET)/src/core/events/event_emitter.o \
 	$(obj).target/$(TARGET)/src/core/io/console.o \
 	$(obj).target/$(TARGET)/src/core/io/websockets.o

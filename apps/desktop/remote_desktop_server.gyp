@@ -20,16 +20,15 @@
                 'sources': [
 
                     './src/main.cc',
-                    './src/dob.cc',
                     './src/application.cc',
                     './src/commands/commands.cc',
-                    './src/osx/window.cc',
-                    './src/osx/desktop.cc',
 
-                    './src/wrtc/connection.cc',
-                    './src/wrtc/connections.cc',
-                    './src/wrtc/observers.cc',
-                    './src/wrtc/core.cc',
+                    './src/core/virt/osx/window.cc',
+                    './src/core/virt/osx/desktop.cc',
+
+                    './src/core/wrtc/connection.cc',
+                    './src/core/wrtc/observers.cc',
+                    './src/core/wrtc/core.cc',
 
                     './src/core/thread/condition.cc',
                     './src/core/thread/mutex.cc',
@@ -37,6 +36,7 @@
 
                     './src/core/do/object.cc',
                     './src/core/do/collection.cc',
+                    './src/core/do/dob.cc',
 
                     './src/core/events/event_emitter.cc',
                     './src/core/io/console.cc',

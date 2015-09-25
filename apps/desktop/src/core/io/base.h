@@ -1,7 +1,7 @@
 #ifndef IO_BASE_H_
 #define IO_BASE_H_
 
-#include "../base/application.h"
+#include "../application/application.h"
 #include "../mesh/mesh.h"
 
 namespace io {

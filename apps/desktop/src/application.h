@@ -1,11 +1,11 @@
 #ifndef APPLICATION_H_
 #define APPLICATION_H_
 
-#include "./dob.h"
-#include "./core/base/application.h"
+#include "./core/do/dob.h"
+#include "./core/application/application.h"
 #include "./commands/commands.h"
 #include "./core/io/console.h"
-#include "./osx/desktop.h"
+#include "./core/virt/osx/desktop.h"
 
 namespace app {
   class Application : public base::Application {
@@ -14,11 +14,9 @@ namespace app {
     Application();
     ~Application();
     void start();
-    domain::Collection* webrtcConnections;
-    domain::Collection* windows;
+    app::DomainObjectBase* dob;
   private:
     app::Commands* _commands;
-    app::DomainObjectBase* _dob;
   };
 }
 

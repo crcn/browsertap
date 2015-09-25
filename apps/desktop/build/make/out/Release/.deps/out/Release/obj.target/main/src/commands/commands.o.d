@@ -1,26 +1,26 @@
 cmd_out/Release/obj.target/main/src/commands/commands.o := /usr/bin/clang '-DEXPAT_RELATIVE_PATH' '-DFEATURE_ENABLE_VOICEMAIL' '-DGTEST_RELATIVE_PATH' '-DJSONCPP_RELATIVE_PATH' '-DLOGGING=1' '-DSRTP_RELATIVE_PATH' '-DFEATURE_ENABLE_SSL' '-DFEATURE_ENABLE_PSTN' '-DHAVE_SCTP' '-DHAVE_SRTP' '-DHAVE_WEBRTC_VIDEO' '-DHAVE_WEBRTC_VOICE' '-DWEBRTC_POSIX' '-DWEBRTC_MAC' '-DWEBRTC_INCLUDE_INTERNAL_AUDIO_DEVICE' '-DOSX' '-DCARBON_DEPRECATED=YES' '-DHASH_NAMESPACE=__gnu_cxx' '-DDISABLE_DYNAMIC_CAST' '-D_REENTRANT' '-DNDEBUG' -I../../. -I../../vendor/webrtc-build-scripts/ios/webrtc/src -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/webrtc -I../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp -I../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include -I../../vendor/libwebsockets/lib -I../../vendor/libwebsockets/build -I../../vendor/jsoncpp/include  -fasm-blocks -mpascal-strings -O3 -mmacosx-version-min=10.5 -arch x86_64 -Wall -Wendif-labels -W -Wno-unused-parameter -std=c++11 -fno-rtti -fvisibility-inlines-hidden -fno-strict-aliasing -MMD -MF out/Release/.deps/out/Release/obj.target/main/src/commands/commands.o.d.raw  -c -o out/Release/obj.target/main/src/commands/commands.o ../../src/commands/commands.cc
 out/Release/obj.target/main/src/commands/commands.o: \
   ../../src/commands/commands.cc ../../src/commands/./commands.h \
-  ../../src/commands/../core/base/application.h \
-  ../../src/commands/../core/base/../log/logger.h \
-  ../../src/commands/../core/base/../mesh/mesh.h \
-  ../../src/commands/../core/base/../mesh/./bus.h \
-  ../../src/commands/../core/base/../mesh/./request.h \
-  ../../src/commands/../core/base/../mesh/./response.h \
-  ../../src/commands/../core/base/../mesh/../thread/thread.h \
-  ../../src/commands/../core/base/../mesh/../thread/./runnable.h \
-  ../../src/commands/../core/base/../mesh/../thread/condition.h \
-  ../../src/commands/../core/base/../mesh/../thread/mutex.h \
-  ../../src/commands/../core/base/../mesh/./accept.h \
-  ../../src/commands/../core/base/../mesh/./reject.h \
-  ../../src/commands/../core/base/../mesh/./commands.h \
-  ../../src/commands/../core/base/../mesh/./fn.h \
-  ../../src/commands/../core/base/../mesh/./sequence.h \
-  ../../src/commands/../core/base/../mesh/./resp.h \
+  ../../src/commands/../core/application/application.h \
+  ../../src/commands/../core/application/../log/logger.h \
+  ../../src/commands/../core/application/../mesh/mesh.h \
+  ../../src/commands/../core/application/../mesh/./bus.h \
+  ../../src/commands/../core/application/../mesh/./request.h \
+  ../../src/commands/../core/application/../mesh/./response.h \
+  ../../src/commands/../core/application/../mesh/../thread/thread.h \
+  ../../src/commands/../core/application/../mesh/../thread/./runnable.h \
+  ../../src/commands/../core/application/../mesh/../thread/condition.h \
+  ../../src/commands/../core/application/../mesh/../thread/mutex.h \
+  ../../src/commands/../core/application/../mesh/./accept.h \
+  ../../src/commands/../core/application/../mesh/./reject.h \
+  ../../src/commands/../core/application/../mesh/./commands.h \
+  ../../src/commands/../core/application/../mesh/./fn.h \
+  ../../src/commands/../core/application/../mesh/./sequence.h \
+  ../../src/commands/../core/application/../mesh/./resp.h \
   ../../src/commands/../core/mesh/mesh.h \
   ../../src/commands/../core/events/event_listener.h \
   ../../src/commands/../core/events/./event.h \
-  ../../src/commands/../wrtc/connection.h \
+  ../../src/commands/../core/wrtc/connection.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosourceinterface.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediastreaminterface.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/basictypes.h \
@@ -155,36 +155,31 @@ out/Release/obj.target/main/src/commands/commands.o: \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videorenderer.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/sctp/sctpdataengine.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/webrtc/webrtcvideocapturerfactory.h \
-  ../../src/commands/../wrtc/./core.h \
-  ../../src/commands/../wrtc/../base/desktop.h \
-  ../../src/commands/../wrtc/../base/./window.h \
-  ../../src/commands/../wrtc/../base/../geom/bounds.h \
-  ../../src/commands/../wrtc/../base/../graphics/bitmap.h \
-  ../../src/commands/../wrtc/./observers.h \
-  ../../src/commands/../wrtc/../core/mesh/mesh.h \
-  ../../src/commands/../wrtc/../core/events/event_emitter.h
+  ../../src/commands/../core/wrtc/./core.h \
+  ../../src/commands/../core/wrtc/./observers.h \
+  ../../src/commands/../core/wrtc/../events/event_emitter.h
 ../../src/commands/commands.cc:
 ../../src/commands/./commands.h:
-../../src/commands/../core/base/application.h:
-../../src/commands/../core/base/../log/logger.h:
-../../src/commands/../core/base/../mesh/mesh.h:
-../../src/commands/../core/base/../mesh/./bus.h:
-../../src/commands/../core/base/../mesh/./request.h:
-../../src/commands/../core/base/../mesh/./response.h:
-../../src/commands/../core/base/../mesh/../thread/thread.h:
-../../src/commands/../core/base/../mesh/../thread/./runnable.h:
-../../src/commands/../core/base/../mesh/../thread/condition.h:
-../../src/commands/../core/base/../mesh/../thread/mutex.h:
-../../src/commands/../core/base/../mesh/./accept.h:
-../../src/commands/../core/base/../mesh/./reject.h:
-../../src/commands/../core/base/../mesh/./commands.h:
-../../src/commands/../core/base/../mesh/./fn.h:
-../../src/commands/../core/base/../mesh/./sequence.h:
-../../src/commands/../core/base/../mesh/./resp.h:
+../../src/commands/../core/application/application.h:
+../../src/commands/../core/application/../log/logger.h:
+../../src/commands/../core/application/../mesh/mesh.h:
+../../src/commands/../core/application/../mesh/./bus.h:
+../../src/commands/../core/application/../mesh/./request.h:
+../../src/commands/../core/application/../mesh/./response.h:
+../../src/commands/../core/application/../mesh/../thread/thread.h:
+../../src/commands/../core/application/../mesh/../thread/./runnable.h:
+../../src/commands/../core/application/../mesh/../thread/condition.h:
+../../src/commands/../core/application/../mesh/../thread/mutex.h:
+../../src/commands/../core/application/../mesh/./accept.h:
+../../src/commands/../core/application/../mesh/./reject.h:
+../../src/commands/../core/application/../mesh/./commands.h:
+../../src/commands/../core/application/../mesh/./fn.h:
+../../src/commands/../core/application/../mesh/./sequence.h:
+../../src/commands/../core/application/../mesh/./resp.h:
 ../../src/commands/../core/mesh/mesh.h:
 ../../src/commands/../core/events/event_listener.h:
 ../../src/commands/../core/events/./event.h:
-../../src/commands/../wrtc/connection.h:
+../../src/commands/../core/wrtc/connection.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosourceinterface.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediastreaminterface.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/basictypes.h:
@@ -319,11 +314,6 @@ out/Release/obj.target/main/src/commands/commands.o: \
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videorenderer.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/sctp/sctpdataengine.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/webrtc/webrtcvideocapturerfactory.h:
-../../src/commands/../wrtc/./core.h:
-../../src/commands/../wrtc/../base/desktop.h:
-../../src/commands/../wrtc/../base/./window.h:
-../../src/commands/../wrtc/../base/../geom/bounds.h:
-../../src/commands/../wrtc/../base/../graphics/bitmap.h:
-../../src/commands/../wrtc/./observers.h:
-../../src/commands/../wrtc/../core/mesh/mesh.h:
-../../src/commands/../wrtc/../core/events/event_emitter.h:
+../../src/commands/../core/wrtc/./core.h:
+../../src/commands/../core/wrtc/./observers.h:
+../../src/commands/../core/wrtc/../events/event_emitter.h:

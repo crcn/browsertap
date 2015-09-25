@@ -7,12 +7,6 @@
 //
 
 #include <iostream>
-#include "./osx/desktop.h"
-#include "./remote2/server.h"
-#include "./wrtc/connection.h"
-#include "./geom/bounds.h"
-#include <json/json.h>
-#include "./core/mesh/mesh.h"
 #include "./application.h" 
 #include "./core/thread/thread.h"
 #include "./core/thread/mutex.h"

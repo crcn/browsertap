@@ -1,5 +1,5 @@
 #include "./commands.h"
-#include "../wrtc/connection.h"
+#include "../core/wrtc/connection.h"
 
 /**
  */
@@ -55,8 +55,9 @@ public:
 
   void run() {
 
+    // app->domainObjects->insert(new WrtcConnectionDomainObject)
     // TODO - app->webRTCCollection->insert()->addListener(this);
-    this->_connection = new wrtc::Connection(NULL);
+    this->_connection = new wrtc::Connection();
     this->_connection->addListener(this);
   }
 
