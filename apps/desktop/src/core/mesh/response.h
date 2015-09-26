@@ -106,6 +106,10 @@ namespace mesh {
         this->_endCondition.signal();
       }
 
+      virtual ~AsyncResponse() {
+        delete this->_thread;
+      }
+
     private:
       void* _arg;
       core::ThreadMutex _mutex;

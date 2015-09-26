@@ -12,10 +12,10 @@ namespace app {
 
   class AppBus  : public mesh::Bus {
   public:
-    AppBus(base::Application* app):app(app) {
+    AppBus(Application* app):app(app) {
 
     }
-    base::Application* app;
+    Application* app;
   };
 
   /**
@@ -23,14 +23,14 @@ namespace app {
 
   class AppFnBus : public AppBus {
   public:
-    AppFnBus(base::Application* app, mesh::Response* (*execute)(mesh::Request*)):AppBus(app),_execute(execute) {
+    AppFnBus(Application* app, mesh::Response* (*execute)(mesh::Request*, Application* app)):AppBus(app),_execute(execute) {
 
     }
     virtual mesh::Response* execute(mesh::Request* request) {
-      return this->_execute(request);
+      return this->_execute(request, this->app);
     }
   private:
-    mesh::Response* (*_execute)(mesh::Request*);
+    mesh::Response* (*_execute)(mesh::Request*, Application*);
   };
 
   /**
@@ -38,8 +38,14 @@ namespace app {
 
   class Commands {
   public:
-    Commands(base::Application* app);
-    base::Application* app;
+    Commands(Application* app);
+    Application* app;
+
+    /**
+     * returns all the windows running on the host machine
+     */
+
+    static mesh::Response* execHydrate(mesh::Request* request, Application* app);
 
     /**
      * returns all the windows running on the host machine
@@ -59,12 +65,6 @@ namespace app {
      */
 
     static mesh::Response* execStartWindowSession(mesh::Request* request);
-
-    /**
-     */
-
-    static mesh::Response* execStartMainSession(mesh::Request* request);
-
   };
 }
 

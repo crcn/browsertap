@@ -1,12 +1,14 @@
 #include "./commands.h"
 #include "../core/wrtc/connection.h"
 #include "../active_records/wrtc_connection.h"
+#include "./main_session_response.h"
 
 namespace app {
+
   /**
    */
 
-  Commands::Commands(base::Application* app):app(app) {
+  Commands::Commands(Application* app):app(app) {
     LOG_INFO(__PRETTY_FUNCTION__);
 
     // replace the application bus with the commands bus. Note that
@@ -14,13 +16,31 @@ namespace app {
     // here will go back to the original app bus.
     this->app->bus = (new mesh::CommandsBus(app->bus))
     ->add("ping", new mesh::FnBus(&this->execPong))
+    ->add("hydrate", new AppFnBus(app, &this->execHydrate))
     ->add("getWindows", new mesh::FnBus(&this->execGetWindows))
-    ->add("startWindowSession", new mesh::FnBus(&this->execStartWindowSession))
-    ->add("startMainSession", new mesh::FnBus(&this->execStartMainSession));
+    ;
   }
 
   /**
    * return all desktop windows
+   */
+
+  mesh::Response* Commands::execHydrate(mesh::Request* request, Application* app) {
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
+
+    LOG_INFO("starting main session");
+
+    // start the webrtc main session
+    MainSessionResponse mainSessionResponse(app);
+    while(mainSessionResponse.read());
+
+    LOG_INFO("starting window watcher");
+
+    return new mesh::NoResponse();
+  }
+
+  /**
+   * simple pong response
    */
 
   mesh::Response* Commands::execPong(mesh::Request* request) {
@@ -46,55 +66,4 @@ namespace app {
 
   /**
    */
-
-  // class
-
-  /**
-   * TODO: move this to another file
-   */
-
-  class MainSessionResponse : public core::EventListener, public mesh::Response, public core::Runnable {
-  public:
-
-    MainSessionResponse(Application* app, mesh::Request* request):_app(app) {
-      this->_response = new mesh::AsyncResponse(this);
-    }
-
-    void* read() {
-      return this->_response->read();
-    }
-
-    void run() {
-
-      this->_connection = new wrtc::Connection();
-      this->_connection->addListener(this);
-      
-      this->_app->ardb->collection(WRTCConnection::COLLECTION_NAME)->insert(new WRTCConnection());
-    }
-
-    void handleEvent(core::Event* event) {
-
-      // TODO - add session info to internal DB
-      this->_connection->removeListener(this);
-      Json::Value value = *((Json::Value*)event->data);
-      Json::FastWriter writer;
-      this->_response->end((void *)writer.write(value).c_str());
-    }
-
-    ~MainSessionResponse() {
-      delete this->_response;
-      // delete this->_connection;
-    }
-  private:
-    mesh::AsyncResponse* _response;
-    wrtc::Connection* _connection;
-    Application* _app;
-  };
-
-  /**
-   */
-
-  mesh::Response* Commands::execStartMainSession(mesh::Request* request) {
-    return new MainSessionResponse(NULL, request);
-  }
 }

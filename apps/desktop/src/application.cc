@@ -8,13 +8,14 @@
 
 app::Application::Application() {
 
-  // message layer
+
   this->bus    = new mesh::Bus();
   this->bus    = new mesh::TailableBus(this->bus);
 
   // desktop controller
   this->desktop = new osx::Desktop();
 
+  // commands which can be executed against the bus
   this->_commands = new app::Commands(this);
 
   // input / output to the application
@@ -24,8 +25,6 @@ app::Application::Application() {
   this->ardb    = new activeRecord::DB(this);
 
   this->_logOperations = new app::LogOperations(this);
-
-  // TODO - this->_busLogger = new BusLogger(this->bus); // tail bus here
 }
 
 /**
@@ -37,7 +36,6 @@ void app::Application::start() {
   // hydrate the app with initial data
   mesh::Request request("hydrate");
   mesh::Response* response = this->bus->execute(&request);
-  while(response->read());
   delete response;
 
   this->io->start();

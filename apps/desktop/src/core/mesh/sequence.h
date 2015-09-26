@@ -19,6 +19,7 @@ namespace mesh {
 
       if (chunk == NULL) {
         this->_current++;
+        delete current; // clean up
         return this->read();
       } else {
         return chunk;

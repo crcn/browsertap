@@ -173,7 +173,8 @@ out/Release/obj.target/main/src/commands/commands.o: \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/webrtc/webrtcvideocapturerfactory.h \
   ../../src/commands/../core/wrtc/./core.h \
   ../../src/commands/../core/wrtc/./observers.h \
-  ../../src/commands/../active_records/wrtc_connection.h
+  ../../src/commands/../active_records/wrtc_connection.h \
+  ../../src/commands/./main_session_response.h
 ../../src/commands/commands.cc:
 ../../src/commands/./commands.h:
 ../../src/commands/../application.h:
@@ -349,3 +350,4 @@ out/Release/obj.target/main/src/commands/commands.o: \
 ../../src/commands/../core/wrtc/./core.h:
 ../../src/commands/../core/wrtc/./observers.h:
 ../../src/commands/../active_records/wrtc_connection.h:
+../../src/commands/./main_session_response.h:
