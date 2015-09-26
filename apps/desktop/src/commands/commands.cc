@@ -2,7 +2,7 @@
 #include "../core/wrtc/connection.h"
 #include "../active_records/wrtc_connection.h"
 #include "../active_records/virt_window.h"
-#include "./main_session_response.h"
+#include "./create_wrtc_connection_response.h"
 
 namespace app {
 
@@ -19,6 +19,7 @@ namespace app {
     ->add("ping", new mesh::FnBus(&this->execPong))
     ->add("find", new AppFnBus(app, &this->execFind))
     ->add("hydrate", new AppFnBus(app, &this->execHydrate))
+    ->add("startWindowSession", new AppFnBus(app, &this->execStartWindowSession))
     ->add("getWindows", new mesh::FnBus(&this->execGetWindows))
     ; // coma here in case other commands are added
   }
@@ -31,7 +32,7 @@ namespace app {
     LOG_INFO("hydrate app");
 
     // start the webrtc main session
-    MainSessionResponse mainSessionResponse(app);
+    CreateWrtcConnectionResponse mainSessionResponse(app);
     while(mainSessionResponse.read());
 
     virt::Desktop* desktop = app->desktop;
@@ -67,18 +68,25 @@ namespace app {
 
   mesh::Response* Commands::execStartWindowSession(mesh::Request* request, Application* app) {
 
+    // TODO - check if window session already exists, return that
+
     Json::Value* data = (Json::Value*)request->data;
-    int id = (*data)["id"].asInt();
+    int id = (*data)["query"]["id"].asInt();
     VirtWindow* window = (VirtWindow*)app->ardb->collection(VirtWindow::COLLECTION_NAME)->findOne(id);
 
     if (window == NULL) {
       // TODO - throw exception here
     }
 
-    // TODO - create webrtc active record connection here and add window printable
+    CreateWrtcConnectionResponse windowWrtcConnection(app);
+    while(windowWrtcConnection.read());
 
+    windowWrtcConnection.connection->setWindow(window);
 
-    return new mesh::BufferedResponse<const char*>("start session");
+    LOG_VERBOSE("DONE");
+
+    // TODO - return webrtc connection
+    return new mesh::NoResponse();
   }
 
   /**

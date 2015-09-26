@@ -7,13 +7,15 @@
 
 namespace app {
 
-  class MainSessionResponse : public core::EventListener, public mesh::Response, public core::Runnable {
+  class CreateWrtcConnectionResponse : public core::EventListener, public mesh::Response, public core::Runnable {
   public:
+
+    WRTCConnection* connection;
 
     /**
      */
 
-    MainSessionResponse(Application* app):_app(app) {
+    CreateWrtcConnectionResponse(Application* app):_app(app) {
       this->_response = new mesh::AsyncResponse(this);
     }
 
@@ -30,8 +32,8 @@ namespace app {
     void run() {
       this->_connection = new wrtc::Connection();
       this->_connection->addListener(this);
-      
-      this->_app->ardb->collection(WRTCConnection::COLLECTION_NAME)->insert(new WRTCConnection());
+      connection = new WRTCConnection(this->_connection);
+      this->_app->ardb->collection(WRTCConnection::COLLECTION_NAME)->insert(connection);
     }
 
     /**
@@ -49,10 +51,13 @@ namespace app {
     /**
      */
 
-    ~MainSessionResponse() {
+    ~CreateWrtcConnectionResponse() {
       delete this->_response;
       // delete this->_connection;
     }
+
+
+
   private:
     mesh::AsyncResponse* _response;
     wrtc::Connection* _connection;

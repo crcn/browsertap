@@ -2,14 +2,22 @@
 #define APP_WRTC_CONNECTION_H_
 
 #include "../core/active_record/object.h"
+#include "../core/graphics/printable.h"
+#include "../core/wrtc/connection.h"
+#include "./virt_window.h"
 
 namespace app {
   class WRTCConnection : public activeRecord::Object {
   public:
-    WRTCConnection();
+    VirtWindow* window;
+    WRTCConnection(wrtc::Connection*);
     virtual bool exists();
     virtual Json::Value toJSON();
+    // TODO - make into addVideo(Object*);
+    virtual void setWindow(VirtWindow*);
     static const char* COLLECTION_NAME;
+  private:
+    wrtc::Connection* _connection;
   };
 }
 
