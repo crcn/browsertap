@@ -54,7 +54,9 @@ namespace mesh {
   class AsyncResponse : public Response {
     public:
 
-      AsyncResponse(core::Runnable* _runnable = NULL) {
+      AsyncResponse(core::Runnable* _runnable = NULL, core::ThreadMutex* mutex = NULL) {
+
+        this->_mutex    = mutex == NULL ? new core::ThreadMutex() : mutex;
         this->_runnable = _runnable;
         this->ended     = false;
 
@@ -64,7 +66,7 @@ namespace mesh {
       }
 
       void* read() {
-        this->_mutex.lock();
+        this->_mutex->lock();
 
         // continue until there is data, or the response
         // has ended.
@@ -74,19 +76,19 @@ namespace mesh {
           if(!this->_chunks.empty()) {
              void* chunk = this->_chunks.front();
              this->_chunks.pop();
-            this->_mutex.unlock();
+            this->_mutex->unlock();
              return chunk;
           }
 
           if (this->ended) {
-            this->_mutex.unlock();
+            this->_mutex->unlock();
 
             // ended - return NULL - no data.
             return NULL;
           }
 
           // no chunks & no end. Async stuff going on, so wait!
-          this->_chunkCondition.wait(this->_mutex);
+          this->_chunkCondition.wait(*this->_mutex);
         }
       }
 
@@ -108,11 +110,12 @@ namespace mesh {
 
       virtual ~AsyncResponse() {
         delete this->_thread;
+        delete this->_mutex;
       }
 
     private:
       void* _arg;
-      core::ThreadMutex _mutex;
+      core::ThreadMutex* _mutex;
       core::ThreadCondition _chunkCondition;
       core::ThreadCondition _endCondition;
       core::Thread* _thread;
@@ -121,12 +124,12 @@ namespace mesh {
       bool ended;
       static void* _run(void* arg) {
         AsyncResponse* _this = (AsyncResponse*) arg;
-        _this->_mutex.lock();
+        _this->_mutex->lock();
         _this->_runnable->run();
         if (!_this->ended) {
-          _this->_endCondition.wait(_this->_mutex);
+          _this->_endCondition.wait(*_this->_mutex);
         }
-        _this->_mutex.unlock();
+        _this->_mutex->unlock();
       }
   };
 }

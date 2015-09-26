@@ -16,7 +16,9 @@ namespace activeRecord {
     virtual bool exists()=0;
     virtual Json::Value toJSON()=0;
     int id();
-    ~Object();
+    virtual ~Object() { }
+  private:
+    static int _idCount;
   };
 }
 

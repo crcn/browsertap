@@ -1,13 +1,14 @@
 #include "./collection.h"
+#include "../log/logger.h"
 
 namespace activeRecord {
-  Collection::Collection(std::string name):name(name) {
-
+  Collection::Collection(std::string name):core::EventEmitter(), name(name) {
   }
 
   Object* Collection::insert(Object* object) {
     this->_objects.push_back(object);
     object->addListener(this);
+    this->emit(ObjectEvent::INSERT, object);
     return object;
   }
 

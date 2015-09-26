@@ -8,7 +8,8 @@
 namespace core {
   class EventEmitter {
   public:
-    void emit(int event, void* data);
+    EventEmitter();
+    virtual void emit(int event, void* data);
     void emit(Event* event);
     void addListener(EventListener* listener);
     void removeListener(EventListener* listener);

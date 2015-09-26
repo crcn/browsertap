@@ -14,7 +14,8 @@ out/Release/obj.target/main/src/core/active_record/collection.o: \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/forwards.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/reader.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/features.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/writer.h
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/writer.h \
+  ../../src/core/active_record/../log/logger.h
 ../../src/core/active_record/collection.cc:
 ../../src/core/active_record/./collection.h:
 ../../src/core/active_record/../events/event_emitter.h:
@@ -30,3 +31,4 @@ out/Release/obj.target/main/src/core/active_record/collection.o: \
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/reader.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/features.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/writer.h:
+../../src/core/active_record/../log/logger.h:

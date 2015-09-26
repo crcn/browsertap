@@ -24,7 +24,8 @@ app::Application::Application() {
   // domain object base
   this->ardb    = new activeRecord::DB(this);
 
-  this->_logOperations = new app::LogOperations(this);
+  // TODO - fix - causing seg faults
+  // this->_logOperations = new app::LogOperations(this);
 }
 
 /**

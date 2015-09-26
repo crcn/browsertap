@@ -9,7 +9,6 @@ namespace core {
     void* target;
     void* currentTarget;
     Event(int type, void* data):type(type),data(data), target(NULL), currentTarget(NULL) {
-      
     }
     Event(int type):Event(type, NULL) {
       

@@ -3,6 +3,7 @@
 namespace activeRecord {  
 
   Object::Object():core::EventEmitter() { }
+  int Object::_idCount = 0;
 
   void Object::remove() {
     this->emit(ObjectEvent::REMOVE, NULL);
@@ -13,6 +14,6 @@ namespace activeRecord {
   }
 
   int Object::id() {
-    return 0;
+    return _idCount++;
   }
 }

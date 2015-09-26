@@ -1,6 +1,7 @@
 #include "./commands.h"
 #include "../core/wrtc/connection.h"
 #include "../active_records/wrtc_connection.h"
+#include "../active_records/virt_window.h"
 #include "./main_session_response.h"
 
 namespace app {
@@ -37,7 +38,9 @@ namespace app {
     virt::Desktop* desktop = app->desktop;
     std::vector<virt::Window*> windows = desktop->windows();
 
-    LOG_INFO("insert " << windows.size() << " native windows");
+    for (int i = 0, n = windows.size(); i < n; i++) {
+      app->ardb->collection(app::VirtWindow::COLLECTION_NAME)->insert(new app::VirtWindow(windows.at(i)));
+    }
 
     return new mesh::NoResponse();
   }

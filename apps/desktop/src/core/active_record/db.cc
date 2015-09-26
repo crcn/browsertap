@@ -2,8 +2,7 @@
 #include "./db.h"
 
 namespace activeRecord {
-  DB::DB(base::Application* bus):app(app) {
-
+  DB::DB(base::Application* app):app(app) {
   }
 
   Collection* DB::collection(std::string name) {
@@ -15,18 +14,17 @@ namespace activeRecord {
   }
 
   void DB::handleEvent(core::Event* event) {
-    // TODO WITH CURRENT TARGET
-    LOG_NOTICE("handle domain object event");
     Json::Value root;
 
     const char* name = NULL;
 
     root["collection"] = ((Collection*)event->currentTarget)->name;
 
+
     switch(event->type) {
       case ObjectEvent::INSERT:
         name = "insert";
-        root["data"] = ((Object*)event->target)->toJSON();
+        root["data"] = ((Object*)event->data)->toJSON();
         break;
       case ObjectEvent::REMOVE:
         name = "remove";
@@ -38,7 +36,15 @@ namespace activeRecord {
         break;
     }
 
-    mesh::Request request(name, &root);
-    this->app->bus->execute(&request);
+    root["name"] = name;
+
+    // TODO - temporary - need to execute stuff here instead
+    Json::FastWriter writer;
+    std::cout << writer.write(root) << std::endl;
+
+    // mesh::Request request(name, &root);
+    // mesh::Response* resp = this->app->bus->execute(&request);
+    // while(resp->read());
+    // delete resp;
   }
 }

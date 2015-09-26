@@ -174,6 +174,7 @@ out/Release/obj.target/main/src/commands/commands.o: \
   ../../src/commands/../core/wrtc/./core.h \
   ../../src/commands/../core/wrtc/./observers.h \
   ../../src/commands/../active_records/wrtc_connection.h \
+  ../../src/commands/../active_records/virt_window.h \
   ../../src/commands/./main_session_response.h
 ../../src/commands/commands.cc:
 ../../src/commands/./commands.h:
@@ -350,4 +351,5 @@ out/Release/obj.target/main/src/commands/commands.o: \
 ../../src/commands/../core/wrtc/./core.h:
 ../../src/commands/../core/wrtc/./observers.h:
 ../../src/commands/../active_records/wrtc_connection.h:
+../../src/commands/../active_records/virt_window.h:
 ../../src/commands/./main_session_response.h:

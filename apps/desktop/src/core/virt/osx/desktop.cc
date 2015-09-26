@@ -17,6 +17,8 @@ std::vector<virt::Window*> osx::Desktop::windows() {
 
     for (int i = 0, n = numWindows; i < n; i++) {
         CFDictionaryRef info = (CFDictionaryRef)CFArrayGetValueAtIndex(windows, i);
+
+        // TODO - filter out windows here 
         this->_windows.push_back((virt::Window*)new osx::Window(info));
     }
 
