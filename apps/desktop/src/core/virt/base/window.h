@@ -12,7 +12,7 @@
 #include "../../geom/bounds.h"
 #include "../../graphics/bitmap.h"
 
-namespace base {
+namespace virt {
   class Window {
   public:
       virtual geom::Bounds bounds()=0;

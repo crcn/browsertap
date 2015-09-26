@@ -14,7 +14,7 @@ namespace app {
   
   class Application : public base::Application {
   public:
-    base::Desktop* desktop;
+    virt::Desktop* desktop;
     Application();
     ~Application();
     void start();

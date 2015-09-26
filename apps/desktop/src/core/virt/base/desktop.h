@@ -12,10 +12,10 @@
 #include <vector>
 #include "./window.h"
 
-namespace base {
+namespace virt {
   class Desktop {
   public:
-      virtual std::vector<base::Window*> windows()=0;
+      virtual std::vector<virt::Window*> windows()=0;
   };
 };
 

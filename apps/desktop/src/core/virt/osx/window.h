@@ -15,7 +15,7 @@
 #include "../base/window.h"
 
 namespace osx {
-    class Window : base::Window {
+    class Window : virt::Window {
     private:
         CFDictionaryRef _info;
         CGRect _cgbounds();

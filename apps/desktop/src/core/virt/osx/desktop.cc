@@ -11,13 +11,13 @@
 #include <iostream>
 
 
-std::vector<base::Window*> osx::Desktop::windows() {
+std::vector<virt::Window*> osx::Desktop::windows() {
     CFArrayRef windows = CGWindowListCopyWindowInfo(kCGWindowListOptionOnScreenOnly, kCGNullWindowID);
     int numWindows    = CFArrayGetCount(windows);
 
     for (int i = 0, n = numWindows; i < n; i++) {
         CFDictionaryRef info = (CFDictionaryRef)CFArrayGetValueAtIndex(windows, i);
-        this->_windows.push_back((base::Window*)new osx::Window(info));
+        this->_windows.push_back((virt::Window*)new osx::Window(info));
     }
 
     // CFRelease(windows);

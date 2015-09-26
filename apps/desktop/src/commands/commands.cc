@@ -18,7 +18,7 @@ namespace app {
     ->add("ping", new mesh::FnBus(&this->execPong))
     ->add("hydrate", new AppFnBus(app, &this->execHydrate))
     ->add("getWindows", new mesh::FnBus(&this->execGetWindows))
-    ;
+    ; // coma here in case other commands are added
   }
 
   /**
@@ -26,15 +26,18 @@ namespace app {
    */
 
   mesh::Response* Commands::execHydrate(mesh::Request* request, Application* app) {
-    LOG_VERBOSE(__PRETTY_FUNCTION__);
+    LOG_INFO("hydrate app");
 
-    LOG_INFO("starting main session");
+    LOG_INFO("start main session");
 
     // start the webrtc main session
     MainSessionResponse mainSessionResponse(app);
     while(mainSessionResponse.read());
 
-    LOG_INFO("starting window watcher");
+    virt::Desktop* desktop = app->desktop;
+    std::vector<virt::Window*> windows = desktop->windows();
+
+    LOG_INFO("insert " << windows.size() << " native windows");
 
     return new mesh::NoResponse();
   }

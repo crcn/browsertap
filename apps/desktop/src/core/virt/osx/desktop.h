@@ -13,11 +13,11 @@
 #include <ApplicationServices/ApplicationServices.h>
 
 namespace osx {
-  class Desktop : public base::Desktop {
+  class Desktop : public virt::Desktop {
   private:
-      std::vector<base::Window*> _windows;
+      std::vector<virt::Window*> _windows;
   public:
-      virtual std::vector<base::Window*> windows();
+      virtual std::vector<virt::Window*> windows();
   };
 }
 #endif
