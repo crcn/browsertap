@@ -41,4 +41,3 @@ namespace activeRecord {
     this->emit(event);
   }
 }
-
