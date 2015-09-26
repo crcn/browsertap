@@ -22,11 +22,19 @@ namespace activeRecord {
     std::vector<Object*> ret;
     for(int i = 0, n = this->_objects.size(); i < n; i++) {
       Object* object = this->_objects.at(i);
-      Json::Value& objJson = object->toJSON();
+      Json::Value objJson = object->toJSON();
       // TODO - query this
       ret.push_back(object);
     }
     return ret;
+  }
+
+  Object* Collection::findOne(int id) {
+    for(int i = 0, n = this->_objects.size(); i < n; i++) {
+      Object* object = this->_objects.at(i);
+      if (object->id() == id) return object;
+    }
+    return NULL;
   }
 
   std::vector<Object*> Collection::all() {
