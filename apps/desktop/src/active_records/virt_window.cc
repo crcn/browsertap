@@ -15,7 +15,9 @@ namespace app {
   bool VirtWindow::exists() {
     
   }
-    
+  
+  // TODO - perhaps change to serializable if json::Value has
+  // option
   Json::Value VirtWindow::toJSON() {
     Json::Value root;
     geom::Bounds b = this->_window->bounds();

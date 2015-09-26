@@ -56,7 +56,6 @@ static int callback_dumb_increment(struct libwebsocket_context * _this,
             } else {
               LOG_ERROR("unable to parse" << in);
             }
-
             
             // log what we recieved and what we're going to send as a response.
             // that disco syntax `%.*s` is used to print just a part of our buffer

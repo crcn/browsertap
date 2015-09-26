@@ -73,7 +73,23 @@ namespace app {
    */
 
   mesh::Response* Commands::execFind(mesh::Request* request, Application* app) {
-    LOG_NOTICE("FIND");
+    Json::Value& root = *((Json::Value*)request->data);
+
+    if (root["collection"].isNull()) {
+
+      // TODO - make this an error object
+      throw "collection must exist";
+    }
+
+    Json::Value& query = root["query"];
+
+    activeRecord::Collection* c = app->ardb->collection(root["collection"].asString());
+    std::vector<activeRecord::Object*> results = query.isNull() ? c->all() : c->find(query);
+
+    for (int i = 0, n = results.size(); i < n; i++) {
+      std::cout << results.at(i)->toJSON() << std::endl;
+    }
+
     return new mesh::NoResponse();
   }
 }

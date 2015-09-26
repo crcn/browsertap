@@ -22,7 +22,7 @@
                 $('button').click(function(e) {
                     e.preventDefault();
                     websocket.send($('input').val());
-                    $('input').val('');
+                    // $('input').val('');
                 });
             });
         </script>
@@ -30,7 +30,7 @@
     <body>
         <h1>WebSockets test</h1>
         <form>
-            <input type="text" />
+            <input type="text" value='{"name":"find", "collection":"virtWindows"}' />
             <button>Send</button>
         </form>
         <div></div>

@@ -4,6 +4,7 @@
 #include "../events/event_emitter.h"
 #include "./events.h"
 #include "./object.h"
+#include <json/json.h>
 
 namespace activeRecord {
 
@@ -13,6 +14,8 @@ namespace activeRecord {
     std::string name;
     Object* insert(Object* obj);
     Object* remove(Object* obj);
+    std::vector<Object*> all();
+    std::vector<Object*> find(Json::Value);
     void handleEvent(core::Event* event);
   private:
     std::vector<Object*> _objects;

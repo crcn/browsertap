@@ -14,6 +14,8 @@ namespace activeRecord {
     void remove();
     void update();
     virtual bool exists()=0;
+
+    // TODO - lowercase this methdd to toJson()
     virtual Json::Value toJSON()=0;
     int id();
     virtual ~Object() { }
