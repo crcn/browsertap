@@ -29,8 +29,6 @@ namespace app {
   mesh::Response* Commands::execHydrate(mesh::Request* request, Application* app) {
     LOG_INFO("hydrate app");
 
-    LOG_INFO("start main session");
-
     // start the webrtc main session
     MainSessionResponse mainSessionResponse(app);
     while(mainSessionResponse.read());
@@ -69,7 +67,4 @@ namespace app {
   mesh::Response* Commands::execStartWindowSession(mesh::Request* request) {
     return new mesh::BufferedResponse<const char*>("start session");
   }
-
-  /**
-   */
 }
