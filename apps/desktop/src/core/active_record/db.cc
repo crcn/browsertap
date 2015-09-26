@@ -20,7 +20,6 @@ namespace activeRecord {
 
     root["collection"] = ((Collection*)event->currentTarget)->name;
 
-
     switch(event->type) {
       case ObjectEvent::INSERT:
         name = "insert";
@@ -35,12 +34,6 @@ namespace activeRecord {
         root["data"] = ((Object*)event->target)->toJSON();
         break;
     }
-
-    // root["name"] = name;
-
-    // // TODO - temporary - need to execute stuff here instead
-    // Json::FastWriter writer;
-    // std::cout << writer.write(root) << std::endl;
 
     mesh::Request request(name, &root);
     mesh::Response* resp = this->app->bus->execute(&request);
