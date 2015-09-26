@@ -9,12 +9,12 @@
 namespace app {
   class WRTCConnection : public activeRecord::Object {
   public:
-    VirtWindow* window;
+    VirtWindow* video;
     WRTCConnection(wrtc::Connection*);
     virtual bool exists();
     virtual Json::Value toJSON();
     // TODO - make into addVideo(Object*);
-    virtual void setWindow(VirtWindow*);
+    virtual void setVideo(VirtWindow*);
     static const char* COLLECTION_NAME;
   private:
     wrtc::Connection* _connection;

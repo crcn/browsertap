@@ -39,6 +39,8 @@ namespace app {
     std::vector<virt::Window*> windows = desktop->windows();
 
     for (int i = 0, n = windows.size(); i < n; i++) {
+
+      // todo - change to app->ardb->insert(activeRecord) - AR should have collection name here
       app->ardb->collection(app::VirtWindow::COLLECTION_NAME)->insert(new app::VirtWindow(windows.at(i)));
     }
 
@@ -72,6 +74,8 @@ namespace app {
 
     Json::Value* data = (Json::Value*)request->data;
     int id = (*data)["query"]["id"].asInt();
+
+    // TODO - change to app->ardb->findOne() with query info here
     VirtWindow* window = (VirtWindow*)app->ardb->collection(VirtWindow::COLLECTION_NAME)->findOne(id);
 
     if (window == NULL) {
@@ -81,7 +85,10 @@ namespace app {
     CreateWrtcConnectionResponse windowWrtcConnection(app);
     while(windowWrtcConnection.read());
 
-    windowWrtcConnection.connection->setWindow(window);
+    windowWrtcConnection.connection->setVideo(window);
+
+    // TODO - add listener when video closes somewhere - maybe create a videoWrtcConnection class
+    // which removes itself
 
     LOG_VERBOSE("DONE");
 

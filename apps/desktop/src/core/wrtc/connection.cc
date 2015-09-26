@@ -9,6 +9,8 @@ namespace wrtc {
 
   Connection::Connection() {
 
+    this->video = NULL;
+
     // observers
     _peerConnectionObserver   = new rtc::RefCountedObject<PeerConnectionObserver>();
     _offerObserver            = new rtc::RefCountedObject<OfferObserver>();
@@ -39,6 +41,13 @@ namespace wrtc {
    */
 
   void Connection::_onIceCandidate(const webrtc::IceCandidateInterface* candidate) {
+  }
+
+  /**
+   */
+
+  void Connection::setVideo(graphics::Printable* video) {
+    this->video = video;
   }
 
   /**

@@ -6,6 +6,7 @@
 #include "talk/app/webrtc/peerconnectionfactoryproxy.h"
 #include "talk/app/webrtc/proxy.h"
 
+#include "../graphics/printable.h"
 #include "webrtc/base/logging.h"
 #include "webrtc/base/json.h"
 #include "webrtc/base/sigslot.h"
@@ -52,8 +53,10 @@ namespace wrtc {
 
   class Connection : public sigslot::has_slots<>, public core::EventEmitter {
   public:
+    graphics::Printable* video;
 
     Connection();
+    void setVideo(graphics::Printable* video);
 
   private:
     rtc::scoped_refptr<PeerConnectionObserver> _peerConnectionObserver;

@@ -80,6 +80,9 @@ out/Release/obj.target/main/src/core/wrtc/connection.o: \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/platform_file.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/proxy.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/bind.h \
+  ../../src/core/wrtc/../graphics/printable.h \
+  ../../src/core/wrtc/../graphics/./bitmap.h \
+  ../../src/core/wrtc/../graphics/../geom/bounds.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/json.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h \
@@ -223,6 +226,9 @@ out/Release/obj.target/main/src/core/wrtc/connection.o: \
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/platform_file.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/proxy.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/bind.h:
+../../src/core/wrtc/../graphics/printable.h:
+../../src/core/wrtc/../graphics/./bitmap.h:
+../../src/core/wrtc/../graphics/../geom/bounds.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/json.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h:

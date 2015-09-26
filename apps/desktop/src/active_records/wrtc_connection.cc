@@ -6,20 +6,25 @@ namespace app {
   const char* WRTCConnection::COLLECTION_NAME = "wrtcConnections";
 
   WRTCConnection::WRTCConnection(wrtc::Connection* connection):_connection(connection) {
-    this->window = NULL;
+    this->video = NULL;
   }
   
   bool WRTCConnection::exists() {
     
   }
   
-  void WRTCConnection::setWindow(VirtWindow* window) {
-    this->window = window;
+  void WRTCConnection::setVideo(VirtWindow* video) {
+    this->video = video;
+    this->_connection->setVideo(video);
   }
 
   Json::Value WRTCConnection::toJSON() {
     Json::Value root;
-    root["window"]["id"] = this->window->id();
+
+    if (this->video) {
+      root["video"]["id"] = this->video->id();
+    }
+
     return root;
   }
 }
