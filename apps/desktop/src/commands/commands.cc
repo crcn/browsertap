@@ -65,7 +65,19 @@ namespace app {
    * initialized session drops all connections.
    */
 
-  mesh::Response* Commands::execStartWindowSession(mesh::Request* request) {
+  mesh::Response* Commands::execStartWindowSession(mesh::Request* request, Application* app) {
+
+    Json::Value* data = (Json::Value*)request->data;
+    int id = (*data)["id"].asInt();
+    VirtWindow* window = (VirtWindow*)app->ardb->collection(VirtWindow::COLLECTION_NAME)->findOne(id);
+
+    if (window == NULL) {
+      // TODO - throw exception here
+    }
+
+    // TODO - create webrtc active record connection here and add window printable
+
+
     return new mesh::BufferedResponse<const char*>("start session");
   }
 

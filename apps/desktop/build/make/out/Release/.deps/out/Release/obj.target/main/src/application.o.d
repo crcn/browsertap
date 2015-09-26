@@ -37,7 +37,8 @@ out/Release/obj.target/main/src/application.o: ../../src/application.cc \
   ../../src/./core/virt/osx/../base/desktop.h \
   ../../src/./core/virt/osx/../base/./window.h \
   ../../src/./core/virt/osx/../base/../../geom/bounds.h \
-  ../../src/./core/virt/osx/../base/../../graphics/bitmap.h \
+  ../../src/./core/virt/osx/../base/../../graphics/printable.h \
+  ../../src/./core/virt/osx/../base/../../graphics/./bitmap.h \
   ../../src/./plugins/log_operations.h ../../src/./commands/commands.h \
   ../../src/./commands/../core/mesh/mesh.h \
   ../../src/./core/io/websockets.h \
@@ -84,7 +85,8 @@ out/Release/obj.target/main/src/application.o: ../../src/application.cc \
 ../../src/./core/virt/osx/../base/desktop.h:
 ../../src/./core/virt/osx/../base/./window.h:
 ../../src/./core/virt/osx/../base/../../geom/bounds.h:
-../../src/./core/virt/osx/../base/../../graphics/bitmap.h:
+../../src/./core/virt/osx/../base/../../graphics/printable.h:
+../../src/./core/virt/osx/../base/../../graphics/./bitmap.h:
 ../../src/./plugins/log_operations.h:
 ../../src/./commands/commands.h:
 ../../src/./commands/../core/mesh/mesh.h:

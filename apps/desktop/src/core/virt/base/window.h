@@ -10,10 +10,10 @@
 #define RemoteDesktop_BaseWindow_h
 
 #include "../../geom/bounds.h"
-#include "../../graphics/bitmap.h"
+#include "../../graphics/printable.h"
 
 namespace virt {
-  class Window {
+  class Window : public graphics::Printable {
   public:
       virtual geom::Bounds bounds()=0;
       virtual void bounds(geom::Bounds bounds)=0;

@@ -4,9 +4,10 @@
 #include "../core/log/logger.h"
 #include "../core/active_record/object.h"
 #include "../core/virt/base/window.h"
+#include "../core/graphics/printable.h"
 
 namespace app {
-  class VirtWindow : public activeRecord::Object {
+  class VirtWindow : public activeRecord::Object, public graphics::Printable {
   public:
     VirtWindow(virt::Window*);
     virtual bool exists();

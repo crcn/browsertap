@@ -18,7 +18,8 @@ out/Release/obj.target/main/src/active_records/virt_window.o: \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/writer.h \
   ../../src/active_records/../core/virt/base/window.h \
   ../../src/active_records/../core/virt/base/../../geom/bounds.h \
-  ../../src/active_records/../core/virt/base/../../graphics/bitmap.h
+  ../../src/active_records/../core/virt/base/../../graphics/printable.h \
+  ../../src/active_records/../core/virt/base/../../graphics/./bitmap.h
 ../../src/active_records/virt_window.cc:
 ../../src/active_records/./virt_window.h:
 ../../src/active_records/../core/log/logger.h:
@@ -37,4 +38,5 @@ out/Release/obj.target/main/src/active_records/virt_window.o: \
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/writer.h:
 ../../src/active_records/../core/virt/base/window.h:
 ../../src/active_records/../core/virt/base/../../geom/bounds.h:
-../../src/active_records/../core/virt/base/../../graphics/bitmap.h:
+../../src/active_records/../core/virt/base/../../graphics/printable.h:
+../../src/active_records/../core/virt/base/../../graphics/./bitmap.h:

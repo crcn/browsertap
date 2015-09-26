@@ -64,7 +64,7 @@ namespace app {
      * starts a new window webRTC session
      */
 
-    static mesh::Response* execStartWindowSession(mesh::Request* request);
+    static mesh::Response* execStartWindowSession(mesh::Request* request, Application* app);
 
     /**
      * execute ardb find

@@ -4,12 +4,14 @@ out/Release/obj.target/main/src/core/virt/osx/desktop.o: \
   ../../src/core/virt/osx/../base/desktop.h \
   ../../src/core/virt/osx/../base/./window.h \
   ../../src/core/virt/osx/../base/../../geom/bounds.h \
-  ../../src/core/virt/osx/../base/../../graphics/bitmap.h \
+  ../../src/core/virt/osx/../base/../../graphics/printable.h \
+  ../../src/core/virt/osx/../base/../../graphics/./bitmap.h \
   ../../src/core/virt/osx/./window.h
 ../../src/core/virt/osx/desktop.cc:
 ../../src/core/virt/osx/./desktop.h:
 ../../src/core/virt/osx/../base/desktop.h:
 ../../src/core/virt/osx/../base/./window.h:
 ../../src/core/virt/osx/../base/../../geom/bounds.h:
-../../src/core/virt/osx/../base/../../graphics/bitmap.h:
+../../src/core/virt/osx/../base/../../graphics/printable.h:
+../../src/core/virt/osx/../base/../../graphics/./bitmap.h:
 ../../src/core/virt/osx/./window.h:
