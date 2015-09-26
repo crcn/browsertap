@@ -65,6 +65,12 @@ namespace app {
      */
 
     static mesh::Response* execStartWindowSession(mesh::Request* request);
+
+    /**
+     * execute ardb find
+     */
+
+    static mesh::Response* execFind(mesh::Request* request, Application* app);
   };
 }
 

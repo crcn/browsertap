@@ -15,10 +15,8 @@ namespace io {
     static void log(int level, const char* message);
   private:
     core::Thread* _thread;
-    int callback_dumb_increment2(struct libwebsocket_context * _this,
-                                   struct libwebsocket *wsi,
-                                   enum libwebsocket_callback_reasons reason,
-                                   void *user, void *in, size_t len);
+    struct libwebsocket* _lws;
+    void _tailOperations();
   };
 }
 

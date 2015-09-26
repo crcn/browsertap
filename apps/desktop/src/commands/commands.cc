@@ -17,6 +17,7 @@ namespace app {
     // here will go back to the original app bus.
     this->app->bus = (new mesh::CommandsBus(app->bus))
     ->add("ping", new mesh::FnBus(&this->execPong))
+    ->add("find", new AppFnBus(app, &this->execFind))
     ->add("hydrate", new AppFnBus(app, &this->execHydrate))
     ->add("getWindows", new mesh::FnBus(&this->execGetWindows))
     ; // coma here in case other commands are added
@@ -66,5 +67,13 @@ namespace app {
 
   mesh::Response* Commands::execStartWindowSession(mesh::Request* request) {
     return new mesh::BufferedResponse<const char*>("start session");
+  }
+
+  /**
+   */
+
+  mesh::Response* Commands::execFind(mesh::Request* request, Application* app) {
+    LOG_NOTICE("FIND");
+    return new mesh::NoResponse();
   }
 }

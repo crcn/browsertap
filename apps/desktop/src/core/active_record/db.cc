@@ -36,15 +36,15 @@ namespace activeRecord {
         break;
     }
 
-    root["name"] = name;
+    // root["name"] = name;
 
-    // TODO - temporary - need to execute stuff here instead
-    Json::FastWriter writer;
-    std::cout << writer.write(root) << std::endl;
+    // // TODO - temporary - need to execute stuff here instead
+    // Json::FastWriter writer;
+    // std::cout << writer.write(root) << std::endl;
 
-    // mesh::Request request(name, &root);
-    // mesh::Response* resp = this->app->bus->execute(&request);
-    // while(resp->read());
-    // delete resp;
+    mesh::Request request(name, &root);
+    mesh::Response* resp = this->app->bus->execute(&request);
+    while(resp->read());
+    delete resp;
   }
 }

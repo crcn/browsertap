@@ -26,36 +26,31 @@ static int callback_dumb_increment(struct libwebsocket_context * _this,
         case LWS_CALLBACK_ESTABLISHED: // just log message that someone is connecting
             LOG_NOTICE("websockets: connection established");
             break;
-        case LWS_CALLBACK_RECEIVE: { // the funny part
-            // create a buffer to hold our response
-            // it has to have some pre and post padding. You don't need to care
-            // what comes there, libwebsockets will do everything for you. For more info see
-            // http://git.warmcat.com/cgi-bin/cgit/libwebsockets/tree/lib/libwebsockets.h#n597
+        case LWS_CALLBACK_RECEIVE: { 
+
             unsigned char *buf = (unsigned char*) malloc(LWS_SEND_BUFFER_PRE_PADDING + len +
                                                          LWS_SEND_BUFFER_POST_PADDING);
             
             int i;
 
-
             Json::Value root;
             Json::Reader reader;
 
-            // pointer to `void *in` holds the incomming request
-            // we're just going to put it in reverse order and put it in `buf` with
-            // correct offset. `len` holds length of the request.
             for (i=0; i < len; i++) {
                 buf[LWS_SEND_BUFFER_PRE_PADDING + (len - 1) - i ] = ((char *) in)[i];
             }
 
             if (reader.parse((char*)in, root)) {
-              mesh::Response* response = app->bus->execute(new mesh::Request("startMainSession", NULL));
-              // mesh::Response* response = app->bus->execute(new mesh::Request("ping", NULL));
-
-              // TODO - thread this stuff here.
+              mesh::Request request(root["name"].asString(), &root);
+              mesh::Response* response = app->bus->execute(&request);
               void* chunk;
-              // std::cout << (const char*)response->read() << std::endl;
+
+              // TODO - multithreading here
               while(chunk = response->read()) {
                 std::cout << (const char*)chunk << std::endl;
+
+                // TODO - something like this
+                // libwebsocket_write(wsi, &buf[LWS_SEND_BUFFER_PRE_PADDING], len, LWS_WRITE_TEXT);
               }
               delete response;
             } else {
@@ -66,15 +61,15 @@ static int callback_dumb_increment(struct libwebsocket_context * _this,
             // log what we recieved and what we're going to send as a response.
             // that disco syntax `%.*s` is used to print just a part of our buffer
             // http://stackoverflow.com/questions/5189071/print-part-of-char-array
-            printf("received data: %s, replying: %.*s\n", (char *) in, (int) len,
-                   buf + LWS_SEND_BUFFER_PRE_PADDING);
+            // printf("received data: %s, replying: %.*s\n", (char *) in, (int) len,
+            //        buf + LWS_SEND_BUFFER_PRE_PADDING);
             
             // send response
             // just notice that we have to tell where exactly our response starts. That's
             // why there's `buf[LWS_SEND_BUFFER_PRE_PADDING]` and how long it is.
             // we know that our response has the same length as request because
             // it's the same message in reverse order.
-            libwebsocket_write(wsi, &buf[LWS_SEND_BUFFER_PRE_PADDING], len, LWS_WRITE_TEXT);
+            // libwebsocket_write(wsi, &buf[LWS_SEND_BUFFER_PRE_PADDING], len, LWS_WRITE_TEXT);
             
             // release memory back into the wild
             free(buf);
@@ -153,13 +148,14 @@ namespace io {
     libwebsocket_context_destroy(context);
   }
 
-  int WebSockets::callback_dumb_increment2(struct libwebsocket_context * _this,
-                                   struct libwebsocket *wsi,
-                                   enum libwebsocket_callback_reasons reason,
-                                   void *user, void *in, size_t len)
-{
-  return 0;
-}
+  void WebSockets::_tailOperations() {
+    mesh::Request tailRequest("tail");
+    mesh::Response* resp = this->app->bus->execute(&tailRequest);
+    mesh::Request* tailedRequest;
+    while(tailedRequest = (mesh::Request*)resp->read()) {
+      // TODO - broadcast here
+    }
+  }
 
   void WebSockets::log(int level, const char* line) {
     std::stringstream ss;
