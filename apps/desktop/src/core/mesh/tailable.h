@@ -17,7 +17,7 @@ namespace mesh {
 
     Response* execute(Request* request) {
       if (request->name.compare("tail") == 0) {
-        AsyncResponse* response = new AsyncResponse(NULL);
+        AsyncResponse* response = new AsyncResponse();
         _tails.push_back(response);
         return response;
       } else {

@@ -111,6 +111,8 @@ namespace app {
 
     Json::Value resp(Json::arrayValue);
 
+    // return new mesh::BufferedResponse<core::JsonChunk*>(new core::JsonChunk(resp));
+
     mesh::AsyncResponse* response = new mesh::AsyncResponse();
 
     for (int i = 0, n = results.size(); i < n; i++) {
