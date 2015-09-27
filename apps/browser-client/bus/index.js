@@ -26,11 +26,11 @@ module.exports = function(app, bus) {
 
     var r = sa.post("/o").send(operation).end(function(err, response) {
       var body = response.body;
-      if (!body) return resolve();
+      if (!body) return resp.end();
 
       if (body.error) {
         var err = httperr[body.error.statusCode](body.error.message);
-        return resp.emit("error", err);
+        return resp.error(err);
       }
 
       resp.end(body);
