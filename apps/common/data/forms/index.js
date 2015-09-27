@@ -8,7 +8,7 @@ export default {
    */
 
   getSessionUser: function*(bus) {
-    return new User(Object.assign({ bus: bus }, yield bus({ name: "getSessionUser" })));
+    return new User(Object.assign({ bus: bus }, yield bus({ name: "getSessionUser" }).read()));
   },
 
   /**
@@ -22,6 +22,6 @@ export default {
    */
 
   logout: function*(bus) {
-    return yield bus({ name: "logout" });
+    return yield bus({ name: "logout" }).read();
   }
 };

@@ -44,7 +44,7 @@ class ConfirmAccountSchema {
     return yield this.bus.execute({ 
       name: "confirmAccount", 
       data: this 
-    });
+    }).read();
   }
 };
 

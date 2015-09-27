@@ -56,7 +56,7 @@ class ResetPasswordForm {
     return yield this.bus.execute({ 
       name: "resetPassword", 
       data: this 
-    });
+    }).read();
   }
 };
 

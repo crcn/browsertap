@@ -38,7 +38,7 @@ class Application extends BaseModel {
 
   initialize() {
     this.initializePlugins();
-    return this.bus({ name: "initialize" });
+    return this.bus({ name: "initialize" }).readAll();
   }
 
   /**
@@ -52,7 +52,7 @@ class Application extends BaseModel {
    */
 
   dispose() {
-    return this.bus({ name: "dispose" });
+    return this.bus({ name: "dispose" }).readAll();
   }
 }
 

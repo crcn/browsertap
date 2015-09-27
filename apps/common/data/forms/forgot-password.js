@@ -31,7 +31,7 @@ class ForgotPasswordForm {
     return yield this.bus.execute({ 
       name: "forgotPassword", 
       data: this 
-    });
+    }).read();
   }
 };
 

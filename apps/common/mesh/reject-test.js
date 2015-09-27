@@ -1,6 +1,7 @@
 import reject from "./reject"
 import co from "co"
 import expect from "expect.js"
+import { BufferedResponse } from "./_responses";
 
 describe(__filename + "#", function() {
   it("can accept or reject an operation", co.wrap(function*() {
@@ -10,14 +11,14 @@ describe(__filename + "#", function() {
         return operation.reject === true;
       },
       function(operation) {
-        return Promise.resolve("accepted");
+        return new BufferedResponse("accepted");
       },
       function(operation) {
-        return Promise.resolve("rejected");
+        return new BufferedResponse("rejected");
       }
     );
 
-    expect(yield bus({ reject: true })).to.be("rejected");
-    expect(yield bus({ reject: false })).to.be("accepted");
+    expect(yield bus({ reject: true }).read()).to.be("rejected");
+    expect(yield bus({ reject: false }).read()).to.be("accepted");
   }));
 });

@@ -13,8 +13,8 @@ describe(__filename + "#", function() {
       password: "password"
     });
 
-    yield signupForm.submit();
 
+    yield signupForm.submit();
 
     var requestInviteForm = new RequestInviteForm({
       bus: apiApp.bus,

@@ -50,8 +50,8 @@ describe(__filename + "#", function() {
       setTimeout(function() {
         expect(browserApp.element.innerHTML).to.contain("alert-success");
         next();
-      }, 1);
-    }, 1);
+      }, 100);
+    }, 100);
   });
 
   it("redirects to the login page if on the home page and not authorized", function(next) {
@@ -59,7 +59,7 @@ describe(__filename + "#", function() {
     setTimeout(function() {
       expect(browserApp.element.innerHTML).to.contain("login-form");
       next();
-    }, 1)
+    }, 100)
   });
 
   it("can reset a forgotten password and login with it", function(next) {
@@ -80,7 +80,7 @@ describe(__filename + "#", function() {
         expect(browserApp.router.location.toString()).to.contain("showMessage=authResetPassword.loginWithNewPassword");
         expect(browserApp.element.innerHTML).to.contain("alert-info");
         next();
-      }, 1);
-    }, 1);
+      }, 100);
+    }, 100);
   });
 });

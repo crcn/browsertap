@@ -85,7 +85,7 @@ export default function(collectionName) {
         target     : this,
         name       : operationName,
         collection : collectionName
-      }, properties));
+      }, properties)).read();
 
       if (data) {
         this.setProperties(this.schema.coerce(Object.assign({}, this, data)));
@@ -100,16 +100,23 @@ export default function(collectionName) {
 
     function *_find(multi, bus, query) {
 
-      var data = yield bus({
+      var response = bus({
         name       : "load",
         multi      : multi,
         query      : query,
         collection : collectionName
       });
 
-      return multi ? data.map(function(data) {
-        return new clazz(Object.assign({ bus: bus }, data));
-      }) : data ? new clazz(Object.assign({ bus: bus }, data)) : void 0;
+      var data;
+
+      if (multi) {
+        return (yield response.readAll()).map(function(data) {
+          return new clazz(Object.assign({ bus: bus }, data));
+        })
+      } else {
+        var data = yield response.read();
+        if (data) return new clazz(Object.assign({ bus: bus }, data));
+      }
     }
 
     clazz.find    = _find.bind(void 0, true);

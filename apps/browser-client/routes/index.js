@@ -69,7 +69,7 @@ module.exports = function(app) {
     var data = Object.assign({ bus: app.bus }, yield app.bus({ 
       name: "getInviteeFromShortCode", 
       shortcode: location.params.shortcode 
-    }));
+    }).read());
  
     location.setProperties({ 
       state: {

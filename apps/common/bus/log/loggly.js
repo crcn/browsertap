@@ -15,6 +15,6 @@ module.exports = function(app) {
       client.log(operation);
     }
 
-    return Promise.resolve();
+    return new mesh.NoResponse();
   };
 };

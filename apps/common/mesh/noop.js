@@ -1,4 +1,6 @@
+import { NoResponse } from "./_responses";
+
 
 export default function(operation) {
-  return Promise.resolve();
+  return new NoResponse();
 };

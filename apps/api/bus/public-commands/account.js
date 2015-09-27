@@ -29,6 +29,7 @@ export default function(app, bus) {
     register: _command({
       execute: function*(operation) {
 
+
         if (app.config.beta) {
           throw new httperr.Unauthorized("cannotRegisterInBeta");
         }

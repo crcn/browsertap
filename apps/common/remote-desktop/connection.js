@@ -19,13 +19,11 @@ class Connection {
      };
      sock.onclose = function() {
          // console.log('close');
-     }; 
-
-     // sock.send('test');
-     // sock.close();
+     };
   }
 }
 
 /**
  */
+
 export default Connection;

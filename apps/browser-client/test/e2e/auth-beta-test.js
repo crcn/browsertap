@@ -52,10 +52,9 @@ describe(__filename + "#", function() {
           expect(Number(inviter.inviteCount)).to.be(1);
           expect(yield Invitee.findOne(browserApp.bus, { "inviter._id": String(inviter._id) })).not.to.be(void 0);
           next();
-        }), 1);
-
-      }, 1);
-    }, 1);
+        }), 5);
+      }, 5);
+    }, 5);
   });
 
   it("can still register a user if the inviter is not found");

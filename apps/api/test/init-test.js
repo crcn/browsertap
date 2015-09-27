@@ -28,8 +28,9 @@ beforeEach(function(next) {
     }
   });
 
-
-  global.apiApp.initialize().then(next);
+  global.apiApp.initialize().then(function() {
+    next();
+  });
 });
 
 beforeEach(function() {

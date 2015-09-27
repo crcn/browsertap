@@ -35,7 +35,7 @@ class LoginForm {
     return yield this.bus.execute({ 
       name: "login", 
       data: this 
-    });
+    }).read();
   }
 };
 

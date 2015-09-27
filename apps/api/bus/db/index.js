@@ -1,7 +1,6 @@
 import sift from "sift";
 import mesh from "common/mesh";
 import co from "co";
-import wp from "common/bus/utils/promise";
 
 var dbs = {
   mock  : require("./mock"),
@@ -25,8 +24,12 @@ module.exports = function(app, bus) {
 
 function _wrapBus20(bus) {
   return function(operation) {
-    return co(function*() {
-      return yield wp(bus, operation);
-    });
+    var resp = new mesh.AsyncResponse();
+    
+    bus(operation)
+    .on("data", resp.write.bind(resp))
+    .on("end", resp.end.bind(resp));
+    // TODO - add error here
+    return resp;
   };
 }

@@ -15,8 +15,8 @@ class Bus extends ValueType {
   /**
    */
 
-  *execute(operation) {
-    return yield this.value(operation);
+  execute(operation) {
+    return this.value(operation);
   }
 }
 

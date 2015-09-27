@@ -37,7 +37,7 @@ describe(__filename + "#", function() {
         yield bus({
           name: "register",
           data: { emailAddress: "a@b.com" }
-        });
+        }).read();
       } catch(e) {
         err = e;
       }

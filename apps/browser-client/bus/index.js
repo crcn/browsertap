@@ -21,19 +21,22 @@ module.exports = function(app, bus) {
   if (!process.browser) return bus;
 
   var bus = function(operation) {
-    return new Promise(function(resolve, reject) {
-      var r = sa.post("/o").send(operation).end(function(err, response) {
-        var body = response.body;
-        if (!body) return resolve();
 
-        if (body.error) {
-          var err = httperr[body.error.statusCode](body.error.message);
-          return reject(err);
-        }
+    var resp = new mesh.AsyncResponse();
 
-        resolve(body); 
-      }); 
-    })
+    var r = sa.post("/o").send(operation).end(function(err, response) {
+      var body = response.body;
+      if (!body) return resolve();
+
+      if (body.error) {
+        var err = httperr[body.error.statusCode](body.error.message);
+        return resp.emit("error", err);
+      }
+
+      resp.end(body);
+    }); 
+
+    return resp;
   };
 
   return bus;

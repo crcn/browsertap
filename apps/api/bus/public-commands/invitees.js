@@ -26,7 +26,6 @@ export default function(app, bus) {
 
     requestInvite: _command({
       execute: function*(operation) {
-
         var form = new RequestInviteForm(Object.assign({ bus: bus }, operation.data));
 
         if (yield User.findOne(bus, { emailAddress: form.emailAddress.valueOf() })) {

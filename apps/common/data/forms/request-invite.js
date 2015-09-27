@@ -40,7 +40,7 @@ class RequestInviteForm {
     return new Invitee(Object.assign({ bus: this.bus }, yield this.bus.execute({ 
       name: "requestInvite", 
       data: this 
-    })));
+    }).read()));
   }
 };
 

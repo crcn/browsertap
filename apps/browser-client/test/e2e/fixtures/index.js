@@ -19,7 +19,7 @@ function *_createVerifiedUser(app) {
 
   var user = new User(Object.assign({ bus: app.bus }, yield app.bus({
     name: "register",
-    data: data})));
+    data: data}).read()));
 
   yield user.insert();
 

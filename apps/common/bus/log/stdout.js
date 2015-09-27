@@ -1,6 +1,7 @@
 import padRight from "lodash/string/padRight";
 import chalk from "chalk";
 import parseStack from "parse-stack";
+import mesh from "common/mesh";
 
 module.exports = function(app) {
 
@@ -66,6 +67,6 @@ module.exports = function(app) {
       console.log(msg);
     }
 
-    return Promise.resolve();
+    return new mesh.NoResponse();
   };
 };

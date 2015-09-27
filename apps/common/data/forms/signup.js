@@ -53,7 +53,7 @@ class SignupForm {
     return yield this.bus.execute({ 
       name: "register", 
       data: this 
-    });
+    }).read();
   }
 };
 

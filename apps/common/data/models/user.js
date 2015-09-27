@@ -89,7 +89,7 @@ class User extends Model {
   *getOrganizations() {
     return (yield this.bus.execute({
       name: "getUserOrganizations"
-    })).map(function(data) {
+    }).read()).map(function(data) {
       return new Organization(Object.assign({ bus: this.bus.value }, data));
     }.bind(this));
   }

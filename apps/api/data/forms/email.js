@@ -38,7 +38,7 @@ class ForgotPasswordForm {
     return yield this.bus.execute({ 
       name: "sendEmail", 
       data: this 
-    });
+    }).read();
   }
 };
 
