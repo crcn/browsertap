@@ -14,6 +14,24 @@ static int callback_http(struct libwebsocket_context* _this,
 }
 
 
+static int write_json(Json::Value resp, struct libwebsocket *wsi) {
+  Json::FastWriter writer;
+
+  std::string jsonResp =  writer.write(resp);
+
+  unsigned char *buf = (unsigned char*) malloc(LWS_SEND_BUFFER_PRE_PADDING + jsonResp.size() +
+                                           LWS_SEND_BUFFER_POST_PADDING);
+
+
+  unsigned char *p = &buf[LWS_SEND_BUFFER_PRE_PADDING];
+  memcpy(p, jsonResp.c_str(), jsonResp.size());
+
+  libwebsocket_write(wsi, p, jsonResp.size(), LWS_WRITE_TEXT);
+
+  free(buf);
+}
+
+
 
 static int callback_dumb_increment(struct libwebsocket_context * _this,
                                    struct libwebsocket *wsi,
@@ -29,31 +47,31 @@ static int callback_dumb_increment(struct libwebsocket_context * _this,
             break;
         case LWS_CALLBACK_RECEIVE: { 
 
-            unsigned char *buf = (unsigned char*) malloc(LWS_SEND_BUFFER_PRE_PADDING + len +
-                                                         LWS_SEND_BUFFER_POST_PADDING);
             
             int i;
 
             Json::Value root;
             Json::Reader reader;
 
-            for (i=0; i < len; i++) {
-                buf[LWS_SEND_BUFFER_PRE_PADDING + (len - 1) - i ] = ((char *) in)[i];
-            }
-
             if (reader.parse((char*)in, root)) {
               mesh::Request request(root["name"].asString(), &root);
               mesh::Response* response = app->bus->execute(&request);
               core::IJsonSerializable* chunk;
 
+              Json::FastWriter writer;
+              Json::Value resp;
+              resp["resp"] = root["id"];
+
               // TODO - multithreading here
               while(chunk = (core::IJsonSerializable*)response->read()) {
 
-                std::cout << chunk->toJson() << std::endl;
+                resp["data"] = chunk->toJson();
 
-                // TODO - something like this
-                // libwebsocket_write(wsi, &buf[LWS_SEND_BUFFER_PRE_PADDING], len, LWS_WRITE_TEXT);
+                write_json(resp, wsi);
               }
+              
+              resp["data"] = Json::nullValue;
+              write_json(resp, wsi);
               delete response;
             } else {
               LOG_ERROR("unable to parse" << in);
@@ -73,7 +91,7 @@ static int callback_dumb_increment(struct libwebsocket_context * _this,
             // libwebsocket_write(wsi, &buf[LWS_SEND_BUFFER_PRE_PADDING], len, LWS_WRITE_TEXT);
             
             // release memory back into the wild
-            free(buf);
+            // free(buf);
             break;
         }
         default:
