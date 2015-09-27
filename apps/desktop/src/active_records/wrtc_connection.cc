@@ -7,10 +7,16 @@ namespace app {
 
   WRTCConnection::WRTCConnection(wrtc::Connection* connection):_connection(connection) {
     this->video = NULL;
+    connection->addListener(this);
   }
   
   bool WRTCConnection::exists() {
     
+  }
+
+  void WRTCConnection::handleEvent(core::Event* event) {
+    // trigger update when local connection changes
+    // this->update();
   }
   
   void WRTCConnection::setVideo(VirtWindow* video) {
@@ -19,13 +25,15 @@ namespace app {
   }
 
   Json::Value WRTCConnection::toJson() {
-    Json::Value root;
+    Json::Value root = activeRecord::Object::toJson();
 
     if (this->video) {
       root["video"]["id"] = this->video->id();
     }
 
-    // root["offer"] = this->_connection->
+    if (this->_connection->localDescription) {
+      root["offer"] = this->_connection->localDescription->toJson();
+    }
 
     return root;
   }

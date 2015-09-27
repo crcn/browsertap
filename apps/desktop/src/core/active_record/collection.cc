@@ -23,7 +23,7 @@ namespace activeRecord {
     for(int i = 0, n = this->_objects.size(); i < n; i++) {
       Object* object = this->_objects.at(i);
       Json::Value objJson = object->toJson();
-      // TODO - query this
+      // TODO - apply query check here
       ret.push_back(object);
     }
     return ret;

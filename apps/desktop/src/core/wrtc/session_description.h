@@ -1,10 +1,11 @@
 #ifndef WRTC_SESSION_DESCRIPTION_H_
 #define WRTC_SESSION_DESCRIPTION_H_
 
+#include "../json/serializeable.h"
 #include <stdio.h>
 
 namespace wrtc {
-  class SessionDescription {
+  class SessionDescription : public core::IJsonSerializable  {
   public:
     std::string type;
     std::string sdp;
@@ -13,7 +14,14 @@ namespace wrtc {
     sdp(sdp) {
 
     }
-    
+
+    Json::Value toJson() {
+      Json::Value root;
+      root["type"] = this->type;
+      root["sdp"]  = this->sdp;
+      return root;
+    }
+
   };
 }
 

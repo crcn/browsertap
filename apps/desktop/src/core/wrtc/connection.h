@@ -59,6 +59,7 @@ namespace wrtc {
     Connection();
     void setVideo(graphics::Printable* video);
     void setRemoteDescription(SessionDescription& description);
+    SessionDescription* localDescription;
 
   private:
     rtc::scoped_refptr<PeerConnectionObserver> _peerConnectionObserver;

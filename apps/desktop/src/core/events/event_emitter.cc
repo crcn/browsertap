@@ -19,7 +19,7 @@ namespace core {
 
     event->currentTarget = this;
 
-    for (int i = 0, n = _listeners.size(); i < n; i++) {
+    for (int i = _listeners.size() - 1; i >= 0; i--) {
       _listeners.at(i)->handleEvent(event);
     }
   }

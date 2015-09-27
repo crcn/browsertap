@@ -40,12 +40,8 @@ namespace app {
      */
 
     void handleEvent(core::Event* event) {
-
-      // TODO - add session info to internal DB
       this->_connection->removeListener(this);
-      Json::Value value = *((Json::Value*)event->data);
-      Json::FastWriter writer;
-      this->_response->end((void *)writer.write(value).c_str());
+      this->_response->end(this->_connection);
     }
 
     /**

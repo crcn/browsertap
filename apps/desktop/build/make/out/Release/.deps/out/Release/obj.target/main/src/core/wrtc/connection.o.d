@@ -146,7 +146,8 @@ out/Release/obj.target/main/src/core/wrtc/connection.o: \
   ../../src/core/wrtc/../events/./event.h \
   ../../src/core/wrtc/../thread/mutex.h \
   ../../src/core/wrtc/../thread/condition.h \
-  ../../src/core/wrtc/./session_description.h
+  ../../src/core/wrtc/./session_description.h \
+  ../../src/core/wrtc/../json/serializeable.h
 ../../src/core/wrtc/connection.cc:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/test/fakeconstraints.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediaconstraintsinterface.h:
@@ -295,3 +296,4 @@ out/Release/obj.target/main/src/core/wrtc/connection.o: \
 ../../src/core/wrtc/../thread/mutex.h:
 ../../src/core/wrtc/../thread/condition.h:
 ../../src/core/wrtc/./session_description.h:
+../../src/core/wrtc/../json/serializeable.h:

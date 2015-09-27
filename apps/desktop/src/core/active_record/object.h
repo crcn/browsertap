@@ -20,6 +20,7 @@ namespace activeRecord {
     virtual ~Object() { }
   private:
     static int _idCount;
+    int _id;
   };
 }
 

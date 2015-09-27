@@ -7,13 +7,14 @@
 #include "./virt_window.h"
 
 namespace app {
-  class WRTCConnection : public activeRecord::Object {
+  class WRTCConnection : public activeRecord::Object, public core::EventListener {
   public:
     VirtWindow* video;
     WRTCConnection(wrtc::Connection*);
     virtual bool exists();
     virtual Json::Value toJson();
     virtual void setVideo(VirtWindow*);
+    void handleEvent(core::Event*);
     static const char* COLLECTION_NAME;
   private:
     wrtc::Connection* _connection;

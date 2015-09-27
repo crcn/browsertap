@@ -7,9 +7,7 @@ namespace wrtc {
   /**
    */
 
-  Connection::Connection() {
-
-    this->video = NULL;
+  Connection::Connection():video(NULL), localDescription(NULL) {
 
     // observers
     _peerConnectionObserver   = new rtc::RefCountedObject<PeerConnectionObserver>();
@@ -72,9 +70,8 @@ namespace wrtc {
     std::string out;
     _connection->local_description()->ToString(&out);
     Json::Value value;
-    value["type"] = "offer";
-    value["sdp"]  = out;
-    this->emit(ConnectionEvent::WRTC_OFFER, &value);
+    this->localDescription = new SessionDescription("offer", out);
+    this->emit(ConnectionEvent::WRTC_OFFER, this->localDescription);
   } 
 
   /**

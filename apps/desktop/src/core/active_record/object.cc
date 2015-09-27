@@ -2,7 +2,9 @@
 
 namespace activeRecord {  
 
-  Object::Object():core::EventEmitter() { }
+  Object::Object():core::EventEmitter() {
+    this->_id = Object::_idCount++;
+  }
   int Object::_idCount = 0;
 
   void Object::remove() {
@@ -14,6 +16,12 @@ namespace activeRecord {
   }
 
   int Object::id() {
-    return _idCount++;
+    return this->_id;
+  }
+
+  Json::Value Object::toJson() {
+    Json::Value root;
+    root["id"] = this->_id;
+    return root;
   }
 }
