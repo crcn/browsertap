@@ -3,6 +3,7 @@
 #include "../active_records/wrtc_connection.h"
 #include "../active_records/virt_window.h"
 #include "./create_wrtc_connection_response.h"
+#include "../core/json/chunk.h"
 
 namespace app {
 
@@ -108,10 +109,12 @@ namespace app {
     activeRecord::Collection* c = app->ardb->collection(root["collection"].asString());
     std::vector<activeRecord::Object*> results = query.isNull() ? c->all() : c->find(query);
 
+    Json::Value resp(Json::arrayValue);
+
     for (int i = 0, n = results.size(); i < n; i++) {
-      std::cout << results.at(i)->toJson() << std::endl;
+      resp.append(results.at(i)->toJson());
     }
 
-    return new mesh::NoResponse();
+    return new mesh::BufferedResponse<core::JsonChunk*>(new core::JsonChunk(resp));
   }
 }
