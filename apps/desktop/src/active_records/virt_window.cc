@@ -21,6 +21,7 @@ namespace app {
   Json::Value VirtWindow::toJson() {
     Json::Value root;
     geom::Bounds b = this->_window->bounds();
+    root["title"]   = this->_window->title();
     root["id"]      = this->id();
     root["x"]       = b.x;
     root["y"]       = b.y;

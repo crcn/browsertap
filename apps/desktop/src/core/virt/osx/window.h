@@ -26,6 +26,7 @@ namespace osx {
         geom::Bounds bounds();
         graphics::Bitmap* print();
         void bounds(geom::Bounds bounds);
+        std::string title();
 
     };
 }

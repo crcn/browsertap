@@ -11,6 +11,7 @@
 
 #include "../../geom/bounds.h"
 #include "../../graphics/printable.h"
+#include <iostream>
 
 namespace virt {
   class Window : public graphics::Printable {
@@ -18,6 +19,7 @@ namespace virt {
       virtual geom::Bounds bounds()=0;
       virtual void bounds(geom::Bounds bounds)=0;
       virtual graphics::Bitmap* print()=0;
+      virtual std::string title()=0;
       int id;
   };
 }
