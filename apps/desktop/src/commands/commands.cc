@@ -20,7 +20,7 @@ namespace app {
     ->add("ping", new mesh::FnBus(&this->execPong))
     ->add("find", new AppFnBus(app, &this->execFind))
     ->add("hydrate", new AppFnBus(app, &this->execHydrate))
-    // ->add("setRemote")
+    ->add("setRemoteAnswer", new AppFnBus(app, &this->execSetRemoteAnswer))
     ->add("startWindowSession", new AppFnBus(app, &this->execStartWindowSession))
     ->add("getWindows", new mesh::FnBus(&this->execGetWindows))
     ; // coma here in case other commands are added
@@ -108,6 +108,27 @@ namespace app {
   /**
    */
 
+  mesh::Response* Commands::execSetRemoteAnswer(mesh::Request* request, Application* app) {
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
+    Json::Value* data = (Json::Value*)request->data;
+    WRTCConnection* connection = (WRTCConnection*)app->ardb->collection(WRTCConnection::COLLECTION_NAME)->findOne((*data)["query"]);
+
+    if (connection == NULL) {
+      LOG_ERROR("wrtc connection not found" << (*data));
+      return NULL;
+    }
+
+    Json::Value& d = (*data)["answer"];
+
+    connection->setRemoteDescription(wrtc::SessionDescription(d["type"].asString(), d["sdp"].asString()));
+
+    // TODO - return webrtc connection
+    return new mesh::BufferedResponse<core::IJsonSerializable*>(connection);
+  }
+
+  /**
+   */
+
   mesh::Response* Commands::execFind(mesh::Request* request, Application* app) {
     Json::Value& root = *((Json::Value*)request->data);
 
@@ -123,8 +144,6 @@ namespace app {
     std::vector<activeRecord::Object*> results = query.isNull() ? c->all() : c->find(query);
 
     Json::Value resp(Json::arrayValue);
-
-    // return new mesh::BufferedResponse<core::JsonChunk*>(new core::JsonChunk(resp));
 
     mesh::AsyncResponse* response = new mesh::AsyncResponse();
 

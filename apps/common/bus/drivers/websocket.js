@@ -31,6 +31,7 @@ export default function(options) {
   }
 
   function send(operation) {
+    console.log(operation); 
     ws.send(JSON.stringify(operation));
   }
 
@@ -41,7 +42,6 @@ export default function(options) {
     operation.id = resp._id = _id++;
  
     _openResponses[resp._id] = resp; 
-
 
     if (_isOpen) {
       send(operation);

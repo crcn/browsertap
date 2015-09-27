@@ -2022,6 +2022,7 @@ exports["default"] = function (options) {
   };
 
   function send(operation) {
+    console.log(operation);
     ws.send(JSON.stringify(operation));
   }
 
@@ -6002,20 +6003,22 @@ var Peer = (function (_Model) {
   }, {
     key: "_setRemoteDescription",
     value: regeneratorRuntime.mark(function _setRemoteDescription(answer) {
+      var result;
       return regeneratorRuntime.wrap(function _setRemoteDescription$(context$2$0) {
         while (1) switch (context$2$0.prev = context$2$0.next) {
           case 0:
-            (0, _co2["default"])(regeneratorRuntime.mark(function callee$2$0() {
-              return regeneratorRuntime.wrap(function callee$2$0$(context$3$0) {
-                while (1) switch (context$3$0.prev = context$3$0.next) {
-                  case 0:
-                  case "end":
-                    return context$3$0.stop();
-                }
-              }, callee$2$0, this);
-            }));
+            context$2$0.next = 2;
+            return this.bus({ name: "setRemoteAnswer", answer: {
+                type: answer.type,
+                sdp: answer.sdp
+              }, query: { id: this.id } }).read();
 
-          case 1:
+          case 2:
+            result = context$2$0.sent;
+
+            console.log(result);
+
+          case 4:
           case "end":
             return context$2$0.stop();
         }
@@ -6093,7 +6096,7 @@ var Window = (function (_Model) {
 
             case 2:
               data = context$3$0.sent;
-              peer = new _peer2["default"](data);
+              peer = new _peer2["default"](Object.assign({ bus: this.bus }, data));
 
             case 4:
             case "end":

@@ -70,6 +70,12 @@ namespace app {
      * execute ardb find
      */
 
+    static mesh::Response* execSetRemoteAnswer(mesh::Request* request, Application* app);
+
+    /**
+     * execute ardb find
+     */
+
     static mesh::Response* execFind(mesh::Request* request, Application* app);
   };
 }

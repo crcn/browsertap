@@ -17,6 +17,10 @@ namespace app {
     // trigger update when local connection changes
     // this->update();
   }
+
+  void WRTCConnection::setRemoteDescription(wrtc::SessionDescription description) {
+    this->_connection->setRemoteDescription(description);
+  }
   
   void WRTCConnection::setVideo(VirtWindow* video) {
     this->video = video;

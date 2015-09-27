@@ -15,6 +15,7 @@ namespace app {
     virtual Json::Value toJson();
     virtual void setVideo(VirtWindow*);
     void handleEvent(core::Event*);
+    void setRemoteDescription(wrtc::SessionDescription);
     static const char* COLLECTION_NAME;
   private:
     wrtc::Connection* _connection;

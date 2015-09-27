@@ -62,7 +62,6 @@ namespace wrtc {
 
   LocalDescriptionObserver::LocalDescriptionObserver() { }
 
-
   void LocalDescriptionObserver::OnSuccess() {
     LOG_VERBOSE(__PRETTY_FUNCTION__);
     onSuccess.emit();

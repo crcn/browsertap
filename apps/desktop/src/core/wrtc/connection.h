@@ -58,7 +58,7 @@ namespace wrtc {
 
     Connection();
     void setVideo(graphics::Printable* video);
-    void setRemoteDescription(SessionDescription& description);
+    void setRemoteDescription(SessionDescription description);
     SessionDescription* localDescription;
 
   private:

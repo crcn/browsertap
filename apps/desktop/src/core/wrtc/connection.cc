@@ -77,7 +77,7 @@ namespace wrtc {
   /**
    */
 
-  void Connection::setRemoteDescription(SessionDescription& description) {
+  void Connection::setRemoteDescription(SessionDescription description) {
     webrtc::SdpParseError error;
 
     webrtc::SessionDescriptionInterface* sd(webrtc::CreateSessionDescription(description.type, description.sdp, &error));

@@ -47,10 +47,13 @@ class Peer extends Model {
   /**
    */
 
-  *_setRemoteDescription(answer) {
-    co(function*() {
+  *_setRemoteDescription(answer) { 
+    var result = yield this.bus({ name: "setRemoteAnswer", answer: {
+      type: answer.type,
+      sdp : answer.sdp
+    }, query: { id: this.id }}).read();
 
-    });
+    console.log(result);
   }
 }
 
