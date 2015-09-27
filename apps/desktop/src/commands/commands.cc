@@ -90,8 +90,6 @@ namespace app {
     // TODO - add listener when video closes somewhere - maybe create a videoWrtcConnection class
     // which removes itself
 
-    LOG_VERBOSE("DONE");
-
     // TODO - return webrtc connection
     return new mesh::NoResponse();
   }

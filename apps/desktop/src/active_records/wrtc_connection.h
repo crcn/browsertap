@@ -13,7 +13,6 @@ namespace app {
     WRTCConnection(wrtc::Connection*);
     virtual bool exists();
     virtual Json::Value toJSON();
-    // TODO - make into addVideo(Object*);
     virtual void setVideo(VirtWindow*);
     static const char* COLLECTION_NAME;
   private:

@@ -56,7 +56,7 @@ namespace mesh {
 
       AsyncResponse(core::Runnable* _runnable = NULL, core::ThreadMutex* mutex = NULL) {
 
-        this->_mutex    = mutex == NULL ? new core::ThreadMutex() : mutex;
+        this->_mutex    = new core::ThreadMutex();
         this->_runnable = _runnable;
         this->ended     = false;
 
