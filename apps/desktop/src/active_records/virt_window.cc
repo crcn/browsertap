@@ -18,7 +18,7 @@ namespace app {
   
   // TODO - perhaps change to serializable if json::Value has
   // option
-  Json::Value VirtWindow::toJSON() {
+  Json::Value VirtWindow::toJson() {
     Json::Value root;
     geom::Bounds b = this->_window->bounds();
     root["id"]      = this->id();

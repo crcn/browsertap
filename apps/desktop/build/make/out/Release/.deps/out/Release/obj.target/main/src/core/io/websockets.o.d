@@ -29,7 +29,8 @@ out/Release/obj.target/main/src/core/io/websockets.o: \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/features.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/writer.h \
   ../../vendor/libwebsockets/lib/libwebsockets.h \
-  ../../vendor/libwebsockets/build/lws_config.h
+  ../../vendor/libwebsockets/build/lws_config.h \
+  ../../src/core/io/../json/serializeable.h
 ../../src/core/io/websockets.cc:
 ../../src/core/io/./websockets.h:
 ../../src/core/io/./base.h:
@@ -61,3 +62,4 @@ out/Release/obj.target/main/src/core/io/websockets.o: \
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/writer.h:
 ../../vendor/libwebsockets/lib/libwebsockets.h:
 ../../vendor/libwebsockets/build/lws_config.h:
+../../src/core/io/../json/serializeable.h:

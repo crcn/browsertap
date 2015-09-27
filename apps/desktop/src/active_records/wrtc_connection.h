@@ -12,7 +12,7 @@ namespace app {
     VirtWindow* video;
     WRTCConnection(wrtc::Connection*);
     virtual bool exists();
-    virtual Json::Value toJSON();
+    virtual Json::Value toJson();
     virtual void setVideo(VirtWindow*);
     static const char* COLLECTION_NAME;
   private:

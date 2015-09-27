@@ -7,6 +7,7 @@ out/Release/obj.target/main/src/active_records/wrtc_connection.o: \
   ../../src/active_records/../core/active_record/../events/./event_listener.h \
   ../../src/active_records/../core/active_record/../events/./event.h \
   ../../src/active_records/../core/active_record/./events.h \
+  ../../src/active_records/../core/active_record/../json/serializeable.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/config.h \
@@ -150,6 +151,7 @@ out/Release/obj.target/main/src/active_records/wrtc_connection.o: \
   ../../src/active_records/../core/wrtc/./observers.h \
   ../../src/active_records/../core/wrtc/../thread/mutex.h \
   ../../src/active_records/../core/wrtc/../thread/condition.h \
+  ../../src/active_records/../core/wrtc/./session_description.h \
   ../../src/active_records/./virt_window.h \
   ../../src/active_records/../core/virt/base/window.h
 ../../src/active_records/wrtc_connection.cc:
@@ -159,6 +161,7 @@ out/Release/obj.target/main/src/active_records/wrtc_connection.o: \
 ../../src/active_records/../core/active_record/../events/./event_listener.h:
 ../../src/active_records/../core/active_record/../events/./event.h:
 ../../src/active_records/../core/active_record/./events.h:
+../../src/active_records/../core/active_record/../json/serializeable.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/config.h:
@@ -302,5 +305,6 @@ out/Release/obj.target/main/src/active_records/wrtc_connection.o: \
 ../../src/active_records/../core/wrtc/./observers.h:
 ../../src/active_records/../core/wrtc/../thread/mutex.h:
 ../../src/active_records/../core/wrtc/../thread/condition.h:
+../../src/active_records/../core/wrtc/./session_description.h:
 ../../src/active_records/./virt_window.h:
 ../../src/active_records/../core/virt/base/window.h:

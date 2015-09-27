@@ -24,6 +24,7 @@ out/Release/obj.target/main/src/main.o: ../../src/main.cc \
   ../../src/./core/active_record/../events/./event.h \
   ../../src/./core/active_record/./events.h \
   ../../src/./core/active_record/./object.h \
+  ../../src/./core/active_record/../json/serializeable.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/config.h \
@@ -68,6 +69,7 @@ out/Release/obj.target/main/src/main.o: ../../src/main.cc \
 ../../src/./core/active_record/../events/./event.h:
 ../../src/./core/active_record/./events.h:
 ../../src/./core/active_record/./object.h:
+../../src/./core/active_record/../json/serializeable.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/config.h:

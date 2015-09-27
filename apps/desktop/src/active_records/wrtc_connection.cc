@@ -18,12 +18,14 @@ namespace app {
     this->_connection->setVideo(video);
   }
 
-  Json::Value WRTCConnection::toJSON() {
+  Json::Value WRTCConnection::toJson() {
     Json::Value root;
 
     if (this->video) {
       root["video"]["id"] = this->video->id();
     }
+
+    // root["offer"] = this->_connection->
 
     return root;
   }

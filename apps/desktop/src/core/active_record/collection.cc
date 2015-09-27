@@ -22,7 +22,7 @@ namespace activeRecord {
     std::vector<Object*> ret;
     for(int i = 0, n = this->_objects.size(); i < n; i++) {
       Object* object = this->_objects.at(i);
-      Json::Value objJson = object->toJSON();
+      Json::Value objJson = object->toJson();
       // TODO - query this
       ret.push_back(object);
     }

@@ -4,6 +4,7 @@
 #include <libwebsockets.h>
 #include <sstream>
 #include <json/json.h>
+#include "../json/serializeable.h"
 
 static int callback_http(struct libwebsocket_context* _this,
                          struct libwebsocket *wsi,
@@ -43,11 +44,12 @@ static int callback_dumb_increment(struct libwebsocket_context * _this,
             if (reader.parse((char*)in, root)) {
               mesh::Request request(root["name"].asString(), &root);
               mesh::Response* response = app->bus->execute(&request);
-              void* chunk;
+              core::IJsonSerializable* chunk;
 
               // TODO - multithreading here
-              while(chunk = response->read()) {
-                std::cout << (const char*)chunk << std::endl;
+              while(chunk = (core::IJsonSerializable*)response->read()) {
+
+                std::cout << chunk->toJson() << std::endl;
 
                 // TODO - something like this
                 // libwebsocket_write(wsi, &buf[LWS_SEND_BUFFER_PRE_PADDING], len, LWS_WRITE_TEXT);

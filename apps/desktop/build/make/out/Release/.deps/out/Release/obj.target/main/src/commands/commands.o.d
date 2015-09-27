@@ -26,6 +26,7 @@ out/Release/obj.target/main/src/commands/commands.o: \
   ../../src/commands/.././core/active_record/../events/./event.h \
   ../../src/commands/.././core/active_record/./events.h \
   ../../src/commands/.././core/active_record/./object.h \
+  ../../src/commands/.././core/active_record/../json/serializeable.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/config.h \
@@ -174,6 +175,7 @@ out/Release/obj.target/main/src/commands/commands.o: \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/webrtc/webrtcvideocapturerfactory.h \
   ../../src/commands/../core/wrtc/./core.h \
   ../../src/commands/../core/wrtc/./observers.h \
+  ../../src/commands/../core/wrtc/./session_description.h \
   ../../src/commands/../active_records/wrtc_connection.h \
   ../../src/commands/../active_records/./virt_window.h \
   ../../src/commands/./create_wrtc_connection_response.h
@@ -204,6 +206,7 @@ out/Release/obj.target/main/src/commands/commands.o: \
 ../../src/commands/.././core/active_record/../events/./event.h:
 ../../src/commands/.././core/active_record/./events.h:
 ../../src/commands/.././core/active_record/./object.h:
+../../src/commands/.././core/active_record/../json/serializeable.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/config.h:
@@ -352,6 +355,7 @@ out/Release/obj.target/main/src/commands/commands.o: \
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/webrtc/webrtcvideocapturerfactory.h:
 ../../src/commands/../core/wrtc/./core.h:
 ../../src/commands/../core/wrtc/./observers.h:
+../../src/commands/../core/wrtc/./session_description.h:
 ../../src/commands/../active_records/wrtc_connection.h:
 ../../src/commands/../active_records/./virt_window.h:
 ../../src/commands/./create_wrtc_connection_response.h:

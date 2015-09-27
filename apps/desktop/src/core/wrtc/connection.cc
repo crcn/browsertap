@@ -75,26 +75,15 @@ namespace wrtc {
     value["type"] = "offer";
     value["sdp"]  = out;
     this->emit(ConnectionEvent::WRTC_OFFER, &value);
-    Json::FastWriter writer;
+  } 
 
-    return;
-    std::cout << writer.write(value) << std::endl;
+  /**
+   */
 
-    std::cout << "paste your answer: " << std::endl;
-
-    std::string answer;
-    std::getline(std::cin, answer);
-
-    Json::Value root;
-    Json::Reader reader;
-    if(!reader.parse(answer, root)) {
-      std::cout << "unable to parse " << answer << std::endl;
-      return;
-    }
-
+  void Connection::setRemoteDescription(SessionDescription& description) {
     webrtc::SdpParseError error;
 
-    webrtc::SessionDescriptionInterface* sd(webrtc::CreateSessionDescription(root["type"].asString(), root["sdp"].asString(), &error));
+    webrtc::SessionDescriptionInterface* sd(webrtc::CreateSessionDescription(description.type, description.sdp, &error));
     if (!sd) {
         LOG_ERROR(error.description.c_str());
         LOG(WARNING) << "Can't parse received session description message."; 
@@ -102,7 +91,7 @@ namespace wrtc {
     }
 
     _connection->SetRemoteDescription(new rtc::RefCountedObject<LocalDescriptionObserver>(), sd);
-  } 
+  }
 
   /**
    */

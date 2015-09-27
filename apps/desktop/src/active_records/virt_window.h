@@ -11,7 +11,7 @@ namespace app {
   public:
     VirtWindow(virt::Window*);
     virtual bool exists();
-    virtual Json::Value toJSON();
+    virtual Json::Value toJson();
     graphics::Bitmap* print();
     static const char* COLLECTION_NAME;
     ~VirtWindow();

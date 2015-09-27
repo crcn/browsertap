@@ -42,6 +42,7 @@
 #include "../events/event_emitter.h"
 #include "../thread/mutex.h"
 #include "../thread/condition.h"
+#include "./session_description.h"
 #include <json/json.h>
 
 namespace wrtc {
@@ -57,6 +58,7 @@ namespace wrtc {
 
     Connection();
     void setVideo(graphics::Printable* video);
+    void setRemoteDescription(SessionDescription& description);
 
   private:
     rtc::scoped_refptr<PeerConnectionObserver> _peerConnectionObserver;

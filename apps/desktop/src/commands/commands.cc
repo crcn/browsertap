@@ -87,11 +87,8 @@ namespace app {
 
     windowWrtcConnection.connection->setVideo(window);
 
-    // TODO - add listener when video closes somewhere - maybe create a videoWrtcConnection class
-    // which removes itself
-
     // TODO - return webrtc connection
-    return new mesh::NoResponse();
+    return new mesh::BufferedResponse<core::IJsonSerializable*>(windowWrtcConnection.connection);
   }
 
   /**
@@ -112,7 +109,7 @@ namespace app {
     std::vector<activeRecord::Object*> results = query.isNull() ? c->all() : c->find(query);
 
     for (int i = 0, n = results.size(); i < n; i++) {
-      std::cout << results.at(i)->toJSON() << std::endl;
+      std::cout << results.at(i)->toJson() << std::endl;
     }
 
     return new mesh::NoResponse();

@@ -124,7 +124,6 @@ rtc::scoped_refptr<webrtc::PeerConnectionFactoryInterface> Core::CreateFactory()
 }
 
 webrtc::PeerConnectionFactoryInterface* Core::GetFactory() {
-  LOG_VERBOSE(__FUNCTION__);
   Core::Init();
   
   return _factory.get();

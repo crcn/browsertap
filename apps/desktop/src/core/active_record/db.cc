@@ -23,7 +23,7 @@ namespace activeRecord {
     switch(event->type) {
       case ObjectEvent::INSERT:
         name = "insert";
-        root["data"] = ((Object*)event->data)->toJSON();
+        root["data"] = ((Object*)event->data)->toJson();
         break;
       case ObjectEvent::REMOVE:
         name = "remove";
@@ -31,7 +31,7 @@ namespace activeRecord {
         break;
       case ObjectEvent::UPDATE:
         name = "update";
-        root["data"] = ((Object*)event->target)->toJSON();
+        root["data"] = ((Object*)event->target)->toJson();
         break;
     }
 
