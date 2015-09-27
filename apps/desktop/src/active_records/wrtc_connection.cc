@@ -11,7 +11,6 @@ namespace app {
   }
   
   bool WRTCConnection::exists() {
-    
   }
 
   void WRTCConnection::handleEvent(core::Event* event) {

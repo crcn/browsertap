@@ -111,10 +111,17 @@ namespace app {
 
     Json::Value resp(Json::arrayValue);
 
+    mesh::AsyncResponse* response = new mesh::AsyncResponse();
+
     for (int i = 0, n = results.size(); i < n; i++) {
-      resp.append(results.at(i)->toJson());
+      Json::Value v = results.at(i)->toJson();
+
+      // TODO - memory leak here
+      response->write(new core::JsonChunk(v));
     }
 
-    return new mesh::BufferedResponse<core::JsonChunk*>(new core::JsonChunk(resp));
+    response->end();
+
+    return response;
   }
 }

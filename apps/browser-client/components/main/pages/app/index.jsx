@@ -8,7 +8,7 @@ import RemoteDesktop from "common/remote-desktop";
 var App = React.createClass({
   componentDidMount: function() {
     var rd = new RemoteDesktop({
-      host: "http://0.0.0.0:8090"
+      host: "ws://localhost:9000"
     });
   },
   render: function() {
