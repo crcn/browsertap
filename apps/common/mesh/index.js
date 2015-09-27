@@ -4,5 +4,6 @@ module.exports = Object.assign({
   accept     : require("./accept"),
   reject     : require("./reject"),
   attach     : require("./attach"),
-  catchError : require("./catch-error")
+  catchError : require("./catch-error"),
+  spy        : require("./spy")
 }, require("./_responses"));

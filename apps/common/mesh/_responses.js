@@ -2,6 +2,11 @@ var events       = require("events");
 var EventEmitter = events.EventEmitter;
 var co           = require("co");
 
+// TODO - do this 
+export class BaseResponse extends Promise {
+
+}
+
 /**
  */
 
@@ -114,6 +119,7 @@ export class AsyncResponse extends EventEmitter {
       this.write(void 0);
     }
 
+    this.emit("end");
     this.ended = true;
   }
 }

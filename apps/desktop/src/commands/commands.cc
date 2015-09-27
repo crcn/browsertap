@@ -20,6 +20,7 @@ namespace app {
     ->add("ping", new mesh::FnBus(&this->execPong))
     ->add("find", new AppFnBus(app, &this->execFind))
     ->add("hydrate", new AppFnBus(app, &this->execHydrate))
+    // ->add("setRemote")
     ->add("startWindowSession", new AppFnBus(app, &this->execStartWindowSession))
     ->add("getWindows", new mesh::FnBus(&this->execGetWindows))
     ; // coma here in case other commands are added
@@ -71,25 +72,37 @@ namespace app {
 
   mesh::Response* Commands::execStartWindowSession(mesh::Request* request, Application* app) {
 
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
+
     // TODO - check if window session already exists, return that
 
     Json::Value* data = (Json::Value*)request->data;
     int id = (*data)["query"]["id"].asInt();
 
-    // TODO - change to app->ardb->findOne() with query info here
-    VirtWindow* window = (VirtWindow*)app->ardb->collection(VirtWindow::COLLECTION_NAME)->findOne(id);
+    Json::Value wrtcQuery;
+    wrtcQuery["video"]["id"] = id;
 
-    if (window == NULL) {
-      // TODO - throw exception here
+    // TODO - check for user here
+    WRTCConnection* connection = (WRTCConnection*)app->ardb->collection(WRTCConnection::COLLECTION_NAME)->findOne(wrtcQuery);
+
+    if (connection == NULL) {
+
+      // TODO - change to app->ardb->findOne() with query info here
+      VirtWindow* window = (VirtWindow*)app->ardb->collection(VirtWindow::COLLECTION_NAME)->findOne(id);
+
+      if (window == NULL) {
+        // TODO - throw exception here
+      }
+
+      CreateWrtcConnectionResponse windowWrtcConnection(app);
+      while(windowWrtcConnection.read());
+
+      windowWrtcConnection.connection->setVideo(window);
+      connection  = windowWrtcConnection.connection;
     }
 
-    CreateWrtcConnectionResponse windowWrtcConnection(app);
-    while(windowWrtcConnection.read());
-
-    windowWrtcConnection.connection->setVideo(window);
-
     // TODO - return webrtc connection
-    return new mesh::BufferedResponse<core::IJsonSerializable*>(windowWrtcConnection.connection);
+    return new mesh::BufferedResponse<core::IJsonSerializable*>(connection);
   }
 
   /**

@@ -2,7 +2,7 @@ import React         from "react";
 import GroundControl from "./ground-control"
 import Portal        from "browser-client/components/common/portal"
 import Toolbar       from "./toolbar"
-import RemoteDesktop from "common/remote-desktop";
+import RemoteDesktopComponent from "./remote-desktop";
 
 
 var App = React.createClass({
@@ -10,17 +10,6 @@ var App = React.createClass({
     return {
       screens: []
     }
-  },
-  componentDidMount: function() {
-    var rd = new RemoteDesktop({
-      host: "ws://localhost:9000"
-    });
-
-    rd.getScreens().then(function(screens) {
-      this.setState({
-        screens: screens
-      })
-    }.bind(this));
   },
   render: function() {
     return <div className="m-browser-client-app">
@@ -31,11 +20,7 @@ var App = React.createClass({
         : void 0 
       } 
 
-      <ul>
-      {this.state.screens.map(function(screen) {
-        return <li><span>{ "screen " + screen.title}</span></li>;
-      })}
-      </ul> 
+      <RemoteDesktopComponent />
 
       <Toolbar {...this.props} /> 
     </div>;

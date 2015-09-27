@@ -12,13 +12,16 @@
 
 
 std::vector<virt::Window*> osx::Desktop::windows() {
-    CFArrayRef windows = CGWindowListCopyWindowInfo(kCGWindowListOptionOnScreenOnly, kCGNullWindowID);
+    CGWindowListOption listOptions = kCGWindowListOptionOnScreenOnly | kCGWindowListExcludeDesktopElements;
+
+    CFArrayRef windows = CGWindowListCopyWindowInfo(listOptions, kCGNullWindowID);
     int numWindows    = CFArrayGetCount(windows);
 
-    for (int i = 0, n = numWindows; i < n; i++) {
-        CFDictionaryRef info = (CFDictionaryRef)CFArrayGetValueAtIndex(windows, i);
+    std::cout << numWindows << std::endl;
 
-        // TODO - filter out windows here 
+    for (int i = 0, n = numWindows; i < n; i++) {
+
+        CFDictionaryRef info = (CFDictionaryRef)CFArrayGetValueAtIndex(windows, i);
         this->_windows.push_back((virt::Window*)new osx::Window(info));
     }
 

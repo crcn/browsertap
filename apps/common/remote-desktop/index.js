@@ -2,7 +2,8 @@ import { EventEmitter }   from "events";
 import mesh               from "common/mesh";
 import createWebsocketBus from "common/bus/drivers/websocket";
 import co                 from "co";
-import VirtWindow         from "./virt-window";
+import Window             from "./window";
+
 
 /**
  */
@@ -26,16 +27,17 @@ class RemoteDesktop extends EventEmitter {
     this.bus = createWebsocketBus({
       host: this.host
     });
+    this.bus = mesh.spy(this.bus);
   }
 
   /**
    */
 
-  getScreens() {
-    return co(function*() {
+  getWindows() {
+    return co(function*() { 
       return (yield this.bus({ name: "find", collection: "virtWindows" }).readAll()).map(function(data) {
-        return new VirtWindow(data);
-      });
+        return new Window(Object.assign({ bus: this.bus }, data));
+      }.bind(this));
     }.bind(this));
   }
 };

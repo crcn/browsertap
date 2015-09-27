@@ -17,9 +17,11 @@ namespace activeRecord {
     std::vector<Object*> all();
     std::vector<Object*> find(Json::Value);
     Object* findOne(int id);
+    Object* findOne(Json::Value);
     void handleEvent(core::Event* event);
   private:
     std::vector<Object*> _objects;
+    bool _equals(Json::Value object, Json::Value query);
   };
 }
 

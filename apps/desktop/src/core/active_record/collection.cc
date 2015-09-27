@@ -23,10 +23,20 @@ namespace activeRecord {
     for(int i = 0, n = this->_objects.size(); i < n; i++) {
       Object* object = this->_objects.at(i);
       Json::Value objJson = object->toJson();
-      // TODO - apply query check here
-      ret.push_back(object);
+      if (this->_equals(objJson, query)) {
+        ret.push_back(object);
+      }
     }
     return ret;
+  }
+
+  Object* Collection::findOne(Json::Value query) {
+    for(int i = 0, n = this->_objects.size(); i < n; i++) {
+      Object* object = this->_objects.at(i);
+      Json::Value objJson = object->toJson();
+      if (this->_equals(objJson, query)) return object;
+    }
+    return NULL;
   }
 
   Object* Collection::findOne(int id) {
@@ -43,9 +53,26 @@ namespace activeRecord {
 
   void Collection::handleEvent(core::Event* event) {
     // if (event->type == ObjectEvent.REMOVE) {
-    //   // TODO 
+    //   // TODO - remove from collection
     // }
 
     this->emit(event);
+  }
+
+  bool Collection::_equals(Json::Value object, Json::Value query) {
+
+    for( Json::ValueIterator itr = query.begin() ; itr != query.end() ; itr++ ) {
+      std::string key    = itr.key().asString();
+      Json::Value qvalue = query[key];
+      Json::Value ovalue = object[key];
+
+      if (qvalue.isObject()) {
+        if (!this->_equals(ovalue, qvalue)) return false;
+      } else if (ovalue.compare(qvalue) != 0) {
+        return false;
+      }
+    }
+
+    return true;
   }
 }
