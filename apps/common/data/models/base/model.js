@@ -35,7 +35,9 @@ class BaseModel extends EventEmitter {
       }
     }
 
-    if (hasChanged) this.emit("change", { properties: newProps }, { properties: oldProps });
+    if (hasChanged) {
+      this.emit("change", { properties: newProps }, { properties: oldProps });
+    }
   }
 
   /**

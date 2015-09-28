@@ -33,6 +33,7 @@
                     './src/core/wrtc/connection.cc',
                     './src/core/wrtc/observers.cc',
                     './src/core/wrtc/core.cc',
+                    './src/core/wrtc/printable_video_capturer.cc',
 
                     './src/core/thread/condition.cc',
                     './src/core/thread/mutex.cc',

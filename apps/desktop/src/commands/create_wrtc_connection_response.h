@@ -7,7 +7,7 @@
 
 namespace app {
 
-  class CreateWrtcConnectionResponse : public core::EventListener, public mesh::Response, public core::Runnable {
+  class CreateWrtcConnectionResponse : public core::EventListener, public mesh::Response {
   public:
 
     WRTCConnection* connection;
@@ -15,8 +15,12 @@ namespace app {
     /**
      */
 
-    CreateWrtcConnectionResponse(Application* app):_app(app) {
-      this->_response = new mesh::AsyncResponse(this);
+    CreateWrtcConnectionResponse(Application* app, graphics::Printable* video = NULL):_app(app) {
+      this->_connection = new wrtc::Connection(video);
+      connection = new WRTCConnection(this->_connection);
+      this->_app->ardb->collection(WRTCConnection::COLLECTION_NAME)->insert(connection);
+      this->_connection->addListener(this);
+      this->_response = new mesh::AsyncResponse();
     }
 
     /**
@@ -24,16 +28,6 @@ namespace app {
     
     void* read() {
       return this->_response->read();
-    }
-
-    /**
-     */
-    
-    void run() {
-      this->_connection = new wrtc::Connection();
-      this->_connection->addListener(this);
-      connection = new WRTCConnection(this->_connection);
-      this->_app->ardb->collection(WRTCConnection::COLLECTION_NAME)->insert(connection);
     }
 
     /**

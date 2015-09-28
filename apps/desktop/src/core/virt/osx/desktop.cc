@@ -17,8 +17,6 @@ std::vector<virt::Window*> osx::Desktop::windows() {
     CFArrayRef windows = CGWindowListCopyWindowInfo(listOptions, kCGNullWindowID);
     int numWindows    = CFArrayGetCount(windows);
 
-    std::cout << numWindows << std::endl;
-
     for (int i = 0, n = numWindows; i < n; i++) {
 
         CFDictionaryRef info = (CFDictionaryRef)CFArrayGetValueAtIndex(windows, i);

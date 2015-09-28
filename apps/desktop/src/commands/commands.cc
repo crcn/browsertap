@@ -94,10 +94,9 @@ namespace app {
         // TODO - throw exception here
       }
 
-      CreateWrtcConnectionResponse windowWrtcConnection(app);
+      CreateWrtcConnectionResponse windowWrtcConnection(app, window);
       while(windowWrtcConnection.read());
 
-      windowWrtcConnection.connection->setVideo(window);
       connection  = windowWrtcConnection.connection;
     }
 

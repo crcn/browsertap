@@ -56,8 +56,8 @@ namespace wrtc {
   public:
     graphics::Printable* video;
 
+    Connection(graphics::Printable* video);
     Connection();
-    void setVideo(graphics::Printable* video);
     void setRemoteDescription(SessionDescription description);
     SessionDescription* localDescription;
 
@@ -76,9 +76,11 @@ namespace wrtc {
     void _onOfferSuccess(webrtc::SessionDescriptionInterface* sdp);
     void _onIceCandidate(const webrtc::IceCandidateInterface* candidate);
     void _onIceConnectionConnected();
+    void _onStateChange(webrtc::PeerConnectionObserver::StateType);
     void _onDataChannelMessage(const webrtc::DataBuffer& buffer);
     void _onIceGatheringChange(webrtc::PeerConnectionInterface::IceGatheringState state);
     void _onLocalDescriptionSuccess();
+    void _setVideo(graphics::Printable* video);
 
     webrtc::PeerConnectionInterface::IceServers _iceServers();
     // core::ThreadMutex _mutex;

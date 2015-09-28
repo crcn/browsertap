@@ -209,6 +209,7 @@ OBJS := \
 	$(obj).target/$(TARGET)/src/core/wrtc/connection.o \
 	$(obj).target/$(TARGET)/src/core/wrtc/observers.o \
 	$(obj).target/$(TARGET)/src/core/wrtc/core.o \
+	$(obj).target/$(TARGET)/src/core/wrtc/printable_video_capturer.o \
 	$(obj).target/$(TARGET)/src/core/thread/condition.o \
 	$(obj).target/$(TARGET)/src/core/thread/mutex.o \
 	$(obj).target/$(TARGET)/src/core/thread/thread.o \

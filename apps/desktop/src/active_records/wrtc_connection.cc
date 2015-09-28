@@ -21,11 +21,6 @@ namespace app {
   void WRTCConnection::setRemoteDescription(wrtc::SessionDescription description) {
     this->_connection->setRemoteDescription(description);
   }
-  
-  void WRTCConnection::setVideo(VirtWindow* video) {
-    this->video = video;
-    this->_connection->setVideo(video);
-  }
 
   Json::Value WRTCConnection::toJson() {
     Json::Value root = activeRecord::Object::toJson();

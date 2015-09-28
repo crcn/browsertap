@@ -22,6 +22,7 @@ namespace wrtc {
 
   void PeerConnectionObserver::OnStateChange(webrtc::PeerConnectionObserver::StateType state) {
     LOG_VERBOSE(__PRETTY_FUNCTION__);
+    onStateChange.emit(state);
   }
 
   void PeerConnectionObserver::OnIceCandidate(const webrtc::IceCandidateInterface* candidate) {

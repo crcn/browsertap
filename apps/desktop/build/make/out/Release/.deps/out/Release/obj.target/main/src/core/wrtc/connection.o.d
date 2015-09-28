@@ -6,24 +6,25 @@ out/Release/obj.target/main/src/core/wrtc/connection.o: \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/stringencode.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/checks.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/typedefs.h \
-  ../../src/core/wrtc/./connection.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosourceinterface.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediastreaminterface.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/basictypes.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/constructormagic.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/refcount.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/atomicops.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/scoped_ref_ptr.h \
+  ../../src/core/wrtc/./printable_video_capturer.h \
+  ../../src/core/wrtc/../log/logger.h \
+  ../../src/core/wrtc/../graphics/printable.h \
+  ../../src/core/wrtc/../graphics/./bitmap.h \
+  ../../src/core/wrtc/../graphics/../geom/bounds.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videocapturer.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/mediachannel.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/codec.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/constants.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/streamparams.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/basictypes.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/constructormagic.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/buffer.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/scoped_ptr.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/template_util.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/dscp.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/logging.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/criticalsection.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/atomicops.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/thread_annotations.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/sigslot.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/socket.h \
@@ -51,6 +52,7 @@ out/Release/obj.target/main/src/core/wrtc/connection.o: \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/sslidentity.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/messagedigest.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/messagequeue.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/scoped_ref_ptr.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/socketserver.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/socketfactory.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/asyncsocket.h \
@@ -65,6 +67,27 @@ out/Release/obj.target/main/src/core/wrtc/connection.o: \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/event.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/asyncpacketsocket.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/ratetracker.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videoadapter.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videocommon.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videoframefactory.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videoframe.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/common_video/interface/video_frame_buffer.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/callback.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/refcount.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/system_wrappers/interface/aligned_malloc.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/common_video/rotation.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/devices/devicemanager.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/device.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/screencastid.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/windowpicker.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videocapturerfactory.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/rollingaccumulator.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/timing.h \
+  ../../src/core/wrtc/../thread/runnable.h \
+  ../../src/core/wrtc/../thread/thread.h \
+  ../../src/core/wrtc/./connection.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosourceinterface.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediastreaminterface.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/peerconnectionfactoryproxy.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/peerconnectioninterface.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/datachannelinterface.h \
@@ -80,9 +103,6 @@ out/Release/obj.target/main/src/core/wrtc/connection.o: \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/platform_file.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/proxy.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/bind.h \
-  ../../src/core/wrtc/../graphics/printable.h \
-  ../../src/core/wrtc/../graphics/./bitmap.h \
-  ../../src/core/wrtc/../graphics/../geom/bounds.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/json.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h \
@@ -100,22 +120,6 @@ out/Release/obj.target/main/src/core/wrtc/connection.o: \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/session/media/channelmanager.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/capturemanager.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/capturerenderadapter.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videocapturer.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videoadapter.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videocommon.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videoframefactory.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videoframe.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/common_video/interface/video_frame_buffer.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/callback.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/system_wrappers/interface/aligned_malloc.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/common_video/rotation.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/devices/devicemanager.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/device.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/screencastid.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/windowpicker.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videocapturerfactory.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/rollingaccumulator.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/timing.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/sigslotrepeater.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/mediaengine.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/mediacommon.h \
@@ -139,8 +143,7 @@ out/Release/obj.target/main/src/core/wrtc/connection.o: \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videorenderer.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/sctp/sctpdataengine.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/webrtc/webrtcvideocapturerfactory.h \
-  ../../src/core/wrtc/./core.h ../../src/core/wrtc/../log/logger.h \
-  ../../src/core/wrtc/./observers.h \
+  ../../src/core/wrtc/./core.h ../../src/core/wrtc/./observers.h \
   ../../src/core/wrtc/../events/event_emitter.h \
   ../../src/core/wrtc/../events/./event_listener.h \
   ../../src/core/wrtc/../events/./event.h \
@@ -154,24 +157,25 @@ out/Release/obj.target/main/src/core/wrtc/connection.o: \
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/stringencode.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/checks.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/typedefs.h:
-../../src/core/wrtc/./connection.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosourceinterface.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediastreaminterface.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/basictypes.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/constructormagic.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/refcount.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/atomicops.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/scoped_ref_ptr.h:
+../../src/core/wrtc/./printable_video_capturer.h:
+../../src/core/wrtc/../log/logger.h:
+../../src/core/wrtc/../graphics/printable.h:
+../../src/core/wrtc/../graphics/./bitmap.h:
+../../src/core/wrtc/../graphics/../geom/bounds.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videocapturer.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/mediachannel.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/codec.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/constants.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/streamparams.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/basictypes.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/constructormagic.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/buffer.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/scoped_ptr.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/template_util.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/dscp.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/logging.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/criticalsection.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/atomicops.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/thread_annotations.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/sigslot.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/socket.h:
@@ -199,6 +203,7 @@ out/Release/obj.target/main/src/core/wrtc/connection.o: \
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/sslidentity.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/messagedigest.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/messagequeue.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/scoped_ref_ptr.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/socketserver.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/socketfactory.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/asyncsocket.h:
@@ -213,6 +218,27 @@ out/Release/obj.target/main/src/core/wrtc/connection.o: \
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/event.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/asyncpacketsocket.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/ratetracker.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videoadapter.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videocommon.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videoframefactory.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videoframe.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/common_video/interface/video_frame_buffer.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/callback.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/refcount.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/system_wrappers/interface/aligned_malloc.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/common_video/rotation.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/devices/devicemanager.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/device.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/screencastid.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/windowpicker.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videocapturerfactory.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/rollingaccumulator.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/timing.h:
+../../src/core/wrtc/../thread/runnable.h:
+../../src/core/wrtc/../thread/thread.h:
+../../src/core/wrtc/./connection.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosourceinterface.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediastreaminterface.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/peerconnectionfactoryproxy.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/peerconnectioninterface.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/datachannelinterface.h:
@@ -228,9 +254,6 @@ out/Release/obj.target/main/src/core/wrtc/connection.o: \
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/platform_file.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/proxy.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/bind.h:
-../../src/core/wrtc/../graphics/printable.h:
-../../src/core/wrtc/../graphics/./bitmap.h:
-../../src/core/wrtc/../graphics/../geom/bounds.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/json.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h:
@@ -248,22 +271,6 @@ out/Release/obj.target/main/src/core/wrtc/connection.o: \
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/session/media/channelmanager.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/capturemanager.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/capturerenderadapter.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videocapturer.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videoadapter.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videocommon.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videoframefactory.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videoframe.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/common_video/interface/video_frame_buffer.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/callback.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/system_wrappers/interface/aligned_malloc.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/common_video/rotation.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/devices/devicemanager.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/device.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/screencastid.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/windowpicker.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videocapturerfactory.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/rollingaccumulator.h:
-../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/timing.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/sigslotrepeater.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/mediaengine.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/mediacommon.h:
@@ -288,7 +295,6 @@ out/Release/obj.target/main/src/core/wrtc/connection.o: \
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/sctp/sctpdataengine.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/webrtc/webrtcvideocapturerfactory.h:
 ../../src/core/wrtc/./core.h:
-../../src/core/wrtc/../log/logger.h:
 ../../src/core/wrtc/./observers.h:
 ../../src/core/wrtc/../events/event_emitter.h:
 ../../src/core/wrtc/../events/./event_listener.h:

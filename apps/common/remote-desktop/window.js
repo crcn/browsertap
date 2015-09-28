@@ -22,6 +22,7 @@ class Window extends Model {
     return co(function*() {
       var data = yield this.bus({ name: "startWindowSession", query: { id: this.id } }).read();
       var peer = new Peer(Object.assign({ bus: this.bus }, data));
+      return peer;
     }.bind(this));
   }
 }

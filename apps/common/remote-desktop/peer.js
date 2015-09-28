@@ -34,6 +34,9 @@ class Peer extends Model {
 
     return new Promise(function(resolve, reject) {
       var pc      = _this._pc = new PeerConnection(pcSettings);
+
+      pc.onaddstream = _this._onAddStream.bind(_this);
+
       pc.setRemoteDescription(new SessionDescription(_this.offer), function() {
         pc.createAnswer(function(answer) {
           pc.setLocalDescription(new RTCSessionDescription(answer), co.wrap(function*() {
@@ -41,6 +44,7 @@ class Peer extends Model {
           }), reject);
         }, reject);
       }, reject);
+
     });
   }
 
@@ -54,6 +58,15 @@ class Peer extends Model {
     }, query: { id: this.id }}).read();
 
     console.log(result);
+  }
+
+  /**
+   */
+
+  _onAddStream(event) { 
+    this.setProperties({
+      videoUrl: URL.createObjectURL(event.stream)
+    })
   }
 }
 

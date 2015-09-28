@@ -674,16 +674,28 @@ var React = require("react");
 var RemoteDesktopWindow = React.createClass({
   displayName: "RemoteDesktopWindow",
 
+  getInitialState: function getInitialState() {
+    return {};
+  },
   componentDidMount: function componentDidMount() {
     if (this.props.win.title != "") {
-      this.props.win.show();
+      this.props.win.show().then((function (peer) {
+        this.peer = peer;
+        peer.on("change", this.onChange);
+      }).bind(this));
     }
+  },
+  onChange: function onChange() {
+    console.log(this.peer);
+    this.setState({
+      videoUrl: this.peer.videoUrl
+    });
   },
   render: function render() {
     return React.createElement(
       "div",
       { className: "m-remote-desktop-screen" },
-      this.props.win.title
+      this.state.videoUrl ? React.createElement("video", { src: this.state.videoUrl }) : void 0
     );
   }
 });
@@ -3348,7 +3360,9 @@ var BaseModel = (function (_EventEmitter) {
         }
       }
 
-      if (hasChanged) this.emit("change", { properties: newProps }, { properties: oldProps });
+      if (hasChanged) {
+        this.emit("change", { properties: newProps }, { properties: oldProps });
+      }
     }
 
     /**
@@ -5973,6 +5987,9 @@ var Peer = (function (_Model) {
 
       return new Promise(function (resolve, reject) {
         var pc = _this._pc = new PeerConnection(pcSettings);
+
+        pc.onaddstream = _this._onAddStream.bind(_this);
+
         pc.setRemoteDescription(new SessionDescription(_this.offer), function () {
           pc.createAnswer(function (answer) {
             pc.setLocalDescription(new RTCSessionDescription(answer), _co2["default"].wrap(regeneratorRuntime.mark(function callee$5$0() {
@@ -6024,6 +6041,17 @@ var Peer = (function (_Model) {
         }
       }, _setRemoteDescription, this);
     })
+
+    /**
+     */
+
+  }, {
+    key: "_onAddStream",
+    value: function _onAddStream(event) {
+      this.setProperties({
+        videoUrl: URL.createObjectURL(event.stream)
+      });
+    }
   }]);
 
   return Peer;
@@ -6097,8 +6125,9 @@ var Window = (function (_Model) {
             case 2:
               data = context$3$0.sent;
               peer = new _peer2["default"](Object.assign({ bus: this.bus }, data));
+              return context$3$0.abrupt("return", peer);
 
-            case 4:
+            case 5:
             case "end":
               return context$3$0.stop();
           }

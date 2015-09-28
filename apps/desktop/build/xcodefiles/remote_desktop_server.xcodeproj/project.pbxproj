@@ -17,13 +17,12 @@
 		4158BD9C14644606773E166C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3840078CE11D7699A409E862 /* CoreVideo.framework */; };
 		575F2D82BA723230EC82C008 /* thread.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3427524D860CD142B2B339CA /* thread.cc */; };
 		704C3871300E583F45E30F64 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E3E8C3E970AACC4AE7B167 /* AppKit.framework */; };
-		7980FB48041958B7947C4438 /* connection.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6A0BD0AF2D47FF55E789CCBA /* connection.cc */; };
-		8050EFC3F81B9F5349645492 /* observers.cc in Sources */ = {isa = PBXBuildFile; fileRef = FF6DADC5A8246005B635AC00 /* observers.cc */; };
+		82C49D7AEEF81AA7C5AA2613 /* connection.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6A0BD0AF2D47FF55E789CCBA /* connection.cc */; };
 		84E02B82A79A92FDE9E80103 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B898A7D1531439D634549F /* CoreAudio.framework */; };
 		84F3F2F7E3F1EDE1CADAA6FA /* desktop.cc in Sources */ = {isa = PBXBuildFile; fileRef = C98F663AFC3950AB01120A83 /* desktop.cc */; };
+		895D0A6E4A1C243B90B7C5AD /* observers.cc in Sources */ = {isa = PBXBuildFile; fileRef = FF6DADC5A8246005B635AC00 /* observers.cc */; };
 		8FCEF323A66DC7590AF94A5D /* commands.cc in Sources */ = {isa = PBXBuildFile; fileRef = E18012A24B373195BD28FB43 /* commands.cc */; };
 		9465AF93C2D8388BB3EDFFF4 /* db.cc in Sources */ = {isa = PBXBuildFile; fileRef = A22A686FB35F5D65559079DD /* db.cc */; };
-		9E1DC35DF275C435AFAB2777 /* core.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1BF70B5948579D84698FDD7 /* core.cc */; };
 		9F83C20B2E99EE9ACDE1BA70 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93199D96CF574561481CFAD2 /* OpenGL.framework */; };
 		A3414FA8AADCD814AAF7CBF6 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5A18A6FAEC1532CA9DE8B4 /* AudioUnit.framework */; };
 		A35F9DEB347A271B8E6C70D5 /* application.cc in Sources */ = {isa = PBXBuildFile; fileRef = 1C41361F380B0672C070E7AA /* application.cc */; };
@@ -33,11 +32,13 @@
 		ADA06C6D6392797F94980C99 /* libwebsockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68B3522057DA85C3A3874D58 /* libwebsockets.a */; };
 		B4E66DF488D19E12E2367FB3 /* virt_window.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9231692D5678557A224CE1C9 /* virt_window.cc */; };
 		C1BB5153C49F81CCA08B337C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA561A0FD98F131E61B56650 /* AudioToolbox.framework */; };
+		C1F9E5FA0D0434C12BB27B15 /* core.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1BF70B5948579D84698FDD7 /* core.cc */; };
 		D0150E425DD612367D2E8A57 /* -lz in Frameworks */ = {isa = PBXBuildFile; fileRef = 80E52F865CC9149683976F0C /* -lz */; };
 		D6FA185D6142EE61211F6328 /* collection.cc in Sources */ = {isa = PBXBuildFile; fileRef = 41B90AF5D25924F900CC6A35 /* collection.cc */; };
 		DC36EF92AF83C26B637D949C /* event_emitter.cc in Sources */ = {isa = PBXBuildFile; fileRef = AB91258A5CDD72EFD913C71C /* event_emitter.cc */; };
 		E942A08909F53C73E0244546 /* console.cc in Sources */ = {isa = PBXBuildFile; fileRef = 7A83D82A74762341D32F56B4 /* console.cc */; };
 		FA275AAE0B28894AA5C60C3C /* wrtc_connection.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6AD1F38F793DF2643D4A1601 /* wrtc_connection.cc */; };
+		FB8404EFBA82DFF8A95EB836 /* printable_video_capturer.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3B6CEE84A84CB1F62B35A204 /* printable_video_capturer.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		1C41361F380B0672C070E7AA /* application.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = application.cc; sourceTree = "<group>"; };
 		3427524D860CD142B2B339CA /* thread.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = thread.cc; sourceTree = "<group>"; };
 		3840078CE11D7699A409E862 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		3B6CEE84A84CB1F62B35A204 /* printable_video_capturer.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = printable_video_capturer.cc; sourceTree = "<group>"; };
 		3E40B8F5AFAF0F6F6065BD61 /* main.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cc; sourceTree = "<group>"; };
 		41B90AF5D25924F900CC6A35 /* collection.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = collection.cc; sourceTree = "<group>"; };
 		43E17C441DF0FF1C94A78598 /* main */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = main; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,7 +113,7 @@
 				204912D1D365425F4F986CF2 /* io */,
 				B98E0E12F4A4EDAE20C99754 /* thread */,
 				60F2A0F5F1B47F47471B03E3 /* virt/osx */,
-				88F8FFCC4F1A23338BF35870 /* wrtc */,
+				FF3686697BA7A29EE4F2E9F8 /* wrtc */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -197,16 +199,6 @@
 			path = plugins;
 			sourceTree = "<group>";
 		};
-		88F8FFCC4F1A23338BF35870 /* wrtc */ = {
-			isa = PBXGroup;
-			children = (
-				6A0BD0AF2D47FF55E789CCBA /* connection.cc */,
-				D1BF70B5948579D84698FDD7 /* core.cc */,
-				FF6DADC5A8246005B635AC00 /* observers.cc */,
-			);
-			path = wrtc;
-			sourceTree = "<group>";
-		};
 		8CB44504A55DD28C075BE1FC /* commands */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +250,17 @@
 				7AB939D216A1C0273552B76D /* supplement.gypi */,
 			);
 			name = Build;
+			sourceTree = "<group>";
+		};
+		FF3686697BA7A29EE4F2E9F8 /* wrtc */ = {
+			isa = PBXGroup;
+			children = (
+				6A0BD0AF2D47FF55E789CCBA /* connection.cc */,
+				D1BF70B5948579D84698FDD7 /* core.cc */,
+				FF6DADC5A8246005B635AC00 /* observers.cc */,
+				3B6CEE84A84CB1F62B35A204 /* printable_video_capturer.cc */,
+			);
+			path = wrtc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,9 +315,10 @@
 				3A03283D2FA9EE11FC5645C4 /* log_operations.cc in Sources */,
 				07281FB0409AB571B8211998 /* window.cc in Sources */,
 				84F3F2F7E3F1EDE1CADAA6FA /* desktop.cc in Sources */,
-				7980FB48041958B7947C4438 /* connection.cc in Sources */,
-				8050EFC3F81B9F5349645492 /* observers.cc in Sources */,
-				9E1DC35DF275C435AFAB2777 /* core.cc in Sources */,
+				82C49D7AEEF81AA7C5AA2613 /* connection.cc in Sources */,
+				895D0A6E4A1C243B90B7C5AD /* observers.cc in Sources */,
+				C1F9E5FA0D0434C12BB27B15 /* core.cc in Sources */,
+				FB8404EFBA82DFF8A95EB836 /* printable_video_capturer.cc in Sources */,
 				305CA3247DA16C01E52CDD0A /* condition.cc in Sources */,
 				3E88287A7FE8005391DCE6A3 /* mutex.cc in Sources */,
 				575F2D82BA723230EC82C008 /* thread.cc in Sources */,
