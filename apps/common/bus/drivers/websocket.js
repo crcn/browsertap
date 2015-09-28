@@ -3,6 +3,9 @@ import co from "co";
 import { EventEmitter } from "events";
 
 export default function(options) {
+
+  if (!process.browser) return mesh.noop;
+  
   var ws = new WebSocket(options.host, 'dumb-increment-protocol');
 
   var _openResponses = {};

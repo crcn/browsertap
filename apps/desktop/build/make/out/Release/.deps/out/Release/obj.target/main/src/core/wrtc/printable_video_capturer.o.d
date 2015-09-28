@@ -82,7 +82,8 @@ out/Release/obj.target/main/src/core/wrtc/printable_video_capturer.o: \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/rollingaccumulator.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/timing.h \
   ../../src/core/wrtc/../thread/runnable.h \
-  ../../src/core/wrtc/../thread/thread.h
+  ../../src/core/wrtc/../thread/thread.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/bind.h
 ../../src/core/wrtc/printable_video_capturer.cc:
 ../../src/core/wrtc/./printable_video_capturer.h:
 ../../src/core/wrtc/../log/logger.h:
@@ -166,3 +167,4 @@ out/Release/obj.target/main/src/core/wrtc/printable_video_capturer.o: \
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/timing.h:
 ../../src/core/wrtc/../thread/runnable.h:
 ../../src/core/wrtc/../thread/thread.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/bind.h:

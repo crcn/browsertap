@@ -6,6 +6,7 @@
 #include "talk/media/base/videocapturer.h"
 #include "../thread/runnable.h"
 #include "../thread/thread.h"
+#include "webrtc/base/sigslot.h"
 
 namespace wrtc {
   class PrintableVideoCapturer : public cricket::VideoCapturer, public core::Runnable  {
@@ -21,11 +22,18 @@ namespace wrtc {
     bool GetPreferredFourccs(std::vector<uint32>* fourccs);
     void run();
 
-    void setImageData(uint8_t *pImageBytes, size_t len, int width, int height);
+    // // Callback attached to SignalFrameCaptured where SignalVideoFrames is called.
+    // void SignalFrameCaptured(VideoCapturer* video_capturer,
+    //                      const CapturedFrame* captured_frame) {
+      
+    // }
+
 
   private:
     bool _isRunning;
     int64 _startTime;
+    rtc::Thread* _startThread;  // Set in Start(), unset in Stop().
+    void signalFrameCapturedOnStartThread2(const cricket::CapturedFrame* frame);
   };
 }
 

@@ -1997,6 +1997,7 @@ exports.createClient = function (config) {
 };
 
 },{"loggly-browserify":510}],38:[function(require,module,exports){
+(function (process){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2016,6 +2017,9 @@ var _co2 = _interopRequireDefault(_co);
 var _events = require("events");
 
 exports["default"] = function (options) {
+
+  if (!process.browser) return _commonMesh2["default"].noop;
+
   var ws = new WebSocket(options.host, 'dumb-increment-protocol');
 
   var _openResponses = {};
@@ -2067,7 +2071,8 @@ exports["default"] = function (options) {
 
 module.exports = exports["default"];
 
-},{"co":453,"common/mesh":78,"events":420}],39:[function(require,module,exports){
+}).call(this,require('_process'))
+},{"_process":424,"co":453,"common/mesh":78,"events":420}],39:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }

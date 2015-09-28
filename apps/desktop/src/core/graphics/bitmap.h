@@ -17,10 +17,12 @@ namespace graphics {
     public:
 
         unsigned char* data;
+        int size;
         geom::Bounds bounds;
 
-        Bitmap(unsigned char *data, geom::Bounds bounds):
+        Bitmap(unsigned char *data, int size, geom::Bounds bounds):
         data(data),
+        size(size),
         bounds(bounds) {
         }
         ~Bitmap() {

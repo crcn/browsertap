@@ -64,18 +64,25 @@ namespace osx {
             kCGWindowListOptionIncludingWindow,
             winId,
             kCGWindowImageNominalResolution | kCGWindowImageBoundsIgnoreFraming);
+        // CGImageDestinationRef destination = CGImageDestinationCreateWithURL("~/Desktop/img.png", kUTTypePNG, 1, NULL);
 
-        size_t bpr = CGImageGetBytesPerRow(image);
-        size_t bpp = CGImageGetBitsPerPixel(image);
-        size_t bpc = CGImageGetBitsPerComponent(image);
-        size_t bytes_per_pixel = bpp / bpc;
+        // size_t bpr = CGImageGetBytesPerRow(image);
+        // size_t bpp = CGImageGetBitsPerPixel(image);
+        // size_t bpc = CGImageGetBitsPerComponent(image);
+        // size_t bytes_per_pixel = bpp / bpc;
+
+        // CFDataRef bgraDataRef = CGDataProviderCopyData(CGImageGetDataProvider(image));
+
 
         CFDataRef bgraDataRef = CGDataProviderCopyData(CGImageGetDataProvider(image));
+
+
         int bgraDataLen = CFDataGetLength(bgraDataRef);
+
+        std::cout << bgraDataLen << std::endl;
         unsigned char* bgraData = new unsigned char[bgraDataLen]; //This is what I need
         CFDataGetBytes(bgraDataRef, CFRangeMake(0, bgraDataLen), bgraData);
         // CGImageRelease(image);
-
 
         // const uint8_t* bytes = [data bytes];
 
@@ -106,7 +113,7 @@ namespace osx {
 
         CFRelease(image);
 
-        return new graphics::Bitmap(bgraData, this->_convertBounds(rect));
+        return new graphics::Bitmap(bgraData, bgraDataLen, this->_convertBounds(rect));
     };
 
 }

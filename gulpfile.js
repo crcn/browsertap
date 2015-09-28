@@ -259,6 +259,7 @@ gulp.task("lint", ["jscs", "jshint"], function (complete) {
 /**
  */
 
+// TODO - run c++ unit tests here as well
 gulp.task("test", function (complete) {
   gulp.
   src(paths.testFiles, { read: false }).
