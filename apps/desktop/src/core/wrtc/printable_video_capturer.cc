@@ -64,21 +64,13 @@ namespace wrtc {
       // std::chrono::nanoseconds dur = std::chrono::high_resolution_clock::now().time_since_epoch();
       // frame.time_stamp = dur.count();
 
-      int len = sizeof(bm->data);
       frame.data = bm->data;
       frame.width = bm->bounds.width;
       frame.height = bm->bounds.height;
       frame.fourcc = cricket::FOURCC_ABGR;
       frame.data_size = frame.width*frame.height*4;
 
-
-      if (false && frame.width*frame.height*4 != len) {
-          std::cerr << "VideoCapturer: with and height don't match size for ABGR data, skipping frame";
-      } else {
-          //LOG(LS_INFO) << "CaptureThread: got frame " << (int)frameVal << " glGetError: " << glGetError();
-          this->SignalFrameCaptured(this, &frame);
-      }
-
+      this->SignalFrameCaptured(this, &frame);
       delete bm;
 
 
