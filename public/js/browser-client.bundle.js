@@ -677,16 +677,13 @@ var RemoteDesktopWindow = React.createClass({
   getInitialState: function getInitialState() {
     return {};
   },
-  componentDidMount: function componentDidMount() {
-    if (this.props.win.title != "") {
-      this.props.win.show().then((function (peer) {
-        this.peer = peer;
-        peer.on("change", this.onChange);
-      }).bind(this));
-    }
+  show: function show() {
+    this.props.win.show().then((function (peer) {
+      this.peer = peer;
+      peer.on("change", this.onChange);
+    }).bind(this));
   },
   onChange: function onChange() {
-    console.log(this.peer);
     this.setState({
       videoUrl: this.peer.videoUrl
     });
@@ -695,7 +692,20 @@ var RemoteDesktopWindow = React.createClass({
     return React.createElement(
       "div",
       { className: "m-remote-desktop-screen" },
-      this.state.videoUrl ? React.createElement("video", { src: this.state.videoUrl }) : void 0
+      this.state.videoUrl ? React.createElement("video", { src: this.state.videoUrl }) : this._renderInfo()
+    );
+  },
+  _renderInfo: function _renderInfo() {
+    return React.createElement(
+      "div",
+      null,
+      JSON.stringify(this.props.win),
+      " ",
+      React.createElement(
+        "button",
+        { onClick: this.show },
+        "show"
+      )
     );
   }
 });
@@ -5989,6 +5999,7 @@ var Peer = (function (_Model) {
         var pc = _this._pc = new PeerConnection(pcSettings);
 
         pc.onaddstream = _this._onAddStream.bind(_this);
+        pc.onicecandidate = _this._onIceCandidate.bind(_this);
 
         pc.setRemoteDescription(new SessionDescription(_this.offer), function () {
           pc.createAnswer(function (answer) {
@@ -6052,6 +6063,13 @@ var Peer = (function (_Model) {
         videoUrl: URL.createObjectURL(event.stream)
       });
     }
+
+    /**
+     */
+
+  }, {
+    key: "_onIceCandidate",
+    value: function _onIceCandidate(event) {}
   }]);
 
   return Peer;

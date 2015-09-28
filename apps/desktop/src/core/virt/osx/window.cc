@@ -65,9 +65,48 @@ namespace osx {
             winId,
             kCGWindowImageNominalResolution | kCGWindowImageBoundsIgnoreFraming);
 
+        size_t bpr = CGImageGetBytesPerRow(image);
+        size_t bpp = CGImageGetBitsPerPixel(image);
+        size_t bpc = CGImageGetBitsPerComponent(image);
+        size_t bytes_per_pixel = bpp / bpc;
+
+        CFDataRef bgraDataRef = CGDataProviderCopyData(CGImageGetDataProvider(image));
+        int bgraDataLen = CFDataGetLength(bgraDataRef);
+        unsigned char* bgraData = new unsigned char[bgraDataLen]; //This is what I need
+        CFDataGetBytes(bgraDataRef, CFRangeMake(0, bgraDataLen), bgraData);
+        // CGImageRelease(image);
+
+
+        // const uint8_t* bytes = [data bytes];
+
+        // printf("Pixel Data:\n");
+        // for(size_t row = 0; row < height; row++)
+        // {
+        //     for(size_t col = 0; col < width; col++)
+        //     {
+        //         const uint8_t* pixel =
+        //             &bytes[row * bpr + col * bytes_per_pixel];
+
+        //         printf("(");
+        //         for(size_t x = 0; x < bytes_per_pixel; x++)
+        //         {
+        //             printf("%.2X", pixel[x]);
+        //             if( x < bytes_per_pixel - 1 )
+        //                 printf(",");
+        //         }
+
+        //         printf(")");
+        //         if( col < width - 1 )
+        //             printf(", ");
+        //     }
+
+        //     printf("\n");
+        // }
+
+
         CFRelease(image);
 
-        return new graphics::Bitmap(NULL, this->_convertBounds(rect));
+        return new graphics::Bitmap(bgraData, this->_convertBounds(rect));
     };
 
 }

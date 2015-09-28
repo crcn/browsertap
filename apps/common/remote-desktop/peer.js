@@ -35,7 +35,8 @@ class Peer extends Model {
     return new Promise(function(resolve, reject) {
       var pc      = _this._pc = new PeerConnection(pcSettings);
 
-      pc.onaddstream = _this._onAddStream.bind(_this);
+      pc.onaddstream    = _this._onAddStream.bind(_this);
+      pc.onicecandidate = _this._onIceCandidate.bind(_this);
 
       pc.setRemoteDescription(new SessionDescription(_this.offer), function() {
         pc.createAnswer(function(answer) {
@@ -67,6 +68,13 @@ class Peer extends Model {
     this.setProperties({
       videoUrl: URL.createObjectURL(event.stream)
     })
+  }
+
+  /**
+   */
+
+  _onIceCandidate(event) {
+
   }
 }
 

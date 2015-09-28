@@ -25,6 +25,7 @@ namespace wrtc {
 
   private:
     bool _isRunning;
+    int64 _startTime;
   };
 }
 

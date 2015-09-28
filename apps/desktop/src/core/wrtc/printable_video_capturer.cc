@@ -1,4 +1,5 @@
 #include "./printable_video_capturer.h"
+// #include <chrono>
 
 namespace wrtc {
   PrintableVideoCapturer::PrintableVideoCapturer(graphics::Printable* printable):
@@ -28,6 +29,7 @@ namespace wrtc {
     LOG_VERBOSE(__PRETTY_FUNCTION__);
     core::Thread::run(this);
     this->_isRunning = true;
+    this->_startTime = 1000000 * static_cast<int64>(rtc::Time()); // ns to ms
     return cricket::CS_RUNNING;
 
   }
@@ -56,18 +58,18 @@ namespace wrtc {
       cricket::CapturedFrame frame;
       graphics::Bitmap* bm = this->target->print();
 
+      frame.time_stamp   = 1000000 * static_cast<int64>(rtc::Time());
       frame.elapsed_time = 33333333;
 
       // std::chrono::nanoseconds dur = std::chrono::high_resolution_clock::now().time_since_epoch();
       // frame.time_stamp = dur.count();
-      //prevTimestamp += frame.elapsed_time;  // 30 fps
 
       int len = sizeof(bm->data);
-      frame.data = (void*)bm->data;
+      frame.data = bm->data;
       frame.width = bm->bounds.width;
       frame.height = bm->bounds.height;
       frame.fourcc = cricket::FOURCC_ABGR;
-      frame.data_size = len;
+      frame.data_size = frame.width*frame.height*4;
 
 
       if (false && frame.width*frame.height*4 != len) {
@@ -80,7 +82,7 @@ namespace wrtc {
       delete bm;
 
 
-      usleep(1000 * 100);
+      usleep(1000);
     }
   }
 

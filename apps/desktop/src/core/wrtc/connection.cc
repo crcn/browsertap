@@ -62,6 +62,33 @@ namespace wrtc {
     // std::cout << video->print() << std::endl;
     PrintableVideoCapturer* capturer = new PrintableVideoCapturer(video);
 
+      // rtc::scoped_ptr<cricket::DeviceManagerInterface> dev_manager(cricket::DeviceManagerFactory::Create());
+
+      // if(!dev_manager->Init()){
+      //     return;
+      // }
+
+      // std::vector<cricket::Device> devs;
+      // if (!dev_manager->GetVideoCaptureDevices(&devs)) {
+      //   return;
+      // }
+      
+      // std::vector<cricket::Device>::iterator dev_it = devs.begin();
+      // cricket::VideoCapturer* capturer = NULL;
+
+      // for (; dev_it != devs.end(); ++dev_it) {
+        
+      //   capturer = dev_manager->CreateVideoCapturer(*dev_it);
+        
+      //   if (capturer != NULL){
+      //     break;
+      //   }
+      // }
+
+      // if (!capturer){
+      //   return;
+      // }
+
     rtc::scoped_refptr<webrtc::VideoSourceInterface> videoSource = _factory->CreateVideoSource(capturer, NULL);
     rtc::scoped_refptr<webrtc::VideoTrackInterface> videoTrack(_factory->CreateVideoTrack("screen", videoSource));
     rtc::scoped_refptr<webrtc::MediaStreamInterface> stream = _factory->CreateLocalMediaStream("stream");

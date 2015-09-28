@@ -16,12 +16,15 @@ namespace graphics {
     class Bitmap {
     public:
 
-        const char* data;
+        unsigned char* data;
         geom::Bounds bounds;
 
-        Bitmap(const char *data, geom::Bounds bounds):
+        Bitmap(unsigned char *data, geom::Bounds bounds):
         data(data),
         bounds(bounds) {
+        }
+        ~Bitmap() {
+          delete this->data;
         }
     };
 };

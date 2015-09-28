@@ -33,7 +33,7 @@ var RemoteDesktopComponent = React.createClass({
   },
   render: function() {
     return <div className="m-remote-desktop">
-      {
+      { 
         this.state.windows.map(function(win) {
           return <Window key={win.id} win={win} />
         })
