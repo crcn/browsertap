@@ -692,7 +692,7 @@ var RemoteDesktopWindow = React.createClass({
     return React.createElement(
       "div",
       { className: "m-remote-desktop-screen" },
-      this.state.videoUrl ? React.createElement("video", { src: this.state.videoUrl }) : this._renderInfo()
+      this.state.videoUrl ? React.createElement("video", { src: this.state.videoUrl, autoPlay: "true" }) : this._renderInfo()
     );
   },
   _renderInfo: function _renderInfo() {
@@ -6008,7 +6008,7 @@ var Peer = (function (_Model) {
 
         pc.setRemoteDescription(new SessionDescription(_this.offer), function () {
           pc.createAnswer(function (answer) {
-            pc.setLocalDescription(new RTCSessionDescription(answer), _co2["default"].wrap(regeneratorRuntime.mark(function callee$5$0() {
+            pc.setLocalDescription(new SessionDescription(answer), _co2["default"].wrap(regeneratorRuntime.mark(function callee$5$0() {
               return regeneratorRuntime.wrap(function callee$5$0$(context$6$0) {
                 while (1) switch (context$6$0.prev = context$6$0.next) {
                   case 0:

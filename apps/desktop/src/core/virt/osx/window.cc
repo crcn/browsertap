@@ -63,57 +63,36 @@ namespace osx {
         CGImageRef image = CGWindowListCreateImage(rect,
             kCGWindowListOptionIncludingWindow,
             winId,
-            kCGWindowImageNominalResolution | kCGWindowImageBoundsIgnoreFraming);
-        // CGImageDestinationRef destination = CGImageDestinationCreateWithURL("~/Desktop/img.png", kUTTypePNG, 1, NULL);
+            kCGWindowImageDefault);
 
-        // size_t bpr = CGImageGetBytesPerRow(image);
-        // size_t bpp = CGImageGetBitsPerPixel(image);
-        // size_t bpc = CGImageGetBitsPerComponent(image);
-        // size_t bytes_per_pixel = bpp / bpc;
-
-        // CFDataRef bgraDataRef = CGDataProviderCopyData(CGImageGetDataProvider(image));
+        // CFDataRef cd = CGDataProviderCopyData(CGImageGetDataProvider(image));
 
 
-        CFDataRef bgraDataRef = CGDataProviderCopyData(CGImageGetDataProvider(image));
 
+        int w = rect.size.width;
+        int h = rect.size.height;
+        int bgraDataLen = w * h * 4;
 
-        int bgraDataLen = CFDataGetLength(bgraDataRef);
+        // Alloc data that the image data will be put into
+        unsigned char *rawData = new unsigned char[bgraDataLen];
+        // unsigned char *rawData = (unsigned char *)CFDataGetBytePtr(cd);
 
-        std::cout << bgraDataLen << std::endl;
-        unsigned char* bgraData = new unsigned char[bgraDataLen]; //This is what I need
-        CFDataGetBytes(bgraDataRef, CFRangeMake(0, bgraDataLen), bgraData);
-        // CGImageRelease(image);
+        // // Create a CGBitmapContext to draw an image into
+        size_t bytesPerPixel = 4;
+        size_t bytesPerRow = bytesPerPixel * w;
+        size_t bitsPerComponent = 8;
+        CGColorSpaceRef colorSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+        CGContextRef context = CGBitmapContextCreate(rawData, w, h,
+                                                     bitsPerComponent, bytesPerRow, colorSpace,
+                                                     kCGImageAlphaPremultipliedLast);
+        CGColorSpaceRelease(colorSpace);
 
-        // const uint8_t* bytes = [data bytes];
-
-        // printf("Pixel Data:\n");
-        // for(size_t row = 0; row < height; row++)
-        // {
-        //     for(size_t col = 0; col < width; col++)
-        //     {
-        //         const uint8_t* pixel =
-        //             &bytes[row * bpr + col * bytes_per_pixel];
-
-        //         printf("(");
-        //         for(size_t x = 0; x < bytes_per_pixel; x++)
-        //         {
-        //             printf("%.2X", pixel[x]);
-        //             if( x < bytes_per_pixel - 1 )
-        //                 printf(",");
-        //         }
-
-        //         printf(")");
-        //         if( col < width - 1 )
-        //             printf(", ");
-        //     }
-
-        //     printf("\n");
-        // }
-
-
+        // Draw the image which will populate rawData
+        CGContextDrawImage(context, CGRectMake(0, 0, w, h), image);
+        CGContextRelease(context);
         CFRelease(image);
 
-        return new graphics::Bitmap(bgraData, bgraDataLen, this->_convertBounds(rect));
+        return new graphics::Bitmap(rawData, bgraDataLen, this->_convertBounds(rect));
     };
 
 }

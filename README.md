@@ -101,3 +101,6 @@ Below are a set apps to be developed
   - [ ] stream windows back to users machine
   - [ ] registered service tell eyebrowse what apps can be launched
   - [ ] ability to launch virtual box vms
+
+- BT core
+

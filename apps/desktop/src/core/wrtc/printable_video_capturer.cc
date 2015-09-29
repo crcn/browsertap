@@ -1,13 +1,77 @@
 #include "./printable_video_capturer.h"
 #include "webrtc/base/bind.h"
-// #include <chrono>
 
 namespace wrtc {
+
+
+class CapturerThread : public rtc::MessageHandler {
+public:
+    CapturerThread(PrintableVideoCapturer* capturer) : capturer_(capturer) {
+        isRunning_ = false;
+        thread_ = new rtc::Thread();
+        thread_->Start();
+        
+        time_stamp_ = 0; 
+    }
+
+    ~CapturerThread() {
+        thread_->Quit();
+        delete thread_;
+    }
+
+    void Start() {
+        thread_->PostDelayed(100, this, MSG_CAPTURE_TIMER);
+        isRunning_ = true;
+    }
+    
+    void Stop() {
+        thread_->Clear(this);
+        isRunning_ = false; 
+    }
+
+    bool IsRunning() {
+        return isRunning_;
+    }
+
+protected:    
+    enum {
+        MSG_CAPTURE_TIMER, 
+    };
+    
+    void OnMessage(rtc::Message* msg) {
+        switch(msg->message_id) {
+        case MSG_CAPTURE_TIMER:
+            thread_->PostDelayed(50, this, MSG_CAPTURE_TIMER);
+            capturer_->run();
+        }
+    }
+    
+private:
+    rtc::Thread* thread_;
+    bool isRunning_;
+    PrintableVideoCapturer* capturer_;
+
+    int64 time_stamp_;
+};
+
   PrintableVideoCapturer::PrintableVideoCapturer(graphics::Printable* printable):
   target(printable),
   _isRunning(false), 
   _startThread(nullptr) {
     LOG_VERBOSE(__PRETTY_FUNCTION__);
+    _mh = new CapturerThread(this);
+    // this->AddRenderer(new PrintableVideoRenderer());
+
+    // Default supported formats. Use ResetSupportedFormats to over write.
+    // std::vector<cricket::VideoFormat> formats;
+
+    // cricket::VideoFormat format(1125, 740, 
+    //         FPS_TO_INTERVAL(15), 
+    //         cricket::FOURCC_ARGB); 
+    // formats.push_back(format);
+
+    SetId("SimpleVideo");
+    // SetSupportedFormats(formats);
   }
 
   bool PrintableVideoCapturer::GetBestCaptureFormat(const cricket::VideoFormat& desired, cricket::VideoFormat* best_format) {
@@ -18,15 +82,15 @@ namespace wrtc {
   cricket::CaptureState PrintableVideoCapturer::Start(const cricket::VideoFormat& format) {
     LOG_VERBOSE(__PRETTY_FUNCTION__);
     // frames need to be sent to.
-    _startThread = rtc::Thread::Current();
+
     SetCaptureFormat(&format);
 
     _startTime = rtc::TimeNanos();
     this->_isRunning = true;
     SetCaptureState(cricket::CaptureState::CS_RUNNING);
 
-
-    core::Thread::run(this);
+    _startThread = rtc::Thread::Current();
+    _mh->Start();
 
     // this->_startTime = 1000000 * static_cast<int64>(rtc::Time()); // ns to ms
     return cricket::CS_RUNNING;
@@ -61,49 +125,36 @@ namespace wrtc {
   //       rtc::Bind(&AVFoundationVideoCapturer::SignalFrameCapturedOnStartThread,
   //                 this, &frame));
   // }
-    while(1) {
-      LOG_VERBOSE(__PRETTY_FUNCTION__); 
+    LOG_VERBOSE(__PRETTY_FUNCTION__); 
 
-      cricket::CapturedFrame frame;
-      graphics::Bitmap* bm = this->target->print();
+    cricket::CapturedFrame frame;
+    graphics::Bitmap* bm = this->target->print();
 
-      // frame.time_stamp   = 1000000 * static_cast<int64>(rtc::Time());
-      // frame.elapsed_time = 33333333;
+    int64 currentTime = rtc::TimeNanos();
+    frame.data         = bm->data;
+    frame.width        = bm->bounds.width;
+    frame.height       = bm->bounds.height;
 
-      // std::chrono::nanoseconds dur = std::chrono::high_resolution_clock::now().time_since_epoch();
-      // frame.time_stamp = dur.count();
-      int64 currentTime = rtc::TimeNanos();
-      frame.data      = bm->data;
-      frame.width     = bm->bounds.width;
-      frame.height    = bm->bounds.height;
-      frame.fourcc    = cricket::FOURCC_ARGB;
-      frame.data_size = bm->size;
-      frame.time_stamp = currentTime;
-      frame.elapsed_time = currentTime - _startTime;
+    //https://code.google.com/p/libyuv/wiki/Formats
+    frame.fourcc       = cricket::FOURCC_ABGR;
+    frame.data_size    = bm->size;
+    frame.time_stamp   = currentTime;
+    frame.elapsed_time = currentTime - _startTime;
 
-      std::cout << currentTime - _startTime << std::endl;
+    this->SignalFrameCaptured(this, &frame);
 
-      // this->SignalFrameCaptured(this, &frame);
-      // this->SignalFrameCaptured(this, &frame);
+    // _startThread->Invoke<void>(
+    //     rtc::Bind(&PrintableVideoCapturer::signalFrameCapturedOnStartThread2,
+    //               this, &frame));
 
-
- 
-      _startThread->Invoke<void>(
-          rtc::Bind(&PrintableVideoCapturer::signalFrameCapturedOnStartThread2,
-                    this, &frame));
-
-      delete bm;
+    delete bm;
 
 
-      // usleep(1000 * 100);
-
-      // core::Thread::run(this);
-      break;
-    }
   }
 
   void PrintableVideoCapturer::signalFrameCapturedOnStartThread2(const cricket::CapturedFrame* frame) {
     this->SignalFrameCaptured(this, frame);
+    // rtc::Thread::Current()->ProcessMessages(1);
   }
 
 }

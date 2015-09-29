@@ -40,7 +40,7 @@ class Peer extends Model {
 
       pc.setRemoteDescription(new SessionDescription(_this.offer), function() {
         pc.createAnswer(function(answer) {
-          pc.setLocalDescription(new RTCSessionDescription(answer), co.wrap(function*() {
+          pc.setLocalDescription(new SessionDescription(answer), co.wrap(function*() {
             resolve(yield _this._setRemoteDescription(answer));
           }), reject);
         }, reject);

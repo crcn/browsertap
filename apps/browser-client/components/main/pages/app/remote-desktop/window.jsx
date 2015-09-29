@@ -13,11 +13,11 @@ var RemoteDesktopWindow = React.createClass({
   onChange: function() {
     this.setState({
       videoUrl: this.peer.videoUrl
-    })
+    });
   },
-  render: function() {
+  render: function() { 
     return <div className="m-remote-desktop-screen"> 
-     { this.state.videoUrl ? <video src={this.state.videoUrl} /> : this._renderInfo() }
+     { this.state.videoUrl ? <video src={this.state.videoUrl} autoPlay="true" /> : this._renderInfo() }
     </div>
   },
   _renderInfo: function() {

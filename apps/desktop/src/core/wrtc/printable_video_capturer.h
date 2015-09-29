@@ -7,8 +7,12 @@
 #include "../thread/runnable.h"
 #include "../thread/thread.h"
 #include "webrtc/base/sigslot.h"
+#include "./core.h"
 
 namespace wrtc {
+
+  class CapturerThread;
+
   class PrintableVideoCapturer : public cricket::VideoCapturer, public core::Runnable  {
   public:
     graphics::Printable* target;
@@ -33,8 +37,24 @@ namespace wrtc {
     bool _isRunning;
     int64 _startTime;
     rtc::Thread* _startThread;  // Set in Start(), unset in Stop().
+    CapturerThread* _mh;  // Set in Start(), unset in Stop().
     void signalFrameCapturedOnStartThread2(const cricket::CapturedFrame* frame);
   };
+
+
+class PrintableVideoRenderer : public webrtc::VideoRendererInterface {
+public:
+  PrintableVideoRenderer() {
+
+  }
+  virtual void SetSize(int width, int height) {
+    std::cout << "SET SIZE" << std::endl;
+  }
+  virtual void RenderFrame(const cricket::VideoFrame* frame) {
+    std::cout << "RENDER IT!" << std::endl;
+  }
+};
+
 }
 
 #endif

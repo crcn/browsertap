@@ -82,8 +82,66 @@ out/Release/obj.target/main/src/core/wrtc/printable_video_capturer.o: \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/rollingaccumulator.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/timing.h \
   ../../src/core/wrtc/../thread/runnable.h \
-  ../../src/core/wrtc/../thread/thread.h \
-  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/bind.h
+  ../../src/core/wrtc/../thread/thread.h ../../src/core/wrtc/./core.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosourceinterface.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediastreaminterface.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/peerconnectionfactoryproxy.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/peerconnectioninterface.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/datachannelinterface.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/dtlsidentitystore.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/dtmfsenderinterface.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/jsep.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/statstypes.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/thread_checker.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/thread_checker_impl.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/platform_thread.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/umametrics.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/fileutils.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/platform_file.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/proxy.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/bind.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/json.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/config.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/value.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/forwards.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/reader.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/features.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/writer.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/ssladapter.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/stringutils.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/jsepsessiondescription.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/jsepicecandidate.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediaconstraintsinterface.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/peerconnectionfactory.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/session/media/channelmanager.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/capturemanager.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/capturerenderadapter.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/sigslotrepeater.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/mediaengine.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/mediacommon.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videoprocessor.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/voiceprocessor.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/session.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/session/media/voicechannel.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/session/media/channel.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/client/socketmonitor.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/session/media/bundlefilter.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/session/media/mediamonitor.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/session/media/mediasession.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/cryptoparams.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/transportdescriptionfactory.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/session/media/rtcpmuxfilter.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/session/media/srtpfilter.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/asyncudpsocket.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/test/fakeconstraints.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosource.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/notifier.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videotrackrenderers.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videorenderer.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/sctp/sctpdataengine.h \
+  ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/webrtc/webrtcvideocapturerfactory.h
 ../../src/core/wrtc/printable_video_capturer.cc:
 ../../src/core/wrtc/./printable_video_capturer.h:
 ../../src/core/wrtc/../log/logger.h:
@@ -167,4 +225,63 @@ out/Release/obj.target/main/src/core/wrtc/printable_video_capturer.o: \
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/timing.h:
 ../../src/core/wrtc/../thread/runnable.h:
 ../../src/core/wrtc/../thread/thread.h:
+../../src/core/wrtc/./core.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosourceinterface.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediastreaminterface.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/peerconnectionfactoryproxy.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/peerconnectioninterface.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/datachannelinterface.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/dtlsidentitystore.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/dtmfsenderinterface.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/jsep.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/statstypes.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/thread_checker.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/thread_checker_impl.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/platform_thread.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/umametrics.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/fileutils.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/platform_file.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/proxy.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/bind.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/json.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/config.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/value.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/forwards.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/reader.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/features.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/writer.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/ssladapter.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/stringutils.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/jsepsessiondescription.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/jsepicecandidate.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediaconstraintsinterface.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/peerconnectionfactory.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/session/media/channelmanager.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/capturemanager.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/capturerenderadapter.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/sigslotrepeater.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/mediaengine.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/mediacommon.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videoprocessor.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/voiceprocessor.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/session.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/session/media/voicechannel.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/session/media/channel.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/client/socketmonitor.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/session/media/bundlefilter.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/session/media/mediamonitor.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/session/media/mediasession.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/cryptoparams.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/p2p/base/transportdescriptionfactory.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/session/media/rtcpmuxfilter.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/session/media/srtpfilter.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/asyncudpsocket.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/test/fakeconstraints.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosource.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/notifier.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videotrackrenderers.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videorenderer.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/sctp/sctpdataengine.h:
+../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/webrtc/webrtcvideocapturerfactory.h:

@@ -84,8 +84,7 @@ out/Release/obj.target/main/src/core/wrtc/connection.o: \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/rollingaccumulator.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/timing.h \
   ../../src/core/wrtc/../thread/runnable.h \
-  ../../src/core/wrtc/../thread/thread.h \
-  ../../src/core/wrtc/./connection.h \
+  ../../src/core/wrtc/../thread/thread.h ../../src/core/wrtc/./core.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosourceinterface.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediastreaminterface.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/peerconnectionfactoryproxy.h \
@@ -143,7 +142,7 @@ out/Release/obj.target/main/src/core/wrtc/connection.o: \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videorenderer.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/sctp/sctpdataengine.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/webrtc/webrtcvideocapturerfactory.h \
-  ../../src/core/wrtc/./core.h ../../src/core/wrtc/./observers.h \
+  ../../src/core/wrtc/./connection.h ../../src/core/wrtc/./observers.h \
   ../../src/core/wrtc/../events/event_emitter.h \
   ../../src/core/wrtc/../events/./event_listener.h \
   ../../src/core/wrtc/../events/./event.h \
@@ -236,7 +235,7 @@ out/Release/obj.target/main/src/core/wrtc/connection.o: \
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/base/timing.h:
 ../../src/core/wrtc/../thread/runnable.h:
 ../../src/core/wrtc/../thread/thread.h:
-../../src/core/wrtc/./connection.h:
+../../src/core/wrtc/./core.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosourceinterface.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/mediastreaminterface.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/peerconnectionfactoryproxy.h:
@@ -294,7 +293,7 @@ out/Release/obj.target/main/src/core/wrtc/connection.o: \
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/base/videorenderer.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/sctp/sctpdataengine.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/media/webrtc/webrtcvideocapturerfactory.h:
-../../src/core/wrtc/./core.h:
+../../src/core/wrtc/./connection.h:
 ../../src/core/wrtc/./observers.h:
 ../../src/core/wrtc/../events/event_emitter.h:
 ../../src/core/wrtc/../events/./event_listener.h:
