@@ -4,46 +4,37 @@
 
 namespace core {
 
-  _TaskRunner::_TaskRunner(TaskWorker* worker):_worker(worker) {
-
-  }
-
-  void* _TaskRunner::run() {
-    return _worker->_run();
-  }
-
-  TaskWorker::TaskWorker(TaskManager* manager):_task(nullptr) {
-    _runner  = new _TaskRunner(this);
+  TaskWorker::TaskWorker(TaskManager* manager):
+  _task(nullptr),
+  _thread(nullptr) {
     _manager = manager;
-    _thread  = Thread::run(_runner);
+    _thread = Thread::run(this, [](void* arg) -> void * {
+      ((TaskWorker*)arg)->_runTasks();
+    });
   }
 
-  void TaskWorker::doTask(Task* task) {
-    // _mutex.lock();
-    _task = task;
-    // _mutex.unlock();
-    // _hasJobCondition.signal();
-  }
-
-  void* TaskWorker::_run() {
+  void* TaskWorker::_runTasks() {
     while(1) { 
 
-      if(_task != nullptr) {
-        _task->run();
-        delete _task;
-        _task = nullptr;
+      Task* task = _manager->popTask();
+
+      if (task != nullptr) {
+        _manager->_workerMutex.lock();
+        task->run();
+        delete task;
+        _manager->_workerMutex.unlock();
+        usleep(100); 
+        continue;
       }
 
-      _manager->addWaitingWorker(this);
+      _manager->addWaitingWorker(this); 
+      startWorkingCondition.wait(_manager->_workerMutex);
 
-      if (_task == nullptr) {
-        _hasJobCondition.wait(_mutex);
-      }
+      usleep(1);
     }
   }
 
   TaskWorker::~TaskWorker() {
     delete _thread;
-    delete _runner;
   }
 }

@@ -11,28 +11,18 @@ namespace core {
   class TaskManager;
   class TaskWorker;
 
-  class _TaskRunner : public core::Runnable {
-  public:
-    _TaskRunner(TaskWorker* _worker);
-    void* run();
-  private:
-    TaskWorker* _worker;
-  };
-
   class TaskWorker {
   friend class _TaskRunner;
   public:
     TaskWorker(TaskManager*);
-    void doTask(Task*);
+    ThreadCondition startWorkingCondition;
     ~TaskWorker();
   private:
-    void* _run();
+    void* _runTasks();
     Thread* _thread;
     TaskManager* _manager;
     Task* _task;
-    _TaskRunner* _runner;
     ThreadMutex _mutex;
-    ThreadCondition _hasJobCondition;
   };
 }
 

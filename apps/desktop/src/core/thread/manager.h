@@ -28,10 +28,18 @@ namespace core {
 
     void addWaitingWorker(TaskWorker*);
 
+    /**
+     */
+
+    core::Task* popTask();
+    ThreadMutex _workerMutex;
+    ThreadMutex _taskMutex;
+
   private:
 
-    ThreadMutex _mutex;
+    Thread* _runThread;
     ThreadCondition _hasWaitingWorkerCondition;
+    ThreadCondition _hasTaskCondition;
     std::queue<Task*> _tasks;
     std::queue<TaskWorker*> _waitingWorkers;
     std::vector<TaskWorker*> _runningWorkers;
