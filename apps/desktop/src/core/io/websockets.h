@@ -11,7 +11,7 @@ namespace io {
   public:
     WebSockets(base::Application* application);
     void start();
-    void run();
+    void* run();
     static void log(int level, const char* message);
   private:
     core::Thread* _thread;

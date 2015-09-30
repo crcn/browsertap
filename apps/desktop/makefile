@@ -7,7 +7,7 @@ app_test: ./build/app_test ./build/app_test2/out/Release/main
 test-app: app_test 
 	./build/app_test/out/Release/app_test
 
-test-app-watch: test-app
+test-app-watch:
 	fswatch ./src | xargs -n1 make test-app
 
 link:

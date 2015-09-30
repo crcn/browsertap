@@ -104,7 +104,7 @@ private:
     LOG_VERBOSE(__PRETTY_FUNCTION__);
   }
 
-  void PrintableVideoCapturer::run() {
+  void* PrintableVideoCapturer::run() {
 
   //   if (_startThread->IsCurrent()) {
   //   SignalFrameCaptured(this, &frame);

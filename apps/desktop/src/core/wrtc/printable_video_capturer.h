@@ -24,7 +24,7 @@ namespace wrtc {
     bool IsRunning();
     bool IsScreencast() const;
     bool GetPreferredFourccs(std::vector<uint32>* fourccs);
-    void run();
+    void* run();
 
     // // Callback attached to SignalFrameCaptured where SignalVideoFrames is called.
     // void SignalFrameCaptured(VideoCapturer* video_capturer,

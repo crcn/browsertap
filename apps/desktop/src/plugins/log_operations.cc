@@ -10,7 +10,7 @@ namespace app {
     core::Thread::run(this);
   }
 
-  void LogOperations::run() {
+  void* LogOperations::run() {
 
     mesh::Request* tailedRequest;
 

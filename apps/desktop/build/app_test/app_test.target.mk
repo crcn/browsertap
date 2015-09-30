@@ -248,6 +248,8 @@ OBJS := \
 	$(obj).target/$(TARGET)/src/core/thread/condition.o \
 	$(obj).target/$(TARGET)/src/core/thread/mutex.o \
 	$(obj).target/$(TARGET)/src/core/thread/thread.o \
+	$(obj).target/$(TARGET)/src/core/thread/manager.o \
+	$(obj).target/$(TARGET)/src/core/thread/worker.o \
 	$(obj).target/$(TARGET)/src/core/active_record/object.o \
 	$(obj).target/$(TARGET)/src/core/active_record/collection.o \
 	$(obj).target/$(TARGET)/src/core/active_record/db.o \
@@ -256,7 +258,7 @@ OBJS := \
 	$(obj).target/$(TARGET)/src/core/io/websockets.o \
 	$(obj).target/$(TARGET)/src/core/virt/osx/window.o \
 	$(obj).target/$(TARGET)/src/core/virt/osx/desktop.o \
-	$(obj).target/$(TARGET)/test.o
+	$(obj).target/$(TARGET)/src/core/thread/manager_test.o
 
 # Add to the list of files we specially track dependencies for.
 all_deps += $(OBJS)

@@ -127,7 +127,7 @@ namespace io {
     this->_thread = core::Thread::run(this);
   }
 
-  void WebSockets::run() {
+  void* WebSockets::run() {
 
 
     struct libwebsocket_context *context;
@@ -152,7 +152,7 @@ namespace io {
 
     if (context == NULL) {
         LOG_ERROR("libwebsocket init failed");
-        return;
+        return NULL;
     }
     
     // infinite loop, to end this server send SIGTERM. (CTRL+C)
@@ -165,6 +165,8 @@ namespace io {
     }
     
     libwebsocket_context_destroy(context);
+
+    return NULL;
   }
 
   void WebSockets::_tailOperations() {

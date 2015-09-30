@@ -57,7 +57,7 @@
                     'target_name': 'app_test',
                     'type': 'executable',
                     'sources': [
-                      './test.cc'
+                      './src/core/thread/manager_test.cc'
                     ]
                 }
             ]

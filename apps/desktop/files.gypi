@@ -32,6 +32,8 @@
             './src/core/thread/condition.cc',
             './src/core/thread/mutex.cc',
             './src/core/thread/thread.cc',
+            './src/core/thread/manager.cc',
+            './src/core/thread/worker.cc',
 
             './src/core/active_record/object.cc',
             './src/core/active_record/collection.cc',

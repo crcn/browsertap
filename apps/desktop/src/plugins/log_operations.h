@@ -8,7 +8,7 @@ namespace app {
   class LogOperations : public core::Runnable {
   public:
     LogOperations(base::Application* app);
-    void run();
+    void* run();
     base::Application* app;
     mesh::Response* _tail;
   };

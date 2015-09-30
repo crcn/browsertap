@@ -33,7 +33,7 @@ namespace core {
 
   void* Thread::_runRunnable(void* runnable) {
     Runnable* r = (Runnable*)runnable;
-    r->run();
+    return r->run();
   }
   
   Thread::~Thread() {
