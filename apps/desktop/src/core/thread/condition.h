@@ -11,24 +11,10 @@ namespace core {
   public:        
     
     ThreadCondition();
-    
-    /**
-     * wait until a condition has been broadcasted
-     */                                           
-    
     void wait(ThreadMutex& mutex);
-    
-    /**
-     * broadcasts to all waiting threads
-     */
+    void wait(ThreadMutex& mutex, int ttl);
     
     void broadcast();
-    
-    
-    /**
-     * signals to one pthread
-     */
-    
     void signal();                     
     
   private:

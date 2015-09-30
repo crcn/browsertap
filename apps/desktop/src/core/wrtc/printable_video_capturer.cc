@@ -60,18 +60,6 @@ private:
   _startThread(nullptr) {
     LOG_VERBOSE(__PRETTY_FUNCTION__);
     _mh = new CapturerThread(this);
-    // this->AddRenderer(new PrintableVideoRenderer());
-
-    // Default supported formats. Use ResetSupportedFormats to over write.
-    // std::vector<cricket::VideoFormat> formats;
-
-    // cricket::VideoFormat format(1125, 740, 
-    //         FPS_TO_INTERVAL(15), 
-    //         cricket::FOURCC_ARGB); 
-    // formats.push_back(format);
-
-    SetId("SimpleVideo");
-    // SetSupportedFormats(formats);
   }
 
   bool PrintableVideoCapturer::GetBestCaptureFormat(const cricket::VideoFormat& desired, cricket::VideoFormat* best_format) {
