@@ -7,6 +7,9 @@ app_test: ./build/app_test ./build/app_test2/out/Release/main
 test-app: app_test 
 	./build/app_test/out/Release/app_test
 
+test-app-watch: test-app
+	fswatch ./src | xargs -n1 make test-app
+
 link:
 	mkdir -p /usr/local/bt;
 	rm /usr/local/bt/remote-desktop-server;

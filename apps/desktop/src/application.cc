@@ -8,7 +8,6 @@
 
 app::Application::Application() {
 
-
   this->bus    = new mesh::Bus();
   this->bus    = new mesh::TailableBus(this->bus);
 
