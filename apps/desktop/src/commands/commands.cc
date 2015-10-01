@@ -34,8 +34,8 @@ namespace app {
     LOG_INFO("hydrate app");
 
     // start the webrtc main session
-    CreateWrtcConnectionResponse mainSessionResponse(app);
-    while(mainSessionResponse.read());
+    // CreateWrtcConnectionResponse mainSessionResponse(app);
+    // while(mainSessionResponse.read());
 
     virt::Desktop* desktop = app->desktop;
     std::vector<virt::Window*> windows = desktop->windows();

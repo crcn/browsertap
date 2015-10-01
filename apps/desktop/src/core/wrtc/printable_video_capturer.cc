@@ -80,9 +80,7 @@ private:
     _startThread = rtc::Thread::Current();
     _mh->Start();
 
-    // this->_startTime = 1000000 * static_cast<int64>(rtc::Time()); // ns to ms
     return cricket::CS_RUNNING;
-
   }
 
   void PrintableVideoCapturer::Stop() {
@@ -130,20 +128,15 @@ private:
     frame.time_stamp   = currentTime;
     frame.elapsed_time = currentTime - _startTime;
 
-    this->SignalFrameCaptured(this, &frame);
-
-    // _startThread->Invoke<void>(
-    //     rtc::Bind(&PrintableVideoCapturer::signalFrameCapturedOnStartThread2,
-    //               this, &frame));
+    _startThread->Invoke<void>(
+        rtc::Bind(&PrintableVideoCapturer::signalFrameCapturedOnStartThread2,
+                  this, &frame));
 
     delete bm;
-
-
   }
 
   void PrintableVideoCapturer::signalFrameCapturedOnStartThread2(const cricket::CapturedFrame* frame) {
     this->SignalFrameCaptured(this, frame);
-    // rtc::Thread::Current()->ProcessMessages(1);
   }
 
 }

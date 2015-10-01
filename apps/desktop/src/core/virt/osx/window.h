@@ -17,17 +17,17 @@
 namespace osx {
     class Window : virt::Window {
     private:
-        CFDictionaryRef _info;
+        uint32_t _windowId;
         CGRect _cgbounds();
         geom::Bounds _convertBounds(CGRect rect);
 
     public:
-        Window(CFDictionaryRef info);
+        Window(uint32_t id);
         geom::Bounds bounds();
         graphics::Bitmap* print();
         void bounds(geom::Bounds bounds);
         std::string title();
-
+        CFDictionaryRef info();
     };
 }
 

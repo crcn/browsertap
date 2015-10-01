@@ -11,80 +11,73 @@
 #include "./window.h"
 #include <iostream>
 
-int _id;
-
-int _generateId() {
-    _id++;
-    return _id;
-}
-
 namespace osx {
 
-    Window::Window(CFDictionaryRef info):
-    _info(info) {
-        this->id = _generateId();
-    }
+  Window::Window(uint32_t id):
+  _windowId(id) {
+  }
 
-    geom::Bounds Window::bounds() {
-        return this->_convertBounds(this->_cgbounds());
-    };
+  geom::Bounds Window::bounds() {
+    return this->_convertBounds(this->_cgbounds());
+  };
 
-    geom::Bounds Window::_convertBounds(CGRect rect) {
-        return geom::Bounds(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
-    };
+  geom::Bounds Window::_convertBounds(CGRect rect) {
+    return geom::Bounds(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
+  };
 
-    CGRect Window::_cgbounds() {
-        CGRect rect;
-        CGRectMakeWithDictionaryRepresentation((CFDictionaryRef)CFDictionaryGetValue(this->_info, kCGWindowBounds), &rect);
-        return rect;
-    };
+  CFDictionaryRef Window::info() {
+    uint32_t windowid[1] = {_windowId};
+    CFArrayRef windowArray            = CFArrayCreate(NULL, (const void **)windowid, 1, NULL);
+    CFArrayRef windowsdescription     = CGWindowListCreateDescriptionFromArray(windowArray);
+    return (CFDictionaryRef)CFArrayGetValueAtIndex ((CFArrayRef)windowsdescription, 0);
+  };
 
-    void Window::bounds(geom::Bounds bounds) {
-        // this->_bounds = bounds;
-        // TODO - resize window here
-    };
+  CGRect Window::_cgbounds() {
+    CGRect rect;
+    CGRectMakeWithDictionaryRepresentation((CFDictionaryRef)CFDictionaryGetValue(this->info(), kCGWindowBounds), &rect);
+    return rect;
+  };
 
-    std::string Window::title() {
-        CFStringRef currentTitle = (CFStringRef)CFDictionaryGetValue(this->_info, kCGWindowName);
-        const char* bytes = CFStringGetCStringPtr(currentTitle, kCFStringEncodingUTF8);
-        if (bytes == NULL) return std::string();
-        std::string ret(bytes);
-        return ret;
-    }
+  void Window::bounds(geom::Bounds bounds) {
+    // this->_bounds = bounds;
+    // TODO - resize window here
+  };
 
-    graphics::Bitmap* Window::print() {
-        CGRect rect = this->_cgbounds();
-        int winId = 0;
+  std::string Window::title() {
+    CFStringRef currentTitle = (CFStringRef)CFDictionaryGetValue(this->info(), kCGWindowName);
+    const char* bytes = CFStringGetCStringPtr(currentTitle, kCFStringEncodingUTF8);
+    if (bytes == NULL) return std::string();
+    std::string ret(bytes);
+    return ret;
+  }
 
-        CFNumberRef windowNumber = (CFNumberRef)CFDictionaryGetValue(this->_info, kCGWindowNumber);
-        CFNumberGetValue(windowNumber, kCFNumberIntType, &winId);
+  graphics::Bitmap* Window::print() {
+    CGRect rect = this->_cgbounds();
 
-        // TODO vs glgrab.c
-        CGImageRef image = CGWindowListCreateImage(rect,
-            kCGWindowListOptionIncludingWindow,
-            winId,
-            kCGWindowImageDefault);
+    // TODO vs glgrab.c
+    CGImageRef image = CGWindowListCreateImage(rect,
+      kCGWindowListOptionIncludingWindow,
+      _windowId,
+      kCGWindowImageDefault);
 
-        // CFDataRef cd = CGDataProviderCopyData(CGImageGetDataProvider(image));
+      // CFDataRef cd = CGDataProviderCopyData(CGImageGetDataProvider(image));
 
+      int w = rect.size.width;
+      int h = rect.size.height;
+      int bgraDataLen = w * h * 4;
 
+      // Alloc data that the image data will be put into
+      unsigned char *rawData = new unsigned char[bgraDataLen];
+      // unsigned char *rawData = (unsigned char *)CFDataGetBytePtr(cd);
 
-        int w = rect.size.width;
-        int h = rect.size.height;
-        int bgraDataLen = w * h * 4;
-
-        // Alloc data that the image data will be put into
-        unsigned char *rawData = new unsigned char[bgraDataLen];
-        // unsigned char *rawData = (unsigned char *)CFDataGetBytePtr(cd);
-
-        // // Create a CGBitmapContext to draw an image into
-        size_t bytesPerPixel = 4;
-        size_t bytesPerRow = bytesPerPixel * w;
-        size_t bitsPerComponent = 8;
-        CGColorSpaceRef colorSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
-        CGContextRef context = CGBitmapContextCreate(rawData, w, h,
-                                                     bitsPerComponent, bytesPerRow, colorSpace,
-                                                     kCGImageAlphaPremultipliedLast);
+      // // Create a CGBitmapContext to draw an image into
+      size_t bytesPerPixel = 4;
+      size_t bytesPerRow = bytesPerPixel * w;
+      size_t bitsPerComponent = 8;
+      CGColorSpaceRef colorSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+      CGContextRef context = CGBitmapContextCreate(rawData, w, h,
+        bitsPerComponent, bytesPerRow, colorSpace,
+        kCGImageAlphaPremultipliedLast);
         CGColorSpaceRelease(colorSpace);
 
         // Draw the image which will populate rawData
@@ -93,6 +86,6 @@ namespace osx {
         CFRelease(image);
 
         return new graphics::Bitmap(rawData, bgraDataLen, this->_convertBounds(rect));
-    };
+      };
 
-}
+    }
