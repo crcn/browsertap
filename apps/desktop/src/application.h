@@ -9,9 +9,9 @@
 #include "./plugins/log_operations.h"
 
 namespace app {
- 
+
   class Commands;
-  
+
   class Application : public base::Application {
   public:
     virt::Desktop* desktop;

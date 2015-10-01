@@ -3,6 +3,7 @@
 
 #include "../log/logger.h"
 #include "../mesh/mesh.h"
+#include "../thread/manager.h"
 
 namespace io {
   class Base;
@@ -13,6 +14,7 @@ namespace base {
   public:
     mesh::Bus* bus;
     io::Base* io;
+    core::TaskManager tasks;
 
     Application() { };
     virtual void start()=0;

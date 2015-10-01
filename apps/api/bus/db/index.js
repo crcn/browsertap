@@ -25,7 +25,7 @@ module.exports = function(app, bus) {
 function _wrapBus20(bus) {
   return function(operation) {
     var resp = new mesh.AsyncResponse();
-    
+
     bus(operation)
     .on("data", resp.write.bind(resp))
     .on("end", resp.end.bind(resp));

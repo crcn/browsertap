@@ -40,12 +40,11 @@ out/Release/obj.target/app/src/main.o: ../../src/main.cc \
   ../../src/./core/virt/osx/../base/../../geom/bounds.h \
   ../../src/./core/virt/osx/../base/../../graphics/printable.h \
   ../../src/./core/virt/osx/../base/../../graphics/./bitmap.h \
-  ../../src/./plugins/log_operations.h \
-  ../../vendor/libwebsockets/lib/libwebsockets.h \
-  ../../vendor/libwebsockets/build/lws_config.h \
-  ../../src/./core/thread/manager.h \
+  ../../src/./plugins/log_operations.h ../../src/./core/thread/manager.h \
   ../../src/./core/active_record/../application/../mesh/../thread/./task.h \
-  ../../src/./core/active_record/../application/../mesh/../thread/./worker.h
+  ../../src/./core/active_record/../application/../mesh/../thread/./worker.h \
+  ../../vendor/libwebsockets/lib/libwebsockets.h \
+  ../../vendor/libwebsockets/build/lws_config.h
 ../../src/main.cc:
 ../../src/./application.h:
 ../../src/./core/active_record/db.h:
@@ -91,8 +90,8 @@ out/Release/obj.target/app/src/main.o: ../../src/main.cc \
 ../../src/./core/virt/osx/../base/../../graphics/printable.h:
 ../../src/./core/virt/osx/../base/../../graphics/./bitmap.h:
 ../../src/./plugins/log_operations.h:
-../../vendor/libwebsockets/lib/libwebsockets.h:
-../../vendor/libwebsockets/build/lws_config.h:
 ../../src/./core/thread/manager.h:
 ../../src/./core/active_record/../application/../mesh/../thread/./task.h:
 ../../src/./core/active_record/../application/../mesh/../thread/./worker.h:
+../../vendor/libwebsockets/lib/libwebsockets.h:
+../../vendor/libwebsockets/build/lws_config.h:

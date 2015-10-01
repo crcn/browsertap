@@ -19,6 +19,9 @@ out/Release/obj.target/app/src/plugins/log_operations.o: \
   ../../src/plugins/../core/application/../mesh/./sequence.h \
   ../../src/plugins/../core/application/../mesh/./resp.h \
   ../../src/plugins/../core/application/../mesh/./tailable.h \
+  ../../src/plugins/../core/application/../thread/manager.h \
+  ../../src/plugins/../core/application/../mesh/../thread/./task.h \
+  ../../src/plugins/../core/application/../mesh/../thread/./worker.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/config.h \
@@ -46,6 +49,9 @@ out/Release/obj.target/app/src/plugins/log_operations.o: \
 ../../src/plugins/../core/application/../mesh/./sequence.h:
 ../../src/plugins/../core/application/../mesh/./resp.h:
 ../../src/plugins/../core/application/../mesh/./tailable.h:
+../../src/plugins/../core/application/../thread/manager.h:
+../../src/plugins/../core/application/../mesh/../thread/./task.h:
+../../src/plugins/../core/application/../mesh/../thread/./worker.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/config.h:
