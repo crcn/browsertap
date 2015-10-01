@@ -19,6 +19,9 @@ out/Release/obj.target/app/src/core/io/websockets.o: \
   ../../src/core/io/../application/../mesh/./sequence.h \
   ../../src/core/io/../application/../mesh/./resp.h \
   ../../src/core/io/../application/../mesh/./tailable.h \
+  ../../src/core/io/../application/../thread/manager.h \
+  ../../src/core/io/../application/../mesh/../thread/./task.h \
+  ../../src/core/io/../application/../mesh/../thread/./worker.h \
   ../../src/core/io/../mesh/mesh.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h \
@@ -51,6 +54,9 @@ out/Release/obj.target/app/src/core/io/websockets.o: \
 ../../src/core/io/../application/../mesh/./sequence.h:
 ../../src/core/io/../application/../mesh/./resp.h:
 ../../src/core/io/../application/../mesh/./tailable.h:
+../../src/core/io/../application/../thread/manager.h:
+../../src/core/io/../application/../mesh/../thread/./task.h:
+../../src/core/io/../application/../mesh/../thread/./worker.h:
 ../../src/core/io/../mesh/mesh.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/json.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/autolink.h:

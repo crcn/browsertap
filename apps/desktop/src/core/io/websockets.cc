@@ -33,20 +33,22 @@ static int callback_http(struct libwebsocket_context* _this,
 
   class BusTask : public core::Task {
   public:
-    BusTask(mesh::Request* request, base::Application* app, struct libwebsocket *wsi):
+    BusTask(Json::Value root, base::Application* app, struct libwebsocket *wsi):
     _app(app),
-    _wsi(wsi),
-    _reqest(request) {
+    _root(root),
+    _wsi(wsi) {
 
     }
     void* run() {
 
-      mesh::Response* response = _app->bus->execute(_request);
+      mesh::Request request(_root["name"].asString(), &_root);
+
+      mesh::Response* response = _app->bus->execute(&request);
       core::IJsonSerializable* chunk;
 
       Json::FastWriter writer;
       Json::Value resp;
-      resp["resp"] = root["id"];
+      resp["resp"] = _root["id"];
 
       // TODO - multithreading here
       while(chunk = (core::IJsonSerializable*)response->read()) {
@@ -57,12 +59,11 @@ static int callback_http(struct libwebsocket_context* _this,
       resp["data"] = Json::nullValue;
       write_json(resp, _wsi);
       delete response;
-      delete _request;
     }
   private:
     base::Application* _app;
     struct libwebsocket *_wsi;
-    mesh::Request* _request;
+    Json::Value _root;
   };
 
   static int callback_dumb_increment(struct libwebsocket_context * _this,
@@ -85,7 +86,7 @@ static int callback_http(struct libwebsocket_context* _this,
           Json::Reader reader;
 
           if (reader.parse((char*)in, root)) {
-            app->tasks.run(new BusTask(new mesh::Request(root["name"].asString(), &root), app, wsi));
+            app->tasks.run(new BusTask(root, app, wsi));
           } else {
             LOG_ERROR("unable to parse" << in);
           }

@@ -11,7 +11,7 @@ namespace core {
     _runThread = Thread::run(this, [](void* arg) -> void * {
       ((TaskManager*)arg)->_runTasks();
     });
-  } 
+  }
 
   void TaskManager::run(core::Task* task) {
     _taskMutex.lock();
@@ -23,12 +23,14 @@ namespace core {
 
   void TaskManager::_runTasks() {
 
+
     while(1) {
 
       if (_tasks.empty()) {
         _taskMutex.lock();
         _hasTaskCondition.wait(_taskMutex, 1);
         _taskMutex.unlock();
+        continue;
       }
 
       TaskWorker* worker = nullptr;
