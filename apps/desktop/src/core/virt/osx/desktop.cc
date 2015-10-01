@@ -10,7 +10,6 @@
 #include "./window.h"
 #include <iostream>
 
-
 std::vector<virt::Window*> osx::Desktop::windows() {
     CGWindowListOption listOptions = kCGWindowListOptionOnScreenOnly | kCGWindowListExcludeDesktopElements;
 
@@ -26,7 +25,7 @@ std::vector<virt::Window*> osx::Desktop::windows() {
         this->_windows.push_back((virt::Window*)new osx::Window(winId));
     }
 
-    // CFRelease(windows);
+    CFRelease(windows);
 
     return this->_windows;
 }
