@@ -66,7 +66,7 @@ namespace app {
   }
 
   /**
-   * start a window session. Note that the session will close once the 
+   * start a window session. Note that the session will close once the
    * initialized session drops all connections.
    */
 

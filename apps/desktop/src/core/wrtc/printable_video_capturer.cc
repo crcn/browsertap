@@ -10,8 +10,8 @@ public:
         isRunning_ = false;
         thread_ = new rtc::Thread();
         thread_->Start();
-        
-        time_stamp_ = 0; 
+
+        time_stamp_ = 0;
     }
 
     ~CapturerThread() {
@@ -23,21 +23,21 @@ public:
         thread_->PostDelayed(100, this, MSG_CAPTURE_TIMER);
         isRunning_ = true;
     }
-    
+
     void Stop() {
         thread_->Clear(this);
-        isRunning_ = false; 
+        isRunning_ = false;
     }
 
     bool IsRunning() {
         return isRunning_;
     }
 
-protected:    
+protected:
     enum {
-        MSG_CAPTURE_TIMER, 
+        MSG_CAPTURE_TIMER,
     };
-    
+
     void OnMessage(rtc::Message* msg) {
         switch(msg->message_id) {
         case MSG_CAPTURE_TIMER:
@@ -45,7 +45,7 @@ protected:
             capturer_->run();
         }
     }
-    
+
 private:
     rtc::Thread* thread_;
     bool isRunning_;
@@ -56,7 +56,7 @@ private:
 
   PrintableVideoCapturer::PrintableVideoCapturer(graphics::Printable* printable):
   target(printable),
-  _isRunning(false), 
+  _isRunning(false),
   _startThread(nullptr) {
     LOG_VERBOSE(__PRETTY_FUNCTION__);
     _mh = new CapturerThread(this);
@@ -113,7 +113,8 @@ private:
   //       rtc::Bind(&AVFoundationVideoCapturer::SignalFrameCapturedOnStartThread,
   //                 this, &frame));
   // }
-    LOG_VERBOSE(__PRETTY_FUNCTION__); 
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
+
 
     cricket::CapturedFrame frame;
     graphics::Bitmap* bm = this->target->print();

@@ -9,7 +9,7 @@
 app::Application::Application() {
 
   this->bus    = new mesh::Bus();
-  this->bus    = new mesh::TailableBus(this->bus);
+  // this->bus    = new mesh::TailableBus(this->bus);
 
   // desktop controller
   this->desktop = new osx::Desktop();

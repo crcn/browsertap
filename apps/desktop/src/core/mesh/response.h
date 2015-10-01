@@ -15,7 +15,7 @@ namespace mesh {
     virtual void* read();
     virtual ~Response() { };
   };
- 
+
   template<typename Type>
   class FnResponse : public Response {
   public:
@@ -109,7 +109,9 @@ namespace mesh {
       }
 
       virtual ~AsyncResponse() {
-        if (this->_thread != NULL) delete this->_thread;
+        if (this->_thread != NULL) {
+          delete this->_thread;
+        }
       }
 
     private:

@@ -73,7 +73,7 @@ namespace wrtc {
     } else {
       LOG_NOTICE("set video track");
       stream->AddTrack(videoTrack);
-    
+
       if (!this->_connection->AddStream(stream)) {
         LOG_ERROR("Adding stream to PeerConnection failed");
       }
@@ -94,11 +94,11 @@ namespace wrtc {
     LOG_VERBOSE(__PRETTY_FUNCTION__);
 
     switch(state) {
-      case webrtc::PeerConnectionInterface::kIceConnectionConnected: 
+      case webrtc::PeerConnectionInterface::kIceConnectionConnected:
         this->_onIceConnectionConnected();
         break;
     }
-  } 
+  }
 
   /**
    */
@@ -111,7 +111,7 @@ namespace wrtc {
     Json::Value value;
     this->localDescription = new SessionDescription("offer", out);
     this->emit(ConnectionEvent::WRTC_OFFER, this->localDescription);
-  } 
+  }
 
   /**
    */
@@ -122,7 +122,7 @@ namespace wrtc {
     webrtc::SessionDescriptionInterface* sd(webrtc::CreateSessionDescription(description.type, description.sdp, &error));
     if (!sd) {
         LOG_ERROR(error.description.c_str());
-        LOG(WARNING) << "Can't parse received session description message."; 
+        LOG(WARNING) << "Can't parse received session description message.";
         return;
     }
 
