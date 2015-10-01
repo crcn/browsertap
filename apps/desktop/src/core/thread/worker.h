@@ -17,8 +17,10 @@ namespace core {
     TaskWorker(TaskManager*);
     ThreadCondition startWorkingCondition;
     ~TaskWorker();
+    bool die();
   private:
     void* _runTasks();
+    bool _keepAlive;
     Thread* _thread;
     TaskManager* _manager;
     Task* _task;

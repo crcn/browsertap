@@ -213,6 +213,8 @@ OBJS := \
 	$(obj).target/$(TARGET)/src/core/thread/condition.o \
 	$(obj).target/$(TARGET)/src/core/thread/mutex.o \
 	$(obj).target/$(TARGET)/src/core/thread/thread.o \
+	$(obj).target/$(TARGET)/src/core/thread/manager.o \
+	$(obj).target/$(TARGET)/src/core/thread/worker.o \
 	$(obj).target/$(TARGET)/src/core/active_record/object.o \
 	$(obj).target/$(TARGET)/src/core/active_record/collection.o \
 	$(obj).target/$(TARGET)/src/core/active_record/db.o \

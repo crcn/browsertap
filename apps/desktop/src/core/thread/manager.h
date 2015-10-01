@@ -31,6 +31,11 @@ namespace core {
     /**
      */
 
+    void buryWorker(TaskWorker*);
+
+    /**
+     */
+
     core::Task* popTask();
     ThreadMutex _workerMutex;
     ThreadMutex _taskMutex;
@@ -49,6 +54,6 @@ namespace core {
     int _minWorkers;
     bool _running;
   };
-} 
+}
 
-#endif   
+#endif

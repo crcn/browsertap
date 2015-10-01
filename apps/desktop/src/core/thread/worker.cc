@@ -6,32 +6,41 @@ namespace core {
 
   TaskWorker::TaskWorker(TaskManager* manager):
   _task(nullptr),
-  _thread(nullptr) {
+  _thread(nullptr),
+  _keepAlive(true) {
     _manager = manager;
     _thread = Thread::run(this, [](void* arg) -> void * {
       ((TaskWorker*)arg)->_runTasks();
     });
   }
 
+  bool TaskWorker::die() {
+    bool canDie = _keepAlive;
+    _keepAlive = false;
+    return canDie;
+  }
+
   void* TaskWorker::_runTasks() {
-    while(1) { 
+
+    while(_keepAlive) {
 
       Task* task = _manager->popTask();
 
       if (task != nullptr) {
-        _manager->_workerMutex.lock();
         task->run();
         delete task;
-        _manager->_workerMutex.unlock();
-        usleep(100); 
         continue;
       }
 
-      _manager->addWaitingWorker(this); 
-      startWorkingCondition.wait(_manager->_workerMutex);
+      _manager->_workerMutex.lock();
+      _manager->addWaitingWorker(this);
+      startWorkingCondition.wait(_manager->_workerMutex, 1);
+      _manager->_workerMutex.unlock();
 
-      usleep(1);
+      usleep(1000);
     }
+
+    _manager->buryWorker(this);
   }
 
   TaskWorker::~TaskWorker() {

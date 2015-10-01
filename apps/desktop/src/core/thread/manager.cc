@@ -4,13 +4,14 @@
 namespace core {
 
   TaskManager::TaskManager():
-  _maxWorkers(10), _minWorkers(2), 
-  _running(false), _numWorkers(0), 
+  _maxWorkers(100), _minWorkers(2),
+  _running(false), _numWorkers(0),
   _runThread(nullptr) {
+    _numWorkers = 0;
     _runThread = Thread::run(this, [](void* arg) -> void * {
       ((TaskManager*)arg)->_runTasks();
     });
-  }
+  } 
 
   void TaskManager::run(core::Task* task) {
     _taskMutex.lock();
@@ -19,68 +20,68 @@ namespace core {
     _hasTaskCondition.signal();
   }
 
+
   void TaskManager::_runTasks() {
 
     while(1) {
 
-      _taskMutex.lock();
-
-      std::cout << _tasks.size() << std::endl;
-
-      if (_tasks.size() == 0) {
-        _hasTaskCondition.wait(_taskMutex);
+      if (_tasks.empty()) {
+        _taskMutex.lock();
+        _hasTaskCondition.wait(_taskMutex, 1);
         _taskMutex.unlock();
-        continue;
       }
 
       TaskWorker* worker = nullptr;
 
       _workerMutex.lock();
-   
+
       if (!_waitingWorkers.empty()) {
 
-        std::cout << "NOT EMPT" << std::endl;
-
         worker = _waitingWorkers.front();
-
         _waitingWorkers.pop();
 
-        worker->startWorkingCondition.signal();
-
-      // // otherwise create a new worker if the num workers does not exc
+        if(_tasks.empty()) {
+          if(worker->die()) {
+            _numWorkers--;
+          }
+          _workerMutex.unlock();
+        } else {
+          _workerMutex.unlock();
+          worker->startWorkingCondition.signal();
+        }
       } else if (_numWorkers < _maxWorkers) {
-
-        std::cout << "create worker" << std::endl;
-        _numWorkers++; 
+        if (_tasks.empty()) continue;
+        _numWorkers++;
+        // create a new worker - it'll pull stuff off the stack
         worker = new TaskWorker(this);
-      } else {
-        std::cout << "WAIT" << std::endl;
-        _taskMutex.unlock(); 
         _workerMutex.unlock();
+      } else {
         _hasWaitingWorkerCondition.wait(_workerMutex);
-        continue;
-      } 
+        _workerMutex.unlock();
+      }
 
-      _taskMutex.unlock();
-      _workerMutex.unlock();
-
-      usleep(100);
+      usleep(1000);
     }
   }
 
   void TaskManager::addWaitingWorker(TaskWorker* worker) {
-    _workerMutex.lock();
-    _numWorkers--;
     _waitingWorkers.push(worker);
-    _workerMutex.unlock(); 
     _hasWaitingWorkerCondition.signal();
   }
 
+  void TaskManager::buryWorker(TaskWorker* worker) {
+    delete worker;
+  }
+
   core::Task* TaskManager::popTask() {
-    _workerMutex.lock();
+    _taskMutex.lock();
+    if (_tasks.empty()) {
+      _taskMutex.unlock();
+      return nullptr;
+    }
     core::Task* task = _tasks.front();
     _tasks.pop();
-    _workerMutex.unlock();
+    _taskMutex.unlock();
     return task;
   }
 }
