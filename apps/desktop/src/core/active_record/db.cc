@@ -22,20 +22,20 @@ namespace activeRecord {
 
     switch(event->type) {
       case ObjectEvent::INSERT:
-        name = "insert";
+        root["name"] = "insert";
         root["data"] = ((Object*)event->data)->toJson();
         break;
       case ObjectEvent::REMOVE:
-        name = "remove";
+        root["name"] = "remove";
         root["query"]["id"] = ((Object*)event->target)->id();
         break;
       case ObjectEvent::UPDATE:
-        name = "update";
+        root["name"] = "update";
         root["data"] = ((Object*)event->target)->toJson();
         break;
     }
 
-    mesh::Request request(name, &root);
+    mesh::Request request("operation", &root);
     mesh::Response* resp = this->app->bus->execute(&request);
     while(resp->read());
     delete resp;

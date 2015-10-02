@@ -76,7 +76,7 @@ namespace mesh {
           if(!this->_chunks.empty()) {
              void* chunk = this->_chunks.front();
              this->_chunks.pop();
-            this->_mutex.unlock();
+             this->_mutex.unlock();
              return chunk;
           }
 

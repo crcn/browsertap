@@ -6,6 +6,7 @@
 #include <json/json.h>
 #include "../json/serializeable.h"
 #include "../thread/task.h"
+#include "../mesh/mesh.h"
 
 static int callback_http(struct libwebsocket_context* _this,
   struct libwebsocket *wsi,
@@ -72,11 +73,12 @@ static int callback_http(struct libwebsocket_context* _this,
     void *user, void *in, size_t len)
     {
 
-      base::Application* app = (base::Application*)libwebsocket_context_user(_this);
+      io::WebSockets* ws = (io::WebSockets*)libwebsocket_context_user(_this);
 
       switch (reason) {
         case LWS_CALLBACK_ESTABLISHED: // just log message that someone is connecting
         LOG_NOTICE("websockets: connection established");
+        ws->connections.push_back(wsi);
         break;
         case LWS_CALLBACK_RECEIVE: {
 
@@ -86,7 +88,7 @@ static int callback_http(struct libwebsocket_context* _this,
           Json::Reader reader;
 
           if (reader.parse((char*)in, root)) {
-            app->tasks.run(new BusTask(root, app, wsi));
+            ws->app->tasks.run(new BusTask(root, ws->app, wsi));
           } else {
             LOG_ERROR("unable to parse" << in);
           }
@@ -108,13 +110,15 @@ static int callback_http(struct libwebsocket_context* _this,
           // free(buf);
           break;
         }
+	      case LWS_CALLBACK_CLOSED:
+          ws->connections.remove(wsi);
+        break;
         default:
         break;
       }
 
       return 0;
     }
-
 
     static struct libwebsocket_protocols protocols[] = {
       /* first protocol must always be HTTP handler */
@@ -134,6 +138,31 @@ static int callback_http(struct libwebsocket_context* _this,
     };
 
     namespace io {
+
+      class WebSocketBus : public mesh::Bus {
+      public:
+        WebSocketBus(mesh::Bus* mainBus, WebSockets* ws):
+        _mainBus(mainBus),
+        _ws(ws) {
+
+        }
+
+        mesh::Response* execute(mesh::Request* request) {
+
+          if (request->name.compare("operation") == 0) {
+          	for (std::list<libwebsocket *>::iterator it = _ws->connections.begin(); it != _ws->connections.end(); ++it) {
+              write_json(*((Json::Value*)request->data), *it);
+          	}
+          }
+
+          return this->_mainBus->execute(request);
+        }
+      private:
+        mesh::Bus* _mainBus;
+        WebSockets* _ws;
+      };
+
+
       WebSockets::WebSockets(base::Application* app):io::Base(app) {
       }
 
@@ -142,7 +171,6 @@ static int callback_http(struct libwebsocket_context* _this,
       }
 
       void* WebSockets::run() {
-
 
         struct libwebsocket_context *context;
         struct lws_context_creation_info info;
@@ -155,11 +183,10 @@ static int callback_http(struct libwebsocket_context* _this,
         info.ssl_private_key_filepath = NULL;
         info.gid = -1;
         info.uid = -1;
-        info.user = (void *)this->app;
+        info.user = (void *)this;
         info.options = 0;
 
         lws_set_log_level(LLL_ERR | LLL_WARN | LLL_NOTICE, &log);
-
 
         // create libwebsocket context representing this server
         context = libwebsocket_create_context(&info);
@@ -168,6 +195,8 @@ static int callback_http(struct libwebsocket_context* _this,
           LOG_ERROR("libwebsocket init failed");
           return NULL;
         }
+
+        app->bus = new WebSocketBus(app->bus, this);
 
         // infinite loop, to end this server send SIGTERM. (CTRL+C)
         while (1) {
@@ -181,15 +210,6 @@ static int callback_http(struct libwebsocket_context* _this,
         libwebsocket_context_destroy(context);
 
         return NULL;
-      }
-
-      void WebSockets::_tailOperations() {
-        mesh::Request tailRequest("tail");
-        mesh::Response* resp = this->app->bus->execute(&tailRequest);
-        mesh::Request* tailedRequest;
-        while(tailedRequest = (mesh::Request*)resp->read()) {
-          // TODO - broadcast here
-        }
       }
 
       void WebSockets::log(int level, const char* line) {

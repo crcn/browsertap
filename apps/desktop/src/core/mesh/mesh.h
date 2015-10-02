@@ -7,4 +7,3 @@
 #include "./response.h"
 #include "./sequence.h"
 #include "./resp.h"
-#include "./tailable.h"

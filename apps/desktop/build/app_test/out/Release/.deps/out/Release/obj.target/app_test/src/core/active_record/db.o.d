@@ -17,7 +17,6 @@ out/Release/obj.target/app_test/src/core/active_record/db.o: \
   ../../src/core/active_record/../application/../mesh/./fn.h \
   ../../src/core/active_record/../application/../mesh/./sequence.h \
   ../../src/core/active_record/../application/../mesh/./resp.h \
-  ../../src/core/active_record/../application/../mesh/./tailable.h \
   ../../src/core/active_record/../application/../thread/manager.h \
   ../../src/core/active_record/../application/../mesh/../thread/./task.h \
   ../../src/core/active_record/../application/../mesh/../thread/./worker.h \
@@ -54,7 +53,6 @@ out/Release/obj.target/app_test/src/core/active_record/db.o: \
 ../../src/core/active_record/../application/../mesh/./fn.h:
 ../../src/core/active_record/../application/../mesh/./sequence.h:
 ../../src/core/active_record/../application/../mesh/./resp.h:
-../../src/core/active_record/../application/../mesh/./tailable.h:
 ../../src/core/active_record/../application/../thread/manager.h:
 ../../src/core/active_record/../application/../mesh/../thread/./task.h:
 ../../src/core/active_record/../application/../mesh/../thread/./worker.h:
