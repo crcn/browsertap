@@ -1,7 +1,10 @@
 .DS_Store
 node_modules
 public/css/all.css
+Release
 *.dmg
+*.o
+out/Release
 *.tar.gz
 *.pkg
 

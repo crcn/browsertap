@@ -1,10 +1,10 @@
 all: ./vendor/webrtc-build-scripts link app app_test
 
-app: ./build/app ./build/xcodefiles ./build/app2/out/Release/main
+app: ./build/app  ./build/app2/out/Release/main
 
 app_test: ./build/app_test ./build/app_test2/out/Release/main
 
-test-app: app_test 
+test-app: app_test
 	./build/app_test/out/Release/app_test
 
 test-app-watch:
