@@ -149,6 +149,7 @@ static int callback_http(struct libwebsocket_context* _this,
 
         mesh::Response* execute(mesh::Request* request) {
 
+          // oplog emitted by active record db
           if (request->name.compare("operation") == 0) {
           	for (std::list<libwebsocket *>::iterator it = _ws->connections.begin(); it != _ws->connections.end(); ++it) {
               write_json(*((Json::Value*)request->data), *it);

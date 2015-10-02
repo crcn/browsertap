@@ -181,6 +181,10 @@ var _pages = require("./pages");
 
 var _pages2 = _interopRequireDefault(_pages);
 
+var _co = require("co");
+
+var _co2 = _interopRequireDefault(_co);
+
 var Main = _react2["default"].createClass({
   displayName: "Main",
 
@@ -201,7 +205,7 @@ var Main = _react2["default"].createClass({
 
 module.exports = Main;
 
-},{"./pages":28,"react":748}],5:[function(require,module,exports){
+},{"./pages":28,"co":453,"react":748}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -628,15 +632,12 @@ var Window = require("./window");
 var RemoteDesktopComponent = React.createClass({
   displayName: "RemoteDesktopComponent",
 
-  getInitialState: function getInitialState() {
-    return {
-      windows: []
-    };
-  },
-  componentDidMount: function componentDidMount() {
-    var rd = new _commonRemoteDesktop2["default"]({
+  componentWillMount: function componentWillMount() {
+    this._rd = new _commonRemoteDesktop2["default"]({
       host: "ws://localhost:9000"
     });
+  },
+  componentDidMount: function componentDidMount() {
 
     rd.bus({ name: "spy" }).on("data", this._onResponse);
 
@@ -647,7 +648,7 @@ var RemoteDesktopComponent = React.createClass({
     }).bind(this));
   },
   _onResponse: function _onResponse(response) {
-    // TODO - error checking here 
+    // TODO - error checking here
     response.once("end", this._onChange);
   },
   _onChange: function _onChange() {
@@ -2016,7 +2017,8 @@ var _co2 = _interopRequireDefault(_co);
 
 var _events = require("events");
 
-exports["default"] = function (options) {
+exports["default"] = function (options, bus) {
+  if (!bus) bus = _commonMesh2["default"].noop;
 
   if (!process.browser) return _commonMesh2["default"].noop;
 
@@ -2036,7 +2038,7 @@ exports["default"] = function (options) {
     var resp = _openResponses[op.resp];
 
     if (!resp) {
-      return console.warn("unable to handle ", message.data);
+      return bus(op);
     }
 
     if (op.data == void 0) {
@@ -2048,7 +2050,6 @@ exports["default"] = function (options) {
   };
 
   function send(operation) {
-    console.log(operation);
     ws.send(JSON.stringify(operation));
   }
 
@@ -5883,7 +5884,6 @@ var RemoteDesktop = (function (_EventEmitter) {
 
     _get(Object.getPrototypeOf(RemoteDesktop.prototype), "constructor", this).call(this);
     Object.assign(this, properties);
-
     this.initialize();
   }
 
@@ -5895,7 +5895,12 @@ var RemoteDesktop = (function (_EventEmitter) {
     value: function initialize() {
       this.bus = (0, _commonBusDriversWebsocket2["default"])({
         host: this.host
-      });
+      }, (function (operation) {
+
+        // blast, I don't want this, but it works :/
+        this.emit("change");
+      }).bind(this));
+
       this.bus = _commonMesh2["default"].spy(this.bus);
     }
 

@@ -16,7 +16,6 @@ class RemoteDesktop extends EventEmitter {
   constructor(properties) {
     super();
     Object.assign(this, properties);
-
     this.initialize();
   }
 
@@ -26,7 +25,12 @@ class RemoteDesktop extends EventEmitter {
   initialize() {
     this.bus = createWebsocketBus({
       host: this.host
-    });
+    }, function(operation) {
+
+      // blast, I don't want this, but it works :/
+      this.emit("change");
+    }.bind(this));
+
     this.bus = mesh.spy(this.bus);
   }
 
@@ -34,7 +38,7 @@ class RemoteDesktop extends EventEmitter {
    */
 
   getWindows() {
-    return co(function*() { 
+    return co(function*() {
       return (yield this.bus({ name: "find", collection: "virtWindows" }).readAll()).map(function(data) {
         return new Window(Object.assign({ bus: this.bus }, data));
       }.bind(this));

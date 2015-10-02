@@ -4,15 +4,12 @@ import RemoteDesktop from "common/remote-desktop";
 import throttle      from "lodash/function/throttle";
 
 var RemoteDesktopComponent = React.createClass({
-  getInitialState: function() {
-    return {
-      windows: []
-    };
+  componentWillMount: function() {
+    this._rd = new RemoteDesktop({
+      host: "ws://localhost:9000"
+    });
   },
   componentDidMount: function() {
-    var rd = new RemoteDesktop({
-      host: "ws://localhost:9000"
-    }); 
 
     rd.bus({ name: "spy" }).on("data", this._onResponse);
 
@@ -24,16 +21,16 @@ var RemoteDesktopComponent = React.createClass({
 
   },
   _onResponse: function(response) {
-    // TODO - error checking here  
+    // TODO - error checking here
     response
-    .once("end", this._onChange); 
+    .once("end", this._onChange);
   },
   _onChange: function() {
     this.forceUpdate();
   },
   render: function() {
     return <div className="m-remote-desktop">
-      { 
+      {
         this.state.windows.map(function(win) {
           return <Window key={win.id} win={win} />
         })

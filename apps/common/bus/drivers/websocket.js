@@ -2,10 +2,11 @@ import mesh from "common/mesh";
 import co from "co";
 import { EventEmitter } from "events";
 
-export default function(options) {
+export default function(options, bus) {
+  if (!bus) bus = mesh.noop;
 
   if (!process.browser) return mesh.noop;
-  
+
   var ws = new WebSocket(options.host, 'dumb-increment-protocol');
 
   var _openResponses = {};
@@ -22,7 +23,7 @@ export default function(options) {
     var resp = _openResponses[op.resp];
 
     if (!resp) {
-      return console.warn("unable to handle ", message.data);
+      return bus(op);
     }
 
     if (op.data == void 0) {
@@ -34,7 +35,6 @@ export default function(options) {
   }
 
   function send(operation) {
-    console.log(operation); 
     ws.send(JSON.stringify(operation));
   }
 
@@ -43,8 +43,8 @@ export default function(options) {
   return function(operation) {
     var resp = new mesh.AsyncResponse();
     operation.id = resp._id = _id++;
- 
-    _openResponses[resp._id] = resp; 
+
+    _openResponses[resp._id] = resp;
 
     if (_isOpen) {
       send(operation);

@@ -89,6 +89,8 @@ namespace app {
         // TODO - throw exception here
       }
 
+      // TODO - need to create video webrtc session here where it removes itself
+      // after the video has been removed
       CreateWrtcConnectionResponse windowWrtcConnection(app, window);
       while(windowWrtcConnection.read());
 
