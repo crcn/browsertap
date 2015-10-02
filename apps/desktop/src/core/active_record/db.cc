@@ -35,7 +35,7 @@ namespace activeRecord {
         break;
     }
 
-    LOG_VERBOSE("active record: " << root["name"].asString() << " " << root["collection"].asString());
+    LOG_INFO("active record: " << root["name"].asString() << " " << root["collection"].asString());
 
     // broadcast oplog into the ether
     mesh::Request request("operation", &root);
