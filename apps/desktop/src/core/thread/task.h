@@ -14,10 +14,10 @@ namespace core {
   class FnTask : public Task {
   public:
     FnTask(void* arg, void* (*run)(void* arg)):_run(run) {
-      this->_arg = arg;
+      _arg = arg;
     }
     void* run() {
-      this->_run(this->_arg);
+      _run(_arg);
     }
     ~FnTask() {
 

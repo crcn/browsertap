@@ -39,7 +39,7 @@ namespace activeRecord {
 
     // broadcast oplog into the ether
     mesh::Request request("operation", &root);
-    mesh::Response* resp = this->app->bus->execute(&request);
+    mesh::Response* resp = app->bus->execute(&request);
     while(resp->read());
     delete resp;
   }

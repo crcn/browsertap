@@ -4,29 +4,22 @@
 
 namespace app {
 
-  LogOperations::LogOperations(base::Application* app):app(app) {
-    mesh::Request tailRequest("tail");
-    this->_tail = this->app->bus->execute(&tailRequest);
-    core::Thread::run(this);
+  LogOperationsBus::LogOperationsBus(mesh::Bus* mainBus):_mainBus(mainBus) {
+
   }
 
-  void* LogOperations::run() {
+  mesh::Response* LogOperationsBus::execute(mesh::Request* request) {
+    Json::Value root;
+    Json::FastWriter writer;
+    root["name"] = request->name;
+    char* str = (char*)writer.write(root).c_str();
 
-    mesh::Request* tailedRequest;
+    // remove newline
+    str[std::strlen(str) - 1] = 0;
 
-    while(tailedRequest = (mesh::Request*)this->_tail->read()) {
+    LOG_VERBOSE("op: " << str);
 
-      Json::Value root;
-      Json::FastWriter writer;
-
-      root["name"] = tailedRequest->name;
-
-      char* str = (char*)writer.write(root).c_str();
-
-      // remove newline
-      str[std::strlen(str) - 1] = 0;
-
-      LOG_VERBOSE("op: " << str);
-    }
+    return this->_mainBus->execute(request);
   }
+
 };

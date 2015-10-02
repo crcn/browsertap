@@ -13,14 +13,14 @@ namespace mesh {
 
     }
     void* read() {
-      if (this->_current == this->_responses.size()) return NULL;
-      Response* current = this->_responses.at(this->_current);
+      if (_current == _responses.size()) return NULL;
+      Response* current = _responses.at(_current);
       void* chunk = current->read();
 
       if (chunk == NULL) {
-        this->_current++;
+        _current++;
         delete current; // clean up
-        return this->read();
+        return read();
       } else {
         return chunk;
       }
@@ -44,7 +44,7 @@ namespace mesh {
      */
 
     SequenceBus* add(Bus* bus) {
-      this->_busses.push_back(bus);
+      _busses.push_back(bus);
       return this;
     }
 
@@ -55,8 +55,8 @@ namespace mesh {
       
       std::vector<Response*> responses;
 
-      for (int i = 0, n = this->_busses.size(); i < n; i++) {
-        responses.push_back(this->_busses.at(i)->execute(request));
+      for (int i = 0, n = _busses.size(); i < n; i++) {
+        responses.push_back(_busses.at(i)->execute(request));
       }
 
       return new SequenceBusResponse(responses);

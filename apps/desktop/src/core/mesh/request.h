@@ -14,9 +14,9 @@ namespace mesh {
     /**
      */
 
-    Request(std::string name, void* data) {
-      this->name = name;
-      this->data = data;
+    Request(std::string name, void* data):
+    name(name),
+    data(data) {
     }
 
     /**

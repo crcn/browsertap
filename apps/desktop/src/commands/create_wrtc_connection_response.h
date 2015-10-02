@@ -16,34 +16,34 @@ namespace app {
      */
 
     CreateWrtcConnectionResponse(Application* app, graphics::Printable* video = NULL):_app(app) {
-      this->_connection = new wrtc::Connection(video);
-      connection = new WRTCConnection(this->_connection);
-      this->_app->ardb->collection(WRTCConnection::COLLECTION_NAME)->insert(connection);
-      this->_connection->addListener(this);
-      this->_response = new mesh::AsyncResponse();
+      _connection = new wrtc::Connection(video);
+      connection = new WRTCConnection(_connection);
+      _app->ardb->collection(WRTCConnection::COLLECTION_NAME)->insert(connection);
+      _connection->addListener(this);
+      _response = new mesh::AsyncResponse();
     }
 
     /**
      */
     
     void* read() {
-      return this->_response->read();
+      return _response->read();
     }
 
     /**
      */
 
     void handleEvent(core::Event* event) {
-      this->_connection->removeListener(this);
-      this->_response->end(this->_connection);
+      _connection->removeListener(this);
+      _response->end(_connection);
     }
 
     /**
      */
 
     ~CreateWrtcConnectionResponse() {
-      delete this->_response;
-      // delete this->_connection;
+      delete _response;
+      // delete _connection;
     }
 
 

@@ -6,7 +6,7 @@
 namespace core {
 
   Thread::Thread(void* data, ThreadCallback* callback) {
-    pthread_create(&this->_thread, NULL, callback, data);
+    pthread_create(&_thread, NULL, callback, data);
   }
 
   Thread* Thread::run(void* data, ThreadCallback* callback) {
@@ -23,12 +23,12 @@ namespace core {
   
   void* Thread::join() {
     void* result = NULL;
-    pthread_join(this->_thread, &result);  
+    pthread_join(_thread, &result);  
     return result;
   }                                         
   
   void Thread::detach() {
-    pthread_detach(this->_thread);
+    pthread_detach(_thread);
   }    
 
   void* Thread::_runRunnable(void* runnable) {
@@ -37,6 +37,6 @@ namespace core {
   }
   
   Thread::~Thread() {
-    this->detach();
+    detach();
   }   
 };

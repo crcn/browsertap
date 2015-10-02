@@ -26,7 +26,7 @@ namespace graphics {
         bounds(bounds) {
         }
         ~Bitmap() {
-          delete this->data;
+          delete data;
         }
     };
 };

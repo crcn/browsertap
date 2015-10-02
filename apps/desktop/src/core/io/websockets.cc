@@ -156,7 +156,7 @@ static int callback_http(struct libwebsocket_context* _this,
           	}
           }
 
-          return this->_mainBus->execute(request);
+          return _mainBus->execute(request);
         }
       private:
         mesh::Bus* _mainBus;
@@ -168,7 +168,7 @@ static int callback_http(struct libwebsocket_context* _this,
       }
 
       void WebSockets::start() {
-        this->_thread = core::Thread::run(this);
+        _thread = core::Thread::run(this);
       }
 
       void* WebSockets::run() {

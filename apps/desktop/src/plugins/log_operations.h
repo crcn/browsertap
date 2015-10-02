@@ -3,14 +3,15 @@
 
 #include "../core/application/application.h"
 #include "../core/thread/runnable.h"
+#include "../core/mesh/mesh.h"
 
 namespace app {
-  class LogOperations : public core::Runnable {
+  class LogOperationsBus : public mesh::Bus {
   public:
-    LogOperations(base::Application* app);
-    void* run();
-    base::Application* app;
-    mesh::Response* _tail;
+    LogOperationsBus(mesh::Bus* bus);
+    mesh::Response* execute(mesh::Request* request);
+  private:
+    mesh::Bus* _mainBus;
   };
 };
 

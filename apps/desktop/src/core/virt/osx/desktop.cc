@@ -60,7 +60,7 @@ namespace osx {
       virt::Window* v = _windows[k];
       _windows.erase(k);
       v->emit(virt::WindowEvents::REMOVE, NULL);
-      this->emit(virt::WindowEvents::REMOVE, v);
+      emit(virt::WindowEvents::REMOVE, v);
       delete v;
     }
 

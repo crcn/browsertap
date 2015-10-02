@@ -74,7 +74,7 @@ private:
     SetCaptureFormat(&format);
 
     _startTime = rtc::TimeNanos();
-    this->_isRunning = true;
+    _isRunning = true;
     SetCaptureState(cricket::CaptureState::CS_RUNNING);
 
     _startThread = rtc::Thread::Current();
@@ -85,13 +85,13 @@ private:
 
   void PrintableVideoCapturer::Stop() {
     LOG_VERBOSE(__PRETTY_FUNCTION__);
-    this->_isRunning = false;
+    _isRunning = false;
     SetCaptureFormat(NULL);
     _startThread = nullptr;
   }
 
   bool PrintableVideoCapturer::IsRunning() {
-    return this->_isRunning;
+    return _isRunning;
   }
 
   bool PrintableVideoCapturer::IsScreencast() const {
@@ -114,7 +114,7 @@ private:
     LOG_VERBOSE(__PRETTY_FUNCTION__);
 
     cricket::CapturedFrame frame;
-    graphics::Bitmap* bm = this->target->print();
+    graphics::Bitmap* bm = target->print();
 
     int64 currentTime = rtc::TimeNanos();
     frame.data         = bm->data;
@@ -135,7 +135,7 @@ private:
   }
 
   void PrintableVideoCapturer::signalFrameCapturedOnStartThread2(const cricket::CapturedFrame* frame) {
-    this->SignalFrameCaptured(this, frame);
+    SignalFrameCaptured(this, frame);
   }
 
 }

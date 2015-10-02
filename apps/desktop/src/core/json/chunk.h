@@ -9,7 +9,7 @@ namespace core {
     JsonChunk(Json::Value value):value(value) {
     }
     Json::Value toJson() {
-      return this->value;
+      return value;
     }
   private:
     Json::Value value;

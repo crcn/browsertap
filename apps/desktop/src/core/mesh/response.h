@@ -23,7 +23,7 @@ namespace mesh {
 
     }
     virtual void* read() {
-      return (void *)this->_read();
+      return (void *)_read();
     }
   private:
     Type (*_read)();
@@ -43,75 +43,82 @@ namespace mesh {
 
       }
       void* read() {
-        void* ret = (void *)this->_buffer;
-        this->_buffer = NULL;
+        void* ret = (void *)_buffer;
+        _buffer = NULL;
         return ret;
       }
     private:
       Type _buffer;
   };
 
-  class AsyncResponse : public Response {
+  class AsyncResponse : public Response, public core::Runnable {
     public:
 
-      AsyncResponse(core::Runnable* _runnable = NULL) {
-
-        this->_runnable = _runnable;
-        this->_thread   = NULL;
-        this->ended     = false;
-
-        if (_runnable != NULL) {
-          this->_thread   = core::Thread::run((void *)this, &AsyncResponse::_run);
+      AsyncResponse(core::Runnable* runnable = nullptr):
+      _runnable(runnable),
+      _thread(nullptr),
+      ended(false) {
+        if (_runnable != nullptr) {
+          _thread   = core::Thread::run(this);
         }
       }
 
       void* read() {
-        this->_mutex.lock();
+        _mutex.lock();
 
         // continue until there is data, or the response
         // has ended.
         while(1) {
 
           // got chunks? Pop one off
-          if(!this->_chunks.empty()) {
-             void* chunk = this->_chunks.front();
-             this->_chunks.pop();
-             this->_mutex.unlock();
+          if(!_chunks.empty()) {
+             void* chunk = _chunks.front();
+             _chunks.pop();
+             _mutex.unlock();
              return chunk;
           }
 
-          if (this->ended) {
-            this->_mutex.unlock();
+          if (ended) {
+            _mutex.unlock();
 
             // ended - return NULL - no data.
             return NULL;
           }
 
           // no chunks & no end. Async stuff going on, so wait!
-          this->_chunkCondition.wait(this->_mutex);
+          _chunkCondition.wait(_mutex);
         }
       }
 
       void write(void* chunk) {
-        this->_chunks.push(chunk);
-        this->_chunkCondition.signal();
+        _chunks.push(chunk);
+        _chunkCondition.signal();
       }
 
       void end(void* chunk) {
-        this->write(chunk);
-        this->end();
+        write(chunk);
+        end();
       }
 
       void end() {
-        this->ended = true;
-        this->_chunkCondition.signal();
-        this->_endCondition.signal();
+        ended = true;
+        _chunkCondition.signal();
+        _endCondition.signal();
       }
 
       virtual ~AsyncResponse() {
-        if (this->_thread != NULL) {
-          delete this->_thread;
+        if (_thread != NULL) {
+          delete _thread;
         }
+      }
+
+      void* run() {
+        _mutex.lock();
+        _runnable->run();
+        if (!ended) {
+          _endCondition.wait(_mutex);
+        }
+        _mutex.unlock();
       }
 
     private:
@@ -123,15 +130,6 @@ namespace mesh {
       core::Runnable* _runnable;
       std::queue<void*> _chunks;
       bool ended;
-      static void* _run(void* arg) {
-        AsyncResponse* _this = (AsyncResponse*) arg;
-        _this->_mutex.lock();
-        _this->_runnable->run();
-        if (!_this->ended) {
-          _this->_endCondition.wait(_this->_mutex);
-        }
-        _this->_mutex.unlock();
-      }
   };
 }
 

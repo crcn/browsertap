@@ -1,27 +1,27 @@
 #include "./object.h"
 
-namespace activeRecord {  
+namespace activeRecord {
 
   Object::Object():core::EventEmitter() {
-    this->_id = Object::_idCount++;
+    _id = Object::_idCount++;
   }
   int Object::_idCount = 0;
 
   void Object::remove() {
-    this->emit(ObjectEvent::REMOVE, NULL);
+    emit(ObjectEvent::REMOVE, NULL);
   }
 
   void Object::update() {
-    this->emit(ObjectEvent::UPDATE, NULL);
+    emit(ObjectEvent::UPDATE, NULL);
   }
 
   int Object::id() {
-    return this->_id;
+    return _id;
   }
 
   Json::Value Object::toJson() {
     Json::Value root;
-    root["id"] = this->_id;
+    root["id"] = _id;
     return root;
   }
 }

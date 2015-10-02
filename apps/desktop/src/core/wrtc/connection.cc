@@ -42,7 +42,7 @@ namespace wrtc {
 
     _dataChannel->RegisterObserver(_dataChannelObserver);
 
-    if (video != NULL) this->_setVideo(video);
+    if (video != NULL) _setVideo(video);
 
     _connection.get()->CreateOffer(_offerObserver.get(), &_constraints);
   }
@@ -57,7 +57,7 @@ namespace wrtc {
    */
 
   void Connection::_setVideo(graphics::Printable* video) {
-    // this->video = video;
+    // video = video;
 
     // std::cout << video->print() << std::endl;
     PrintableVideoCapturer* capturer = new PrintableVideoCapturer(video);
@@ -74,7 +74,7 @@ namespace wrtc {
       LOG_NOTICE("set video track");
       stream->AddTrack(videoTrack);
 
-      if (!this->_connection->AddStream(stream)) {
+      if (!_connection->AddStream(stream)) {
         LOG_ERROR("Adding stream to PeerConnection failed");
       }
     }
@@ -95,7 +95,7 @@ namespace wrtc {
 
     switch(state) {
       case webrtc::PeerConnectionInterface::kIceConnectionConnected:
-        this->_onIceConnectionConnected();
+        _onIceConnectionConnected();
         break;
     }
   }
@@ -109,8 +109,8 @@ namespace wrtc {
     std::string out;
     _connection->local_description()->ToString(&out);
     Json::Value value;
-    this->localDescription = new SessionDescription("offer", out);
-    this->emit(ConnectionEvent::WRTC_OFFER, this->localDescription);
+    localDescription = new SessionDescription("offer", out);
+    emit(ConnectionEvent::WRTC_OFFER, localDescription);
   }
 
   /**

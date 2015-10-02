@@ -16,7 +16,7 @@ namespace mesh {
      */
 
     virtual Response* execute(Request* request) {
-      return this->_execute(request);
+      return _execute(request);
     }
 
   private:

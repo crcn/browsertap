@@ -46,7 +46,6 @@ out/Release/obj.target/app_test/src/commands/commands.o: \
   ../../src/commands/.././core/virt/osx/../base/../../geom/bounds.h \
   ../../src/commands/.././core/virt/osx/../base/../../graphics/printable.h \
   ../../src/commands/.././core/virt/osx/../base/../../graphics/./bitmap.h \
-  ../../src/commands/.././plugins/log_operations.h \
   ../../src/commands/../core/mesh/mesh.h \
   ../../src/commands/../core/wrtc/connection.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosourceinterface.h \
@@ -230,7 +229,6 @@ out/Release/obj.target/app_test/src/commands/commands.o: \
 ../../src/commands/.././core/virt/osx/../base/../../geom/bounds.h:
 ../../src/commands/.././core/virt/osx/../base/../../graphics/printable.h:
 ../../src/commands/.././core/virt/osx/../base/../../graphics/./bitmap.h:
-../../src/commands/.././plugins/log_operations.h:
 ../../src/commands/../core/mesh/mesh.h:
 ../../src/commands/../core/wrtc/connection.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosourceinterface.h:

@@ -27,7 +27,7 @@ namespace mesh {
      */
 
     CommandsBus* add(std::string name, Bus* bus) {
-      this->_busses[name] = bus;
+      _busses[name] = bus;
       return this;
     }
 
@@ -35,9 +35,9 @@ namespace mesh {
      */
 
     Response* execute(Request* request) {
-      Bus* bus = this->_busses[request->name];
-      if (bus != NULL) return bus->execute(request);
-      return this->_noopBus->execute(request);
+      Bus* bus = _busses[request->name];
+      if (bus != nullptr) return bus->execute(request);
+      return _noopBus->execute(request);
     }
 
   private:

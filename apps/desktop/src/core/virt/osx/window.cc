@@ -18,7 +18,7 @@ namespace osx {
   }
 
   geom::Bounds Window::bounds() {
-    return this->_convertBounds(this->_cgbounds());
+    return _convertBounds(_cgbounds());
   };
 
   geom::Bounds Window::_convertBounds(CGRect rect) {
@@ -34,17 +34,17 @@ namespace osx {
 
   CGRect Window::_cgbounds() {
     CGRect rect;
-    CGRectMakeWithDictionaryRepresentation((CFDictionaryRef)CFDictionaryGetValue(this->info(), kCGWindowBounds), &rect);
+    CGRectMakeWithDictionaryRepresentation((CFDictionaryRef)CFDictionaryGetValue(info(), kCGWindowBounds), &rect);
     return rect;
   };
 
   void Window::bounds(geom::Bounds bounds) {
-    // this->_bounds = bounds;
+    // _bounds = bounds;
     // TODO - resize window here
   };
 
   std::string Window::title() {
-    CFStringRef currentTitle = (CFStringRef)CFDictionaryGetValue(this->info(), kCGWindowName);
+    CFStringRef currentTitle = (CFStringRef)CFDictionaryGetValue(info(), kCGWindowName);
     const char* bytes = CFStringGetCStringPtr(currentTitle, kCFStringEncodingUTF8);
     if (bytes == NULL) return std::string();
     std::string ret(bytes);
@@ -52,7 +52,7 @@ namespace osx {
   }
 
   graphics::Bitmap* Window::print() {
-    CGRect rect = this->_cgbounds();
+    CGRect rect = _cgbounds();
 
     // TODO vs glgrab.c
     CGImageRef image = CGWindowListCreateImage(rect,
@@ -85,6 +85,6 @@ namespace osx {
         CGContextRelease(context);
         CFRelease(image);
 
-        return new graphics::Bitmap(rawData, bgraDataLen, this->_convertBounds(rect));
+        return new graphics::Bitmap(rawData, bgraDataLen, _convertBounds(rect));
       };
     }

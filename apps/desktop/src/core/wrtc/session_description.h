@@ -17,8 +17,8 @@ namespace wrtc {
 
     Json::Value toJson() {
       Json::Value root;
-      root["type"] = this->type;
-      root["sdp"]  = this->sdp;
+      root["type"] = type;
+      root["sdp"]  = sdp;
       return root;
     }
 

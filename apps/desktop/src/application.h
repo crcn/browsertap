@@ -6,7 +6,6 @@
 #include "./core/io/console.h"
 #include "./core/virt/osx/desktop.h"
 #include "./core/thread/thread.h"
-#include "./plugins/log_operations.h"
 
 namespace app {
 
@@ -21,7 +20,6 @@ namespace app {
     activeRecord::DB* ardb;
   private:
     app::Commands* _commands;
-    app::LogOperations* _logOperations;
   };
 }
 

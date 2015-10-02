@@ -8,16 +8,16 @@ namespace app {
   }
 
   graphics::Bitmap* VirtWindow::print() {
-    return this->_window->print();
+    return _window->print();
   }
 
   // TODO - perhaps change to serializable if json::Value has
   // option
   Json::Value VirtWindow::toJson() {
     Json::Value root;
-    geom::Bounds b = this->_window->bounds();
-    root["title"]   = this->_window->title();
-    root["id"]      = this->id();
+    geom::Bounds b = _window->bounds();
+    root["title"]   = _window->title();
+    root["id"]      = id();
     root["x"]       = b.x;
     root["y"]       = b.y;
     root["width"]   = b.width;

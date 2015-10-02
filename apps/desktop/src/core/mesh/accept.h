@@ -27,10 +27,10 @@ namespace mesh {
      */
 
     virtual Response* execute(Request* request) {
-      if(this->_test(request)) {
-        return this->_yes->execute(request);
+      if(_test(request)) {
+        return _yes->execute(request);
       } else {
-        return this->_no->execute(request);
+        return _no->execute(request);
       }
     }
 

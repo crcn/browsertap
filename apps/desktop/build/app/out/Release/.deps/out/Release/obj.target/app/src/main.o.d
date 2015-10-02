@@ -42,7 +42,6 @@ out/Release/obj.target/app/src/main.o: ../../src/main.cc \
   ../../src/./core/virt/osx/../base/../../geom/bounds.h \
   ../../src/./core/virt/osx/../base/../../graphics/printable.h \
   ../../src/./core/virt/osx/../base/../../graphics/./bitmap.h \
-  ../../src/./plugins/log_operations.h \
   ../../vendor/libwebsockets/lib/libwebsockets.h \
   ../../vendor/libwebsockets/build/lws_config.h
 ../../src/main.cc:
@@ -91,6 +90,5 @@ out/Release/obj.target/app/src/main.o: ../../src/main.cc \
 ../../src/./core/virt/osx/../base/../../geom/bounds.h:
 ../../src/./core/virt/osx/../base/../../graphics/printable.h:
 ../../src/./core/virt/osx/../base/../../graphics/./bitmap.h:
-../../src/./plugins/log_operations.h:
 ../../vendor/libwebsockets/lib/libwebsockets.h:
 ../../vendor/libwebsockets/build/lws_config.h:

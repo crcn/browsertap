@@ -7,9 +7,9 @@ namespace activeRecord {
   }
 
   Object* Collection::insert(Object* object) {
-    this->_objects.push_back(object);
+    _objects.push_back(object);
     object->addListener(this);
-    this->emit(ObjectEvent::INSERT, object);
+    emit(ObjectEvent::INSERT, object);
     return object;
   }
 
@@ -28,10 +28,10 @@ namespace activeRecord {
 
   std::vector<Object*> Collection::find(Json::Value query) {
     std::vector<Object*> ret;
-    for(int i = this->_objects.size(); i--;) {
-      Object* object = this->_objects.at(i);
+    for(int i = _objects.size(); i--;) {
+      Object* object = _objects.at(i);
       Json::Value objJson = object->toJson();
-      if (this->_equals(objJson, query)) {
+      if (_equals(objJson, query)) {
         ret.push_back(object);
       }
     }
@@ -39,34 +39,34 @@ namespace activeRecord {
   }
 
   Object* Collection::findOne(Json::Value query) {
-    for(int i = this->_objects.size(); i--;) {
-      Object* object = this->_objects.at(i);
+    for(int i = _objects.size(); i--;) {
+      Object* object = _objects.at(i);
       Json::Value objJson = object->toJson();
-      if (this->_equals(objJson, query)) return object;
+      if (_equals(objJson, query)) return object;
     }
     return NULL;
   }
 
   Object* Collection::findOne(int id) {
-    for(int i = this->_objects.size(); i--;) {
-      Object* object = this->_objects.at(i);
+    for(int i = _objects.size(); i--;) {
+      Object* object = _objects.at(i);
       if (object->id() == id) return object;
     }
     return NULL;
   }
 
   std::vector<Object*> Collection::all() {
-    return this->_objects;
+    return _objects;
   }
 
   void Collection::handleEvent(core::Event* event) {
 
     if (event->type == ObjectEvent::REMOVE) {
       Object* activeRecord = (Object*)event->target;
-      this->remove(activeRecord);
+      remove(activeRecord);
     }
 
-    this->emit(event);
+    emit(event);
   }
 
   bool Collection::_equals(Json::Value object, Json::Value query) {
@@ -77,7 +77,7 @@ namespace activeRecord {
       Json::Value ovalue = object[key];
 
       if (qvalue.isObject()) {
-        if (!this->_equals(ovalue, qvalue)) return false;
+        if (!_equals(ovalue, qvalue)) return false;
       } else if (ovalue.compare(qvalue) != 0) {
         return false;
       }

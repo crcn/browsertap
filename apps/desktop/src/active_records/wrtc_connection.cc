@@ -6,31 +6,31 @@ namespace app {
   const char* WRTCConnection::COLLECTION_NAME = "wrtcConnections";
 
   WRTCConnection::WRTCConnection(wrtc::Connection* connection):_connection(connection) {
-    this->video = NULL;
+    video = NULL;
     connection->addListener(this);
   }
-  
+
   bool WRTCConnection::exists() {
   }
 
   void WRTCConnection::handleEvent(core::Event* event) {
     // trigger update when local connection changes
-    // this->update();
+    // update();
   }
 
   void WRTCConnection::setRemoteDescription(wrtc::SessionDescription description) {
-    this->_connection->setRemoteDescription(description);
+    _connection->setRemoteDescription(description);
   }
 
   Json::Value WRTCConnection::toJson() {
     Json::Value root = activeRecord::Object::toJson();
 
-    if (this->video) {
-      root["video"]["id"] = this->video->id();
+    if (video) {
+      root["video"]["id"] = video->id();
     }
 
-    if (this->_connection->localDescription) {
-      root["offer"] = this->_connection->localDescription->toJson();
+    if (_connection->localDescription) {
+      root["offer"] = _connection->localDescription->toJson();
     }
 
     return root;

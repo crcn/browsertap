@@ -27,7 +27,7 @@ namespace app {
 
     }
     virtual mesh::Response* execute(mesh::Request* request) {
-      return this->_execute(request, this->app);
+      return _execute(request, app);
     }
   private:
     mesh::Response* (*_execute)(mesh::Request*, Application*);

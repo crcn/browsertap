@@ -47,7 +47,7 @@ void* io::Console::captureStdin (void *ptr) {
 
 void io::Console::executeCommand(Json::Value& root) {
 
-    mesh::Response* response = this->app->bus->execute(new mesh::Request(root["name"].asString(), (void*)&root));
+    mesh::Response* response = app->bus->execute(new mesh::Request(root["name"].asString(), (void*)&root));
     const char* chunk;
 
     // boundary start

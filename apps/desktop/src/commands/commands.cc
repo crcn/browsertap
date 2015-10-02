@@ -17,13 +17,13 @@ namespace app {
     // replace the application bus with the commands bus. Note that
     // any commands that do not get executed against *registered* commands
     // here will go back to the original app bus.
-    this->app->bus = (new mesh::CommandsBus(app->bus))
-    ->add("ping", new mesh::FnBus(&this->execPong))
-    ->add("find", new AppFnBus(app, &this->execFind))
-    ->add("hydrate", new AppFnBus(app, &this->execHydrate))
-    ->add("setRemoteAnswer", new AppFnBus(app, &this->execSetRemoteAnswer))
-    ->add("startWindowSession", new AppFnBus(app, &this->execStartWindowSession))
-    ->add("getWindows", new mesh::FnBus(&this->execGetWindows))
+    app->bus = (new mesh::CommandsBus(app->bus))
+    ->add("ping", new mesh::FnBus(&execPong))
+    ->add("find", new AppFnBus(app, &execFind))
+    ->add("hydrate", new AppFnBus(app, &execHydrate))
+    ->add("setRemoteAnswer", new AppFnBus(app, &execSetRemoteAnswer))
+    ->add("startWindowSession", new AppFnBus(app, &execStartWindowSession))
+    ->add("getWindows", new mesh::FnBus(&execGetWindows))
     ; // coma here in case other commands are added
   }
 
