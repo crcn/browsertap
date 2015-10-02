@@ -57,7 +57,8 @@
                     'target_name': 'app_test',
                     'type': 'executable',
                     'sources': [
-                      './src/core/thread/manager_test.cc'
+                      './src/core/thread/manager_test.cc',
+                      './src/commands/sync_windows_task_test.cc'
                     ]
                 }
             ]

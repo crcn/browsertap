@@ -13,9 +13,9 @@
 #include "./window.h"
 
 namespace virt {
-  class Desktop {
+  class Desktop : public core::EventEmitter  {
   public:
-      virtual std::vector<virt::Window*> windows()=0;
+      virtual std::vector<virt::Window*> syncWindows()=0;
   };
 };
 

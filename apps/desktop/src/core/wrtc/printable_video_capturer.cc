@@ -41,7 +41,7 @@ protected:
     void OnMessage(rtc::Message* msg) {
         switch(msg->message_id) {
         case MSG_CAPTURE_TIMER:
-            thread_->PostDelayed(50, this, MSG_CAPTURE_TIMER);
+            thread_->PostDelayed(150, this, MSG_CAPTURE_TIMER);
             capturer_->run();
         }
     }
@@ -112,7 +112,6 @@ private:
   //                 this, &frame));
   // }
     LOG_VERBOSE(__PRETTY_FUNCTION__);
-
 
     cricket::CapturedFrame frame;
     graphics::Bitmap* bm = this->target->print();

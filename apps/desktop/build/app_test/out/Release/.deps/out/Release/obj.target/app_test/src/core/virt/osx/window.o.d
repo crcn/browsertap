@@ -3,11 +3,17 @@ out/Release/obj.target/app_test/src/core/virt/osx/window.o: \
   ../../src/core/virt/osx/window.cc ../../src/core/virt/osx/./window.h \
   ../../src/core/virt/osx/../base/window.h \
   ../../src/core/virt/osx/../base/../../geom/bounds.h \
+  ../../src/core/virt/osx/../base/../../events/event_emitter.h \
+  ../../src/core/virt/osx/../base/../../events/./event_listener.h \
+  ../../src/core/virt/osx/../base/../../events/./event.h \
   ../../src/core/virt/osx/../base/../../graphics/printable.h \
   ../../src/core/virt/osx/../base/../../graphics/./bitmap.h
 ../../src/core/virt/osx/window.cc:
 ../../src/core/virt/osx/./window.h:
 ../../src/core/virt/osx/../base/window.h:
 ../../src/core/virt/osx/../base/../../geom/bounds.h:
+../../src/core/virt/osx/../base/../../events/event_emitter.h:
+../../src/core/virt/osx/../base/../../events/./event_listener.h:
+../../src/core/virt/osx/../base/../../events/./event.h:
 ../../src/core/virt/osx/../base/../../graphics/printable.h:
 ../../src/core/virt/osx/../base/../../graphics/./bitmap.h:

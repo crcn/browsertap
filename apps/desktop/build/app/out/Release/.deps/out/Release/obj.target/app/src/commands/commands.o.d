@@ -182,7 +182,8 @@ out/Release/obj.target/app/src/commands/commands.o: \
   ../../src/commands/../active_records/wrtc_connection.h \
   ../../src/commands/../active_records/./virt_window.h \
   ../../src/commands/./create_wrtc_connection_response.h \
-  ../../src/commands/../core/json/chunk.h
+  ../../src/commands/../core/json/chunk.h \
+  ../../src/commands/./sync_windows_task.h
 ../../src/commands/commands.cc:
 ../../src/commands/./commands.h:
 ../../src/commands/../application.h:
@@ -367,3 +368,4 @@ out/Release/obj.target/app/src/commands/commands.o: \
 ../../src/commands/../active_records/./virt_window.h:
 ../../src/commands/./create_wrtc_connection_response.h:
 ../../src/commands/../core/json/chunk.h:
+../../src/commands/./sync_windows_task.h:

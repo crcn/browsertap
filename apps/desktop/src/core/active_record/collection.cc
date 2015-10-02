@@ -14,7 +14,14 @@ namespace activeRecord {
   }
 
   Object* Collection::remove(Object* object) {
-    // TODO
+
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
+
+    object->removeListener(this);
+
+    std::vector<Object*>::iterator it = std::find(_objects.begin(), _objects.end(), object);
+    if (it != _objects.end()) _objects.erase(it);
+
     return object;
   }
 
@@ -52,9 +59,11 @@ namespace activeRecord {
   }
 
   void Collection::handleEvent(core::Event* event) {
-    // if (event->type == ObjectEvent.REMOVE) {
-    //   // TODO - remove from collection
-    // }
+
+    if (event->type == ObjectEvent::REMOVE) {
+      Object* activeRecord = (Object*)event->target;
+      this->remove(activeRecord);
+    }
 
     this->emit(event);
   }

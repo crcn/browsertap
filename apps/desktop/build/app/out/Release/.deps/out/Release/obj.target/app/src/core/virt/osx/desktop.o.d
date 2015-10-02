@@ -4,6 +4,9 @@ out/Release/obj.target/app/src/core/virt/osx/desktop.o: \
   ../../src/core/virt/osx/../base/desktop.h \
   ../../src/core/virt/osx/../base/./window.h \
   ../../src/core/virt/osx/../base/../../geom/bounds.h \
+  ../../src/core/virt/osx/../base/../../events/event_emitter.h \
+  ../../src/core/virt/osx/../base/../../events/./event_listener.h \
+  ../../src/core/virt/osx/../base/../../events/./event.h \
   ../../src/core/virt/osx/../base/../../graphics/printable.h \
   ../../src/core/virt/osx/../base/../../graphics/./bitmap.h \
   ../../src/core/virt/osx/./window.h
@@ -12,6 +15,9 @@ out/Release/obj.target/app/src/core/virt/osx/desktop.o: \
 ../../src/core/virt/osx/../base/desktop.h:
 ../../src/core/virt/osx/../base/./window.h:
 ../../src/core/virt/osx/../base/../../geom/bounds.h:
+../../src/core/virt/osx/../base/../../events/event_emitter.h:
+../../src/core/virt/osx/../base/../../events/./event_listener.h:
+../../src/core/virt/osx/../base/../../events/./event.h:
 ../../src/core/virt/osx/../base/../../graphics/printable.h:
 ../../src/core/virt/osx/../base/../../graphics/./bitmap.h:
 ../../src/core/virt/osx/./window.h:

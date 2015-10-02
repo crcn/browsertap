@@ -10,11 +10,17 @@
 #define RemoteDesktop_BaseWindow_h
 
 #include "../../geom/bounds.h"
+#include "../../events/event_emitter.h"
 #include "../../graphics/printable.h"
 #include <iostream>
 
 namespace virt {
-  class Window : public graphics::Printable {
+
+  enum WindowEvents {
+    REMOVE
+  };
+
+  class Window : public graphics::Printable, public core::EventEmitter {
   public:
       virtual geom::Bounds bounds()=0;
       virtual void bounds(geom::Bounds bounds)=0;

@@ -258,7 +258,8 @@ OBJS := \
 	$(obj).target/$(TARGET)/src/core/io/websockets.o \
 	$(obj).target/$(TARGET)/src/core/virt/osx/window.o \
 	$(obj).target/$(TARGET)/src/core/virt/osx/desktop.o \
-	$(obj).target/$(TARGET)/src/core/thread/manager_test.o
+	$(obj).target/$(TARGET)/src/core/thread/manager_test.o \
+	$(obj).target/$(TARGET)/src/commands/sync_windows_task_test.o
 
 # Add to the list of files we specially track dependencies for.
 all_deps += $(OBJS)

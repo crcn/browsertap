@@ -33,7 +33,7 @@ app::Application::Application() {
 void app::Application::start() {
   LOG_INFO(__PRETTY_FUNCTION__);
 
-  // hydrate the app with initial data
+  // hydrate the app with initial data. TODO - maybe change this to startSync
   mesh::Request request("hydrate");
   mesh::Response* response = this->bus->execute(&request);
   delete response;

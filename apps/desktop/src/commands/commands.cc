@@ -4,6 +4,7 @@
 #include "../active_records/virt_window.h"
 #include "./create_wrtc_connection_response.h"
 #include "../core/json/chunk.h"
+#include "./sync_windows_task.h"
 
 namespace app {
 
@@ -37,14 +38,8 @@ namespace app {
     // CreateWrtcConnectionResponse mainSessionResponse(app);
     // while(mainSessionResponse.read());
 
-    virt::Desktop* desktop = app->desktop;
-    std::vector<virt::Window*> windows = desktop->windows();
+    app->tasks.run(new SyncWindowsTask(app->desktop, app->ardb->collection(app::VirtWindow::COLLECTION_NAME)));
 
-    for (int i = 0, n = windows.size(); i < n; i++) {
-
-      // todo - change to app->ardb->insert(activeRecord) - AR should have collection name here
-      app->ardb->collection(app::VirtWindow::COLLECTION_NAME)->insert(new app::VirtWindow(windows.at(i)));
-    }
 
     return new mesh::NoResponse();
   }
