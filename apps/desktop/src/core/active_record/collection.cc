@@ -7,7 +7,6 @@ namespace activeRecord {
   }
 
   Object* Collection::insert(Object* object) {
-    LOG_VERBOSE(__PRETTY_FUNCTION__);
     this->_objects.push_back(object);
     object->addListener(this);
     this->emit(ObjectEvent::INSERT, object);
@@ -15,9 +14,6 @@ namespace activeRecord {
   }
 
   Object* Collection::remove(Object* object) {
-
-    LOG_VERBOSE(__PRETTY_FUNCTION__);
-
     object->removeListener(this);
 
     std::vector<Object*>::iterator it = std::find(_objects.begin(), _objects.end(), object);
