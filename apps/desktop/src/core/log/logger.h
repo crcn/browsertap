@@ -20,12 +20,12 @@
 
 #define LOG_WARN(MESSAGE) \
   (\
-    (std::cout << "\033[33m:\033[39m " << MESSAGE << std::endl) \
+    (std::cerr << "\033[33m:\033[39m " << MESSAGE << std::endl) \
   )
 
 #define LOG_ERROR(MESSAGE) \
   (\
-    (std::cout << "\033[31m:\033[39m " << MESSAGE << std::endl) \
+    (std::cerr << "\033[31m:\033[39m " << MESSAGE << std::endl) \
   )
 
 #endif
