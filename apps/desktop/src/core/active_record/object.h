@@ -14,7 +14,6 @@ namespace activeRecord {
     Object();
     void remove();
     void update();
-    virtual bool exists()=0;
     virtual Json::Value toJson()=0;
     int id();
     virtual ~Object() { }

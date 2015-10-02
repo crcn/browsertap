@@ -5,15 +5,10 @@ namespace app {
   const char* VirtWindow::COLLECTION_NAME = "virtWindows";
 
   VirtWindow::VirtWindow(virt::Window* window):_window(window) {
-    LOG_VERBOSE(__PRETTY_FUNCTION__);
   }
 
   graphics::Bitmap* VirtWindow::print() {
     return this->_window->print();
-  }
-
-  bool VirtWindow::exists() {
-
   }
 
   // TODO - perhaps change to serializable if json::Value has

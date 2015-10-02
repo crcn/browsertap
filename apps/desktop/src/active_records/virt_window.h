@@ -10,7 +10,6 @@ namespace app {
   class VirtWindow : public activeRecord::Object, public graphics::Printable {
   public:
     VirtWindow(virt::Window*);
-    virtual bool exists();
     virtual Json::Value toJson();
     graphics::Bitmap* print();
     static const char* COLLECTION_NAME;
