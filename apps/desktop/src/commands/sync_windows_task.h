@@ -47,6 +47,7 @@ namespace app {
         app::VirtWindow* arWindow = _windowDictionary[window];
         if (arWindow != nullptr) {
           arWindow->remove();
+          _windowDictionary.erase(window);
         }
       }
     }

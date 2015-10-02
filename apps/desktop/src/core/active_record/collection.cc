@@ -20,14 +20,18 @@ namespace activeRecord {
     object->removeListener(this);
 
     std::vector<Object*>::iterator it = std::find(_objects.begin(), _objects.end(), object);
-    if (it != _objects.end()) _objects.erase(it);
+    if (it != _objects.end()) {
+      _objects.erase(it);
+    } else {
+      LOG_WARN("could not find object to remove");
+    }
 
     return object;
   }
 
   std::vector<Object*> Collection::find(Json::Value query) {
     std::vector<Object*> ret;
-    for(int i = 0, n = this->_objects.size(); i < n; i++) {
+    for(int i = this->_objects.size(); i--;) {
       Object* object = this->_objects.at(i);
       Json::Value objJson = object->toJson();
       if (this->_equals(objJson, query)) {
@@ -38,7 +42,7 @@ namespace activeRecord {
   }
 
   Object* Collection::findOne(Json::Value query) {
-    for(int i = 0, n = this->_objects.size(); i < n; i++) {
+    for(int i = this->_objects.size(); i--;) {
       Object* object = this->_objects.at(i);
       Json::Value objJson = object->toJson();
       if (this->_equals(objJson, query)) return object;
@@ -47,7 +51,7 @@ namespace activeRecord {
   }
 
   Object* Collection::findOne(int id) {
-    for(int i = 0, n = this->_objects.size(); i < n; i++) {
+    for(int i = this->_objects.size(); i--;) {
       Object* object = this->_objects.at(i);
       if (object->id() == id) return object;
     }

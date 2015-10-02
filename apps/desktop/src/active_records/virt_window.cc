@@ -11,11 +11,11 @@ namespace app {
   graphics::Bitmap* VirtWindow::print() {
     return this->_window->print();
   }
-  
+
   bool VirtWindow::exists() {
-    
+
   }
-  
+
   // TODO - perhaps change to serializable if json::Value has
   // option
   Json::Value VirtWindow::toJson() {

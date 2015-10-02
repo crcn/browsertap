@@ -87,5 +87,4 @@ namespace osx {
 
         return new graphics::Bitmap(rawData, bgraDataLen, this->_convertBounds(rect));
       };
-
     }

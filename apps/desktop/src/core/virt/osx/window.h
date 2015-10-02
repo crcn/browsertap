@@ -25,10 +25,11 @@ namespace osx {
         Window(uint32_t id);
         geom::Bounds bounds();
         graphics::Bitmap* print();
-        bool exists();
         void bounds(geom::Bounds bounds);
         std::string title();
         CFDictionaryRef info();
+        ~Window() {
+        }
     };
 }
 
