@@ -1,15 +1,14 @@
-import expect from "expect.js";
-import mesh from "common/mesh";
-import sift from "sift";
-import co from "co";
-import runOp from "common/bus/utils/promise";
-import User from "common/data/models/user";
-import SignupForm from "common/data/forms/signup";
-import LoginForm from "common/data/forms/login";
-import forms from "common/data/forms";
+import expect             from "expect.js";
+import mesh               from "common/mesh";
+import sift               from "sift";
+import co                 from "co";
+import User               from "common/data/models/user";
+import SignupForm         from "common/data/forms/signup";
+import LoginForm          from "common/data/forms/login";
+import forms              from "common/data/forms";
 import ForgotPasswordForm from "common/data/forms/forgot-password";
-import ResetPasswordForm from "common/data/forms/reset-password";
-import Token from "api/data/models/token";
+import ResetPasswordForm  from "common/data/forms/reset-password";
+import Token              from "api/data/models/token";
 import ConfirmAccountForm from "common/data/forms/confirm-account";
 
 describe(__filename + "#", function() {
@@ -321,7 +320,7 @@ describe(__filename + "#", function() {
       }));
 
     });
-  
+
 
     describe("with an account", function() {
 

@@ -1,6 +1,5 @@
 import platform from "platform";
 import parseStack from "parse-stack";
-import mesh from "mesh";
 
 /**
  */
@@ -43,4 +42,3 @@ function server(app) {
 
   process.on("uncaughtException", onException);
 }
-

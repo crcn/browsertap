@@ -1,5 +1,4 @@
 import mixin from "common/utils/class/mixin";
-import cp from "common/bus/utils/promise"
 import httperr from "httperr"
 
 export default function(collectionName) {
@@ -110,7 +109,7 @@ export default function(collectionName) {
       var data;
 
       if (multi) {
-        return (yield response.readAll()).map(function(data) { 
+        return (yield response.readAll()).map(function(data) {
           return new clazz(Object.assign({ bus: bus }, data));
         })
       } else {

@@ -1,5 +1,4 @@
 import http       from "http";
-import mesh       from "mesh";
 import routes     from "./routes";
 import koa        from "koa";
 import bodyparser from "koa-bodyparser";

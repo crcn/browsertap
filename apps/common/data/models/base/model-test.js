@@ -1,5 +1,4 @@
 import expect from "expect.js";
-import mesh from "mesh";
 import BaseModel from "./model";
 
 describe(__filename + "#", function() {

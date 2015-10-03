@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 public/css/all.css
+public/build/
 Release
 *.dmg
 out
@@ -8,4 +9,3 @@ out
 out/Release
 *.tar.gz
 *.pkg
-

@@ -1,7 +1,7 @@
 import BaseModel from "common/data/models/base/model";
 import extend from "lodash/object/extend";
 import LogLevels from "./levels";
-import mesh from "mesh";
+import mesh from "common/mesh";
 
 class Logger extends BaseModel {
 

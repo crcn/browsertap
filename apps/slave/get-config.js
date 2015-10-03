@@ -1,4 +1,4 @@
-import deepExtend      from "deep-extend";
+import deepExtend      from "lodash/object/merge";
 import os              from "os";
 import getCommonConfig from "common/utils/get-config";
 import path            from "path"

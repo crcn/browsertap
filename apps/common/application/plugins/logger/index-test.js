@@ -1,5 +1,4 @@
 import loggerPlugin from "./index";
-import mesh from "mesh";
 import expect from "expect.js";
 import LogLevels from "common/logger/levels";
 import BaseModel from "common/data/models/base/model";

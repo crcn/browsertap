@@ -8,10 +8,10 @@
     "start": "../../node_modules/.bin/electron ."
   },
   "dependencies": {
-      "co": "^4.6.0",
-      "common": "file:../common",
-      "react": "^0.13.3",
-      "babel": "^5.8.23"
+    "babel": "^5.8.23",
+    "co": "^4.6.0",
+    "common": "file:../common",
+    "react": "^0.13.3"
   },
   "author": "",
   "license": "ISC"
