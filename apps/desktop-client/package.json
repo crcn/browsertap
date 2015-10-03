@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "",
-  "main": "index.js",
+  "main": "entry.js",
   "scripts": {
     "start": "../../node_modules/.bin/electron ."
   },
