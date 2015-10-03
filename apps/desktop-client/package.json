@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "description": "",
-  "main": "entry.js",
+  "main": "index.js",
   "scripts": {
-    "start": "../../node_modules/.bin/electron .",
+    "start": "./node_modules/.bin/electron .",
     "dev": "linklocal",
     "prepublish": "if [ \"$NODE_ENV\" != \"production\" ]; then npm run dev; fi"
   },
@@ -13,9 +13,13 @@
     "babel": "^5.8.23",
     "co": "^4.6.0",
     "common": "file:../common",
-    "slave": "file:../slave",
-    "react": "^0.13.3"
+    "lodash": "^3.10.1",
+    "react": "^0.14.0-rc1",
+    "slave": "file:../slave"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^0.4.1"
+  }
 }

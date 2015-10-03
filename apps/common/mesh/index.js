@@ -4,6 +4,7 @@ module.exports = Object.assign({
   accept     : require("./accept"),
   reject     : require("./reject"),
   attach     : require("./attach"),
+  commands   : require("./commands"),
 
   // TODO - separate into a promise, resolve, or reject
   yields     : require("./yields"),

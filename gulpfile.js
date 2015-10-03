@@ -225,7 +225,6 @@ var iofwatch = process.argv.indexOf("watch");
  */
 
 gulp.task("watch", function () {
-  console.log(paths.watchFiles);
   gulp.watch(paths.watchFiles, process.argv.slice(2, iofwatch));
 });
 

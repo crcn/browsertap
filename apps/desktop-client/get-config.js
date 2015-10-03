@@ -1,4 +1,3 @@
-
 var getConfig   = require("common/utils/get-config");
 var deepExtend  = require("lodash/object/defaultsDeep");
 

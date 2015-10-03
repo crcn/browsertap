@@ -9,8 +9,8 @@ import User               from "common/data/models/user";
 import httperr            from "httperr";
 import mu                 from "mustache";
 import fs                 from "fs";
-import commands           from "api/bus/drivers/commands";
-  
+import commands           from "common/mesh/commands";
+
 export default function(app, bus) {
   return commands(
     Object.assign({},
