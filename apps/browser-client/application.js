@@ -5,7 +5,7 @@ var Main            = require("./components/main");
 var routes          = require("./routes");
 var createBus       = require("./bus");
 var shortcuts       = require("./shortcuts");
- 
+
 /**
  */
 
@@ -15,8 +15,8 @@ class BrowserClientApplication extends BaseApplication {
    */
 
   intl = {
-    messages: Object.assign({}, 
-      require("./translations/en"), 
+    messages: Object.assign({},
+      require("./translations/en"),
       require("common/translations/en")
     )
   }
@@ -37,14 +37,14 @@ class BrowserClientApplication extends BaseApplication {
     this.use(routes);
     this.use(shortcuts);
     this.bus = createBus(this, this.bus);
-  } 
+  }
 
   /**
    */
 
   initialize() {
     super.initialize(this);
-    this.router.initialize(); 
+    this.router.initialize();
 
     var props = Object.assign({
       app      : this,

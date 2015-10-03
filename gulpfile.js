@@ -35,11 +35,18 @@ var apps = [
   { name: "desktop-client" , bundle: false }
 ];
 
+var appNames = apps.map(function(app) {
+  return app.name;
+});
+
+var ignore          = "!apps/*/{node_modules,node_modules/**}";
+var appsFilesPrefix =  "apps/{" + appNames.join(",") +"}/**";
+
 var paths = {
-  testFiles      : ["!apps/*/node_modules/**", "test/**/*.js"],
-  allFiles       : ["!apps/*/node_modules/**", "test/**/*.js"],
-  lessFiles      : ["apps/common/less/**/*.less"],
-  watchFiles     : [],
+  testFiles      : [ignore, "test/**/*.js", appsFilesPrefix + "/*-test.js"],
+  allFiles       : [ignore, "test/**/*.js", appsFilesPrefix],
+  lessFiles      : [appsFilesPrefix + "/*.less"],
+  watchFiles     : [appsFilesPrefix, ignore],
   buildDirectory : path.normalize(__dirname + "/public"),
   publicDirectory : path.normalize(__dirname + "/public")
 };
@@ -57,13 +64,6 @@ var ops = {
     }
   }
 };
-
-apps.forEach(function(app) {
-  paths.allFiles.push("apps/" + app.name + "/**/*.js");
-  paths.testFiles.push("apps/" + app.name + "/**/*-test.js");
-  paths.lessFiles.push("apps/" + app.name + "/**/*.less");
-  paths.watchFiles.push("apps/" + app.name + "/**/*");
-});
 
 /**
  */
@@ -225,6 +225,7 @@ var iofwatch = process.argv.indexOf("watch");
  */
 
 gulp.task("watch", function () {
+  console.log(paths.watchFiles);
   gulp.watch(paths.watchFiles, process.argv.slice(2, iofwatch));
 });
 
