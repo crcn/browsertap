@@ -1,5 +1,5 @@
-import commands from "./commands";
 import BaseApplication from "common/application";
+import createBus       from "./bus";
 
 class Application extends BaseApplication {
 
@@ -14,9 +14,12 @@ class Application extends BaseApplication {
    */
 
   initializePlugins() {
+    this.bus = createBus(this, this.bus);
     super.initializePlugins();
-    this.use(commands);
   }
 };
+
+/**
+ */
 
 export default Application;
