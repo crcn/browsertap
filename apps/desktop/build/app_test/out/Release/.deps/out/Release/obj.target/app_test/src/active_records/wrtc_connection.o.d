@@ -152,6 +152,9 @@ out/Release/obj.target/app_test/src/active_records/wrtc_connection.o: \
   ../../src/active_records/../core/wrtc/../thread/mutex.h \
   ../../src/active_records/../core/wrtc/../thread/condition.h \
   ../../src/active_records/../core/wrtc/./session_description.h \
+  ../../src/active_records/../core/wrtc/./printable_video_capturer.h \
+  ../../src/active_records/../core/wrtc/../thread/runnable.h \
+  ../../src/active_records/../core/wrtc/../thread/thread.h \
   ../../src/active_records/./virt_window.h \
   ../../src/active_records/../core/virt/base/window.h
 ../../src/active_records/wrtc_connection.cc:
@@ -306,5 +309,8 @@ out/Release/obj.target/app_test/src/active_records/wrtc_connection.o: \
 ../../src/active_records/../core/wrtc/../thread/mutex.h:
 ../../src/active_records/../core/wrtc/../thread/condition.h:
 ../../src/active_records/../core/wrtc/./session_description.h:
+../../src/active_records/../core/wrtc/./printable_video_capturer.h:
+../../src/active_records/../core/wrtc/../thread/runnable.h:
+../../src/active_records/../core/wrtc/../thread/thread.h:
 ../../src/active_records/./virt_window.h:
 ../../src/active_records/../core/virt/base/window.h:

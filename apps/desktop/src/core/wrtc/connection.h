@@ -43,12 +43,14 @@
 #include "../thread/mutex.h"
 #include "../thread/condition.h"
 #include "./session_description.h"
+#include "./printable_video_capturer.h"
 #include <json/json.h>
 
 namespace wrtc {
 
   enum ConnectionEvent {
-    WRTC_OFFER
+    WRTC_OFFER,
+    DISCONNECTED
   };
 
 
@@ -58,10 +60,14 @@ namespace wrtc {
 
     Connection(graphics::Printable* video);
     Connection();
+    bool connected();
     void setRemoteDescription(SessionDescription description);
     SessionDescription* localDescription;
 
   private:
+    bool _connected;
+    void _disconnect();
+    PrintableVideoCapturer* _capturer;
     rtc::scoped_refptr<PeerConnectionObserver> _peerConnectionObserver;
     rtc::scoped_refptr<OfferObserver> _offerObserver;
     rtc::scoped_refptr<LocalDescriptionObserver> _localDescriptionObserver;
@@ -78,7 +84,9 @@ namespace wrtc {
     void _onIceConnectionConnected();
     void _onStateChange(webrtc::PeerConnectionObserver::StateType);
     void _onDataChannelMessage(const webrtc::DataBuffer& buffer);
+    void _onDataChannelStateChange();
     void _onIceGatheringChange(webrtc::PeerConnectionInterface::IceGatheringState state);
+    void _onIceConnectionChange(webrtc::PeerConnectionInterface::IceConnectionState state);
     void _onLocalDescriptionSuccess();
     void _setVideo(graphics::Printable* video);
 

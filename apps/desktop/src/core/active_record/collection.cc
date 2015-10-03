@@ -13,7 +13,7 @@ namespace activeRecord {
     return object;
   }
 
-  Object* Collection::remove(Object* object) {
+  void Collection::remove(Object* object) {
     object->removeListener(this);
 
     std::vector<Object*>::iterator it = std::find(_objects.begin(), _objects.end(), object);
@@ -23,7 +23,7 @@ namespace activeRecord {
       LOG_WARN("could not find object to remove");
     }
 
-    return object;
+    delete object;
   }
 
   std::vector<Object*> Collection::find(Json::Value query) {

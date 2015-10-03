@@ -177,6 +177,7 @@ out/Release/obj.target/app/src/commands/commands.o: \
   ../../src/commands/../core/wrtc/./core.h \
   ../../src/commands/../core/wrtc/./observers.h \
   ../../src/commands/../core/wrtc/./session_description.h \
+  ../../src/commands/../core/wrtc/./printable_video_capturer.h \
   ../../src/commands/../active_records/wrtc_connection.h \
   ../../src/commands/../active_records/./virt_window.h \
   ../../src/commands/./create_wrtc_connection_response.h \
@@ -360,6 +361,7 @@ out/Release/obj.target/app/src/commands/commands.o: \
 ../../src/commands/../core/wrtc/./core.h:
 ../../src/commands/../core/wrtc/./observers.h:
 ../../src/commands/../core/wrtc/./session_description.h:
+../../src/commands/../core/wrtc/./printable_video_capturer.h:
 ../../src/commands/../active_records/wrtc_connection.h:
 ../../src/commands/../active_records/./virt_window.h:
 ../../src/commands/./create_wrtc_connection_response.h:

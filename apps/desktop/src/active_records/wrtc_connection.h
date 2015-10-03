@@ -15,6 +15,7 @@ namespace app {
     virtual bool exists();
     virtual Json::Value toJson();
     void handleEvent(core::Event*);
+    void disconnect();
     void setRemoteDescription(wrtc::SessionDescription);
     static const char* COLLECTION_NAME;
   private:

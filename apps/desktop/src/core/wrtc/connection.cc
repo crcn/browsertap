@@ -17,6 +17,7 @@ namespace wrtc {
 
   Connection::Connection(graphics::Printable* video):video(video), localDescription(NULL) {
 
+    _capturer = nullptr;
     // observers
     _peerConnectionObserver   = new rtc::RefCountedObject<PeerConnectionObserver>();
     _offerObserver            = new rtc::RefCountedObject<OfferObserver>();
@@ -27,9 +28,11 @@ namespace wrtc {
     _peerConnectionObserver->onIceCandidate.connect(this, &Connection::_onIceCandidate);
     _peerConnectionObserver->onStateChange.connect(this, &Connection::_onStateChange);
     _peerConnectionObserver->onIceGatheringChange.connect(this, &Connection::_onIceGatheringChange);
+    _peerConnectionObserver->onIceConnectionChange.connect(this, &Connection::_onIceConnectionChange);
     _offerObserver->onSuccess.connect(this, &Connection::_onOfferSuccess);
     _localDescriptionObserver->onSuccess.connect(this, &Connection::_onLocalDescriptionSuccess);
     _dataChannelObserver->onMessage.connect(this, &Connection::_onDataChannelMessage);
+    _dataChannelObserver->onStateChange.connect(this, &Connection::_onDataChannelStateChange);
 
     _constraints.AddOptional(webrtc::MediaConstraintsInterface::kEnableDtlsSrtp, webrtc::MediaConstraintsInterface::kValueTrue);
     _factory     = Core::GetFactory();
@@ -38,7 +41,6 @@ namespace wrtc {
     webrtc::DataChannelInit config;
     config.reliable = false;
     _dataChannel = _connection->CreateDataChannel("data", &config);
-
 
     _dataChannel->RegisterObserver(_dataChannelObserver);
 
@@ -50,8 +52,7 @@ namespace wrtc {
   /**
    */
 
-  void Connection::_onIceCandidate(const webrtc::IceCandidateInterface* candidate) {
-  }
+  void Connection::_onIceCandidate(const webrtc::IceCandidateInterface* candidate) { }
 
   /**
    */
@@ -60,12 +61,11 @@ namespace wrtc {
     // video = video;
 
     // std::cout << video->print() << std::endl;
-    PrintableVideoCapturer* capturer = new PrintableVideoCapturer(video);
+    _capturer = new PrintableVideoCapturer(video);
 
-    rtc::scoped_refptr<webrtc::VideoSourceInterface> videoSource = _factory->CreateVideoSource(capturer, NULL);
+    rtc::scoped_refptr<webrtc::VideoSourceInterface> videoSource = _factory->CreateVideoSource(_capturer, NULL);
     rtc::scoped_refptr<webrtc::VideoTrackInterface> videoTrack(_factory->CreateVideoTrack("screen", videoSource));
     rtc::scoped_refptr<webrtc::MediaStreamInterface> stream = _factory->CreateLocalMediaStream("stream");
-
     // videoTrack->AddRenderer(new PrintableVideoRenderer());
 
     if (!stream.get()) {
@@ -79,6 +79,13 @@ namespace wrtc {
       }
     }
   }
+
+    /**
+     */
+
+    bool Connection::connected() {
+      return _connected;
+    }
 
   /**
    */
@@ -98,6 +105,29 @@ namespace wrtc {
         _onIceConnectionConnected();
         break;
     }
+  }
+
+  /**
+   */
+
+  void Connection::_onIceConnectionChange(webrtc::PeerConnectionInterface::IceConnectionState state) {
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
+
+    switch(state) {
+      case webrtc::PeerConnectionInterface::kIceConnectionDisconnected:
+        emit(ConnectionEvent::DISCONNECTED, NULL);
+        this->_disconnect();
+        break;
+    }
+  }
+
+  /**
+   */
+
+  void Connection::_disconnect() {
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
+    _capturer->Stop();
+    _connection->Close();
   }
 
   /**
@@ -133,11 +163,19 @@ namespace wrtc {
    */
 
   void Connection::_onDataChannelMessage(const webrtc::DataBuffer& buffer) {
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
 
     std::string msg;
     msg.assign((const char *)buffer.data.data(), (size_t)buffer.data.size());
 
     LOG_INFO(msg);
+  }
+
+  /**
+   */
+
+  void Connection::_onDataChannelStateChange() {
+    LOG_VERBOSE(__PRETTY_FUNCTION__);
   }
 
   /**

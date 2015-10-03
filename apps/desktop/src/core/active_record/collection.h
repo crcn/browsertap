@@ -13,7 +13,7 @@ namespace activeRecord {
     Collection(std::string);
     std::string name;
     Object* insert(Object* obj);
-    Object* remove(Object* obj);
+    void remove(Object* obj);
     std::vector<Object*> all();
     std::vector<Object*> find(Json::Value);
     Object* findOne(int id);

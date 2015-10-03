@@ -23,7 +23,7 @@ namespace app {
     ->add("hydrate", new AppFnBus(app, &execHydrate))
     ->add("setRemoteAnswer", new AppFnBus(app, &execSetRemoteAnswer))
     ->add("startWindowSession", new AppFnBus(app, &execStartWindowSession))
-    ->add("load", new AppFnBus(app, &execFind)) 
+    ->add("load", new AppFnBus(app, &execFind))
     ; // coma here in case other commands are added
   }
 
@@ -33,14 +33,7 @@ namespace app {
 
   mesh::Response* Commands::execHydrate(mesh::Request* request, Application* app) {
     LOG_INFO("hydrate app");
-
-    // start the webrtc main session
-    // CreateWrtcConnectionResponse mainSessionResponse(app);
-    // while(mainSessionResponse.read());
-
     app->tasks.run(new SyncWindowsTask(app->desktop, app->ardb->collection(app::VirtWindow::COLLECTION_NAME)));
-
-
     return new mesh::NoResponse();
   }
 
@@ -138,7 +131,7 @@ namespace app {
     for (int i = 0, n = results.size(); i < n; i++) {
       Json::Value v = results.at(i)->toJson();
 
-      // TODO - memory leak here
+      // TODO - memory leak here  - maybe used scoped pointer instead
       response->write(new core::JsonChunk(v));
     }
 

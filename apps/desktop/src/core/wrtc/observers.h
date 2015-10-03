@@ -30,6 +30,7 @@ namespace wrtc {
     sigslot::signal1<const webrtc::IceCandidateInterface*> onIceCandidate;
     sigslot::signal1<webrtc::PeerConnectionObserver::StateType> onStateChange;
     sigslot::signal1<webrtc::PeerConnectionInterface::IceGatheringState> onIceGatheringChange;
+    sigslot::signal1<webrtc::PeerConnectionInterface::IceConnectionState> onIceConnectionChange;
   };
 
   /**
@@ -63,8 +64,8 @@ namespace wrtc {
   /**
    */
 
-  class DataChannelObserver : 
-    public webrtc::DataChannelObserver, 
+  class DataChannelObserver :
+    public webrtc::DataChannelObserver,
     public rtc::RefCountInterface
   {
    public:

@@ -77,6 +77,8 @@ static int callback_http(struct libwebsocket_context* _this,
 
       switch (reason) {
         case LWS_CALLBACK_ESTABLISHED: // just log message that someone is connecting
+
+        // TODO - create active record here of WSI
         LOG_NOTICE("websockets: connection established");
         ws->connections.push_back(wsi);
         break;
@@ -111,6 +113,7 @@ static int callback_http(struct libwebsocket_context* _this,
           break;
         }
         case LWS_CALLBACK_CLOSED:
+        // remove active record here
         ws->connections.remove(wsi);
         // TODO - ws->app->bus->execute({ })
         break;

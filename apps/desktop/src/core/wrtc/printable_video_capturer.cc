@@ -86,6 +86,8 @@ private:
   void PrintableVideoCapturer::Stop() {
     LOG_VERBOSE(__PRETTY_FUNCTION__);
     _isRunning = false;
+    _mh->Stop();
+    delete _mh;
     SetCaptureFormat(NULL);
     _startThread = nullptr;
   }

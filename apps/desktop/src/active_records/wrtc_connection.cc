@@ -16,10 +16,18 @@ namespace app {
   void WRTCConnection::handleEvent(core::Event* event) {
     // trigger update when local connection changes
     // update();
+    switch(event->type) {
+      case wrtc::ConnectionEvent::DISCONNECTED: return this->disconnect();
+    }
   }
 
   void WRTCConnection::setRemoteDescription(wrtc::SessionDescription description) {
     _connection->setRemoteDescription(description);
+  }
+
+  void WRTCConnection::disconnect() {
+    LOG_NOTICE(__PRETTY_FUNCTION__);
+    this->remove();
   }
 
   Json::Value WRTCConnection::toJson() {
