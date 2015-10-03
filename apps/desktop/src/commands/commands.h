@@ -53,13 +53,6 @@ namespace app {
 
     static mesh::Response* execPong(mesh::Request* request);
 
-
-    /**
-     * returns all the windows running on the host machine
-     */
-
-    static mesh::Response* execGetWindows(mesh::Request* request);
-
     /**
      * starts a new window webRTC session
      */

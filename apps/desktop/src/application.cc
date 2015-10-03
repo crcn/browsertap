@@ -23,6 +23,7 @@ app::Application::Application() {
   // domain object base
   ardb    = new activeRecord::DB(this);
 
+  // debugging only
   // bus     = new app::LogOperationsBus(bus);
 }
 

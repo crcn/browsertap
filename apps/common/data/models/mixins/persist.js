@@ -110,7 +110,7 @@ export default function(collectionName) {
       var data;
 
       if (multi) {
-        return (yield response.readAll()).map(function(data) {
+        return (yield response.readAll()).map(function(data) { 
           return new clazz(Object.assign({ bus: bus }, data));
         })
       } else {
@@ -120,6 +120,9 @@ export default function(collectionName) {
     }
 
     clazz.find    = _find.bind(void 0, true);
+    clazz.all     = function*(bus) {
+      return yield clazz.find(bus);
+    };
     clazz.findOne = _find.bind(void 0, false);
 
     return clazz;

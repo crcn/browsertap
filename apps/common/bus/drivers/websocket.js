@@ -23,6 +23,7 @@ export default function(options, bus) {
     var resp = _openResponses[op.resp];
 
     if (!resp) {
+      console.log("remote < ", op);
       return bus(op);
     }
 
@@ -35,6 +36,7 @@ export default function(options, bus) {
   }
 
   function send(operation) {
+    console.log("remote > ", operation);
     ws.send(JSON.stringify(operation));
   }
 

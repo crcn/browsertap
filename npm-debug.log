@@ -1,6 +1,6 @@
 0 info it worked if it ends with ok
 1 verbose cli [ 'node', '/usr/local/bin/npm', 'start' ]
-2 info using npm@2.14.6
+2 info using npm@2.14.7
 3 info using node@v0.10.4
 4 verbose run-script [ 'prestart', 'start', 'poststart' ]
 5 info prestart browsertap@1.0.0
@@ -20,7 +20,7 @@
 12 error Darwin 15.0.0
 13 error argv "node" "/usr/local/bin/npm" "start"
 14 error node v0.10.4
-15 error npm  v2.14.6
+15 error npm  v2.14.7
 16 error code ELIFECYCLE
 17 error browsertap@1.0.0 start: `cd apps/api; npm start`
 17 error Exit status 1

@@ -1,9 +1,11 @@
 import { EventEmitter }   from "events";
 import mesh               from "common/mesh";
 import createWebsocketBus from "common/bus/drivers/websocket";
+import createMemoryBus    from "common/bus/drivers/memory";
 import co                 from "co";
 import Window             from "./window";
-
+import sift               from "sift";
+import createBus          from "./bus";
 
 /**
  */
@@ -16,33 +18,14 @@ class RemoteDesktop extends EventEmitter {
   constructor(properties) {
     super();
     Object.assign(this, properties);
-    this.initialize();
+    this.bus = createBus(this);
   }
 
   /**
    */
 
-  initialize() {
-    this.bus = createWebsocketBus({
-      host: this.host
-    }, function(operation) {
-
-      // blast, I don't want this, but it works :/
-      this.emit("change");
-    }.bind(this));
-
-    this.bus = mesh.spy(this.bus);
-  }
-
-  /**
-   */
-
-  getWindows() {
-    return co(function*() {
-      return (yield this.bus({ name: "find", collection: "virtWindows" }).readAll()).map(function(data) {
-        return new Window(Object.assign({ bus: this.bus }, data));
-      }.bind(this));
-    }.bind(this));
+  *getWindows() {
+    return yield Window.all(this.bus);
   }
 };
 

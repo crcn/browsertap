@@ -63,7 +63,7 @@ var ops = {
     bail     : options.bail     !== 'false',
     reporter : options.reporter || 'dot',
     grep     : options.grep     || options.only,
-    timeout  : options.timeout  || 1000 * 5,
+    timeout  : options.timeout  || 1000 * 2,
     compilers : {
       js: babel
     }

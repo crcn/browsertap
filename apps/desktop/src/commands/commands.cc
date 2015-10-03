@@ -23,7 +23,7 @@ namespace app {
     ->add("hydrate", new AppFnBus(app, &execHydrate))
     ->add("setRemoteAnswer", new AppFnBus(app, &execSetRemoteAnswer))
     ->add("startWindowSession", new AppFnBus(app, &execStartWindowSession))
-    ->add("getWindows", new mesh::FnBus(&execGetWindows))
+    ->add("load", new AppFnBus(app, &execFind)) 
     ; // coma here in case other commands are added
   }
 
@@ -50,14 +50,6 @@ namespace app {
 
   mesh::Response* Commands::execPong(mesh::Request* request) {
     return new mesh::BufferedResponse<const char*>("pong");
-  }
-
-  /**
-   * return all desktop windows
-   */
-
-  mesh::Response* Commands::execGetWindows(mesh::Request* request) {
-    return new mesh::BufferedResponse<const char*>("get windows");
   }
 
   /**

@@ -20,12 +20,11 @@ namespace geom {
         int width;
         int height;
 
-        Bounds(int x, int y, int width, int height) {
-            x      = x;
-            y      = y;
-            width  = width;
-            height = height;
-        }
+        Bounds(int x, int y, int width, int height):
+        x(x),
+        y(y),
+        width(width),
+        height(height) { }
 
         Bounds():
         x(0),

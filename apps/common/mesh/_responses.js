@@ -2,21 +2,32 @@ var events       = require("events");
 var EventEmitter = events.EventEmitter;
 var co           = require("co");
 
-// TODO - do this 
-export class BaseResponse extends Promise {
+// TODO - do this
+export class BaseResponse {
+  constructor() {
+    this._promise = new Promise((resolve, reject) => {
+      this._resolve = resolve;
+      this._reject  = reject;
+    });
+  }
 
+  then(resolve, reject) {
+    return this._promise.then(resolve, reject);
+  }
 }
 
 /**
  */
 
-export class BufferedResponse {
+export class BufferedResponse extends BaseResponse {
 
   /**
    */
 
   constructor(chunk) {
+    super();
     this.chunk = chunk;
+    this._resolve();
   }
 
   /**
@@ -43,9 +54,13 @@ export class BufferedResponse {
 /**
  */
 
-export class NoResponse {
+export class NoResponse extends BaseResponse {
+  constructor() {
+    super();
+    this._resolve();
+  }
   read() {
-
+    return Promise.resolve(void 0);
   }
   readAll() {
     return Promise.resolve([]);
@@ -55,7 +70,7 @@ export class NoResponse {
 /**
  */
 
-export class AsyncResponse extends EventEmitter {
+export class AsyncResponse extends BaseResponse {
 
   /**
    */
@@ -63,22 +78,25 @@ export class AsyncResponse extends EventEmitter {
   constructor() {
     super();
     this._chunks = [];
+    this._em     = new EventEmitter();
   }
 
   /**
    */
 
   read() {
+
     if (this._chunks.length) {
       var chunk = this._chunks.shift();
       if (chunk instanceof Error) return Promise.reject(chunk);
       return Promise.resolve(chunk);
     }
-    return new Promise(function(resolve, reject) {
-      this.once("data", function() {
+
+    return new Promise((resolve, reject) => {
+      this._em.once("data", () => {
         this.read().then(resolve, reject);
-      }.bind(this));
-    }.bind(this));
+      });
+    });
   }
 
   /**
@@ -98,7 +116,7 @@ export class AsyncResponse extends EventEmitter {
 
   write(chunk) {
     this._chunks.push(chunk);
-    this.emit("data", chunk);
+    this._em.emit("data", chunk);
   }
 
   /**
@@ -106,6 +124,7 @@ export class AsyncResponse extends EventEmitter {
 
   error(chunk) {
     this.end(chunk);
+    this._reject(chunk);
   }
 
   /**
@@ -119,22 +138,7 @@ export class AsyncResponse extends EventEmitter {
       this.write(void 0);
     }
 
-    this.emit("end");
     this.ended = true;
-  }
-}
-
-/**
- */
-
-export class PromiseResponse extends EventEmitter {
-  constructor(run) {
-    super();
-    this._run = run;
-  }
-  read() {
-    var run = this._run;
-    this._run = void 0;
-    return run();
+    this._resolve();
   }
 }

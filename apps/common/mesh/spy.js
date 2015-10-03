@@ -6,14 +6,18 @@ export default function(bus) {
     var ret;
     if (operation.name === "spy") {
       ret = new AsyncResponse();
-      ret.once("end", function() {
+      ret.then(function() {
         spies.splice(spies.indexOf(ret), 1);
       });
       spies.push(ret);
     } else {
       ret = bus(operation);
+      ret.operation = operation;
       spies.forEach(function(spy) {
-        spy.write(ret);
+        spy.write({
+          operation: operation,
+          response: ret
+        });
       });
     }
     return ret;

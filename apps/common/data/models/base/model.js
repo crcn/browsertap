@@ -5,6 +5,7 @@ import mesh from "mesh";
 var __getters = {};
 
 /**
+ * TODO: move persistence stuff over to here. BaseModel should extend DataTransferObject, or similar
  */
 
 class BaseModel extends EventEmitter {

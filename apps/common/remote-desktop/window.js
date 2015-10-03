@@ -1,18 +1,13 @@
-import Model from "common/data/models/base/model"
-import co from "co";
-import Peer from "./peer";
+import Model         from "common/data/models/base/model"
+import co            from "co";
+import Peer          from "./peer";
+import persistMixin  from "common/data/models/mixins/persist"
 
 /**
  */
 
+@persistMixin("virtWindows")
 class Window extends Model {
-
-  /**
-   */
-
-  constructor(properties) { 
-    super(properties);
-  }
 
   /**
    * start the session
