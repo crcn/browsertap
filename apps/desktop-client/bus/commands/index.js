@@ -18,5 +18,6 @@ export default function(app, bus) {
 
 function syncMachines(app) {
   app.logger.info("synchronizing machines");
+  // insert MDNS scanner 
   // TODO - support mdns, and aws
 }
