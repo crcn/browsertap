@@ -2,7 +2,7 @@ import createRouter from "api/bus/drivers/create-router";
 import sift         from "sift";
 import EmailForm    from "api/data/forms/email";
 import httperr      from "httperr";
-import _command     from "api/bus/drivers/command";
+import _command     from "common/bus/drivers/command";
 
 export default function(app, bus) {
   return {
@@ -18,4 +18,3 @@ export default function(app, bus) {
     })
   };
 };
-

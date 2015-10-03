@@ -4,13 +4,13 @@ import mesh               from "common/mesh";
 import httperr            from "httperr";
 import mu                 from "mustache";
 import fs                 from "fs";
-import _command           from "api/bus/drivers/command";
+import _command           from "common/bus/drivers/command";
 import cstripe            from "stripe";
 import Organization       from "common/data/models/organization";
 
 export default function(app, bus) {
 
-  var browserHost = app.get("config.hosts.browser"); 
+  var browserHost = app.get("config.hosts.browser");
 
   return {
 

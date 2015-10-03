@@ -18,3 +18,5 @@ var app = global.app = new Application({
 app.initialize().then(function() {
   app.logger.info("initialized");
 });
+
+require("./test.js");

@@ -15,7 +15,7 @@ import httperr            from "httperr";
 import mu                 from "mustache";
 import fs                 from "fs";
 import templates          from "./templates";
-import _command           from "api/bus/drivers/command";
+import _command           from "common/bus/drivers/command";
 
 export default function(app, bus) {
 
@@ -77,7 +77,7 @@ export default function(app, bus) {
         // also create an organization for the user
         var org = yield user.createOrganization();
 
-        // login to create the session and other things 
+        // login to create the session and other things
         var loginForm = new LoginForm({
           bus          : mesh.attach({ session: operation.session }, app.bus),
           emailAddress : form.emailAddress,
@@ -132,7 +132,7 @@ export default function(app, bus) {
         var form = new ForgotPasswordForm(Object.assign({ bus: bus }, operation.data));
         var user = yield User.findOne(bus, { emailAddress: form.emailAddress.valueOf() });
         if (!user) throw new httperr.NotFound("emailAddressNotFound");
-   
+
         var token = new Token({
           bus: bus,
           key: user.emailAddress
