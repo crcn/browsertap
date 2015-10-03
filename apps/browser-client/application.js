@@ -1,3 +1,4 @@
+var ReactDOM        = require("react-dom");
 var React           = require("react");
 var BaseApplication = require("common/application");
 var Router          = require("common/router");
@@ -51,7 +52,7 @@ class BrowserClientApplication extends BaseApplication {
       location : this.router.location
     }, this.intl);
 
-    if (this.element) React.render(React.createElement(Main, props), this.element);
+    if (this.element) ReactDOM.render(React.createElement(Main, props), this.element);
 
     return Promise.resolve();
   }
