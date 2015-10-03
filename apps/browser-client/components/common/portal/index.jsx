@@ -1,4 +1,5 @@
 var React             = require("react");
+var ReactDOM          = require("react-dom");
 
 /*
 */
@@ -17,12 +18,12 @@ var Portal = React.createClass({
     },
 
     shouldComponentUpdate: function() {
-        React.render(this.props.children, this.element);
+        ReactDOM.render(this.props.children, this.element);
         return true;
     },
 
-    _renderLayer: function() { 
-        React.render(this.props.children, this.element);
+    _renderLayer: function() {
+        ReactDOM.render(this.props.children, this.element);
     },
 
     // Placeholder to satisfy render

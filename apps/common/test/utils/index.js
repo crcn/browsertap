@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 
 export default {
 
@@ -13,7 +14,7 @@ export default {
     var component = React.createElement(componentClass, Object.assign({
       app: app, messages: app.intl.messages
     }, props));
-    React.render(component, div);
+    ReactDOM.render(component, div);
     return div;
   }
 
