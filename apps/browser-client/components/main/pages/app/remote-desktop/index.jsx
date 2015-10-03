@@ -10,6 +10,9 @@ var RemoteDesktopComponent = React.createClass({
       windows: []
     }
   },
+
+
+  // TODO - clean this stuff up or shove it in a mixi (CC)
   componentDidMount: function() {
     this._rd = new RemoteDesktop({
       host: "ws://localhost:9000"
@@ -41,7 +44,9 @@ var RemoteDesktopComponent = React.createClass({
   render: function() {
     return <div className="m-remote-desktop">
       {
-        (this.state.windows || []).map(function(win) {
+        (this.state.windows || []).filter(function(win) {
+          return win.width > 50 && win.height > 30;
+        }).map(function(win) {
           return <Window key={win.id} win={win} />
         })
       }

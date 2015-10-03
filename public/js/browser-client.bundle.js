@@ -641,6 +641,8 @@ var RemoteDesktopComponent = React.createClass({
       windows: []
     };
   },
+
+  // TODO - clean this stuff up or shove it in a mixi (CC)
   componentDidMount: function componentDidMount() {
     this._rd = new _commonRemoteDesktop2["default"]({
       host: "ws://localhost:9000"
@@ -721,7 +723,9 @@ var RemoteDesktopComponent = React.createClass({
     return React.createElement(
       "div",
       { className: "m-remote-desktop" },
-      (this.state.windows || []).map(function (win) {
+      (this.state.windows || []).filter(function (win) {
+        return win.width > 50 && win.height > 30;
+      }).map(function (win) {
         return React.createElement(Window, { key: win.id, win: win });
       })
     );
