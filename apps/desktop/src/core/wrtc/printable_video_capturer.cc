@@ -41,7 +41,7 @@ protected:
     void OnMessage(rtc::Message* msg) {
         switch(msg->message_id) {
         case MSG_CAPTURE_TIMER:
-            thread_->PostDelayed(150, this, MSG_CAPTURE_TIMER);
+            thread_->PostDelayed(120, this, MSG_CAPTURE_TIMER);
             capturer_->run();
         }
     }

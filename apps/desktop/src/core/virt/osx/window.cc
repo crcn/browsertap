@@ -10,6 +10,7 @@
 
 #include "./window.h"
 #include <iostream>
+#include <ctime>
 
 namespace osx {
 
@@ -52,19 +53,32 @@ namespace osx {
   }
 
   graphics::Bitmap* Window::print() {
+
+    int startTime = clock();
+
     CGRect rect = _cgbounds();
 
     // TODO vs glgrab.c
-    CGImageRef image = CGWindowListCreateImage(rect,
-      kCGWindowListOptionIncludingWindow,
-      _windowId,
-      kCGWindowImageDefault);
+    CGImageRef image    = CGWindowListCreateImage(rect, kCGWindowListOptionIncludingWindow, _windowId, kCGWindowImageDefault);
+    CGDataProviderRef provider = CGImageGetDataProvider(image);
+    CFDataRef imageData = CGDataProviderCopyData(CGImageGetDataProvider(image));
+
+    unsigned char* data = (unsigned char*)CFDataGetBytePtr(imageData);
+
+    int w = rect.size.width;
+    int h = rect.size.height;
+    // size_t bytesPerPixel = 4;
+    // size_t bytesPerRow = bytesPerPixel * w;
+    int bgraDataLen = w * h * 4;
+    std::cout << "time 1: " << double(clock() - startTime) / CLOCKS_PER_SEC << std::endl;
+
+    // return new graphics::Bitmap(data, bgraDataLen, _convertBounds(rect));
 
       // CFDataRef cd = CGDataProviderCopyData(CGImageGetDataProvider(image));
 
-      int w = rect.size.width;
-      int h = rect.size.height;
-      int bgraDataLen = w * h * 4;
+      // int w = rect.size.width;
+      // int h = rect.size.height;
+      // int bgraDataLen = w * h * 4;
 
       // Alloc data that the image data will be put into
       unsigned char *rawData = new unsigned char[bgraDataLen];
@@ -79,11 +93,19 @@ namespace osx {
         bitsPerComponent, bytesPerRow, colorSpace,
         kCGImageAlphaPremultipliedLast);
         CGColorSpaceRelease(colorSpace);
+      std::cout << "time 2: " << double(clock() - startTime) / CLOCKS_PER_SEC << std::endl;
 
         // Draw the image which will populate rawData
         CGContextDrawImage(context, CGRectMake(0, 0, w, h), image);
+
+        std::cout << "time 3: " << double(clock() - startTime) / CLOCKS_PER_SEC << std::endl;
+
         CGContextRelease(context);
+
+
         CFRelease(image);
+
+        std::cout << "time 4: " << double(clock() - startTime) / CLOCKS_PER_SEC << std::endl;
 
         return new graphics::Bitmap(rawData, bgraDataLen, _convertBounds(rect));
       };
