@@ -19,6 +19,7 @@ var flatten         = require("lodash/array/flatten");
 var babel           = require("babel/register")({
   optional: ["es7.classProperties", "es7.decorators"]
 });
+var packager = require("electron-packager");
 var spawn           = require("child_process").spawn;
 var uglify          = require("gulp-uglify");
 var rename          = require("gulp-rename");
@@ -182,8 +183,6 @@ gulp.task("bundle-home", function() {
   }
 });
 
-
-
 /**
  * TODO - modify me for all apps
  */
@@ -284,6 +283,26 @@ gulp.task("watch", function () {
 
 gulp.task("default", function () {
   return gulp.run("test");
+});
+
+/**
+ */
+
+gulp.task("package", ["package-eyebrowse"], function() {
+});
+
+/**
+ */
+
+gulp.task("package-eyebrowse", function(next) {
+  packager({
+    name: "eyebrowse",
+    version: "0.33.4",
+    platform: "darwin",
+    arch: "x64",
+    dir: __dirname + "/apps/desktop-client",
+    out: __dirname + "/out/eyebrowse"
+  }, next);
 });
 
 /**
