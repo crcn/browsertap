@@ -19,7 +19,7 @@
     "intl": "^1.0.0",
     "mousetrap": "^1.5.3",
     "react": "^0.14.0-rc1",
-    "react-dom": "^0.1.0",
+    "react-dom": "^0.14.0-rc1",
     "react-intl": "^1.2.0",
     "superagent": "^1.4.0"
   }
