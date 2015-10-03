@@ -5,11 +5,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "gulp lint test --only=browser-client"
+    "test": "gulp lint test --only=browser-client",
+    "dev": "linklocal",
+    "prepublish": "if [ \"$NODE_ENV\" != \"production\" ]; then npm run dev; fi"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "common": "file:../common",
     "classnames": "^2.1.5",
     "co": "^4.6.0",
     "httperr": "^1.0.0",

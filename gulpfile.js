@@ -8,6 +8,7 @@ var plumber         = require("gulp-plumber");
 var glob            = require("glob");
 var sift            = require("sift");
 var browserify      = require("browserify");
+var resolutions     = require('browserify-resolutions');
 var watchify        = require("watchify");
 var babelify        = require("babelify");
 var File            = require("vinyl");
@@ -111,6 +112,8 @@ gulp.task("bundle-js", function() {
       });
 
       b = watchify(browserify(opts));
+
+      // b.plugin(resolutions, "*");
 
       // b.plugin(collapse);
       b.transform({ global: true }, babelify.configure({

@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "test": "gulp lint test --only=api"
+    "test": "gulp lint test --only=api",
+    "dev": "linklocal",
+    "prepublish": "if [ \"$NODE_ENV\" != \"production\" ]; then npm run dev; fi"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +17,7 @@
     "cron": "^1.0.9",
     "httperr": "^1.0.0",
     "koa": "^1.0.0",
+    "common": "file:../common",
     "koa-bodyparser": "^2.0.1",
     "koa-cors": "0.0.16",
     "koa-generic-session": "^1.9.2",
