@@ -9,3 +9,4 @@ out
 out/Release
 *.tar.gz
 *.pkg
+*.bundle.js

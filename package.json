@@ -19,7 +19,8 @@
     "browser-client": "file:./apps/browser-client",
     "common": "file:./apps/common",
     "desktop-client": "file:./apps/desktop-client",
-    "api": "file:./apps/api"
+    "api": "file:./apps/api",
+    "slave": "file:./apps/slave"
   },
   "devDependencies": {
     "babel": "^5.8.23",

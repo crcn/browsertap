@@ -37,7 +37,7 @@ var apps = [
 
 var paths = {
   testFiles      : ["!apps/*/node_modules/**", "test/**/*.js"],
-  allFiles       : ["test/**/*.js"],
+  allFiles       : ["!apps/*/node_modules/**", "test/**/*.js"],
   lessFiles      : ["apps/common/less/**/*.less"],
   watchFiles     : [],
   buildDirectory : path.normalize(__dirname + "/public"),
