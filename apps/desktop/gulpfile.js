@@ -2,7 +2,6 @@ var gulp          = require("gulp");
 var child_process = require("child_process");
 var spawn         = child_process.spawn;
 var co            = require("co");
-var mergeStreams  = require("merge-stream");
 var rmdir         = _promisify(require("rmdir"));
 var trim          = require("lodash/string/trim");
 
