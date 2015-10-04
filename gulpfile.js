@@ -43,15 +43,14 @@ var ignore          = "!apps/*/{node_modules,node_modules/**}";
 var appsFilesPrefix =  "apps/{" + appNames.join(",") +"}/**";
 
 var paths = {
-  testFiles      : [ignore, "test/**/*.js", appsFilesPrefix + "/*-test.js"],
-  allFiles       : [ignore, "test/**/*.js", appsFilesPrefix],
-  lessFiles      : [appsFilesPrefix + "/*.less"],
-  watchFiles     : [appsFilesPrefix, ignore],
-  buildDirectory : path.normalize(__dirname + "/public"),
-  publicDirectory : path.normalize(__dirname + "/public")
+  testFiles       : [ignore, "test/**/*.js", appsFilesPrefix + "/*-test.js"],
+  allFiles        : [ignore, "test/**/*.js", appsFilesPrefix],
+  lessFiles       : [appsFilesPrefix + "/*.less"],
+  watchFiles      : [appsFilesPrefix, ignore],
+  buildDirectory  : path.normalize(__dirname + "/public"),
+  publicDirectory : path.normalize(__dirname + "/public"),
+  gulpFiles       : "apps/{desktop}/gulpfile.js"
 };
-
-
 
 var ops = {
   mocha: {

@@ -19,6 +19,7 @@
   "dependencies": {
     "browser-client": "file:./apps/browser-client",
     "common": "file:./apps/common",
+    "desktop": "file:./apps/desktop",
     "desktop-client": "file:./apps/desktop-client",
     "api": "file:./apps/api",
     "slave": "file:./apps/slave"
