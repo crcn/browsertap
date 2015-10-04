@@ -4,7 +4,7 @@
 #include "./plugins/log_operations.h"
 #include <iostream>
 
-#ifndef _MCS_VER
+#ifndef _MSC_VER
   #include "./core/virt/osx/desktop.h"
   typedef osx::Desktop MainDesktop;
 #else
@@ -18,9 +18,11 @@
 app::Application::Application() {
 
   bus    = new mesh::Bus();
-
-  // desktop controller
-  desktop = new MainDesktop();
+  #ifndef _MSC_VER
+    desktop = new osx::Desktop();
+  #else
+    desktop = new win32::Desktop();
+  #endif
 
   // commands which can be executed against the bus
   _commands = new app::Commands(this);
@@ -39,7 +41,7 @@ app::Application::Application() {
  */
 
 void app::Application::start() {
-  LOG_INFO(__PRETTY_FUNCTION__);
+  LOG_INFO(__FUNCTION__);
 
   // hydrate the app with initial data. TODO - maybe change this to startSync
   mesh::Request request("hydrate");

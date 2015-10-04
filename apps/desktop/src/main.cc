@@ -6,6 +6,10 @@
 //  Copyright (c) 2015 browsertap. All rights reserved.
 //
 
+#ifndef __PRETTY_FUNCTION__
+#define __PRETTY_FUNCTION__
+#endif
+
 #include <iostream>
 #include "./application.h"
 #include "./core/thread/thread.h"

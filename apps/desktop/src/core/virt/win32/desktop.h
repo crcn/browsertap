@@ -10,10 +10,11 @@
 #define __RemoteDesktop__WinSystem__
 
 #include <vector>
+#include "../base/desktop.h"
 #include "./window.h"
 
 namespace win32 {
-  class Desktop : public core::EventEmitter  {
+  class Desktop : public virt::Desktop  {
   public:
       virtual std::vector<virt::Window*> syncWindows() {
         std::vector<virt::Window*> wins;
