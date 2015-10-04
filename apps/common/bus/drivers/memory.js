@@ -64,8 +64,13 @@ class MemoryCollection {
 
 class MemoryDatabase {
 
-  constructor(persistBus) {
+  constructor(initialData) {
     this._collections = {};
+    if (initialData) {
+      for (var collectionName in initialData) {
+        this.collection(collectionName)._items = _clone(initialData[collectionName]);
+      }
+    }
   }
 
   collection(name) {
@@ -77,8 +82,8 @@ class MemoryDatabase {
   }
 }
 
-export default function(persistBus) {
-  var db = new MemoryDatabase();
+export default function(initialData) {
+  var db = new MemoryDatabase(initialData);
   return accept(sift({ name: /insert|load|remove|update/ }), function(operation) {
     return db.collection(operation.collection).execute(operation);
   });
