@@ -24,5 +24,5 @@ export default function(app, bus) {
      */
 
     syncWindows: require("./sync-windows")(app)
-  }, noop);
+  }, bus);
 };

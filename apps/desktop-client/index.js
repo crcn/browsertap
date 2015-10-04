@@ -1,3 +1,5 @@
+var doc = require('app');
+
 require("babel/register")({
   optional: ["es7.classProperties", "es7.decorators"]
 });
@@ -15,8 +17,8 @@ var app = global.app = new Application({
 /**
  */
 
-app.initialize().then(function() {
-  app.logger.info("initialized");
+doc.on("ready", function() {
+  app.initialize().then(function() {
+    app.logger.info("initialized");
+  });
 });
-
-require("./test.js");

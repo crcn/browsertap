@@ -2,6 +2,7 @@ import { EventEmitter }   from "events";
 import mesh               from "common/mesh";
 import createWebsocketBus from "common/bus/drivers/websocket";
 import createMemoryBus    from "common/bus/drivers/memory";
+import createCacheBus     from "common/bus/drivers/cache-bus";
 import co                 from "co";
 import sift               from "sift";
 
@@ -13,10 +14,10 @@ export default function(options) {
 
   var bus = memoryBus;
 
-  var remoteBus = mesh.reject(sift({ pushed: true }), createWebsocketBus({
+  var remoteBus = mesh.reject(sift({ remote: true }), createWebsocketBus({
     host: options.host
   }, function(operation) {
-    operation.pushed = true;
+    operation.remote = true;
 
     // feed operation back into the bus so that spies get the update. Also note that this
     // operation will get rejected by the WS bus
@@ -29,29 +30,4 @@ export default function(options) {
   bus = mesh.spy(bus);
 
   return bus;
-}
-
-
-function createCacheBus(localBus, remoteBus) {
-  return mesh.accept(sift({ name: "load" }), mesh.fallback(
-    localBus,
-    function(operation) {
-
-      var ret = new mesh.AsyncResponse();
-
-      function *run() {
-        var resp = remoteBus(operation);
-        var chunk;
-        while(chunk = yield resp.read()) {
-          ret.write(chunk);
-          yield localBus({ name: "insert", collection: operation.collection, data: chunk }).read();
-        }
-        ret.end();
-      }
-
-      co(run);
-
-      return ret;
-    }
-  ), remoteBus);
 }
