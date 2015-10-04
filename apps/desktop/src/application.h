@@ -4,7 +4,7 @@
 #include "./core/active_record/db.h"
 #include "./core/application/application.h"
 #include "./core/io/console.h"
-#include "./core/virt/osx/desktop.h"
+#include "./core/virt/base/desktop.h"
 #include "./core/thread/thread.h"
 
 namespace app {

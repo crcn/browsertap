@@ -36,19 +36,20 @@ out/Release/obj.target/app/src/application.o: ../../src/application.cc \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/features.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include/json/writer.h \
   ../../src/./core/io/console.h ../../src/./core/io/./base.h \
-  ../../src/./core/io/../mesh/mesh.h ../../src/./core/virt/osx/desktop.h \
-  ../../src/./core/virt/osx/../base/desktop.h \
-  ../../src/./core/virt/osx/../base/./window.h \
-  ../../src/./core/virt/osx/../base/../../geom/bounds.h \
-  ../../src/./core/virt/osx/../base/../../graphics/printable.h \
-  ../../src/./core/virt/osx/../base/../../graphics/./bitmap.h \
+  ../../src/./core/io/../mesh/mesh.h \
+  ../../src/./core/virt/base/desktop.h \
+  ../../src/./core/virt/base/./window.h \
+  ../../src/./core/virt/base/../../geom/bounds.h \
+  ../../src/./core/virt/base/../../graphics/printable.h \
+  ../../src/./core/virt/base/../../graphics/./bitmap.h \
   ../../src/./commands/commands.h \
   ../../src/./commands/../core/mesh/mesh.h \
   ../../src/./core/io/websockets.h \
   ../../vendor/libwebsockets/lib/libwebsockets.h \
   ../../vendor/libwebsockets/build/lws_config.h \
   ../../src/./plugins/log_operations.h \
-  ../../src/./plugins/../core/mesh/mesh.h
+  ../../src/./plugins/../core/mesh/mesh.h \
+  ../../src/./core/virt/osx/desktop.h
 ../../src/application.cc:
 ../../src/./application.h:
 ../../src/./core/active_record/db.h:
@@ -89,12 +90,11 @@ out/Release/obj.target/app/src/application.o: ../../src/application.cc \
 ../../src/./core/io/console.h:
 ../../src/./core/io/./base.h:
 ../../src/./core/io/../mesh/mesh.h:
-../../src/./core/virt/osx/desktop.h:
-../../src/./core/virt/osx/../base/desktop.h:
-../../src/./core/virt/osx/../base/./window.h:
-../../src/./core/virt/osx/../base/../../geom/bounds.h:
-../../src/./core/virt/osx/../base/../../graphics/printable.h:
-../../src/./core/virt/osx/../base/../../graphics/./bitmap.h:
+../../src/./core/virt/base/desktop.h:
+../../src/./core/virt/base/./window.h:
+../../src/./core/virt/base/../../geom/bounds.h:
+../../src/./core/virt/base/../../graphics/printable.h:
+../../src/./core/virt/base/../../graphics/./bitmap.h:
 ../../src/./commands/commands.h:
 ../../src/./commands/../core/mesh/mesh.h:
 ../../src/./core/io/websockets.h:
@@ -102,3 +102,4 @@ out/Release/obj.target/app/src/application.o: ../../src/application.cc \
 ../../vendor/libwebsockets/build/lws_config.h:
 ../../src/./plugins/log_operations.h:
 ../../src/./plugins/../core/mesh/mesh.h:
+../../src/./core/virt/osx/desktop.h:

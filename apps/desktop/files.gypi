@@ -41,10 +41,22 @@
 
             './src/core/events/event_emitter.cc',
             './src/core/io/console.cc',
-            './src/core/io/websockets.cc',
-            
-            './src/core/virt/osx/window.cc',
-            './src/core/virt/osx/desktop.cc'
+            './src/core/io/websockets.cc'
+        ],
+
+        "conditions": [
+            ["OS=='mac'", {
+                'sources': [
+                    './src/core/virt/osx/window.cc',
+                    './src/core/virt/osx/desktop.cc'
+                ]
+            }],
+            ["OS=='win'", {
+                'sources': [
+                    './src/core/virt/win32/window.cc',
+                    './src/core/virt/win32/desktop.cc'
+                ]
+            }]
         ]
     }
 }

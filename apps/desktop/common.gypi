@@ -16,7 +16,11 @@
                     "Release_x64": {
                         "msvs_configuration_platform": "x64",
                     }
-                }
+                },
+
+                'include_dirs': [
+                    './vendor/pthreads-w32-2-9-1-release/Pre-built.2/include'
+                ]
             }
         }, {
             "target_defaults": {

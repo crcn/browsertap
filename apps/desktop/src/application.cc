@@ -4,6 +4,14 @@
 #include "./plugins/log_operations.h"
 #include <iostream>
 
+#ifndef _MCS_VER
+  #include "./core/virt/osx/desktop.h"
+  typedef osx::Desktop MainDesktop;
+#else
+  #include "./core/virt/win32/desktop.h"
+  typedef win32::Desktop MainDesktop;
+#endif
+
 /**
  */
 
@@ -12,7 +20,7 @@ app::Application::Application() {
   bus    = new mesh::Bus();
 
   // desktop controller
-  desktop = new osx::Desktop();
+  desktop = new MainDesktop();
 
   // commands which can be executed against the bus
   _commands = new app::Commands(this);

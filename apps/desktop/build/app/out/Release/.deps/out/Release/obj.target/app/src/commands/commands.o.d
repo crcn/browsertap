@@ -40,12 +40,11 @@ out/Release/obj.target/app/src/commands/commands.o: \
   ../../src/commands/.././core/io/console.h \
   ../../src/commands/.././core/io/./base.h \
   ../../src/commands/.././core/io/../mesh/mesh.h \
-  ../../src/commands/.././core/virt/osx/desktop.h \
-  ../../src/commands/.././core/virt/osx/../base/desktop.h \
-  ../../src/commands/.././core/virt/osx/../base/./window.h \
-  ../../src/commands/.././core/virt/osx/../base/../../geom/bounds.h \
-  ../../src/commands/.././core/virt/osx/../base/../../graphics/printable.h \
-  ../../src/commands/.././core/virt/osx/../base/../../graphics/./bitmap.h \
+  ../../src/commands/.././core/virt/base/desktop.h \
+  ../../src/commands/.././core/virt/base/./window.h \
+  ../../src/commands/.././core/virt/base/../../geom/bounds.h \
+  ../../src/commands/.././core/virt/base/../../graphics/printable.h \
+  ../../src/commands/.././core/virt/base/../../graphics/./bitmap.h \
   ../../src/commands/../core/mesh/mesh.h \
   ../../src/commands/../core/wrtc/connection.h \
   ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosourceinterface.h \
@@ -224,12 +223,11 @@ out/Release/obj.target/app/src/commands/commands.o: \
 ../../src/commands/.././core/io/console.h:
 ../../src/commands/.././core/io/./base.h:
 ../../src/commands/.././core/io/../mesh/mesh.h:
-../../src/commands/.././core/virt/osx/desktop.h:
-../../src/commands/.././core/virt/osx/../base/desktop.h:
-../../src/commands/.././core/virt/osx/../base/./window.h:
-../../src/commands/.././core/virt/osx/../base/../../geom/bounds.h:
-../../src/commands/.././core/virt/osx/../base/../../graphics/printable.h:
-../../src/commands/.././core/virt/osx/../base/../../graphics/./bitmap.h:
+../../src/commands/.././core/virt/base/desktop.h:
+../../src/commands/.././core/virt/base/./window.h:
+../../src/commands/.././core/virt/base/../../geom/bounds.h:
+../../src/commands/.././core/virt/base/../../graphics/printable.h:
+../../src/commands/.././core/virt/base/../../graphics/./bitmap.h:
 ../../src/commands/../core/mesh/mesh.h:
 ../../src/commands/../core/wrtc/connection.h:
 ../../vendor/webrtc-build-scripts/ios/webrtc/src/talk/app/webrtc/videosourceinterface.h:
