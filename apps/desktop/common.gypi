@@ -67,7 +67,7 @@
               'link_settings': {
                   'libraries': [
                       '/usr/local/bt/remote-desktop-server/vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds/libWebRTC-9725-mac-x86_64-Release.a',
-                      '/usr/local/bt/remote-desktop-server/vendor/libwebsockets/build/lib/libwebsockets.a',
+                      '/usr/local/bt/remote-desktop-server/shared/libwebsockets_darwin.a',
                       '-lz',
                       '$(SDKROOT)/System/Library/Frameworks/AudioToolbox.framework',
                       '$(SDKROOT)/System/Library/Frameworks/AudioUnit.framework',

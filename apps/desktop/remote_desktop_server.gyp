@@ -8,18 +8,13 @@
         './files.gypi'
     ],
 
-    'conditions': [
-        ['OS=="mac"', {
-            'targets': [
-                {
-                    'target_name': 'app',
-                    'type': 'executable',
-                    'sources': [
-                        './src/main.cc'
-                    ]
-                }
-            ] 
-        }]
+    'targets': [
+        {
+            'target_name': 'app',
+            'type': 'executable',
+            'sources': [
+                './src/main.cc'
+            ]
+        }
     ]
-
 }
