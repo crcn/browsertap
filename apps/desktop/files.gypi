@@ -52,6 +52,7 @@
                 ]
             }],
             ["OS=='win'", {
+
                 'sources': [
                     './src/core/virt/win32/window.cc',
                     './src/core/virt/win32/desktop.cc'

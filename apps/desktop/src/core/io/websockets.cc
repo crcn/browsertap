@@ -61,6 +61,7 @@ static int callback_http(struct libwebsocket_context* _this,
       resp["data"] = Json::nullValue;
       write_json(resp, _wsi);
       delete response;
+      return nullptr;
     }
   private:
     base::Application* _app;
