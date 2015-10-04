@@ -30,6 +30,7 @@ static int callback_http(struct libwebsocket_context* _this,
     libwebsocket_write(wsi, p, jsonResp.size(), LWS_WRITE_TEXT);
 
     free(buf);
+    return 0;
   }
 
   class BusTask : public core::Task {
