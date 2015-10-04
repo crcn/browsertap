@@ -30,7 +30,6 @@ export default function(app) {
 
     co(run);
 
-    for (var i = 10; i--;)
     yield app.bus({ name: "insert", collection: "virt-windows", data: {
       width: 500,
       height: 500,
@@ -44,10 +43,12 @@ export default function(app) {
   };
 
   function remove() {
-    
+
   }
 
   function insert(virtWindow) {
+
+    // TODO - app.bus({ name: "openWindow", model: virtWindow });
 
     app.logger.info("open virtual window ", virtWindow);
 
