@@ -1,4 +1,4 @@
-var mousetrap = require("mousetrap");
+import mousetrap from "mousetrap";
 
 export default function(app) {
 
@@ -8,7 +8,7 @@ export default function(app) {
   function rebindKeys() {
     if (currentKeys) currentKeys.dispose();
 
-    // TODO - yield for shortcut info 
+    // TODO - yield for shortcut info
     currentKeys = _bindKeys({
 
       /**
@@ -16,17 +16,17 @@ export default function(app) {
 
       "alt+space": function() {
         app.router.setQuery({
-          showControls: app.router.location.query.showControls ? void 0 : true 
+          showControls: app.router.location.query.showControls ? void 0 : true
         })
       },
 
       /**
        */
 
-      "alt+right": function() { 
+      "alt+right": function() {
         app.router.setQuery({
           toolBarPosition: (Number(app.router.location.query.toolBarPosition || 0) + 1) % 4
-        }); 
+        });
       }
     });
   }

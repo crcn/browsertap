@@ -1,5 +1,6 @@
 #include "./worker.h"
 #include "./manager.h"
+#include "../shims/shims.h"
 #include <iostream>
 
 namespace core {
@@ -11,6 +12,7 @@ namespace core {
     _manager = manager;
     _thread = Thread::run(this, [](void* arg) -> void * {
       ((TaskWorker*)arg)->_runTasks();
+      return nullptr;
     });
   }
 
@@ -41,6 +43,7 @@ namespace core {
     }
 
     _manager->buryWorker(this);
+    return nullptr;
   }
 
   TaskWorker::~TaskWorker() {

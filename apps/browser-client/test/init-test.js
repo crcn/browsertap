@@ -1,5 +1,5 @@
 import BrowserApplication from "../application";
-import mesh from "common/mesh"
+import mesh from "common/mesh";
 
 var port = 8091;
 

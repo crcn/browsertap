@@ -7,15 +7,15 @@ module.exports = function(app) {
 
   var auth = co.wrap(function*(location, next) {
 
-    try { 
+    try {
 
       // stuff already exists
       if (location.user)  {
         return next();
       }
- 
+
       var user         = (yield forms.getSessionUser(app.bus));
-      var organization = (yield user.getOrganizations())[0]; 
+      var organization = (yield user.getOrganizations())[0];
 
       location.setProperties({
         user         : user,
@@ -32,11 +32,11 @@ module.exports = function(app) {
   router.addRoute("home", "/", auth, co.wrap(function*(location) {
     location.setProperties({
       state: {
-        mainPage: "home", 
+        mainPage: "home",
         authPage: "signup"
       }
     });
-  })); 
+  }));
 
   router.addRoute("app", "/app", function(location) {
     location.setProperties({
@@ -53,7 +53,7 @@ module.exports = function(app) {
         authPage: "signup"
       }
     });
-  }); 
+  });
 
   router.addRoute("requestInviteComplete", "/request-invite-complete", function(location) {
     location.setProperties({
@@ -66,12 +66,12 @@ module.exports = function(app) {
 
   router.addRoute("invite", "/invite/:shortcode", co.wrap(function*(location) {
 
-    var data = Object.assign({ bus: app.bus }, yield app.bus({ 
-      name: "getInviteeFromShortCode", 
-      shortcode: location.params.shortcode 
+    var data = Object.assign({ bus: app.bus }, yield app.bus({
+      name: "getInviteeFromShortCode",
+      shortcode: location.params.shortcode
     }).read());
- 
-    location.setProperties({ 
+
+    location.setProperties({
       state: {
         inviter  : new Invitee(data),
         mainPage : "auth",
@@ -95,7 +95,7 @@ module.exports = function(app) {
       state: {
         token: location.params.token,
         mainPage: "auth",
-        authPage: "resetPassword" 
+        authPage: "resetPassword"
       }
     });
   });

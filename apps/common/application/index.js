@@ -1,10 +1,10 @@
 import BaseModel from "common/data/models/base/model";
-import flatten from "lodash/array/flattenDeep"
-import Logger from "common/logger"
-import createBus from "common/bus"
-import catchError from "./plugins/catch-errors"
-import createCommonBus from "common/bus"
-import createLogBus    from "common/bus/log"
+import flatten from "lodash/array/flattenDeep";
+import Logger from "common/logger";
+import createBus from "common/bus";
+import catchError from "./plugins/catch-errors";
+import createCommonBus from "common/bus";
+import createLogBus    from "common/bus/log";
 
 /**
  */

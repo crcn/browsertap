@@ -19,6 +19,7 @@ export default function(bus, onError) {
         resp.error(e);
       }
     });
+
     return resp;
-  }
+  };
 };

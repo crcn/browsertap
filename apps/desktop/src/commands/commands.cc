@@ -12,7 +12,7 @@ namespace app {
    */
 
   Commands::Commands(Application* app):app(app) {
-    LOG_INFO(__PRETTY_FUNCTION__);
+    LOG_INFO(__FUNCTION__);
 
     // replace the application bus with the commands bus. Note that
     // any commands that do not get executed against *registered* commands
@@ -52,7 +52,7 @@ namespace app {
 
   mesh::Response* Commands::execStartWindowSession(mesh::Request* request, Application* app) {
 
-    LOG_VERBOSE(__PRETTY_FUNCTION__);
+    LOG_VERBOSE(__FUNCTION__);
 
     // TODO - check if window session already exists, return that
 
@@ -90,7 +90,7 @@ namespace app {
    */
 
   mesh::Response* Commands::execSetRemoteAnswer(mesh::Request* request, Application* app) {
-    LOG_VERBOSE(__PRETTY_FUNCTION__);
+    LOG_VERBOSE(__FUNCTION__);
     Json::Value* data = (Json::Value*)request->data;
     WRTCConnection* connection = (WRTCConnection*)app->ardb->collection(WRTCConnection::COLLECTION_NAME)->findOne((*data)["query"]);
 
@@ -111,6 +111,7 @@ namespace app {
    */
 
   mesh::Response* Commands::execFind(mesh::Request* request, Application* app) {
+    LOG_VERBOSE(__FUNCTION__);
     Json::Value& root = *((Json::Value*)request->data);
 
     if (root["collection"].isNull()) {
@@ -130,7 +131,7 @@ namespace app {
 
     for (int i = 0, n = results.size(); i < n; i++) {
       Json::Value v = results.at(i)->toJson();
-
+      
       // TODO - memory leak here  - maybe used scoped pointer instead
       response->write(new core::JsonChunk(v));
     }

@@ -36,22 +36,16 @@ CFLAGS_Debug := \
 	-Wall \
 	-Wendif-labels \
 	-W \
-	-Wno-unused-parameter \
-	-Wall \
-	-Wendif-labels \
-	-W \
 	-Wno-unused-parameter
 
 # Flags passed to only C files.
 CFLAGS_C_Debug := \
-	-fno-strict-aliasing \
 	-fno-strict-aliasing
 
 # Flags passed to only C++ files.
 CFLAGS_CC_Debug := \
 	-std=c++11 \
 	-fno-rtti \
-	-fno-strict-aliasing \
 	-fno-strict-aliasing
 
 # Flags passed to only ObjC files.
@@ -61,17 +55,15 @@ CFLAGS_OBJC_Debug :=
 CFLAGS_OBJCC_Debug :=
 
 INCS_Debug := \
+	-I$(srcdir)/vendor/webrtc/include \
+	-I$(srcdir)/vendor/libwebsockets/lib \
+	-I$(srcdir)/vendor/libwebsockets/build \
+	-I$(srcdir)/vendor/jsoncpp/include \
 	-I$(srcdir)/. \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/webrtc \
-	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc \
-	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include \
-	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp \
-	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include \
-	-I$(srcdir)/vendor/libwebsockets/lib \
-	-I$(srcdir)/vendor/libwebsockets/build \
-	-I$(srcdir)/vendor/jsoncpp/include
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc
 
 DEFS_Debug_Base := \
 	'-DEXPAT_RELATIVE_PATH' \
@@ -117,17 +109,15 @@ CFLAGS_OBJC_Debug_Base :=
 CFLAGS_OBJCC_Debug_Base :=
 
 INCS_Debug_Base := \
+	-I$(srcdir)/vendor/webrtc/include \
+	-I$(srcdir)/vendor/libwebsockets/lib \
+	-I$(srcdir)/vendor/libwebsockets/build \
+	-I$(srcdir)/vendor/jsoncpp/include \
 	-I$(srcdir)/. \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/webrtc \
-	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc \
-	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include \
-	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp \
-	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include \
-	-I$(srcdir)/vendor/libwebsockets/lib \
-	-I$(srcdir)/vendor/libwebsockets/build \
-	-I$(srcdir)/vendor/jsoncpp/include
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc
 
 DEFS_Release := \
 	'-DEXPAT_RELATIVE_PATH' \
@@ -162,15 +152,10 @@ CFLAGS_Release := \
 	-Wall \
 	-Wendif-labels \
 	-W \
-	-Wno-unused-parameter \
-	-Wall \
-	-Wendif-labels \
-	-W \
 	-Wno-unused-parameter
 
 # Flags passed to only C files.
 CFLAGS_C_Release := \
-	-fno-strict-aliasing \
 	-fno-strict-aliasing
 
 # Flags passed to only C++ files.
@@ -178,7 +163,6 @@ CFLAGS_CC_Release := \
 	-std=c++11 \
 	-fno-rtti \
 	-fvisibility-inlines-hidden \
-	-fno-strict-aliasing \
 	-fno-strict-aliasing
 
 # Flags passed to only ObjC files.
@@ -188,17 +172,15 @@ CFLAGS_OBJC_Release :=
 CFLAGS_OBJCC_Release :=
 
 INCS_Release := \
+	-I$(srcdir)/vendor/webrtc/include \
+	-I$(srcdir)/vendor/libwebsockets/lib \
+	-I$(srcdir)/vendor/libwebsockets/build \
+	-I$(srcdir)/vendor/jsoncpp/include \
 	-I$(srcdir)/. \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party \
 	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/webrtc \
-	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc \
-	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include \
-	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp \
-	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include \
-	-I$(srcdir)/vendor/libwebsockets/lib \
-	-I$(srcdir)/vendor/libwebsockets/build \
-	-I$(srcdir)/vendor/jsoncpp/include
+	-I$(srcdir)/vendor/webrtc-build-scripts/ios/webrtc/src/webrtc
 
 OBJS := \
 	$(obj).target/$(TARGET)/src/application.o \

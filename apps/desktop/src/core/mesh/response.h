@@ -119,6 +119,7 @@ namespace mesh {
           _endCondition.wait(_mutex);
         }
         _mutex.unlock();
+        return nullptr;
       }
 
     private:

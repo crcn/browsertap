@@ -17,7 +17,7 @@ export default function(app) {
 
       var spy   = app.bus({
         name: "spy",
-        filter: sift({ name: /insert|remove|update/, collection: "virt-windows" })
+        filter: sift({ name: /insert|remove|update/, collection: "virtWindows" })
       });
 
       var chunk;
@@ -30,7 +30,7 @@ export default function(app) {
 
     co(run);
 
-    yield app.bus({ name: "insert", collection: "virt-windows", data: {
+    yield app.bus({ name: "insert", collection: "virtWindows", data: {
       width: 500,
       height: 500,
       x: i * 100,

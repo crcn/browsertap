@@ -17,7 +17,7 @@ namespace core {
       _arg = arg;
     }
     void* run() {
-      _run(_arg);
+      return _run(_arg);
     }
     ~FnTask() {
 

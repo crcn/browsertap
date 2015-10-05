@@ -12,6 +12,7 @@ export default function(app, bus) {
       execute: function*() {
         yield app.bus({ name: "syncMachines" });
         yield app.bus({ name: "syncWindows"  });
+        yield app.bus({ name: "openWindow", width: 500, height: 400 });
       }
     }),
 
@@ -23,6 +24,11 @@ export default function(app, bus) {
     /**
      */
 
-    syncWindows: require("./sync-windows")(app)
+    syncWindows: require("./sync-windows")(app),
+
+    /**
+     */
+
+    openWindow: require("./open-window")(app)
   }, bus);
 };

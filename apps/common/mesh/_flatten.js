@@ -10,4 +10,4 @@ export default function flatten(array) {
   }
 
   return flattened;
-}
+};

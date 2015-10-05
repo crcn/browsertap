@@ -6,6 +6,11 @@ var path          = require("path");
 var co            = require("co");
 var trim          = require("lodash/string/trim");
 var os            = require("os");
+var request       = require("request");
+var unzip         = require("unzip");
+var ProgressBar   = require("progress");
+var ok            = require("okay");
+var fs            = require("fs");
 
 var paths = {
 
@@ -17,13 +22,19 @@ _task("default", make);
 _task("link", link);
 _task("run", run);
 _task("clean", clean);
+_task("clean-vendors", cleanVendors);
 _task("prepare", prepare);
 _task("make", make);
 _task("test", test);
+_task("download", download);
 _task("vendors", vendors);
 
 function* clean() {
   yield _rmdir(__dirname + "/build");
+}
+
+function* cleanVendors() {
+  yield _rmdir(__dirname + "/vendor");
 }
 
 function* run() {
@@ -94,14 +105,38 @@ function* _mkdir(directory, ops) {
   } catch(e) { }
 }
 
+function *download() {
+
+  // download webrtc builds
+
+  var win32WebrtcVersion = "webrtcbuilds-10081-d6d27e7-windows";
+
+  if (!(yield _fileExists(__dirname + "/vendor/" + win32WebrtcVersion))) {
+    yield _promisifyStream(_requestStream("downloading win32 wrtc builds", "https://github.com/vsimon/webrtcbuilds/releases/download/10081/" + win32WebrtcVersion + ".zip").pipe(unzip.Extract({
+      path: __dirname + "/vendor"
+    })));
+  }
+
+  var pthreadsVersion = "pthreads-w32-2-9-1-release";
+  if (true || !(yield _fileExists(__dirname + "/vendor/" + pthreadsVersion))) {
+    yield _promisifyStream(_requestStream("downloading win32 pthreads", "ftp://sourceware.org/pub/pthreads-win32/" + pthreadsVersion + ".zip").pipe(unzip.Extract({
+      path: __dirname + "/vendor"
+    })));
+  }
+
+  // console.log("downloading websockets");
+  // yield _spawn(["git", "clone" ]);
+}
+
 function* prepare() {
   // yield vendors();
   yield link();
+  yield _os({ win32: clean });
 
   var type = (yield _os({ win32: "msvs" })) || "make";
 
   yield _spawn(["python", "./vendor/gyp/gyp_main.py", "remote_desktop_server.gyp", "--depth=.", "-f", type, "--generator-output=./build/app"]);
-  yield _spawn(["python", "./vendor/gyp/gyp_main.py",  "tests.gyp", "--depth=.", "-f", type, "--generator-output=./build/app_test"]);
+  // yield _spawn(["python", "./vendor/gyp/gyp_main.py",  "tests.gyp", "--depth=.", "-f", type, "--generator-output=./build/app_test"]);
 }
 
 function* make() {
@@ -110,11 +145,11 @@ function* make() {
   yield _os({
     win32: function*() {
       yield _spawn(["msbuild", "./build/app/app.vcxproj"]);
-      yield _spawn(["msbuild", "./build/app_test/app_test.vcxproj"]);
+      //yield _spawn(["msbuild", "./build/app_test/app_test.vcxproj"]);
     },
     darwin: function*() {
       yield _spawn(["make", "-C", "./build/app", "V=1"]);
-      yield _spawn(["make", "-C", "./build/app_test", "V=1"]);
+      //yield _spawn(["make", "-C", "./build/app_test", "V=1"]);
     }
   })
 }
@@ -197,6 +232,45 @@ function _promisify(method) {
       }))
     });
   }
+}
+
+function _requestStream(label, url) {
+  var req = request(url);
+
+  req.on("response", function(res) {
+    var len = parseInt(res.headers['content-length'], 10);
+
+    var bar = new ProgressBar("  " + label + " [:bar] :percent", {
+      complete: '=',
+      incomplete: ' ',
+      width: 20,
+      total: len
+    });
+
+    res.on('data', function (chunk) {
+      bar.tick(chunk.length);
+    });
+
+    res.on('end', function () {
+      console.log('\n');
+    });
+  })
+
+
+  return req;
+}
+
+function _fileExists(path) {
+  return new Promise(function(resolve, reject) {
+    fs.exists(path, ok(resolve, reject));
+  });
+}
+
+function _promisifyStream(stream) {
+  return new Promise(function(resolve, reject) {
+    stream.once("end", resolve);
+    stream.once("error", reject);
+  });
 }
 
 function *_os(methods) {

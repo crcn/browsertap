@@ -1,2 +1,0 @@
-INDEX VERSION 1.125+/Users/craigcondon/Developer/Jobs/browsertap/java/.metadata/.plugins/org.eclipse.jdt.core
-3223741160.index

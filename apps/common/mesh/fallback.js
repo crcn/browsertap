@@ -14,7 +14,7 @@ export default function(...busses) {
         var chunk;
         var hasData = false;
 
-        while(chunk = yield resp.read()) {
+        while (chunk = yield resp.read()) {
           hasData = true;
           ret.write(chunk);
         }

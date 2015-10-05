@@ -1,18 +1,20 @@
 import BaseApplication from "common/application";
-import http            from "./http";
-// import emailer         from "./emailer";
-// import stripe          from "./stripe";
 import createBus       from "./bus";
-// import jobs            from "./jobs";
- 
+import mdns            from "common/plugins/mdns";
+
 class SlaveApplication extends BaseApplication {
+
+  /**
+   */
+
+  pkg = require("./package.json")
 
   /**
    */
 
   initializePlugins() {
     this.bus = createBus(this, this.bus);
-    this.use(http);
+    this.use(mdns);
     super.initializePlugins();
   }
 }

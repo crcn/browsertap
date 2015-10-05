@@ -1,6 +1,6 @@
-import accept from "./accept"
-import co from "co"
-import expect from "expect.js"
+import accept from "./accept";
+import co from "co";
+import expect from "expect.js";
 import { BufferedResponse } from "./_responses";
 
 describe(__filename + "#", function() {
@@ -16,7 +16,6 @@ describe(__filename + "#", function() {
         return new BufferedResponse("rejected");
       }
     );
-
 
     expect(yield bus({ accept: true }).read()).to.be("accepted");
     expect(yield bus({ accept: false }).read()).to.be("rejected");

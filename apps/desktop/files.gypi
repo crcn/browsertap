@@ -1,17 +1,16 @@
 {
     'includes': [
-        './vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/supplement.gypi',
-        './vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/build/common.gypi',
-        './vendor/webrtc-build-scripts/ios/webrtc/src/talk/build/common.gypi',
+
+            './vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/supplement.gypi',
+            './vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/build/common.gypi',
+            './vendor/webrtc-build-scripts/ios/webrtc/src/talk/build/common.gypi',
         './common.gypi',
         './config.gypi'
     ],
 
     'target_defaults': {
         'include_dirs': [
-            './vendor/webrtc-build-scripts/ios/webrtc/src/third_party/jsoncpp/source/include',
-            './vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libsrtp/srtp',
-            './vendor/webrtc-build-scripts/ios/webrtc/src/third_party/libyuv/include',
+            './vendor/webrtc/include',
             './vendor/libwebsockets/lib',
             './vendor/libwebsockets/build',
             './vendor/jsoncpp/include'
@@ -52,7 +51,6 @@
                 ]
             }],
             ["OS=='win'", {
-
                 'sources': [
                     './src/core/virt/win32/window.cc',
                     './src/core/virt/win32/desktop.cc'

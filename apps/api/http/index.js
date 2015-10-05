@@ -18,7 +18,7 @@ module.exports = function(app) {
 
   k.use(serve(app.get("config.directories.public")));
 
-  k.keys = ['keys', 'keykeys'];
+  k.keys = ["keys", "keykeys"];
 
   k.use(cors());
   k.use(bodyparser());

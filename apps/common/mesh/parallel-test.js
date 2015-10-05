@@ -1,6 +1,6 @@
-import parallel from "./parallel"
-import co from "co"
-import expect from "expect.js"
+import parallel from "./parallel";
+import co from "co";
+import expect from "expect.js";
 import { BufferedResponse } from "./_responses";
 
 describe(__filename + "#", function() {

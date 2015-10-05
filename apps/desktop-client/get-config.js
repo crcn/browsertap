@@ -8,6 +8,9 @@ module.exports = function(env) {
       beta: true,
       api: {
         host: "http://0.0.0.0:8080"
+      },
+      mdns: {
+        browse: ["machine"]
       }
     },
     staging: {

@@ -18,9 +18,28 @@
                     }
                 },
 
+                  'defines': [
+                    'UNICODE',
+                    'WIN32',
+                    'WEBRTC_WIN',
+                    'NOMINMAX'
+                  ],
+
                 'include_dirs': [
                     './vendor/pthreads-w32-2-9-1-release/Pre-built.2/include'
-                ]
+                ],
+                'link_settings': {
+                    'libraries': [
+                        "./vendor/webrtc/lib/Release_x64/webrtc_full.lib",
+                        "advapi32.lib",
+                        "dmoguids.lib",
+                        "msdmo.lib",
+                        "secur32.lib",
+                        "winmm.lib",
+                        "ws2_32.lib",
+                        "wmcodecdspuuid.lib"
+                    ]
+                }
             }
         }, {
             "target_defaults": {
@@ -52,6 +71,7 @@
         }],
 
         ['OS=="mac"', {
+
             "xcode_settings": {
                 'CLANG_CXX_LANGUAGE_STANDARD': 'c++11',
                 'GCC_ENABLE_CPP_RTTI': 'NO',
@@ -68,6 +88,11 @@
             },
 
             'target_defaults': {
+              'includes': [
+                  './vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/supplement.gypi',
+                  './vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/build/common.gypi',
+                  './vendor/webrtc-build-scripts/ios/webrtc/src/talk/build/common.gypi'
+              ],
               'link_settings': {
                   'libraries': [
                       '/usr/local/bt/remote-desktop-server/vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds/libWebRTC-9725-mac-x86_64-Release.a',

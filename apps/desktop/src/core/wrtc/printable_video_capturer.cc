@@ -58,7 +58,7 @@ private:
   target(printable),
   _isRunning(false),
   _startThread(nullptr) {
-    LOG_VERBOSE(__PRETTY_FUNCTION__);
+    LOG_VERBOSE(__FUNCTION__);
     _mh = new CapturerThread(this);
   }
 
@@ -68,7 +68,7 @@ private:
   }
 
   cricket::CaptureState PrintableVideoCapturer::Start(const cricket::VideoFormat& format) {
-    LOG_VERBOSE(__PRETTY_FUNCTION__);
+    LOG_VERBOSE(__FUNCTION__);
     // frames need to be sent to.
 
     SetCaptureFormat(&format);
@@ -84,7 +84,7 @@ private:
   }
 
   void PrintableVideoCapturer::Stop() {
-    LOG_VERBOSE(__PRETTY_FUNCTION__);
+    LOG_VERBOSE(__FUNCTION__);
     _isRunning = false;
     _mh->Stop();
     delete _mh;
@@ -101,7 +101,8 @@ private:
   };
 
   bool PrintableVideoCapturer::GetPreferredFourccs(std::vector<uint32>* fourccs) {
-    LOG_VERBOSE(__PRETTY_FUNCTION__);
+    LOG_VERBOSE(__FUNCTION__);
+    return true;
   }
 
   void* PrintableVideoCapturer::run() {
@@ -113,7 +114,7 @@ private:
   //       rtc::Bind(&AVFoundationVideoCapturer::SignalFrameCapturedOnStartThread,
   //                 this, &frame));
   // }
-    LOG_VERBOSE(__PRETTY_FUNCTION__);
+    LOG_VERBOSE(__FUNCTION__);
 
     cricket::CapturedFrame frame;
     graphics::Bitmap* bm = target->print();
@@ -134,6 +135,7 @@ private:
                   this, &frame));
 
     delete bm;
+    return nullptr;
   }
 
   void PrintableVideoCapturer::signalFrameCapturedOnStartThread2(const cricket::CapturedFrame* frame) {

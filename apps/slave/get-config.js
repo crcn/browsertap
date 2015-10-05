@@ -9,6 +9,13 @@ module.exports = function(env) {
     defaults: {
       http: {
         port: 8090
+      },
+      mdns: {
+        advertise : "machine",
+        port      : 9000
+      },
+      paths: {
+        desktopController: path.join(__dirname, "..", "/desktop/build/app/out/Release/app")
       }
     }
   };

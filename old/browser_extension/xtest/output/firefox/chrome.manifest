@@ -1,3 +1,0 @@
-content BrowserTap_kango chrome/content/
-overlay chrome://browser/content/browser.xul chrome://BrowserTap_kango/content/content.xul
-resource BrowserTap_kango chrome/content/

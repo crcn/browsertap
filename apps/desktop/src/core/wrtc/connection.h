@@ -1,7 +1,7 @@
 #ifndef WRTC_CONNECTION_H_
 #define WRTC_CONNECTION_H_
 
-
+#include "./core.h"
 #include "talk/app/webrtc/videosourceinterface.h"
 #include "talk/app/webrtc/peerconnectionfactoryproxy.h"
 #include "talk/app/webrtc/proxy.h"
@@ -15,7 +15,6 @@
 #include "webrtc/base/scoped_ptr.h"
 #include "webrtc/base/ssladapter.h"
 #include "webrtc/base/sslstreamadapter.h"
-#include "webrtc/base/stringutils.h"
 #include "webrtc/base/thread.h"
 #include "webrtc/base/buffer.h"
 #include "webrtc/base/scoped_ref_ptr.h"
@@ -37,7 +36,6 @@
 #include "talk/media/sctp/sctpdataengine.h"
 #include "talk/media/devices/devicemanager.h"
 #include "talk/media/webrtc/webrtcvideocapturerfactory.h"
-#include "./core.h"
 #include "./observers.h"
 #include "../events/event_emitter.h"
 #include "../thread/mutex.h"

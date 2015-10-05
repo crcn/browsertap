@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mdns": "^2.2.10",
     "common": "file:../common"
   }
 }

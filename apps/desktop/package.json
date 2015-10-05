@@ -17,6 +17,10 @@
   "devDependencies": {
     "co": "^4.6.0",
     "gulp": "^3.9.0",
-    "lodash": "^3.10.1"
+    "lodash": "^3.10.1",
+    "okay": "^1.0.0",
+    "progress": "^1.1.8",
+    "request": "^2.64.0",
+    "unzip": "^0.1.11"
   }
 }

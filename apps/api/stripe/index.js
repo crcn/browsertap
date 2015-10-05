@@ -11,8 +11,8 @@ function mock() {
         return new Promise(function(resolve, reject) {
           resolve({
             id: "customer1"
-          })
-        })
+          });
+        });
       }
     },
     charges: {
@@ -20,8 +20,8 @@ function mock() {
         return new Promise(function(resolve, reject) {
           resolve({
             id: "charge1"
-          })
-        })
+          });
+        });
       }
     }
   }

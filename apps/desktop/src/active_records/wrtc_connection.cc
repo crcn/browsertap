@@ -10,9 +10,6 @@ namespace app {
     connection->addListener(this);
   }
 
-  bool WRTCConnection::exists() {
-  }
-
   void WRTCConnection::handleEvent(core::Event* event) {
     // trigger update when local connection changes
     // update();
@@ -26,7 +23,7 @@ namespace app {
   }
 
   void WRTCConnection::disconnect() {
-    LOG_NOTICE(__PRETTY_FUNCTION__);
+    LOG_NOTICE(__FUNCTION__);
     this->remove();
   }
 

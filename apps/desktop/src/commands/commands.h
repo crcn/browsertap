@@ -1,6 +1,7 @@
 #ifndef COMMANDS_H_
 #define COMMANDS_H_
 
+#include "../core/headers.h"
 #include "../application.h"
 #include "../core/mesh/mesh.h"
 #include "../core/events/event_listener.h"

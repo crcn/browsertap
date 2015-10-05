@@ -12,7 +12,6 @@ namespace app {
     VirtWindow* video;
     wrtc::Connection* _connection;
     WRTCConnection(wrtc::Connection*);
-    virtual bool exists();
     virtual Json::Value toJson();
     void handleEvent(core::Event*);
     void disconnect();

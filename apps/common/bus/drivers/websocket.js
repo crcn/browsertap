@@ -1,11 +1,12 @@
 import mesh from "common/mesh";
 import co from "co";
 import { EventEmitter } from "events";
+import ws from "websocket";
+
+var WebSocket = ws.w3cwebsocket;
 
 export default function(options, bus) {
   if (!bus) bus = mesh.noop;
-
-  if (!process.browser) return mesh.noop;
 
   var ws = new WebSocket(options.host, 'dumb-increment-protocol');
 
@@ -23,7 +24,7 @@ export default function(options, bus) {
     var resp = _openResponses[op.resp];
 
     if (!resp) {
-      console.log("remote < ", op);
+      app.logger.verbose("ws remote < ", op);
       return bus(op);
     }
 
@@ -36,7 +37,7 @@ export default function(options, bus) {
   }
 
   function send(operation) {
-    console.log("remote > ", operation);
+    app.logger.verbose("ws remote > ", operation);
     ws.send(JSON.stringify(operation));
   }
 

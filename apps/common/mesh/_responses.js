@@ -1,6 +1,5 @@
-var events       = require("events");
-var EventEmitter = events.EventEmitter;
-var co           = require("co");
+import { EventEmitter } from "events";
+import co from "co";
 
 // TODO - do this
 export class BaseResponse {
@@ -106,7 +105,7 @@ export class AsyncResponse extends BaseResponse {
     return co(function*() {
       var chunks = [];
       var chunk;
-      while(chunk = yield this.read()) chunks.push(chunk);
+      while (chunk = yield this.read()) chunks.push(chunk);
       return chunks;
     }.bind(this));
   }

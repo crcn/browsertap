@@ -80,7 +80,7 @@ ThreadConstructor* _signal;
 rtc::scoped_refptr<webrtc::PeerConnectionFactoryInterface> _factory;
 
 void Core::Init() {
-  LOG(LS_INFO) << __PRETTY_FUNCTION__;
+  LOG(LS_INFO) << __FUNCTION__;
   
   #ifdef WIN32
     rtc::EnsureWinsockInit();
@@ -101,7 +101,7 @@ void Core::Init() {
 }
 
 void Core::Dispose() {
-  LOG(LS_INFO) << __PRETTY_FUNCTION__;
+  LOG(LS_INFO) << __FUNCTION__;
 
   _factory.release();
 

@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "./manager.h"
+#include "./src/core/shims/shims.h"
 #include <iostream>
 
 using namespace core;

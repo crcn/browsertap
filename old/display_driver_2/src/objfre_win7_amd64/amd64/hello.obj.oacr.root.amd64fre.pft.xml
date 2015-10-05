@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DEFECTS>
-<OACRDEFECTCOUNT>2</OACRDEFECTCOUNT>
-<OACRERRORCOUNT>0</OACRERRORCOUNT>
-<DEFECT _seq="1"><SFA><LINE>8</LINE><COLUMN>9</COLUMN><FILENAME>hello.c</FILENAME><FILEPATH>c:\btap\display_driver_2\src\</FILEPATH></SFA><DEFECTCODE>28101</DEFECTCODE><DESCRIPTION>The Drivers module has inferred that the current function is a DRIVER_INITIALIZE function:  This is informational only. No problem has been detected.</DESCRIPTION><FUNCTION>DriverEntry</FUNCTION><FUNCLINE>8</FUNCLINE><PATH/></DEFECT>
-<DEFECT _seq="2"><SFA><LINE>11</LINE><COLUMN>28</COLUMN><FILENAME>hello.c</FILENAME><FILEPATH>c:\btap\display_driver_2\src\</FILEPATH></SFA><DEFECTCODE>28155</DEFECTCODE><DESCRIPTION>The function being assigned or passed should be a DRIVER_UNLOAD function:  Add the declaration 'DRIVER_UNLOAD DriverUnload;' before the current first declaration of DriverUnload.</DESCRIPTION><FUNCTION>DriverEntry</FUNCTION><FUNCLINE>8</FUNCLINE><PATH/></DEFECT>
-</DEFECTS>

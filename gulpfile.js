@@ -12,8 +12,6 @@ var resolutions     = require('browserify-resolutions');
 var watchify        = require("watchify");
 var babelify        = require("babelify");
 var File            = require("vinyl");
-var jscs            = require("gulp-jscs");
-var jshint          = require("gulp-jshint");
 var flatten         = require("lodash/array/flatten");
 var babel           = require("babel/register")({
   optional: ["es7.classProperties", "es7.decorators"]
@@ -45,6 +43,7 @@ var appsFilesPrefix =  "apps/{" + appNames.join(",") +"}/**";
 var paths = {
   testFiles       : [ignore, "test/**/*.js", appsFilesPrefix + "/*-test.js"],
   allFiles        : [ignore, "test/**/*.js", appsFilesPrefix],
+  jsFiles         : [ignore, "test/**/*.js", appsFilesPrefix + "/*.js", appsFilesPrefix + "/*.jsx"],
   lessFiles       : [appsFilesPrefix + "/*.less"],
   watchFiles      : [appsFilesPrefix, ignore],
   buildDirectory  : path.normalize(__dirname + "/public"),
@@ -141,67 +140,6 @@ gulp.task("minify-js", ["bundle-js"], function() {
   src(glob.sync(paths.buildDirectory + "/*.bundle.js")).
   pipe(uglify()).
   pipe(gulp.dest(paths.buildDirectory));
-});
-
-/**
- */
-
-gulp.task("jscs", function() {
-  return gulp.
-  src(paths.allFiles).
-  pipe(jscs({
-      "preset": "google",
-      "fileExtensions": [ ".js", "jscs" ],
-
-      "requireParenthesesAroundIIFE": true,
-      "maximumLineLength": 200,
-      "validateLineBreaks": "LF",
-      "validateIndentation": 2,
-      "validateQuoteMarks": "\"",
-      "disallowSpaceAfterObjectKeys": "ignoreMultiLine",
-
-      "disallowKeywords": ["with"],
-      "disallowSpacesInsideObjectBrackets": null,
-      "disallowImplicitTypeConversion": ["string"],
-      "requireCurlyBraces": [],
-
-      "safeContextKeyword": "self",
-
-      "excludeFiles": [
-          "test/data/**",
-          "./lib/parser.js"
-      ]
-  }));
-});
-
-/**
- */
-
-gulp.task("jshint", function() {
-    return gulp.
-    src(paths.allFiles).
-    pipe(jshint({
-      "node"     : true,
-      "bitwise"  : false,
-      "esnext"   : true,
-      "eqnull"   : true,
-      "browser"  : true,
-      "undef"    : true,
-      "eqeqeq"   : false,
-      "noarg"    : true,
-      "mocha"    : true,
-      "evil"     : true,
-      "laxbreak" : true,
-      "-W100"    : true
-    })).
-    pipe(jshint.reporter('default'));
-});
-
-/**
- */
-
-gulp.task("lint", ["jscs", "jshint"], function (complete) {
-  complete();
 });
 
 /**

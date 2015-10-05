@@ -7,6 +7,7 @@
 #include "../core/virt/base/desktop.h"
 #include "../core/virt/base/window.h"
 #include "../core/active_record/collection.h"
+#include "../core/shims/shims.h"
 #include <map>
 
 namespace app {

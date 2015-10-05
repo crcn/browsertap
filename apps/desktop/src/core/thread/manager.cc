@@ -1,4 +1,5 @@
 #include "./manager.h"
+#include "../shims/shims.h"
 #include <iostream>
 
 namespace core {

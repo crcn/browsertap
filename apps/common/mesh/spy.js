@@ -6,6 +6,7 @@ export default function(bus) {
     var ret;
     if (operation.name === "spy") {
       ret = new AsyncResponse();
+      ret.operation = operation;
       ret.then(function() {
         spies.splice(spies.indexOf(ret), 1);
       });
@@ -14,6 +15,7 @@ export default function(bus) {
       ret = bus(operation);
       ret.operation = operation;
       spies.forEach(function(spy) {
+        if (spy.operation.filter && !spy.operation.filter(operation)) return;
         spy.write({
           operation: operation,
           response: ret

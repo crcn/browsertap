@@ -26,6 +26,8 @@
 #ifndef WRTC_CORE_H_
 #define WRTC_CORE_H_
 
+#include "../headers.h"
+
 #include "talk/app/webrtc/videosourceinterface.h"
 #include "talk/app/webrtc/peerconnectionfactoryproxy.h"
 #include "talk/app/webrtc/proxy.h"
@@ -38,7 +40,6 @@
 #include "webrtc/base/scoped_ptr.h"
 #include "webrtc/base/ssladapter.h"
 #include "webrtc/base/sslstreamadapter.h"
-#include "webrtc/base/stringutils.h"
 #include "webrtc/base/thread.h"
 #include "webrtc/base/buffer.h"
 #include "webrtc/base/scoped_ref_ptr.h"

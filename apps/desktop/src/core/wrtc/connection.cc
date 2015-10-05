@@ -1,6 +1,7 @@
+#include "../headers.h"
+#include "./connection.h"
 #include "talk/app/webrtc/test/fakeconstraints.h"
 #include "./printable_video_capturer.h"
-#include "./connection.h"
 #include "./core.h"
 
 namespace wrtc {
@@ -91,14 +92,14 @@ namespace wrtc {
    */
 
   void Connection::_onStateChange(webrtc::PeerConnectionObserver::StateType state) {
-    LOG_VERBOSE(__PRETTY_FUNCTION__);
+    LOG_VERBOSE(__FUNCTION__);
   }
 
   /**
    */
 
   void Connection::_onIceGatheringChange(webrtc::PeerConnectionInterface::IceGatheringState state) {
-    LOG_VERBOSE(__PRETTY_FUNCTION__);
+    LOG_VERBOSE(__FUNCTION__);
 
     switch(state) {
       case webrtc::PeerConnectionInterface::kIceConnectionConnected:
@@ -111,7 +112,7 @@ namespace wrtc {
    */
 
   void Connection::_onIceConnectionChange(webrtc::PeerConnectionInterface::IceConnectionState state) {
-    LOG_VERBOSE(__PRETTY_FUNCTION__);
+    LOG_VERBOSE(__FUNCTION__);
 
     switch(state) {
       case webrtc::PeerConnectionInterface::kIceConnectionDisconnected:
@@ -125,7 +126,7 @@ namespace wrtc {
    */
 
   void Connection::_disconnect() {
-    LOG_VERBOSE(__PRETTY_FUNCTION__);
+    LOG_VERBOSE(__FUNCTION__);
     _capturer->Stop();
     _connection->Close();
   }
@@ -134,7 +135,7 @@ namespace wrtc {
    */
 
   void Connection::_onIceConnectionConnected() {
-    LOG_VERBOSE(__PRETTY_FUNCTION__);
+    LOG_VERBOSE(__FUNCTION__);
 
     std::string out;
     _connection->local_description()->ToString(&out);
@@ -163,7 +164,7 @@ namespace wrtc {
    */
 
   void Connection::_onDataChannelMessage(const webrtc::DataBuffer& buffer) {
-    LOG_VERBOSE(__PRETTY_FUNCTION__);
+    LOG_VERBOSE(__FUNCTION__);
 
     std::string msg;
     msg.assign((const char *)buffer.data.data(), (size_t)buffer.data.size());
@@ -175,14 +176,14 @@ namespace wrtc {
    */
 
   void Connection::_onDataChannelStateChange() {
-    LOG_VERBOSE(__PRETTY_FUNCTION__);
+    LOG_VERBOSE(__FUNCTION__);
   }
 
   /**
    */
 
   void Connection::_onOfferSuccess(webrtc::SessionDescriptionInterface* sdp) {
-    LOG_VERBOSE(__PRETTY_FUNCTION__);
+    LOG_VERBOSE(__FUNCTION__);
     _connection->SetLocalDescription(_localDescriptionObserver, sdp);
   }
 
@@ -190,7 +191,7 @@ namespace wrtc {
    */
 
   void Connection::_onLocalDescriptionSuccess() {
-    LOG_VERBOSE(__PRETTY_FUNCTION__);
+    LOG_VERBOSE(__FUNCTION__);
   }
   /**
    */

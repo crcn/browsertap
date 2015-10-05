@@ -14,7 +14,7 @@ io::Console::Console(base::Application* app):io::Base(app) {
  */
 
 void io::Console::start() {
-  LOG_INFO(__PRETTY_FUNCTION__);
+  LOG_INFO(__FUNCTION__);
   pthread_t thread;
   pthread_create (&thread, NULL, &captureStdin, this);
 }
