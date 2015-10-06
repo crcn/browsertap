@@ -4,6 +4,7 @@ public/css/all.css
 public/build/
 apps/desktop/vendor
 apps/desktop/build
+apps/desktop/shared
 Release
 *.dmg
 out

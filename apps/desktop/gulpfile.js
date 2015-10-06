@@ -11,6 +11,7 @@ var unzip         = require("unzip2");
 var ProgressBar   = require("progress");
 var ok            = require("okay");
 var fs            = require("fs");
+var DecompressZip = require('decompress-zip');
 
 
 // TODO - build specific to stats
@@ -52,7 +53,8 @@ function* link() {
 }
 
 function* vendors() {
-  yield *libwebsockets()
+  // yield *libwebsockets();
+  yield *webrtc();
 }
 
 function* libwebsockets() {
@@ -69,9 +71,20 @@ function* libwebsockets() {
       });
     },
     darwin: function*() {
-      yield _script("/build_libwebsockets.sh");
+      yield _spawn(["cmake", "..", "-DCMAKE_OSX_DEPLOYMENT_TARGET=10.5", "-DCMAKE_OSX_ARCHITECTURES=x86_64", "-DLWS_WITH_SSL=0"], {
+        cwd: buildDir
+      });
+      yield _spawn(["make"], {
+        cwd: buildDir
+      });
       yield _cp(buildDir + "/lib/libwebsockets.a", __dirname + "/shared/libwebsockets_darwin.a");
     }
+  });
+}
+
+function* webrtc() {
+  yield _spawn([__dirname + "/vendor/depot_tools/gclient", "sync", "--force"], {
+    cwd: __dirname + "/vendor/webrtc"
   });
 }
 
@@ -104,8 +117,10 @@ function* _mkdir(directory, ops) {
 
 function *download() {
 
-  https://www.dropbox.com/s/ftwgpa50ehp0tqi/webrtc.zip?dl=0
+  yield _mkdir(__dirname + "/vendor");
+
   var downloads = {
+    "Depot Tools"    : "https://www.dropbox.com/s/eoqbc39hf75suui/depot_tools.zip?dl=1",
     "win32 pthreads" : "https://www.dropbox.com/s/9xk0n73cbx1ffxc/pthreads-win32.zip?dl=1",
     "WebRTC"         : "https://www.dropbox.com/s/ftwgpa50ehp0tqi/webrtc.zip?dl=1",
     "google mock"    : "https://www.dropbox.com/s/w5mkd5g7x3fwosz/gmock.zip?dl=1",
@@ -119,11 +134,31 @@ function *download() {
     var url = downloads[label];
     var zipName = url.match(/(\w+)\.zip/)[1];
     if (!(yield _fileExists(__dirname + "/vendor/" + zipName))) {
-      yield _promisifyStream(_requestStream(label, url).pipe(unzip.Extract({
-        path: __dirname + "/vendor/" + zipName
-      })));
+      var zipPath = __dirname + "/vendor/" + zipName + ".zip";
+      yield _promisifyStream(_requestStream(label, url).pipe(fs.createWriteStream(zipPath)));
+      yield _unzip(zipPath, zipPath.replace(".zip", ""));
+      yield _rmdir(zipPath);
     }
   }
+}
+
+function *_unzip(zipPath, dest) {
+  return new Promise(function(resolve, reject) {
+
+    var unzipper = new DecompressZip(zipPath);
+
+    unzipper.on('error', function(error) {
+      console.warn(error);
+    });
+
+    unzipper.on('extract', function (log) {
+      resolve();
+    });
+
+    unzipper.extract({
+      path: dest
+    });
+  });
 }
 
 function* prepare() {
