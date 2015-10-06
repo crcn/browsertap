@@ -2,6 +2,8 @@
 node_modules
 public/css/all.css
 public/build/
+apps/desktop/vendor
+apps/desktop/build
 Release
 *.dmg
 out
