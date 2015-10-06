@@ -11,7 +11,6 @@ var unzip         = require("unzip2");
 var ProgressBar   = require("progress");
 var ok            = require("okay");
 var fs            = require("fs");
-var DecompressZip = require('decompress-zip');
 
 
 // TODO - build specific to stats
@@ -132,7 +131,7 @@ function *download() {
 
   for (label in downloads) {
     var url = downloads[label];
-    var zipName = url.match(/(\w+)\.zip/)[1];
+    var zipName = url.match(/([^\/]+)\.zip/)[1];
     if (!(yield _fileExists(__dirname + "/vendor/" + zipName))) {
       var zipPath = __dirname + "/vendor/" + zipName + ".zip";
       yield _promisifyStream(_requestStream(label, url).pipe(fs.createWriteStream(zipPath)));
@@ -143,22 +142,7 @@ function *download() {
 }
 
 function *_unzip(zipPath, dest) {
-  return new Promise(function(resolve, reject) {
-
-    var unzipper = new DecompressZip(zipPath);
-
-    unzipper.on('error', function(error) {
-      console.warn(error);
-    });
-
-    unzipper.on('extract', function (log) {
-      resolve();
-    });
-
-    unzipper.extract({
-      path: dest
-    });
-  });
+  yield _spawn(["unzip", zipPath, "-d", dest]);
 }
 
 function* prepare() {
