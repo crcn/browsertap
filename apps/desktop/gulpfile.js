@@ -7,14 +7,11 @@ var co            = require("co");
 var trim          = require("lodash/string/trim");
 var os            = require("os");
 var request       = require("request");
-var unzip         = require("unzip");
+var unzip         = require("unzip2");
 var ProgressBar   = require("progress");
 var ok            = require("okay");
 var fs            = require("fs");
 
-var paths = {
-
-};
 
 // TODO - build specific to stats
 
@@ -107,25 +104,20 @@ function* _mkdir(directory, ops) {
 
 function *download() {
 
-  // download webrtc builds
+  var downloads = {
+    "win32 pthreads" : "pthreads-win32",
+    "WebRTC"         : "webrtc"
+  };
 
-  var win32WebrtcVersion = "webrtcbuilds-10081-d6d27e7-windows";
-
-  if (!(yield _fileExists(__dirname + "/vendor/" + win32WebrtcVersion))) {
-    yield _promisifyStream(_requestStream("downloading win32 wrtc builds", "https://github.com/vsimon/webrtcbuilds/releases/download/10081/" + win32WebrtcVersion + ".zip").pipe(unzip.Extract({
-      path: __dirname + "/vendor"
-    })));
+  for (label in downloads) {
+    var zipName = downloads[label];
+    if (!(yield _fileExists(__dirname + "/vendor/" + zipName))) {
+      var url = "https://www.dropbox.com/s/9xk0n73cbx1ffxc/" + zipName + ".zip?dl=1";
+      yield _promisifyStream(_requestStream(label, url).pipe(unzip.Extract({
+        path: __dirname + "/vendor/" + zipName
+      })));
+    }
   }
-
-  var pthreadsVersion = "pthreads-w32-2-9-1-release";
-  if (true || !(yield _fileExists(__dirname + "/vendor/" + pthreadsVersion))) {
-    yield _promisifyStream(_requestStream("downloading win32 pthreads", "ftp://sourceware.org/pub/pthreads-win32/" + pthreadsVersion + ".zip").pipe(unzip.Extract({
-      path: __dirname + "/vendor"
-    })));
-  }
-
-  // console.log("downloading websockets");
-  // yield _spawn(["git", "clone" ]);
 }
 
 function* prepare() {
@@ -135,7 +127,7 @@ function* prepare() {
 
   var type = (yield _os({ win32: "msvs" })) || "make";
 
-  yield _spawn(["python", "./vendor/gyp/gyp_main.py", "remote_desktop_server.gyp", "--depth=.", "-f", type, "--generator-output=./build/app"]);
+  yield _spawn(["python", "./vendor/gyp/gyp_main.py", "gyp/remote_desktop_server.gyp", "--depth=.", "-f", type, "--generator-output=./build/app"]);
   // yield _spawn(["python", "./vendor/gyp/gyp_main.py",  "tests.gyp", "--depth=.", "-f", type, "--generator-output=./build/app_test"]);
 }
 
@@ -262,7 +254,7 @@ function _requestStream(label, url) {
 
 function _fileExists(path) {
   return new Promise(function(resolve, reject) {
-    fs.exists(path, ok(resolve, reject));
+    fs.exists(path, resolve);
   });
 }
 

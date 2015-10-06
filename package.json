@@ -20,6 +20,7 @@
     "browser-client": "file:./apps/browser-client",
     "common": "file:./apps/common",
     "desktop-client": "file:./apps/desktop-client",
+    "desktop": "file:./apps/desktop",
     "api": "file:./apps/api",
     "slave": "file:./apps/slave"
   },
