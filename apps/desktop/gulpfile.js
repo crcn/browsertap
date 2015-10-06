@@ -82,8 +82,38 @@ function* libwebsockets() {
 }
 
 function* webrtc() {
-  yield _spawn([__dirname + "/vendor/depot_tools/gclient", "sync", "--force"], {
-    cwd: __dirname + "/vendor/webrtc"
+
+  var chromiumDir = __dirname + "/vendor/chromium";
+
+  yield _mkdir(chromiumDir);
+
+  yield _spawn([__dirname + "/vendor/depot_tools/gclient", "config", "--name", "src", "http://webrtc.googlecode.com/svn/trunk"], {
+    cwd: chromiumDir
+  });
+
+  yield _spawn([__dirname + "/vendor/depot_tools/gclient", "sync"], {
+    cwd: chromiumDir
+  });
+
+  return;
+
+  var env = Object.assign({}, process.env, {
+    GYP_GENERATORS: "ninja",
+    GYP_DEFINES: "build_with_libjingle=1 build_with_chromium=0 libjingle_objc=1 OS=ios target_arch=armv7",
+    GYP_GENERATOR_FLAGS: "output_dir=out_ios",
+    GYP_CROSSCOMPILE: 1
+  });
+
+  console.log(env);
+
+  yield _spawn([__dirname + "/vendor/depot_tools/gclient", "runhooks"], {
+    env: env,
+    cwd: __dirname + "/vendor/webrtc/src"
+  });
+
+  yield _spawn([__dirname + "/vendor/depot_tools/ninja", "-C", "out_ios/Release-iphonesimulator", "iossim", "AppRTCDemo"], {
+    env: env,
+    cwd: __dirname + "/vendor/webrtc/src"
   });
 }
 
