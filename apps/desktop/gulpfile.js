@@ -104,15 +104,21 @@ function* _mkdir(directory, ops) {
 
 function *download() {
 
+  https://www.dropbox.com/s/ftwgpa50ehp0tqi/webrtc.zip?dl=0
   var downloads = {
-    "win32 pthreads" : "pthreads-win32",
-    "WebRTC"         : "webrtc"
+    "win32 pthreads" : "https://www.dropbox.com/s/9xk0n73cbx1ffxc/pthreads-win32.zip?dl=1",
+    "WebRTC"         : "https://www.dropbox.com/s/ftwgpa50ehp0tqi/webrtc.zip?dl=1",
+    "google mock"    : "https://www.dropbox.com/s/w5mkd5g7x3fwosz/gmock.zip?dl=1",
+    "gyp"            : "https://www.dropbox.com/s/8bcu8u5tqc833sb/gyp.zip?dl=1",
+    "google test"    : "https://www.dropbox.com/s/24nqg6f6zonat0d/gtest.zip?dl=1",
+    "websockets"     : "https://www.dropbox.com/s/eeedhow8h7p9syl/libwebsockets.zip?dl=1",
+    "json"           : "https://www.dropbox.com/s/gdwof6c6pzg944g/jsoncpp.zip?dl=1"
   };
 
   for (label in downloads) {
-    var zipName = downloads[label];
+    var url = downloads[label];
+    var zipName = url.match(/(\w+)\.zip/)[1];
     if (!(yield _fileExists(__dirname + "/vendor/" + zipName))) {
-      var url = "https://www.dropbox.com/s/9xk0n73cbx1ffxc/" + zipName + ".zip?dl=1";
       yield _promisifyStream(_requestStream(label, url).pipe(unzip.Extract({
         path: __dirname + "/vendor/" + zipName
       })));
@@ -262,6 +268,7 @@ function _promisifyStream(stream) {
   return new Promise(function(resolve, reject) {
     stream.once("end", resolve);
     stream.once("error", reject);
+    stream.once("finish", resolve);
   });
 }
 
