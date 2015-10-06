@@ -87,11 +87,11 @@ function* webrtc() {
 
   yield _mkdir(chromiumDir);
 
-  yield _spawn([__dirname + "/vendor/depot_tools/gclient", "config", "--name", "src", "http://webrtc.googlecode.com/svn/trunk"], {
+  yield _spawn([__dirname + "/vendor/depot_tools/gclient", "config", "--name=src", "https://chromium.googlesource.com/external/webrtc"], {
     cwd: chromiumDir
   });
 
-  yield _spawn([__dirname + "/vendor/depot_tools/gclient", "sync"], {
+  yield _spawn([__dirname + "/vendor/depot_tools/gclient", "sync", "--force"], {
     cwd: chromiumDir
   });
 
