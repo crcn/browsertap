@@ -24,7 +24,8 @@ _task("clean-vendors", cleanVendors);
 _task("prepare", prepare);
 _task("make", make);
 _task("test", test);
-_task("download-vendors", downloadVendors);
+_task("download", download);
+_task("vendors", vendors);
 
 function* clean() {
   yield _rmdir(__dirname + "/build");
@@ -81,36 +82,96 @@ function* libwebsockets() {
   });
 }
 
-function *downloadVendors() {
+function* webrtc() {
+
+  // https://github.com/pristineio/webrtc-build-scripts/blob/master/ios/build.sh
+  var env = Object.assign({}, process.env, {
+    GYP_GENERATORS: "ninja,xcode-ninja",
+    GYP_DEFINES: "build_with_libjingle=1 chromium_ios_signing=0 OS=mac target_arch=ia32",
+    GYP_GENERATOR_FLAGS: "output_dir=out_mac_x86_64",
+    GYP_CROSSCOMPILE: 1
+  });
+
+  yield _spawn([__dirname + "/vendor/depot_tools/gclient", "runhooks"], {
+    env: env,
+    cwd: chromiumDir + "/src"
+  });
+
+  // monkeypatch
+  fs.writeFileSync(chromiumDir + "/src/webrtc/libjingle_examples.gyp", fs.readFileSync(__dirname + "/monkeypatch/libjingle_examples.gyp", "utf8"), "utf8");
+
+  yield _spawn([__dirname + "/vendor/depot_tools/ninja", "-C", "out_mac_x86_64/Release", "libWebRTC_objc"], {
+    env: env,
+    cwd: chromiumDir + "/src"
+  });
+}
+
+function* _rmdir(directory, ops) {
+
+  try {
+    yield _os({
+      win32: function*() {
+        yield _exec(["echo y|rmdir " + _path(directory) + " /S"], ops);
+      },
+      "darwin linux": function*() {
+        yield _spawn(["rm", "-rf", directory], ops);
+      }
+    });
+  } catch(e) { }
+}
+
+function* _mkdir(directory, ops) {
+  try {
+    yield _os({
+      win32: function*() {
+        yield _exec("md " + _path(directory), ops);
+      },
+      "darwin linux": function*() {
+        yield _spawn(["mkdir", "-p", directory], ops);
+      }
+    });
+  } catch(e) { }
+}
+
+function *download() {
 
   yield _mkdir(__dirname + "/vendor");
 
-  var downloads = yield _os({
-    win32: {
-      "webrtc": "https://www.dropbox.com/s/8id0hivzk8w21el/webrtcbuilds-10183-af4ced9.zip?dl=1"
-    },
-    darwin: {
-      "websockets": "https://www.dropbox.com/s/adpkcgigf40e6kh/1.4.zip?dl=1",
-      "webrtc": "https://www.dropbox.com/s/8id0hivzk8w21el/webrtcbuilds-10183-af4ced9.zip?dl=1"
-    }
-  });
+  var downloads = {
+    "Depot Tools"    : "https://www.dropbox.com/s/eoqbc39hf75suui/depot_tools.zip?dl=1",
+    "win32 pthreads" : "https://www.dropbox.com/s/9xk0n73cbx1ffxc/pthreads-win32.zip?dl=1",
+    "google mock"    : "https://www.dropbox.com/s/w5mkd5g7x3fwosz/gmock.zip?dl=1",
+    "gyp"            : "https://www.dropbox.com/s/8bcu8u5tqc833sb/gyp.zip?dl=1",
+    "google test"    : "https://www.dropbox.com/s/24nqg6f6zonat0d/gtest.zip?dl=1",
+    "websockets"     : "https://www.dropbox.com/s/eeedhow8h7p9syl/libwebsockets.zip?dl=1",
+    "json"           : "https://www.dropbox.com/s/gdwof6c6pzg944g/jsoncpp.zip?dl=1"
+  };
 
-  Object.assign(downloads, {
-    depot_tools: "https://www.dropbox.com/s/90971ldhigqxi8a/depot_tools.zip?dl=1",
-    gmock: "https://www.dropbox.com/s/8yubyq5epy6it24/gmock.zip?dl=1",
-    gtest: "https://www.dropbox.com/s/j93f56z0ewhquyh/gtest.zip?dl=1",
-    gyp: "https://www.dropbox.com/s/bdytm7rb80q1zvi/gyp.zip?dl=1"
-  });
-
-  for (zipName in downloads) {
-    var url = downloads[zipName];
+  for (label in downloads) {
+    var url = downloads[label];
+    var zipName = url.match(/([^\/]+)\.zip/)[1];
     if (!(yield _fileExists(__dirname + "/vendor/" + zipName))) {
       var zipPath = __dirname + "/vendor/" + zipName + ".zip";
-      yield _promisifyStream(_requestStream(zipName, url).pipe(fs.createWriteStream(zipPath)));
+      yield _promisifyStream(_requestStream(label, url).pipe(fs.createWriteStream(zipPath)));
       yield _unzip(zipPath, zipPath.replace(".zip", ""));
       yield _rmdir(zipPath);
     }
   }
+
+  yield _mkdir(chromiumDir);
+
+  yield _spawn([__dirname + "/vendor/depot_tools/gclient", "config", "--name=src", "https://chromium.googlesource.com/external/webrtc"], {
+    cwd: chromiumDir
+  });
+
+  yield _spawn([__dirname + "/vendor/depot_tools/gclient", "sync", "--force"], {
+    cwd: chromiumDir
+  });
+
+}
+
+function *_unzip(zipPath, dest) {
+  yield _spawn(["unzip", zipPath, "-d", dest]);
 }
 
 function* prepare() {
@@ -241,6 +302,7 @@ function _requestStream(label, url) {
     });
   })
 
+
   return req;
 }
 
@@ -258,10 +320,6 @@ function _promisifyStream(stream) {
   });
 }
 
-function *_unzip(zipPath, dest) {
-  yield _spawn(["unzip", zipPath, "-d", dest]);
-}
-
 function *_os(methods) {
   var platform = os.platform();
   for (var n in methods) {
@@ -271,30 +329,4 @@ function *_os(methods) {
 
 function _path(path) {
   return os.platform() === "win32" ? path.replace(/\//g, "\\") : path;
-}
-
-function* _rmdir(directory, ops) {
-  try {
-    yield _os({
-      win32: function*() {
-        yield _exec(["echo y|rmdir " + _path(directory) + " /S"], ops);
-      },
-      "darwin linux": function*() {
-        yield _spawn(["rm", "-rf", directory], ops);
-      }
-    });
-  } catch(e) { }
-}
-
-function* _mkdir(directory, ops) {
-  try {
-    yield _os({
-      win32: function*() {
-        yield _exec("md " + _path(directory), ops);
-      },
-      "darwin linux": function*() {
-        yield _spawn(["mkdir", "-p", directory], ops);
-      }
-    });
-  } catch(e) { }
 }
