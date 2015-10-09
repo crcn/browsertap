@@ -75,9 +75,10 @@
             "xcode_settings": {
                 'CLANG_CXX_LANGUAGE_STANDARD': 'c++11',
                 'GCC_ENABLE_CPP_RTTI': 'NO',
-                'MACOSX_DEPLOYMENT_TARGET': '10.5',
+                'MACOSX_DEPLOYMENT_TARGET': '10.6',
                 'OTHER_CFLAGS': [
-                    '-fno-strict-aliasing'
+                    '-fno-strict-aliasing',
+                    '-DWEBRTC_POSIX'
                 ],
                 'WARNING_CFLAGS': [
                     '-Wall',

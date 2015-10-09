@@ -41,14 +41,14 @@
         "conditions": [
             ["OS=='mac'", {
                 'sources': [
-                    './src/core/virt/osx/window.cc',
-                    './src/core/virt/osx/desktop.cc'
+                    '<(DEPTH)/src/core/virt/osx/window.cc',
+                    '<(DEPTH)/src/core/virt/osx/desktop.cc'
                 ]
             }],
             ["OS=='win'", {
                 'sources': [
-                    './src/core/virt/win32/window.cc',
-                    './src/core/virt/win32/desktop.cc'
+                    '<(DEPTH)/src/core/virt/win32/window.cc',
+                    '<(DEPTH)/src/core/virt/win32/desktop.cc'
                 ]
             }]
         ]

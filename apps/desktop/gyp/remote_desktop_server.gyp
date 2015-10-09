@@ -8,7 +8,7 @@
             'target_name': 'app',
             'type': 'executable',
             'sources': [
-                './src/main.cc'
+                '<(DEPTH)/src/main.cc'
             ]
         }
     ]
