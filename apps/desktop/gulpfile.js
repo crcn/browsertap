@@ -87,7 +87,10 @@ function *downloadVendors() {
 
   var downloads = yield _os({
     win32: {
-      "webrtc": "https://www.dropbox.com/s/8id0hivzk8w21el/webrtcbuilds-10183-af4ced9.zip?dl=1"
+      "webrtc": "https://www.dropbox.com/s/8id0hivzk8w21el/webrtcbuilds-10183-af4ced9.zip?dl=1",
+      "jsoncpp": "https://www.dropbox.com/s/iecxx5qcqyemd2f/0.10.5.zip?dl=1",
+      "websockets": "https://www.dropbox.com/s/o2ie7xbz6fgfjwu/1.4.zip?dl=1",
+      "pthreads": "https://www.dropbox.com/s/b5cd1y4kx3t46in/2.9.1.zip?dl=1"
     },
     darwin: {
       "websockets": "https://www.dropbox.com/s/adpkcgigf40e6kh/1.4.zip?dl=1",
