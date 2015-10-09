@@ -88,15 +88,10 @@
             },
 
             'target_defaults': {
-              'includes': [
-                  './vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/supplement.gypi',
-                  './vendor/webrtc-build-scripts/ios/webrtc/src/webrtc/build/common.gypi',
-                  './vendor/webrtc-build-scripts/ios/webrtc/src/talk/build/common.gypi'
-              ],
               'link_settings': {
                   'libraries': [
-                      '/usr/local/bt/remote-desktop-server/vendor/webrtc-build-scripts/ios/webrtc/libjingle_peerconnection_builds/libWebRTC-9725-mac-x86_64-Release.a',
-                      '/usr/local/bt/remote-desktop-server/shared/libwebsockets_darwin.a',
+                      '/usr/local/bt/remote-desktop-server/vendor/webrtc/lib/Release/libwebrtc_full.a',
+                      '/usr/local/bt/remote-desktop-server/vendor/websockets/lib/libwebsockets.a',
                       '-lz',
                       '$(SDKROOT)/System/Library/Frameworks/AudioToolbox.framework',
                       '$(SDKROOT)/System/Library/Frameworks/AudioUnit.framework',
