@@ -24,8 +24,6 @@ namespace core {
 
   private:
     pthread_cond_t _condition;
-    // struct timespec _ts;
-    // struct timeval _tp;
   };
 };
 

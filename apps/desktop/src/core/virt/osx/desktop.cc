@@ -54,7 +54,6 @@ namespace osx {
       }
     }
 
-
     for (int i = toDelete.size(); i--;) {
       uint32_t k = toDelete.at(i);
       virt::Window* v = _windows[k];

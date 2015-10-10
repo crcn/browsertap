@@ -9,17 +9,22 @@
 #ifndef __RemoteDesktop__WinSystem__
 #define __RemoteDesktop__WinSystem__
 
+#include <Windows.h>
 #include <vector>
+#include <map>
 #include "../base/desktop.h"
 #include "./window.h"
 
 namespace win32 {
   class Desktop : public virt::Desktop  {
   public:
-      virtual std::vector<virt::Window*> syncWindows() {
-        std::vector<virt::Window*> wins;
-        return wins;
-      }
+      Desktop();
+      std::vector<virt::Window*> syncWindows();
+      void _getWindows();
+      static BOOL CALLBACK _eachWindow(HWND hWnd, LPARAM lParam);
+      BOOL CALLBACK _eachWindow(HWND hWnd);
+  private:
+    std::map<HWND, win32::Window*> _windows;
   };
 };
 

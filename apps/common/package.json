@@ -18,6 +18,7 @@
     "co": "^4.6.0",
     "credit-card": "^1.2.1",
     "httperr": "^1.0.0",
+    "lodash": "^3.10.1",
     "loggly": "^1.0.8",
     "loggly-browserify": "^1.0.4",
     "mdns": "^2.2.10",
