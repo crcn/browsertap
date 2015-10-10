@@ -46,7 +46,7 @@ export default function(app) {
     var response = bus({ name: "load", collection: "virtWindows", multi: true });
     var chunk;
     while(chunk = yield response.read()) {
-      // yield app.bus({ name: "insert", collection: "virtWindows", data: chunk });
+      yield app.bus({ name: "insert", collection: "virtWindows", data: chunk });
     }
   }
 };

@@ -14,8 +14,7 @@ export default function(app) {
     // Create the browser window.
     var win = new BrowserWindow({
       width  : operation.width,
-      height : operation.height,
-      frame  : false
+      height : operation.height
     });
 
     // and load the index.html of the app.

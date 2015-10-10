@@ -12,7 +12,6 @@ export default function(app, bus) {
       execute: function*() {
         yield app.bus({ name: "syncMachines" });
         yield app.bus({ name: "syncWindows"  });
-        yield app.bus({ name: "openWindow", width: 500, height: 400 });
       }
     }),
 
