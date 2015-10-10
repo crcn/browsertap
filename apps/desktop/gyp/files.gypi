@@ -15,9 +15,9 @@
             '<(DEPTH)/src/commands/commands.cc',
             '<(DEPTH)/src/active_records/wrtc_connection.cc',
             '<(DEPTH)/src/active_records/virt_window.cc',
-
-            '<(DEPTH)/src/plugins/log_operations.cc',
-
+            #
+            # '<(DEPTH)/src/plugins/log_operations.cc',
+            #
             '<(DEPTH)/src/core/wrtc/connection.cc',
             '<(DEPTH)/src/core/wrtc/observers.cc',
             '<(DEPTH)/src/core/wrtc/core.cc',
@@ -34,7 +34,6 @@
             '<(DEPTH)/src/core/active_record/db.cc',
 
             '<(DEPTH)/src/core/events/event_emitter.cc',
-            '<(DEPTH)/src/core/io/console.cc',
             '<(DEPTH)/src/core/io/websockets.cc'
         ],
 
@@ -48,7 +47,8 @@
             ["OS=='win'", {
                 'sources': [
                     '<(DEPTH)/src/core/virt/win32/window.cc',
-                    '<(DEPTH)/src/core/virt/win32/desktop.cc'
+                    '<(DEPTH)/src/core/virt/win32/desktop.cc',
+                    '<(DEPTH)/src/core/shims/sleep.cc'
                 ]
             }]
         ]

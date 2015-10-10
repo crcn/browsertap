@@ -1,7 +1,7 @@
 #ifndef CORE_THREAD_H_
 #define CORE_THREAD_H_
 
-#include <pthread.h>
+#include "./core.h"
 #include "./runnable.h"
 
 namespace core {
@@ -9,10 +9,10 @@ namespace core {
   typedef void* (ThreadCallback)(void*);
 
   class Thread {
-  public:      
+  public:
 
     void* join();
-    void detach();    
+    void detach();
     static Thread* run(void* data, ThreadCallback* callback);
     static Thread* run(ThreadCallback* callback);
     static Thread* run(Runnable* runnable);
@@ -20,7 +20,7 @@ namespace core {
     ~Thread();
 
   private:
-    pthread_t _thread; 
+    pthread_t _thread;
     Thread(void* data, ThreadCallback* callback);
     static void* _runRunnable(void* runnable);
   };

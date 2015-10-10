@@ -18,19 +18,34 @@
                     }
                 },
 
+                'msvs_settings': {
+                    'VCCLCompilerTool' : {
+                      'AdditionalOptions' : ['/MT']
+                    },
+                    'VCLinkerTool': {
+                    #   'IgnoreDefaultLibraryNames':['libcmtd.lib', 'libcmt.lib', 'msvcrt.lib', 'msvcrtd.lib']
+                    }
+                },
+
                   'defines': [
                     'UNICODE',
                     'WIN32',
                     'WEBRTC_WIN',
-                    'NOMINMAX'
+                    'NOMINMAX',
+                    'HAVE_STRUCT_TIMESPEC'
                   ],
 
                 'include_dirs': [
-                    './vendor/pthreads-w32-2-9-1-release/Pre-built.2/include'
+                    '<(DEPTH)/vendor/pthreads/include'
                 ],
                 'link_settings': {
                     'libraries': [
-                        "./vendor/webrtc/lib/Release_x64/webrtc_full.lib",
+                        "../../../vendor/webrtc/lib/Release_x64/webrtc_full.lib",
+                        "../../../vendor/pthreads/lib/x64/pthreadVC2.lib",
+                        # "../../../vendor/websockets/lib/websockets.lib",
+                        "../../../vendor/websockets/lib/websockets_shared.lib",
+                        "../../../vendor/websockets/lib/zlib_internal.lib",
+                        # "../../../vendor/jsoncpp/lib/lib_json.lib",
                         "advapi32.lib",
                         "dmoguids.lib",
                         "msdmo.lib",
@@ -91,7 +106,7 @@
             'target_defaults': {
               'link_settings': {
                   'libraries': [
-                      '/usr/local/bt/remote-desktop-server/vendor/webrtc/lib/Release/libwebrtc_full.a',
+                      '/usr/local/bt/remote-desktop-server/vendor/webrtc/lib/Release_x64/libwebrtc_full.a',
                       '/usr/local/bt/remote-desktop-server/vendor/websockets/lib/libwebsockets.a',
                       '-lz',
                       '$(SDKROOT)/System/Library/Frameworks/AudioToolbox.framework',

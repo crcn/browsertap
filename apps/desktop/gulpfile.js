@@ -87,7 +87,7 @@ function *downloadVendors() {
 
   var downloads = yield _os({
     win32: {
-      "webrtc": "https://www.dropbox.com/s/8id0hivzk8w21el/webrtcbuilds-10183-af4ced9.zip?dl=1",
+      "webrtc": "https://www.dropbox.com/s/4smubw7mz2xdtvp/webrtcbuilds-10158-6df1ef6.zip?dl=1",
       "jsoncpp": "https://www.dropbox.com/s/iecxx5qcqyemd2f/0.10.5.zip?dl=1",
       "websockets": "https://www.dropbox.com/s/o2ie7xbz6fgfjwu/1.4.zip?dl=1",
       "pthreads": "https://www.dropbox.com/s/b5cd1y4kx3t46in/2.9.1.zip?dl=1"
@@ -125,6 +125,7 @@ function* prepare() {
   yield _os({ win32: clean });
 
   var type = (yield _os({ win32: "msvs" })) || "make";
+  type = "msvs";
 
   yield _spawn(["python", "./vendor/gyp/gyp_main.py", "gyp/remote_desktop_server.gyp", "--depth=.", "-f", type, "--generator-output=./build/app"]);
   // yield _spawn(["python", "./vendor/gyp/gyp_main.py",  "tests.gyp", "--depth=.", "-f", type, "--generator-output=./build/app_test"]);
@@ -135,7 +136,9 @@ function* make() {
 
   yield _os({
     win32: function*() {
-      yield _spawn(["msbuild", "./build/app/app.vcxproj"]);
+      yield _spawn(["msbuild", "app.vcxproj"], {
+        cwd: __dirname + "/build/app/gyp"
+      });
       //yield _spawn(["msbuild", "./build/app_test/app_test.vcxproj"]);
     },
     darwin: function*() {

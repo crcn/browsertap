@@ -1,7 +1,7 @@
 #ifndef CORE_THREAD_MUTEX_H_
 #define CORE_THREAD_MUTEX_H_
 
-#include <pthread.h>    
+#include "./core.h"
 
 namespace core {
 

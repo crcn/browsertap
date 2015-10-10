@@ -1,7 +1,6 @@
 #include "./console.h"
 #include <iostream>
-#include <pthread.h>
-#include <sstream>     
+#include <sstream>
 
 /**
  */
@@ -15,8 +14,8 @@ io::Console::Console(base::Application* app):io::Base(app) {
 
 void io::Console::start() {
   LOG_INFO(__FUNCTION__);
-  pthread_t thread;
-  pthread_create (&thread, NULL, &captureStdin, this);
+  // pthread_t thread;
+  // pthread_create (&thread, NULL, &captureStdin, this);
 }
 
 /**
@@ -40,7 +39,7 @@ void* io::Console::captureStdin (void *ptr) {
       c->executeCommand(root);
     }
   }
-} 
+}
 
 /**
  */
@@ -57,7 +56,7 @@ void io::Console::executeCommand(Json::Value& root) {
     response->read([](const char* ))
     */
 
-    // output data  
+    // output data
     while(chunk = (const char*)response->read()) {
       std::cout << chunk;
     }

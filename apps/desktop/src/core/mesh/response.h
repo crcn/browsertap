@@ -12,7 +12,7 @@
 namespace mesh {
   class Response {
   public:
-    virtual void* read();
+    virtual void* read()=0;
     virtual ~Response() { };
   };
 

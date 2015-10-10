@@ -1,6 +1,5 @@
 #include "./websockets.h"
 #include <iostream>
-#include <pthread.h>
 #include <libwebsockets.h>
 #include <sstream>
 #include <json/json.h>
