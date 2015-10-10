@@ -23,6 +23,7 @@ namespace win32 {
       void _getWindows();
       static BOOL CALLBACK _eachWindow(HWND hWnd, LPARAM lParam);
       BOOL CALLBACK _eachWindow(HWND hWnd);
+      // void startRecording();
   private:
     std::map<HWND, win32::Window*> _windows;
   };
