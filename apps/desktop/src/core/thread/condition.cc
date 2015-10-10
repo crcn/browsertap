@@ -1,5 +1,14 @@
+#include <windows.h>
+#include "../shims/shims.h"
 #include "./condition.h"
 #include "./mutex.h"
+
+#ifdef _MSC_VER
+struct timespec {
+        time_t tv_sec;
+        long tv_nsec;
+};
+#endif
 
 namespace core {
   ThreadCondition::ThreadCondition() {
@@ -11,15 +20,18 @@ namespace core {
   }
 
   void ThreadCondition::wait(ThreadMutex& mutex, int ttl) {
-    // gettimeofday(&_tp, NULL);
-    //
-    // _ts.tv_sec  = _tp.tv_sec;
-    // _ts.tv_nsec = _tp.tv_usec * 1000;
-    // _ts.tv_sec += ttl;
-    //
-    // if(pthread_cond_timedwait(&_condition, &mutex._mutex, &_ts)) {
-    //   //std::cout << "ER" << std::endl;
-    // }
+
+    struct timespec ts;
+    struct timeval tp;
+
+    gettimeofday(&tp, NULL);
+
+     ts.tv_sec  = tp.tv_sec;
+     ts.tv_nsec = tp.tv_usec * 1000;
+     ts.tv_sec += ttl;
+
+    if(pthread_cond_timedwait(&_condition, &mutex._mutex, &ts)) {
+    }
   }
 
   void ThreadCondition::signal() {

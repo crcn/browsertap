@@ -24,6 +24,12 @@ _task("make", make);
 _task("test", test);
 _task("download-vendors", downloadVendors);
 
+
+var iofwatch = process.argv.indexOf("watch");
+gulp.task("watch", function () {
+  gulp.watch("./src/**/*", process.argv.slice(2, iofwatch));
+});
+
 function* clean() {
   yield _rmdir(__dirname + "/build");
 }
@@ -120,7 +126,7 @@ function *downloadVendors() {
 function* prepare() {
   // yield vendors();
   yield link();
-  yield _os({ win32: clean });
+  //yield _os({ win32: clean });
 
   var type = (yield _os({ win32: "msvs" })) || "make";
   type = "msvs";

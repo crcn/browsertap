@@ -48,7 +48,8 @@
                 'sources': [
                     '<(DEPTH)/src/core/virt/win32/window.cc',
                     '<(DEPTH)/src/core/virt/win32/desktop.cc',
-                    '<(DEPTH)/src/core/shims/sleep.cc'
+                    '<(DEPTH)/src/core/shims/sleep.cc',
+                    '<(DEPTH)/src/core/shims/time.cc'
                 ]
             }]
         ]

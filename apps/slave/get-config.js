@@ -5,6 +5,11 @@ import path            from "path"
 
 module.exports = function(env) {
 
+  var binPath = {
+    win32: path.join(__dirname, "..", "/desktop/build/app/gyp/Debug/app.exe"),
+    darwn: path.join(__dirname, "..", "/desktop/build/app/out/Release/app")
+  }[os.platform()];
+
   var configs = {
     defaults: {
       http: {
@@ -15,7 +20,7 @@ module.exports = function(env) {
         port      : 9000
       },
       paths: {
-        desktopController: path.join(__dirname, "..", "/desktop/build/app/out/Release/app")
+        desktopController: binPath
       }
     }
   };
