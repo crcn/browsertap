@@ -7,9 +7,7 @@ var co            = require("co");
 var trim          = require("lodash/string/trim");
 var os            = require("os");
 var request       = require("request");
-var unzip         = require("unzip2");
 var ProgressBar   = require("progress");
-var ok            = require("okay");
 var fs            = require("fs");
 
 // TODO - build specific to stats
