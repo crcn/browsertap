@@ -24,7 +24,9 @@ export default function(app, bus) {
   function *_spawnDesktopController(operation) {
     var binPath = app.get("config.paths.desktopController");
     app.logger.info("spawning desktop controller %s", binPath);
+        console.log(typeof AsyncResponse);
     var resp = new AsyncResponse();
+
 
     var cwd     = path.dirname(binPath);
     var binName = path.basename(binPath);
