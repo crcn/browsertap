@@ -6,4 +6,4 @@ mockery.enable({
 });
 
 mockery.registerMock("browser-window", require("./mocks/browser-window"));
-mockery.registerMock("common/mesh/bus/websocket", require("./mocks/websocket-bus"));
+// mockery.registerMock("common/mesh/bus/websocket", require("./mocks/websocket-bus"));

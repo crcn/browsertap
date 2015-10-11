@@ -5,7 +5,7 @@ module.exports = {
     var app = new Application({
       testMode: true
     });
-    // await app.initialize();
+    app.initialize();
     return app;
   }
 }

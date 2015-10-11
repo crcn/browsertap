@@ -1,5 +1,4 @@
 import { CommandsBus, NoResponse } from "common/mesh";
-import co from "co";
 import CommandBus  from "common/mesh/bus/command";
 
 export default function(app, bus) {
@@ -9,9 +8,9 @@ export default function(app, bus) {
      */
 
     initialize: new CommandBus({
-      execute: function*() {
-        yield app.bus.execute({ name: "syncMachines" }).read();
-        yield app.bus.execute({ name: "syncWindows"  }).read();
+      execute: async function() {
+        await app.bus.execute({ name: "syncMachines" }).read();
+        await app.bus.execute({ name: "syncWindows"  }).read();
         // yield app.bus.execute({ name: "openWindow", width: 500, height: 500 });
       }
     }),
