@@ -1,36 +1,37 @@
 import mixin from "common/utils/class/mixin";
 import httperr from "httperr"
+import readAll from "common/mesh/read-all";
 
 export default function(collectionName) {
 
   var persistMixin = mixin({
 
     /**
-     */
+    */
 
     constructor() {
-        this.on("change", this._pOnChange);
-        this._pOnChange({ properties: this });
+      this.on("change", this._pOnChange);
+      this._pOnChange({ properties: this });
     },
 
     /**
-     */
+    */
 
     _pOnChange(changed) {
-        if (changed.properties.data) {
-            this.setProperties(this.deserialize(changed.properties.data));
-        }
+      if (changed.properties.data) {
+        this.setProperties(this.deserialize(changed.properties.data));
+      }
     },
 
     /**
-     */
+    */
 
     deserialize() {
-        // OVERRIDE ME
+      // OVERRIDE ME
     },
 
     /**
-     */
+    */
 
     *load () {
       return yield this.fetch("load", {
@@ -39,7 +40,7 @@ export default function(collectionName) {
     },
 
     /**
-     */
+    */
 
     *remove () {
       var data = yield this.fetch("remove", {
@@ -49,14 +50,14 @@ export default function(collectionName) {
     },
 
     /**
-     */
+    */
 
     *save() {
       return this._id ? this.update() : this.insert();
     },
 
     /**
-     */
+    */
 
     *insert() {
       var data = yield this.fetch("insert", {
@@ -66,7 +67,7 @@ export default function(collectionName) {
     },
 
     /**
-     */
+    */
 
     *update() {
       return yield this.fetch("update", {
@@ -76,15 +77,15 @@ export default function(collectionName) {
     },
 
     /**
-     */
+    */
 
     *fetch(operationName, properties) {
 
-      var data = yield this.bus.value(Object.assign({
+      var data = (yield this.bus.execute(Object.assign({
         target     : this,
         name       : operationName,
         collection : collectionName
-      }, properties)).read();
+      }, properties)).read()).value;
 
       if (data) {
         this.setProperties(this.schema.coerce(Object.assign({}, this, data)));
@@ -99,22 +100,20 @@ export default function(collectionName) {
 
     function *_find(multi, bus, query) {
 
-      var response = bus({
+      var response = bus.execute({
         name       : "load",
         multi      : multi,
         query      : query,
         collection : collectionName
       });
 
-      var data;
-
       if (multi) {
-        return (yield response.readAll()).map(function(data) {
+        return (yield readAll(response)).map(function(data) {
           return new clazz(Object.assign({ bus: bus }, data));
         })
       } else {
-        var data = yield response.read();
-        if (data) return new clazz(Object.assign({ bus: bus }, data));
+        var {value} = yield response.read();
+        if (value) return new clazz(Object.assign({ bus: bus }, value));
       }
     }
 

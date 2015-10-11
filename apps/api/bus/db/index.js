@@ -1,5 +1,5 @@
 import sift from "sift";
-import mesh from "common/mesh";
+import { AcceptBus, AsyncResponse } from "mesh";
 import co from "co";
 
 var dbs = {
@@ -15,21 +15,13 @@ module.exports = function(app, bus) {
     throw new Error("db transport " + type + " does not exist");
   }
 
-  return mesh.accept(
+  var busClass = dbs[type];
+
+  var bus = new AcceptBus(
     sift({ name: /insert|update|remove|load/ }),
-    _wrapBus20(dbs[type](app)),
+    new busClass(app),
     bus
-  );
+  )
+
+  this.execute = bus.execute.bind(bus);
 };
-
-function _wrapBus20(bus) {
-  return function(operation) {
-    var resp = new mesh.AsyncResponse();
-
-    bus(operation)
-    .on("data", resp.write.bind(resp))
-    .on("end", resp.end.bind(resp));
-    // TODO - add error here
-    return resp;
-  };
-}

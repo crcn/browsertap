@@ -1,7 +1,7 @@
 import padRight from "lodash/string/padRight";
 import chalk from "chalk";
 import parseStack from "parse-stack";
-import mesh from "common/mesh";
+import { EmptyResponse } from "mesh";
 
 module.exports = function(app) {
 
@@ -19,7 +19,7 @@ module.exports = function(app) {
     }
   };
 
-  return function(operation) {
+  this.execute = function(operation) {
 
     // TODO - calc log info here such as log(":break");
 
@@ -67,6 +67,6 @@ module.exports = function(app) {
       console.log(msg);
     }
 
-    return new mesh.NoResponse();
+    return new EmptyResponse();
   };
 };

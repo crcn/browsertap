@@ -6,11 +6,6 @@ import Schema      from "common/data/schema/schema";
 
 var forgotPasswordSchema = new Schema({
   fields: {
-    bus: {
-      required : true,
-      hidden   : true,
-      type     : require("common/data/types/bus")
-    },
     emailAddress:  {
       required : true,
       type     : require("common/data/types/email-address")
@@ -28,10 +23,10 @@ class ForgotPasswordForm {
    */
 
   *submit() {
-    return yield this.bus.execute({ 
-      name: "forgotPassword", 
-      data: this 
-    }).read();
+    return (yield this.bus.execute({
+      name: "forgotPassword",
+      data: this
+    }).read()).value;
   }
 };
 

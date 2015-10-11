@@ -1,7 +1,6 @@
 import sift              from "sift";
-import mesh              from "common/mesh";
 import httperr           from "httperr";
-import _command          from "common/bus/drivers/command";
+import CommandBus        from "common/mesh/bus/command";
 import Invitee           from "common/data/models/invitee";
 import User              from "common/data/models/user";
 import RequestInviteForm from "common/data/forms/request-invite";
@@ -24,7 +23,7 @@ export default function(app, bus) {
     /**
      */
 
-    requestInvite: _command({
+    requestInvite: new CommandBus({
       execute: function*(operation) {
         var form = new RequestInviteForm(Object.assign({ bus: bus }, operation.data));
 
@@ -64,7 +63,7 @@ export default function(app, bus) {
     /**
      */
 
-    getInviteeFromShortCode: _command({
+    getInviteeFromShortCode: new CommandBus({
       execute: function*(operation) {
         var invitee = yield Invitee.findOne(bus, { shortcode: operation.shortcode });
         if (!invitee) throw new httperr.NotFound("inviteeNotFound");

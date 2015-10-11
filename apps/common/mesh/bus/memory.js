@@ -1,4 +1,4 @@
-import { noop, accept, AsyncResponse } from "common/mesh";
+import { Bus, AcceptBus, AsyncResponse, EmptyResponse } from "mesh";
 import sift             from "sift";
 
 function _clone(data) {
@@ -6,6 +6,8 @@ function _clone(data) {
 }
 
 function _response(results) {
+
+  // TODO - yield write here
   var resp = new AsyncResponse();
   results.forEach(resp.write.bind(resp));
   resp.end();
@@ -82,9 +84,16 @@ class MemoryDatabase {
   }
 }
 
-export default function(initialData) {
-  var db = new MemoryDatabase(initialData);
-  return accept(sift({ name: /insert|load|remove|update/ }), function(operation) {
-    return db.collection(operation.collection).execute(operation);
-  });
-};
+class MemoryBus extends Bus {
+  constructor(initialData) {
+    super();
+    this._db = new MemoryDatabase(initialData);
+  }
+  execute(operation) {
+    return /insert|load|remove|update/.test(operation.name)      ?
+    this._db.collection(operation.collection).execute(operation) :
+    new EmptyResponse();
+  }
+}
+
+export default MemoryBus;

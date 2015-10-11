@@ -11,16 +11,17 @@
       var React          = require("react");
       var ReactDOM       = require("react-dom");
       var createIPCBus   = require("desktop-client/bus/drivers/ipc");
-      var mesh           = require("common/mesh");
+      var mesh           = require("mesh");
+      var CommandsBus    = require("common/mesh/bus/commands");
       var componentClass = require("desktop-client/components/" + config.componentName);
 
       document.title = config.title || "";
       ReactDOM.render(React.createElement(componentClass, config), document.getElementById("app"));
 
 
-      var bus = createIPCBus(require("ipc"), mesh.commands({
+      var bus = createIPCBus(require("ipc"), new CommandsBus({
         ping: function(operation) {
-          return new mesh.BufferedResponse("pong!");
+          return new mesh.BufferedResponse(void 0, "pong!");
         }
       }));
 

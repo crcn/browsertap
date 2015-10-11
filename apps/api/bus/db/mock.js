@@ -1,17 +1,23 @@
-// TODO - deprecated - use common/mesh/drivers
-import memory from "mesh-memory";
-import mesh from "mesh";
+import MemoryDbBus from "common/mesh/bus/memory";
+import { AcceptBus } from "mesh";
 import sift from "sift";
 
 module.exports = function(app) {
   app.logger.info("init mock db");
-  var bus = memory();
+  var membus = new MemoryDbBus();
   var _i = 0;
-  bus = mesh.accept(sift({ name: "insert" }), function(operation) {
-    operation.data = Object.assign({ _id: createId() }, operation.data);
-    return this(operation);
-  }.bind(bus), bus);
-  return bus;
+
+  var bus = new AcceptBus(
+    sift({ name: "insert" }),
+    {
+      execute: function(operation) {
+        operation.data = Object.assign({ _id: createId() }, operation.data);
+        return membus.execute(operation);
+      }
+    }, membus
+  );
+
+  this.execute = bus.execute.bind(bus);
 };
 
 function createId() {

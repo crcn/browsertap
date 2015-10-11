@@ -4,7 +4,6 @@ import User from "common/data/models/user"
  */
 
 export function *create(app) {
-
   return {
     unverifiedUser : yield _createVerifiedUser(app)
   };
@@ -17,9 +16,9 @@ function *_createVerifiedUser(app) {
     password    : "password"
   };
 
-  var user = new User(Object.assign({ bus: app.bus }, yield app.bus({
+  var user = new User(Object.assign({ bus: app.bus }, (yield app.bus.execute({
     name: "register",
-    data: data}).read()));
+    data: data}).read()).value));
 
   yield user.insert();
 

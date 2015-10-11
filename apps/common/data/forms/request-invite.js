@@ -7,11 +7,6 @@ import Invitee     from "common/data/models/invitee";
 
 var requestInviteFormSchema = new Schema({
   fields: {
-    bus: {
-      required : true,
-      hidden   : true,
-      type     : require("common/data/types/bus")
-    },
     inviterShortcode: {
       hidden : true,
       type: String
@@ -37,10 +32,10 @@ class RequestInviteForm {
    */
 
   *submit() {
-    return new Invitee(Object.assign({ bus: this.bus }, yield this.bus.execute({ 
-      name: "requestInvite", 
-      data: this 
-    }).read()));
+    return new Invitee(Object.assign({ bus: this.bus }, (yield this.bus.execute({
+      name: "requestInvite",
+      data: this
+    }).read()).value));
   }
 };
 

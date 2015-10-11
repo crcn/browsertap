@@ -1,5 +1,5 @@
 import APIApplication from "../application";
-import mesh           from "common/mesh";
+import { AttachDefaultsBus } from "mesh";
 
 var port = 8091;
 
@@ -35,7 +35,7 @@ beforeEach(function(next) {
 
 beforeEach(function() {
   global.apiApp.session = {};
-  global.apiApp.bus = mesh.attach({ app: global.apiApp, session: global.apiApp.session }, global.apiApp.bus);
+  global.apiApp.bus = new AttachDefaultsBus({ app: global.apiApp, session: global.apiApp.session }, global.apiApp.bus);
 });
 
 afterEach(function(next) {

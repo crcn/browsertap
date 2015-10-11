@@ -1,6 +1,6 @@
 import { commands, noop, NoResponse } from "common/mesh";
 import co from "co";
-import _command  from "common/bus/drivers/command";
+import CommandBus  from "common/mesh/bus/command";
 
 export default function(app, bus) {
   return commands({
@@ -8,10 +8,10 @@ export default function(app, bus) {
     /**
      */
 
-    initialize: _command({
+    initialize: new CommandBus({
       execute: function*() {
-        yield app.bus({ name: "syncMachines" });
-        yield app.bus({ name: "syncWindows"  });
+        yield app.bus.execute({ name: "syncMachines" });
+        yield app.bus.execute({ name: "syncWindows"  });
       }
     }),
 

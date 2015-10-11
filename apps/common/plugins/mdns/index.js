@@ -1,5 +1,5 @@
-import { AsyncResponse, NoResponse, commands } from "common/mesh/commands";
-import _command from "common/bus/drivers/command";
+import { AsyncResponse, NoResponse, commands } from "common/mesh/bus/commands";
+import _command from "common/mesh/bus/command";
 import co from "co";
 
 export default function(app, mdns) {
@@ -40,7 +40,7 @@ export default function(app, mdns) {
 
       co(function*() {
         app.logger.info("mdns service %s update", browseName);
-        yield app.bus({
+        yield app.bus.execute({
           name: "upsert",
           collection: collection,
           query: { _id: item._id },
@@ -52,7 +52,7 @@ export default function(app, mdns) {
 
     browser.on("serviceDown", function(service) {
       app.logger.info("mdns service %s down", browseName);
-      app.bus({
+      app.bus.execute({
         name: "remove",
         collection: collection,
         query: { _id: _deser(service)._id }

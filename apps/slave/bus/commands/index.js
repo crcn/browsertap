@@ -1,21 +1,22 @@
-import { commands, NoResponse, AsyncResponse } from "common/mesh";
-import command from "common/bus/drivers/command";
+import { EmptyResponse, AsyncResponse } from "mesh";
+import CommandsBus from "common/mesh/bus/commands";
+import CommandBus from "common/mesh/bus/command";
 import { spawn } from "child_process";
 import path from "path";
 
 export default function(app, bus) {
 
-  return commands({
-    initialize: command({
+  return new CommandsBus({
+    initialize: new CommandBus({
       execute: _initialize,
     }),
-    spawnDesktopController: command({
+    spawnDesktopController: new CommandBus({
       execute: _spawnDesktopController
     })
   }, bus);
 
   function *_initialize(operation) {
-    app.bus({ name: "spawnDesktopController" });
+    app.bus.execute({ name: "spawnDesktopController" });
   }
 
   function *_spawnDesktopController(operation) {

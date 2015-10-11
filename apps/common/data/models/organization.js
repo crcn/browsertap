@@ -32,16 +32,7 @@ var organizationSchema = new Schema({
   fields: {
 
     /**
-     * required for executing DB commands
-     */
-
-    bus: {
-      required: true,
-      type: require("common/data/types/bus")
-    },
-
-    /**
-     * ID of the user 
+     * ID of the user
      */
 
     _id: {
@@ -51,8 +42,8 @@ var organizationSchema = new Schema({
     /**
      */
 
-    name: { 
-      required: false, 
+    name: {
+      required: false,
       type: String
     },
 
@@ -76,7 +67,7 @@ class Organization extends Model {
    */
 
   *getUsage() {
-    return new Usage(Object.assign({ bus: this.bus }, yield this.bus({
+    return new Usage(Object.assign({ bus: this.bus }, yield this.bus.execute({
       name: "getUsage",
       organization: this
     })));
@@ -110,7 +101,7 @@ class Organization extends Model {
    */
 
   *startDesktop() {
-    
+
   }
 }
 

@@ -1,13 +1,12 @@
 import DataForm from "./index"
 import React from "react/addons"
 import expect from "expect.js"
-import mesh from "common/mesh"
 import mixinSchema from "common/data/schema/mixin"
 import Schema from "common/data/schema/schema"
 import Password from "common/data/types/password"
 import EmailAddress from "common/data/types/email-address"
 import testUtils from "common/test/utils"
- 
+
 describe(__filename + "#", function() {
 
   function renderDataForm(props) {
@@ -103,4 +102,4 @@ describe(__filename + "#", function() {
     expect(passwordInput2.parentNode.parentNode.querySelector(".ion-checkmark")).not.to.be(null);
 
   });
-}); 
+});

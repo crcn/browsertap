@@ -18,11 +18,6 @@ class Token {
 
 var confirmAccountSchema = new Schema({
   fields: {
-    bus: {
-      required : true,
-      hidden   : true,
-      type     : require("common/data/types/bus")
-    }, 
     token: {
       required : true,
       hidden   : true,
@@ -41,10 +36,10 @@ class ConfirmAccountSchema {
    */
 
   *submit() {
-    return yield this.bus.execute({ 
-      name: "confirmAccount", 
-      data: this 
-    }).read();
+    return (yield this.bus.execute({
+      name: "confirmAccount",
+      data: this
+    }).read()).value;
   }
 };
 

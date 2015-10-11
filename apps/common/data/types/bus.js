@@ -9,14 +9,14 @@ class Bus extends ValueType {
    */
 
   validate(value) {
-    return typeof value === "function";
+    return value && !!value.execute;
   }
 
   /**
    */
 
   execute(operation) {
-    return this.value(operation);
+    return this.value.execute(operation);
   }
 }
 

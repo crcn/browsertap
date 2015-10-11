@@ -1,26 +1,27 @@
-import _command from "common/bus/drivers/command";
+import CommandBus from "common/mesh/bus/command";
 import sift from "sift";
-import createWebSocketBus from "common/bus/drivers/websocket";
+import createWebSocketBus from "common/mesh/bus/websocket";
 import co from "co";
 
 export default function(app) {
 
-  return _command({
+  return new CommandBus({
     execute: _execute
   });
 
   function *_execute(operation) {
     app.logger.info("synchronizing machines");
 
-    var spy = app.bus({
+    var spy = app.bus.execute({
       name: "spy",
       filter: sift({ name: /insert|remove|update/, collection: "servers" })
     });
 
     co(function*() {
-      var spied;
-      while(spied = yield spy.read()) {
-        switch(spied.operation.name) {
+      var value;
+      while({value} = yield spy.read()) {
+        if (!value) break;
+        switch(value.operation.name) {
           case "insert": yield _insert(spied.operation.data)
         }
       }
@@ -43,10 +44,12 @@ export default function(app) {
     }, app.bus);
 
     // TODO - VirtWindow.all(bus)
-    var response = bus({ name: "load", collection: "virtWindows", multi: true });
-    var chunk;
-    while(chunk = yield response.read()) {
-      yield app.bus({ name: "insert", collection: "virtWindows", data: chunk });
+    var response = bus.execute({ name: "load", collection: "virtWindows", multi: true });
+    var value;
+    var done;
+    while({value, done} = yield response.read()) {
+      if (done) break;
+      yield app.bus.execute({ name: "insert", collection: "virtWindows", data: value });
     }
   }
 };

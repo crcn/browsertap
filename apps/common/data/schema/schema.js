@@ -107,7 +107,7 @@ class Schema {
       } catch(e) {
 
         // re-throw with a more especific error message. This is coded as well so that it can be
-        // internationalized. 
+        // internationalized.
         if (e.statusCode === 400) {
           var err   = new httperr.BadRequest(property + "." + e.message);
           err.field = this.fields[property];

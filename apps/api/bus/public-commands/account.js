@@ -1,6 +1,6 @@
 import createRouter       from "api/bus/drivers/create-router";
 import sift               from "sift";
-import mesh               from "common/mesh";
+import { AttachDefaultsBus } from "mesh";
 import SignupForm         from "common/data/forms/signup";
 import LoginForm          from "common/data/forms/login";
 import ForgotPasswordForm from "common/data/forms/forgot-password";
@@ -15,7 +15,7 @@ import httperr            from "httperr";
 import mu                 from "mustache";
 import fs                 from "fs";
 import templates          from "./templates";
-import _command           from "common/bus/drivers/command";
+import CommandBus         from "common/mesh/bus/command";
 
 export default function(app, bus) {
 
@@ -26,9 +26,8 @@ export default function(app, bus) {
     /**
      */
 
-    register: _command({
+    register: new CommandBus({
       execute: function*(operation) {
-
 
         if (app.config.beta) {
           throw new httperr.Unauthorized("cannotRegisterInBeta");
@@ -79,7 +78,7 @@ export default function(app, bus) {
 
         // login to create the session and other things
         var loginForm = new LoginForm({
-          bus          : mesh.attach({ session: operation.session }, app.bus),
+          bus          : new AttachDefaultsBus({ session: operation.session }, app.bus),
           emailAddress : form.emailAddress,
           password     : form.password
         });
@@ -92,7 +91,7 @@ export default function(app, bus) {
      * logs the user in
      */
 
-    login: _command({
+    login: new CommandBus({
       execute: function*(operation) {
 
         var form = new LoginForm(Object.assign({ bus: bus }, operation.data));
@@ -118,7 +117,7 @@ export default function(app, bus) {
      * logs the user in
      */
 
-    logout: _command({
+    logout: new CommandBus({
       execute: function*(operation) {
         operation.session.userId = void 0;
       }
@@ -127,7 +126,7 @@ export default function(app, bus) {
     /**
      */
 
-    forgotPassword: _command({
+    forgotPassword: new CommandBus({
       execute: function*(operation) {
         var form = new ForgotPasswordForm(Object.assign({ bus: bus }, operation.data));
         var user = yield User.findOne(bus, { emailAddress: form.emailAddress.valueOf() });
@@ -157,7 +156,7 @@ export default function(app, bus) {
     /**
      */
 
-    getSessionUser: _command({
+    getSessionUser: new CommandBus({
       auth: true,
       execute: function*(operation) {
         return operation.user.toPublic();
@@ -167,7 +166,7 @@ export default function(app, bus) {
     /**
      */
 
-    confirmAccount: _command({
+    confirmAccount: new CommandBus({
       execute: function*(operation) {
         var form  = new ConfirmAccountForm(Object.assign({ bus: bus }, operation.data));
         var token = yield Token.findOne(bus, { _id: String(form.token._id) });
@@ -187,7 +186,7 @@ export default function(app, bus) {
     /**
      */
 
-    resetPassword: _command({
+    resetPassword: new CommandBus({
       execute: function*(operation) {
         var form = new ResetPasswordForm(Object.assign({ bus: bus }, operation.data));
 
@@ -219,7 +218,7 @@ export default function(app, bus) {
     /**
      */
 
-    updateUser: _command({
+    updateUser: new CommandBus({
       auth: true,
       execute: function*(operation) {
         // TODO

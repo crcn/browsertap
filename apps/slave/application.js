@@ -1,5 +1,5 @@
 import BaseApplication from "common/application";
-import createBus       from "./bus";
+import Slavebus       from "./bus";
 import mdns            from "common/plugins/mdns";
 
 class SlaveApplication extends BaseApplication {
@@ -13,7 +13,7 @@ class SlaveApplication extends BaseApplication {
    */
 
   initializePlugins() {
-    this.bus = createBus(this, this.bus);
+    this.bus = new SlaveBus(this, this.bus);
     this.use(mdns);
     super.initializePlugins();
   }

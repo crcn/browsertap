@@ -1,19 +1,38 @@
-import { noop, catchError } from "common/mesh"
-import internalCommands from "./internal-commands";
-import publicCommands from "./public-commands";
-import db from "./db";
-import log from "common/bus/log";
+import { WrapBus, NoopBus, CatchErrorBus } from "mesh";
 
-module.exports = function(app, bus) {
-  if (!bus) bus = noop;
-  bus = db(app, bus);
-  bus = internalCommands(app, bus);
-  bus = publicCommands(app, bus);
-  bus = log(app, bus); // TODO - change this to log operations
+import InternalCommandsBus from "./internal-commands";
+import PublicCommandsBus from "./public-commands";
+import DbBus from "./db";
+import LogBus from "common/mesh/bus/log";
 
-  bus = catchError(bus, function(err) {
-    app.logger.error(err);
-  });
+class APIBus extends WrapBus {
 
-  return bus;
-};
+  /**
+   */
+
+  constructor(app, bus) {
+
+    if (!bus) bus = new NoopBus();
+    bus = new DbBus(app, bus);
+    bus = new InternalCommandsBus(app, bus);
+    bus = new PublicCommandsBus(app, bus);
+
+    // var obus = bus;
+    //
+    // bus = {
+    //   execute: function(operation) {
+    //     console.log(operation);
+    //     return obus.execute(operation);
+    //   }
+    // }
+    // bus = new LogBus(app, bus);
+    bus = new CatchErrorBus(bus, function(error) {
+      app.logger.error(error);
+      throw error;
+    });
+
+    super(bus.execute.bind(bus));
+  }
+}
+
+export default APIBus;

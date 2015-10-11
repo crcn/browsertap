@@ -1,5 +1,5 @@
 import expect             from "expect.js";
-import mesh               from "common/mesh";
+import { AttachDefaultsBus } from "mesh";
 import sift               from "sift";
 import co                 from "co";
 import User               from "common/data/models/user";
@@ -25,7 +25,7 @@ describe(__filename + "#", function() {
 
   beforeEach(function() {
     session = global.apiApp.session;
-    global.apiApp.bus = bus = mesh.attach({ app: global.apiApp, public: true }, global.apiApp.bus);
+    global.apiApp.bus = bus = new AttachDefaultsBus({ app: global.apiApp, public: true }, global.apiApp.bus);
   });
 
   describe("insert# ", function() {
@@ -33,7 +33,7 @@ describe(__filename + "#", function() {
       var err;
 
       try {
-        yield bus({
+        yield bus.execute({
           name: "register",
           data: { emailAddress: "a@b.com" }
         }).read();

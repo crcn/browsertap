@@ -16,7 +16,9 @@ describe(__filename + "#", function() {
   it("only passes appropriate logs to the bus", function() {
     var logs = [];
     var logger = new Logger({
-      bus: logs.push.bind(logs),
+      bus: {
+        execute: logs.push.bind(logs)
+      },
       level: LogLevels.VERBOSE
     });
 
@@ -36,7 +38,9 @@ describe(__filename + "#", function() {
   it("can dynamically set the level", function() {
     var logs = [];
     var logger = new Logger({
-      bus: logs.unshift.bind(logs),
+      bus: {
+        execute: logs.unshift.bind(logs)
+      },
       level: LogLevels.VERBOSE
     });
 

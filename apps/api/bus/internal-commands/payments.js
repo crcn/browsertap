@@ -1,10 +1,9 @@
 import createRouter   from "api/bus/drivers/create-router";
 import sift           from "sift";
-import mesh           from "common/mesh";
 import httperr        from "httperr";
 import mu             from "mustache";
 import fs             from "fs";
-import _command       from "common/bus/drivers/command";
+import CommandBus     from "common/mesh/bus/command";
 import cstripe        from "stripe";
 import StripeCustomer from "api/data/models/stripe-customer";
 import Organization   from "common/data/models/organization";
@@ -16,7 +15,7 @@ export default function(app, bus) {
     /**
      */
 
-    chargeUsersForUsage: _command({
+    chargeUsersForUsage: new CommandBus({
       execute: function*(operation) {
         for (var customer of StripeCustomer.all(app.bus)) {
           var organization = Organization.findOne(app.bus, { _id: customer.organization._id });

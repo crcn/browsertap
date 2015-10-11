@@ -1,4 +1,4 @@
-import mesh from "common/mesh";
+import { NoopBus, AsyncResponse } from "mesh";
 import co from "co";
 import { EventEmitter } from "events";
 import ws from "websocket";
@@ -25,7 +25,7 @@ export default function(options, bus) {
 
     if (!resp) {
       app.logger.verbose("ws remote < ", op);
-      return bus(op);
+      return bus.execute(op);
     }
 
     if (op.data == void 0) {
@@ -43,8 +43,8 @@ export default function(options, bus) {
 
   var _id = 0;
 
-  return function(operation) {
-    var resp = new mesh.AsyncResponse();
+  this.execute = function(operation) {
+    var resp = new AsyncResponse();
     operation.id = resp._id = _id++;
 
     _openResponses[resp._id] = resp;

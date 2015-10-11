@@ -1,14 +1,16 @@
 import BaseModel from "common/data/models/base/model";
 import extend from "lodash/object/extend";
 import LogLevels from "./levels";
-import mesh from "common/mesh";
+import { NoopBus } from "mesh";
+
+var noop = new NoopBus();
 
 class Logger extends BaseModel {
 
   /**
    */
 
-  bus: mesh.noop
+  bus: noop
 
   /**
    */
@@ -39,7 +41,7 @@ Object.keys(LogLevels).forEach(function(key) {
     var type = key.toLowerCase();
     Logger.prototype[type] = function() {
       if (!(this.level & code)) return;
-      this.bus({
+      this.bus.execute({
 
         // blast off into the either. Enable any handler for logs.
         name: "log",

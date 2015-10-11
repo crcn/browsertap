@@ -1,7 +1,7 @@
 import mongo from "mesh-mongodb";
-import mesh from "mesh";
 import sift from "sift";
 import { ObjectId } from "mongodb"
+import { NodeStreamResponse } from "mesh";
 import traverse from "traverse";
 
 module.exports = function(app) {
@@ -19,13 +19,11 @@ module.exports = function(app) {
     });
   }
 
-  var bus = function(operation) {
+  this.execute = function(operation) {
 
     _fixMongoids(operation.data);
     _fixMongoids(operation.query);
 
-    return db(operation);
+    return new NodeStreamResponse(db(operation));
   }
-
-  return bus;
 };

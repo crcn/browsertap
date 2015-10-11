@@ -1,14 +1,13 @@
-import mesh from "common/mesh";
 import sift from "sift";
 
 module.exports = function(app, bus) {
-  return function(operation) {
+  this.execute = function(operation) {
     if (operation.name !== "log") {
       app.logger.verbose("bus ", {
         name: operation.name,
         query: operation.query
       });
     }
-    return bus(operation);
-  };
+    return bus.execute(operation);
+  }
 };

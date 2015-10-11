@@ -14,6 +14,12 @@ var babelify        = require("babelify");
 var File            = require("vinyl");
 var flatten         = require("lodash/array/flatten");
 var babel           = require("babel/register")({
+  ignore: function(path) {
+    if (/(common|mesh|api|browser-client)/.test(path) && path.split("node_modules").length <= 2) {
+      return false;
+    }
+    return true;
+  },
   optional: ["es7.classProperties", "es7.decorators"]
 });
 var packager        = require("electron-packager");

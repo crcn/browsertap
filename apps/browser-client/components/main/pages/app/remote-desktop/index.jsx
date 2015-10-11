@@ -21,7 +21,7 @@ var RemoteDesktopComponent = React.createClass({
   },
   _initialize: function*() {
     this._onChange();
-    var spy = this._rd.bus({ name: "spy" });
+    var spy = this._rd.bus.execute({ name: "spy" });
 
     var chunk;
     while (chunk = yield spy.read()) {

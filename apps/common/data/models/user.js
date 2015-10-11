@@ -11,16 +11,7 @@ var userSchema = new Schema({
   fields: {
 
     /**
-     * required for executing DB commands
-     */
-
-    bus: {
-      required: true,
-      type: require("common/data/types/bus")
-    },
-
-    /**
-     * ID of the user 
+     * ID of the user
      */
 
     _id: {
@@ -38,8 +29,8 @@ var userSchema = new Schema({
     /**
      */
 
-    emailAddress: { 
-      required: true, 
+    emailAddress: {
+      required: true,
       unique: true, // TODO
       type: require("common/data/types/email-address")
     },
@@ -64,7 +55,7 @@ var userSchema = new Schema({
     lastName: {
       type: String
     },
-    
+
     /**
      * secret keys including password
      */
@@ -89,7 +80,7 @@ class User extends Model {
   *getOrganizations() {
     return (yield this.bus.execute({
       name: "getUserOrganizations"
-    }).read()).map(function(data) {
+    }).read()).value.map(function(data) {
       return new Organization(Object.assign({ bus: this.bus.value }, data));
     }.bind(this));
   }

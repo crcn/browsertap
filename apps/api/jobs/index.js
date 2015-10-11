@@ -9,7 +9,7 @@ export default function(app) {
   jobs.forEach(function(operation) {
     new CronJob(operation.cron, function() {
       app.logger.info("run cron job: %s", operation.name);
-      app.bus(operation);
+      app.bus.execute(operation);
     }, void 0, true);
   });
 }

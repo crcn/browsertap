@@ -13,7 +13,6 @@ describe(__filename + "#", function() {
       password: "password"
     });
 
-
     yield signupForm.submit();
 
     var requestInviteForm = new RequestInviteForm({
@@ -29,9 +28,9 @@ describe(__filename + "#", function() {
     } catch(e) {
       err = e;
     }
-
-    expect(err.statusCode).to.be(409);
+    
     expect(err.message).to.be("userEmailAddressExists");
+    expect(err.statusCode).to.be(409);
   }));
 
   it("returns the same invitee object if the email exists", co.wrap(function*() {

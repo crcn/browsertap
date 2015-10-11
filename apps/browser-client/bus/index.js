@@ -1,10 +1,10 @@
-// var createSocketBus = require("common/bus/socketio");
+// var createSocketBus = require("common/mesh/bus/log/socketio");
 // var io              = require("socket.io-client");
 // var mesh            = require("mesh");
-var mesh = require("common/mesh");
+var { AsyncResponse, NoopBus } = require("mesh");
 var sa   = require("superagent");
 var httperr = require("httperr");
- 
+
 module.exports = function(app, bus) {
 
   var host    = app.get("config.hosts.api");
@@ -17,12 +17,12 @@ module.exports = function(app, bus) {
   // var bus    = void 0;
   // bus        = createSocketBus(channel, client, bus);
 
-  if (!bus) bus = mesh.noop;
+  if (!bus) bus = new NoopBus();
   if (!process.browser) return bus;
 
-  var bus = function(operation) {
+  this.execute = function(operation) {
 
-    var resp = new mesh.AsyncResponse();
+    var resp = new AsyncResponse();
 
     var r = sa.post("/o").send(operation).end(function(err, response) {
       var body = response.body;
@@ -34,7 +34,7 @@ module.exports = function(app, bus) {
       }
 
       resp.end(body);
-    }); 
+    });
 
     return resp;
   };

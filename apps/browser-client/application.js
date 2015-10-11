@@ -1,11 +1,11 @@
-var ReactDOM        = require("react-dom");
-var React           = require("react");
-var BaseApplication = require("common/application");
-var Router          = require("common/router");
-var Main            = require("./components/main");
-var routes          = require("./routes");
-var createBus       = require("./bus");
-var shortcuts       = require("./shortcuts");
+var ReactDOM         = require("react-dom");
+var React            = require("react");
+var BaseApplication  = require("common/application");
+var Router           = require("common/router");
+var Main             = require("./components/main");
+var routes           = require("./routes");
+var BrowserClientBus = require("./bus");
+var shortcuts        = require("./shortcuts");
 
 /**
  */
@@ -37,7 +37,7 @@ class BrowserClientApplication extends BaseApplication {
     super.initializePlugins();
     this.use(routes);
     this.use(shortcuts);
-    this.bus = createBus(this, this.bus);
+    this.bus = new BrowserClientBus(this, this.bus);
   }
 
   /**

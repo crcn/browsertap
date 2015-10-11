@@ -19,11 +19,6 @@ class Token {
 
 var resetPaswordSchema = new Schema({
   fields: {
-    bus: {
-      required : true,
-      hidden   : true,
-      type     : require("common/data/types/bus")
-    }, 
     token: {
       required : true,
       hidden   : true,
@@ -53,10 +48,10 @@ class ResetPasswordForm {
    */
 
   *submit() {
-    return yield this.bus.execute({ 
-      name: "resetPassword", 
-      data: this 
-    }).read();
+    return (yield this.bus.execute({
+      name: "resetPassword",
+      data: this
+    }).read()).value;
   }
 };
 

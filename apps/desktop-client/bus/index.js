@@ -1,18 +1,19 @@
-import commands from "./commands";
-import createMemoryBus from "common/bus/drivers/memory";
-import createCacheBus from "common/bus/drivers/cache-bus";
-import { noop, spy } from "common/mesh";
-import createUpsertBus from "common/bus/drivers/upsert";
+import InternalCommandsBus from "./commands";
+import MemoryBus from "common/mesh/bus/memory";
+import CacheBus from "common/mesh/bus/cache-bus";
+import { NoopBus } from "mesh";
+import SpyBus from "common/mesh/bus/spy";
+import UpsertBus from "common/mesh/bus/upsert";
 
 export default function(app, bus) {
-  if (!bus) bus = noop;
+  if (!bus) bus = new NoopBus();
 
   // where the stuff is stored
-  bus = createMemoryBus();
-  bus = createUpsertBus(bus)
-  bus = commands(app, bus);
-  bus = spy(bus);
-  bus = createUpsertBus(bus);
+  bus = new MemoryBus();
+  // bus = new UpsertBus(bus)
+  bus = new InternalCommandsBus(app, bus);
+  bus = new SpyBus(bus);
+  bus = new UpsertBus(bus);
 
   return bus;
 }

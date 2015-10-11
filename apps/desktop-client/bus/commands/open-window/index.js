@@ -1,9 +1,9 @@
-import command from "common/bus/drivers/command";
+import CommandBus from "common/mesh/bus/command";
 import BrowserWindow from "browser-window";
 import createIPCBus from "desktop-client/bus/drivers/ipc";
 
 export default function(app) {
-  return command({
+  return CommandBus({
     execute: openWindow
   });
 

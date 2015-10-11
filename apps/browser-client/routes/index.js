@@ -66,10 +66,10 @@ module.exports = function(app) {
 
   router.addRoute("invite", "/invite/:shortcode", co.wrap(function*(location) {
 
-    var data = Object.assign({ bus: app.bus }, yield app.bus({
+    var data = Object.assign({ bus: app.bus }, (yield app.bus.execute({
       name: "getInviteeFromShortCode",
       shortcode: location.params.shortcode
-    }).read());
+    }).read()).value);
 
     location.setProperties({
       state: {

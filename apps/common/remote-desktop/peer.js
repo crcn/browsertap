@@ -1,7 +1,7 @@
 import Model from "common/data/models/base/model"
 import co from "co";
 
-var PeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || 
+var PeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection ||
                        window.webkitRTCPeerConnection || window.msRTCPeerConnection;
 
 var SessionDescription = window.RTCSessionDescription || window.mozRTCSessionDescription ||
@@ -20,7 +20,7 @@ class Peer extends Model {
   /**
    */
 
-  constructor(properties) { 
+  constructor(properties) {
     super(properties);
     this.connect();
   }
@@ -52,11 +52,11 @@ class Peer extends Model {
   /**
    */
 
-  *_setRemoteDescription(answer) { 
-    var result = yield this.bus({ name: "setRemoteAnswer", answer: {
+  *_setRemoteDescription(answer) {
+    var result = (yield this.bus.execute({ name: "setRemoteAnswer", answer: {
       type: answer.type,
       sdp : answer.sdp
-    }, query: { id: this.id }}).read();
+    }, query: { id: this.id }}).read()).value;
 
     console.log(result);
   }
@@ -64,7 +64,7 @@ class Peer extends Model {
   /**
    */
 
-  _onAddStream(event) { 
+  _onAddStream(event) {
     this.setProperties({
       videoUrl: URL.createObjectURL(event.stream)
     })

@@ -6,11 +6,6 @@ import Schema      from "common/data/schema/schema";
 
 var loginFormSchema = new Schema({
   fields: {
-    bus: {
-      required : true,
-      hidden   : true,
-      type     : require("common/data/types/bus")
-    },
     emailAddress:  {
       required : true,
       type     : require("common/data/types/email-address")
@@ -32,10 +27,10 @@ class LoginForm {
    */
 
   *submit() {
-    return yield this.bus.execute({ 
-      name: "login", 
-      data: this 
-    }).read();
+    return (yield this.bus.execute({
+      name: "login",
+      data: this
+    }).read()).value;
   }
 };
 

@@ -4,9 +4,9 @@ import cluster         from "cluster";
 import http            from "./http";
 import emailer         from "./emailer";
 import stripe          from "./stripe";
-import createBus       from "./bus";
+import APIBus          from "./bus";
 import jobs            from "./jobs";
- 
+
 class APIApplication extends BaseApplication {
 
   /**
@@ -17,7 +17,7 @@ class APIApplication extends BaseApplication {
   }
 
   /**
-   */ 
+   */
 
   initialize(next) {
 
@@ -40,7 +40,7 @@ class APIApplication extends BaseApplication {
    */
 
   initializePlugins() {
-    this.bus = createBus(this, this.bus);
+    this.bus = new APIBus(this, this.bus);
     super.initializePlugins();
     if (this.debug !== true) {
       this.use(http);

@@ -11,16 +11,7 @@ var tokenSchema = new Schema({
   fields: {
 
     /**
-     * required for executing DB commands
-     */
-
-    bus: {
-      required: true,
-      type: require("common/data/types/bus")
-    },
-
-    /**
-     * ID of the user 
+     * ID of the user
      */
 
     _id: {
@@ -30,7 +21,7 @@ var tokenSchema = new Schema({
     /**
      */
 
-    expiresAt: { 
+    expiresAt: {
       default: function() {
         return new Date(Date.now() + 3600 * 24 * 1000); // 24 hours
       },

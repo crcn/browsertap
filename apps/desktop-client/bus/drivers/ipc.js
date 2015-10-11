@@ -1,4 +1,4 @@
-import { AsyncResponse, noop } from "common/mesh";
+import { AsyncResponse, NoopBus } from "mesh";
 import co from "co";
 
 
@@ -10,7 +10,7 @@ export default function(connection, bus) {
   var _i = 0;
 
   connection.on("operation", co.wrap(function*(operation) {
-    var resp = bus(operation);
+    var resp = bus.execute(operation);
     var chunk;
     while(chunk = yield resp.read()) {
       console.log("RESP", connection.send);

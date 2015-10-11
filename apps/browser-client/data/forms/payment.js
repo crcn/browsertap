@@ -9,11 +9,6 @@ import httperr          from "httperr" ;
 
 var paymenyFormSchema = new Schema({
   fields: {
-    bus: {
-      required : true,
-      hidden   : true,
-      type     : require("common/data/types/bus")
-    },
     organization: {
       required: true,
       type: require("common/data/types/reference")
@@ -37,9 +32,9 @@ var paymenyFormSchema = new Schema({
 class PaymentForm {
 
   /**
-   */ 
+   */
 
-  *submit() { 
+  *submit() {
 
     // TODO - move this to command
     var result = yield new Promise(function(resolve, reject) {

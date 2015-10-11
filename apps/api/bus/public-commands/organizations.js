@@ -1,10 +1,9 @@
 import createRouter       from "api/bus/drivers/create-router";
 import sift               from "sift";
-import mesh               from "common/mesh";
 import httperr            from "httperr";
 import mu                 from "mustache";
 import fs                 from "fs";
-import _command           from "common/bus/drivers/command";
+import CommandBus         from "common/mesh/bus/command";
 import cstripe            from "stripe";
 import Organization       from "common/data/models/organization";
 
@@ -17,7 +16,7 @@ export default function(app, bus) {
     /**
      */
 
-    getUserOrganizations: _command({
+    getUserOrganizations: new CommandBus({
       auth: true,
       execute: function*(operation) {
         return yield Organization.find(bus, {

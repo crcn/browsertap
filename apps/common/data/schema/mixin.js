@@ -7,7 +7,7 @@ export default function(schema) {
      */
 
     constructor(properties) {
-      Object.assign(this, schema.coerce(properties || {}));
+      Object.assign(this, properties, schema.coerce(properties || {}));
     },
 
     /**

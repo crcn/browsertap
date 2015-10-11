@@ -9,15 +9,18 @@ import User               from "common/data/models/user";
 import httperr            from "httperr";
 import mu                 from "mustache";
 import fs                 from "fs";
-import commands           from "common/mesh/commands";
+import CommandsBus        from "common/mesh/bus/commands";
+import { WrapBus }        from "mesh";
 
-export default function(app, bus) {
-  return commands(
-    Object.assign({},
+class PublicCommandsBus extends CommandsBus {
+  constructor(app, bus) {
+    super(Object.assign({},
       require("./account")(app, bus),
       require("./payments")(app, bus),
       require("./organizations")(app, bus),
       require("./invitees")(app, bus)
-    )
-  , bus);
-};
+    ), bus);
+  }
+}
+
+export default PublicCommandsBus;

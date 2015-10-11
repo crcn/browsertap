@@ -1,5 +1,5 @@
 import BrowserApplication from "../application";
-import mesh from "common/mesh";
+import { AttachDefaultsBus } from "mesh";
 
 var port = 8091;
 
@@ -10,7 +10,7 @@ beforeEach(function(next) {
   global.browserApp = new BrowserApplication({
     test: {},
     element: document.createElement("div"),
-    bus: mesh.attach({ public: true, session: session }, apiApp.bus),
+    bus: new AttachDefaultsBus({ public: true, session: session }, apiApp.bus),
     debug: true,
     config: {
       beta: false,

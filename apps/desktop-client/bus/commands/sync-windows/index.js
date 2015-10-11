@@ -1,4 +1,4 @@
-import _command      from "common/bus/drivers/command";
+import _command      from "common/mesh/bus/command";
 import co            from "co";
 import sift          from "sift";
 import BrowserWindow from "browser-window";
@@ -15,7 +15,7 @@ export default function(app) {
 
     function *run() {
 
-      var spy   = app.bus({
+      var spy   = app.bus.execute({
         name: "spy",
         filter: sift({ name: /insert|remove|update/, collection: "virtWindows" })
       });
@@ -41,7 +41,7 @@ export default function(app) {
 
   function insert(virtWindow) {
 
-    // TODO - app.bus({ name: "openWindow", model: virtWindow });
+    // TODO - app.bus.execute({ name: "openWindow", model: virtWindow });
 
     app.logger.info("open virtual window ", virtWindow);
 
@@ -49,7 +49,7 @@ export default function(app) {
       return app.logger.warn("ignoring window ", virtWindow);
     }
 
-    app.bus({
+    app.bus.execute({
       name: "openWindow",
       width: virtWindow.width,
       height: virtWindow.height,

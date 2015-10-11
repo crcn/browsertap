@@ -3,14 +3,9 @@ import Schema      from "common/data/schema/schema";
 
 /**
  */
- 
+
 var signupFormSchema = new Schema({
   fields: {
-    bus: {
-      required : true,
-      hidden   : true, 
-      type     : require("common/data/types/bus")
-    },
     emailAddress:  {
       required : true,
       type     : require("common/data/types/email-address")
@@ -35,7 +30,7 @@ var signupFormSchema = new Schema({
     //   }
     // }
   }
-}); 
+});
 
 /**
 
@@ -50,10 +45,10 @@ class SignupForm {
    */
 
   *submit() {
-    return yield this.bus.execute({ 
-      name: "register", 
-      data: this 
-    }).read();
+    return (yield this.bus.execute({
+      name: "register",
+      data: this
+    }).read()).value;
   }
 };
 

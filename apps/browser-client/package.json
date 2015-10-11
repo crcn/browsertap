@@ -17,9 +17,9 @@
     "common": "file:../common",
     "httperr": "^1.0.0",
     "intl": "^1.0.0",
+    "mesh": "^5.0.0",
     "mousetrap": "^1.5.3",
-    "react": "^0.14.0-rc1",
-    "react-dom": "^0.14.0-rc1",
+    "react": "^0.14.0",
     "react-intl": "^1.2.0",
     "superagent": "^1.4.0"
   }

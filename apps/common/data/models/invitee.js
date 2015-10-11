@@ -10,15 +10,6 @@ var inviteeMixin = new Schema({
   fields: {
 
     /**
-     * required for executing DB commands
-     */
-
-    bus: {
-      required: true,
-      type: require("common/data/types/bus")
-    },
-
-    /**
      */
 
     shortcode: {
@@ -43,7 +34,7 @@ var inviteeMixin = new Schema({
     /**
      */
 
-    _id: { 
+    _id: {
       type: require("common/data/types/object-id")
     },
 
@@ -58,8 +49,8 @@ var inviteeMixin = new Schema({
     /**
      */
 
-    emailAddress: { 
-      required: false, 
+    emailAddress: {
+      required: false,
       unique: true, // TODO
       type: require("common/data/types/email-address")
     }
