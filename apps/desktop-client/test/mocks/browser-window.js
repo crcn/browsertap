@@ -1,6 +1,5 @@
 class BrowserWindowMock {
   constructor() {
-    console.log("BWIN");
   }
 }
 

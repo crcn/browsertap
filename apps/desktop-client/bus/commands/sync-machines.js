@@ -2,6 +2,7 @@ import CommandBus from "common/mesh/bus/command";
 import sift from "sift";
 import WebSocketBus from "common/mesh/bus/websocket";
 import co from "co";
+import syncDbCollection from "common/mesh/utils/sync-db-collection";
 
 export default function(app) {
 
@@ -12,23 +13,13 @@ export default function(app) {
   function *_execute(operation) {
     app.logger.info("synchronizing machines");
 
-    var spy = app.bus.execute({
-      name: "spy",
-      filter: sift({ name: /insert|remove|update/, collection: "servers" })
-    });
-
-    async function run() {
-      var value;
-      while({value} = await spy.read()) {
-        if (!value) break;
-        switch(value.operation.name) {
-          case "insert": await _insert(value.operation.data)
-        }
+    syncDbCollection(
+      app.bus,
+      "servers",
+      {
+        insert: _insert
       }
-    };
-
-    run();
-
+    )
   }
 
   var _connections = {
@@ -51,7 +42,7 @@ export default function(app) {
     var chunk;
     while(chunk = await response.read()) {
       if (chunk.done) break;
-      await app.bus.execute({ name: "insert", collection: "virtWindows", data: chunk }).read();
+      await app.bus.execute({ name: "insert", collection: "virtWindows", data: chunk.value }).read();
     }
   }
 };

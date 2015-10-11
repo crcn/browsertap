@@ -2,6 +2,7 @@ import CommandBus    from "common/mesh/bus/command";
 import co            from "co";
 import sift          from "sift";
 import BrowserWindow from "browser-window";
+import syncDbCollection from "common/mesh/utils/sync-db-collection";
 
 export default function(app) {
 
@@ -13,22 +14,13 @@ export default function(app) {
 
     app.logger.info("synchronizing virtual windows");
 
-    async function run() {
-
-      var spy   = app.bus.execute({
-        name: "spy",
-        filter: sift({ name: /insert|remove|update/, collection: "virtWindows" })
-      });
-
-      var value;
-      while({value} = await spy.read()) {
-        switch(value.operation.name) {
-          case "insert": insert(value.operation.data)
-        }
+    asyncDbCollection(
+      app.bus,
+      "virtWindows",
+      {
+        insert: insert
       }
-    }
-
-    run();
+    );
   }
 
   var _windows = {

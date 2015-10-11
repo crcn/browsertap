@@ -38,7 +38,7 @@ class MockSlave {
     });
     return true;
   }
-  close() {
+  dispose() {
     this._server.close();
   }
 }
