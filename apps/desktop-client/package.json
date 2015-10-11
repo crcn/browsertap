@@ -25,6 +25,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^0.4.1"
+    "electron": "^0.4.1",
+    "mockery": "^1.4.0"
   }
 }

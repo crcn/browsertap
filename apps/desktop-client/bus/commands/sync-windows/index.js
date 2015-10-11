@@ -13,7 +13,7 @@ export default function(app) {
 
     app.logger.info("synchronizing virtual windows");
 
-    function *run() {
+    async function run() {
 
       var spy   = app.bus.execute({
         name: "spy",
@@ -21,14 +21,14 @@ export default function(app) {
       });
 
       var value;
-      while({value} = yield spy.read()) {
+      while({value} = await spy.read()) {
         switch(value.operation.name) {
           case "insert": insert(value.operation.data)
         }
       }
     }
 
-    co(run);
+    run();
   }
 
   var _windows = {

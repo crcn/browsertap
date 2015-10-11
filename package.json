@@ -44,6 +44,7 @@
     "lodash": "^3.10.1",
     "merge-stream": "^1.0.0",
     "mkdirp": "^0.5.1",
+    "mockery": "^1.4.0",
     "package-path": "0.0.1",
     "sift": "^2.0.8",
     "vinyl": "^1.0.0",

@@ -3,6 +3,7 @@ import BrowserWindow from "browser-window";
 import createIPCBus from "desktop-client/bus/drivers/ipc";
 
 export default function(app) {
+  
   return new CommandBus({
     execute: openWindow
   });

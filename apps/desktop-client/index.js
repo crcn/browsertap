@@ -1,7 +1,7 @@
 var doc = require('app');
 
 require("babel/register")({
-  optional: ["es7.classProperties", "es7.decorators"]
+  optional: ["es7.classProperties", "es7.decorators", "es7.asyncFunctions"]
 });
 
 var Application = require("./application");

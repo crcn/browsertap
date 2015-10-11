@@ -17,15 +17,17 @@ export default function(app) {
       filter: sift({ name: /insert|remove|update/, collection: "servers" })
     });
 
-    co(function*() {
+    async function run() {
       var value;
-      while({value} = yield spy.read()) {
+      while({value} = await spy.read()) {
         if (!value) break;
         switch(value.operation.name) {
-          case "insert": yield _insert(value.operation.data)
+          case "insert": await _insert(value.operation.data)
         }
       }
-    });
+    };
+
+    run();
 
   }
 
@@ -33,7 +35,7 @@ export default function(app) {
 
   };
 
-  function *_insert(machine) {
+  async function _insert(machine) {
 
     var host = "ws://" + machine.host + ":" + machine.port;
 
@@ -45,11 +47,10 @@ export default function(app) {
 
     // TODO - VirtWindow.all(bus)
     var response = bus.execute({ name: "load", collection: "virtWindows", multi: true });
-    var value;
-    var done;
-    while({value, done} = yield response.read()) {
-      if (done) break;
-      yield app.bus.execute({ name: "insert", collection: "virtWindows", data: value }).read();
+    var chunk;
+    while(chunk = await response.read()) {
+      if (chunk.done) break;
+      await app.bus.execute({ name: "insert", collection: "virtWindows", data: chunk }).read();
     }
   }
 };
