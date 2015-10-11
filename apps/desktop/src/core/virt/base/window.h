@@ -26,6 +26,7 @@ namespace virt {
       virtual void bounds(geom::Bounds bounds)=0;
       virtual graphics::Bitmap* print()=0;
       virtual std::string title()=0;
+      virtual bool isMinimized()=0;
       virtual ~Window(){ };
   };
 }

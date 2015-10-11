@@ -13,6 +13,19 @@ namespace win32 {
 		return title;
   }
 
+  bool Window::isMinimized() {
+
+    WINDOWPLACEMENT placement = WINDOWPLACEMENT();
+
+    if (GetWindowPlacement(_target, &placement)) {
+        // std::cout << placement.showCmd << std::endl;/
+        if ((placement.showCmd == SW_MAXIMIZE) || (placement.showCmd == SW_SHOWNORMAL)) {
+            return false;
+        }
+    }
+    return true;
+  }
+
   geom::Bounds Window::bounds() {
 
 		RECT rect;

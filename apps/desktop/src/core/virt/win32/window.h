@@ -13,6 +13,7 @@ namespace win32 {
     geom::Bounds bounds();
     void bounds(geom::Bounds bounds);
     std::string title();
+    bool isMinimized();
     // WindowCapture capturer();
   private:
     HWND _target;

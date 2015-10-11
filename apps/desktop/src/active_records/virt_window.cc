@@ -17,6 +17,7 @@ namespace app {
     Json::Value root;
     geom::Bounds b = _window->bounds();
     root["title"]   = _window->title();
+    root["minimized"] = _window->isMinimized();
     root["id"]      = id();
     root["x"]       = b.x;
     root["y"]       = b.y;

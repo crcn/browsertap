@@ -22,6 +22,10 @@ namespace osx {
     return _convertBounds(_cgbounds());
   };
 
+  bool Window::isMinimized() {
+    return false; // TODO
+  }
+
   geom::Bounds Window::_convertBounds(CGRect rect) {
     return geom::Bounds(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
   };

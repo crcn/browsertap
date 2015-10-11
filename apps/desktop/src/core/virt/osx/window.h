@@ -28,6 +28,7 @@ namespace osx {
         void bounds(geom::Bounds bounds);
         std::string title();
         CFDictionaryRef info();
+        bool isMinimized();
         ~Window() {
         }
     };
