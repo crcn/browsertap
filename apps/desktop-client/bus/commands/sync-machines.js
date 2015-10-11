@@ -42,6 +42,7 @@ export default function(app) {
     app.logger.info("connect machine %s", host);
 
     var bus = _connections = new WebSocketBus({
+      app: app,
       host: host
     }, app.bus);
 

@@ -5,14 +5,17 @@ import ws from "websocket";
 
 var WebSocket = ws.w3cwebsocket;
 
-export default function(options, bus) {
+export default function({app, host}, bus) {
   if (!bus) bus = mesh.noop;
 
-  var ws = new WebSocket(options.host, 'dumb-increment-protocol');
+  var ws = new WebSocket(host, 'dumb-increment-protocol');
 
   var _openResponses = {};
   var _waitingOps    = [];
   var _isOpen        = false;
+  ws.onerror = function(error) {
+    // console.log(error);
+  };
 
   ws.onopen    = function() {
     _isOpen = true;

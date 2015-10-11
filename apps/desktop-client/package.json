@@ -26,6 +26,8 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^0.4.1",
-    "mockery": "^1.4.0"
+    "find-open-port": "^1.0.0",
+    "mockery": "^1.4.0",
+    "websocket": "^1.0.22"
   }
 }

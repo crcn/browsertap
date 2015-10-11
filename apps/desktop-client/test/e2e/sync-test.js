@@ -1,5 +1,8 @@
 var testUtils = require("desktop-client/test/utils");
 var MockSlave = require("desktop-client/test/mocks/slave");
+var findOpenPort = require("find-open-port");
+import { AcceptBus, BufferedBus } from "mesh";
+import sift from "sift";
 
 describe(__filename + "#", function() {
 
@@ -13,10 +16,19 @@ describe(__filename + "#", function() {
   });
 
   it("automatically synchronizes windows from a machine that was added", async function(next) {
+
+    var slave = new MockSlave({
+      bus: new AcceptBus(sift({
+        name: "load",
+        collection: "virtWindows"
+      }), new BufferedBus(void 0, [{width:100,height:100}]))
+    });
+    await slave.listen(await findOpenPort());
+    console.log(slave.port);
     await app.bus.execute({ name: "insert", collection: "servers", data: {
-      host: "127.0.0.0",
-      port: 9090
+      host: "127.0.0.1",
+      port: slave.port
     }}).read();
-    next();
+    setTimeout(next, 1000);
   });
 });
