@@ -6,7 +6,7 @@ import path from "path";
 
 export default function(app, bus) {
 
-  return new CommandsBus({
+  bus = new CommandsBus({
     initialize: new CommandBus({
       execute: _initialize,
     }),
@@ -14,6 +14,8 @@ export default function(app, bus) {
       execute: _spawnDesktopController
     })
   }, bus);
+
+  this.execute = bus.execute.bind(bus);
 
   function *_initialize(operation) {
     app.bus.execute({ name: "spawnDesktopController" });

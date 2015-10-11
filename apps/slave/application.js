@@ -1,5 +1,5 @@
 import BaseApplication from "common/application";
-import Slavebus       from "./bus";
+import SlaveBus       from "./bus";
 import mdns            from "common/plugins/mdns";
 
 class SlaveApplication extends BaseApplication {

@@ -7,7 +7,7 @@ module.exports = function(env) {
 
   var binPath = {
     win32: path.join(__dirname, "..", "/desktop/build/app/gyp/Debug/app.exe"),
-    darwn: path.join(__dirname, "..", "/desktop/build/app/out/Release/app")
+    darwin: path.join(__dirname, "..", "/desktop/build/app/out/Release/app")
   }[os.platform()];
 
   var configs = {

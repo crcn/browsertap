@@ -1,3 +1,3 @@
 
-export { default as SpyBus      } from "./spy";
-export { default as CommandsBus } from "./commands";
+export { default as SpyBus      } from "./bus/spy";
+export { default as CommandsBus } from "./bus/commands";
