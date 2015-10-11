@@ -11,7 +11,7 @@ export default function(app, bus) {
       execute: async function() {
         await app.bus.execute({ name: "syncMachines" }).read();
         await app.bus.execute({ name: "syncWindows"  }).read();
-        // yield app.bus.execute({ name: "openWindow", width: 500, height: 500 });
+        // await app.bus.execute({ name: "openWindow", width: 500, height: 500, componentName: "virt-window" });
       }
     }),
 

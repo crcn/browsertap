@@ -1,6 +1,5 @@
 import { AsyncResponse, NoResponse, commands } from "common/mesh/bus/commands";
 import _command from "common/mesh/bus/command";
-import co from "co";
 
 export default function(app, mdns) {
 
@@ -34,20 +33,16 @@ export default function(app, mdns) {
       };
     }
 
-    browser.on("serviceUp", function(service) {
+    browser.on("serviceUp", async function(service) {
 
       var item = _deser(service);
-
-      co(function*() {
-        app.logger.info("mdns service %s update", browseName);
-        yield app.bus.execute({
-          name: "upsert",
-          collection: collection,
-          query: { _id: item._id },
-          data: item
-        });
-      });
-
+      app.logger.info("mdns service %s update", browseName);
+      await app.bus.execute({
+        name: "upsert",
+        collection: collection,
+        query: { _id: item._id },
+        data: item
+      }).read();
     });
 
     browser.on("serviceDown", function(service) {

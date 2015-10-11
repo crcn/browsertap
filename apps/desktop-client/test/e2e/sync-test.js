@@ -17,7 +17,7 @@ describe(__filename + "#", function() {
     }, next);
   });
 
-  it("automatically synchronizes windows from a machine that was added", async function(next) {
+  it("automatically synchronizes windows from a machine that was added", async function() {
 
     var slave = new MockSlave({
       bus: new AcceptBus(sift({
@@ -43,10 +43,9 @@ describe(__filename + "#", function() {
     expect(virtWindows.length).to.be(2);
 
     slave.dispose();
-    next();
   });
 
-  it("opens a new window for each inserted virtual window", async function(next) {
+  it("opens a new window for each inserted virtual window", async function() {
     var openWindowOps = [];
     app.bus = new AcceptBus(sift({ name: "openWindow" }), {
         execute: function(operation) {
@@ -59,6 +58,5 @@ describe(__filename + "#", function() {
     await app.bus.execute({ name: "insert", collection: "virtWindows", data: { width: 100, height: 100 }}).read();
     await testUtils.timeout(200);
     expect(openWindowOps.length).to.be(2);
-    next();
   });
 });

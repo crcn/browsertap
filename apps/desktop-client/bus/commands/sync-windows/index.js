@@ -14,7 +14,6 @@ export default function(app) {
 
     app.logger.info("synchronizing virtual windows");
 
-
     syncDbCollection(
       app.bus,
       "virtWindows",
@@ -36,9 +35,7 @@ export default function(app) {
 
     // TODO - app.bus.execute({ name: "openWindow", model: virtWindow });
 
-    app.logger.info("open virtual window ", virtWindow);
-
-    if (virtWindow.height < 60 || virtWindow.width < 60) {
+    if (virtWindow.height < 60 || virtWindow.width < 60 || virtWindow.title === "" || /manager/i.test(virtWindow.title)) {
       return app.logger.notice("ignoring window ", virtWindow);
     }
 
@@ -46,7 +43,8 @@ export default function(app) {
       name: "openWindow",
       width: virtWindow.width,
       height: virtWindow.height,
-      title: virtWindow.title
+      title: virtWindow.title,
+      componentName: "virt-window"
     });
   }
 }

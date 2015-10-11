@@ -7,6 +7,11 @@ class Application extends BaseApplication {
   /**
    */
 
+  classes = {}
+
+  /**
+   */
+
   constructor(properties) {
     super(properties);
   }

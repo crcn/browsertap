@@ -8,12 +8,10 @@ export default function(bus, collection, options) {
     update: noop
   }, options);
 
-
   var spy = bus.execute({
     name: "spy",
     filter: sift({ name: /insert|remove|update/, collection: collection })
   });
-
 
   async function run() {
     var value;

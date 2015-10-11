@@ -42,6 +42,7 @@ export default function(app) {
     var chunk;
     while(chunk = await response.read()) {
       if (chunk.done) break;
+      if (chunk.value.minimized) continue;
       await app.bus.execute({ name: "insert", collection: "virtWindows", data: chunk.value }).read();
     }
   }

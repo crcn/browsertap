@@ -10,7 +10,6 @@ class SpyBus extends Bus {
 
     if (operation.name === "spy") {
       return new AsyncResponse((writable) => {
-        this._spies.push(writable);
         writable.operation = operation;
         writable.then(() => {
           this._spies.splice(this._spices.indexOf(writable), 1);
