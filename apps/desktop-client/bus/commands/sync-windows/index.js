@@ -1,11 +1,11 @@
-import _command      from "common/mesh/bus/command";
+import CommandBus    from "common/mesh/bus/command";
 import co            from "co";
 import sift          from "sift";
 import BrowserWindow from "browser-window";
 
 export default function(app) {
 
-  return _command({
+  return new CommandBus({
     execute: execute
   });
 
@@ -20,10 +20,10 @@ export default function(app) {
         filter: sift({ name: /insert|remove|update/, collection: "virtWindows" })
       });
 
-      var chunk;
-      while(chunk = yield spy.read()) {
-        switch(chunk.operation.name) {
-          case "insert": insert(chunk.operation.data)
+      var value;
+      while({value} = yield spy.read()) {
+        switch(value.operation.name) {
+          case "insert": insert(value.operation.data)
         }
       }
     }

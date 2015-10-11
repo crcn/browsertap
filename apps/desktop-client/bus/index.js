@@ -10,10 +10,9 @@ export default function(app, bus) {
 
   // where the stuff is stored
   bus = new MemoryBus();
-  // bus = new UpsertBus(bus)
   bus = new InternalCommandsBus(app, bus);
   bus = new SpyBus(bus);
   bus = new UpsertBus(bus);
 
-  return bus;
+  this.execute = bus.execute.bind(bus);
 }

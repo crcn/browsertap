@@ -1,17 +1,17 @@
-import { commands, noop, NoResponse } from "common/mesh";
+import { CommandsBus, NoResponse } from "common/mesh";
 import co from "co";
 import CommandBus  from "common/mesh/bus/command";
 
 export default function(app, bus) {
-  return commands({
+  bus = new CommandsBus({
 
     /**
      */
 
     initialize: new CommandBus({
       execute: function*() {
-        yield app.bus.execute({ name: "syncMachines" });
-        yield app.bus.execute({ name: "syncWindows"  });
+        yield app.bus.execute({ name: "syncMachines" }).read();
+        yield app.bus.execute({ name: "syncWindows"  }).read();
       }
     }),
 
@@ -30,4 +30,6 @@ export default function(app, bus) {
 
     openWindow: require("./open-window")(app)
   }, bus);
+
+  this.execute = bus.execute.bind(bus);
 };

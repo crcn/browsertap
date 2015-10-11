@@ -1,6 +1,6 @@
 import CommandBus from "common/mesh/bus/command";
 import sift from "sift";
-import createWebSocketBus from "common/mesh/bus/websocket";
+import WebSocketBus from "common/mesh/bus/websocket";
 import co from "co";
 
 export default function(app) {
@@ -22,7 +22,7 @@ export default function(app) {
       while({value} = yield spy.read()) {
         if (!value) break;
         switch(value.operation.name) {
-          case "insert": yield _insert(spied.operation.data)
+          case "insert": yield _insert(value.operation.data)
         }
       }
     });
@@ -39,7 +39,7 @@ export default function(app) {
 
     app.logger.info("connect machine %s", host);
 
-    var bus = _connections = createWebSocketBus({
+    var bus = _connections = new WebSocketBus({
       host: host
     }, app.bus);
 
@@ -49,7 +49,7 @@ export default function(app) {
     var done;
     while({value, done} = yield response.read()) {
       if (done) break;
-      yield app.bus.execute({ name: "insert", collection: "virtWindows", data: value });
+      yield app.bus.execute({ name: "insert", collection: "virtWindows", data: value }).read();
     }
   }
 };
