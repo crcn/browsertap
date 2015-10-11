@@ -13,15 +13,6 @@ var watchify        = require("watchify");
 var babelify        = require("babelify");
 var File            = require("vinyl");
 var flatten         = require("lodash/array/flatten");
-var babel           = require("babel/register")({
-  ignore: function(path) {
-    if (/(common|mesh|api|browser-client)/.test(path) && path.split("node_modules").length <= 2) {
-      return false;
-    }
-    return true;
-  },
-  optional: ["es7.classProperties", "es7.decorators"]
-});
 var packager        = require("electron-packager");
 var uglify          = require("gulp-uglify");
 var source          = require("vinyl-source-stream");
@@ -31,6 +22,17 @@ var collapse        = require("bundle-collapser/plugin");
 var options         = require("yargs").argv;
 var mergeStream     = require("merge-stream");
 var fs              = require("fs");
+var pp = require("package-path");
+
+var babel           = require("babel/register")({
+  optional: ["es7.classProperties", "es7.decorators", "es7.asyncFunctions"],
+  ignore: function(path) {
+    var pkg = require(pp.sync(path) + "/package.json");
+    return !pkg.es6;
+  }
+});
+
+
 
 var apps = [
   { name: "api"            , bundle: false },

@@ -12,7 +12,7 @@ var app = global.app = new Application({
 });
 
 /**
- */
+ */ 
 
 app.initialize(function() {
   app.logger.info("initialized");

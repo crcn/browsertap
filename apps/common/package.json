@@ -10,6 +10,7 @@
   "browser": {
     "loggly": "./browser-modules/loggly/index.js"
   },
+  "es6": true,
   "author": "",
   "license": "ISC",
   "dependencies": {

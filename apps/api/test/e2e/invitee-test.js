@@ -2,8 +2,24 @@ import expect            from "expect.js";
 import RequestInviteForm from "common/data/forms/request-invite";
 import SignupForm        from "common/data/forms/signup"
 import co                from "co"
+import testUtils         from "api/test/utils";
 
 describe(__filename + "#", function() {
+
+  var apiApp;
+
+  beforeEach(function(next) {
+    testUtils.createFakeApp().then(function(app) {
+      apiApp = app;
+      next();
+    })
+  });
+
+  afterEach(function() {
+
+  });
+
+
   it("cannot request an invite if the email exists as a user", co.wrap(function*() {
 
     var signupForm = new SignupForm({
@@ -28,7 +44,7 @@ describe(__filename + "#", function() {
     } catch(e) {
       err = e;
     }
-    
+
     expect(err.message).to.be("userEmailAddressExists");
     expect(err.statusCode).to.be(409);
   }));

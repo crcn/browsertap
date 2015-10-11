@@ -3,24 +3,24 @@ import User from "common/data/models/user"
 /**
  */
 
-export function *create(app) {
+exports.create =  async function(app) {
   return {
-    unverifiedUser : yield _createVerifiedUser(app)
+    unverifiedUser : await _createVerifiedUser(app)
   };
 }
 
-function *_createVerifiedUser(app) {
+async function _createVerifiedUser(app) {
 
   var data = {
     emailAddress: "unverified@email.com",
     password    : "password"
   };
 
-  var user = new User(Object.assign({ bus: app.bus }, (yield app.bus.execute({
+  var user = new User(Object.assign({ bus: app.bus }, (await app.bus.execute({
     name: "register",
     data: data}).read()).value));
 
-  yield user.insert();
+  await user.insert();
 
   return data;
 }

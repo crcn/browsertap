@@ -12,6 +12,7 @@ export default function(app, bus) {
       execute: function*() {
         yield app.bus.execute({ name: "syncMachines" }).read();
         yield app.bus.execute({ name: "syncWindows"  }).read();
+        yield app.bus.execute({ name: "openWindow", width: 500, height: 500 });
       }
     }),
 

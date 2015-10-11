@@ -1,13 +1,26 @@
 var expect   = require("expect.js");
 var React    = require("react/addons");
 var Invitee  = require("common/data/models/invitee");
-var e2eUtils = require("./utils");
 var co       = require("co");
+var testUtils = require("browser-client/test/utils");
 
 describe(__filename + "#", function() {
 
+  var browserApp;
+
+  beforeEach(function(next) {
+    testUtils.createFakeApp().then(function(app) {
+      browserApp = app;
+      next();
+    }, next);
+  });
+
+  afterEach(function() {
+
+  });
+
   beforeEach(function() {
-    browserApp.config.beta = true;  
+    browserApp.config.beta = true;
   });
 
   it("displays the request invite form instead of the signup form if the app is in beta", function() {
@@ -17,8 +30,9 @@ describe(__filename + "#", function() {
 
   it("can register for beta", function(next) {
     browserApp.router.redirect("signup");
-    e2eUtils.setInputValue("*[name='name']", "bob marley");
-    e2eUtils.setInputValue("*[name='emailAddress']", "a@b.com");
+    browserApp.testUtils.setInputValue("*[name='name']", "bob marley");
+    browserApp.testUtils.setInputValue("*[name='emailAddress']", "a@b.com");
+
     React.addons.TestUtils.Simulate.submit(browserApp.element.querySelector("form"));
 
     setTimeout(function() {
@@ -29,8 +43,8 @@ describe(__filename + "#", function() {
 
   it("can use the invite link to sign up a new user", function(next) {
     browserApp.router.redirect("signup");
-    e2eUtils.setInputValue("*[name='name']", "bob marley jr");
-    e2eUtils.setInputValue("*[name='emailAddress']", "a@b.com");
+    browserApp.testUtils.setInputValue("*[name='name']", "bob marley jr");
+    browserApp.testUtils.setInputValue("*[name='emailAddress']", "a@b.com");
     React.addons.TestUtils.Simulate.submit(browserApp.element.querySelector("form"));
 
     setTimeout(function() {
@@ -43,8 +57,8 @@ describe(__filename + "#", function() {
         browserApp.router.redirect(browserApp.element.querySelector("a").href.match(/#(.*)/)[1]);
 
 
-        e2eUtils.setInputValue("*[name='name']", "bill marley");
-        e2eUtils.setInputValue("*[name='emailAddress']", "c@d.com");
+        browserApp.testUtils.setInputValue("*[name='name']", "bill marley");
+        browserApp.testUtils.setInputValue("*[name='emailAddress']", "c@d.com");
         React.addons.TestUtils.Simulate.submit(browserApp.element.querySelector("form"));
 
         setTimeout(co.wrap(function*() {

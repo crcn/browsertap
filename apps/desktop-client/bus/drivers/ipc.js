@@ -30,7 +30,7 @@ export default function(connection, bus) {
     delete _openResponses[id];
   });
 
-  return function(operation) {
+  this.execute = function(operation) {
     var resp = new AsyncResponse();
     _openResponses[operation.id = (++_i)] = resp;
     connection.send("operation", operation);

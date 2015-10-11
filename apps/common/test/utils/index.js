@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Application from "common/application";
 
 export default {
 
@@ -8,7 +9,7 @@ export default {
 
   renderElement: function(componentClass, props, app) {
 
-    if (!app) app = apiApp;
+    if (!app) app = new Application();
 
     var div = document.createElement("div");
     var component = React.createElement(componentClass, Object.assign({

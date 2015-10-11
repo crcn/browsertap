@@ -11,6 +11,7 @@
   },
   "author": "",
   "license": "ISC",
+  "es6": true,
   "dependencies": {
     "co": "^4.6.0",
     "common": "file:../common",

@@ -1,8 +1,23 @@
 var expect = require("expect.js");
 var React  = require("react/addons");
-var e2eUtils = require("./utils");
+var testUtils = require("browser-client/test/utils");
 
 describe(__filename + "#", function() {
+
+  var browserApp;
+  var apiApp;
+
+  beforeEach(function(next) {
+    testUtils.createFakeApp().then(function(app) {
+      browserApp = app;
+      apiApp = app.apiApp;
+      next();
+    }, next);
+  });
+
+  afterEach(function() {
+
+  });
 
   it("can redirect to the login page", function() {
     browserApp.router.redirect("login");
@@ -59,28 +74,28 @@ describe(__filename + "#", function() {
     setTimeout(function() {
       expect(browserApp.element.innerHTML).to.contain("login-form");
       next();
-    }, 100)
+    }, 2)
   });
 
   it("can reset a forgotten password and login with it", function(next) {
     browserApp.router.redirect("logout");
     browserApp.router.redirect("forgotPassword");
-    e2eUtils.setInputValue("*[name='emailAddress']", browserApp.test.fixtures.unverifiedUser.emailAddress);
+    browserApp.testUtils.setInputValue("*[name='emailAddress']", browserApp.test.fixtures.unverifiedUser.emailAddress);
     React.addons.TestUtils.Simulate.submit(browserApp.element.querySelector("form"));
-    
+
     setTimeout(function() {
 
       var message = apiApp.emailer.outbox.messages.pop();
       browserApp.router.redirect(message.body.valueOf().match(/(\/reset-password\/.*)/)[1]);
-      e2eUtils.setInputValue("*[name='password']", "password99");
-      e2eUtils.setInputValue("*[name='repeatPassword']", "password99");
+      browserApp.testUtils.setInputValue("*[name='password']", "password99");
+      browserApp.testUtils.setInputValue("*[name='repeatPassword']", "password99");
 
       React.addons.TestUtils.Simulate.submit(browserApp.element.querySelector("form"));
       setTimeout(function() {
         expect(browserApp.router.location.toString()).to.contain("showMessage=authResetPassword.loginWithNewPassword");
         expect(browserApp.element.innerHTML).to.contain("alert-info");
         next();
-      }, 100);
-    }, 100);
+      }, 2);
+    }, 2);
   });
 });

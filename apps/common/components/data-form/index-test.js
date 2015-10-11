@@ -6,11 +6,12 @@ import Schema from "common/data/schema/schema"
 import Password from "common/data/types/password"
 import EmailAddress from "common/data/types/email-address"
 import testUtils from "common/test/utils"
+import APIApplication from "api/application";
 
 describe(__filename + "#", function() {
 
   function renderDataForm(props) {
-    return testUtils.renderElement(DataForm, props);
+    return testUtils.renderElement(DataForm, props, new APIApplication());
   }
 
   it("can render various forms", function() {

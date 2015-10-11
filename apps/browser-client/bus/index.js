@@ -1,7 +1,9 @@
 // var createSocketBus = require("common/mesh/bus/log/socketio");
 // var io              = require("socket.io-client");
 // var mesh            = require("mesh");
-var { AsyncResponse, NoopBus } = require("mesh");
+var mesh = require("mesh");
+var AsyncResponse = mesh.AsyncResponse;
+var NoopBus = mesh.NoopBus;
 var sa   = require("superagent");
 var httperr = require("httperr");
 

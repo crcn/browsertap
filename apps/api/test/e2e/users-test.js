@@ -11,7 +11,22 @@ import ResetPasswordForm  from "common/data/forms/reset-password";
 import Token              from "api/data/models/token";
 import ConfirmAccountForm from "common/data/forms/confirm-account";
 
+import testUtils         from "api/test/utils";
+
 describe(__filename + "#", function() {
+
+  var apiApp;
+
+  beforeEach(function(next) {
+    testUtils.createFakeApp().then(function(app) {
+      apiApp = app;
+      next();
+    })
+  });
+
+  afterEach(function() {
+    apiApp.dispose();
+  });
 
   var bus;
   var session;
@@ -24,8 +39,8 @@ describe(__filename + "#", function() {
   };
 
   beforeEach(function() {
-    session = global.apiApp.session;
-    global.apiApp.bus = bus = new AttachDefaultsBus({ app: global.apiApp, public: true }, global.apiApp.bus);
+    session = apiApp.session;
+    apiApp.bus = bus = new AttachDefaultsBus({ app: apiApp, public: true }, apiApp.bus);
   });
 
   describe("insert# ", function() {

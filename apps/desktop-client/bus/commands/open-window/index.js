@@ -24,10 +24,17 @@ export default function(app) {
     })));
 
     win.webContents.on('did-finish-load', function() {
-      var b = createIPCBus(win.webContents);
-      b({ name: "ping" }).read().then(function(chunk) {
-        console.log("response: ", chunk);
+
+      win.webContents.on("pong", function() {
+        console.log("PONG");
       });
+
+
+      win.webContents.send("ping", "wing");
+      // var b = createIPCBus(win.webContents);
+      // b({ name: "ping" }).read().then(function(chunk) {
+      //   console.log("response: ", chunk);
+      // });
     });
 
     win.openDevTools();
