@@ -3,6 +3,7 @@
 
 #include <windows.h>
 #include "../base/window.h"
+#include "../../graphics/bitmap.h"
 
 namespace win32 {
   class Window : public virt::Window {
@@ -12,6 +13,7 @@ namespace win32 {
     geom::Bounds bounds();
     void bounds(geom::Bounds bounds);
     std::string title();
+    // WindowCapture capturer();
   private:
     HWND _target;
   };

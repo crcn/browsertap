@@ -48,6 +48,7 @@
                         # "../../../vendor/jsoncpp/lib/lib_json.lib",
                         "advapi32.lib",
                         "dmoguids.lib",
+                        "gdi32.lib",
                         "msdmo.lib",
                         "secur32.lib",
                         "winmm.lib",
