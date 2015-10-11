@@ -1,7 +1,7 @@
 var testUtils = require("desktop-client/test/utils");
 var MockSlave = require("desktop-client/test/mocks/slave");
 var findOpenPort = require("find-open-port");
-import { AcceptBus, BufferedBus } from "mesh";
+import { AcceptBus, BufferedBus, EmptyResponse } from "mesh";
 import readAll from "common/mesh/read-all";
 import expect from "expect.js";
 import sift from "sift";
@@ -43,6 +43,22 @@ describe(__filename + "#", function() {
     expect(virtWindows.length).to.be(2);
 
     slave.dispose();
+    next();
+  });
+
+  it("opens a new window for each inserted virtual window", async function(next) {
+    var openWindowOps = [];
+    app.bus = new AcceptBus(sift({ name: "openWindow" }), {
+        execute: function(operation) {
+          openWindowOps.push(operation);
+          return new EmptyResponse();
+        }
+      },
+      app.bus
+    );
+    await app.bus.execute({ name: "insert", collection: "virtWindows", data: { width: 100, height: 100 }}).read();
+    await testUtils.timeout(200);
+    expect(openWindowOps.length).to.be(2);
     next();
   });
 });

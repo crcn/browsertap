@@ -14,14 +14,21 @@ export default function(bus, collection, options) {
     filter: sift({ name: /insert|remove|update/, collection: collection })
   });
 
+
   async function run() {
     var value;
     while({value} = await spy.read()) {
       if (!value) break;
       switch(value.operation.name) {
-        case "insert": await handlers.insert(value.operation.data)
-        case "remove": await handlers.remove(value.operation.query)
-        case "update": await handlers.remove(value.operation.query, value.operation.data)
+        case "insert":
+          await handlers.insert(value.operation.data);
+          break;
+        case "remove":
+          await handlers.remove(value.operation.query);
+          break;
+        case "update":
+          await handlers.remove(value.operation.query, value.operation.data)
+          break;
       }
     }
   };
