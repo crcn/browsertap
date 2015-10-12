@@ -33,8 +33,8 @@ export default function(collectionName) {
     /**
     */
 
-    *load () {
-      return yield this.fetch("load", {
+    load () {
+      return this.fetch("load", {
         query: { _id: this._id }
       });
     },
@@ -42,35 +42,33 @@ export default function(collectionName) {
     /**
     */
 
-    *remove () {
-      var data = yield this.fetch("remove", {
+    remove () {
+      return this.fetch("remove", {
         query: { _id: String(this._id) }
       });
-      return this;
     },
 
     /**
     */
 
-    *save() {
+    save() {
       return this._id ? this.update() : this.insert();
     },
 
     /**
     */
 
-    *insert() {
-      var data = yield this.fetch("insert", {
+    insert() {
+      return this.fetch("insert", {
         data : this.toJSON()
       });
-      return this;
     },
 
     /**
     */
 
-    *update() {
-      return yield this.fetch("update", {
+    update() {
+      return this.fetch("update", {
         data : this.toJSON(),
         query: { _id: String(this._id) }
       });
@@ -79,9 +77,9 @@ export default function(collectionName) {
     /**
     */
 
-    *fetch(operationName, properties) {
+    async fetch(operationName, properties) {
 
-      var data = (yield this.bus.execute(Object.assign({
+      var data = (await this.bus.execute(Object.assign({
         target     : this,
         name       : operationName,
         collection : collectionName
@@ -98,7 +96,7 @@ export default function(collectionName) {
   return function(clazz) {
     clazz = persistMixin(clazz);
 
-    function *_find(multi, bus, query) {
+    async function _find(multi, bus, query) {
 
       var response = bus.execute({
         name       : "load",
@@ -108,18 +106,18 @@ export default function(collectionName) {
       });
 
       if (multi) {
-        return (yield readAll(response)).map(function(data) {
+        return (await readAll(response)).map(function(data) {
           return new clazz(Object.assign({ bus: bus }, data));
         })
       } else {
-        var {value} = yield response.read();
+        var {value} = await response.read();
         if (value) return new clazz(Object.assign({ bus: bus }, value));
       }
     }
 
     clazz.find    = _find.bind(void 0, true);
-    clazz.all     = function*(bus) {
-      return yield clazz.find(bus);
+    clazz.all     = function(bus) {
+      return clazz.find(bus);
     };
     clazz.findOne = _find.bind(void 0, false);
 

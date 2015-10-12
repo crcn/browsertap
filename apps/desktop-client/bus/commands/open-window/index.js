@@ -1,6 +1,7 @@
 import CommandBus from "common/mesh/bus/command";
 import BrowserWindow from "browser-window";
-import createIPCBus from "desktop-client/bus/drivers/ipc";
+import IPCBus from "desktop-client/bus/drivers/ipc";
+import { AttachDefaultsBus } from "mesh";
 
 export default function(app) {
 
@@ -15,14 +16,29 @@ export default function(app) {
     // Create the browser window.
     var win = new (app.classes.browserWindowClass || BrowserWindow)({
       width  : operation.width,
-      height : operation.height
+      height : operation.height,
+      frame  : false
     });
 
     // and load the index.html of the app.
     win.loadUrl("file://" + __dirname + "/window.html#" + encodeURIComponent(JSON.stringify({
       componentName : operation.componentName || "main",
-      title         : operation.title
+      title         : operation.title,
+      props         : operation.props
     })));
+
+    async function _spyToIPC(bus) {
+      var spy = bus.execute({ name: "spy" });
+      var ipc = new IPCBus(require("ipc"), win.webContents, new AttachDefaultsBus({ remote: true }, bus));
+      var chunk;
+      while(chunk = await spy.read()) {
+        if (chunk.value.operation.remote) continue;
+        ipc.execute(chunk.value.operation);
+      }
+    }
+
+    _spyToIPC(app.bus);
+
 
     // win.webContents.on('did-finish-load', function() {
     //

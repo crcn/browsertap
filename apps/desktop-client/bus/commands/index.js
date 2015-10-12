@@ -1,4 +1,5 @@
 import { CommandsBus, NoResponse } from "common/mesh";
+import { BufferedResponse } from "mesh";
 import CommandBus  from "common/mesh/bus/command";
 
 export default function(app, bus) {
@@ -11,7 +12,17 @@ export default function(app, bus) {
       execute: async function() {
         await app.bus.execute({ name: "syncMachines" }).read();
         await app.bus.execute({ name: "syncWindows"  }).read();
-        // await app.bus.execute({ name: "openWindow", width: 500, height: 500, componentName: "virt-window" });
+        await app.bus.execute({ name: "openWindow", width: 500, height: 500, componentName: "virt-window" });
+      }
+    }),
+
+    /**
+     * for testing
+     */
+
+    ping: new CommandBus({
+      execute: async function() {
+        return "pong!";
       }
     }),
 

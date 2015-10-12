@@ -1,39 +1,44 @@
 import { AsyncResponse, NoopBus } from "mesh";
-import co from "co";
 
 
-export default function(connection, bus) {
+export default function(input, output, bus) {
 
-  if (!bus) bus = noop;
+  if (!bus) bus = new NoopBus();
 
   var _openResponses = {};
   var _i = 0;
 
-  connection.on("operation", co.wrap(function*(operation) {
+  function createListener(callback) {
+    return function(event) {
+      var args = Array.prototype.slice.call(arguments);
+      if (args[0].sender) args.shift();
+      return callback.apply(this, args);
+    }
+  }
+
+  input.on("operation", createListener(async function(operation) {
     var resp = bus.execute(operation);
     var chunk;
-    while(chunk = yield resp.read()) {
-      console.log("RESP", connection.send);
-      connection.send("chunk", operation.id, chunk);
+    while(chunk = await resp.read()) {
+      if (chunk.done) break;
+      output.send("chunk", operation.id, chunk.value);
     }
-    ipc.send("end", operation.id);
+    output.send("end", operation.id);
   }));
 
-  connection.on("chunk", function(id, chunk) {
-    console.log("CHUNK", chunk);
-    _openResponses[id].write(chunk);
-  });
+  input.on("chunk", createListener(function(id, chunkValue) {
+    _openResponses[id].write(chunkValue);
+  }));
 
-  connection.on("end", function(id, chunk) {
-    console.log("END");
+  input.on("end", createListener(function(id, chunk) {
     _openResponses[id].end();
     delete _openResponses[id];
-  });
+  }));
 
   this.execute = function(operation) {
     var resp = new AsyncResponse();
     _openResponses[operation.id = (++_i)] = resp;
-    connection.send("operation", operation);
+    output.send("operation", operation);
     return resp;
   }
 }

@@ -16,8 +16,7 @@ export default function(app) {
 
     syncDbCollection(
       app.bus,
-      "virtWindows",
-      {
+      "virtWindows", {
         insert: insert
       }
     );
@@ -44,7 +43,10 @@ export default function(app) {
       width: virtWindow.width,
       height: virtWindow.height,
       title: virtWindow.title,
-      componentName: "virt-window"
+      componentName: "virt-window",
+      props: {
+        virtualWindow: virtWindow
+      }
     });
   }
 }

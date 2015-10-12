@@ -23,7 +23,7 @@ describe(__filename + "#", function() {
       bus: new AcceptBus(sift({
         name: "load",
         collection: "virtWindows"
-      }), new BufferedBus(void 0, [{width:100,height:100}, {width:100,height:100}]))
+      }), new BufferedBus(void 0, [{width:100,height:100,title:"abba"}, {width:100,height:100,title:"baab"}]))
     });
 
     await slave.listen(await findOpenPort());
@@ -57,6 +57,6 @@ describe(__filename + "#", function() {
     );
     await app.bus.execute({ name: "insert", collection: "virtWindows", data: { width: 100, height: 100 }}).read();
     await testUtils.timeout(200);
-    expect(openWindowOps.length).to.be(2);
+    expect(openWindowOps.length).to.be(1);
   });
 });

@@ -4,6 +4,7 @@ import CacheBus from "common/mesh/bus/cache-bus";
 import { NoopBus } from "mesh";
 import SpyBus from "common/mesh/bus/spy";
 import UpsertBus from "common/mesh/bus/upsert";
+import IPCBus from "./drivers/ipc";
 
 export default function(app, bus) {
   if (!bus) bus = new NoopBus();
