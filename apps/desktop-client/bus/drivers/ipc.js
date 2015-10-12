@@ -32,11 +32,16 @@ export default function(input, output, bus) {
   }));
 
   input.on("chunk", createListener(function(id, chunkValue) {
-    _openResponses[id].write(chunkValue);
+    if (_openResponses[id]) _openResponses[id].write(chunkValue);
+    console.log("RESP");
+    console.log(id);
+    console.log(JSON.stringify(Object.keys(_openResponses)))
+    console.log(JSON.stringify(chunkValue));
+
   }));
 
   input.on("end", createListener(function(id, chunk) {
-    _openResponses[id].end();
+    if (_openResponses[id]) _openResponses[id].end();
     delete _openResponses[id];
   }));
 

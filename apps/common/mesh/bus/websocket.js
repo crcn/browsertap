@@ -30,7 +30,7 @@ export default function({app, host}, bus) {
       app.logger.verbose("ws remote < ", op);
       return bus.execute(op);
     }
-    
+
     if (op.data == void 0) {
       resp.end();
       delete _openResponses[op.resp];
@@ -44,16 +44,19 @@ export default function({app, host}, bus) {
     ws.send(JSON.stringify(operation));
   }
 
-  var _id = 0;
+  var _i = 0;
+  var _mid = Date.now() + "_" + Math.round(Math.random() * 99999) + "_";
+
+  function createId() {
+    return _mid + (++_i);
+  }
 
   this.execute = function(operation) {
     var resp = new AsyncResponse();
     if (!operation.id) {
-      operation.id = _id++;
+      operation.id = createId();
     }
-    resp._id = operation.id;
-
-    _openResponses[resp._id] = resp;
+    _openResponses[operation.id] = resp;
 
     if (_isOpen) {
       send(operation);
