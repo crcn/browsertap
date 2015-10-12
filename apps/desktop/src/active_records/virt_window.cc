@@ -18,7 +18,7 @@ namespace app {
     geom::Bounds b = _window->bounds();
     root["title"]   = _window->title();
     root["minimized"] = _window->isMinimized();
-    root["id"]      = id();
+    root["_id"]      = id();
     root["x"]       = b.x;
     root["y"]       = b.y;
     root["width"]   = b.width;

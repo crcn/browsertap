@@ -31,7 +31,7 @@ namespace app {
     Json::Value root = activeRecord::Object::toJson();
 
     if (video) {
-      root["video"]["id"] = video->id();
+      root["video"]["_id"] = video->id();
     }
 
     if (_connection->localDescription) {
