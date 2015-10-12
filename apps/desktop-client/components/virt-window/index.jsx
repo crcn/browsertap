@@ -8,7 +8,7 @@ var VirtWindowComponent = React.createClass({
       _id: this.props.virtualWindow._id
     });
 
-    console.log(virtualWindow);
+    var peer = await virtualWindow.startCapture();
   },
   render: function() {
     return <div>

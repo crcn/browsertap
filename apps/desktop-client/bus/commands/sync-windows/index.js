@@ -35,7 +35,7 @@ export default function(app) {
     // TODO - app.bus.execute({ name: "openWindow", model: virtWindow });
 
     if (virtWindow.height < 60 || virtWindow.width < 60 || virtWindow.title === "" || /manager/i.test(virtWindow.title)) {
-      return app.logger.notice("ignoring window ", virtWindow);
+      // return app.logger.notice("ignoring window ", virtWindow);
     }
 
     app.bus.execute({
