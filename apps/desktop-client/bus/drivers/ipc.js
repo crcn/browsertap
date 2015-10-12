@@ -7,6 +7,11 @@ export default function(input, output, bus) {
 
   var _openResponses = {};
   var _i = 0;
+  var _mid = Date.now() + "_" + Math.round(Math.random() * 99999) + "_";
+
+  function createId() {
+    return _mid + (++_i);
+  }
 
   function createListener(callback) {
     return function(event) {
@@ -37,7 +42,7 @@ export default function(input, output, bus) {
 
   this.execute = function(operation) {
     var resp = new AsyncResponse();
-    _openResponses[operation.id = (++_i)] = resp;
+    _openResponses[operation.id = createId()] = resp;
     output.send("operation", operation);
     return resp;
   }

@@ -5,6 +5,12 @@
   </head>
   <body>
 
+    <style>
+      html, body {
+        padding: 0px;
+        margin: 0px;
+      }
+    </style>
 
     <div id="app"></div>
     <script>
@@ -21,10 +27,6 @@
 
       // two-way communication between window and this
       var bus = new IPCBus(require("ipc"), require("ipc"));
-
-      bus.execute({ name: "ping" }).read().then(function(chunk) {
-        console.log(chunk.value);
-      });
 
       var props = Object.assign({}, config.props, {
         bus: bus

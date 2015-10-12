@@ -30,7 +30,7 @@ export default function({app, host}, bus) {
       app.logger.verbose("ws remote < ", op);
       return bus.execute(op);
     }
-
+    
     if (op.data == void 0) {
       resp.end();
       delete _openResponses[op.resp];
@@ -48,7 +48,10 @@ export default function({app, host}, bus) {
 
   this.execute = function(operation) {
     var resp = new AsyncResponse();
-    operation.id = resp._id = _id++;
+    if (!operation.id) {
+      operation.id = _id++;
+    }
+    resp._id = operation.id;
 
     _openResponses[resp._id] = resp;
 

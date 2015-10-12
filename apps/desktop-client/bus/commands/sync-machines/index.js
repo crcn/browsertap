@@ -3,6 +3,8 @@ import sift from "sift";
 import WebSocketBus from "common/mesh/bus/websocket";
 import co from "co";
 import syncDbCollection from "common/mesh/utils/sync-db-collection";
+import { AcceptBus, AttachDefaultsBus } from "mesh";
+
 
 export default function(app) {
 
@@ -35,7 +37,13 @@ export default function(app) {
     var bus = _connections = new WebSocketBus({
       app: app,
       host: host
-    }, app.bus);
+    }, new AttachDefaultsBus({ machine: { _id: machine._id } }, app.bus));
+
+    // add the remove bus.
+    // TODO - this needs to be removed
+    app.remoteBusses.push(new AcceptBus(sift({
+      "target.machine._id": machine._id
+    }), bus));
 
     // TODO - VirtWindow.all(bus)
     var response = bus.execute({ name: "load", collection: "virtWindows", multi: true });
@@ -43,8 +51,9 @@ export default function(app) {
     while(chunk = await response.read()) {
       if (chunk.done) break;
       if (chunk.value.minimized) continue;
+      chunk.value.machine = { _id: machine._id };
       await app.bus.execute({ name: "insert", collection: "virtWindows", data: chunk.value }).read();
-      break;
+      // break;
     }
   }
 };

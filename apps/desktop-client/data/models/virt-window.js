@@ -11,6 +11,9 @@ var schema = new Schema({
       required:true,
       type: require("common/data/types/object-id")
     },
+    machine: {
+      type: Object
+    },
     width: {
       type: Number
     },
@@ -28,9 +31,8 @@ class VirtWindow extends Model {
    */
 
   async startCapture() {
-    var {value} = await this.bus.execute({ name: "startWindowSession", query: { id: this._id } }).read();
-    console.log(value);
-    var peer = new Peer(Object.assign({ bus: this.bus }, data));
+    var {value} = await this.fetch("startWindowSession").read();
+    var peer = new Peer(Object.assign({ bus: this.bus }, value));
     await peer.connect();
     return peer;
   }

@@ -59,6 +59,20 @@ class Peer extends Model {
   }
 
   /**
+   * FIXME: should not go here
+   */
+
+  getPropertyAsync(property) {
+    return new Promise((resolve, reject) => {
+      if (this[property]) return resolve(property);
+      var onChange = (props) => {
+        console.log(JSON.stringify(props));
+      };
+      this.on("change", onChange);
+    });
+  }
+
+  /**
    */
 
   _onAddStream(event) {
