@@ -16,7 +16,7 @@ namespace activeRecord {
     void remove(Object* obj);
     std::vector<Object*> all();
     std::vector<Object*> find(Json::Value);
-    Object* findOne(int id);
+    Object* findOne(std::string _id);
     Object* findOne(Json::Value);
     void handleEvent(core::Event* event);
   private:

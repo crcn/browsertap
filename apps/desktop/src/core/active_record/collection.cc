@@ -47,10 +47,10 @@ namespace activeRecord {
     return NULL;
   }
 
-  Object* Collection::findOne(int id) {
+  Object* Collection::findOne(std::string _id) {
     for(int i = _objects.size(); i--;) {
       Object* object = _objects.at(i);
-      if (object->id() == id) return object;
+      if (object->id().compare(_id) == 0) return object;
     }
     return NULL;
   }

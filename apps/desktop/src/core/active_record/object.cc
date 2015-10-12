@@ -1,11 +1,11 @@
 #include "./object.h"
+#include "./object_id.h"
 
 namespace activeRecord {
 
   Object::Object():core::EventEmitter() {
-    _id = Object::_idCount++;
+    _id = generateUniqueId();
   }
-  int Object::_idCount = 0;
 
   void Object::remove() {
     emit(ObjectEvent::REMOVE, NULL);
@@ -15,13 +15,13 @@ namespace activeRecord {
     emit(ObjectEvent::UPDATE, NULL);
   }
 
-  int Object::id() {
+  std::string Object::id() {
     return _id;
   }
 
   Json::Value Object::toJson() {
     Json::Value root;
-    root["id"] = _id;
+    root["_id"] = _id;
     return root;
   }
 }

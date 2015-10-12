@@ -15,11 +15,11 @@ namespace activeRecord {
     void remove();
     void update();
     virtual Json::Value toJson()=0;
-    int id();
+    std::string id();
     virtual ~Object() { }
   private:
     static int _idCount;
-    int _id;
+    std::string _id;
   };
 }
 
