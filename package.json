@@ -27,6 +27,7 @@
   "devDependencies": {
     "babel": "^5.8.23",
     "babelify": "^6.3.0",
+    "browser-sync": "^2.9.11",
     "browserify": "^11.2.0",
     "browserify-resolutions": "^1.0.6",
     "bulk": "^2.0.0",

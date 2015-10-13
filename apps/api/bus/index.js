@@ -4,7 +4,7 @@ import InternalCommandsBus from "./internal-commands";
 import PublicCommandsBus from "./public-commands";
 import DbBus from "./db";
 import LogBus from "common/mesh/bus/log";
-
+ 
 class APIBus extends WrapBus {
 
   /**

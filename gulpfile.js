@@ -26,6 +26,7 @@ var collapse        = require("bundle-collapser/plugin");
 var options         = require("yargs").argv;
 var mergeStream     = require("merge-stream");
 var fs              = require("fs");
+var browserSync     = require('browser-sync').create();
 var pp = require("package-path");
 
 
@@ -161,7 +162,7 @@ gulp.task("minify-js", ["bundle-js"], function() {
 /**
  */
 
-// TODO - run c++ unit tests here as well
+// TODO: run c++ unit tests here as well
 gulp.task("test", function (complete) {
   gulp.
   src(paths.testFiles, { read: false }).
@@ -169,6 +170,16 @@ gulp.task("test", function (complete) {
   pipe(mocha(ops.mocha)).
   on("error", complete).
   on("end", complete);
+});
+
+gulp.task('browser-sync-coverage', function(complete) {
+    browserSync.init({
+        server: {
+            baseDir: __dirname + "/coverage"
+        }
+    });
+
+    gulp.watch(__dirname + "/coverage/**", browserSync.reload);
 });
 
 /**
@@ -197,7 +208,7 @@ gulp.task("test-coverage", ["test-coverage-hook"], function() {
   .pipe(istanbul.writeReports({
     reporters: ["text", "text-summary", "json", "html"]
   }))
-  .pipe(istanbul.enforceThresholds({ thresholds: { global: 95 } }));
+  .pipe(istanbul.enforceThresholds({ thresholds: { global: 50 } }));
 });
 
 var iofwatch = process.argv.indexOf("watch");

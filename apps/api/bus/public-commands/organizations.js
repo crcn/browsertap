@@ -1,4 +1,3 @@
-import createRouter       from "api/bus/drivers/create-router";
 import sift               from "sift";
 import httperr            from "httperr";
 import mu                 from "mustache";

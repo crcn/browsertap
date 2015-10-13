@@ -1,9 +1,7 @@
-require("babel/register")({
-  optional: ["es7.classProperties", "es7.decorators"]
-});
+require("common/babel-hooks");
 
-var Application = require("./application");
-var getConfig = require("./get-config");
+import Application from "./application";
+import getConfig  from "./get-config";
 
 /**
  */
@@ -12,12 +10,12 @@ if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = "development";
 }
 
-/** 
+/**
  */
 
 var app = new Application({
   config: getConfig(process.env)
-}); 
+});
 
 /**
  */
@@ -25,5 +23,3 @@ var app = new Application({
 app.initialize(function() {
   // app.logger.info("init'd");
 });
-
-

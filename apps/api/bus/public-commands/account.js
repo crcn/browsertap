@@ -1,4 +1,3 @@
-import createRouter       from "api/bus/drivers/create-router";
 import sift               from "sift";
 import { AttachDefaultsBus } from "mesh";
 import SignupForm         from "common/data/forms/signup";

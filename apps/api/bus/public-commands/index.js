@@ -1,4 +1,3 @@
-import createRouter       from "api/bus/drivers/create-router";
 import sift               from "sift";
 import SignupForm         from "common/data/forms/signup";
 import LoginForm          from "common/data/forms/login";
