@@ -42,12 +42,16 @@ class APIApplication extends BaseApplication {
   initializePlugins() {
     this.bus = new APIBus(this, this.bus);
     super.initializePlugins();
+
     if (this.debug !== true) {
       this.use(http);
     }
-    this.use(emailer);
-    this.use(stripe);
-    this.use(jobs);
+
+    this.use(
+      emailer,
+      stripe,
+      jobs
+    );
   }
 
   /**

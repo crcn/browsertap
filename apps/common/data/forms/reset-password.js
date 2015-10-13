@@ -1,5 +1,6 @@
 import mixinSchema from "common/data/schema/mixin";
 import Schema      from "common/data/schema/schema";
+import mixinForm   from "./mixins/form";
 
 /**
  */
@@ -42,18 +43,8 @@ var resetPaswordSchema = new Schema({
  */
 
 @mixinSchema(resetPaswordSchema)
-class ResetPasswordForm {
-
-  /**
-   */
-
-  *submit() {
-    return (yield this.bus.execute({
-      name: "resetPassword",
-      data: this
-    }).read()).value;
-  }
-};
+@mixinForm("resetPassword")
+class ResetPasswordForm { };
 
 /**
 */

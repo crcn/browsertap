@@ -10,8 +10,6 @@ LOG_LEVEL=VERBOSE npm start
 DB=mock npm start # start mock mongodb
 ```
 
-
 #### features
 
 - ability to execute remote operations via socket.io
-

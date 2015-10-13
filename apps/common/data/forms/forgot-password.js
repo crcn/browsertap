@@ -1,5 +1,6 @@
 import mixinSchema from "common/data/schema/mixin";
 import Schema      from "common/data/schema/schema";
+import mixinForm   from "./mixins/form";
 
 /**
  */
@@ -17,18 +18,8 @@ var forgotPasswordSchema = new Schema({
  */
 
 @mixinSchema(forgotPasswordSchema)
-class ForgotPasswordForm {
-
-  /**
-   */
-
-  *submit() {
-    return (yield this.bus.execute({
-      name: "forgotPassword",
-      data: this
-    }).read()).value;
-  }
-};
+@mixinForm("forgotPassword")
+class ForgotPasswordForm { };
 
 /**
 */

@@ -1,6 +1,7 @@
 import mixinSchema from "common/data/schema/mixin";
 import Schema      from "common/data/schema/schema";
 import Invitee     from "common/data/models/invitee";
+import mixinForm   from "./mixins/form";
 
 /**
  */
@@ -26,18 +27,8 @@ var requestInviteFormSchema = new Schema({
  */
 
 @mixinSchema(requestInviteFormSchema)
-class RequestInviteForm {
-
-  /**
-   */
-
-  *submit() {
-    return new Invitee(Object.assign({ bus: this.bus }, (yield this.bus.execute({
-      name: "requestInvite",
-      data: this
-    }).read()).value));
-  }
-};
+@mixinForm("requestInvite", Invitee)
+class RequestInviteForm { };
 
 
 /**

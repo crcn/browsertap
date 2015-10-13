@@ -1,5 +1,6 @@
 import mixinSchema from "common/data/schema/mixin";
 import Schema      from "common/data/schema/schema";
+import mixinForm   from "./mixins/form";
 
 /**
  */
@@ -30,18 +31,8 @@ var confirmAccountSchema = new Schema({
  */
 
 @mixinSchema(confirmAccountSchema)
-class ConfirmAccountSchema {
-
-  /**
-   */
-
-  *submit() {
-    return (yield this.bus.execute({
-      name: "confirmAccount",
-      data: this
-    }).read()).value;
-  }
-};
+@mixinForm("confirmAccount")
+class ConfirmAccountSchema { };
 
 /**
 */

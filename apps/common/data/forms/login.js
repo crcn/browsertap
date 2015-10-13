@@ -1,5 +1,6 @@
 import mixinSchema from "common/data/schema/mixin";
 import Schema      from "common/data/schema/schema";
+import mixinForm   from "./mixins/form";
 
 /**
  */
@@ -21,18 +22,8 @@ var loginFormSchema = new Schema({
  */
 
 @mixinSchema(loginFormSchema)
-class LoginForm {
-
-  /**
-   */
-
-  *submit() {
-    return (yield this.bus.execute({
-      name: "login",
-      data: this
-    }).read()).value;
-  }
-};
+@mixinForm("login")
+class LoginForm { }
 
 
 /**
