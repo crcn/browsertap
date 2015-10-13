@@ -1,4 +1,4 @@
-import CacheBus from "./cache-bus";
+import CacheBus from "./cache";
 import { NoopBus, EmptyResponse } from "mesh";
 import co from "co";
 import MemoryBus from "./memory";
