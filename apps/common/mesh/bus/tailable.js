@@ -1,4 +1,5 @@
 import { Bus, AsyncResponse } from "mesh";
+import sift from "sift";
 
 /**
  * Makes a bus tailable
@@ -17,11 +18,15 @@ class TailableBus extends Bus {
 
   /**
    */
-   
+
   execute(operation) {
     if (operation.name === "tail") {
       return new AsyncResponse((writable) => {
         this._tails.push(writable);
+        writable.filter = operation.filter ? sift(operation.filter) : function() {
+          return true;
+        };
+
         writable.then(() => {
           this._tails.splice(this._tails.indexOf(writable), 1);
         });
@@ -29,7 +34,7 @@ class TailableBus extends Bus {
     } else {
       var ret = this._bus.execute(operation);
       this._tails.forEach((tail) => {
-        tail.write(operation);
+        if (tail.filter(operation)) tail.write(operation);
       });
       return ret;
     }

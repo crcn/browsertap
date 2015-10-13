@@ -65,10 +65,27 @@ describe(__filename + "#", function() {
     expect(tailCount).to.be(2);
     await tail.end();
     expect(bus._tails.length).to.be(0);
-    // await bus.execute({ name: "op3" });
-    // expect(tailCount).to.be(2);
-    // await bus.execute({ name: "op4" });
-    // expect(tailCount).to.be(2);
+  });
 
+  it("can filter operations from getting tailed", async function() {
+    var bus = new NoopBus();
+    bus     = new TailableBus(bus);
+    var tailCount = 0;
+
+    async function readTails(readable) {
+      var value;
+      var done;
+      while(({value, done} = await readable.read()) && !done) {
+        tailCount++;
+      }
+    }
+
+    readTails(bus.execute({ name: "tail", filter: { name: /op1|op2/ } }));
+
+    await bus.execute({ name: "op1" });
+    await bus.execute({ name: "op2" });
+    await bus.execute({ name: "op3" });
+    await bus.execute({ name: "op4" });
+    expect(tailCount).to.be(2);
   });
 });
