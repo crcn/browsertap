@@ -17,13 +17,13 @@ export default function(app, bus) {
 
     addStripeCustomer: new CommandBus({
       auth: true,
-      execute: function*(operation) {
+      execute: async function(operation) {
 
-        var organization = yield Organization.findOne(bus, {
+        var organization = await Organization.findOne(bus, {
           _id: operation.data.organization._id
         });
 
-        var data = yield app.stripe.customers.create({
+        var data = await app.stripe.customers.create({
           source: operation.data.customer.id,
           email: operation.user.emailAddress.valueOf()
         });
@@ -33,7 +33,7 @@ export default function(app, bus) {
           organization: organization
         }));
 
-        return yield customer.insert();
+        return await customer.insert();
       }
     })
   };

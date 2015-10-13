@@ -10,11 +10,11 @@ export default function(app, bus) {
 
   var browserHost = app.get("config.hosts.browser");
 
-  function *generateShortCode() {
+  async function generateShortCode() {
     var code;
     do {
       code = crc32(String(Date.now()));
-    } while(yield Invitee.findOne(bus, { shortcode: code }));
+    } while(await Invitee.findOne(bus, { shortcode: code }));
     return code;
   }
 
@@ -24,10 +24,10 @@ export default function(app, bus) {
      */
 
     requestInvite: new CommandBus({
-      execute: function*(operation) {
+      execute: async function(operation) {
         var form = new RequestInviteForm(Object.assign({ bus: bus }, operation.data));
 
-        if (yield User.findOne(bus, { emailAddress: form.emailAddress.valueOf() })) {
+        if (await User.findOne(bus, { emailAddress: form.emailAddress.valueOf() })) {
           throw new httperr.Conflict("userEmailAddressExists");
         }
 
@@ -36,23 +36,23 @@ export default function(app, bus) {
 
         // return invitee based on email address. Don't want to lock them out
         // from seeing the secondary page which allows them to invite people.
-        if (!(invitee = yield Invitee.findOne(bus, { emailAddress: form.emailAddress.valueOf() }))) {
+        if (!(invitee = await Invitee.findOne(bus, { emailAddress: form.emailAddress.valueOf() }))) {
 
           // reward them
           if (form.inviterShortcode) {
-            inviter = yield Invitee.findOne(bus, { shortcode: form.inviterShortcode.valueOf() });
+            inviter = await Invitee.findOne(bus, { shortcode: form.inviterShortcode.valueOf() });
             if (inviter) {
               inviter.inviteCount++;
-              yield inviter.update();
+              await inviter.update();
             }
           }
 
           var invitee = new Invitee(Object.assign({ }, form, {
             inviter   : inviter,
-            shortcode : yield generateShortCode()
+            shortcode : await generateShortCode()
           }));
 
-          yield invitee.insert();
+          await invitee.insert();
         }
 
 
@@ -64,8 +64,8 @@ export default function(app, bus) {
      */
 
     getInviteeFromShortCode: new CommandBus({
-      execute: function*(operation) {
-        var invitee = yield Invitee.findOne(bus, { shortcode: operation.shortcode });
+      execute: async function(operation) {
+        var invitee = await Invitee.findOne(bus, { shortcode: operation.shortcode });
         if (!invitee) throw new httperr.NotFound("inviteeNotFound");
         return { name: invitee.name };
       }

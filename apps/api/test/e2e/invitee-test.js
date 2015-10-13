@@ -8,11 +8,8 @@ describe(__filename + "#", function() {
 
   var apiApp;
 
-  beforeEach(function(next) {
-    testUtils.createFakeApp().then(function(app) {
-      apiApp = app;
-      next();
-    })
+  beforeEach(async function() {
+    apiApp = await testUtils.createFakeApp();
   });
 
   afterEach(function() {
@@ -20,7 +17,7 @@ describe(__filename + "#", function() {
   });
 
 
-  it("cannot request an invite if the email exists as a user", co.wrap(function*() {
+  it("cannot request an invite if the email exists as a user", async function() {
 
     var signupForm = new SignupForm({
       bus: apiApp.bus,
@@ -29,7 +26,7 @@ describe(__filename + "#", function() {
       password: "password"
     });
 
-    yield signupForm.submit();
+    await signupForm.submit();
 
     var requestInviteForm = new RequestInviteForm({
       bus: apiApp.bus,
@@ -40,16 +37,16 @@ describe(__filename + "#", function() {
     var err;
 
     try {
-      yield requestInviteForm.submit();
+      await requestInviteForm.submit();
     } catch(e) {
       err = e;
     }
 
     expect(err.message).to.be("userEmailAddressExists");
     expect(err.statusCode).to.be(409);
-  }));
+  });
 
-  it("returns the same invitee object if the email exists", co.wrap(function*() {
+  it("returns the same invitee object if the email exists", async function() {
     var requestInviteForm = new RequestInviteForm({
       bus: apiApp.bus,
       name: "bob",
@@ -57,11 +54,11 @@ describe(__filename + "#", function() {
     });
 
     var err;
-    var invitee = yield requestInviteForm.submit();
-    var inviteeb = yield requestInviteForm.submit();
+    var invitee = await requestInviteForm.submit();
+    var inviteeb = await requestInviteForm.submit();
 
     expect(invitee._id.valueOf()).to.be(inviteeb._id.valueOf());
-  }));
+  });
 
   xit("cannot request an invite an invitee already exists");
   xit("prioritizes users who have invited more people");

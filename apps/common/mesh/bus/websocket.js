@@ -1,5 +1,4 @@
 import { NoopBus, AsyncResponse } from "mesh";
-import co from "co";
 import { EventEmitter } from "events";
 import ws from "websocket";
 
@@ -15,7 +14,6 @@ export default function({app, host}, bus) {
   var _waitingOps    = [];
   var _isOpen        = false;
   ws.onerror = function(error) {
-    // console.log(error);
   };
 
   ws.onopen    = function() {

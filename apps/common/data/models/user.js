@@ -77,8 +77,8 @@ class User extends Model {
   /**
    */
 
-  *getOrganizations() {
-    return (yield this.bus.execute({
+  async getOrganizations() {
+    return (await this.bus.execute({
       name: "getUserOrganizations"
     }).read()).value.map(function(data) {
       return new Organization(Object.assign({ bus: this.bus.value }, data));
@@ -88,7 +88,7 @@ class User extends Model {
   /**
    */
 
-  *createOrganization() {
+  async createOrganization() {
     var organization = new Organization({
       bus: this.bus,
       access: [{
@@ -96,7 +96,7 @@ class User extends Model {
         level: "admin"
       }]
     });
-    return yield organization.insert();
+    return await organization.insert();
   }
 }
 

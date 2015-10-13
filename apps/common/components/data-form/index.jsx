@@ -5,9 +5,8 @@ import CreditCardNumber from "common/data/types/credit-card-number"
 import CVC          from "common/data/types/credit-card-number"
 import cx           from "classnames"
 import ReactIntl    from "react-intl";
-import co           from "co";
 import diff         from "object-diff";
- 
+
 var IntlMixin         = ReactIntl.IntlMixin;
 var FormattedMessage  = ReactIntl.FormattedMessage;
 var FormattedRelative = ReactIntl.FormattedRelative;
@@ -24,7 +23,7 @@ var Field = React.createClass({
   propTypes: {
     messages: React.PropTypes.object.isRequired
   },
- 
+
   /**
    */
 
@@ -77,17 +76,17 @@ var Field = React.createClass({
 
     var classNames = cx({
       "field"        : true,
-      // "form-group"   : true, 
+      // "form-group"   : true,
       "form-inline"  : true,
       "has-error"    : this.state.valid === false,
       "has-success"  : this.state.valid === true,
       "has-feedback" : this.state.valid != void 0
-    }); 
+    });
 
     var fieldElement = this._createFromField(this.props.name, this.props.field);
 
     if (fieldElement.props.type === "hidden") {
-      return null; 
+      return null;
     }
 
     return <div className={classNames} onChange={this.onChange}>
@@ -96,14 +95,14 @@ var Field = React.createClass({
         { fieldElement }
       </div>
         { this.state.valid != void 0  ? <span className={"ion-" + (this.state.valid ? "checkmark" : "close") + " form-control-feedback"}></span> : void 0 }
-    </div>; 
+    </div>;
   },
 
   /**
    */
 
   _createFromField: function(name, field) {
- 
+
     if(field.type === EmailAddress || field.type === String || field.type === CVC || field.type === CreditCardNumber) {
       return <input name={name} type="text" className="form-control" />;
     } else if (field.type === Password) {
@@ -181,28 +180,28 @@ var DataForm = React.createClass({
   /**
    */
 
-  onSubmit: co.wrap(function*(event) {
-    event.preventDefault();  
+  onSubmit: async function(event) {
+    event.preventDefault();
 
     this.setState({ loading: true });
 
     var err;
     try {
-      var result = yield this.state.form.submit();
+      var result = await this.state.form.submit();
     } catch(e) {
       err = e;
     }
-    
+
     if (this.isMounted()) this.setState({
       loading: false,
       error: err,
       success: !err
-    }); 
+    });
 
     if (!err && this.props.onSuccess) {
       this.props.onSuccess(result);
     }
-  }),
+  },
 
   /**
    */
@@ -213,13 +212,13 @@ var DataForm = React.createClass({
     var schema    = formClass.schema;
 
     var formFields = [];
- 
+
     for (var name in schema.fields) {
-      var field = schema.fields[name]; 
+      var field = schema.fields[name];
       if (field.hidden) continue;
       formFields.push(
         <Field key={name} name={name} field={field} onFieldData={this.onFieldData} data={this.state.data} {...this.props} />
-      );  
+      );
     }
 
     return <form onChange={this._onChange} className="form-horizontal m-common-data-form" onSubmit={this.onSubmit}>
@@ -230,18 +229,18 @@ var DataForm = React.createClass({
 
       { this.state.error ? <div className="alert alert-danger">{
         <FormattedMessage message={this.getIntlMessage("errors." + this.state.error.message)} />
-      }</div> : void 0 } 
+      }</div> : void 0 }
 
       { this.state.success && this.props.successMessage ? <div className="alert alert-success">{
-        <FormattedMessage message={this.getIntlMessage(this.props.successMessage)} /> 
+        <FormattedMessage message={this.getIntlMessage(this.props.successMessage)} />
       }</div> : void 0 }
       <div className="fields">
         { formFields }
-      </div>  
-      <div className="form-group submit-button">   
+      </div>
+      <div className="form-group submit-button">
         <button name="submit" type="submit" className="form-control" disabled={!this.state.form || this.state.loading}>
           { this.state.loading ? "loading..." : this.getIntlMessage(this.props.submitLabel || "buttons.submit") }
-        </button> 
+        </button>
       </div>
     </form>
   }

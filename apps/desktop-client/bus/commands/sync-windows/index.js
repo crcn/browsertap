@@ -1,5 +1,4 @@
 import CommandBus    from "common/mesh/bus/command";
-import co            from "co";
 import sift          from "sift";
 import BrowserWindow from "browser-window";
 import syncDbCollection from "common/mesh/utils/sync-db-collection";
@@ -11,7 +10,7 @@ export default function(app) {
   });
 
   // TODO - change to async
-  function *execute(operation) {
+  function execute(operation) {
 
     app.logger.info("synchronizing virtual windows");
 

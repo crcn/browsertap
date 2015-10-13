@@ -34,10 +34,10 @@ class PaymentForm {
   /**
    */
 
-  *submit() {
+  async submit() {
 
     // TODO - move this to command
-    var result = yield new Promise(function(resolve, reject) {
+    var result = await new Promise(function(resolve, reject) {
       Stripe.card.createToken({
         number: this.cardNumber.valueOf(),
         cvc: 333,
@@ -49,7 +49,7 @@ class PaymentForm {
       });
     }.bind(this));
 
-    return yield this.bus.execute({
+    return await this.bus.execute({
       name: "addStripeCustomer",
       data: {
         organization: this.organization,

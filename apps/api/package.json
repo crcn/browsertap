@@ -13,7 +13,6 @@
   "license": "ISC",
   "es6": true,
   "dependencies": {
-    "co": "^4.6.0",
     "common": "file:../common",
     "crc32": "^0.2.2",
     "cron": "^1.0.9",

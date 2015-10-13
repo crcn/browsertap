@@ -7,16 +7,9 @@ describe(__filename + "#", function() {
   var browserApp;
   var apiApp;
 
-  beforeEach(function(next) {
-    testUtils.createFakeApp().then(function(app) {
-      browserApp = app;
-      apiApp = app.apiApp;
-      next();
-    }, next);
-  });
-
-  afterEach(function() {
-
+  beforeEach(async function() {
+    browserApp = await testUtils.createFakeApp();
+    apiApp = browserApp.apiApp;
   });
 
   it("can redirect to the login page", function() {
@@ -70,11 +63,11 @@ describe(__filename + "#", function() {
   });
 
   it("redirects to the login page if on the home page and not authorized", function(next) {
-    browserApp.router.redirect("/");
+    browserApp.router.redirect("logout");
     setTimeout(function() {
       expect(browserApp.element.innerHTML).to.contain("login-form");
       next();
-    }, 2)
+    }, 10)
   });
 
   it("can reset a forgotten password and login with it", function(next) {

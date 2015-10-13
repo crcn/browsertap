@@ -18,7 +18,6 @@ var VirtWindowComponent = React.createClass({
     })
   },
   onResize: function() {
-    console.log("RESIZ");
   },
   render: function() {
     return <div>

@@ -10,9 +10,9 @@ export default function(app, bus) {
      */
 
     sendEmail: new CommandBus({
-      execute: function*(operation) {
+      execute: async function(operation) {
         var form = new EmailForm(Object.assign({ bus: bus }, operation.data));
-        yield app.emailer.send(form);
+        await app.emailer.send(form);
       }
     })
   };

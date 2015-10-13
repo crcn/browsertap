@@ -13,7 +13,6 @@ var RootComponent = React.createClass({
     });
     var chunk
     while(chunk = await spy.read()) {
-      console.log("OPERATION");
     }
   },
   render: function() {

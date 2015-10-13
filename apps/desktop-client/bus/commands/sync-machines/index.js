@@ -1,7 +1,6 @@
 import CommandBus from "common/mesh/bus/command";
 import sift from "sift";
 import WebSocketBus from "common/mesh/bus/websocket";
-import co from "co";
 import syncDbCollection from "common/mesh/utils/sync-db-collection";
 import { AcceptBus, AttachDefaultsBus } from "mesh";
 
@@ -12,7 +11,7 @@ export default function(app) {
     execute: _execute
   });
 
-  function *_execute(operation) {
+  function _execute(operation) {
     app.logger.info("synchronizing machines");
 
     syncDbCollection(

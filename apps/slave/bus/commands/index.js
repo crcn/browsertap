@@ -17,16 +17,15 @@ export default function(app, bus) {
 
   this.execute = bus.execute.bind(bus);
 
-  function *_initialize(operation) {
+  function _initialize(operation) {
     app.bus.execute({ name: "spawnDesktopController" });
   }
 
-  function *_spawnDesktopController(operation) {
+  function _spawnDesktopController(operation) {
     var binPath = app.get("config.paths.desktopController");
     app.logger.info("spawning desktop controller %s", binPath);
         console.log(typeof AsyncResponse);
     var resp = new AsyncResponse();
-
 
     var cwd     = path.dirname(binPath);
     var binName = path.basename(binPath);

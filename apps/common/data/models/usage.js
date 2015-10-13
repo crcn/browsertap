@@ -12,7 +12,7 @@ var usageSchema = new Schema({
   fields: {
 
     /**
-     * ID of the user 
+     * ID of the user
      */
 
     _id: {
@@ -20,7 +20,7 @@ var usageSchema = new Schema({
     },
 
     /**
-     * ID of the user 
+     * ID of the user
      */
 
     organization: {
@@ -30,7 +30,7 @@ var usageSchema = new Schema({
     /**
      */
 
-    minutes: { 
+    minutes: {
       default: 0,
       type: Number
     }
@@ -43,13 +43,13 @@ var usageSchema = new Schema({
 @persistMixin("usages")
 @mixinSchema(usageSchema)
 class Usage extends Model {
-  *reset() {
+  async reset() {
     this.minutes = 0;
-    return yield this.update();
+    return await this.update();
   }
-  *addMinutes(amount) {
+  async addMinutes(amount) {
     this.minutes += amount;
-    return yield this.update();
+    return await this.update();
   }
 }
 

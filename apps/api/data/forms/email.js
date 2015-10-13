@@ -30,8 +30,8 @@ class ForgotPasswordForm {
   /**
    */
 
-  *submit() {
-    return (yield this.bus.execute({
+  async submit() {
+    return (await this.bus.execute({
       name: "sendEmail",
       data: this
     }).read()).value;

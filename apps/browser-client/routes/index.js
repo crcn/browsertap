@@ -1,11 +1,10 @@
 import forms   from "common/data/forms";
-import co      from "co";
 import Invitee from "common/data/models/invitee";
 
 module.exports = function(app) {
   var router = app.router;
 
-  var auth = co.wrap(function*(location, next) {
+  async function auth(location, next) {
 
     try {
 
@@ -14,8 +13,8 @@ module.exports = function(app) {
         return next();
       }
 
-      var user         = (yield forms.getSessionUser(app.bus));
-      var organization = (yield user.getOrganizations())[0];
+      var user         = (await forms.getSessionUser(app.bus));
+      var organization = (await user.getOrganizations())[0];
 
       location.setProperties({
         user         : user,
@@ -27,16 +26,16 @@ module.exports = function(app) {
         error: e
       });
     }
-  });
+  };
 
-  router.addRoute("home", "/", auth, co.wrap(function*(location) {
+  router.addRoute("home", "/", auth, function(location) {
     location.setProperties({
       state: {
         mainPage: "home",
         authPage: "signup"
       }
     });
-  }));
+  });
 
   router.addRoute("app", "/app", function(location) {
     location.setProperties({
@@ -64,9 +63,9 @@ module.exports = function(app) {
     });
   });
 
-  router.addRoute("invite", "/invite/:shortcode", co.wrap(function*(location) {
+  router.addRoute("invite", "/invite/:shortcode", async function(location) {
 
-    var data = Object.assign({ bus: app.bus }, (yield app.bus.execute({
+    var data = Object.assign({ bus: app.bus }, (await app.bus.execute({
       name: "getInviteeFromShortCode",
       shortcode: location.params.shortcode
     }).read()).value);
@@ -79,7 +78,7 @@ module.exports = function(app) {
         authPage : "invited"
       }
     });
-  }));
+  });
 
   router.addRoute("forgotPassword", "/forgot", function(location) {
     location.setProperties({
@@ -109,17 +108,17 @@ module.exports = function(app) {
     });
   });
 
-  router.addRoute("logout", "/logout", co.wrap(function*(location) {
-    yield forms.logout(app.bus);
+  router.addRoute("logout", "/logout", async function(location) {
+    await forms.logout(app.bus);
     router.redirect("login");
-  }));
+  });
 
-  router.addRoute("confirm", "/confirm/:token._id", co.wrap(function*(location) {
+  router.addRoute("confirm", "/confirm/:token._id", async function(location) {
 
     var err;
 
     try {
-      yield forms.confirmAccount(app.bus, location.params.token);
+      await forms.confirmAccount(app.bus, location.params.token);
     } catch(e) {
       err = e;
     }
@@ -131,5 +130,5 @@ module.exports = function(app) {
         authPage: "confirmed"
       }
     });
-  }));
+  });
 };

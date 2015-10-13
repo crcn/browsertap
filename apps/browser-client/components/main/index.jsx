@@ -1,6 +1,5 @@
 import React from "react";
 import Pages from "./pages";
-import co    from "co";
 
 var Main = React.createClass({
   componentDidMount: function() {

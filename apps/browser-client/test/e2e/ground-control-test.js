@@ -1,27 +1,22 @@
 var expect       = require("expect.js");
 var React        = require("react/addons");
-var co           = require("co");
-
 var testUtils = require("browser-client/test/utils");
 
 describe(__filename + "#", function() {
 
   var browserApp;
 
-  beforeEach(function(next) {
-    testUtils.createFakeApp().then(function(app) {
-      browserApp = app;
-      next();
-    }, next);
+  beforeEach(async function() {
+    browserApp = await testUtils.createFakeApp();
   });
 
   afterEach(function() {
 
   });
 
-  beforeEach(co.wrap(function*() {
-    yield browserApp.testUtils.login(browserApp.test.fixtures.unverifiedUser);
-  }));
+  beforeEach(async function() {
+    await browserApp.testUtils.login(browserApp.test.fixtures.unverifiedUser);
+  });
 
   xit("can redirect to the login page", function() {
 

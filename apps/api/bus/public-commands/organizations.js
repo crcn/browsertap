@@ -17,8 +17,8 @@ export default function(app, bus) {
 
     getUserOrganizations: new CommandBus({
       auth: true,
-      execute: function*(operation) {
-        return yield Organization.find(bus, {
+      execute: async function(operation) {
+        return await Organization.find(bus, {
           "access.user._id": operation.user._id.valueOf()
         });
       }

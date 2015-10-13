@@ -11,7 +11,7 @@ var stripeCustomerSchema = new Schema({
   fields: {
 
     /**
-     * ID of the user 
+     * ID of the user
      */
 
     organization: {
@@ -34,9 +34,9 @@ var stripeCustomerSchema = new Schema({
 @persistMixin("stripeCustomers")
 @mixinSchema(stripeCustomerSchema)
 class StripeCustomer extends Model {
-  *charge(amount) {
-    
-    var result = yield this.app.stripe.charges.create({
+  async charge(amount) {
+
+    var result = await this.app.stripe.charges.create({
       amount: amount,
       currency: "usd",
       customer: this.id.valueOf()

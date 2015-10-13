@@ -21,7 +21,7 @@ export default {
   /**
    */
 
-  logout: function*(bus) {
-    return (yield bus.execute({ name: "logout" }).read()).value;
+  logout: async function(bus) {
+    return (await bus.execute({ name: "logout" }).read()).value;
   }
 };

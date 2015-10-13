@@ -15,19 +15,19 @@ export default function(app, bus) {
      */
 
     chargeUsersForUsage: new CommandBus({
-      execute: function*(operation) {
+      execute: async function(operation) {
         for (var customer of StripeCustomer.all(app.bus)) {
           var organization = Organization.findOne(app.bus, { _id: customer.organization._id });
-          var plan         = yield organization.getPlan();
-          var usage        = yield organization.getUsage();
+          var plan         = await organization.getPlan();
+          var usage        = await organization.getUsage();
 
           // TODO - charge based on plan
           var amount = plan.calculateChargeAmount(usage);
           if (amount === 0) continue;
 
-          var invoice = yield customer.charge(amount);
+          var invoice = await customer.charge(amount);
 
-          yield usage.reset();
+          await usage.reset();
           // TODO - send email here
         }
       }

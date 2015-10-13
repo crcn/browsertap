@@ -26,7 +26,7 @@ export default function(app, bus) {
      */
 
     register: new CommandBus({
-      execute: function*(operation) {
+      execute: async function(operation) {
 
         if (app.config.beta) {
           throw new httperr.Unauthorized("cannotRegisterInBeta");
@@ -35,7 +35,7 @@ export default function(app, bus) {
         // form here for validation
         var form = new SignupForm(Object.assign({ bus: bus }, operation.data));
 
-        if (yield User.findOne(bus, { emailAddress: form.emailAddress.valueOf() })) {
+        if (await User.findOne(bus, { emailAddress: form.emailAddress.valueOf() })) {
           throw new httperr.Conflict("emailAddressExists");
         }
 
@@ -51,14 +51,14 @@ export default function(app, bus) {
         });
 
         // register the user
-        yield user.insert();
+        await user.insert();
 
         var token = new Token({
           bus: bus,
           key: user.emailAddress
         });
 
-        yield token.insert();
+        await token.insert();
 
         // TODO - i18n translate this shit
         var emailForm = new EmailForm({
@@ -70,10 +70,10 @@ export default function(app, bus) {
           })
         });
 
-        yield emailForm.submit();
+        await emailForm.submit();
 
         // also create an organization for the user
-        var org = yield user.createOrganization();
+        var org = await user.createOrganization();
 
         // login to create the session and other things
         var loginForm = new LoginForm({
@@ -82,7 +82,7 @@ export default function(app, bus) {
           password     : form.password
         });
 
-        return yield loginForm.submit();
+        return await loginForm.submit();
       }
     }),
 
@@ -91,10 +91,10 @@ export default function(app, bus) {
      */
 
     login: new CommandBus({
-      execute: function*(operation) {
+      execute: async function(operation) {
 
         var form = new LoginForm(Object.assign({ bus: bus }, operation.data));
-        var user = yield User.findOne(bus, { emailAddress: form.emailAddress.valueOf() });
+        var user = await User.findOne(bus, { emailAddress: form.emailAddress.valueOf() });
 
         if (!user) {
           throw new httperr.NotFound("emailAddressNotFound");
@@ -126,9 +126,9 @@ export default function(app, bus) {
      */
 
     forgotPassword: new CommandBus({
-      execute: function*(operation) {
+      execute: async function(operation) {
         var form = new ForgotPasswordForm(Object.assign({ bus: bus }, operation.data));
-        var user = yield User.findOne(bus, { emailAddress: form.emailAddress.valueOf() });
+        var user = await User.findOne(bus, { emailAddress: form.emailAddress.valueOf() });
         if (!user) throw new httperr.NotFound("emailAddressNotFound");
 
         var token = new Token({
@@ -136,7 +136,7 @@ export default function(app, bus) {
           key: user.emailAddress
         });
 
-        yield token.insert();
+        await token.insert();
 
         // TODO - i18n translate this shit
         var emailForm = new EmailForm({
@@ -148,7 +148,7 @@ export default function(app, bus) {
           })
         });
 
-        yield emailForm.submit();
+        await emailForm.submit();
       }
     }),
 
@@ -157,7 +157,7 @@ export default function(app, bus) {
 
     getSessionUser: new CommandBus({
       auth: true,
-      execute: function*(operation) {
+      execute: async function(operation) {
         return operation.user.toPublic();
       }
     }),
@@ -166,19 +166,19 @@ export default function(app, bus) {
      */
 
     confirmAccount: new CommandBus({
-      execute: function*(operation) {
+      execute: async function(operation) {
         var form  = new ConfirmAccountForm(Object.assign({ bus: bus }, operation.data));
-        var token = yield Token.findOne(bus, { _id: String(form.token._id) });
+        var token = await Token.findOne(bus, { _id: String(form.token._id) });
         if (!token) throw new httperr.NotFound("tokenDoesNotExist");
 
         // fetch the email stored in the token
-        var user = yield User.findOne(bus, { emailAddress: String(token.key) });
+        var user = await User.findOne(bus, { emailAddress: String(token.key) });
         if (!user) throw new httperr.NotFound("emailAddressNotFound");
 
         user.confirmed = true;
 
-        yield user.update();
-        yield token.remove();
+        await user.update();
+        await token.remove();
       }
     }),
 
@@ -186,17 +186,17 @@ export default function(app, bus) {
      */
 
     resetPassword: new CommandBus({
-      execute: function*(operation) {
+      execute: async function(operation) {
         var form = new ResetPasswordForm(Object.assign({ bus: bus }, operation.data));
 
         // find the token from the form
-        var token = yield Token.findOne(bus, { _id: String(form.token._id) });
+        var token = await Token.findOne(bus, { _id: String(form.token._id) });
         if (!token) throw new httperr.NotFound("tokenDoesNotExist");
 
         if (token.expired) throw new httperr.NotAcceptable("tokenHasExpired");
 
         // fetch the email stored in the token
-        var user = yield User.findOne(bus, { emailAddress: String(token.key) });
+        var user = await User.findOne(bus, { emailAddress: String(token.key) });
         if (!user) throw new httperr.NotFound("emailAddressNotFound");
 
         // reset the password here
@@ -207,10 +207,10 @@ export default function(app, bus) {
         });
 
         // remove the token so that it cannot be re-used
-        yield token.remove();
+        await token.remove();
 
         // update the user
-        yield user.update();
+        await user.update();
       }
     }),
 
@@ -219,7 +219,7 @@ export default function(app, bus) {
 
     updateUser: new CommandBus({
       auth: true,
-      execute: function*(operation) {
+      execute: async function(operation) {
         // TODO
       }
     })

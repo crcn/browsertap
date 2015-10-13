@@ -12,7 +12,6 @@
   "es6": true,
   "dependencies": {
     "babel": "^5.8.23",
-    "co": "^4.6.0",
     "common": "file:../common",
     "lodash": "^3.10.1",
     "mdns": "^2.2.10",

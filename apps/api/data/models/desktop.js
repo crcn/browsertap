@@ -32,7 +32,7 @@ var desktopSchema = new Schema({
   }
 });
 
-/** 
+/**
  * maybe don't implement this
  */
 
@@ -43,16 +43,16 @@ class Desktop {
    * stops the desktopr
    */
 
-  *stop() {
-    return yield this.fetch("stopDesktop");
+  async stop() {
+    return await this.fetch("stopDesktop");
   }
 
   /**
    * TODO
    */
 
-  *start(owner) {
-    return yield this.fetch("startDesktop", {
+  async start(owner) {
+    return await this.fetch("startDesktop", {
       // owner
     });
   }

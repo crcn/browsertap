@@ -1,22 +1,14 @@
 var expect   = require("expect.js");
 var React    = require("react/addons");
 var Invitee  = require("common/data/models/invitee");
-var co       = require("co");
 var testUtils = require("browser-client/test/utils");
 
 describe(__filename + "#", function() {
 
   var browserApp;
 
-  beforeEach(function(next) {
-    testUtils.createFakeApp().then(function(app) {
-      browserApp = app;
-      next();
-    }, next);
-  });
-
-  afterEach(function() {
-
+  beforeEach(async function() {
+    browserApp = await testUtils.createFakeApp();
   });
 
   beforeEach(function() {
@@ -61,12 +53,12 @@ describe(__filename + "#", function() {
         browserApp.testUtils.setInputValue("*[name='emailAddress']", "c@d.com");
         React.addons.TestUtils.Simulate.submit(browserApp.element.querySelector("form"));
 
-        setTimeout(co.wrap(function*() {
-          var inviter = yield Invitee.findOne(browserApp.bus, { shortcode: shortcode });
+        setTimeout(async function() {
+          var inviter = await Invitee.findOne(browserApp.bus, { shortcode: shortcode });
           expect(Number(inviter.inviteCount)).to.be(1);
-          expect(yield Invitee.findOne(browserApp.bus, { "inviter._id": String(inviter._id) })).not.to.be(void 0);
+          expect(await Invitee.findOne(browserApp.bus, { "inviter._id": String(inviter._id) })).not.to.be(void 0);
           next();
-        }), 5);
+        }, 5);
       }, 5);
     }, 5);
   });
