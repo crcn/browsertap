@@ -5,6 +5,7 @@ import ws from "websocket";
 
 var WebSocket = ws.w3cwebsocket;
 
+// TODO - should use remove operation helper - see ros.js
 export default function({app, host}, bus) {
   if (!bus) bus = mesh.noop;
 

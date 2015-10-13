@@ -51,6 +51,7 @@ export default function(app) {
     while(chunk = await response.read()) {
       if (chunk.done) break;
       if (chunk.value.minimized) continue;
+      // TODO = yield new VirtWindow(chunk.value).insert();
       chunk.value.machine = { _id: machine._id };
       await app.bus.execute({ name: "insert", collection: "virtWindows", data: chunk.value }).read();
       // break;

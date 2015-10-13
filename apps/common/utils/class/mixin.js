@@ -5,8 +5,8 @@
 
 function mixin (behaviour, sharedBehaviour = {}) {
 
-  const instanceKeys = Reflect.ownKeys(behaviour);
-  const sharedKeys   = Reflect.ownKeys(sharedBehaviour);
+  const instanceKeys = global.Reflect.ownKeys(behaviour);
+  const sharedKeys   = global.Reflect.ownKeys(sharedBehaviour);
   const typeTag      = Symbol('isa');
 
   function _mixin (clazz) {

@@ -10,10 +10,12 @@ export default function(app) {
     execute: execute
   });
 
+  // TODO - change to async
   function *execute(operation) {
 
     app.logger.info("synchronizing virtual windows");
 
+    // TODO - use more abstract sync
     syncDbCollection(
       app.bus,
       "virtWindows", {
@@ -34,6 +36,7 @@ export default function(app) {
 
     // TODO - app.bus.execute({ name: "openWindow", model: virtWindow });
 
+    // TODO - this filter should not be here. Should be where windows are synced
     if (virtWindow.height < 60 || virtWindow.width < 60 || virtWindow.title === "" || /manager/i.test(virtWindow.title)) {
       return app.logger.notice("ignoring window ", virtWindow);
     }

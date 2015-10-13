@@ -1,7 +1,11 @@
 require("./gulp/dom");
 
+require("events").EventEmitter.defaultMaxListeners = undefined;
+
 var gulp            = require("gulp");
 var mocha           = require("gulp-mocha");
+var istanbul        = require("gulp-istanbul");
+var isparta         = require("isparta");
 var less            = require("gulp-less");
 var mkdirp          = require("mkdirp");
 var plumber         = require("gulp-plumber");
@@ -24,15 +28,19 @@ var mergeStream     = require("merge-stream");
 var fs              = require("fs");
 var pp = require("package-path");
 
-var babel           = require("babel/register")({
-  optional: ["es7.classProperties", "es7.decorators", "es7.asyncFunctions"],
-  ignore: function(path) {
-    var pkg = require(pp.sync(path) + "/package.json");
-    return !pkg.es6;
-  }
-});
 
 
+function keepJsFile(path) {
+  var pkg = require(pp.sync(path) + "/package.json");
+  return pkg.es6;
+}
+
+var babelOptions = ["es7.classProperties", "es7.decorators", "es7.asyncFunctions"];
+
+var babel = require("babel/register")({
+  optional: babelOptions,
+  ignore: function(f) { return !keepJsFile(f); }
+})
 
 var apps = [
   { name: "api"            , bundle: false },
@@ -123,7 +131,7 @@ gulp.task("bundle-js", function() {
 
       // b.plugin(collapse);
       b.transform({ global: true }, babelify.configure({
-        optional: ["es7.classProperties", "es7.decorators"],
+        optional: babelOptions,
         ignore: ["buffer"]
       }));
 
@@ -161,6 +169,35 @@ gulp.task("test", function (complete) {
   pipe(mocha(ops.mocha)).
   on("error", complete).
   on("end", complete);
+});
+
+/**
+ */
+
+gulp.task("test-coverage-hook", function() {
+  return gulp.src(paths.jsFiles)
+  .pipe(istanbul({
+    instrumenter: isparta.Instrumenter,
+    includeUntested: true,
+    babel: {
+      optional: babelOptions
+    }
+  }))
+  .pipe(istanbul.hookRequire());
+});
+
+/**
+ */
+
+gulp.task("test-coverage", ["test-coverage-hook"], function() {
+  return gulp
+  .src(paths.testFiles, { read: false })
+  .pipe(plumber())
+  .pipe(mocha(ops.mocha))
+  .pipe(istanbul.writeReports({
+    reporters: ["text", "text-summary", "json", "html"]
+  }))
+  .pipe(istanbul.enforceThresholds({ thresholds: { global: 95 } }));
 });
 
 var iofwatch = process.argv.indexOf("watch");

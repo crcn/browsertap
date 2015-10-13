@@ -1,6 +1,6 @@
 import { AsyncResponse, NoopBus } from "mesh";
 
-
+// TODO - should use remove operation helper - see ros.js
 export default function(input, output, bus) {
 
   if (!bus) bus = new NoopBus();

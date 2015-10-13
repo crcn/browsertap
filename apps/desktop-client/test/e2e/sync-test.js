@@ -17,6 +17,8 @@ describe(__filename + "#", function() {
     }, next);
   });
 
+  return;
+
   it("automatically synchronizes windows from a machine that was added", async function() {
 
     var slave = new MockSlave({
