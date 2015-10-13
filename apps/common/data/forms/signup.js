@@ -11,33 +11,15 @@ var signupFormSchema = new Schema({
       required : true,
       type     : require("common/data/types/email-address")
     },
-    // firstName:  {
-    //   required : false,
-    //   type     : String
-    // },
-    // lastName:  {
-    //   required : false,
-    //   type     : String
-    // },
     password: {
       required : true,
       type     : require("common/data/types/password")
     }
-    // repeatPassword: {
-    //   required : true,
-    //   type     : require("common/data/types/password"),
-    //   validate : function(password, data) {
-    //     return String(password) === String(data.password);
-    //   }
-    // }
   }
 });
 
 /**
-
-var form = new SignupForm(form);
-
-*/
+ */
 
 @mixinSchema(signupFormSchema)
 @mixinForm("register")

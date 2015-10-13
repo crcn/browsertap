@@ -13,9 +13,7 @@ import mixinSchema   from "common/data/schema/mixin";
     }
   }
 }))
-class Reference {
-  
-}
+class Reference { };
 
 /**
  */

@@ -5,7 +5,7 @@ import http            from "./http";
 import emailer         from "./emailer";
 import stripe          from "./stripe";
 import APIBus          from "./bus";
-import jobs            from "./jobs";
+import cronTasks       from "./cron-tasks";
 
 class APIApplication extends BaseApplication {
 
@@ -50,7 +50,7 @@ class APIApplication extends BaseApplication {
     this.use(
       emailer,
       stripe,
-      jobs
+      cronTasks
     );
   }
 

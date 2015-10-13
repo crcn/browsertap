@@ -1,8 +1,6 @@
-var nodemailer = require('nodemailer');
+import nodemailer from "nodemailer";
 
-
-
-var mailers = {
+const mailers = {
   mock     : require("./mock"),
   default  : require("./nodemailer")
 };

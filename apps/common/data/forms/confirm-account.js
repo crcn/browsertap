@@ -1,28 +1,17 @@
 import mixinSchema from "common/data/schema/mixin";
 import Schema      from "common/data/schema/schema";
 import mixinForm   from "./mixins/form";
+import Reference   from "common/data/types/reference";
 
 /**
  */
-
-@mixinSchema(new Schema({
-  fields: {
-    _id: {
-      required : true,
-      type     : require("common/data/types/object-id")
-    }
-  }
-}))
-class Token {
-
-}
 
 var confirmAccountSchema = new Schema({
   fields: {
     token: {
       required : true,
       hidden   : true,
-      type     : Token
+      type     : Reference
     }
   }
 });

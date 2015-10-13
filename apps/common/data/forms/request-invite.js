@@ -30,7 +30,6 @@ var requestInviteFormSchema = new Schema({
 @mixinForm("requestInvite", Invitee)
 class RequestInviteForm { };
 
-
 /**
 */
 

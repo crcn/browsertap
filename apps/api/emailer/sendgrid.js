@@ -29,7 +29,6 @@ class Emailer {
       html    : options.body
     });
 
-
     return new Promise(function(resolve, reject) {
       this._sg.send(email, function(err, response) {
         if (err) {

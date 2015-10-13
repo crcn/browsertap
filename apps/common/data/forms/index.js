@@ -7,15 +7,15 @@ export default {
   /**
    */
 
-  getSessionUser: function*(bus) {
-    return new User(Object.assign({ bus: bus }, (yield bus.execute({ name: "getSessionUser" }).read()).value));
+  getSessionUser: async function(bus) {
+    return new User(Object.assign({ bus: bus }, (await bus.execute({ name: "getSessionUser" }).read()).value));
   },
 
   /**
    */
 
-  confirmAccount: function*(bus, token) {
-    return yield (new ConfirmAccountForm(Object.assign({ bus: bus, token: token }))).submit();
+  confirmAccount: function(bus, token) {
+    return (new ConfirmAccountForm(Object.assign({ bus: bus, token: token }))).submit();
   },
 
   /**
