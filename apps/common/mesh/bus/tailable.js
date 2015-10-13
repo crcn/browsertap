@@ -1,14 +1,23 @@
 import { Bus, AsyncResponse } from "mesh";
 
 /**
+ * Makes a bus tailable
  */
 
 class TailableBus extends Bus {
+
+  /**
+   */
+
   constructor(bus) {
     super();
     this._bus   = bus;
     this._tails = [];
   }
+
+  /**
+   */
+   
   execute(operation) {
     if (operation.name === "tail") {
       return new AsyncResponse((writable) => {
