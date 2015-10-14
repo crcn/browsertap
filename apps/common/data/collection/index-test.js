@@ -1,5 +1,6 @@
 import Collection from "./index";
 import { BufferedBus, NoopBus } from "mesh";
+import TailableBus from "common/mesh/bus/tailable";
 import expect from "expect.js";
 
 describe(__filename + "#", function() {
@@ -27,9 +28,9 @@ describe(__filename + "#", function() {
 
   it("can shift items onto the collection", function() {
     var c = new Collection();
-    c.shift(5, 4, 5);
+    c.unshift(5, 4, 5);
     expect(c.length).to.be(3);
-    c.shift(5, 4, 2);
+    c.unshift(5, 4, 2);
     expect(c.length).to.be(6);
     expect(c.at(0)).to.be(5);
     expect(c.at(2)).to.be(2);
@@ -41,7 +42,7 @@ describe(__filename + "#", function() {
     expect(c.length).to.be(4);
     c.pop();
     expect(c.length).to.be(3);
-    c.unshift();
+    c.shift();
     expect(c.length).to.be(2);
     expect(c.at(0)).to.be(2);
     expect(c.at(1)).to.be(3);
@@ -54,8 +55,30 @@ describe(__filename + "#", function() {
     expect(items.join("")).to.be("4321");
   });
 
-  xit("tails 'inserts' executed on a bus", async function() {
-    var bus = new NoopBus();
-    var c = new Collection({ })
+  it("emits a 'change' event whenever the collection is mutated", function() {
+    var c = new Collection();
+    var change;
+    c.on("change", function(c) {
+      change = c[0];
+    });
+    c.push(0, 1, 2, 3);
+    expect(change.removed.length).to.be(0);
+    expect(change.index).to.be(0);
+    expect(change.addedCount).to.be(4);
+
+    c.shift();
+    expect(change.removed.length).to.be(1);
+    expect(change.index).to.be(0);
+    expect(change.addedCount).to.be(0);
+
+    c.pop();
+    expect(change.removed.length).to.be(1);
+    expect(change.index).to.be(c.length);
+    expect(change.addedCount).to.be(0);
+
+    c.splice(0, 2, "a", "b", "c");
+    expect(change.removed.length).to.be(2);
+    expect(change.index).to.be(0);
+    expect(change.addedCount).to.be(3);
   });
 });

@@ -32,8 +32,15 @@ class Collection extends EventEmitter {
   /**
    */
 
-  shift(...items) {
+  unshift(...items) {
     return this.splice(0, 0, ...items);
+  }
+
+  /**
+   */
+
+  shift() {
+    return this.splice(0, 1);
   }
 
   /**
@@ -46,18 +53,24 @@ class Collection extends EventEmitter {
   /**
    */
 
-  unshift() {
-    return this.splice(0, 1);
-  }
-
-  /**
-   */
-
   splice(start, removeCount, ...newItems) {
-    var removed = this.source.slice(start, removeCount);
+    var removed = this.source.slice(start, start + removeCount);
     this.source.splice(start, removeCount, ...newItems);
     this.length = this.source.length; // reset length
-    // TODO - emit change here
+
+    // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/observe
+    var changes = [];
+
+    changes.push({
+      type: "splice",
+      object: this,
+      index: start,
+      removed: removed,
+      addedCount: newItems.length
+    });
+
+    this.emit("change", changes);
+
     return this;
   }
 }
