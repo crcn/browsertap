@@ -52,7 +52,7 @@ class Peer extends Model {
    */
 
   async _setRemoteDescription(answer) {
-    var result = (await this.bus.execute({ name: "setRemoteAnswer", answer: {
+    var result = (await this.bus.execute({ action: "setRemoteAnswer", answer: {
       type: answer.type,
       sdp : answer.sdp
     }, query: { id: this.id }}).read()).value;

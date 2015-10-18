@@ -2,7 +2,7 @@
 class Form {
   async submit() {
     return (await this.bus.execute({
-      name: this.name,
+      action: this.name,
       data: this
     }).read()).value;
   }

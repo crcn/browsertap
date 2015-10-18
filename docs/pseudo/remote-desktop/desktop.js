@@ -8,7 +8,7 @@ var provisioner = new GroupProvisioner(
   new LocalVMS(new VirtualBox(path))
 );
 
-var server = sift({ name: "windows", version: "10", arch: "x64" }, yield aws.getServers());
+var server = sift({ action: "windows", version: "10", arch: "x64" }, yield aws.getServers());
 
 // start & wait until booted
 yield server.start();
@@ -17,10 +17,9 @@ yield server.start();
 var desktop = new Desktop(server);
 
 // signal webrtc launch
-yield desktop.launch({ name: "chrome", version: "36", args: [] });
+yield desktop.launch({ action: "chrome", version: "36", args: [] });
 
 yield desktop.getScreens();
 
 desktop.sendKeyboardEvent();
 desktop.sendMouseEvent();
-

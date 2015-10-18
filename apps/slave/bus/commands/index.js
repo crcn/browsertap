@@ -16,7 +16,7 @@ export function create(app, bus) {
   }, bus);
 
   function _initialize(operation) {
-    app.bus.execute({ name: "spawnDesktopController" });
+    app.bus.execute({ action: "spawnDesktopController" });
   }
 
   function _spawnDesktopController(operation) {

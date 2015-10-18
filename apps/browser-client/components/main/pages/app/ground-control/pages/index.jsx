@@ -52,11 +52,11 @@ var ops = [
 ];
 
 var Cell = React.createClass({
-  redirect: function() { 
+  redirect: function() {
     if (this.props.cell.click) return this.props.cell.click(this.props);
     this.props.app.router.setQuery({
       showControls: this.props.cell.name
-    }); 
+    });
   },
   render: function() {
     return <div className="cell" onClick={this.redirect}>
@@ -68,17 +68,17 @@ var Cell = React.createClass({
 var Options = React.createClass({
   render: function() {
     var elements = [];
- 
+
     for (var op of ops) {
       elements.push(<Cell cell={op} {...this.props} />);
     }
- 
+
     var selected = sift({ name: this.props.location.query.showControls }, ops).shift();
- 
+
     return <div className="pages">
       { selected ? React.createElement(selected.componentClass, Object.assign({}, this.props)) : elements }
     </div>;
-  } 
+  }
 });
 
 export default Options;

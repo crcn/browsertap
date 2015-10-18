@@ -38,7 +38,7 @@ export default function(app, mdns) {
       var item = _deser(service);
       app.logger.info("mdns service %s update", browseName);
       await app.bus.execute({
-        name: "upsert",
+        action: "upsert",
         collection: collection,
         query: { _id: item._id },
         data: item
@@ -48,7 +48,7 @@ export default function(app, mdns) {
     browser.on("serviceDown", function(service) {
       app.logger.info("mdns service %s down", browseName);
       app.bus.execute({
-        name: "remove",
+        action: "remove",
         collection: collection,
         query: { _id: _deser(service)._id }
       });

@@ -9,15 +9,15 @@ export default function(bus, collection, options) {
   }, options);
 
   var spy = bus.execute({
-    name: "spy",
-    filter: sift({ name: /insert|remove|update/, collection: collection })
+    action: "spy",
+    filter: sift({ action: /insert|remove|update/, collection: collection })
   });
 
   async function run() {
     var value;
     while({value} = await spy.read()) {
       if (!value) break;
-      switch(value.operation.name) {
+      switch(value.operation.action) {
         case "insert":
           await handlers.insert(value.operation.data);
           break;

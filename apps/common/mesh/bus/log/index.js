@@ -13,7 +13,7 @@ export default {
     if (!bus) bus = NoopBus.create();
 
     bus = AcceptBus.create(
-      sift({ name: "log" }),
+      sift({ action: "log" }),
       ParallelBus.create(busFactories.map(function(busClass) {
         return busClass.create(app, bus);
       })),

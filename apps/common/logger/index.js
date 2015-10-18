@@ -44,7 +44,7 @@ Object.keys(LogLevels).forEach(function(key) {
       this.bus.execute({
 
         // blast off into the either. Enable any handler for logs.
-        name: "log",
+        action: "log",
 
         // add english term to log
         type: type,

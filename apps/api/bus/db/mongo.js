@@ -23,6 +23,8 @@ export default {
     return {
       execute: function(operation) {
 
+        operation.action = operation.name;
+
         _fixMongoids(operation.data);
         _fixMongoids(operation.query);
 

@@ -11,9 +11,9 @@ export default {
 
       initialize: CommandBus.create({
         execute: async function() {
-          await app.bus.execute({ name: "syncMachines" }).read();
-          await app.bus.execute({ name: "syncWindows"  }).read();
-          // await app.bus.execute({ name: "insert", collection: "virtWindows", data: { width: 500, height: 400, title: "something" } });
+          await app.bus.execute({ action: "syncMachines" }).read();
+          await app.bus.execute({ action: "syncWindows"  }).read();
+          // await app.bus.execute({ action: "insert", collection: "virtWindows", data: { width: 500, height: 400, title: "something" } });
         }
       }),
 

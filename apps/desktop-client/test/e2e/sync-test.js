@@ -21,13 +21,13 @@ describe(__filename + "#", function() {
 
     var slave = new MockSlave({
       bus: AcceptBus.create(sift({
-        name: "load",
+        action: "load",
         collection: "virtWindows"
       }), BufferedBus.create(void 0, [{width:100,height:100,title:"abba"}, {width:100,height:100,title:"baab"}]))
     });
 
     await slave.listen(await findOpenPort());
-    await app.bus.execute({ name: "insert", collection: "servers", data: {
+    await app.bus.execute({ action: "insert", collection: "servers", data: {
       host: "127.0.0.1",
       port: slave.port
     }}).read();
@@ -35,7 +35,7 @@ describe(__filename + "#", function() {
     await testUtils.timeout(100);
 
     var virtWindows = await readAll(app.bus.execute({
-      name: "load",
+      action: "load",
       collection: "virtWindows",
       multi: true
     }));
@@ -47,7 +47,7 @@ describe(__filename + "#", function() {
 
   xit("opens a new window for each inserted virtual window", async function() {
     var openWindowOps = [];
-    app.bus = AcceptBus.create(sift({ name: "openWindow" }), {
+    app.bus = AcceptBus.create(sift({ action: "openWindow" }), {
         execute: function(operation) {
           openWindowOps.push(operation);
           return EmptyResponse.create();
@@ -55,7 +55,7 @@ describe(__filename + "#", function() {
       },
       app.bus
     );
-    await app.bus.execute({ name: "insert", collection: "virtWindows", data: { width: 100, height: 100 }}).read();
+    await app.bus.execute({ action: "insert", collection: "virtWindows", data: { width: 100, height: 100 }}).read();
     await testUtils.timeout(200);
     expect(openWindowOps.length).to.be(1);
   });

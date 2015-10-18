@@ -21,7 +21,7 @@ class MemoryCollection {
   }
 
   execute(operation) {
-    return this[operation.name](operation);
+    return this[operation.action](operation);
   }
 
   insert(operation) {
@@ -85,9 +85,9 @@ class MemoryBus extends Bus {
     this._db = new MemoryDatabase(initialData);
   }
   execute(operation) {
-    return /insert|load|remove|update/.test(operation.name)      ?
+    return /insert|load|remove|update/.test(operation.action)    ?
     this._db.collection(operation.collection).execute(operation) :
-    new EmptyResponse();
+    EmptyResponse.create();
   }
 }
 

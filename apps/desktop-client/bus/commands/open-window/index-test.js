@@ -21,7 +21,7 @@ describe(__filename + "#", function() {
       }
     }
 
-    await app.bus.execute({ name: "openWindow", width: 100, height: 100 });
+    await app.bus.execute({ action: "openWindow", width: 100, height: 100 });
     await testUtils.timeout(10);
     expect(win.width).to.be(100);
     expect(win.height).to.be(100);
@@ -38,7 +38,7 @@ describe(__filename + "#", function() {
       }
     }
 
-    await app.bus.execute({ name: "openWindow", width: 100, height: 100, componentName: "test" }).read();
+    await app.bus.execute({ action: "openWindow", width: 100, height: 100, componentName: "test" }).read();
     await testUtils.timeout(0);
     expect(win.url).to.contain("componentName%22%3A%22test%22%7D");
   });

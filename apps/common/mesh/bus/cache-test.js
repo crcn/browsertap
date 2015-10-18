@@ -19,7 +19,7 @@ describe(__filename + "#", function() {
 
     var bus3 = CacheBus.create(bus1, bus2);
 
-    await bus3.execute({ name: "load", collection: "items", multi: true }).read();
-    expect((await readAll(bus1.execute({ name: "load", collection: "items", multi: true }))).length).to.be(2);
+    await bus3.execute({ action: "load", collection: "items", multi: true }).read();
+    expect((await readAll(bus1.execute({ action: "load", collection: "items", multi: true }))).length).to.be(2);
   });
 });

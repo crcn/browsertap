@@ -30,7 +30,7 @@ module.exports = function(env) {
       jobs: [
 
         // charge users once a month
-        { cron: "0 0 1 * *", name: "chargeUsersForUsage" }
+        { cron: "0 0 1 * *", action: "chargeUsersForUsage" }
       ],
       directories: {
         public: path.normalize(__dirname + "/../../public")

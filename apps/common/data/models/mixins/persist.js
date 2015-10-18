@@ -80,7 +80,7 @@ export default function(collectionName) {
     fetch(operationName, properties) {
       return this.bus.execute(Object.assign({
         target     : this,
-        name       : operationName,
+        action     : operationName,
         collection : collectionName
       }, properties));
     },
@@ -94,7 +94,7 @@ export default function(collectionName) {
       if (value) {
         this.setProperties(this.schema.coerce(Object.assign({}, this, value)));
       }
-      
+
       return value;
     }
   });
@@ -105,7 +105,7 @@ export default function(collectionName) {
     async function _find(multi, bus, query) {
 
       var response = bus.execute({
-        name       : "load",
+        action     : "load",
         multi      : multi,
         query      : query,
         collection : collectionName

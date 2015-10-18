@@ -24,13 +24,13 @@ export default function(app) {
 
   })
 
-    app.bus.execute({ name: "tail"})
+    app.bus.execute({ action: "tail"})
     .pipeTo(new Writable(
 
     ));
     */
-    // app.bus.execute({ name: "tail" }).pipeTo(new Writable(new CollectionSink(new Collection())))
-    // app.bus.execute({ name: "tail" }).pipeTo()
+    // app.bus.execute({ action: "tail" }).pipeTo(new Writable(new CollectionSink(new Collection())))
+    // app.bus.execute({ action: "tail" }).pipeTo()
 
     syncDbCollection(
       app.bus,
@@ -72,14 +72,14 @@ export default function(app) {
     }), bus));
 
     // TODO - VirtWindow.all(bus)
-    var response = bus.execute({ name: "load", collection: "virtWindows", multi: true });
+    var response = bus.execute({ action: "load", collection: "virtWindows", multi: true });
     var chunk;
     while(chunk = await response.read()) {
       if (chunk.done) break;
       if (chunk.value.minimized) continue;
       // TODO = yield new VirtWindow(chunk.value).insert();
       chunk.value.owner = { _id: machine._id };
-      await app.bus.execute({ name: "insert", collection: "virtWindows", data: chunk.value }).read();
+      await app.bus.execute({ action: "insert", collection: "virtWindows", data: chunk.value }).read();
       // break;
     }
   }

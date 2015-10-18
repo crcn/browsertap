@@ -66,9 +66,10 @@ class Organization extends Model {
   /**
    */
 
+   // TODO - simplify 
   *getUsage() {
     return new Usage(Object.assign({ bus: this.bus }, yield this.bus.execute({
-      name: "getUsage",
+      action: "getUsage",
       organization: this
     })));
   }

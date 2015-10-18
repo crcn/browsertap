@@ -1,13 +1,12 @@
 import mixin from "common/utils/class/mixin";
 import httperr from "httperr"
-import readAll from "common/mesh/utils/read-all";
 
 export default function(formName, modelClass) {
   return mixin({
     submit: async function() {
 
       var data = (await this.bus.execute({
-        name: formName,
+        action: formName,
         data: this
       }).read()).value;
 

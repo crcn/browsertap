@@ -9,13 +9,13 @@ describe(__filename + "#", function() {
     bus     = SpyBus.create(bus);
 
     async function runSpy() {
-      var sp = bus.execute({ name: "spy" });
+      var sp = bus.execute({ action: "spy" });
       expect((await sp.read()).value.response).to.be.an(Response);
     }
 
     var p = runSpy();
 
-    bus.execute({ name: "doSomething" });
+    bus.execute({ action: "doSomething" });
 
     return p;
   });
@@ -25,14 +25,14 @@ describe(__filename + "#", function() {
     var bus  = SpyBus.create(bus1);
 
     async function run() {
-      var sp = bus.execute({ name: "spy", filter: sift({ name: "op2" }) });
-      expect((await sp.read()).value.operation.name).to.be("op2");
+      var sp = bus.execute({ action: "spy", filter: sift({ action: "op2" }) });
+      expect((await sp.read()).value.operation.action).to.be("op2");
     }
 
     var ret = run();
 
-    bus.execute({ name: "op1" });
-    bus.execute({ name: "op2" });
+    bus.execute({ action: "op1" });
+    bus.execute({ action: "op2" });
 
     return ret;
   });

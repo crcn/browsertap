@@ -45,7 +45,7 @@ describe(__filename + "#", function() {
 
       try {
         await bus.execute({
-          name: "register",
+          action: "register",
           data: { emailAddress: "a@b.com" }
         }).read();
       } catch(e) {

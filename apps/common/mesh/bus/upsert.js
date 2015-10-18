@@ -4,17 +4,17 @@ import sift from "sift";
 export default {
   create: function(bus) {
 
-    return AcceptBus.create(sift({ name: "upsert" }), {
+    return AcceptBus.create(sift({ action: "upsert" }), {
       execute: function(operation) {
         return Response.create(async function(writable) {
           var chunk = await bus.execute({
-            name: "load",
+            action: "load",
             collection: operation.collection,
             query: operation.query
           }).read();
 
           writable.write((await bus.execute({
-            name: !chunk.done ? "update" : "insert",
+            action: !chunk.done ? "update" : "insert",
             collection: operation.collection,
             query: operation.query,
             data: operation.data

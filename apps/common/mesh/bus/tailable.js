@@ -20,7 +20,7 @@ class TailableBus extends Bus {
    */
 
   execute(operation) {
-    if (operation.name === "tail") {
+    if (operation.action === "tail") {
       return Response.create((writable) => {
         this._tails.push(writable);
         writable.filter = operation.filter ? sift(operation.filter) : function() {

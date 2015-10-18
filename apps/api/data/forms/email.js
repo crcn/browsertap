@@ -32,7 +32,7 @@ class ForgotPasswordForm {
 
   async submit() {
     return (await this.bus.execute({
-      name: "sendEmail",
+      action: "sendEmail",
       data: this
     }).read()).value;
   }

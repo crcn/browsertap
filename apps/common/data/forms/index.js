@@ -8,7 +8,7 @@ export default {
    */
 
   getSessionUser: async function(bus) {
-    return new User(Object.assign({ bus: bus }, (await bus.execute({ name: "getSessionUser" }).read()).value));
+    return new User(Object.assign({ bus: bus }, (await bus.execute({ action: "getSessionUser" }).read()).value));
   },
 
   /**
@@ -22,6 +22,6 @@ export default {
    */
 
   logout: async function(bus) {
-    return (await bus.execute({ name: "logout" }).read()).value;
+    return (await bus.execute({ action: "logout" }).read()).value;
   }
 };

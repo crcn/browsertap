@@ -4,9 +4,9 @@ export default {
   create: function(app, bus) {
     return {
       execute: function(operation) {
-        if (operation.name !== "log") {
+        if (operation.action !== "log") {
           app.logger.verbose("bus ", {
-            name: operation.name,
+            action: operation.action,
             query: operation.query
           });
         }

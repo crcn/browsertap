@@ -8,7 +8,7 @@ class SpyBus extends Bus {
   }
   execute(operation) {
 
-    if (operation.name === "spy") {
+    if (operation.action === "spy") {
       return Response.create((writable) => {
         writable.operation = operation;
         writable.then(() => {

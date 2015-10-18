@@ -9,7 +9,7 @@ export default {
     var _i = 0;
 
     var bus = AcceptBus.create(
-      sift({ name: "insert" }),
+      sift({ action: "insert" }),
       {
         execute: function(operation) {
           operation.data = Object.assign({ _id: createId() }, operation.data);

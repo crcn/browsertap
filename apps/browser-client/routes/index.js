@@ -66,7 +66,7 @@ module.exports = function(app) {
   router.addRoute("invite", "/invite/:shortcode", async function(location) {
 
     var data = Object.assign({ bus: app.bus }, (await app.bus.execute({
-      name: "getInviteeFromShortCode",
+      action: "getInviteeFromShortCode",
       shortcode: location.params.shortcode
     }).read()).value);
 

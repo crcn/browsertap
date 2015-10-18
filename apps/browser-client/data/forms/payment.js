@@ -50,7 +50,7 @@ class PaymentForm {
     }.bind(this));
 
     return await this.bus.execute({
-      name: "addStripeCustomer",
+      action: "addStripeCustomer",
       data: {
         organization: this.organization,
         customer: result

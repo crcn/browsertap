@@ -18,7 +18,7 @@ export default {
     var busClass = dbs[type];
 
     var bus = AcceptBus.create(
-      sift({ name: /insert|update|remove|load/ }),
+      sift({ action: /insert|update|remove|load/ }),
       busClass.create(app),
       bus
     )

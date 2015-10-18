@@ -7,7 +7,7 @@ class CommandsBus extends Bus {
     this._bus      = bus || NoopBus.create();
   }
   execute(operation) {
-    return (this._commands[operation.name] || this._bus).execute(operation);
+    return (this._commands[operation.action] || this._bus).execute(operation);
   }
 }
 

@@ -23,13 +23,13 @@ describe(__filename + "#", function() {
 
     var slave = new MockSlave({
       bus: AcceptBus.create(sift({
-        name: "load",
+        action: "load",
         collection: "virtWindows"
       }), BufferedBus.create(void 0, [{width:100,height:100,title:"abba"}, {width:100,height:100,title:"baab"}]))
     });
 
     await slave.listen(await findOpenPort());
-    await app.bus.execute({ name: "insert", collection: "servers", data: {
+    await app.bus.execute({ action: "insert", collection: "servers", data: {
       host: "127.0.0.1",
       port: slave.port
     }}).read();
@@ -37,7 +37,7 @@ describe(__filename + "#", function() {
     await testUtils.timeout(100);
 
     var virtWindows = await readAll(app.bus.execute({
-      name: "load",
+      action: "load",
       collection: "virtWindows",
       multi: true
     }));

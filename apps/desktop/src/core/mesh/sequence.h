@@ -52,14 +52,14 @@ namespace mesh {
      */
 
     Response* execute(Request* request) {
-      
+
       std::vector<Response*> responses;
 
       for (int i = 0, n = _busses.size(); i < n; i++) {
         responses.push_back(_busses.at(i)->execute(request));
       }
 
-      return SequenceBus.createResponse(responses);
+      return new SequenceBusResponse(responses);
     }
 
   private:

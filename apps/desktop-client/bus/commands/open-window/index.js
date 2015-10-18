@@ -28,7 +28,7 @@ export default function(app) {
     })));
 
     async function _spyToIPC(bus) {
-      var spy = bus.execute({ name: "spy" });
+      var spy = bus.execute({ action: "spy" });
       var ipc = IPCBus.create(require("ipc"), win.webContents, AttachDefaultsBus.create({ remote: true }, bus));
       var chunk;
       while(chunk = await spy.read()) {

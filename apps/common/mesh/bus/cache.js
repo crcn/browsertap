@@ -4,7 +4,7 @@ import sift from "sift";
 export default {
 
   create: function(localBus, remoteBus) {
-    return AcceptBus.create(sift({ name: "load" }), FallbackBus.create([
+    return AcceptBus.create(sift({ action: "load" }), FallbackBus.create([
       localBus,
       {
         execute: function(operation) {
@@ -16,7 +16,7 @@ export default {
               while({value, done} = await resp.read()) {
                 if (done) break;
                 writable.write(value);
-                await localBus.execute({ name: "insert", collection: operation.collection, data: value }).read();
+                await localBus.execute({ action: "insert", collection: operation.collection, data: value }).read();
               }
               writable.close();
             } catch(e) {

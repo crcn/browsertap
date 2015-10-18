@@ -17,7 +17,7 @@ async function _createVerifiedUser(app) {
   };
 
   var user = new User(Object.assign({ bus: app.bus }, (await app.bus.execute({
-    name: "register",
+    action: "register",
     data: data}).read()).value));
 
   await user.insert();
