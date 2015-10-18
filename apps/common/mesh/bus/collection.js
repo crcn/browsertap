@@ -64,7 +64,7 @@ class CollectionBus extends Bus {
 
   _load(operation, writable) {
     this._find(operation).forEach((item) => {
-      writable.write(item);
+      writable.write(cloneObject(item));
     });
     writable.close();
   }
