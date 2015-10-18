@@ -1,9 +1,8 @@
 import CommandBus from "common/mesh/bus/command";
 import sift from "sift";
 import WebSocketBus from "common/mesh/bus/websocket";
-import syncDbCollection from "common/mesh/utils/sync-db-collection";
+import syncDbCollection from "common/mesh/utils/sync-collection";
 import { AcceptBus, AttachDefaultsBus } from "mesh";
-
 
 export default function(app) {
 
@@ -31,6 +30,8 @@ export default function(app) {
     ));
     */
     // app.bus.execute({ name: "tail" }).pipeTo(new Writable(new CollectionSink(new Collection())))
+    // app.bus.execute({ name: "tail" }).pipeTo()
+
     syncDbCollection(
       app.bus,
       "servers",
@@ -38,6 +39,10 @@ export default function(app) {
         insert: _insert
       }
     )
+
+    /*
+
+    */
   }
 
   var _connections = {
@@ -45,6 +50,11 @@ export default function(app) {
   };
 
   async function _insert(machine) {
+
+    // TODO
+    // var m = new Machine({
+    //   bus: WebSocketBus.create
+    // })
 
     var host = "ws://" + machine.host + ":" + machine.port;
 
@@ -58,7 +68,7 @@ export default function(app) {
     // add the remove bus.
     // TODO - this needs to be removed
     app.remoteBusses.push(AcceptBus.create(sift({
-      "target.machine._id": machine._id
+      "target.owner._id": machine._id
     }), bus));
 
     // TODO - VirtWindow.all(bus)
@@ -68,7 +78,7 @@ export default function(app) {
       if (chunk.done) break;
       if (chunk.value.minimized) continue;
       // TODO = yield new VirtWindow(chunk.value).insert();
-      chunk.value.machine = { _id: machine._id };
+      chunk.value.owner = { _id: machine._id };
       await app.bus.execute({ name: "insert", collection: "virtWindows", data: chunk.value }).read();
       // break;
     }

@@ -1,6 +1,6 @@
 import mixin from "common/utils/class/mixin";
 import httperr from "httperr"
-import readAll from "common/mesh/read-all";
+import readAll from "common/mesh/utils/read-all";
 
 export default function(formName, modelClass) {
   return mixin({

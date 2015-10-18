@@ -3,6 +3,7 @@ import application from "../../application";
 import { AttachDefaultsBus } from "mesh";
 import fixtures from "../fixtures/index";
 var React  = require("react/addons");
+import { timeout } from "common/test/utils";
 
 module.exports = {
   createFakeApp: async function(properties) {

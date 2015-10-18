@@ -1,6 +1,6 @@
 import MemoryBus from "./memory";
 import expect    from "expect.js";
-import readAll   from "common/mesh/read-all";
+import readAll   from "common/mesh/utils/read-all";
 
 describe(__filename + "#", function() {
   it("can be created", function() {

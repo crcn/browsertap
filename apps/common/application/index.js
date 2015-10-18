@@ -4,7 +4,7 @@ import Logger from "common/logger";
 import catchError from "./plugins/catch-errors";
 import CommonBus from "common/mesh/bus/log";
 import LogBus    from "common/mesh/bus/log";
-import readAll from "common/mesh/read-all";
+import readAll from "common/mesh/utils/read-all";
 
 /**
  */
