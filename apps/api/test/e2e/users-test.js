@@ -1,7 +1,6 @@
 import expect             from "expect.js";
 import { AttachDefaultsBus } from "mesh";
 import sift               from "sift";
-import co                 from "co";
 import User               from "common/data/models/user";
 import SignupForm         from "common/data/forms/signup";
 import LoginForm          from "common/data/forms/login";
@@ -37,7 +36,7 @@ describe(__filename + "#", function() {
 
   beforeEach(function() {
     session = apiApp.session;
-    apiApp.bus = bus = new AttachDefaultsBus({ app: apiApp, public: true }, apiApp.bus);
+    apiApp.bus = bus = AttachDefaultsBus.create({ app: apiApp, public: true }, apiApp.bus);
   });
 
   describe("insert# ", function() {

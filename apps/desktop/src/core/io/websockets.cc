@@ -202,7 +202,7 @@ static int callback_http(struct libwebsocket_context* _this,
           return NULL;
         }
 
-        app->bus = new WebSocketBus(app->bus, this);
+        app->bus = WebSocketBus.create(app->bus, this);
 
         // infinite loop, to end this server send SIGTERM. (CTRL+C)
         while (1) {

@@ -16,7 +16,7 @@ module.exports = {
       },
       apiApp: apiApp,
       element: document.createElement("div"),
-      bus: new AttachDefaultsBus({ public: true, session: session }, apiApp.bus),
+      bus: AttachDefaultsBus.create({ public: true, session: session }, apiApp.bus),
       debug: true,
       config: {
         beta: false,

@@ -1,4 +1,4 @@
-import { Bus, AcceptBus, AsyncResponse, EmptyResponse } from "mesh";
+import { Bus, AcceptBus, Response, EmptyResponse, BufferedResponse } from "mesh";
 import sift             from "sift";
 
 function _clone(data) {
@@ -6,12 +6,7 @@ function _clone(data) {
 }
 
 function _response(results) {
-
-  // TODO - yield write here
-  var resp = new AsyncResponse();
-  results.forEach(resp.write.bind(resp));
-  resp.end();
-  return resp;
+  return BufferedResponse.create(void 0, results);
 }
 
 function _oneOrMany(operation, items) {

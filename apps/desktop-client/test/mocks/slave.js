@@ -5,7 +5,7 @@ var WebSocketServer = ws.server;
 
 class MockSlave {
   constructor({bus}) {
-    this.bus = bus || new NoopBus();
+    this.bus = bus || NoopBus.create();
   }
   async listen(port) {
     this.port = port;

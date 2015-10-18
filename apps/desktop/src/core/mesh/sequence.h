@@ -59,7 +59,7 @@ namespace mesh {
         responses.push_back(_busses.at(i)->execute(request));
       }
 
-      return new SequenceBusResponse(responses);
+      return SequenceBus.createResponse(responses);
     }
 
   private:

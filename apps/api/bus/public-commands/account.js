@@ -25,7 +25,7 @@ export default function(app, bus) {
     /**
      */
 
-    register: new CommandBus({
+    register: CommandBus.create({
       execute: async function(operation) {
 
         if (app.config.beta) {
@@ -77,7 +77,7 @@ export default function(app, bus) {
 
         // login to create the session and other things
         var loginForm = new LoginForm({
-          bus          : new AttachDefaultsBus({ session: operation.session }, app.bus),
+          bus          : AttachDefaultsBus.create({ session: operation.session }, app.bus),
           emailAddress : form.emailAddress,
           password     : form.password
         });
@@ -90,7 +90,7 @@ export default function(app, bus) {
      * logs the user in
      */
 
-    login: new CommandBus({
+    login: CommandBus.create({
       execute: async function(operation) {
 
         var form = new LoginForm(Object.assign({ bus: bus }, operation.data));
@@ -116,7 +116,7 @@ export default function(app, bus) {
      * logs the user in
      */
 
-    logout: new CommandBus({
+    logout: CommandBus.create({
       execute: function*(operation) {
         operation.session.userId = void 0;
       }
@@ -125,7 +125,7 @@ export default function(app, bus) {
     /**
      */
 
-    forgotPassword: new CommandBus({
+    forgotPassword: CommandBus.create({
       execute: async function(operation) {
         var form = new ForgotPasswordForm(Object.assign({ bus: bus }, operation.data));
         var user = await User.findOne(bus, { emailAddress: form.emailAddress.valueOf() });
@@ -155,7 +155,7 @@ export default function(app, bus) {
     /**
      */
 
-    getSessionUser: new CommandBus({
+    getSessionUser: CommandBus.create({
       auth: true,
       execute: async function(operation) {
         return operation.user.toPublic();
@@ -165,7 +165,7 @@ export default function(app, bus) {
     /**
      */
 
-    confirmAccount: new CommandBus({
+    confirmAccount: CommandBus.create({
       execute: async function(operation) {
         var form  = new ConfirmAccountForm(Object.assign({ bus: bus }, operation.data));
         var token = await Token.findOne(bus, { _id: String(form.token._id) });
@@ -185,7 +185,7 @@ export default function(app, bus) {
     /**
      */
 
-    resetPassword: new CommandBus({
+    resetPassword: CommandBus.create({
       execute: async function(operation) {
         var form = new ResetPasswordForm(Object.assign({ bus: bus }, operation.data));
 
@@ -217,7 +217,7 @@ export default function(app, bus) {
     /**
      */
 
-    updateUser: new CommandBus({
+    updateUser: CommandBus.create({
       auth: true,
       execute: async function(operation) {
         // TODO

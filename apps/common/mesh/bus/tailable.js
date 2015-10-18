@@ -1,4 +1,4 @@
-import { Bus, AsyncResponse } from "mesh";
+import { Bus, Response } from "mesh";
 import sift from "sift";
 
 /**
@@ -21,7 +21,7 @@ class TailableBus extends Bus {
 
   execute(operation) {
     if (operation.name === "tail") {
-      return new AsyncResponse((writable) => {
+      return Response.create((writable) => {
         this._tails.push(writable);
         writable.filter = operation.filter ? sift(operation.filter) : function() {
           return true;

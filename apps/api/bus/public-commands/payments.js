@@ -15,7 +15,7 @@ export default function(app, bus) {
     /**
      */
 
-    addStripeCustomer: new CommandBus({
+    addStripeCustomer: CommandBus.create({
       auth: true,
       execute: async function(operation) {
 

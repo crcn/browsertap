@@ -6,17 +6,19 @@ import SpyBus from "common/mesh/bus/spy";
 import UpsertBus from "common/mesh/bus/upsert";
 import IPCBus from "./drivers/ipc";
 
-export default function(app, bus) {
-  if (!bus) bus = new NoopBus();
+export default {
+  create: function(app, bus) {
+    if (!bus) bus = NoopBus.create();
 
-  app.remoteBusses = [];
+    app.remoteBusses = [];
 
-  // where the stuff is stored
-  bus = new MemoryBus();
-  bus = new InternalCommandsBus(app, bus);
-  bus = new FallbackBus([new FallbackBus(app.remoteBusses), bus]);
-  bus = new SpyBus(bus);
-  bus = new UpsertBus(bus);
+    // where the stuff is stored
+    bus = MemoryBus.create();
+    bus = InternalCommandsBus.create(app, bus);
+    bus = FallbackBus.create([FallbackBus.create(app.remoteBusses), bus]);
+    bus = SpyBus.create(bus);
+    bus = UpsertBus.create(bus);
 
-  this.execute = bus.execute.bind(bus);
+    return bus;
+  }
 }

@@ -19,11 +19,11 @@ namespace app {
     // here will go back to the original app bus.
     app->bus = (new mesh::CommandsBus(app->bus))
     ->add("ping", new mesh::FnBus(&execPong))
-    ->add("find", new AppFnBus(app, &execFind))
-    ->add("hydrate", new AppFnBus(app, &execHydrate))
-    ->add("setRemoteAnswer", new AppFnBus(app, &execSetRemoteAnswer))
-    ->add("startWindowSession", new AppFnBus(app, &execStartWindowSession))
-    ->add("load", new AppFnBus(app, &execFind))
+    ->add("find", AppFnBus.create(app, &execFind))
+    ->add("hydrate", AppFnBus.create(app, &execHydrate))
+    ->add("setRemoteAnswer", AppFnBus.create(app, &execSetRemoteAnswer))
+    ->add("startWindowSession", AppFnBus.create(app, &execStartWindowSession))
+    ->add("load", AppFnBus.create(app, &execFind))
     ; // coma here in case other commands are added
   }
 
@@ -131,7 +131,7 @@ namespace app {
 
     for (int i = 0, n = results.size(); i < n; i++) {
       Json::Value v = results.at(i)->toJson();
-      
+
       // TODO - memory leak here  - maybe used scoped pointer instead
       response->write(new core::JsonChunk(v));
     }

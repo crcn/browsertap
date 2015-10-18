@@ -1,6 +1,6 @@
 import httperr from "httperr";
 import User from "common/data/models/user";
-import { Bus, AsyncResponse }  from "mesh";
+import { Bus, Response }  from "mesh";
 
 class CommandBus extends Bus {
   constructor({ auth, execute }) {
@@ -9,20 +9,21 @@ class CommandBus extends Bus {
     this._execute = execute;
   }
   execute(operation) {
-    return new AsyncResponse(async function(writable) {
+    return Response.create(async function(writable) {
 
       if (this._auth === true) {
         if (!operation.session.userId) {
-          return writable.error(new httperr.Unauthorized("must be logged in for this"));
+          return writable.abort(new httperr.Unauthorized("must be logged in for this"));
         }
 
         operation.user = await User.findOne(operation.app.bus, { _id: String(operation.session.userId) });
       }
 
       try {
-        writable.end(await this._execute(operation));
+        writable.write(await this._execute(operation));
+        writable.close();
       } catch(e) {
-        writable.error(e);
+        writable.abort(e);
       }
     }.bind(this));
   }

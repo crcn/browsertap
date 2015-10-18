@@ -6,7 +6,7 @@ import sift             from "sift";
 describe(__filename + "#", function() {
   it("can spy on a bus that does not emit anything", async function() {
     var bus = NoopBus();
-    bus     = new SpyBus(bus);
+    bus     = SpyBus.create(bus);
 
     async function runSpy() {
       var sp = bus.execute({ name: "spy" });
@@ -21,8 +21,8 @@ describe(__filename + "#", function() {
   });
 
   it("can add a filter to a spy", async function() {
-    var bus1 = new NoopBus();
-    var bus  = new SpyBus(bus1);
+    var bus1 = NoopBus.create();
+    var bus  = SpyBus.create(bus1);
 
     async function run() {
       var sp = bus.execute({ name: "spy", filter: sift({ name: "op2" }) });

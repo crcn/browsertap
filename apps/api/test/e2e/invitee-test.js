@@ -1,7 +1,6 @@
 import expect            from "expect.js";
 import RequestInviteForm from "common/data/forms/request-invite";
 import SignupForm        from "common/data/forms/signup"
-import co                from "co"
 import testUtils         from "api/test/utils";
 
 describe(__filename + "#", function() {

@@ -1,20 +1,24 @@
 import loggly from "loggly";
 import { NoopBus, EmptyResponse } from "mesh";
 
-module.exports = function(app) {
+export default {
+  create: function(app) {
 
-  var config = app.get("config.loggly");
+    var config = app.get("config.loggly");
 
-  if (!config) return new NoopBus();
+    if (!config) return NoopBus.create();
 
-  var client = loggly.createClient(config);
+    var client = loggly.createClient(config);
 
-  this.execute = function(operation) {
+    return {
+      execute: function(operation) {
 
-    if (/warn|error/.test(operation.type)) {
-      client.log(operation);
+        if (/warn|error/.test(operation.type)) {
+          client.log(operation);
+        }
+
+        return EmptyResponse.create();
+      }
     }
-
-    return new EmptyResponse();
-  };
+  }
 };

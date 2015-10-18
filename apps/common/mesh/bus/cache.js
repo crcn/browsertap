@@ -1,30 +1,31 @@
-import { AcceptBus, FallbackBus, AsyncResponse } from "mesh";
+import { AcceptBus, FallbackBus, Response } from "mesh";
 import sift from "sift";
 
-export default function(localBus, remoteBus) {
+export default {
 
-  var bus = new AcceptBus(sift({ name: "load" }), new FallbackBus([
-    localBus,
-    {
-      execute: function(operation) {
-        return new AsyncResponse(async function(writable) {
-          try {
-            var resp = remoteBus.execute(operation);
-            var value;
-            var done;
-            while({value, done} = await resp.read()) {
-              if (done) break;
-              writable.write(value);
-              await localBus.execute({ name: "insert", collection: operation.collection, data: value }).read();
+  create: function(localBus, remoteBus) {
+    return AcceptBus.create(sift({ name: "load" }), FallbackBus.create([
+      localBus,
+      {
+        execute: function(operation) {
+          return new Response(async function(writable) {
+            try {
+              var resp = remoteBus.execute(operation);
+              var value;
+              var done;
+              while({value, done} = await resp.read()) {
+                if (done) break;
+                writable.write(value);
+                await localBus.execute({ name: "insert", collection: operation.collection, data: value }).read();
+              }
+              writable.close();
+            } catch(e) {
+              writable.abort(e);
             }
-            writable.end();
-          } catch(e) {
-            writable.error(e);
-          }
-        });
+          });
+        }
       }
-    }
-  ]), remoteBus);
+    ]), remoteBus);
 
-  this.execute = bus.execute.bind(bus);
-}
+  }
+};

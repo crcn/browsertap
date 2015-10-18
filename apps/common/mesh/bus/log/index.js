@@ -1,25 +1,25 @@
 import { AcceptBus, NoopBus, ParallelBus } from "mesh";
 import sift from "sift";
+import LogOperationsBus from "./operations";
 
 var busFactories = [
   require("./loggly"),
   require("./stdout")
 ];
 
-import LogOperationsBus from "./operations";
+export default {
+  create: function(app, bus) {
 
+    if (!bus) bus = NoopBus.create();
 
-module.exports = function(app, bus) {
+    bus = AcceptBus.create(
+      sift({ name: "log" }),
+      ParallelBus.create(busFactories.map(function(busClass) {
+        return busClass.create(app, bus);
+      })),
+      LogOperationsBus.create(app, bus)
+    )
 
-  if (!bus) bus = new NoopBus();
-
-  bus = new AcceptBus(
-    sift({ name: "log" }),
-    new ParallelBus(busFactories.map(function(busClass) {
-      return new busClass(app, bus);
-    })),
-    new LogOperationsBus(app, bus)
-  )
-
-  this.execute = bus.execute.bind(bus);
-};
+    return bus;
+  }
+}

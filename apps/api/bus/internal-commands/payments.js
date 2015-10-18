@@ -14,7 +14,7 @@ export default function(app, bus) {
     /**
      */
 
-    chargeUsersForUsage: new CommandBus({
+    chargeUsersForUsage: CommandBus.create({
       execute: async function(operation) {
         for (var customer of StripeCustomer.all(app.bus)) {
           var organization = Organization.findOne(app.bus, { _id: customer.organization._id });

@@ -23,7 +23,7 @@ export default function(app, bus) {
     /**
      */
 
-    requestInvite: new CommandBus({
+    requestInvite: CommandBus.create({
       execute: async function(operation) {
         var form = new RequestInviteForm(Object.assign({ bus: bus }, operation.data));
 
@@ -63,7 +63,7 @@ export default function(app, bus) {
     /**
      */
 
-    getInviteeFromShortCode: new CommandBus({
+    getInviteeFromShortCode: CommandBus.create({
       execute: async function(operation) {
         var invitee = await Invitee.findOne(bus, { shortcode: operation.shortcode });
         if (!invitee) throw new httperr.NotFound("inviteeNotFound");

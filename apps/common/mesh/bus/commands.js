@@ -4,7 +4,7 @@ class CommandsBus extends Bus {
   constructor(commands, bus) {
     super();
     this._commands = commands;
-    this._bus      = bus || new NoopBus();
+    this._bus      = bus || NoopBus.create();
   }
   execute(operation) {
     return (this._commands[operation.name] || this._bus).execute(operation);

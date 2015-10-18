@@ -40,7 +40,7 @@ class APIApplication extends BaseApplication {
    */
 
   initializePlugins() {
-    this.bus = new APIBus(this, this.bus);
+    this.bus = APIBus.create(this, this.bus);
     super.initializePlugins();
 
     if (this.debug !== true) {

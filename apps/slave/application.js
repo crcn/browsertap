@@ -13,7 +13,7 @@ class SlaveApplication extends BaseApplication {
    */
 
   initializePlugins() {
-    this.bus = new SlaveBus(this, this.bus);
+    this.bus = SlaveBus.create(this, this.bus);
     this.use(mdns);
     super.initializePlugins();
   }

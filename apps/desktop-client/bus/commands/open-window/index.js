@@ -5,7 +5,7 @@ import { AttachDefaultsBus } from "mesh";
 
 export default function(app) {
 
-  return new CommandBus({
+  return CommandBus.create({
     execute: openWindow
   });
 
@@ -29,7 +29,7 @@ export default function(app) {
 
     async function _spyToIPC(bus) {
       var spy = bus.execute({ name: "spy" });
-      var ipc = new IPCBus(require("ipc"), win.webContents, new AttachDefaultsBus({ remote: true }, bus));
+      var ipc = IPCBus.create(require("ipc"), win.webContents, AttachDefaultsBus.create({ remote: true }, bus));
       var chunk;
       while(chunk = await spy.read()) {
         if (chunk.value.operation.remote) continue;

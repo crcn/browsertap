@@ -7,13 +7,30 @@ import { AcceptBus, AttachDefaultsBus } from "mesh";
 
 export default function(app) {
 
-  return new CommandBus({
+  return CommandBus.create({
     execute: _execute
   });
 
   function _execute(operation) {
     app.logger.info("synchronizing machines");
 
+    /*
+
+    var bus = RoundRobinBus.create([
+      WrapBus.create((operation) => fetch(operation)),
+      WrapBus.create((operation) => fetch(operation))
+    ]);
+
+    bus.execute({
+
+  })
+
+    app.bus.execute({ name: "tail"})
+    .pipeTo(new Writable(
+
+    ));
+    */
+    // app.bus.execute({ name: "tail" }).pipeTo(new Writable(new CollectionSink(new Collection())))
     syncDbCollection(
       app.bus,
       "servers",
@@ -33,14 +50,14 @@ export default function(app) {
 
     app.logger.info("connect machine %s", host);
 
-    var bus = _connections = new WebSocketBus({
+    var bus = _connections = WebSocketBus.create({
       app: app,
       host: host
-    }, new AttachDefaultsBus({ machine: { _id: machine._id } }, app.bus));
+    }, AttachDefaultsBus.create({ machine: { _id: machine._id } }, app.bus));
 
     // add the remove bus.
     // TODO - this needs to be removed
-    app.remoteBusses.push(new AcceptBus(sift({
+    app.remoteBusses.push(AcceptBus.create(sift({
       "target.machine._id": machine._id
     }), bus));
 

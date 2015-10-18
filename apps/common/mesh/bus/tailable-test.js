@@ -1,6 +1,7 @@
 import TailableBus from "./tailable";
-import { NoopBus, AsyncResponse } from "mesh";
+import { NoopBus, Response } from "mesh";
 import expect from "expect.js";
+import { timeout } from "common/test/utils";
 
 describe(__filename + "#", function() {
   it("can tail a bus for operations", async function() {
@@ -11,8 +12,10 @@ describe(__filename + "#", function() {
       expect(chunk.value.name).to.be("op1");
       tailCount++;
     });
-    await bus.execute({ name: "op1" });
+    await bus.execute({ name: "op1" }).read();
+    await timeout(0);
     expect(tailCount).to.be(1);
+
   });
 
   it("only tails operations after execution", async function() {
@@ -20,11 +23,11 @@ describe(__filename + "#", function() {
     var tailCount = 0;
     var bus = {
       execute: function(operation) {
-        return new AsyncResponse(async function(writable) {
+        return new Response(async function(writable) {
           await writable.write("a");
           await writable.write("b");
           i++;
-          await writable.end();
+          await writable.close();
         });
       }
     };
@@ -54,16 +57,18 @@ describe(__filename + "#", function() {
       }
     }
 
-
     var tail = bus.execute({ name: "tail" });
     readTails(tail);
     expect(bus._tails.length).to.be(1);
 
-    await bus.execute({ name: "op" });
+    await bus.execute({ name: "op" }).read();
+    await timeout(0);
     expect(tailCount).to.be(1);
-    await bus.execute({ name: "op2" });
+    await bus.execute({ name: "op2" }).read();
+    await timeout(0);
     expect(tailCount).to.be(2);
-    await tail.end();
+    await tail.cancel();
+    await timeout(0);
     expect(bus._tails.length).to.be(0);
   });
 
@@ -82,10 +87,10 @@ describe(__filename + "#", function() {
 
     readTails(bus.execute({ name: "tail", filter: { name: /op1|op2/ } }));
 
-    await bus.execute({ name: "op1" });
-    await bus.execute({ name: "op2" });
-    await bus.execute({ name: "op3" });
-    await bus.execute({ name: "op4" });
+    await bus.execute({ name: "op1" }).read();
+    await bus.execute({ name: "op2" }).read();
+    await bus.execute({ name: "op3" }).read();
+    await bus.execute({ name: "op4" }).read();
     expect(tailCount).to.be(2);
   });
 });

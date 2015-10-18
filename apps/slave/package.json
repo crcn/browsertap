@@ -12,9 +12,5 @@
   "license": "ISC",
   "es6": true,
   "dependencies": {
-    "babel": "^5.8.23",
-    "common": "file:../common",
-    "lodash": "^3.10.1",
-    "mesh": "^5.0.2"
   }
 }

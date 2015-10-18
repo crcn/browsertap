@@ -5,7 +5,7 @@ import syncDbCollection from "common/mesh/utils/sync-db-collection";
 
 export default function(app) {
 
-  return new CommandBus({
+  return CommandBus.create({
     execute: execute
   });
 

@@ -22,10 +22,10 @@ describe(__filename + "#", function() {
   it("automatically synchronizes windows from a machine that was added", async function() {
 
     var slave = new MockSlave({
-      bus: new AcceptBus(sift({
+      bus: AcceptBus.create(sift({
         name: "load",
         collection: "virtWindows"
-      }), new BufferedBus(void 0, [{width:100,height:100,title:"abba"}, {width:100,height:100,title:"baab"}]))
+      }), BufferedBus.create(void 0, [{width:100,height:100,title:"abba"}, {width:100,height:100,title:"baab"}]))
     });
 
     await slave.listen(await findOpenPort());
@@ -49,7 +49,7 @@ describe(__filename + "#", function() {
 
   it("opens a new window for each inserted virtual window", async function() {
     var openWindowOps = [];
-    app.bus = new AcceptBus(sift({ name: "openWindow" }), {
+    app.bus = AcceptBus.create(sift({ name: "openWindow" }), {
         execute: function(operation) {
           openWindowOps.push(operation);
           return new EmptyResponse();

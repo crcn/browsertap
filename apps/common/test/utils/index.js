@@ -17,6 +17,13 @@ export default {
     }, props));
     ReactDOM.render(component, div);
     return div;
+  },
+
+  /**
+   */
+
+  timeout: function(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
 };

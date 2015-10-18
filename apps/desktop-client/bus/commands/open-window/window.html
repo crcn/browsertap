@@ -26,7 +26,7 @@
       var componentClass = require("desktop-client/components/" + config.componentName);
 
       // two-way communication between window and this
-      var bus = new IPCBus(require("ipc"), require("ipc"));
+      var bus = IPCBus.create(require("ipc"), require("ipc"));
 
       var props = Object.assign({}, config.props, {
         bus: bus

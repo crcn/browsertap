@@ -25,7 +25,7 @@ module.exports = {
 
     await app.initialize();
 
-    app.bus = new AttachDefaultsBus({ app: app, session: app.session }, app.bus);
+    app.bus = AttachDefaultsBus.create({ app: app, session: app.session }, app.bus);
 
     return app;
   }

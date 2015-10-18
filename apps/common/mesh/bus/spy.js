@@ -1,15 +1,15 @@
-import { Bus, NoopBus, AsyncResponse } from "mesh"
+import { Bus, NoopBus, Response } from "mesh"
 
 class SpyBus extends Bus {
   constructor(bus) {
     super();
-    this._bus = bus || new NoopBus();
+    this._bus = bus || NoopBus.create();
     this._spies = [];
   }
   execute(operation) {
 
     if (operation.name === "spy") {
-      return new AsyncResponse((writable) => {
+      return Response.create((writable) => {
         writable.operation = operation;
         writable.then(() => {
           this._spies.splice(this._spices.indexOf(writable), 1);

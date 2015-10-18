@@ -5,6 +5,7 @@ import catchError from "./plugins/catch-errors";
 import CommonBus from "common/mesh/bus/log";
 import LogBus    from "common/mesh/bus/log";
 import readAll from "common/mesh/read-all";
+
 /**
  */
 
@@ -16,10 +17,10 @@ class Application extends BaseModel {
   constructor(properties) {
     super(properties);
 
-    this.bus = new CommonBus(this, this.bus);
+    this.bus = CommonBus.create(this, this.bus);
 
     this.logger = new Logger(Object.assign({
-      bus: new LogBus(this)
+      bus: LogBus.create(this)
     }, this.get("config.log")));
   }
 

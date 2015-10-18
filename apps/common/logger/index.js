@@ -3,7 +3,7 @@ import extend from "lodash/object/extend";
 import LogLevels from "./levels";
 import { NoopBus } from "mesh";
 
-var noop = new NoopBus();
+var noop = NoopBus.create();
 
 class Logger extends BaseModel {
 

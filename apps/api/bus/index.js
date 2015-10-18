@@ -1,28 +1,23 @@
-import { WrapBus, NoopBus, CatchErrorBus } from "mesh";
+import { Bus, WrapBus, NoopBus, CatchErrorBus } from "mesh";
 
 import InternalCommandsBus from "./internal-commands";
 import PublicCommandsBus from "./public-commands";
 import DbBus from "./db";
 import LogBus from "common/mesh/bus/log";
 
-class APIBus extends WrapBus {
 
-  /**
-   */
+export default {
+  create: function(app, bus) {
 
-  constructor(app, bus) {
-
-    if (!bus) bus = new NoopBus();
-    bus = new DbBus(app, bus);
-    bus = new InternalCommandsBus(app, bus);
-    bus = new PublicCommandsBus(app, bus);
-    bus = new CatchErrorBus(bus, function(error) {
+    if (!bus) bus = NoopBus.create();
+    bus = DbBus.create(app, bus);
+    bus = InternalCommandsBus.create(app, bus);
+    bus = PublicCommandsBus.create(app, bus);
+    bus = CatchErrorBus.create(bus, function(error) {
       app.logger.error(error);
       throw error;
     });
 
-    super(bus.execute.bind(bus));
+    return bus;
   }
-}
-
-export default APIBus;
+};

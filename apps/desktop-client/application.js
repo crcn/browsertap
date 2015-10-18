@@ -20,7 +20,7 @@ class Application extends BaseApplication {
    */
 
   initializePlugins() {
-    this.bus = new DesktopClientBus(this, this.bus);
+    this.bus = DesktopClientBus.create(this, this.bus);
     this.use(mdns);
     super.initializePlugins();
   }

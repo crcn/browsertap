@@ -15,7 +15,7 @@ export default function(app, bus) {
     /**
      */
 
-    getUserOrganizations: new CommandBus({
+    getUserOrganizations: CommandBus.create({
       auth: true,
       execute: async function(operation) {
         return await Organization.find(bus, {
