@@ -1,16 +1,15 @@
-import { EventEmitter } from 'events';
+import DataObject from '../object';
 
 /**
  */
 
-class Collection extends EventEmitter {
+class Collection extends DataObject {
 
   /**
    */
 
   constructor(properties) {
-    super();
-    if (properties) Object.assign(this, properties);
+    super(properties);
     if (!this.target) this.target = [];
     this.length = this.target.length;
   }
@@ -59,17 +58,14 @@ class Collection extends EventEmitter {
     this.length = this.target.length; // reset length
 
     // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/observe
-    var changes = [];
 
-    changes.push({
+    this._addChange({
       type       : 'splice',
       object     : this,
       index      : start,
       removed    : removed,
       addedCount : newItems.length
     });
-
-    this.emit('change', changes);
 
     return this;
   }

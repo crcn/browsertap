@@ -15,4 +15,11 @@ describe(__filename + '#', function() {
     expect(c.at(0).source._id).to.be(1);
     expect(c.at(1).source._id).to.be(2);
   });
+
+  it("updates data on a model", function() {
+    var c = new ModelCollection({
+      source: [{ _id: 1 }]
+    });
+
+  });
 });

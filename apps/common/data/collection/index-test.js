@@ -2,6 +2,7 @@ import Collection from './index';
 import { BufferedBus, NoopBus } from 'mesh';
 import TailableBus from 'common/mesh/bus/tailable';
 import expect from 'expect.js';
+import testUtils from 'common/test/utils';
 
 describe(__filename + '#', function() {
 
@@ -55,28 +56,32 @@ describe(__filename + '#', function() {
     expect(items.join('')).to.be('4321');
   });
 
-  it('emits a change event whenever the collection is mutated', function() {
+  it('emits a change event whenever the collection is mutated', async function() {
     var c = new Collection();
     var change;
-    c.on('change', function(c) {
+    c.watch(function(c) {
       change = c[0];
     });
     c.push(0, 1, 2, 3);
+    await testUtils.timeout(0);
     expect(change.removed.length).to.be(0);
     expect(change.index).to.be(0);
     expect(change.addedCount).to.be(4);
 
     c.shift();
+    await testUtils.timeout(0);
     expect(change.removed.length).to.be(1);
     expect(change.index).to.be(0);
     expect(change.addedCount).to.be(0);
 
     c.pop();
+    await testUtils.timeout(0);
     expect(change.removed.length).to.be(1);
     expect(change.index).to.be(c.length);
     expect(change.addedCount).to.be(0);
 
     c.splice(0, 2, 'a', 'b', 'c');
+    await testUtils.timeout(0);
     expect(change.removed.length).to.be(2);
     expect(change.index).to.be(0);
     expect(change.addedCount).to.be(3);
