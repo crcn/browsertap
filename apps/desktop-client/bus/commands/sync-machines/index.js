@@ -4,6 +4,12 @@ import WebSocketBus from "common/mesh/bus/websocket";
 import syncDbCollection from "common/mesh/utils/sync-collection";
 import { AcceptBus, AttachDefaultsBus } from "mesh";
 
+class Machine {
+  dispose() {
+
+  }
+}
+
 export default function(app) {
 
   return CommandBus.create({
@@ -31,6 +37,27 @@ export default function(app) {
     */
     // app.bus.execute({ action: "tail" }).pipeTo(new Writable(new CollectionSink(new Collection())))
     // app.bus.execute({ action: "tail" }).pipeTo()
+
+    // app.bus.execute({ action: "tail" }).pipeTo(BusWriter.create(CollectionBus.create))
+
+    /*
+    var machines = ModelCollection.create({ createModel: (data) {
+      var bus =
+      return {
+        update: function(properties) {
+
+        },
+        dispose: function() {
+
+        }
+      }
+    } });
+
+    app.bus
+    .execute({ action: "tail" })
+    .pipeTo(BusWriter.create(CollectionBus.create(machines)))
+
+    */
 
     syncDbCollection(
       app.bus,

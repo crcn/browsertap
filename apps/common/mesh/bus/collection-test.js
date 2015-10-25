@@ -42,4 +42,8 @@ describe(__filename + "#", function() {
     expect(items.length).to.be(3);
     expect(items.join("")).to.be("8910");
   });
+
+  xit("if the target item has an update() method, use that", async function() {
+
+  });
 });
