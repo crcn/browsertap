@@ -53,7 +53,7 @@ describe(__filename + '#', function() {
     var message = messages.shift();
     var route = message.body.match(/(\/confirm\/.*)/)[1];
     browserApp.router.redirect(route);
-    await timeout(50);
+    await timeout(0);
     expect(browserApp.element.innerHTML).to.contain('alert-success');
   });
 

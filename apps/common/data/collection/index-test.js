@@ -9,9 +9,9 @@ describe(__filename + '#', function() {
     new Collection();
   });
 
-  it('can be created with a source array', function() {
+  it('can be created with a target array', function() {
     var c = new Collection({
-      source: [9, 8, 7, 6]
+      target: [9, 8, 7, 6]
     });
     expect(c.length).to.be(4);
     expect(c.at(0)).to.be(9);
@@ -38,7 +38,7 @@ describe(__filename + '#', function() {
   });
 
   it('can pop & unshift items from the collection', function() {
-    var c = new Collection({ source: [1, 2, 3, 4] });
+    var c = new Collection({ target: [1, 2, 3, 4] });
     expect(c.length).to.be(4);
     c.pop();
     expect(c.length).to.be(3);
@@ -49,7 +49,7 @@ describe(__filename + '#', function() {
   });
 
   it('can call map()', function() {
-    var items = (new Collection({ source: [5, 4, 3, 2] })).map(function(n) {
+    var items = (new Collection({ target: [5, 4, 3, 2] })).map(function(n) {
       return n - 1;
     });
     expect(items.join('')).to.be('4321');

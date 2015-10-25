@@ -1,15 +1,17 @@
 import React      from "react";
 import DataForm   from "common/components/data-form";
-import SignupForm from "common/data/forms/signup"; 
+import SignupForm from "common/data/forms/signup";
 import {IntlMixin, FormattedMessage, FormattedHTMLMessage }    from "react-intl";
- 
+
 var Signup = React.createClass({
   mixins: [IntlMixin],
 
   onSuccess: function(result) {
-    setTimeout(function() {
-      this.props.app.router.redirect("app"); 
-    }.bind(this), process.browser ? 1000 * 2 : void 0);
+    if (process.browser) {
+      setTimeout(function() {
+        this.props.app.router.redirect("app");
+      }.bind(this), 1000 * 2);
+    }
   },
 
   render: function() {
@@ -22,6 +24,6 @@ var Signup = React.createClass({
       </div>
     </div>;
   }
-}); 
- 
+});
+
 export default Signup;
