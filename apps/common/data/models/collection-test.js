@@ -16,10 +16,18 @@ describe(__filename + '#', function() {
     expect(c.at(1).source._id).to.be(2);
   });
 
-  it("updates data on a model", function() {
+  it("updates data on a model when the source changes", function() {
+
     var c = new ModelCollection({
-      source: [{ _id: 1 }]
+      source: [{ _id: 1 }, { _id: 2 }]
     });
 
+    var m1 = c.at(0);
+
+    c.setProperties({
+      source: [{ _id: 1, name: "a" }, { _id: 2 }]
+    });
+
+    expect(m1.source.name).to.be("a");
   });
 });

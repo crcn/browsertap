@@ -32,8 +32,7 @@ class DataObject {
     Object.observe(this, changeWatcher);
     return {
       dispose: () => {
-        var i = this._watchers.indexOf(changeWatcher);
-        if (!!~i) this._watchers.splice(i, 1);
+        Object.unobserve(this, changeWatcher);
       }
     }
   }

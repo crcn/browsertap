@@ -1,11 +1,12 @@
 import DataCollection from '../collection';
+import DataObject from '../object';
 
 class ModelCollection extends DataCollection {
 
   /**
    */
 
-  modelClass = Object
+  modelClass = DataObject
 
 
   /**
@@ -14,7 +15,7 @@ class ModelCollection extends DataCollection {
   constructor(properties) {
     super(properties);
     if (!this.source) this.source = [];
-    this._update();
+    this._syncSource();
   }
 
   /**
@@ -27,6 +28,16 @@ class ModelCollection extends DataCollection {
   /**
    */
 
+  setProperties(properties) {
+    super.setProperties(properties);
+    if (properties.source) {
+      this._syncSource();
+    }
+  }
+
+  /**
+   */
+
   getSourceCollection() {
 
   }
@@ -34,10 +45,10 @@ class ModelCollection extends DataCollection {
   /**
    */
 
-  _update() {
+  _syncSource() {
     var target        = [];
     var _newModelDict = {};
-    var _oldModelDict = this._dict || {};
+    var _oldModelDict = this._modelDict || {};
 
     for (var i = 0, n = this.source.length; i < n; i++) {
       var sourceData = this.source[i];
@@ -45,7 +56,7 @@ class ModelCollection extends DataCollection {
       var model;
 
       if (model = _oldModelDict[_id]) {
-        model.setProperties({ data: sourceData });
+        model.setProperties({ source: sourceData });
       } else {
         model = this.createModel({ source: sourceData });
       }
@@ -53,6 +64,8 @@ class ModelCollection extends DataCollection {
       _newModelDict[_id] = model;
       target.push(model);
     }
+
+    this._modelDict = _newModelDict;
 
     this.target = target;
     this.length = this.target.length;
