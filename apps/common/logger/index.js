@@ -1,7 +1,7 @@
-import BaseModel from "common/data/models/base/model";
-import extend from "lodash/object/extend";
-import LogLevels from "./levels";
-import { NoopBus } from "mesh";
+import BaseModel from 'common/data/models/base/model';
+import extend from 'lodash/object/extend';
+import LogLevels from './levels';
+import { NoopBus } from 'mesh';
 
 var noop = NoopBus.create();
 
@@ -44,7 +44,7 @@ Object.keys(LogLevels).forEach(function(key) {
       this.bus.execute({
 
         // blast off into the either. Enable any handler for logs.
-        action: "log",
+        action: 'log',
 
         // add english term to log
         type: type,

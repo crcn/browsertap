@@ -1,10 +1,10 @@
-import mixinSchema  from "./mixin"
-import EmailAddress from "common/data/types/email-address"
-import Password     from "common/data/types/password"
-import Schema       from "./schema"
-import expect       from "expect.js"
+import mixinSchema  from './mixin'
+import EmailAddress from 'common/data/types/email-address'
+import Password     from 'common/data/types/password'
+import Schema       from './schema'
+import expect       from 'expect.js'
 
-describe(__filename + "#", function() {
+describe(__filename + '#', function() {
 
   var locationSchema = new Schema({
     fields: {
@@ -30,13 +30,13 @@ describe(__filename + "#", function() {
   @mixinSchema(personSchema)
   class Person { }
 
-  it("can be wrapped around any class", function() {
+  it('can be wrapped around any class', function() {
 
     var m = new Person({
-      emailAddress: "a@b.com",
+      emailAddress: 'a@b.com',
       location: {
-        city: "San Francisco",
-        state: "CA",
+        city: 'San Francisco',
+        state: 'CA',
         zip: 94102
       }
     });
@@ -46,18 +46,18 @@ describe(__filename + "#", function() {
     expect(m.location.zip.valueOf()).to.be(94102);
   });
 
-  it("can properly be serialized into a json object", function() {
+  it('can properly be serialized into a json object', function() {
 
     var m = new Person({
-      emailAddress: "a@b.com",
+      emailAddress: 'a@b.com',
       location: {
-        city: "San Francisco"
+        city: 'San Francisco'
       }
     });
 
     var obj = JSON.parse(JSON.stringify(m));
-    expect(obj.emailAddress).to.be("a@b.com");
-    expect(obj.location.city).to.be("San Francisco");
+    expect(obj.emailAddress).to.be('a@b.com');
+    expect(obj.location.city).to.be('San Francisco');
     expect(obj.location.state).to.be(void 0);
   });
 });

@@ -1,9 +1,9 @@
-import Model         from "common/data/models/base/model"
-import Schema        from "common/data/schema/schema";
-import persistMixin  from "common/data/models/mixins/persist"
-import mixinSchema   from "common/data/schema/mixin"
-import DesktopState  from "api/data/types/desktop-state"
-import Reference     from "api/data/types/reference";
+import Model         from 'common/data/models/base/model'
+import Schema        from 'common/data/schema/schema';
+import persistMixin  from 'common/data/models/mixins/persist'
+import mixinSchema   from 'common/data/schema/mixin'
+import DesktopState  from 'api/data/types/desktop-state'
+import Reference     from 'api/data/types/reference';
 
 /**
  */
@@ -11,7 +11,7 @@ import Reference     from "api/data/types/reference";
 var desktopSchema = new Schema({
   fields: {
     _id: {
-      type: require("common/data/types/object-id")
+      type: require('common/data/types/object-id')
     },
 
     /**
@@ -44,7 +44,7 @@ class Desktop {
    */
 
   async stop() {
-    return await this.fetch("stopDesktop");
+    return await this.fetch('stopDesktop');
   }
 
   /**
@@ -52,7 +52,7 @@ class Desktop {
    */
 
   async start(owner) {
-    return await this.fetch("startDesktop", {
+    return await this.fetch('startDesktop', {
       // owner
     });
   }

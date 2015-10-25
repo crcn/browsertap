@@ -23,7 +23,7 @@ class MockMailer {
   // @params(EmailForm)
   send(email) {
     this.outbox.messages.push(email);
-    this.app.logger.info("email", email);
+    this.app.logger.info('email', email);
     return Promise.resolve();
   }
 }

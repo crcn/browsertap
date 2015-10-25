@@ -1,4 +1,4 @@
-import { Bus } from "mesh";
+import { Bus } from 'mesh';
 
 class WebSocketBusMock extends Bus {
   constructor({app, host}, bus) {

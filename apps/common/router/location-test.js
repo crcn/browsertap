@@ -1,10 +1,10 @@
-import Location from "./location";
-import expect from "expect.js";
+import Location from './location';
+import expect from 'expect.js';
 
-describe(__filename + "#", function() {
+describe(__filename + '#', function() {
 
   // don't want.
-  xit("disposes the previous state when it changes", function(next) {
+  xit('disposes the previous state when it changes', function(next) {
 
     var disposeCount = 0;
 
@@ -18,7 +18,7 @@ describe(__filename + "#", function() {
       }
     });
 
-    loc.set("state", {});
+    loc.set('state', {});
 
     setTimeout(function() {
       expect(disposeCount).to.be(1);

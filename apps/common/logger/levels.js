@@ -12,7 +12,7 @@ exports.STAGING     = exports.NOTICE | exports.INFO | exports.PRODUCTION;
 exports.DEVELOPMENT = exports.ALL;
 
 exports.fromString = function(level) {
-  return level.toUpperCase().split("|").map(function(level) {
+  return level.toUpperCase().split('|').map(function(level) {
     return exports[level] || exports.NONE;
   }).reduce(function(a, b) {
     return a | b;

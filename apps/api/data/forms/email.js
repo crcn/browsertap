@@ -1,5 +1,5 @@
-import mixinSchema from "common/data/schema/mixin";
-import Schema      from "common/data/schema/schema";
+import mixinSchema from 'common/data/schema/mixin';
+import Schema      from 'common/data/schema/schema';
 
 /**
  */
@@ -8,7 +8,7 @@ var forgotPasswordSchema = new Schema({
   fields: {
     to:  {
       required : true,
-      type     : require("common/data/types/email-address")
+      type     : require('common/data/types/email-address')
     },
     subject: {
       required: true,
@@ -32,7 +32,7 @@ class ForgotPasswordForm {
 
   async submit() {
     return (await this.bus.execute({
-      action: "sendEmail",
+      action: 'sendEmail',
       data: this
     }).read()).value;
   }

@@ -1,13 +1,13 @@
-import BaseApplication from "common/application";
-import SlaveBus       from "./bus";
-import mdns            from "common/plugins/mdns";
+import BaseApplication from 'common/application';
+import SlaveBus       from './bus';
+import mdns            from 'common/plugins/mdns';
 
 class SlaveApplication extends BaseApplication {
 
   /**
    */
 
-  pkg = require("./package.json")
+  pkg = require('./package.json')
 
   /**
    */

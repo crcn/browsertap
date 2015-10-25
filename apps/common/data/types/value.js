@@ -1,4 +1,4 @@
-import httperr from "httperr";
+import httperr from 'httperr';
 /**
  */
 
@@ -12,11 +12,11 @@ class ValueType {
     value = this.coerce(value);
 
     // just like strongly typed stuff. The value in the constructor should not
-    // be "castable" to this type
+    // be 'castable' to this type
     if (!this.validate(value)) {
 
       // use same HTTP status codes since they're already spelled out. 
-      throw new httperr.BadRequest("invalid");
+      throw new httperr.BadRequest('invalid');
     }
 
     this._value = value;

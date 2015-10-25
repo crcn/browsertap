@@ -1,9 +1,9 @@
-import Model         from "common/data/models/base/model"
-import Schema        from "common/data/schema/schema";
-import persistMixin  from "common/data/models/mixins/persist"
-import mixinSchema   from "common/data/schema/mixin";
-import httperr       from "httperr";
-import Reference     from "common/data/types/reference";
+import Model         from 'common/data/models/base/model'
+import Schema        from 'common/data/schema/schema';
+import persistMixin  from 'common/data/models/mixins/persist'
+import mixinSchema   from 'common/data/schema/mixin';
+import httperr       from 'httperr';
+import Reference     from 'common/data/types/reference';
 
 /**
  */
@@ -16,7 +16,7 @@ var invoiceSchema = new Schema({
      */
 
     _id: {
-      type: require("common/data/types/object-id")
+      type: require('common/data/types/object-id')
     },
 
     /**
@@ -39,7 +39,7 @@ var invoiceSchema = new Schema({
 /**
  */
 
-@persistMixin("invoices")
+@persistMixin('invoices')
 @mixinSchema(invoiceSchema)
 class Invoice extends Model {
   

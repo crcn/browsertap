@@ -1,16 +1,16 @@
-import loggerPlugin from "./index";
-import expect from "expect.js";
-import LogLevels from "common/logger/levels";
-import BaseModel from "common/data/models/base/model";
+import loggerPlugin from './index';
+import expect from 'expect.js';
+import LogLevels from 'common/logger/levels';
+import BaseModel from 'common/data/models/base/model';
 
-describe(__filename + "#", function() {
+describe(__filename + '#', function() {
 
-  it("attaches .logger property to the model", function() {
+  it('attaches .logger property to the model', function() {
     var model = new BaseModel();
     loggerPlugin(model);
   });
 
-  it("gets config properties from the model", function() {
+  it('gets config properties from the model', function() {
 
     var model = new BaseModel({
       config: {
@@ -25,7 +25,7 @@ describe(__filename + "#", function() {
     expect(model.logger.level).to.be(LogLevels.VERBOSE);
   });
 
-  it("re-routes all logs back to the application bus", function() {
+  it('re-routes all logs back to the application bus', function() {
 
     var ops = [];
 
@@ -42,7 +42,7 @@ describe(__filename + "#", function() {
 
     loggerPlugin(model);
 
-    model.logger.notice("hello world");
+    model.logger.notice('hello world');
     expect(ops.length).to.be(1);
   });
 });

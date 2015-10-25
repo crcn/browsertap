@@ -1,7 +1,7 @@
-import cstripe            from "stripe"
+import cstripe            from 'stripe'
 
 export default function(app) {
-  app.stripe = app.get("config.stripe.mock") ? mock() : cstripe(app.get("config.stripe.sk"));
+  app.stripe = app.get('config.stripe.mock') ? mock() : cstripe(app.get('config.stripe.sk'));
 };
 
 function mock() {
@@ -10,7 +10,7 @@ function mock() {
       create: function() {
         return new Promise(function(resolve, reject) {
           resolve({
-            id: "customer1"
+            id: 'customer1'
           });
         });
       }
@@ -19,7 +19,7 @@ function mock() {
       create: function() {
         return new Promise(function(resolve, reject) {
           resolve({
-            id: "charge1"
+            id: 'charge1'
           });
         });
       }

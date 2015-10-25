@@ -1,7 +1,7 @@
-import mixinSchema from "common/data/schema/mixin";
-import Schema      from "common/data/schema/schema";
-import mixinForm   from "./mixins/form";
-import Reference   from "common/data/types/reference";
+import mixinSchema from 'common/data/schema/mixin';
+import Schema      from 'common/data/schema/schema';
+import mixinForm   from './mixins/form';
+import Reference   from 'common/data/types/reference';
 
 /**
  */
@@ -15,11 +15,11 @@ var resetPaswordSchema = new Schema({
     },
     password:  {
       required : true,
-      type     : require("common/data/types/password")
+      type     : require('common/data/types/password')
     },
     repeatPassword:  {
       required : true,
-      type     : require("common/data/types/password"),
+      type     : require('common/data/types/password'),
       validate : function(value, data) {
         return value.valueOf() === data.password.valueOf();
       }
@@ -31,7 +31,7 @@ var resetPaswordSchema = new Schema({
  */
 
 @mixinSchema(resetPaswordSchema)
-@mixinForm("resetPassword")
+@mixinForm('resetPassword')
 class ResetPasswordForm { };
 
 /**

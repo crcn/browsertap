@@ -1,7 +1,7 @@
-import mixinSchema from "common/data/schema/mixin";
-import Schema      from "common/data/schema/schema";
-import mixinForm   from "./mixins/form";
-import Reference   from "common/data/types/reference";
+import mixinSchema from 'common/data/schema/mixin';
+import Schema      from 'common/data/schema/schema';
+import mixinForm   from './mixins/form';
+import Reference   from 'common/data/types/reference';
 
 /**
  */
@@ -20,7 +20,7 @@ var confirmAccountSchema = new Schema({
  */
 
 @mixinSchema(confirmAccountSchema)
-@mixinForm("confirmAccount")
+@mixinForm('confirmAccount')
 class ConfirmAccountSchema { };
 
 /**

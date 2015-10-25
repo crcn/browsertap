@@ -1,4 +1,4 @@
-import mixin from "common/utils/class/mixin"
+import mixin from 'common/utils/class/mixin'
 
 export default function(schema) {
   var _mixin = mixin({

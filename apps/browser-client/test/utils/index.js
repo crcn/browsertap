@@ -1,9 +1,9 @@
-import apiTestUtils from "api/test/utils";
-import application from "../../application";
-import { AttachDefaultsBus } from "mesh";
-import fixtures from "../fixtures/index";
-var React  = require("react/addons");
-import { timeout } from "common/test/utils";
+import apiTestUtils from 'api/test/utils';
+import application from '../../application';
+import { AttachDefaultsBus } from 'mesh';
+import fixtures from '../fixtures/index';
+var React  = require('react/addons');
+import { timeout } from 'common/test/utils';
 
 module.exports = {
   createFakeApp: async function(properties) {
@@ -16,7 +16,7 @@ module.exports = {
       test: {
       },
       apiApp: apiApp,
-      element: document.createElement("div"),
+      element: document.createElement('div'),
       bus: AttachDefaultsBus.create({ public: true, session: session }, apiApp.bus),
       debug: true,
       config: {
@@ -25,13 +25,13 @@ module.exports = {
           level: 0
         },
         db: {
-          type: "mock"
+          type: 'mock'
         },
         email: {
-          type: "mock"
+          type: 'mock'
         },
         hosts: {
-          browser: "0.0.0.0:8080"
+          browser: '0.0.0.0:8080'
         }
       }
     });
@@ -39,18 +39,18 @@ module.exports = {
     await app.initialize();
 
     app.test.fixtures = await fixtures.create(app);
-    app.router.redirect("/logout");
+    app.router.redirect('/logout');
 
     app.testUtils = {
 
       login: function(user) {
-        app.router.redirect("logout");
-        app.router.redirect("login");
-        app.element.querySelector("*[name='emailAddress']").value    = user.emailAddress.valueOf();
-        app.element.querySelector("*[name='password']").value = user.password.valueOf();
-        React.addons.TestUtils.Simulate.change(app.element.querySelector("*[name='emailAddress']"));
-        React.addons.TestUtils.Simulate.change(app.element.querySelector("*[name='password']"));
-        React.addons.TestUtils.Simulate.submit(app.element.querySelector("form"));
+        app.router.redirect('logout');
+        app.router.redirect('login');
+        app.element.querySelector('*[name="emailAddress"]').value    = user.emailAddress.valueOf();
+        app.element.querySelector('*[name="password"]').value = user.password.valueOf();
+        React.addons.TestUtils.Simulate.change(app.element.querySelector('*[name="emailAddress"]'));
+        React.addons.TestUtils.Simulate.change(app.element.querySelector('*[name="password"]'));
+        React.addons.TestUtils.Simulate.submit(app.element.querySelector('form'));
       },
 
       setInputValue: function(query, value) {

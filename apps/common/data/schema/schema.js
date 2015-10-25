@@ -1,4 +1,4 @@
-import httperr from "httperr"
+import httperr from 'httperr'
 
 /**
  */
@@ -10,14 +10,14 @@ class Field {
 
   constructor(properties) {
 
-    if (typeof properties === "function") {
+    if (typeof properties === 'function') {
       this.type = properties;
     } else {
       Object.assign(this, properties);
     }
 
     if (!this.type) {
-      throw new Error("type must exist for schema field");
+      throw new Error('type must exist for schema field');
     }
   }
 
@@ -29,21 +29,21 @@ class Field {
     // TODO - check for invalid
     if (value == void 0) {
       if (this.default != void 0) {
-        value = typeof this.default === "function" ? this.default() : this.default;
+        value = typeof this.default === 'function' ? this.default() : this.default;
       } else if (this.required) {
-        throw new httperr.BadRequest("invalid");
+        throw new httperr.BadRequest('invalid');
       } else {
         return;
       }
     }
 
     if (this.validate && !this.validate(value, data)) {
-      throw new httperr.BadRequest("invalid");
+      throw new httperr.BadRequest('invalid');
     }
 
     if (this.collection) {
       if (!Array.isArray(value)) {
-        throw new httperr.BadRequest("invalid");
+        throw new httperr.BadRequest('invalid');
       }
       return value.map(function(value) {
         return this._cast(value);
@@ -79,7 +79,7 @@ class Schema {
     for (var key in fields) {
       var fieldOptions = fields[key];
       if (Array.isArray(fieldOptions)) {
-        fieldOptions = typeof fieldOptions[0] === "function" ? {
+        fieldOptions = typeof fieldOptions[0] === 'function' ? {
           type: fieldOptions[0]
         } : fieldOptions[0];
 
@@ -109,7 +109,7 @@ class Schema {
         // re-throw with a more especific error message. This is coded as well so that it can be
         // internationalized.
         if (e.statusCode === 400) {
-          var err   = new httperr.BadRequest(property + "." + e.message);
+          var err   = new httperr.BadRequest(property + '.' + e.message);
           err.field = this.fields[property];
           throw err;
         }

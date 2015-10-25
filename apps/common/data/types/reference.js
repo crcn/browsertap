@@ -1,5 +1,5 @@
-import Schema        from "common/data/schema/schema";
-import mixinSchema   from "common/data/schema/mixin";
+import Schema        from 'common/data/schema/schema';
+import mixinSchema   from 'common/data/schema/mixin';
 
 /**
  */
@@ -9,7 +9,7 @@ import mixinSchema   from "common/data/schema/mixin";
   fields: {
     _id: {
       required: true,
-      type: require("common/data/types/object-id")
+      type: require('common/data/types/object-id')
     }
   }
 }))

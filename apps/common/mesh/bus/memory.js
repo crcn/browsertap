@@ -1,5 +1,5 @@
-import { Bus, AcceptBus, Response, EmptyResponse, BufferedResponse } from "mesh";
-import sift             from "sift";
+import { Bus, AcceptBus, Response, EmptyResponse, BufferedResponse } from 'mesh';
+import sift             from 'sift';
 
 function _clone(data) {
   return JSON.parse(JSON.stringify(data));
@@ -72,7 +72,7 @@ class MemoryDatabase {
 
   collection(name) {
     if (name == void 0) {
-      throw new Error("collection name must not be undefined");
+      throw new Error('collection name must not be undefined');
     }
 
     return this._collections[name] || (this._collections[name] = new MemoryCollection(this));

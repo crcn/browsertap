@@ -1,4 +1,4 @@
-import { Bus, NoopBus, Response } from "mesh"
+import { Bus, NoopBus, Response } from 'mesh'
 
 class SpyBus extends Bus {
   constructor(bus) {
@@ -8,7 +8,7 @@ class SpyBus extends Bus {
   }
   execute(operation) {
 
-    if (operation.action === "spy") {
+    if (operation.action === 'spy') {
       return Response.create((writable) => {
         writable.operation = operation;
         writable.then(() => {

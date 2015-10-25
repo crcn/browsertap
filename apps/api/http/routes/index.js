@@ -1,4 +1,4 @@
-import createRouter from "koa-router";
+import createRouter from 'koa-router';
 
 /**
  */
@@ -7,7 +7,7 @@ export default function(server, app) {
 
   var router = createRouter();
 
-  router.all("/o", async function(next) {
+  router.all('/o', async function(next) {
 
     var session = this.session;
 

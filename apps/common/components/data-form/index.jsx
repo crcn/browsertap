@@ -1,11 +1,11 @@
-import React        from "react"
-import EmailAddress from "common/data/types/email-address"
-import Password     from "common/data/types/password"
-import CreditCardNumber from "common/data/types/credit-card-number"
-import CVC          from "common/data/types/credit-card-number"
-import cx           from "classnames"
-import ReactIntl    from "react-intl";
-import diff         from "object-diff";
+import React        from 'react'
+import EmailAddress from 'common/data/types/email-address'
+import Password     from 'common/data/types/password'
+import CreditCardNumber from 'common/data/types/credit-card-number'
+import CVC          from 'common/data/types/credit-card-number'
+import cx           from 'classnames'
+import ReactIntl    from 'react-intl';
+import diff         from 'object-diff';
 
 var IntlMixin         = ReactIntl.IntlMixin;
 var FormattedMessage  = ReactIntl.FormattedMessage;
@@ -75,26 +75,26 @@ var Field = React.createClass({
   render: function() {
 
     var classNames = cx({
-      "field"        : true,
-      // "form-group"   : true,
-      "form-inline"  : true,
-      "has-error"    : this.state.valid === false,
-      "has-success"  : this.state.valid === true,
-      "has-feedback" : this.state.valid != void 0
+      'field'        : true,
+      // 'form-group'   : true,
+      'form-inline'  : true,
+      'has-error'    : this.state.valid === false,
+      'has-success'  : this.state.valid === true,
+      'has-feedback' : this.state.valid != void 0
     });
 
     var fieldElement = this._createFromField(this.props.name, this.props.field);
 
-    if (fieldElement.props.type === "hidden") {
+    if (fieldElement.props.type === 'hidden') {
       return null;
     }
 
     return <div className={classNames} onChange={this.onChange}>
-      <label className="control-label"><FormattedMessage message={this.getIntlMessage("fieldsLabels." + this.props.name)} /></label>
-      <div className="input">
+      <label className='control-label'><FormattedMessage message={this.getIntlMessage('fieldsLabels.' + this.props.name)} /></label>
+      <div className='input'>
         { fieldElement }
       </div>
-        { this.state.valid != void 0  ? <span className={"ion-" + (this.state.valid ? "checkmark" : "close") + " form-control-feedback"}></span> : void 0 }
+        { this.state.valid != void 0  ? <span className={'ion-' + (this.state.valid ? 'checkmark' : 'close') + ' form-control-feedback'}></span> : void 0 }
     </div>;
   },
 
@@ -104,11 +104,11 @@ var Field = React.createClass({
   _createFromField: function(name, field) {
 
     if(field.type === EmailAddress || field.type === String || field.type === CVC || field.type === CreditCardNumber) {
-      return <input name={name} type="text" className="form-control" />;
+      return <input name={name} type='text' className='form-control' />;
     } else if (field.type === Password) {
-      return <input name={name} type="password" className="form-control" />;
+      return <input name={name} type='password' className='form-control' />;
     } else {
-      return <input name={name} type="hidden" className="form-control" />;
+      return <input name={name} type='hidden' className='form-control' />;
     }
 
   },
@@ -117,7 +117,7 @@ var Field = React.createClass({
    */
 
   _getPlaceHolderText: function(name) {
-    return this.getIntlMessage("fieldsLabels." + name);
+    return this.getIntlMessage('fieldsLabels.' + name);
   }
 });
 
@@ -221,25 +221,25 @@ var DataForm = React.createClass({
       );
     }
 
-    return <form onChange={this._onChange} className="form-horizontal m-common-data-form" onSubmit={this.onSubmit}>
+    return <form onChange={this._onChange} className='form-horizontal m-common-data-form' onSubmit={this.onSubmit}>
 
       {this.props.title ? <h4>
           <FormattedMessage message={this.getIntlMessage(this.props.title)} />
       </h4> : void 0 }
 
-      { this.state.error ? <div className="alert alert-danger">{
-        <FormattedMessage message={this.getIntlMessage("errors." + this.state.error.message)} />
+      { this.state.error ? <div className='alert alert-danger'>{
+        <FormattedMessage message={this.getIntlMessage('errors.' + this.state.error.message)} />
       }</div> : void 0 }
 
-      { this.state.success && this.props.successMessage ? <div className="alert alert-success">{
+      { this.state.success && this.props.successMessage ? <div className='alert alert-success'>{
         <FormattedMessage message={this.getIntlMessage(this.props.successMessage)} />
       }</div> : void 0 }
-      <div className="fields">
+      <div className='fields'>
         { formFields }
       </div>
-      <div className="form-group submit-button">
-        <button name="submit" type="submit" className="form-control" disabled={!this.state.form || this.state.loading}>
-          { this.state.loading ? "loading..." : this.getIntlMessage(this.props.submitLabel || "buttons.submit") }
+      <div className='form-group submit-button'>
+        <button name='submit' type='submit' className='form-control' disabled={!this.state.form || this.state.loading}>
+          { this.state.loading ? 'loading...' : this.getIntlMessage(this.props.submitLabel || 'buttons.submit') }
         </button>
       </div>
     </form>

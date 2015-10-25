@@ -1,5 +1,5 @@
-import sendgrid from "sendgrid";
-import httperr  from "httperr";
+import sendgrid from 'sendgrid';
+import httperr  from 'httperr';
 
 /**
  */
@@ -33,7 +33,7 @@ class Emailer {
       this._sg.send(email, function(err, response) {
         if (err) {
           this.app.logger.error(err.stack);
-          return reject(new httperr[500]("couldNotSendEmail"));
+          return reject(new httperr[500]('couldNotSendEmail'));
         }
         resolve();
       }.bind(this));

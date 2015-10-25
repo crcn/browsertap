@@ -1,5 +1,5 @@
-import passwordHash from "password-hash"
-import ValueType    from "./value"
+import passwordHash from 'password-hash'
+import ValueType    from './value'
 /**
  */
 

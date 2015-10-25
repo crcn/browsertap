@@ -1,6 +1,6 @@
-import mixinSchema from "common/data/schema/mixin";
-import Schema      from "common/data/schema/schema";
-import mixinForm   from "./mixins/form";
+import mixinSchema from 'common/data/schema/mixin';
+import Schema      from 'common/data/schema/schema';
+import mixinForm   from './mixins/form';
 
 /**
  */
@@ -9,11 +9,11 @@ var signupFormSchema = new Schema({
   fields: {
     emailAddress:  {
       required : true,
-      type     : require("common/data/types/email-address")
+      type     : require('common/data/types/email-address')
     },
     password: {
       required : true,
-      type     : require("common/data/types/password")
+      type     : require('common/data/types/password')
     }
   }
 });
@@ -22,7 +22,7 @@ var signupFormSchema = new Schema({
  */
 
 @mixinSchema(signupFormSchema)
-@mixinForm("register")
+@mixinForm('register')
 class SignupForm { };
 
 /**

@@ -1,6 +1,6 @@
-import APIApplication from "../../application";
-import merge from "lodash/object/merge";
-import { AttachDefaultsBus } from "mesh";
+import APIApplication from '../../application';
+import merge from 'lodash/object/merge';
+import { AttachDefaultsBus } from 'mesh';
 
 module.exports = {
   createFakeApp: async function(properties) {
@@ -15,10 +15,10 @@ module.exports = {
           level: 0
         },
         db: {
-          type: "mock"
+          type: 'mock'
         },
         emailer: {
-          service: "mock"
+          service: 'mock'
         }
       }
     }, properties));

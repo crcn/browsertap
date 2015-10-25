@@ -1,7 +1,7 @@
-var mdnsPlugins = require("./index");
-var Application = require("common/application");
+var mdnsPlugins = require('./index');
+var Application = require('common/application');
 
-describe(__filename + "#", function() {
+describe(__filename + '#', function() {
 
   var app;
   var types          = [];
@@ -23,7 +23,7 @@ describe(__filename + "#", function() {
     //   }
     // })
   })
-  xit("can be used in an application", function() {
+  xit('can be used in an application', function() {
     var app = new Application()
     app.use()
   });

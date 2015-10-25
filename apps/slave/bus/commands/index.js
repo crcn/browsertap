@@ -1,8 +1,8 @@
-import { EmptyResponse, Response } from "mesh";
-import CommandsBus from "common/mesh/bus/commands";
-import CommandBus from "common/mesh/bus/command";
-import { spawn } from "child_process";
-import path from "path";
+import { EmptyResponse, Response } from 'mesh';
+import CommandsBus from 'common/mesh/bus/commands';
+import CommandBus from 'common/mesh/bus/command';
+import { spawn } from 'child_process';
+import path from 'path';
 
 export function create(app, bus) {
 
@@ -16,12 +16,12 @@ export function create(app, bus) {
   }, bus);
 
   function _initialize(operation) {
-    app.bus.execute({ action: "spawnDesktopController" });
+    app.bus.execute({ action: 'spawnDesktopController' });
   }
 
   function _spawnDesktopController(operation) {
-    var binPath = app.get("config.paths.desktopController");
-    app.logger.info("spawning desktop controller %s", binPath);
+    var binPath = app.get('config.paths.desktopController');
+    app.logger.info('spawning desktop controller %s', binPath);
 
     return Response.create(function(writable) {
 
@@ -33,7 +33,7 @@ export function create(app, bus) {
       proc.stdout.pipe(process.stdout);
       proc.stder.pipe(process.stderr);
 
-      proc.on("close", function(err, code) {
+      proc.on('close', function(err, code) {
         if (err) return writable.error(err);
         writable.close();
       });

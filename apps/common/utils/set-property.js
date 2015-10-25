@@ -1,5 +1,5 @@
 function set(target, keypath, value) {
-  var keys = typeof keypath === "string" ? keypath.split(".") : keypath;
+  var keys = typeof keypath === 'string' ? keypath.split('.') : keypath;
   var ct   = target;
   var key;
 

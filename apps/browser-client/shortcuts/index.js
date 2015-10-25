@@ -1,9 +1,9 @@
-import mousetrap from "mousetrap";
+import mousetrap from 'mousetrap';
 
 export default function(app) {
 
   var currentKeys;
-  app.router.location.on("change", rebindKeys);
+  app.router.location.on('change', rebindKeys);
 
   function rebindKeys() {
     if (currentKeys) currentKeys.dispose();
@@ -14,7 +14,7 @@ export default function(app) {
       /**
        */
 
-      "alt+space": function() {
+      'alt+space': function() {
         app.router.setQuery({
           showControls: app.router.location.query.showControls ? void 0 : true
         })
@@ -23,7 +23,7 @@ export default function(app) {
       /**
        */
 
-      "alt+right": function() {
+      'alt+right': function() {
         app.router.setQuery({
           toolBarPosition: (Number(app.router.location.query.toolBarPosition || 0) + 1) % 4
         });

@@ -1,4 +1,4 @@
-import { Bus, NoopBus } from "mesh";
+import { Bus, NoopBus } from 'mesh';
 
 class CommandsBus extends Bus {
   constructor(commands, bus) {

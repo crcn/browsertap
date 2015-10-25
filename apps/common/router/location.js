@@ -1,6 +1,6 @@
-import qs from "qs";
-import BaseModel from "common/data/models/base/model";
-import extend from "lodash/object/extend";
+import qs from 'qs';
+import BaseModel from 'common/data/models/base/model';
+import extend from 'lodash/object/extend';
 
 /**
  */
@@ -26,11 +26,11 @@ class Location extends BaseModel {
       // remove blank queries
       for (var key in this.query) {
         var v = this.query[key];
-        if (v === "") continue;
+        if (v === '') continue;
         q[key] = v;
       }
 
-      path += "?" + qs.stringify(q);
+      path += '?' + qs.stringify(q);
     }
 
     return path;

@@ -1,8 +1,8 @@
-import Model         from "common/data/models/base/model"
-import Schema        from "common/data/schema/schema";
-import persistMixin  from "common/data/models/mixins/persist"
-import mixinSchema   from "common/data/schema/mixin";
-import httperr       from "httperr";
+import Model         from 'common/data/models/base/model'
+import Schema        from 'common/data/schema/schema';
+import persistMixin  from 'common/data/models/mixins/persist'
+import mixinSchema   from 'common/data/schema/mixin';
+import httperr       from 'httperr';
 
 /**
  */
@@ -15,7 +15,7 @@ var tokenSchema = new Schema({
      */
 
     _id: {
-      type: require("common/data/types/object-id")
+      type: require('common/data/types/object-id')
     },
 
     /**
@@ -58,7 +58,7 @@ var tokenSchema = new Schema({
 /**
  */
 
-@persistMixin("tokens")
+@persistMixin('tokens')
 @mixinSchema(tokenSchema)
 class Token extends Model {
   get expired() {

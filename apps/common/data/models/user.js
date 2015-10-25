@@ -1,8 +1,8 @@
-import Model         from "common/data/models/base/model"
-import Schema        from "common/data/schema/schema";
-import persistMixin  from "common/data/models/mixins/persist"
-import mixinSchema   from "common/data/schema/mixin";
-import Organization  from "common/data/models/organization";
+import Model         from 'common/data/models/base/model'
+import Schema        from 'common/data/schema/schema';
+import persistMixin  from 'common/data/models/mixins/persist'
+import mixinSchema   from 'common/data/schema/mixin';
+import Organization  from 'common/data/models/organization';
 
 /**
  */
@@ -15,7 +15,7 @@ var userSchema = new Schema({
      */
 
     _id: {
-      type: require("common/data/types/object-id")
+      type: require('common/data/types/object-id')
     },
 
     /**
@@ -32,14 +32,14 @@ var userSchema = new Schema({
     emailAddress: {
       required: true,
       unique: true, // TODO
-      type: require("common/data/types/email-address")
+      type: require('common/data/types/email-address')
     },
 
     /**
      */
 
     locale: {
-      type: require("common/data/types/locale")
+      type: require('common/data/types/locale')
     },
 
     /**
@@ -62,7 +62,7 @@ var userSchema = new Schema({
 
     keys: [{
       internal: true,
-      type: require("./password-key")
+      type: require('./password-key')
     }]
   }
 });
@@ -70,7 +70,7 @@ var userSchema = new Schema({
 /**
  */
 
-@persistMixin("users")
+@persistMixin('users')
 @mixinSchema(userSchema)
 class User extends Model {
 
@@ -79,7 +79,7 @@ class User extends Model {
 
   async getOrganizations() {
     return (await this.bus.execute({
-      action: "getUserOrganizations"
+      action: 'getUserOrganizations'
     }).read()).value.map(function(data) {
       return new Organization(Object.assign({ bus: this.bus.value }, data));
     }.bind(this));
@@ -93,7 +93,7 @@ class User extends Model {
       bus: this.bus,
       access: [{
         user: { _id: this._id },
-        level: "admin"
+        level: 'admin'
       }]
     });
     return await organization.insert();

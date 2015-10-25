@@ -1,4 +1,4 @@
-import DataCollection from "../collection";
+import DataCollection from '../collection';
 
 class ModelCollection extends DataCollection {
 

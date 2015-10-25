@@ -1,8 +1,8 @@
-import Model         from "common/data/models/base/model"
-import Schema        from "common/data/schema/schema";
-import persistMixin  from "common/data/models/mixins/persist"
-import mixinSchema   from "common/data/schema/mixin";
-import Reference     from "common/data/types/reference";
+import Model         from 'common/data/models/base/model'
+import Schema        from 'common/data/schema/schema';
+import persistMixin  from 'common/data/models/mixins/persist'
+import mixinSchema   from 'common/data/schema/mixin';
+import Reference     from 'common/data/types/reference';
 
 /**
  */
@@ -31,14 +31,14 @@ var stripeCustomerSchema = new Schema({
 /**
  */
 
-@persistMixin("stripeCustomers")
+@persistMixin('stripeCustomers')
 @mixinSchema(stripeCustomerSchema)
 class StripeCustomer extends Model {
   async charge(amount) {
 
     var result = await this.app.stripe.charges.create({
       amount: amount,
-      currency: "usd",
+      currency: 'usd',
       customer: this.id.valueOf()
     });
 

@@ -1,10 +1,10 @@
-import loggly from "loggly";
-import { NoopBus, EmptyResponse } from "mesh";
+import loggly from 'loggly';
+import { NoopBus, EmptyResponse } from 'mesh';
 
 export default {
   create: function(app) {
 
-    var config = app.get("config.loggly");
+    var config = app.get('config.loggly');
 
     if (!config) return NoopBus.create();
 

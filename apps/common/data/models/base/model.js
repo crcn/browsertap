@@ -1,4 +1,4 @@
-import {EventEmitter} from "events";
+import {EventEmitter} from 'events';
 
 var __getters = {};
 
@@ -35,7 +35,7 @@ class BaseModel extends EventEmitter {
     }
 
     if (hasChanged) {
-      this.emit("change", { properties: newProps }, { properties: oldProps });
+      this.emit('change', { properties: newProps }, { properties: oldProps });
     }
   }
 
@@ -45,7 +45,7 @@ class BaseModel extends EventEmitter {
 
   get(keypath) {
     if (__getters[keypath]) return __getters[keypath](this);
-    __getters[keypath] = new Function("self", "try { return self." + keypath + "} catch(e) { }");
+    __getters[keypath] = new Function('self', 'try { return self.' + keypath + '} catch(e) { }');
     return this.get(keypath);
   }
 

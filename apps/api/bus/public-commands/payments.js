@@ -1,12 +1,12 @@
-import sift           from "sift";
-import httperr        from "httperr";
-import mu             from "mustache";
-import fs             from "fs";
-import templates      from "./templates";
-import CommandBus     from "common/mesh/bus/command";
-import cstripe        from "stripe";
-import StripeCustomer from "api/data/models/stripe-customer";
-import Organization   from "common/data/models/organization";
+import sift           from 'sift';
+import httperr        from 'httperr';
+import mu             from 'mustache';
+import fs             from 'fs';
+import templates      from './templates';
+import CommandBus     from 'common/mesh/bus/command';
+import cstripe        from 'stripe';
+import StripeCustomer from 'api/data/models/stripe-customer';
+import Organization   from 'common/data/models/organization';
 
 export default function(app, bus) {
 

@@ -1,5 +1,5 @@
-import InternalCommandsBus from "./commands";
-import { NoopBus } from "common/mesh";
+import InternalCommandsBus from './commands';
+import { NoopBus } from 'common/mesh';
 
 export default function(app, bus) {
   if (!bus) bus = NoopBus.create();

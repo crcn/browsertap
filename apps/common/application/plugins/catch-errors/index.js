@@ -1,5 +1,5 @@
-import platform from "platform";
-import parseStack from "parse-stack";
+import platform from 'platform';
+import parseStack from 'parse-stack';
 
 /**
  */
@@ -34,11 +34,11 @@ function browser(app) {
 function server(app) {
   function onException(error) {
     app.logger.error(error.message, { stack: parseStack(error), platform: platformInfo });
-    app.logger.notice("gracefully shutting down");
+    app.logger.notice('gracefully shutting down');
 
     // give some time for the op to send to loggly
     setTimeout(process.exit.bind(process, 1), 1000 * 4);
   }
 
-  process.on("uncaughtException", onException);
+  process.on('uncaughtException', onException);
 }

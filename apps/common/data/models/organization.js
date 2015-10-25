@@ -1,9 +1,9 @@
-import Model         from "common/data/models/base/model"
-import Schema        from "common/data/schema/schema";
-import persistMixin  from "common/data/models/mixins/persist"
-import mixinSchema   from "common/data/schema/mixin";
-import Reference     from "common/data/types/reference";
-import Usage         from "common/data/models/usage";
+import Model         from 'common/data/models/base/model'
+import Schema        from 'common/data/schema/schema';
+import persistMixin  from 'common/data/models/mixins/persist'
+import mixinSchema   from 'common/data/schema/mixin';
+import Reference     from 'common/data/types/reference';
+import Usage         from 'common/data/models/usage';
 
 /**
  */
@@ -15,7 +15,7 @@ import Usage         from "common/data/models/usage";
       type: Reference
     },
     level: {
-      default: "admin",
+      default: 'admin',
       required: true,
       type: String
     }
@@ -36,7 +36,7 @@ var organizationSchema = new Schema({
      */
 
     _id: {
-      type: require("common/data/types/object-id")
+      type: require('common/data/types/object-id')
     },
 
     /**
@@ -59,17 +59,17 @@ var organizationSchema = new Schema({
 /**
  */
 
-@persistMixin("organizations")
+@persistMixin('organizations')
 @mixinSchema(organizationSchema)
 class Organization extends Model {
 
   /**
    */
 
-   // TODO - simplify 
+   // TODO - simplify
   *getUsage() {
     return new Usage(Object.assign({ bus: this.bus }, yield this.bus.execute({
-      action: "getUsage",
+      action: 'getUsage',
       organization: this
     })));
   }

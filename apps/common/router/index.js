@@ -1,8 +1,8 @@
 
-import BaseModel from "common/data/models/base/model";
-import Location from "./location";
-import debounce from "lodash/function/debounce";
-import qs from "qs";
+import BaseModel from 'common/data/models/base/model';
+import Location from './location';
+import debounce from 'lodash/function/debounce';
+import qs from 'qs';
 
 /**
  * _setter for a deep path
@@ -10,7 +10,7 @@ import qs from "qs";
 
 function _set(target, path, value) {
   var current = target;
-  var pathParts = path.split(".");
+  var pathParts = path.split('.');
   for (var i = 0, n = pathParts.length - 1; i < n; i++) {
     var key = pathParts[i];
     if (!current[key]) current[key] = {};
@@ -25,7 +25,7 @@ function _set(target, path, value) {
 
 function _get(target, path) {
   var current = target;
-  var pathParts = path.split(".");
+  var pathParts = path.split('.');
 
   for (var i = 0, n = pathParts.length; i < n; i++) {
     var key = pathParts[i];
@@ -39,8 +39,8 @@ function _get(target, path) {
  */
 
 function _parseUrl(url) {
-  var path      = url.replace("#", "");
-  var pathParts = path.split("?");
+  var path      = url.replace('#', '');
+  var pathParts = path.split('?');
   return {
     pathname : pathParts.shift(),
     query    : pathParts.length ? qs.parse(pathParts.pop()) : {}
@@ -71,7 +71,7 @@ function _bindWindowLocation(router) {
   // watch the location for any change, stringify it, then reflect
   // that change in the location hash. This will ensure that the user
   // is able to reload the page and still maintain the application state
-  router.location.on("change", debounce(function(op, np) {
+  router.location.on('change', debounce(function(op, np) {
     if (!getNewLocation()) return;
     location.hash = router.location.toString(); 
     // history.pushState({}, router.location.state.title, router.location.toString());
@@ -99,7 +99,7 @@ class Router extends BaseModel {
 
     // redirect
     if (process.browser) {
-      this.redirect(location.hash === "" ? "/" : location.hash); 
+      this.redirect(location.hash === '' ? '/' : location.hash); 
     }
   }
 
@@ -119,9 +119,9 @@ class Router extends BaseModel {
     if (!handler) handler = function() { };
 
     // convert something like /home/:id/path to /home/(\w+)/
-    var pathTester = new RegExp("^" + pathname.replace(/(:[^\/]+)/g, "([^\/]+)") + "$");
-    var paramNames = pathname.split("/").filter(function(path) {
-      return path.charAt(0) === ":";
+    var pathTester = new RegExp('^' + pathname.replace(/(:[^\/]+)/g, '([^\/]+)') + '$');
+    var paramNames = pathname.split('/').filter(function(path) {
+      return path.charAt(0) === ':';
     }).map(function(pathname) {
       return pathname.substr(1);
     });
@@ -171,7 +171,7 @@ class Router extends BaseModel {
   redirect(aliasOrPathname, options) {
 
     // just modify the options 
-    if (arguments.length === 1 && typeof aliasOrPathname === "object") {
+    if (arguments.length === 1 && typeof aliasOrPathname === 'object') {
       options         = aliasOrPathname;
       // TODO - take params into consideration 
       aliasOrPathname = this.location.pathname;
@@ -179,7 +179,7 @@ class Router extends BaseModel {
 
     if (!options) options = {};
 
-    aliasOrPathname = aliasOrPathname.replace(/\/+/g, "/");
+    aliasOrPathname = aliasOrPathname.replace(/\/+/g, '/');
 
     var pathParts = _parseUrl(aliasOrPathname);
 
@@ -194,9 +194,9 @@ class Router extends BaseModel {
     if (route) {
       route.handler(this.location);
     } else {
-      var error = new Error("not found");
+      var error = new Error('not found');
       error.code = 404;
-      this.emit("error", error);
+      this.emit('error', error);
     }
   }
 
@@ -226,14 +226,14 @@ class Router extends BaseModel {
    */
 
   getUrl(aliasOrPathname, options) {
-    return "#" + this.getPathname(aliasOrPathname, options); 
+    return '#' + this.getPathname(aliasOrPathname, options); 
   }
 
   /**
    */
 
   getRoute(aliasOrPathname) {
-    // aliasOrPathname = aliasOrPathname.replace(/\/+/g, "/"); // remove double slashes
+    // aliasOrPathname = aliasOrPathname.replace(/\/+/g, '/'); // remove double slashes
 
     for (var alias in this._routes) {
       var route = this._routes[alias];

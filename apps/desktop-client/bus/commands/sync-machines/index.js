@@ -1,8 +1,8 @@
-import CommandBus from "common/mesh/bus/command";
-import sift from "sift";
-import WebSocketBus from "common/mesh/bus/websocket";
-import syncDbCollection from "common/mesh/utils/sync-collection";
-import { AcceptBus, AttachDefaultsBus } from "mesh";
+import CommandBus from 'common/mesh/bus/command';
+import sift from 'sift';
+import WebSocketBus from 'common/mesh/bus/websocket';
+import syncDbCollection from 'common/mesh/utils/sync-collection';
+import { AcceptBus, AttachDefaultsBus } from 'mesh';
 
 class Machine {
   dispose() {
@@ -17,7 +17,7 @@ export default function(app) {
   });
 
   function _execute(operation) {
-    app.logger.info("synchronizing machines");
+    app.logger.info('synchronizing machines');
 
     /*
 
@@ -30,15 +30,15 @@ export default function(app) {
 
   })
 
-    app.bus.execute({ action: "tail"})
+    app.bus.execute({ action: 'tail'})
     .pipeTo(new Writable(
 
     ));
     */
-    // app.bus.execute({ action: "tail" }).pipeTo(new Writable(new CollectionSink(new Collection())))
-    // app.bus.execute({ action: "tail" }).pipeTo()
+    // app.bus.execute({ action: 'tail' }).pipeTo(new Writable(new CollectionSink(new Collection())))
+    // app.bus.execute({ action: 'tail' }).pipeTo()
 
-    // app.bus.execute({ action: "tail" }).pipeTo(BusWriter.create(CollectionBus.create))
+    // app.bus.execute({ action: 'tail' }).pipeTo(BusWriter.create(CollectionBus.create))
 
     /*
     var machines = ModelCollection.create({ createModel: (data) {
@@ -54,14 +54,14 @@ export default function(app) {
     } });
 
     app.bus
-    .execute({ action: "tail" })
+    .execute({ action: 'tail' })
     .pipeTo(BusWriter.create(CollectionBus.create(machines)))
 
     */
 
     syncDbCollection(
       app.bus,
-      "servers",
+      'servers',
       {
         insert: _insert
       }
@@ -83,9 +83,9 @@ export default function(app) {
     //   bus: WebSocketBus.create
     // })
 
-    var host = "ws://" + machine.host + ":" + machine.port;
+    var host = 'ws://' + machine.host + ':' + machine.port;
 
-    app.logger.info("connect machine %s", host);
+    app.logger.info('connect machine %s', host);
 
     var bus = _connections = WebSocketBus.create({
       app: app,
@@ -95,18 +95,18 @@ export default function(app) {
     // add the remove bus.
     // TODO - this needs to be removed
     app.remoteBusses.push(AcceptBus.create(sift({
-      "target.owner._id": machine._id
+      'target.owner._id': machine._id
     }), bus));
 
     // TODO - VirtWindow.all(bus)
-    var response = bus.execute({ action: "load", collection: "virtWindows", multi: true });
+    var response = bus.execute({ action: 'load', collection: 'virtWindows', multi: true });
     var chunk;
     while(chunk = await response.read()) {
       if (chunk.done) break;
       if (chunk.value.minimized) continue;
       // TODO = yield new VirtWindow(chunk.value).insert();
       chunk.value.owner = { _id: machine._id };
-      await app.bus.execute({ action: "insert", collection: "virtWindows", data: chunk.value }).read();
+      await app.bus.execute({ action: 'insert', collection: 'virtWindows', data: chunk.value }).read();
       // break;
     }
   }

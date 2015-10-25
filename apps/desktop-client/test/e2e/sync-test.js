@@ -1,12 +1,12 @@
-var testUtils = require("desktop-client/test/utils");
-var MockSlave = require("desktop-client/test/mocks/slave");
-var findOpenPort = require("find-open-port");
-import { AcceptBus, BufferedBus, EmptyResponse } from "mesh";
-import readAll from "common/mesh/utils/read-all";
-import expect from "expect.js";
-import sift from "sift";
+var testUtils = require('desktop-client/test/utils');
+var MockSlave = require('desktop-client/test/mocks/slave');
+var findOpenPort = require('find-open-port');
+import { AcceptBus, BufferedBus, EmptyResponse } from 'mesh';
+import readAll from 'common/mesh/utils/read-all';
+import expect from 'expect.js';
+import sift from 'sift';
 
-describe(__filename + "#", function() {
+describe(__filename + '#', function() {
 
   var app;
 
@@ -17,26 +17,26 @@ describe(__filename + "#", function() {
     }, next);
   });
 
-  xit("automatically synchronizes windows from a machine that was added", async function() {
+  xit('automatically synchronizes windows from a machine that was added', async function() {
 
     var slave = new MockSlave({
       bus: AcceptBus.create(sift({
-        action: "load",
-        collection: "virtWindows"
-      }), BufferedBus.create(void 0, [{width:100,height:100,title:"abba"}, {width:100,height:100,title:"baab"}]))
+        action: 'load',
+        collection: 'virtWindows'
+      }), BufferedBus.create(void 0, [{width:100,height:100,title:'abba'}, {width:100,height:100,title:'baab'}]))
     });
 
     await slave.listen(await findOpenPort());
-    await app.bus.execute({ action: "insert", collection: "servers", data: {
-      host: "127.0.0.1",
+    await app.bus.execute({ action: 'insert', collection: 'servers', data: {
+      host: '127.0.0.1',
       port: slave.port
     }}).read();
 
     await testUtils.timeout(100);
 
     var virtWindows = await readAll(app.bus.execute({
-      action: "load",
-      collection: "virtWindows",
+      action: 'load',
+      collection: 'virtWindows',
       multi: true
     }));
 
@@ -45,9 +45,9 @@ describe(__filename + "#", function() {
     slave.dispose();
   });
 
-  xit("opens a new window for each inserted virtual window", async function() {
+  xit('opens a new window for each inserted virtual window', async function() {
     var openWindowOps = [];
-    app.bus = AcceptBus.create(sift({ action: "openWindow" }), {
+    app.bus = AcceptBus.create(sift({ action: 'openWindow' }), {
         execute: function(operation) {
           openWindowOps.push(operation);
           return EmptyResponse.create();
@@ -55,7 +55,7 @@ describe(__filename + "#", function() {
       },
       app.bus
     );
-    await app.bus.execute({ action: "insert", collection: "virtWindows", data: { width: 100, height: 100 }}).read();
+    await app.bus.execute({ action: 'insert', collection: 'virtWindows', data: { width: 100, height: 100 }}).read();
     await testUtils.timeout(200);
     expect(openWindowOps.length).to.be(1);
   });

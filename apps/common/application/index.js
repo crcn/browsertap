@@ -1,10 +1,10 @@
-import BaseModel from "common/data/models/base/model";
-import flatten from "lodash/array/flattenDeep";
-import Logger from "common/logger";
-import catchError from "./plugins/catch-errors";
-import CommonBus from "common/mesh/bus/log";
-import LogBus    from "common/mesh/bus/log";
-import readAll from "common/mesh/utils/read-all";
+import BaseModel from 'common/data/models/base/model';
+import flatten from 'lodash/array/flattenDeep';
+import Logger from 'common/logger';
+import catchError from './plugins/catch-errors';
+import CommonBus from 'common/mesh/bus/log';
+import LogBus    from 'common/mesh/bus/log';
+import readAll from 'common/mesh/utils/read-all';
 
 /**
  */
@@ -21,7 +21,7 @@ class Application extends BaseModel {
 
     this.logger = new Logger(Object.assign({
       bus: LogBus.create(this)
-    }, this.get("config.log")));
+    }, this.get('config.log')));
   }
 
   /**
@@ -38,7 +38,7 @@ class Application extends BaseModel {
 
   initialize() {
     this.initializePlugins();
-    return readAll(this.bus.execute({ action: "initialize" }));
+    return readAll(this.bus.execute({ action: 'initialize' }));
   }
 
   /**
@@ -52,7 +52,7 @@ class Application extends BaseModel {
    */
 
   dispose() {
-    return readAll(this.bus.execute({ action: "dispose" }));
+    return readAll(this.bus.execute({ action: 'dispose' }));
   }
 }
 

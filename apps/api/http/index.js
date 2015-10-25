@@ -1,24 +1,24 @@
-import http       from "http";
-import routes     from "./routes";
-import koa        from "koa";
-import bodyparser from "koa-bodyparser";
-import cors       from "koa-cors"
-import redisStore from "koa-redis";
-import session    from "koa-generic-session";
-import serve      from "koa-static";
+import http       from 'http';
+import routes     from './routes';
+import koa        from 'koa';
+import bodyparser from 'koa-bodyparser';
+import cors       from 'koa-cors'
+import redisStore from 'koa-redis';
+import session    from 'koa-generic-session';
+import serve      from 'koa-static';
 
 /**
  */
 
 module.exports = function(app) {
-  var port = app.get("config.http.port");
-  app.logger.info("http port: %d", port);
+  var port = app.get('config.http.port');
+  app.logger.info('http port: %d', port);
 
   var k = koa();
 
-  k.use(serve(app.get("config.directories.public")));
+  k.use(serve(app.get('config.directories.public')));
 
-  k.keys = ["keys", "keykeys"];
+  k.keys = ['keys', 'keykeys'];
 
   k.use(cors());
   k.use(bodyparser());

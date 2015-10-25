@@ -1,6 +1,6 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Application from "common/application";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Application from 'common/application';
 
 export default {
 
@@ -11,7 +11,7 @@ export default {
 
     if (!app) app = new Application();
 
-    var div = document.createElement("div");
+    var div = document.createElement('div');
     var component = React.createElement(componentClass, Object.assign({
       app: app, messages: app.intl.messages
     }, props));

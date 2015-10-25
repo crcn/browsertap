@@ -1,6 +1,6 @@
-import mixin from "common/utils/class/mixin";
-import httperr from "httperr"
-import readAll from "common/mesh/utils/read-all";
+import mixin from 'common/utils/class/mixin';
+import httperr from 'httperr'
+import readAll from 'common/mesh/utils/read-all';
 
 export default function(collectionName) {
 
@@ -10,7 +10,7 @@ export default function(collectionName) {
     */
 
     constructor() {
-      this.on("change", this._pOnChange);
+      this.on('change', this._pOnChange);
       this._pOnChange({ properties: this });
     },
 
@@ -34,7 +34,7 @@ export default function(collectionName) {
     */
 
     load () {
-      return this._run("load", {
+      return this._run('load', {
         query: { _id: this._id }
       });
     },
@@ -43,7 +43,7 @@ export default function(collectionName) {
     */
 
     remove () {
-      return this._run("remove", {
+      return this._run('remove', {
         query: { _id: String(this._id) }
       });
     },
@@ -59,7 +59,7 @@ export default function(collectionName) {
     */
 
     insert() {
-      return this._run("insert", {
+      return this._run('insert', {
         data : this.toJSON()
       });
     },
@@ -68,7 +68,7 @@ export default function(collectionName) {
     */
 
     update() {
-      return this._run("update", {
+      return this._run('update', {
         data : this.toJSON(),
         query: { _id: String(this._id) }
       });
@@ -105,7 +105,7 @@ export default function(collectionName) {
     async function _find(multi, bus, query) {
 
       var response = bus.execute({
-        action     : "load",
+        action     : 'load',
         multi      : multi,
         query      : query,
         collection : collectionName

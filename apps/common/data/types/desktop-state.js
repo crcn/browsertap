@@ -1,4 +1,4 @@
-import ValueType from "common/data/types/value";
+import ValueType from 'common/data/types/value';
 
 class DesktopState extends ValueType {
   validate(value) {

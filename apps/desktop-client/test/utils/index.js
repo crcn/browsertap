@@ -1,4 +1,4 @@
-var Application = require("../../application");
+var Application = require('../../application');
 
 module.exports = {
   timeout: function(ms) {

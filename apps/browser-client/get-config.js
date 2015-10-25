@@ -1,6 +1,6 @@
 
-var getConfig   = require("common/utils/get-config");
-var deepExtend  = require("lodash/object/defaultsDeep");
+var getConfig   = require('common/utils/get-config');
+var deepExtend  = require('lodash/object/defaultsDeep');
 
 module.exports = function(env) {
 
@@ -8,12 +8,12 @@ module.exports = function(env) {
     defaults: {
       beta: true,
       api: {
-        host: "http://0.0.0.0:8080"
+        host: 'http://0.0.0.0:8080'
       }
     },
     staging: {
       api: {
-        host: "http://staging.browsertap.com/api"
+        host: 'http://staging.browsertap.com/api'
       }
     }
   };

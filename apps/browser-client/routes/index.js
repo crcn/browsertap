@@ -1,5 +1,5 @@
-import forms   from "common/data/forms";
-import Invitee from "common/data/models/invitee";
+import forms   from 'common/data/forms';
+import Invitee from 'common/data/models/invitee';
 
 module.exports = function(app) {
   var router = app.router;
@@ -22,98 +22,98 @@ module.exports = function(app) {
       });
       next();
     } catch(e) {
-      return router.redirect("login", {
+      return router.redirect('login', {
         error: e
       });
     }
   };
 
-  router.addRoute("home", "/", auth, function(location) {
+  router.addRoute('home', '/', auth, function(location) {
     location.setProperties({
       state: {
-        mainPage: "home",
-        authPage: "signup"
+        mainPage: 'home',
+        authPage: 'signup'
       }
     });
   });
 
-  router.addRoute("app", "/app", function(location) {
+  router.addRoute('app', '/app', function(location) {
     location.setProperties({
       state: {
-        mainPage: "app",
+        mainPage: 'app',
       }
     });
   });
 
-  router.addRoute("signup", "/signup", function(location) {
+  router.addRoute('signup', '/signup', function(location) {
     location.setProperties({
       state: {
-        mainPage: "auth",
-        authPage: "signup"
+        mainPage: 'auth',
+        authPage: 'signup'
       }
     });
   });
 
-  router.addRoute("requestInviteComplete", "/request-invite-complete", function(location) {
+  router.addRoute('requestInviteComplete', '/request-invite-complete', function(location) {
     location.setProperties({
       state: {
-        mainPage: "auth",
-        authPage: "requestInviteComplete"
+        mainPage: 'auth',
+        authPage: 'requestInviteComplete'
       }
     });
   });
 
-  router.addRoute("invite", "/invite/:shortcode", async function(location) {
+  router.addRoute('invite', '/invite/:shortcode', async function(location) {
 
     var data = Object.assign({ bus: app.bus }, (await app.bus.execute({
-      action: "getInviteeFromShortCode",
+      action: 'getInviteeFromShortCode',
       shortcode: location.params.shortcode
     }).read()).value);
 
     location.setProperties({
       state: {
         inviter  : new Invitee(data),
-        mainPage : "auth",
+        mainPage : 'auth',
         shortcode: location.params.shortcode,
-        authPage : "invited"
+        authPage : 'invited'
       }
     });
   });
 
-  router.addRoute("forgotPassword", "/forgot", function(location) {
+  router.addRoute('forgotPassword', '/forgot', function(location) {
     location.setProperties({
       state: {
-        mainPage: "auth",
-        authPage: "forgotPassword"
+        mainPage: 'auth',
+        authPage: 'forgotPassword'
       }
     });
   });
 
-  router.addRoute("resetPassword", "/reset-password/:token._id", function(location) {
+  router.addRoute('resetPassword', '/reset-password/:token._id', function(location) {
     location.setProperties({
       state: {
         token: location.params.token,
-        mainPage: "auth",
-        authPage: "resetPassword"
+        mainPage: 'auth',
+        authPage: 'resetPassword'
       }
     });
   });
 
-  router.addRoute("login", "/login", function(location) {
+  router.addRoute('login', '/login', function(location) {
     location.setProperties({
       state: {
-        mainPage: "auth",
-        authPage: "login"
+        mainPage: 'auth',
+        authPage: 'login'
       }
     });
   });
 
-  router.addRoute("logout", "/logout", async function(location) {
+  router.addRoute('logout', '/logout', async function(location) {
     await forms.logout(app.bus);
-    router.redirect("login");
+    router.redirect('login');
   });
 
-  router.addRoute("confirm", "/confirm/:token._id", async function(location) {
+  router.addRoute('confirm', '/confirm/:token._id', async function(location) {
 
     var err;
 
@@ -125,9 +125,9 @@ module.exports = function(app) {
 
     location.setProperties({
       state: {
-        mainPage: "auth",
+        mainPage: 'auth',
         error   : err,
-        authPage: "confirmed"
+        authPage: 'confirmed'
       }
     });
   });

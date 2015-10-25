@@ -1,5 +1,5 @@
-import nodemailer from "nodemailer";
-import httperr from "httperr";
+import nodemailer from 'nodemailer';
+import httperr from 'httperr';
 
 /**
  */
@@ -33,7 +33,7 @@ class Emailer {
       }, function(error, info){
           if(error) {
             this.app.logger.error(err.stack);
-           return reject(new httperr[500]("couldNotSendEmail"));
+           return reject(new httperr[500]('couldNotSendEmail'));
           }
           resolve(info);
 

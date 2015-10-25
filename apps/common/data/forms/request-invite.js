@@ -1,7 +1,7 @@
-import mixinSchema from "common/data/schema/mixin";
-import Schema      from "common/data/schema/schema";
-import Invitee     from "common/data/models/invitee";
-import mixinForm   from "./mixins/form";
+import mixinSchema from 'common/data/schema/mixin';
+import Schema      from 'common/data/schema/schema';
+import Invitee     from 'common/data/models/invitee';
+import mixinForm   from './mixins/form';
 
 /**
  */
@@ -18,7 +18,7 @@ var requestInviteFormSchema = new Schema({
     },
     emailAddress:  {
       required : true,
-      type     : require("common/data/types/email-address")
+      type     : require('common/data/types/email-address')
     }
   }
 });
@@ -27,7 +27,7 @@ var requestInviteFormSchema = new Schema({
  */
 
 @mixinSchema(requestInviteFormSchema)
-@mixinForm("requestInvite", Invitee)
+@mixinForm('requestInvite', Invitee)
 class RequestInviteForm { };
 
 /**

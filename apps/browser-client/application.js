@@ -1,11 +1,11 @@
-var ReactDOM         = require("react-dom");
-var React            = require("react");
-var BaseApplication  = require("common/application");
-var Router           = require("common/router");
-var Main             = require("./components/main");
-var routes           = require("./routes");
-var BrowserClientBus = require("./bus");
-var shortcuts        = require("./shortcuts");
+var ReactDOM         = require('react-dom');
+var React            = require('react');
+var BaseApplication  = require('common/application');
+var Router           = require('common/router');
+var Main             = require('./components/main');
+var routes           = require('./routes');
+var BrowserClientBus = require('./bus');
+var shortcuts        = require('./shortcuts');
 
 /**
  */
@@ -17,8 +17,8 @@ class BrowserClientApplication extends BaseApplication {
 
   intl = {
     messages: Object.assign({},
-      require("./translations/en"),
-      require("common/translations/en")
+      require('./translations/en'),
+      require('common/translations/en')
     )
   }
 

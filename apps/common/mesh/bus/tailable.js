@@ -1,5 +1,5 @@
-import { Bus, Response } from "mesh";
-import sift from "sift";
+import { Bus, Response } from 'mesh';
+import sift from 'sift';
 
 /**
  * Makes a bus tailable
@@ -20,7 +20,7 @@ class TailableBus extends Bus {
    */
 
   execute(operation) {
-    if (operation.action === "tail") {
+    if (operation.action === 'tail') {
       return Response.create((writable) => {
         this._tails.push(writable);
         writable.filter = operation.filter ? sift(operation.filter) : function() {

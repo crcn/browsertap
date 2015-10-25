@@ -11,7 +11,7 @@ function mixin (behaviour, sharedBehaviour = {}) {
 
   function _mixin (clazz) {
 
-    if (~instanceKeys.indexOf("constructor")) {
+    if (~instanceKeys.indexOf('constructor')) {
       class ctor extends clazz {
         constructor() {
           super(...arguments);

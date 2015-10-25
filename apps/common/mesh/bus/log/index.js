@@ -1,10 +1,10 @@
-import { AcceptBus, NoopBus, ParallelBus } from "mesh";
-import sift from "sift";
-import LogOperationsBus from "./operations";
+import { AcceptBus, NoopBus, ParallelBus } from 'mesh';
+import sift from 'sift';
+import LogOperationsBus from './operations';
 
 var busFactories = [
-  require("./loggly"),
-  require("./stdout")
+  require('./loggly'),
+  require('./stdout')
 ];
 
 export default {
@@ -13,7 +13,7 @@ export default {
     if (!bus) bus = NoopBus.create();
 
     bus = AcceptBus.create(
-      sift({ action: "log" }),
+      sift({ action: 'log' }),
       ParallelBus.create(busFactories.map(function(busClass) {
         return busClass.create(app, bus);
       })),

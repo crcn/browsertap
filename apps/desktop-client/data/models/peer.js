@@ -1,4 +1,4 @@
-import Model from "common/data/models/base/model"
+import Model from 'common/data/models/base/model'
 
 var PeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection ||
                        window.webkitRTCPeerConnection || window.msRTCPeerConnection;
@@ -52,7 +52,7 @@ class Peer extends Model {
    */
 
   async _setRemoteDescription(answer) {
-    var result = (await this.bus.execute({ action: "setRemoteAnswer", answer: {
+    var result = (await this.bus.execute({ action: 'setRemoteAnswer', answer: {
       type: answer.type,
       sdp : answer.sdp
     }, query: { id: this.id }}).read()).value;
@@ -68,7 +68,7 @@ class Peer extends Model {
       var onChange = (props) => {
         console.log(JSON.stringify(props));
       };
-      this.on("change", onChange);
+      this.on('change', onChange);
     });
   }
 

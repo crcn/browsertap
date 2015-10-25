@@ -1,4 +1,4 @@
-import { EventEmitter } from "events";
+import { EventEmitter } from 'events';
 
 /**
  */
@@ -62,14 +62,14 @@ class Collection extends EventEmitter {
     var changes = [];
 
     changes.push({
-      type: "splice",
+      type: 'splice',
       object: this,
       index: start,
       removed: removed,
       addedCount: newItems.length
     });
 
-    this.emit("change", changes);
+    this.emit('change', changes);
 
     return this;
   }
@@ -80,16 +80,16 @@ class Collection extends EventEmitter {
  */
 
 [
-  "map",
-  "forEach",
-  "reduce",
-  "join",
-  "slice",
-  "sort",
-  "concat",
-  "indexOf",
-  "lastIndexOf",
-  "revers"
+  'map',
+  'forEach',
+  'reduce',
+  'join',
+  'slice',
+  'sort',
+  'concat',
+  'indexOf',
+  'lastIndexOf',
+  'revers'
 ].forEach(function(methodName) {
   Collection.prototype[methodName] = function(...args) {
     return this.source[methodName].apply(this.source, args);

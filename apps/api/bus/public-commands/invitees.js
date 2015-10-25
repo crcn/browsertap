@@ -1,14 +1,14 @@
-import sift              from "sift";
-import httperr           from "httperr";
-import CommandBus        from "common/mesh/bus/command";
-import Invitee           from "common/data/models/invitee";
-import User              from "common/data/models/user";
-import RequestInviteForm from "common/data/forms/request-invite";
-import crc32             from "crc32";
+import sift              from 'sift';
+import httperr           from 'httperr';
+import CommandBus        from 'common/mesh/bus/command';
+import Invitee           from 'common/data/models/invitee';
+import User              from 'common/data/models/user';
+import RequestInviteForm from 'common/data/forms/request-invite';
+import crc32             from 'crc32';
 
 export default function(app, bus) {
 
-  var browserHost = app.get("config.hosts.browser");
+  var browserHost = app.get('config.hosts.browser');
 
   async function generateShortCode() {
     var code;
@@ -28,7 +28,7 @@ export default function(app, bus) {
         var form = new RequestInviteForm(Object.assign({ bus: bus }, operation.data));
 
         if (await User.findOne(bus, { emailAddress: form.emailAddress.valueOf() })) {
-          throw new httperr.Conflict("userEmailAddressExists");
+          throw new httperr.Conflict('userEmailAddressExists');
         }
 
         var invitee;
@@ -66,7 +66,7 @@ export default function(app, bus) {
     getInviteeFromShortCode: CommandBus.create({
       execute: async function(operation) {
         var invitee = await Invitee.findOne(bus, { shortcode: operation.shortcode });
-        if (!invitee) throw new httperr.NotFound("inviteeNotFound");
+        if (!invitee) throw new httperr.NotFound('inviteeNotFound');
         return { name: invitee.name };
       }
     })

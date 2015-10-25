@@ -1,10 +1,10 @@
-import InternalCommandsBus from "./commands";
-import MemoryBus from "common/mesh/bus/memory";
-import CacheBus from "common/mesh/bus/cache";
-import { NoopBus, FallbackBus } from "mesh";
-import SpyBus from "common/mesh/bus/spy";
-import UpsertBus from "common/mesh/bus/upsert";
-import IPCBus from "./drivers/ipc";
+import InternalCommandsBus from './commands';
+import MemoryBus from 'common/mesh/bus/memory';
+import CacheBus from 'common/mesh/bus/cache';
+import { NoopBus, FallbackBus } from 'mesh';
+import SpyBus from 'common/mesh/bus/spy';
+import UpsertBus from 'common/mesh/bus/upsert';
+import IPCBus from './drivers/ipc';
 
 export default {
   create: function(app, bus) {

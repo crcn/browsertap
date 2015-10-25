@@ -1,4 +1,4 @@
-import { Response, NoopBus } from "mesh";
+import { Response, NoopBus } from 'mesh';
 
 // TODO - should use remove operation helper - see ros.js
 export default {
@@ -8,7 +8,7 @@ export default {
 
     var _openResponses = {};
     var _i = 0;
-    var _mid = Date.now() + "_" + Math.round(Math.random() * 99999) + "_";
+    var _mid = Date.now() + '_' + Math.round(Math.random() * 99999) + '_';
 
     function createId() {
       return _mid + (++_i);
@@ -22,21 +22,21 @@ export default {
       }
     }
 
-    input.on("operation", createListener(async function(operation) {
+    input.on('operation', createListener(async function(operation) {
       var resp = bus.execute(operation);
       var chunk;
       while(chunk = await resp.read()) {
         if (chunk.done) break;
-        output.send("chunk", operation.id, chunk.value);
+        output.send('chunk', operation.id, chunk.value);
       }
-      output.send("end", operation.id);
+      output.send('end', operation.id);
     }));
 
-    input.on("chunk", createListener(function(id, chunkValue) {
+    input.on('chunk', createListener(function(id, chunkValue) {
       if (_openResponses[id]) _openResponses[id].write(chunkValue);
     }));
 
-    input.on("end", createListener(function(id, chunk) {
+    input.on('end', createListener(function(id, chunk) {
       if (_openResponses[id]) _openResponses[id].end();
       delete _openResponses[id];
     }));
@@ -45,7 +45,7 @@ export default {
       execute: function(operation) {
         return Response.create(function(writable) {
           _openResponses[operation.id = createId()] = writable;
-          output.send("operation", operation);
+          output.send('operation', operation);
         });
       }
     };

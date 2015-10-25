@@ -1,8 +1,8 @@
-import mixinSchema      from "common/data/schema/mixin";
-import Schema           from "common/data/schema/schema";
-import CreditCardNumber from "common/data/types/credit-card-number";
-import CVC              from "common/data/types/cvc";
-import httperr          from "httperr" ;
+import mixinSchema      from 'common/data/schema/mixin';
+import Schema           from 'common/data/schema/schema';
+import CreditCardNumber from 'common/data/types/credit-card-number';
+import CVC              from 'common/data/types/cvc';
+import httperr          from 'httperr' ;
 
 /**
  */
@@ -11,7 +11,7 @@ var paymenyFormSchema = new Schema({
   fields: {
     organization: {
       required: true,
-      type: require("common/data/types/reference")
+      type: require('common/data/types/reference')
     },
     cardNumber: {
       type: CreditCardNumber
@@ -44,13 +44,13 @@ class PaymentForm {
         exp_month: 10,
         exp_year: 16
       }, function(status, result) {
-        if (status !== 200) return reject(new httperr[status]("errors.unableToPay"));
+        if (status !== 200) return reject(new httperr[status]('errors.unableToPay'));
         resolve(result);
       });
     }.bind(this));
 
     return await this.bus.execute({
-      action: "addStripeCustomer",
+      action: 'addStripeCustomer',
       data: {
         organization: this.organization,
         customer: result

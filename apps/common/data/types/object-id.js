@@ -1,4 +1,4 @@
-import ValueType from "./value";
+import ValueType from './value';
 
 /**
  */

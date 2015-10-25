@@ -1,4 +1,4 @@
-import sift from "sift";
+import sift from 'sift';
 
 export default function(bus, collection, options) {
 
@@ -9,7 +9,7 @@ export default function(bus, collection, options) {
   }, options);
 
   var spy = bus.execute({
-    action: "spy",
+    action: 'spy',
     filter: sift({ action: /insert|remove|update/, collection: collection })
   });
 
@@ -18,13 +18,13 @@ export default function(bus, collection, options) {
     while({value} = await spy.read()) {
       if (!value) break;
       switch(value.operation.action) {
-        case "insert":
+        case 'insert':
           await handlers.insert(value.operation.data);
           break;
-        case "remove":
+        case 'remove':
           await handlers.remove(value.operation.query);
           break;
-        case "update":
+        case 'update':
           await handlers.remove(value.operation.query, value.operation.data)
           break;
       }

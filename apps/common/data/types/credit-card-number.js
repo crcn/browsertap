@@ -1,5 +1,5 @@
-import ValueType from "./value";
-import cc        from "credit-card";
+import ValueType from './value';
+import cc        from 'credit-card';
 
 /**
  */

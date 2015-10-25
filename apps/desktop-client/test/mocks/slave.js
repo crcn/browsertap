@@ -1,6 +1,6 @@
-import ws from "websocket";
-import http from "http";
-import { NoopBus } from "mesh";
+import ws from 'websocket';
+import http from 'http';
+import { NoopBus } from 'mesh';
 var WebSocketServer = ws.server;
 
 class MockSlave {
@@ -20,10 +20,10 @@ class MockSlave {
       httpServer: server,
       autoAcceptConnections: false
     });
-    ws.on("request", (request) => {
+    ws.on('request', (request) => {
       var connection = request.accept('dumb-increment-protocol', request.origin);
 
-      connection.on("message", async function(message) {
+      connection.on('message', async function(message) {
         var op = JSON.parse(message.utf8Data);
         var resp = this.bus.execute(op);
         var chunk;

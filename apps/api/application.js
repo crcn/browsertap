@@ -1,11 +1,11 @@
-import BaseApplication from "common/application";
-import extend          from "lodash/object/extend";
-import cluster         from "cluster";
-import http            from "./http";
-import emailer         from "./emailer";
-import stripe          from "./stripe";
-import APIBus          from "./bus";
-import cronTasks       from "./cron-tasks";
+import BaseApplication from 'common/application';
+import extend          from 'lodash/object/extend';
+import cluster         from 'cluster';
+import http            from './http';
+import emailer         from './emailer';
+import stripe          from './stripe';
+import APIBus          from './bus';
+import cronTasks       from './cron-tasks';
 
 class APIApplication extends BaseApplication {
 
@@ -13,7 +13,7 @@ class APIApplication extends BaseApplication {
    */
 
   intl = {
-    messages: require("common/translations/en")
+    messages: require('common/translations/en')
   }
 
   /**
@@ -21,13 +21,13 @@ class APIApplication extends BaseApplication {
 
   initialize(next) {
 
-    this.logger.info("bt hosts: ", this.get("config.hosts"));
-    this.logger.info("redis host: ", this.get("config.redis.host"));
-    this.logger.info("directories: ", this.get("config.directories"));
+    this.logger.info('bt hosts: ', this.get('config.hosts'));
+    this.logger.info('redis host: ', this.get('config.redis.host'));
+    this.logger.info('directories: ', this.get('config.directories'));
 
     // fork it?
-    if (cluster.isMaster && this.get("config.numCores") > 0) {
-      this.logger.info("fourk it %d times ✊", this.config.numCores);
+    if (cluster.isMaster && this.get('config.numCores') > 0) {
+      this.logger.info('fourk it %d times ✊', this.config.numCores);
       for (var i = this.config.numCores; i--;) this.fork();
       if (next) next();
       return;
@@ -58,7 +58,7 @@ class APIApplication extends BaseApplication {
    */
 
   fork() {
-    cluster.fork().once("exit", this.fork.bind(this));
+    cluster.fork().once('exit', this.fork.bind(this));
   }
 }
 

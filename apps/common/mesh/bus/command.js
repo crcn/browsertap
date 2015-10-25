@@ -1,6 +1,6 @@
-import httperr from "httperr";
-import User from "common/data/models/user";
-import { Bus, Response }  from "mesh";
+import httperr from 'httperr';
+import User from 'common/data/models/user';
+import { Bus, Response }  from 'mesh';
 
 class CommandBus extends Bus {
   constructor({ auth, execute }) {
@@ -13,7 +13,7 @@ class CommandBus extends Bus {
 
       if (this._auth === true) {
         if (!operation.session.userId) {
-          return writable.abort(new httperr.Unauthorized("must be logged in for this"));
+          return writable.abort(new httperr.Unauthorized('must be logged in for this'));
         }
 
         operation.user = await User.findOne(operation.app.bus, { _id: String(operation.session.userId) });

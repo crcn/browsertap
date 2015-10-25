@@ -1,7 +1,7 @@
-import sift         from "sift";
-import EmailForm    from "api/data/forms/email";
-import httperr      from "httperr";
-import CommandBus   from "common/mesh/bus/command";
+import sift         from 'sift';
+import EmailForm    from 'api/data/forms/email';
+import httperr      from 'httperr';
+import CommandBus   from 'common/mesh/bus/command';
 
 export default function(app, bus) {
   return {

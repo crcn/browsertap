@@ -1,5 +1,5 @@
-import mixin from "common/utils/class/mixin";
-import httperr from "httperr"
+import mixin from 'common/utils/class/mixin';
+import httperr from 'httperr'
 
 export default function(formName, modelClass) {
   return mixin({

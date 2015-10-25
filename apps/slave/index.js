@@ -1,17 +1,17 @@
-require("babel/register")({
+require('babel/register')({
   ignore:/common\/node_modules/,
-  optional: ["es7.classProperties", "es7.decorators"]
+  optional: ['es7.classProperties', 'es7.decorators']
 });
 
 
-var Application = require("./application");
-var getConfig   = require("./get-config");
+var Application = require('./application');
+var getConfig   = require('./get-config');
 
 /**
  */
 
 if (!process.env.NODE_ENV) {
-  process.env.NODE_ENV = "development";
+  process.env.NODE_ENV = 'development';
 }
 
 /**
@@ -25,5 +25,5 @@ var app = new Application({
  */
 
 app.initialize(function() {
-  // app.logger.info("init'd");
+  // app.logger.info('init'd');
 });

@@ -1,6 +1,6 @@
-import { NoopBus, Response } from "mesh";
-import { EventEmitter } from "events";
-import ws from "websocket";
+import { NoopBus, Response } from 'mesh';
+import { EventEmitter } from 'events';
+import ws from 'websocket';
 
 var WebSocket = ws.w3cwebsocket;
 
@@ -27,7 +27,7 @@ export default {
       var resp = _openResponses[op.resp];
 
       if (!resp) {
-        app.logger.verbose("ws remote < ", op);
+        app.logger.verbose('ws remote < ', op);
         return bus.execute(op);
       }
 
@@ -40,12 +40,12 @@ export default {
     }
 
     function send(operation) {
-      app.logger.verbose("ws remote > ", operation);
+      app.logger.verbose('ws remote > ', operation);
       ws.send(JSON.stringify(operation));
     }
 
     var _i = 0;
-    var _mid = Date.now() + "_" + Math.round(Math.random() * 99999) + "_";
+    var _mid = Date.now() + '_' + Math.round(Math.random() * 99999) + '_';
 
     function createId() {
       return _mid + (++_i);
