@@ -2,7 +2,6 @@ import { AcceptBus, FallbackBus, Response } from 'mesh';
 import sift from 'sift';
 
 export default {
-
   create: function(localBus, remoteBus) {
     return AcceptBus.create(sift({ action: 'load' }), FallbackBus.create([
       localBus,
@@ -26,6 +25,5 @@ export default {
         }
       }
     ]), remoteBus);
-
   }
 };

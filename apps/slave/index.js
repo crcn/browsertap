@@ -1,5 +1,4 @@
 require('babel/register')({
-  ignore:/common\/node_modules/,
   optional: ['es7.classProperties', 'es7.decorators']
 });
 

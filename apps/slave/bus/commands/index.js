@@ -4,39 +4,42 @@ import CommandBus from 'common/mesh/bus/command';
 import { spawn } from 'child_process';
 import path from 'path';
 
-export function create(app, bus) {
+export default {
 
-  return CommandsBus.create({
-    initialize: CommandBus.create({
-      execute: _initialize,
-    }),
-    spawnDesktopController: CommandBus.create({
-      execute: _spawnDesktopController
-    })
-  }, bus);
+  create: function(app, bus) {
 
-  function _initialize(operation) {
-    app.bus.execute({ action: 'spawnDesktopController' });
-  }
+    return CommandsBus.create({
+      initialize: CommandBus.create({
+        execute: _initialize,
+      }),
+      spawnDesktopController: CommandBus.create({
+        execute: _spawnDesktopController
+      })
+    }, bus);
 
-  function _spawnDesktopController(operation) {
-    var binPath = app.get('config.paths.desktopController');
-    app.logger.info('spawning desktop controller %s', binPath);
+    function _initialize(operation) {
+      app.bus.execute({ action: 'spawnDesktopController' });
+    }
 
-    return Response.create(function(writable) {
+    function _spawnDesktopController(operation) {
+      var binPath = app.get('config.paths.desktopController');
+      app.logger.info('spawning desktop controller %s', binPath);
 
-      var cwd     = path.dirname(binPath);
-      var binName = path.basename(binPath);
+      return Response.create(function(writable) {
 
-      var proc = spawn(binPath);
+        var cwd     = path.dirname(binPath);
+        var binName = path.basename(binPath);
 
-      proc.stdout.pipe(process.stdout);
-      proc.stder.pipe(process.stderr);
+        var proc = spawn(binPath);
 
-      proc.on('close', function(err, code) {
-        if (err) return writable.error(err);
-        writable.close();
+        proc.stdout.pipe(process.stdout);
+        proc.stder.pipe(process.stderr);
+
+        proc.on('close', function(err, code) {
+          if (err) return writable.error(err);
+          writable.close();
+        });
       });
-    });
+    }
   }
 }

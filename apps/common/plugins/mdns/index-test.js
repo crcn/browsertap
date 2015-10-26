@@ -7,7 +7,6 @@ describe(__filename + '#', function() {
   var types          = [];
   var advertisements = [];
 
-
   var mdns;
 
   beforeEach(function() {

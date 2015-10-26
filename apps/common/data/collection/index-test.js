@@ -1,6 +1,5 @@
 import Collection from './index';
 import { BufferedBus, NoopBus } from 'mesh';
-import TailableBus from 'common/mesh/bus/tailable';
 import expect from 'expect.js';
 import testUtils from 'common/test/utils';
 
