@@ -1,5 +1,5 @@
 import DataForm from './index'
-import React from 'react/addons'
+import TestUtils from 'react-addons-test-utils';
 import expect from 'expect.js'
 import mixinSchema from 'common/data/schema/mixin'
 import Schema from 'common/data/schema/schema'
@@ -49,16 +49,16 @@ describe(__filename + '#', function() {
     expect(submitButton.disabled).to.be(true);
 
     // test ui state
-    React.addons.TestUtils.Simulate.change(passwordInput);
+    TestUtils.Simulate.change(passwordInput);
 
     expect(passwordInput.parentNode.parentNode.querySelector('.ion-close')).not.to.be(null);
     passwordInput.value = 'password';
-    React.addons.TestUtils.Simulate.change(passwordInput);
+    TestUtils.Simulate.change(passwordInput);
     expect(passwordInput.parentNode.parentNode.querySelector('.ion-close')).to.be(null);
     expect(passwordInput.parentNode.parentNode.querySelector('.ion-checkmark')).not.to.be(null);
 
     emailAddressInput.value = 'a@b.com';
-    React.addons.TestUtils.Simulate.change(emailAddressInput);
+    TestUtils.Simulate.change(emailAddressInput);
 
     expect(submitButton.disabled).to.be(false);
   });
@@ -91,13 +91,13 @@ describe(__filename + '#', function() {
     passwordInput.value  = 'password';
     passwordInput2.value = 'password1';
 
-    React.addons.TestUtils.Simulate.change(passwordInput);
-    React.addons.TestUtils.Simulate.change(passwordInput2);
+    TestUtils.Simulate.change(passwordInput);
+    TestUtils.Simulate.change(passwordInput2);
 
     expect(submitButton.disabled).to.be(true);
 
     passwordInput.value  = 'password1';
-    React.addons.TestUtils.Simulate.change(passwordInput);
+    TestUtils.Simulate.change(passwordInput);
     expect(submitButton.disabled).to.be(false);
 
     expect(passwordInput2.parentNode.parentNode.querySelector('.ion-checkmark')).not.to.be(null);

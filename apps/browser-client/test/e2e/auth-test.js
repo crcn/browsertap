@@ -1,5 +1,5 @@
 var expect = require('expect.js');
-var React  = require('react/addons');
+var TestUtils = require('react-addons-test-utils');
 var testUtils = require('browser-client/test/utils');
 var timeout = require('common/test/utils').timeout;
 
@@ -35,9 +35,9 @@ describe(__filename + '#', function() {
     var passwordInput     = browserApp.element.querySelector('*[name="password"]');
     emailAddressInput.value = 'a@b.com';
     passwordInput.value     = 'password';
-    React.addons.TestUtils.Simulate.change(emailAddressInput);
-    React.addons.TestUtils.Simulate.change(passwordInput);
-    React.addons.TestUtils.Simulate.submit(browserApp.element.querySelector('form'));
+    TestUtils.Simulate.change(emailAddressInput);
+    TestUtils.Simulate.change(passwordInput);
+    TestUtils.Simulate.submit(browserApp.element.querySelector('form'));
   }
 
   it('can successfuly sign up a user', async function() {
@@ -67,14 +67,14 @@ describe(__filename + '#', function() {
     browserApp.router.redirect('logout');
     browserApp.router.redirect('forgotPassword');
     browserApp.testUtils.setInputValue('*[name="emailAddress"]', browserApp.test.fixtures.unverifiedUser.emailAddress);
-    React.addons.TestUtils.Simulate.submit(browserApp.element.querySelector('form'));
+    TestUtils.Simulate.submit(browserApp.element.querySelector('form'));
 
     await timeout(2);
     var message = apiApp.emailer.outbox.messages.pop();
     browserApp.router.redirect(message.body.valueOf().match(/(\/reset-password\/.*)/)[1]);
     browserApp.testUtils.setInputValue('*[name="password"]', 'password99');
     browserApp.testUtils.setInputValue('*[name="repeatPassword"]', 'password99');
-    React.addons.TestUtils.Simulate.submit(browserApp.element.querySelector('form'));
+    TestUtils.Simulate.submit(browserApp.element.querySelector('form'));
     await timeout(2);
     expect(browserApp.router.location.toString()).to.contain('showMessage=authResetPassword.loginWithNewPassword');
     expect(browserApp.element.innerHTML).to.contain('alert-info');

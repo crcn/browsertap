@@ -1,5 +1,5 @@
 var expect   = require('expect.js');
-var React    = require('react/addons');
+var TestUtils = require('react-addons-test-utils');
 var Invitee  = require('common/data/models/invitee');
 var testUtils = require('browser-client/test/utils');
 var timeout   = require('common/test/utils').timeout;
@@ -26,7 +26,7 @@ describe(__filename + '#', function() {
     browserApp.testUtils.setInputValue('*[name="name"]', 'bob marley');
     browserApp.testUtils.setInputValue('*[name="emailAddress"]', 'a@b.com');
 
-    React.addons.TestUtils.Simulate.submit(browserApp.element.querySelector('form'));
+    TestUtils.Simulate.submit(browserApp.element.querySelector('form'));
 
     await timeout(0);
     expect(browserApp.element.innerHTML).to.contain('request-invite-complete');
@@ -36,7 +36,7 @@ describe(__filename + '#', function() {
     browserApp.router.redirect('signup');
     browserApp.testUtils.setInputValue('*[name="name"]', 'bob marley jr');
     browserApp.testUtils.setInputValue('*[name="emailAddress"]', 'a@b.com');
-    React.addons.TestUtils.Simulate.submit(browserApp.element.querySelector('form'));
+    TestUtils.Simulate.submit(browserApp.element.querySelector('form'));
 
     await timeout(5);
     var value = browserApp.element.querySelector('input').value.match(/(\/invite\/.*)/)[1];
@@ -49,7 +49,7 @@ describe(__filename + '#', function() {
 
     browserApp.testUtils.setInputValue('*[name="name"]', 'bill marley');
     browserApp.testUtils.setInputValue('*[name="emailAddress"]', 'c@d.com');
-    React.addons.TestUtils.Simulate.submit(browserApp.element.querySelector('form'));
+    TestUtils.Simulate.submit(browserApp.element.querySelector('form'));
 
     await timeout(5);
     var inviter = await Invitee.findOne(browserApp.bus, { shortcode: shortcode });

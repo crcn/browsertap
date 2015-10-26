@@ -2,7 +2,7 @@ import apiTestUtils from 'api/test/utils';
 import application from '../../application';
 import { AttachDefaultsBus } from 'mesh';
 import fixtures from '../fixtures/index';
-var React  = require('react/addons');
+var TestUtils = require('react-addons-test-utils');
 import { timeout } from 'common/test/utils';
 
 module.exports = {
@@ -48,14 +48,14 @@ module.exports = {
         app.router.redirect('login');
         app.element.querySelector('*[name="emailAddress"]').value    = user.emailAddress.valueOf();
         app.element.querySelector('*[name="password"]').value = user.password.valueOf();
-        React.addons.TestUtils.Simulate.change(app.element.querySelector('*[name="emailAddress"]'));
-        React.addons.TestUtils.Simulate.change(app.element.querySelector('*[name="password"]'));
-        React.addons.TestUtils.Simulate.submit(app.element.querySelector('form'));
+        TestUtils.Simulate.change(app.element.querySelector('*[name="emailAddress"]'));
+        TestUtils.Simulate.change(app.element.querySelector('*[name="password"]'));
+        TestUtils.Simulate.submit(app.element.querySelector('form'));
       },
 
       setInputValue: function(query, value) {
         app.element.querySelector(query).value = value;
-        React.addons.TestUtils.Simulate.change(app.element.querySelector(query));
+        TestUtils.Simulate.change(app.element.querySelector(query));
       }
 
     };
