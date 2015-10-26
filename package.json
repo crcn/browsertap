@@ -9,7 +9,7 @@
     "start-api": "cd apps/api; npm start",
     "start-eyebrowse": "cd apps/desktop-client; npm start",
     "dev": "linklocal link -r && linklocal list -r | bulk -c 'npm install --production'",
-    "prepublish": "if [ \"$NODE_ENV\" != \"production\" ]; then npm run dev; fi"
+    "prepublish2": "if [ \"$NODE_ENV\" != \"production\" ]; then npm run dev; fi"
   },
   "author": "",
   "license": "ISC",

@@ -2,6 +2,7 @@
 node_modules
 public/css/all.css
 coverage/
+npm-*
 public/build/
 apps/desktop/vendor
 apps/desktop/build
