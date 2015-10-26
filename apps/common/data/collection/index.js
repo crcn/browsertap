@@ -65,17 +65,18 @@ class Collection extends DataObject {
   splice(start, removeCount, ...newItems) {
     var removed = this.target.slice(start, start + removeCount);
     this.target.splice(start, removeCount, ...newItems);
-    this.length = this.target.length; // reset length
 
     // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/observe
 
     this._addChange({
       type       : 'splice',
-      object     : this,
+      object: this,
       index      : start,
       removed    : removed,
       addedCount : newItems.length
     });
+
+    this.length = this.target.length; // reset length
 
     return this;
   }
@@ -89,6 +90,7 @@ class Collection extends DataObject {
   'map',
   'forEach',
   'reduce',
+  'filter',
   'join',
   'slice',
   'sort',

@@ -90,6 +90,8 @@
     "linklocal": "^2.5.2",
     "merge-stream": "^1.0.0",
     "mkdirp": "^0.5.1",
+    "mocha": "^2.3.3",
+    "mocha-osx-reporter": "^0.1.2",
     "mockery": "^1.4.0",
     "package-path": "0.0.1",
     "react": "^0.14.0",

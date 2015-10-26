@@ -20,7 +20,7 @@ class DataObject {
    */
 
   _addChange(change) {
-    Object.getNotifier(this).performChange(change.type, function() {
+    Object.getNotifier(this).performChange('update', () => {
       return change;
     });
   }
@@ -37,6 +37,11 @@ class DataObject {
     }
   }
 }
+
+/**
+ */
+
+DataObject.create = require('common/utils/class/create');
 
 /**
  */

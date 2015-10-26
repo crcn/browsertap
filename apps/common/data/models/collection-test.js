@@ -2,6 +2,7 @@ import ModelCollection from './collection';
 import DataObject from '../object';
 import expect from 'expect.js';
 import testUtils from 'common/test/utils';
+import sift from 'sift';
 
 describe(__filename + '#', function() {
 
@@ -53,7 +54,7 @@ describe(__filename + '#', function() {
       source: [{_id: 1}, {_id:2},{_id:3}]
     });
     c.watch(function(c) {
-      changes = c[0];
+      changes = c;
     });
 
     c.setProperties({
@@ -61,7 +62,7 @@ describe(__filename + '#', function() {
     });
 
     await testUtils.timeout(0);
-    expect(changes.name).to.be('target');
+    expect(changes.filter(sift({ name: 'target' })).length).to.be(1);
   });
 
   it('calls dispose() on the models that have been removed', async function() {

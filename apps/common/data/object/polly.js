@@ -48,6 +48,7 @@ class DataObject {
    */
 
   _addChange(change) {
+    change.object = this;
     this._changes.push(change);
     if (this._running) return;
     this._running = true;
@@ -74,6 +75,8 @@ class DataObject {
     }
   }
 }
+
+DataObject.create = require('common/utils/class/create');
 
 /**
  */

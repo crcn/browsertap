@@ -1,4 +1,4 @@
 import NativeDataObject from "./native";
 import PollyDataObject  from "./polly";
 
-export default (!!Object.observe ? PollyDataObject : PollyDataObject);
+export default (!!Object.observe ? NativeDataObject : PollyDataObject);

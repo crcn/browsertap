@@ -13,7 +13,7 @@ export default {
         execute: async function() {
           await app.bus.execute({ action: 'syncMachines' }).read();
           await app.bus.execute({ action: 'syncWindows'  }).read();
-          // await app.bus.execute({ action: 'insert', collection: 'virtWindows', data: { width: 500, height: 400, title: 'something' } });
+          await app.bus.execute({ action: 'insert', collection: 'virtWindows', data: { width: 500, height: 400, title: 'something' } });
         }
       }),
 
@@ -30,17 +30,17 @@ export default {
       /**
       */
 
-      syncMachines: require('./sync-machines')(app),
+      syncMachines: require('./sync-machines').create(app),
 
       /**
       */
 
-      syncWindows: require('./sync-windows')(app),
+      syncWindows: require('./sync-windows').create(app),
 
       /**
       */
 
-      openWindow: require('./open-window')(app)
+      openWindow: require('./open-window').create(app)
     }, bus);
   }
 }
