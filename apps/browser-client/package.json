@@ -6,8 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "gulp lint test --only=browser-client",
-    "dev": "linklocal",
-    "prepublish": "if [ \"$NODE_ENV\" != \"production\" ]; then npm run dev; fi"
+    "dev": "linklocal"
   },
   "author": "",
   "license": "ISC",
