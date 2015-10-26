@@ -86,4 +86,11 @@ describe(__filename + '#', function() {
     expect(change.index).to.be(0);
     expect(change.addedCount).to.be(3);
   });
+
+  it('can change the target', function() {
+    var c = new Collection();
+    c.setProperties({ target: [1, 2, 3]});
+    expect(c.length).to.be(3);
+    expect(c.at(1)).to.be(2);
+  });
 });

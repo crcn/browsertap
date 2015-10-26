@@ -17,6 +17,16 @@ class Collection extends DataObject {
   /**
    */
 
+  setProperties(properties) {
+    super.setProperties(properties);
+    if (properties.target) {
+      this.length = this.target.length;
+    }
+  }
+
+  /**
+   */
+
   at(index) {
     return this.target[index];
   }
