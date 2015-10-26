@@ -2,7 +2,7 @@ var CronJob = require('cron').CronJob;
 
 export default function(app) {
 
-  var jobs = app.get('config.jobs') || [];
+  var jobs = app.config.jobs || [];
 
   app.logger.info('cron jobs: ', jobs);
 

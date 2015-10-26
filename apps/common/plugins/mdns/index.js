@@ -5,10 +5,10 @@ export default function(app, mdns) {
 
   if (!mdns) mdns = require('mdns');
 
-  var port       = app.get('config.mdns.port');
-  var collection = app.get('config.mdns.collection') || 'servers';
-  var name       = app.get('config.mdns.advertise');
-  var browse     = app.get('config.mdns.browse') || [];
+  var port       = app.config.mdns.port;
+  var collection = app.config.mdns.collection || 'servers';
+  var name       = app.config.mdns.advertise;
+  var browse     = app.config.mdns.browse || [];
 
   app.logger.info('mdns port: %d', port);
   app.logger.info('mdns collection: %d', collection);

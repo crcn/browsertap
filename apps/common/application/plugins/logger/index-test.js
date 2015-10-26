@@ -1,24 +1,22 @@
 import loggerPlugin from './index';
 import expect from 'expect.js';
 import LogLevels from 'common/logger/levels';
-import BaseModel from 'common/data/models/base/model';
 
 describe(__filename + '#', function() {
 
   it('attaches .logger property to the model', function() {
-    var model = new BaseModel();
-    loggerPlugin(model);
+    loggerPlugin({ config: { log: true }});
   });
 
   it('gets config properties from the model', function() {
 
-    var model = new BaseModel({
+    var model = {
       config: {
         log: {
           level: LogLevels.VERBOSE
         }
       }
-    });
+    };
 
     loggerPlugin(model);
 
@@ -29,7 +27,7 @@ describe(__filename + '#', function() {
 
     var ops = [];
 
-    var model = new BaseModel({
+    var model = {
       bus: {
         execute: ops.push.bind(ops)
       },
@@ -38,7 +36,7 @@ describe(__filename + '#', function() {
           level: LogLevels.ALL
         }
       }
-    });
+    };
 
     loggerPlugin(model);
 

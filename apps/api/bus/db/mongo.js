@@ -7,7 +7,7 @@ import traverse from 'traverse';
 export default {
   create: function (app) {
 
-    var host = app.get('config.db.host');
+    var host = app.config.db.host;
     app.logger.info('init mongo db: %s', host);
 
     var db = mongo(host);

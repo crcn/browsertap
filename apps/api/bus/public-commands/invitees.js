@@ -8,7 +8,7 @@ import crc32             from 'crc32';
 
 export default function(app, bus) {
 
-  var browserHost = app.get('config.hosts.browser');
+  var browserHost = app.config.hosts.browser;
 
   async function generateShortCode() {
     var code;

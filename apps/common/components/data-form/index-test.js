@@ -6,12 +6,22 @@ import Schema from 'common/data/schema/schema'
 import Password from 'common/data/types/password'
 import EmailAddress from 'common/data/types/email-address'
 import testUtils from 'common/test/utils'
-import APIApplication from 'api/application';
+import apiTestUtils from 'api/test/utils';
 
 describe(__filename + '#', function() {
 
+  var app;
+
+  beforeEach(async function() {
+    app = await apiTestUtils.createFakeApp();
+  });
+
+  afterEach(function() {
+    app.dispose();
+  });
+
   function renderDataForm(props) {
-    return testUtils.renderElement(DataForm, props, new APIApplication());
+    return testUtils.renderElement(DataForm, props, app);
   }
 
   it('can render various forms', function() {

@@ -21,12 +21,12 @@ class APIApplication extends BaseApplication {
 
   initialize(next) {
 
-    this.logger.info('bt hosts: ', this.get('config.hosts'));
-    this.logger.info('redis host: ', this.get('config.redis.host'));
-    this.logger.info('directories: ', this.get('config.directories'));
+    this.logger.info('bt hosts: ', this.config.hosts);
+    this.logger.info('redis host: ', this.config.redis.host);
+    this.logger.info('directories: ', this.config.directories);
 
     // fork it?
-    if (cluster.isMaster && this.get('config.numCores') > 0) {
+    if (cluster.isMaster && this.config.numCores > 0) {
       this.logger.info('fourk it %d times ✊', this.config.numCores);
       for (var i = this.config.numCores; i--;) this.fork();
       if (next) next();

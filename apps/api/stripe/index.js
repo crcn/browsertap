@@ -1,7 +1,7 @@
 import cstripe            from 'stripe'
 
 export default function(app) {
-  app.stripe = app.get('config.stripe.mock') ? mock() : cstripe(app.get('config.stripe.sk'));
+  app.stripe = app.config.stripe.mock ? mock() : cstripe(app.config.stripe.sk);
 };
 
 function mock() {

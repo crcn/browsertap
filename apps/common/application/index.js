@@ -21,7 +21,7 @@ class Application extends BaseModel {
 
     this.logger = new Logger(Object.assign({
       bus: LogBus.create(this)
-    }, this.get('config.log')));
+    }, this.config.log));
   }
 
   /**

@@ -15,15 +15,7 @@ describe(__filename + '#', function() {
     m.setProperties({ name: 'a' });
     expect(m.name).to.be('a');
   });
-
-  it('can get() a property on the model', function() {
-    var m = new BaseModel({ a: { b: 'c' }});
-    expect(m.get('a').b).to.be('c');
-    expect(m.get('a.b')).to.be('c');
-    expect(m.get('d')).to.be(void 0);
-    expect(m.get('d.e.f')).to.be(void 0);
-  });
-
+  
   it('emits a change event with the old & new props', function(next) {
     var m = new BaseModel({ a: 'b' });
     m.once('change', function(n, o) {

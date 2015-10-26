@@ -10,8 +10,8 @@ var httperr = require('httperr');
 export default {
   create: function (app, bus) {
 
-    var host    = app.get('config.hosts.api');
-    // var channel = app.get('config.socket.channel');
+    var host    = app.config.hosts.api;
+    // var channel = app.config.socket.channel;
 
     // app.logger.info('socket.io channel: %s', channel);
     app.logger.info('api host: %s', host);

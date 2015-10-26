@@ -18,7 +18,7 @@ import CommandBus         from 'common/mesh/bus/command';
 
 export default function(app, bus) {
 
-  var browserHost = app.get('config.hosts.browser');
+  var browserHost = app.config.hosts.browser;
 
   return {
 

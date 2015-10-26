@@ -11,12 +11,12 @@ import serve      from 'koa-static';
  */
 
 module.exports = function(app) {
-  var port = app.get('config.http.port');
+  var port = app.config.http.port;
   app.logger.info('http port: %d', port);
 
   var k = koa();
 
-  k.use(serve(app.get('config.directories.public')));
+  k.use(serve(app.config.directories.public));
 
   k.keys = ['keys', 'keykeys'];
 

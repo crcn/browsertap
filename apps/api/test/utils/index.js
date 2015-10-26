@@ -14,8 +14,17 @@ module.exports = {
         log: {
           level: 0
         },
+        redis: {
+          host: 'localhost'
+        },
+        hosts: {
+          browser: '//browser'
+        },
         db: {
           type: 'mock'
+        },
+        stripe: {
+          mock: true
         },
         emailer: {
           service: 'mock'

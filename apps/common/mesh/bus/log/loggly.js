@@ -4,7 +4,7 @@ import { NoopBus, EmptyResponse } from 'mesh';
 export default {
   create: function(app) {
 
-    var config = app.get('config.loggly');
+    var config = app.config.loggly;
 
     if (!config) return NoopBus.create();
 

@@ -8,7 +8,7 @@ var dbs = {
 
 export default {
   create: function(app, bus) {
-    var type = app.get('config.db.type');
+    var type = app.config.db.type;
     app.logger.info('init db: %s', type);
 
     if (!dbs[type]) {

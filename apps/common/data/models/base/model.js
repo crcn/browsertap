@@ -1,6 +1,5 @@
 import {EventEmitter} from 'events';
 
-var __getters = {};
 
 /**
  * TODO: move persistence stuff over to here. BaseModel should extend DataTransferObject, or similar
@@ -37,16 +36,6 @@ class BaseModel extends EventEmitter {
     if (hasChanged) {
       this.emit('change', { properties: newProps }, { properties: oldProps });
     }
-  }
-
-  /**
-   * GET properties on the model without busting
-   */
-
-  get(keypath) {
-    if (__getters[keypath]) return __getters[keypath](this);
-    __getters[keypath] = new Function('self', 'try { return self.' + keypath + '} catch(e) { }');
-    return this.get(keypath);
   }
 
   /**
