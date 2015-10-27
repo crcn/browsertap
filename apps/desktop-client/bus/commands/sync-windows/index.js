@@ -7,6 +7,7 @@ import FilterThrough    from 'common/mesh/stream/filter-through';
 import ModelCollection  from 'common/data/models/collection';
 import BusWriter        from 'common/mesh/stream/bus-writer';
 import CollectionBus    from 'common/mesh/bus/collection';
+// import VirtWindow       from 'desktop-client/bus/commands/sync-windows';
 
 
 class VirtWindow extends DataObject {

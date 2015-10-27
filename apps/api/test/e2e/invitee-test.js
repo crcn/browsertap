@@ -15,7 +15,6 @@ describe(__filename + '#', function() {
 
   });
 
-
   it('cannot request an invite if the email exists as a user', async function() {
 
     var signupForm = new SignupForm({
@@ -59,6 +58,6 @@ describe(__filename + '#', function() {
     expect(invitee._id.valueOf()).to.be(inviteeb._id.valueOf());
   });
 
-  xit('cannot request an invite an invitee already exists');
-  xit('prioritizes users who have invited more people');
+  // xit('cannot request an invite an invitee already exists');
+  // xit('prioritizes users who have invited more people');
 });

@@ -61,5 +61,5 @@ describe(__filename + '#', function() {
 
   });
 
-  it('can still register a user if the inviter is not found');
+  // it('can still register a user if the inviter is not found');
 });

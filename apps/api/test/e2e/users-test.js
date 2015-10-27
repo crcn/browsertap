@@ -222,8 +222,6 @@ describe(__filename + '#', function() {
       expect(organizations[0].access[0].user._id.valueOf()).to.be(user._id.valueOf());
     });
 
-    // xit('cannot register a new user if the passwords do not match');
-
     it('cannot load a user if they\'re not logged in', async function() {
 
       var form = new SignupForm(Object.assign({ bus: bus }, fixtures.user1));

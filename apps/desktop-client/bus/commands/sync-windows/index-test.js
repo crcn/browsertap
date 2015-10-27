@@ -56,6 +56,6 @@ describe(__filename + '#', function() {
     expect(BrowserWindow.references.length).to.be(0);
   });
 
-  xit('closes a window when a virtual window has been removed');
-  xit('only sync virtual windows - ignores other synced collection items')
+  // xit('closes a window when a virtual window has been removed');
+  // xit('only sync virtual windows - ignores other synced collection items')
 });

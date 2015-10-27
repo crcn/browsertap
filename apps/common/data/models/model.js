@@ -1,6 +1,10 @@
 import {EventEmitter} from 'events';
 import DataObject from '../object';
 import ModelCollection from './collection';
+import FilterThrough from 'common/mesh/stream/filter-through';
+import CollectionBus from 'common/mesh/bus/collection';
+import BusWriter from 'common/mesh/stream/bus-writer';
+import sift from 'sift';
 
 /**
 * TODO: move persistence stuff over to here. BaseModel should extend DataTransferObject, or similar
@@ -148,6 +152,26 @@ class BaseModel extends DataObject {
         createModel : (properties) => new this(Object.assign({ bus: bus }, properties)),
         source      : await response.readAll()
       });
+
+      if (options.tail) {
+        bus.execute({ action: 'tail' })
+        .pipeTo(FilterThrough.create((operation) => {
+          if (operation.collection !== this.collectionName) {
+            return false;
+          }
+          if (operation.action === 'insert') {
+            return sift(query)(operation.data);
+          }
+          return true;
+        }))
+        .pipeTo(
+          BusWriter.create(
+            CollectionBus.create(
+              collection.getSourceCollection()
+            )
+          )
+        )
+      }
 
       return collection;
     } else {

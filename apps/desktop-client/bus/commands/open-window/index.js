@@ -1,3 +1,4 @@
+// DEPRECATED
 import CommandBus from 'common/mesh/bus/command';
 import BrowserWindow from 'browser-window';
 import IPCBus from 'desktop-client/bus/drivers/ipc';
