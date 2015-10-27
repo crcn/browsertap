@@ -5,6 +5,9 @@ class IPCMock {
   send() {
 
   }
+
+  resetMock() {
+  }
 }
 
 module.exports = new IPCMock();

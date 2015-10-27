@@ -5,6 +5,19 @@ mockery.enable({
   warnOnUnregistered: false
 });
 
-mockery.registerMock('browser-window', require('./mocks/browser-window'));
-mockery.registerMock('ipc', require('./mocks/ipc'));
-// mockery.registerMock('common/mesh/bus/websocket', require('./mocks/websocket-bus'));
+var mock = {
+  'browser-window': require('./mocks/browser-window'),
+  'ipc': require('./mocks/ipc')
+};
+
+
+for (var moduleName in mock) {
+  var mv = mock[moduleName];
+  mockery.registerMock(moduleName, mv);
+}
+
+beforeEach(function() {
+  for (var moduleName in mock) {
+    mock[moduleName].resetMock();
+  }
+});
