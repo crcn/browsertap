@@ -1,19 +1,22 @@
 import Schema        from 'common/data/schema/schema';
-import mixinSchema   from 'common/data/schema/mixin';
 
 /**
  */
 
 
-@mixinSchema(new Schema({
+var schema = new Schema({
   fields: {
     _id: {
       required: true,
       type: require('common/data/types/object-id')
     }
   }
-}))
-class Reference { };
+});
+class Reference {
+  constructor(properties) {
+    Object.assign(this, schema.coerce(properties));
+  }
+};
 
 /**
  */

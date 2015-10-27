@@ -2,7 +2,6 @@ var testUtils = require('desktop-client/test/utils');
 var MockSlave = require('desktop-client/test/mocks/slave');
 var findOpenPort = require('find-open-port');
 import { AcceptBus, BufferedBus, EmptyResponse } from 'mesh';
-import readAll from 'common/mesh/utils/read-all';
 import expect from 'expect.js';
 import sift from 'sift';
 
@@ -36,11 +35,11 @@ describe(__filename + '#', function() {
 
     await testUtils.timeout(100);
 
-    var virtWindows = await readAll(app.bus.execute({
+    var virtWindows = await app.bus.execute({
       action: 'load',
       collection: 'virtWindows',
       multi: true
-    }));
+    }).readAll();
 
     expect(virtWindows.length).to.be(2);
 

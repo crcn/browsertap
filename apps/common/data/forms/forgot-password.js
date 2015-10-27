@@ -1,6 +1,5 @@
-import mixinSchema from 'common/data/schema/mixin';
 import Schema      from 'common/data/schema/schema';
-import mixinForm   from './mixins/form';
+import Form        from './base';
 
 /**
  */
@@ -17,9 +16,11 @@ var forgotPasswordSchema = new Schema({
 /**
  */
 
-@mixinSchema(forgotPasswordSchema)
-@mixinForm('forgotPassword')
-class ForgotPasswordForm { };
+class ForgotPasswordForm extends Form  {
+  constructor(properties) {
+    super('forgotPassword', forgotPasswordSchema, properties);
+  }
+};
 
 /**
 */

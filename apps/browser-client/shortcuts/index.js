@@ -3,7 +3,7 @@ import mousetrap from 'mousetrap';
 export default function(app) {
 
   var currentKeys;
-  app.router.location.on('change', rebindKeys);
+  app.router.location.watch(rebindKeys);
 
   function rebindKeys() {
     if (currentKeys) currentKeys.dispose();

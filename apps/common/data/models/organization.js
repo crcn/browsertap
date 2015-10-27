@@ -1,14 +1,13 @@
-import Model         from 'common/data/models/base/model'
+import Model         from 'common/data/models/model'
+import DataObject    from 'common/data/object';
 import Schema        from 'common/data/schema/schema';
-import persistMixin  from 'common/data/models/mixins/persist'
-import mixinSchema   from 'common/data/schema/mixin';
 import Reference     from 'common/data/types/reference';
 import Usage         from 'common/data/models/usage';
 
 /**
  */
 
-@mixinSchema(new Schema({
+var accessSchema = new Schema({
   fields: {
     user: {
       required: true,
@@ -20,9 +19,12 @@ import Usage         from 'common/data/models/usage';
       type: String
     }
   }
-}))
-class Access {
+});
 
+class Access {
+  constructor(properties) {
+    Object.assign(this, accessSchema.coerce(properties));
+  }
 }
 
 /**
@@ -59,16 +61,23 @@ var organizationSchema = new Schema({
 /**
  */
 
-@persistMixin('organizations')
-@mixinSchema(organizationSchema)
 class Organization extends Model {
+
+  static collectionName = 'organizations';
+
+  /**
+   */
+
+  constructor(properties) {
+    super(organizationSchema, properties);
+  }
 
   /**
    */
 
    // TODO - simplify
-  *getUsage() {
-    return new Usage(Object.assign({ bus: this.bus }, yield this.bus.execute({
+  async getUsage() {
+    return new Usage(Object.assign({ bus: this.bus }, await this.bus.execute({
       action: 'getUsage',
       organization: this
     })));

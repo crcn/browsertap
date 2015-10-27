@@ -1,7 +1,6 @@
-import mixinSchema from 'common/data/schema/mixin';
-import Schema      from 'common/data/schema/schema';
-import mixinForm   from './mixins/form';
-import Reference   from 'common/data/types/reference';
+import Schema    from 'common/data/schema/schema';
+import Reference from 'common/data/types/reference';
+import Form      from './base';
 
 /**
  */
@@ -30,9 +29,11 @@ var resetPaswordSchema = new Schema({
 /**
  */
 
-@mixinSchema(resetPaswordSchema)
-@mixinForm('resetPassword')
-class ResetPasswordForm { };
+class ResetPasswordForm extends Form {
+  constructor(properties) {
+    super('resetPassword', resetPaswordSchema, properties);
+  }
+};
 
 /**
 */

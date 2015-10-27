@@ -1,6 +1,5 @@
-import mixinSchema from 'common/data/schema/mixin';
-import Schema      from 'common/data/schema/schema';
-import mixinForm   from './mixins/form';
+import Schema  from 'common/data/schema/schema';
+import Form   from './base';
 
 /**
  */
@@ -21,9 +20,11 @@ var signupFormSchema = new Schema({
 /**
  */
 
-@mixinSchema(signupFormSchema)
-@mixinForm('register')
-class SignupForm { };
+class SignupForm extends Form {
+  constructor(properties) {
+    super('register', signupFormSchema, properties);
+  }
+};
 
 /**
 */

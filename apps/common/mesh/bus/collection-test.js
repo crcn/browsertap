@@ -2,7 +2,6 @@ import { Bus } from 'mesh';
 import CollectionBus from './collection';
 import expect from 'expect.js';
 import { timeout } from 'common/test/utils';
-import readAll from 'common/mesh/utils/read-all';
 
 describe(__filename + '#', function() {
 
@@ -38,7 +37,7 @@ describe(__filename + '#', function() {
   it('can execute load() operations against the collection', async function() {
     var source = [5, 6, 7, 8, 9, 10];
     var bus = CollectionBus.create(source);
-    var items = await readAll(bus.execute({ action: 'load', query: { $gt: 7 } }));
+    var items = await bus.execute({ action: 'load', query: { $gt: 7 } }).readAll();
     expect(items.length).to.be(3);
     expect(items.join('')).to.be('8910');
   });

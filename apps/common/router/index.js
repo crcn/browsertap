@@ -1,8 +1,8 @@
 
-import BaseModel from 'common/data/models/base/model';
 import Location from './location';
 import debounce from 'lodash/function/debounce';
 import qs from 'qs';
+import DataObject from 'common/data/object';
 
 /**
  * _setter for a deep path
@@ -64,21 +64,21 @@ function _bindWindowLocation(router) {
     var newLocation = new Location(_parseUrl(window.location.hash));
     if (router.location.toString() !== newLocation.toString()) {
       return newLocation.toString();
-    } 
+    }
     return void 0;
   }
 
   // watch the location for any change, stringify it, then reflect
   // that change in the location hash. This will ensure that the user
   // is able to reload the page and still maintain the application state
-  router.location.on('change', debounce(function(op, np) {
+  router.location.watch(debounce(function(op, np) {
     if (!getNewLocation()) return;
-    location.hash = router.location.toString(); 
+    location.hash = router.location.toString();
     // history.pushState({}, router.location.state.title, router.location.toString());
   }), 10);
 }
 
-class Router extends BaseModel {
+class Router extends DataObject {
 
   /**
    */
@@ -93,13 +93,13 @@ class Router extends BaseModel {
   }
 
   /**
-   */ 
+   */
 
   initialize() {
 
     // redirect
     if (process.browser) {
-      this.redirect(location.hash === '' ? '/' : location.hash); 
+      this.redirect(location.hash === '' ? '/' : location.hash);
     }
   }
 
@@ -162,7 +162,7 @@ class Router extends BaseModel {
   setQuery(query) {
     this.redirect({
       query: Object.assign({}, this.location.query, query)
-    }) 
+    })
   }
 
   /**
@@ -170,10 +170,10 @@ class Router extends BaseModel {
 
   redirect(aliasOrPathname, options) {
 
-    // just modify the options 
+    // just modify the options
     if (arguments.length === 1 && typeof aliasOrPathname === 'object') {
       options         = aliasOrPathname;
-      // TODO - take params into consideration 
+      // TODO - take params into consideration
       aliasOrPathname = this.location.pathname;
     }
 
@@ -187,7 +187,7 @@ class Router extends BaseModel {
 
     this.location.setProperties(Object.assign({
       pathname: route ? route.getPathname(pathParts.pathname, options) : pathParts.pathname,
-      params  : options.params, 
+      params  : options.params,
       query   : Object.assign({}, options.query, pathParts.query)
     }, options));
 
@@ -226,7 +226,7 @@ class Router extends BaseModel {
    */
 
   getUrl(aliasOrPathname, options) {
-    return '#' + this.getPathname(aliasOrPathname, options); 
+    return '#' + this.getPathname(aliasOrPathname, options);
   }
 
   /**

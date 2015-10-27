@@ -1,6 +1,5 @@
 import MemoryBus from './memory';
 import expect    from 'expect.js';
-import readAll   from 'common/mesh/utils/read-all';
 
 describe(__filename + '#', function() {
   it('can be created', function() {
@@ -35,7 +34,7 @@ describe(__filename + '#', function() {
     var data = await bus.execute({ action: 'insert', collection: 'items', data: { id: 1 } }).read();
     var data = await bus.execute({ action: 'insert', collection: 'items', data: { id: 1 } }).read();
     expect(data.value.id).to.be(1);
-    var data = await readAll(bus.execute({ action: 'load', collection: 'items', query: { id: 1 }}));
+    var data = await bus.execute({ action: 'load', collection: 'items', query: { id: 1 }}).readAll();
     expect(data.length).to.be(1);
   });
 
@@ -45,7 +44,7 @@ describe(__filename + '#', function() {
     var data = await bus.execute({ action: 'insert', collection: 'items', data: { id: 1 } }).read();
     var data = await bus.execute({ action: 'insert', collection: 'items', data: { id: 1 } }).read();
     expect(data.value.id).to.be(1);
-    var data = await readAll(bus.execute({ action: 'load', collection: 'items', multi: true, query: { id: 1 }}));
+    var data = await bus.execute({ action: 'load', collection: 'items', multi: true, query: { id: 1 }}).readAll();
     expect(data.length).to.be(3);
   });
 
@@ -62,10 +61,10 @@ describe(__filename + '#', function() {
     var bus = MemoryBus.create();
     var data = await bus.execute({ action: 'insert', collection: 'items', data: { id: 1 } }).read();
     expect(data.value.id).to.be(1);
-    var data = await readAll(bus.execute({ action: 'load', collection: 'items', query: { id: 1 }}));
+    var data = await bus.execute({ action: 'load', collection: 'items', query: { id: 1 }}).readAll();
     expect(data.length).to.be(1);
-    await readAll(bus.execute({ action: 'remove', collection: 'items', query: { id: 1 }}));
-    var data = await readAll(bus.execute({ action: 'load', collection: 'items', query: { id: 1 }}));
+    await bus.execute({ action: 'remove', collection: 'items', query: { id: 1 }}).readAll();
+    var data = await bus.execute({ action: 'load', collection: 'items', query: { id: 1 }}).readAll();
     expect(data.length).to.be(0);
   });
 });

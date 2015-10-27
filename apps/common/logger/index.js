@@ -1,11 +1,11 @@
-import BaseModel from 'common/data/models/base/model';
-import extend from 'lodash/object/extend';
-import LogLevels from './levels';
+import extend      from 'lodash/object/extend';
+import LogLevels   from './levels';
 import { NoopBus } from 'mesh';
+import DataObject  from 'common/data/object';
 
 var noop = NoopBus.create();
 
-class Logger extends BaseModel {
+class Logger extends DataObject {
 
   /**
    */

@@ -37,6 +37,15 @@ export default {
 
       app.logger.info('synchronizing virtual windows');
 
+      /* TODO - CollectionReader
+      .create(VirtWindow.find({ }).awaitChang())
+      .pipeTo(ArrayChangeToDbOpsThrough.create())
+      .pipeTo(BusWriter.create(
+        CollectionBus.create(
+
+        )
+      ))
+      */
       app.bus.execute({
         action: 'tail'
       })

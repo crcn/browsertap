@@ -1,4 +1,4 @@
-import Model   from 'common/data/models/base/model';
+import Model   from 'common/data/models/model';
 
 class Machine extends Model {
   getWindows() {

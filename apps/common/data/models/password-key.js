@@ -1,6 +1,4 @@
-import Model         from 'common/data/models/base/model'
 import Schema        from 'common/data/schema/schema';
-import mixinSchema   from 'common/data/schema/mixin';
 
 /**
  */
@@ -17,9 +15,10 @@ var passwordSchema = new Schema({
 /**
  */
 
-@mixinSchema(passwordSchema)
-class PasswordKey extends Model {
-
+class PasswordKey {
+  constructor(properties) {
+    Object.assign(this, passwordSchema.coerce(properties));
+  }
 }
 
 export default PasswordKey;

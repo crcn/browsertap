@@ -1,16 +1,16 @@
 import qs from 'qs';
-import BaseModel from 'common/data/models/base/model';
+import DataObject from 'common/data/object';
 import extend from 'lodash/object/extend';
 
 /**
  */
 
-class Location extends BaseModel {
+class Location extends DataObject {
 
   constructor(properties) {
-    super(properties); 
-    if (!this.query) this.query   = {}; 
-    if (!this.state) this.state   = {}; 
+    super(properties);
+    if (!this.query) this.query   = {};
+    if (!this.state) this.state   = {};
   }
 
   /**
@@ -38,4 +38,3 @@ class Location extends BaseModel {
 }
 
 export default Location;
-

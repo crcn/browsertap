@@ -54,7 +54,9 @@ module.exports = {
       },
 
       setInputValue: function(query, value) {
-        app.element.querySelector(query).value = value;
+        var el = app.element.querySelector(query);
+        if (!el) throw new Error('no elements for for query selector ' + query);
+        el.value = value;
         TestUtils.Simulate.change(app.element.querySelector(query));
       }
 

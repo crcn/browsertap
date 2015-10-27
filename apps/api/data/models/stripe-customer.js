@@ -1,7 +1,5 @@
-import Model         from 'common/data/models/base/model'
+import Model         from 'common/data/models/model'
 import Schema        from 'common/data/schema/schema';
-import persistMixin  from 'common/data/models/mixins/persist'
-import mixinSchema   from 'common/data/schema/mixin';
 import Reference     from 'common/data/types/reference';
 
 /**
@@ -31,9 +29,11 @@ var stripeCustomerSchema = new Schema({
 /**
  */
 
-@persistMixin('stripeCustomers')
-@mixinSchema(stripeCustomerSchema)
 class StripeCustomer extends Model {
+  static collectionName = 'stripeCustomers';
+  constructor(properties) {
+    super(stripeCustomerSchema, properties);
+  }
   async charge(amount) {
 
     var result = await this.app.stripe.charges.create({

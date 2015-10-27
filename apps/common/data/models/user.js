@@ -1,7 +1,5 @@
-import Model         from 'common/data/models/base/model'
+import Model         from 'common/data/models/model'
 import Schema        from 'common/data/schema/schema';
-import persistMixin  from 'common/data/models/mixins/persist'
-import mixinSchema   from 'common/data/schema/mixin';
 import Organization  from 'common/data/models/organization';
 
 /**
@@ -70,9 +68,16 @@ var userSchema = new Schema({
 /**
  */
 
-@persistMixin('users')
-@mixinSchema(userSchema)
 class User extends Model {
+
+  static collectionName = 'users';
+
+  /**
+   */
+
+  constructor(properties) {
+    super(userSchema, properties);
+  }
 
   /**
    */

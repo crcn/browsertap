@@ -1,7 +1,6 @@
-import mixinSchema from 'common/data/schema/mixin';
 import Schema      from 'common/data/schema/schema';
 import Invitee     from 'common/data/models/invitee';
-import mixinForm   from './mixins/form';
+import Form        from './base';
 
 /**
  */
@@ -26,9 +25,11 @@ var requestInviteFormSchema = new Schema({
 /**
  */
 
-@mixinSchema(requestInviteFormSchema)
-@mixinForm('requestInvite', Invitee)
-class RequestInviteForm { };
+class RequestInviteForm extends Form {
+  constructor(properties) {
+    super('requestInvite', requestInviteFormSchema, properties, Invitee);
+  }
+};
 
 /**
 */

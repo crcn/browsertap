@@ -94,7 +94,21 @@ class Schema {
   /**
    */
 
-  coerce(data) {
+  serialize(target, includeInternal) {
+    var data = {};
+    for (var property in this.fields) {
+      var field = this.fields[property];
+      if (field.internal && includeInternal !== true) continue;
+      data[property] = target[property];
+    }
+    return JSON.parse(JSON.stringify(data));
+  }
+
+  /**
+   */
+
+  coerce(data, keepOtherProps) {
+    if (!data) data = {};
     var coercedData = {};
 
     for (var property in this.fields) {
@@ -116,6 +130,10 @@ class Schema {
 
         throw e;
       }
+    }
+
+    if (keepOtherProps) {
+      coercedData = Object.assign({}, data, coercedData);
     }
 
     return coercedData;

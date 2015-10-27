@@ -1,7 +1,5 @@
-import Model         from 'common/data/models/base/model'
+import Model         from 'common/data/models/model'
 import Schema        from 'common/data/schema/schema';
-import persistMixin  from 'common/data/models/mixins/persist'
-import mixinSchema   from 'common/data/schema/mixin';
 import httperr       from 'httperr';
 import Reference     from 'common/data/types/reference';
 
@@ -12,7 +10,7 @@ var invoiceSchema = new Schema({
   fields: {
 
     /**
-     * ID of the user 
+     * ID of the user
      */
 
     _id: {
@@ -20,7 +18,7 @@ var invoiceSchema = new Schema({
     },
 
     /**
-     * ID of the user 
+     * ID of the user
      */
 
     organization: {
@@ -39,10 +37,11 @@ var invoiceSchema = new Schema({
 /**
  */
 
-@persistMixin('invoices')
-@mixinSchema(invoiceSchema)
 class Invoice extends Model {
-  
+  static collectionName = 'invoices';
+  constructor(properties) {
+    super(invoiceSchema, properties);
+  }
 }
 
 /**

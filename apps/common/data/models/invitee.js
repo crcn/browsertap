@@ -1,7 +1,5 @@
-import Model         from 'common/data/models/base/model'
+import Model         from 'common/data/models/model'
 import Schema        from 'common/data/schema/schema';
-import persistMixin  from 'common/data/models/mixins/persist'
-import mixinSchema   from 'common/data/schema/mixin';
 
 /**
  */
@@ -60,9 +58,11 @@ var inviteeMixin = new Schema({
 /**
  */
 
-@persistMixin('invitees')
-@mixinSchema(inviteeMixin)
 class Invitee extends Model {
+  static collectionName = 'invitees';
+  constructor(properties) {
+    super(inviteeMixin, properties);
+  }
 
   // getShareLink() {
   //   return this.app.config.hosts.browser + '#/w/' + this.shortcode;

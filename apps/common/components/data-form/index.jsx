@@ -143,7 +143,9 @@ var DataForm = React.createClass({
 
   getInitialState: function() {
     return {
-      data: this.props.data || {}
+      data: this.props.data || {},
+      form: new this.props.formClass(),
+      valid: false
     }
   },
 
@@ -154,25 +156,26 @@ var DataForm = React.createClass({
     var data = this.state.data;
     data[name] = value;
 
-    var formClass = this.props.formClass;
-    var schema    = formClass.schema;
+    var form   = this.state.form;
+    var schema = form.schema;
 
     data.bus = this.props.app.bus;
 
-    var form;
+    var valid = false;
 
     try {
-      var form = new formClass(data);
+      form.setProperties(data);
+      valid = true;
     } catch(e) {
-
     }
 
     this.setState({
       form: form,
-      data: this.state.data
+      data: data,
+      valid: valid
     });
 
-    if (form && this.props.onForm) {
+    if (valid && this.props.onForm) {
       this.props.onForm(form);
     }
   },
@@ -208,8 +211,12 @@ var DataForm = React.createClass({
 
   render: function() {
 
-    var formClass = this.props.formClass;
-    var schema    = formClass.schema;
+    var form   = this.state.form;
+    var schema = form.schema;
+
+    if (!schema) {
+      throw new Error('schema not provided for ' + form.constructor.name);
+    }
 
     var formFields = [];
 
@@ -238,7 +245,7 @@ var DataForm = React.createClass({
         { formFields }
       </div>
       <div className='form-group submit-button'>
-        <button name='submit' type='submit' className='form-control' disabled={!this.state.form || this.state.loading}>
+        <button name='submit' type='submit' className='form-control' disabled={!this.state.valid || this.state.loading}>
           { this.state.loading ? 'loading...' : this.getIntlMessage(this.props.submitLabel || 'buttons.submit') }
         </button>
       </div>

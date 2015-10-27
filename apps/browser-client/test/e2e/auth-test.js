@@ -1,7 +1,7 @@
-var expect = require('expect.js');
-var TestUtils = require('react-addons-test-utils');
-var testUtils = require('browser-client/test/utils');
-var timeout = require('common/test/utils').timeout;
+import expect from 'expect.js';
+import TestUtils from 'react-addons-test-utils';
+import testUtils from 'browser-client/test/utils';
+import { timeout } from 'common/test/utils';
 
 describe(__filename + '#', function() {
 
@@ -13,24 +13,28 @@ describe(__filename + '#', function() {
     apiApp = browserApp.apiApp;
   });
 
-  it('can redirect to the login page', function() {
+  it('can redirect to the login page', async function() {
     browserApp.router.redirect('login');
+    await timeout(0);
     expect(browserApp.element.querySelector('.login-form')).not.to.be(null);
   });
 
 
-  it('can redirect to the signup page', function() {
+  it('can redirect to the signup page', async function() {
     browserApp.router.redirect('signup');
+    await timeout(0);
     expect(browserApp.element.querySelector('.signup-form')).not.to.be(null);
   });
 
-  it('can redirect to the forgot password page', function() {
+  it('can redirect to the forgot password page', async function() {
     browserApp.router.redirect('forgotPassword');
+    await timeout(0);
     expect(browserApp.element.querySelector('.forgot-password-form')).not.to.be(null);
   });
 
   async function signup() {
     browserApp.router.redirect('signup');
+    await timeout(0);
     var emailAddressInput = browserApp.element.querySelector('*[name="emailAddress"]');
     var passwordInput     = browserApp.element.querySelector('*[name="password"]');
     emailAddressInput.value = 'a@b.com';
@@ -65,13 +69,16 @@ describe(__filename + '#', function() {
 
   it('can reset a forgotten password and login with it', async function() {
     browserApp.router.redirect('logout');
+    await timeout(0);
     browserApp.router.redirect('forgotPassword');
+    await timeout(0);
     browserApp.testUtils.setInputValue('*[name="emailAddress"]', browserApp.test.fixtures.unverifiedUser.emailAddress);
     TestUtils.Simulate.submit(browserApp.element.querySelector('form'));
 
     await timeout(2);
     var message = apiApp.emailer.outbox.messages.pop();
     browserApp.router.redirect(message.body.valueOf().match(/(\/reset-password\/.*)/)[1]);
+    await timeout(0);
     browserApp.testUtils.setInputValue('*[name="password"]', 'password99');
     browserApp.testUtils.setInputValue('*[name="repeatPassword"]', 'password99');
     TestUtils.Simulate.submit(browserApp.element.querySelector('form'));

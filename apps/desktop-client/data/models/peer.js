@@ -1,4 +1,4 @@
-import Model from 'common/data/models/base/model'
+import Model from 'common/data/models/model'
 
 var PeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection ||
                        window.webkitRTCPeerConnection || window.msRTCPeerConnection;

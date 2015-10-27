@@ -1,7 +1,5 @@
-import Model         from 'common/data/models/base/model'
+import Model         from 'common/data/models/model'
 import Schema        from 'common/data/schema/schema';
-import persistMixin  from 'common/data/models/mixins/persist'
-import mixinSchema   from 'common/data/schema/mixin';
 import httperr       from 'httperr';
 
 /**
@@ -58,9 +56,11 @@ var tokenSchema = new Schema({
 /**
  */
 
-@persistMixin('tokens')
-@mixinSchema(tokenSchema)
 class Token extends Model {
+  static collectionName = 'tokens';
+  constructor(properties) {
+    super(tokenSchema, properties);
+  }
   get expired() {
     return this.expiresAt.getTime() < Date.now();
   }

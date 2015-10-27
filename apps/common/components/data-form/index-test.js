@@ -1,11 +1,11 @@
 import DataForm from './index'
 import TestUtils from 'react-addons-test-utils';
 import expect from 'expect.js'
-import mixinSchema from 'common/data/schema/mixin'
 import Schema from 'common/data/schema/schema'
 import Password from 'common/data/types/password'
 import EmailAddress from 'common/data/types/email-address'
 import testUtils from 'common/test/utils'
+import Form from 'common/data/forms/base';
 import apiTestUtils from 'api/test/utils';
 
 describe(__filename + '#', function() {
@@ -25,16 +25,19 @@ describe(__filename + '#', function() {
   }
 
   it('can render various forms', function() {
-
-    @mixinSchema(new Schema({
-      fields: {
-        emailAddress : EmailAddress,
-        password     : Password
+    class SomeForm extends Form {
+      constructor(properties) {
+        super('send', new Schema({
+          fields: {
+            emailAddress : EmailAddress,
+            password     : Password
+          }
+        }), properties);
       }
-    }))
-    class Form { }
+    }
 
-    var div = renderDataForm({ formClass: Form });
+
+    var div = renderDataForm({ formClass: SomeForm });
 
     expect(div.querySelector('*[type=\'password\']')).not.to.be(null);
     expect(div.querySelector('*[type=\'text\']')).not.to.be(null);
@@ -42,15 +45,18 @@ describe(__filename + '#', function() {
 
   it('enables the submit button once all the fields have been validated', function() {
 
-    @mixinSchema(new Schema({
-      fields: {
-        emailAddress : EmailAddress,
-        password     : Password
+    class SomeForm extends Form {
+      constructor(properties) {
+        super('send', new Schema({
+          fields: {
+            emailAddress : EmailAddress,
+            password     : Password
+          }
+        }), properties);
       }
-    }))
-    class Form { }
+    }
 
-    var div = renderDataForm({ formClass: Form });
+    var div = renderDataForm({ formClass: SomeForm });
 
     var emailAddressInput = div.querySelector('*[type="text"]');
     var passwordInput     = div.querySelector('*[type="password"]');
@@ -75,20 +81,24 @@ describe(__filename + '#', function() {
 
   it('can render a form that depends on another field', function() {
 
-    @mixinSchema(new Schema({
-      fields: {
-        password       : Password,
-        repeatPassword : {
-          type: Password,
-          validate: function(password, data) {
-            return String(password) === String(data.password);
-          }
-        }
-      }
-    }))
-    class Form { }
 
-    var div = renderDataForm({ formClass: Form });
+    class SomeForm extends Form {
+      constructor(properties) {
+        super('send', new Schema({
+          fields: {
+            password       : Password,
+            repeatPassword : {
+              type: Password,
+              validate: function(password, data) {
+                return String(password) === String(data.password);
+              }
+            }
+          }
+        }), properties);
+      }
+    }
+
+    var div = renderDataForm({ formClass: SomeForm });
 
     var submitButton      = div.querySelector('*[type="submit"]');
 

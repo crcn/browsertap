@@ -1,6 +1,4 @@
-import Model from 'common/data/models/base/model';
-import persistMixin from 'common/data/models/mixins/persist';
-import schemaMixin from 'common/data/schema/mixin';
+import Model from 'common/data/models/model';
 import Schema from 'common/data/schema/schema';
 import Peer from './peer';
 
@@ -23,9 +21,12 @@ var schema = new Schema({
   }
 });
 
-@schemaMixin(schema)
-@persistMixin('virtWindows')
 class VirtWindow extends Model {
+  static collectionName = 'virtWindows';
+
+  constructor(properties) {
+    super(schema, properties);
+  }
 
   /**
    */

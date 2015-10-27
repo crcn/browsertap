@@ -1,5 +1,5 @@
-import mixinSchema from 'common/data/schema/mixin';
-import Schema      from 'common/data/schema/schema';
+import Schema from 'common/data/schema/schema';
+import Form   from 'common/data/forms/base';
 
 /**
  */
@@ -24,17 +24,14 @@ var forgotPasswordSchema = new Schema({
 /**
  */
 
-@mixinSchema(forgotPasswordSchema)
-class ForgotPasswordForm {
+class ForgotPasswordForm extends Form {
+
 
   /**
    */
 
-  async submit() {
-    return (await this.bus.execute({
-      action: 'sendEmail',
-      data: this
-    }).read()).value;
+  constructor(properties) {
+    super('sendEmail', forgotPasswordSchema, properties);
   }
 };
 

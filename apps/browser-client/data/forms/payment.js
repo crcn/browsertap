@@ -1,7 +1,7 @@
-import mixinSchema      from 'common/data/schema/mixin';
 import Schema           from 'common/data/schema/schema';
 import CreditCardNumber from 'common/data/types/credit-card-number';
 import CVC              from 'common/data/types/cvc';
+import Form             from 'common/data/forms/base';
 import httperr          from 'httperr' ;
 
 /**
@@ -28,8 +28,14 @@ var paymenyFormSchema = new Schema({
 /**
  */
 
-@mixinSchema(paymenyFormSchema)
-class PaymentForm {
+class PaymentForm extends Form {
+
+  /**
+   */
+
+  constructor(properties) {
+    super(paymentFormSchema, properties);
+  }
 
   /**
    */
