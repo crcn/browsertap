@@ -17,12 +17,12 @@ class Emailer {
 
   /**
    */
-   
+
   send(form) {
 
     var options = form.toJSON();
 
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
 
       // send mail with defined transport object
       this._transporter.sendMail({
@@ -30,15 +30,15 @@ class Emailer {
         from    : this.from,
         subject : options.subject,
         html    : options.body
-      }, function(error, info){
+      }, (error, info) => {
           if(error) {
             this.app.logger.error(err.stack);
            return reject(new httperr[500]('couldNotSendEmail'));
           }
           resolve(info);
 
-      }.bind(this));
-    }.bind(this));
+      });
+    });
   }
 }
 

@@ -43,7 +43,7 @@ class PaymentForm extends Form {
   async submit() {
 
     // TODO - move this to command
-    var result = await new Promise(function(resolve, reject) {
+    var result = await new Promise((resolve, reject) => {
       Stripe.card.createToken({
         number: this.cardNumber.valueOf(),
         cvc: 333,
@@ -53,7 +53,7 @@ class PaymentForm extends Form {
         if (status !== 200) return reject(new httperr[status]('errors.unableToPay'));
         resolve(result);
       });
-    }.bind(this));
+    });
 
     return await this.bus.execute({
       action: 'addStripeCustomer',

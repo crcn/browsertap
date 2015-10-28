@@ -85,9 +85,9 @@ class User extends Model {
   async getOrganizations() {
     return (await this.bus.execute({
       action: 'getUserOrganizations'
-    }).read()).value.map(function(data) {
+    }).read()).value.map((data) => {
       return new Organization(Object.assign({ bus: this.bus.value }, data));
-    }.bind(this));
+    });
   }
 
   /**

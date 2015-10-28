@@ -23,7 +23,7 @@ class MockSlave {
     ws.on('request', (request) => {
       var connection = request.accept('dumb-increment-protocol', request.origin);
 
-      connection.on('message', async function(message) {
+      connection.on('message', async (message) => {
         var op = JSON.parse(message.utf8Data);
         var resp = this.bus.execute(op);
         var chunk;
@@ -34,7 +34,7 @@ class MockSlave {
           }));
           if (chunk.done) break;
         }
-      }.bind(this));
+      });
     });
     return true;
   }

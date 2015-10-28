@@ -29,15 +29,15 @@ class Emailer {
       html    : options.body
     });
 
-    return new Promise(function(resolve, reject) {
-      this._sg.send(email, function(err, response) {
+    return new Promise((resolve, reject) => {
+      this._sg.send(email, (err, response) => {
         if (err) {
           this.app.logger.error(err.stack);
           return reject(new httperr[500]('couldNotSendEmail'));
         }
         resolve();
-      }.bind(this));
-    }.bind(this));
+      });
+    });
   }
 }
 

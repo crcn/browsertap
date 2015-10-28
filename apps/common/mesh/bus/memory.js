@@ -40,10 +40,10 @@ class MemoryCollection {
   remove(operation) {
     var items = sift(operation.query, this._items);
     items     = _oneOrMany(operation, items);
-    items.forEach(function(item) {
+    items.forEach((item) => {
       var i = this._items.indexOf(item);
       if (~i) this._items.splice(i, 1);
-    }.bind(this));
+    });
     return _response(items);
   }
 

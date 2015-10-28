@@ -1,6 +1,6 @@
 import BaseApplication  from 'common/application';
 import DesktopClientBus from './bus';
-import mdns             from 'common/plugins/mdns';
+import mdns             from 'common/network/mdns';
 
 class Application extends BaseApplication {
 

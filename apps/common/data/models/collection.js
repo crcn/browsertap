@@ -1,5 +1,6 @@
 import DataCollection from '../collection';
 import DataObject from '../object';
+import mergeCollection from 'common/utils/collection/merge';
 
 class ModelCollection extends DataCollection {
 
@@ -60,29 +61,45 @@ class ModelCollection extends DataCollection {
     var _newModelDict = {};
     var _oldModelDict = this._modelDict || {};
 
-    for (var i = 0, n = this.source.length; i < n; i++) {
-      var sourceData = this.source[i];
-      var _id        = sourceData._id;
-      var model;
-
-      if (model = _oldModelDict[_id]) {
-        model.setProperties({ source: sourceData });
-      } else {
-        model = this.createModel({ source: sourceData });
+    var target = mergeCollection(this.target, this.source, {
+      cast: (sourceData) => {
+        return this.createModel({ source: sourceData });
+      },
+      update: (a, b) => {
+        a.setProperties({ source: b.source });
+      },
+      equals: (a, b) => {
+        return a.source._id == b.source._id;
+      },
+      remove: (a) => {
+        if (a.dispose) a.dispose();
       }
+    });
 
-      _newModelDict[_id] = model;
-      target.push(model);
-    }
-
-    for (var _id in _oldModelDict) {
-      if (_newModelDict[_id] == void 0) {
-        var oldModel = _oldModelDict[_id];
-        if (oldModel.dispose) oldModel.dispose();
-      }
-    }
-
-    this._modelDict = _newModelDict;
+    // more optimal, but might break 
+    // for (var i = 0, n = this.source.length; i < n; i++) {
+    //   var sourceData = this.source[i];
+    //   var _id        = sourceData._id;
+    //   var model;
+    //
+    //   if (model = _oldModelDict[_id]) {
+    //     model.setProperties({ source: sourceData });
+    //   } else {
+    //     model = this.createModel({ source: sourceData });
+    //   }
+    //
+    //   _newModelDict[_id] = model;
+    //   target.push(model);
+    // }
+    //
+    // for (var _id in _oldModelDict) {
+    //   if (_newModelDict[_id] == void 0) {
+    //     var oldModel = _oldModelDict[_id];
+    //     if (oldModel.dispose) oldModel.dispose();
+    //   }
+    // }
+    //
+    // this._modelDict = _newModelDict;
 
     this.setProperties({
       target: target,

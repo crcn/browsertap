@@ -28,9 +28,9 @@ class Application extends DataObject {
    */
 
   use() {
-    flatten(Array.prototype.slice.call(arguments)).forEach(function(plugin) {
+    flatten(Array.prototype.slice.call(arguments)).forEach((plugin) => {
       plugin(this);
-    }.bind(this));
+    });
   }
 
   /**

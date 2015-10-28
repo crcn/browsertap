@@ -8,9 +8,9 @@ var Signup = React.createClass({
 
   onSuccess: function(result) {
     if (process.browser) {
-      setTimeout(function() {
+      setTimeout(() => {
         this.props.app.router.redirect("app");
-      }.bind(this), 1000 * 2);
+      }, 1000 * 2);
     }
   },
 

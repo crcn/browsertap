@@ -9,7 +9,7 @@ class CommandBus extends Bus {
     this._execute = execute;
   }
   execute(operation) {
-    return Response.create(async function(writable) {
+    return Response.create(async (writable) => {
 
       if (this._auth === true) {
         if (!operation.session.userId) {
@@ -25,7 +25,7 @@ class CommandBus extends Bus {
       } catch(e) {
         writable.abort(e);
       }
-    }.bind(this));
+    });
   }
 }
 

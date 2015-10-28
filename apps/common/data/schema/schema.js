@@ -45,9 +45,9 @@ class Field {
       if (!Array.isArray(value)) {
         throw new httperr.BadRequest('invalid');
       }
-      return value.map(function(value) {
+      return value.map((value) => {
         return this._cast(value);
-      }.bind(this));
+      });
     }
 
     return this._cast(value);
