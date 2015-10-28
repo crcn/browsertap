@@ -76,7 +76,7 @@ class ModelCollection extends DataCollection {
       }
     });
 
-    // more optimal, but might break 
+    // more optimal, but might break
     // for (var i = 0, n = this.source.length; i < n; i++) {
     //   var sourceData = this.source[i];
     //   var _id        = sourceData._id;

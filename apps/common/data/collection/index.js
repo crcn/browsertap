@@ -91,6 +91,7 @@ class Collection extends DataObject {
   'forEach',
   'reduce',
   'filter',
+  'find',
   'join',
   'slice',
   'sort',

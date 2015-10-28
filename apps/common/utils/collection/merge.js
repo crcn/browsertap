@@ -19,18 +19,12 @@ export default function(existingItems, newItems, selector) {
     // cast the new item into whatever object needs to be in the existing items collection.
     // This could be a model for instance
     newItem    = selector.cast(newItems[i]);
-    mergedItem = newItem;
+    mergedItem = existingItems.find(function(existingItem) {
+      return selector.equals(existingItem, newItem);
+    }) || newItem;
 
-    // compare the new item with the existing items
-    for (var j = 0, n2 = existingItems.length; j < n2; j++) {
-
-      existingItem = existingItems[j];
-
-      if (selector.equals(existingItem, newItem)) {
-        selector.update(existingItem, newItem);
-        mergedItem = existingItem;
-        break;
-      }
+    if (mergedItem !== newItem) {
+      selector.update(mergedItem, newItem);
     }
 
     mergedItems.push(mergedItem);
@@ -39,17 +33,7 @@ export default function(existingItems, newItems, selector) {
   for (var i = 0, n = existingItems.length; i < n; i++) {
 
     existingItem = existingItems[i];
-
-    for (var j = 0, n2 = mergedItems.length; j < n2; j++) {
-
-      mergedItem = mergedItems[j];
-
-      if (selector.equals(mergedItem, existingItem)) {
-        break;
-      }
-    }
-
-    if (j === n2) {
+    if (!~mergedItems.indexOf(existingItem)) {
       selector.remove(existingItem);
     }
   }
