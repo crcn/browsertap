@@ -30,7 +30,6 @@ var browserSync     = require('browser-sync').create();
 var pp = require("package-path");
 
 
-
 function keepJsFile(path) {
   var pkg = require(pp.sync(path) + "/package.json");
   return pkg.es6;

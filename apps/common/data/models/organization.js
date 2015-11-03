@@ -64,13 +64,7 @@ var organizationSchema = new Schema({
 class Organization extends Model {
 
   static collectionName = 'organizations';
-
-  /**
-   */
-
-  constructor(properties) {
-    super(organizationSchema, properties);
-  }
+  static schema = organizationSchema;
 
   /**
    */

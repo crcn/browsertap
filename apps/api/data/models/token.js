@@ -58,9 +58,7 @@ var tokenSchema = new Schema({
 
 class Token extends Model {
   static collectionName = 'tokens';
-  constructor(properties) {
-    super(tokenSchema, properties);
-  }
+  static schema = tokenSchema;
   get expired() {
     return this.expiresAt.getTime() < Date.now();
   }

@@ -31,9 +31,8 @@ var stripeCustomerSchema = new Schema({
 
 class StripeCustomer extends Model {
   static collectionName = 'stripeCustomers';
-  constructor(properties) {
-    super(stripeCustomerSchema, properties);
-  }
+  static schema = stripeCustomerSchema;
+  
   async charge(amount) {
 
     var result = await this.app.stripe.charges.create({

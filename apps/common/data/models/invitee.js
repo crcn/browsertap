@@ -4,7 +4,7 @@ import Schema        from 'common/data/schema/schema';
 /**
  */
 
-var inviteeMixin = new Schema({
+var inviteeSchema = new Schema({
   fields: {
 
     /**
@@ -60,13 +60,7 @@ var inviteeMixin = new Schema({
 
 class Invitee extends Model {
   static collectionName = 'invitees';
-  constructor(properties) {
-    super(inviteeMixin, properties);
-  }
-
-  // getShareLink() {
-  //   return this.app.config.hosts.browser + '#/w/' + this.shortcode;
-  // }
+  static schema = inviteeSchema;
 }
 
 /**

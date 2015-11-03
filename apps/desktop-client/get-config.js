@@ -10,7 +10,8 @@ module.exports = function(env) {
         host: 'http://0.0.0.0:8080'
       },
       mdns: {
-        browse: ['machine']
+        browse: ['machine'],
+        port: 9000
       }
     },
     staging: {
@@ -20,5 +21,6 @@ module.exports = function(env) {
     }
   };
 
-  return deepExtend({}, getConfig(env), config.defaults);
+
+  return deepExtend({}, config.defaults, getConfig(env));
 };

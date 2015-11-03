@@ -1,5 +1,6 @@
 import { NoResponse, commands } from 'common/mesh/bus/commands';
 import _command from 'common/mesh/bus/command';
+import Machine from 'common/data/models/machine';
 
 export default function(app, mdns) {
 
@@ -34,24 +35,30 @@ export default function(app, mdns) {
     }
 
     browser.on('serviceUp', async function(service) {
+      app.logger.info('mdns service %s up', browseName);
 
-      var item = _deser(service);
-      app.logger.info('mdns service %s update', browseName);
-      await app.bus.execute({
-        action: 'upsert',
-        collection: collection,
-        query: { _id: item._id },
-        data: item
-      }).read();
+      var m = Machine.create({
+        source: _deser(service),
+        bus: app.bus
+      });
+
+      await m.save();
     });
 
-    browser.on('serviceDown', function(service) {
+    browser.on('serviceDown', async function(service) {
       app.logger.info('mdns service %s down', browseName);
-      app.bus.execute({
-        action: 'remove',
-        collection: collection,
-        query: { _id: _deser(service)._id }
+
+      var source = _deser(service);
+
+      var machine = await Machine.findOne(app.bus, {
+        _id: source._id
       });
+
+      if (!machine) {
+        return app.logger.warn('machine %s does not exist', source._id);
+      }
+
+      await machine.remove();
     });
 
     browser.start();

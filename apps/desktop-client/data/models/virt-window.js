@@ -23,10 +23,7 @@ var schema = new Schema({
 
 class VirtWindow extends Model {
   static collectionName = 'virtWindows';
-
-  constructor(properties) {
-    super(schema, properties);
-  }
+  static schema = schema;
 
   /**
    */

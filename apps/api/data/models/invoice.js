@@ -39,9 +39,7 @@ var invoiceSchema = new Schema({
 
 class Invoice extends Model {
   static collectionName = 'invoices';
-  constructor(properties) {
-    super(invoiceSchema, properties);
-  }
+  static schema = invoiceSchema;
 }
 
 /**

@@ -15,9 +15,9 @@ class BaseModel extends DataObject {
   /**
   */
 
-  constructor(schema, properties) {
+  constructor(properties) {
     super(properties);
-    this.schema = schema;
+    this.schema = this.constructor.schema;
     if (properties && properties.source) {
       this._syncSource();
     }
@@ -45,7 +45,10 @@ class BaseModel extends DataObject {
   */
 
   save() {
-    return this._id ? this.update() : this.insert();
+    return this._run('upsert', {
+      query: { _id: String(this._id) },
+      data : this.toJSON()
+    });
   }
 
   /**

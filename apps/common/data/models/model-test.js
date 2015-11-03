@@ -22,9 +22,7 @@ describe(__filename + '#', function() {
 
   class SubModel extends BaseModel {
     static collectionName = 'items';
-    constructor(properties) {
-        super(new Schema(), properties);
-    }
+    static schema = new Schema();
   }
 
   it('can find items items against a db', async function() {

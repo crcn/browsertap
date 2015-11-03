@@ -71,13 +71,7 @@ var userSchema = new Schema({
 class User extends Model {
 
   static collectionName = 'users';
-
-  /**
-   */
-
-  constructor(properties) {
-    super(userSchema, properties);
-  }
+  static schema = userSchema;
 
   /**
    */

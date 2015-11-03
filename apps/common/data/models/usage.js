@@ -40,9 +40,8 @@ var usageSchema = new Schema({
 
 class Usage extends Model {
   static collectionName = 'usages';
-  constructor(properties) {
-    super(usageSchema, properties);
-  }
+  static schema = usageSchema;
+  
   async reset() {
     this.minutes = 0;
     return await this.update();
