@@ -101,19 +101,15 @@ describe(__filename + '#', function() {
     expect(c.length).to.be(2);
   });
 
-  it('syncs source to the source collection', async function() {
+  it('automatically watches the source collection if it is a data collection', async function() {
     var c = new ModelCollection({
-      source: [{_id:1},{_id:2}]
+      source: new ModelCollection({
+        source: [{_id:1},{_id:2}]
+      })
     });
-    var sc = c.getSourceCollection();
-    sc.push({_id:3});
-    await testUtils.timeout(0);
-    expect(c.length).to.be(3);
 
-    c.setProperties({ source: [{_id:3}] });
+    c.source.pop();
     await testUtils.timeout(0);
     expect(c.length).to.be(1);
-    expect(sc.length).to.be(1);
-
   });
 });

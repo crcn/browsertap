@@ -1,5 +1,6 @@
 import {EventEmitter} from 'events';
 import DataObject from '../object';
+import DataCollection from '../collection';
 import ModelCollection from './collection';
 import FilterThrough from 'common/mesh/stream/filter-through';
 import CollectionBus from 'common/mesh/bus/collection';
@@ -151,9 +152,13 @@ class BaseModel extends DataObject {
 
     if (multi) {
 
+      var source = new DataCollection({
+        target: await response.readAll()
+      });
+
       var collection = new ModelCollection({
         createModel : (properties) => new this(Object.assign({ bus: bus }, properties)),
-        source      : await response.readAll()
+        source      : source
       });
 
       if (options.tail) {
@@ -170,7 +175,7 @@ class BaseModel extends DataObject {
         .pipeTo(
           BusWriter.create(
             CollectionBus.create(
-              collection.getSourceCollection()
+              source
             )
           )
         )
@@ -191,8 +196,8 @@ class BaseModel extends DataObject {
     return this._find(false, bus, query, options);
   }
 
-  static all(bus) {
-    return this.find(busy);
+  static all(bus, options) {
+    return this.find(bus, function() { return true; }, options);
   }
 }
 

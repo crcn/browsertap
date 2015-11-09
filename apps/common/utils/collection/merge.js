@@ -14,11 +14,10 @@ export default function(existingItems, newItems, selector) {
   var newItem;
   var mergedItem;
 
-  for (var i = 0, n = newItems.length; i < n; i++) {
-
+  newItems.forEach(function(newItem, i) {
     // cast the new item into whatever object needs to be in the existing items collection.
     // This could be a model for instance
-    newItem    = selector.cast(newItems[i]);
+    newItem    = selector.cast(newItem);
     mergedItem = existingItems.find(function(existingItem) {
       return selector.equals(existingItem, newItem);
     }) || newItem;
@@ -28,15 +27,13 @@ export default function(existingItems, newItems, selector) {
     }
 
     mergedItems.push(mergedItem);
-  }
+  });
 
-  for (var i = 0, n = existingItems.length; i < n; i++) {
-
-    existingItem = existingItems[i];
+  existingItems.forEach(function(existingItem, i) {
     if (!~mergedItems.indexOf(existingItem)) {
       selector.remove(existingItem);
     }
-  }
+  });
 
   return mergedItems;
 };

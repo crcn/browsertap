@@ -7,16 +7,15 @@ import FilterThrough    from 'common/mesh/stream/filter-through';
 import ModelCollection  from 'common/data/models/collection';
 import BusWriter        from 'common/mesh/stream/bus-writer';
 import CollectionBus    from 'common/mesh/bus/collection';
-// import VirtWindow       from 'desktop-client/bus/commands/sync-windows';
+import VirtWindow       from 'desktop-client/data/models/virt-window';
 
-
-class VirtWindow extends DataObject {
+class VirtWindowPopup extends DataObject {
   constructor(properties, app) {
     super(properties);
     this.app = app;
     this._window = new BrowserWindow({
-      width: properties.source.width,
-      height: properties.source.height
+      width: properties.source.width.valueOf(),
+      height: properties.source.height.valueOf()
     });
 
     this._window.loadUrl(__dirname + '/window.html');
@@ -34,41 +33,18 @@ export default {
     });
 
     // TODO - change to async
-    function execute(operation) {
+    async function execute(operation) {
 
       app.logger.info('synchronizing virtual windows');
 
-      /* TODO - CollectionReader
-      .create(VirtWindow.find({ }).awaitChang())
-      .pipeTo(ArrayChangeToDbOpsThrough.create())
-      .pipeTo(BusWriter.create(
-        CollectionBus.create(
-
-        )
-      ))
-      */
-      app.bus.execute({
-        action: 'tail'
-      })
-      .pipeTo(FilterThrough.create(function(operation) {
-
-        // TODO - need to fix logic here - ignoring windows
-        // like this is likely going to cause bugs
-        if (operation.collection !== 'virtWindows') return false;
-        if (operation.action !== 'insert') return true;
-        return operation.data.width > 60 &&
-        operation.data.height > 60 &&
-        operation.data.title !== '';
-      }))
-      .pipeTo(
-        BusWriter.create(
-          CollectionBus.create(
-            ModelCollection.create({
-              createModel: (properties) => VirtWindow.create(properties, app)
-            }).getSourceCollection()
-          )
-        )
-      )
+      var popups = new ModelCollection({
+        source: await VirtWindow.find(app.bus, {
+          width: { $gt: 60 },
+          height: { $gt: 60 },
+          title: { $ne: '' }
+        }, { tail: true }),
+        createModel: (properties) => VirtWindowPopup.create(properties, app)
+      });
     }
 
   }

@@ -5,6 +5,7 @@ import sift from 'sift';
 import { timeout } from 'common/test/utils';
 import BrowserWindow from 'browser-window';
 import expect from 'expect.js';
+import repeat from 'lodash/string/repeat';
 
 describe(__filename + '#', function() {
 
@@ -32,7 +33,7 @@ describe(__filename + '#', function() {
     await app.bus.execute({
       action: 'insert',
       collection: 'virtWindows',
-      data: { _id: 1, width: 100, height: 200 }
+      data: { _id: repeat('1', 24), width: 100, height: 200, title: 'abba' }
     });
 
     await timeout(0);
@@ -49,7 +50,7 @@ describe(__filename + '#', function() {
     await app.bus.execute({
       action: 'insert',
       collection: 'virtWindows',
-      data: { _id: 1, width: 50, height: 100 }
+      data: { _id: repeat('1', 24), width: 50, height: 100 }
     });
 
     await timeout(0);
