@@ -27,3 +27,15 @@ cases with very little assistence. Basically just like rainforestQA without the 
 
 - infastructure in place for launching any app. Just need a robo agent.
 - could be its own product (probably should be)
+
+
+#### Rambling
+
+- Ability to recursively identify patterns in how it understands what bugs might be in a particular instance. Needs to also pay attention to multiple false positives & false negatives - possibly identifier for a flakey part of the system.
+- Should display notice warnings for any visual differences
+- Should be able to spin up an infinite amount of workers for tasks
+- Should test speeds, email clients, screen resolutions
+- Confidence score of according to a particular task. If it fails, then move onto the next item. Otherwise throw an error. If a route has been picked, then use that next time. If it fails next time then re-start then go back to #1.
+- Should be able to identify various shapes and attach metadata about them - descriptors of what they mean. This also applies to text. Text in itself should not be keyed up against a database, but instead keyed based on what it *looks* like. This is important especially for mispelled inforation.
+- location of any text element should take into consideration other contexts such as language.
+
